@@ -10,21 +10,21 @@
 
     <title>Shopus | Profile</title>
 
-    <link rel="stylesheet" href="{{ asset('template-assets/front/css/swiper10-bundle.min.css') }}">
+    <link rel="stylesheet" href="./css/swiper10-bundle.min.css">
 
-    <link rel="stylesheet" href="{{ asset('template-assets/front/css/bootstrap-5.3.2.min.css') }}">
+    <link rel="stylesheet" href="./css/bootstrap-5.3.2.min.css">
 
-    <link rel="stylesheet" href="{{ asset('template-assets/front/css/nouislider.min.css') }}">
+    <link rel="stylesheet" href="css/nouislider.min.css">
 
-    <link rel="stylesheet" href="{{ asset('template-assets/front/css/aos-3.0.0.css') }}">
+    <link rel="stylesheet" href="css/aos-3.0.0.css">
 
-    <link rel="stylesheet" href="{{ asset('template-assets/front//css/style.css') }}">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
 
     <header id="header" class="header">
-        {{-- <div class="header-top-section">
+        <div class="header-top-section">
             <div class="container">
                 <div class="header-top">
                     <div class="header-profile">
@@ -40,18 +40,53 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
         <div class="header-center-section d-none d-lg-block">
             <div class="container">
                 <div class="header-center">
                     <div class="logo">
                         <a href="index.html">
-                            <img src="{{ asset('template-assets/front/assets/images/logos/logo.webp') }}"
-                                alt="logo">
+                            <img src="./assets/images/logos/logo.webp" alt="logo">
                         </a>
                     </div>
+                    <div class="header-cart-items">
+                        <div class="header-search">
+                            <button class="header-search-btn" onclick="modalAction('.search')">
+                                <span>
+                                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M13.9708 16.4151C12.5227 17.4021 10.9758 17.9723 9.27353 18.0062C5.58462 18.0802 2.75802 16.483 1.05056 13.1945C-1.76315 7.77253 1.33485 1.37571 7.25086 0.167548C12.2281 -0.848249 17.2053 2.87895 17.7198 7.98579C17.9182 9.95558 17.5566 11.7939 16.5852 13.5061C16.4512 13.742 16.483 13.8725 16.6651 14.0553C18.2412 15.6386 19.8112 17.2272 21.3735 18.8244C22.1826 19.6513 22.2058 20.7559 21.456 21.4932C20.7697 22.1678 19.7047 22.1747 18.9764 21.4793C18.3623 20.8917 17.7774 20.2737 17.1796 19.6688C16.118 18.5929 15.0564 17.5153 13.9708 16.4151ZM2.89545 9.0364C2.91692 12.4172 5.59664 15.1164 8.91967 15.1042C12.2384 15.092 14.9138 12.3493 14.8889 8.98505C14.864 5.63213 12.1826 2.92508 8.89047 2.92857C5.58204 2.93118 2.87397 5.68958 2.89545 9.0364Z"
+                                            fill="black" />
+                                    </svg>
+                                </span>
+                            </button>
+                            <div class="modal-wrapper search">
+                                <div onclick="modalAction('.search')" class="anywhere-away"></div>
 
-                    {{-- <div class="header-compaire">
+                                <div class="modal-main">
+                                    <div class="wrapper-close-btn" onclick="modalAction('.search')">
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="red" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M6 18L18 6M6 6l12 12"></path>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div class="wrapper-main">
+                                        <div class="search-section">
+                                            <input type="text" placeholder="Search Products.........">
+                                            <div class="divider"></div>
+                                            <button type="button">All Categories</button>
+                                            <a href="#" class="shop-btn">Search</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="header-compaire">
                             <a href="compaire.html" class="cart-item">
                                 <span>
                                     <svg width="34" height="27" viewBox="0 0 34 27" fill="none"
@@ -75,8 +110,8 @@
                                     Compaire
                                 </span>
                             </a>
-                        </div> --}}
-                    {{-- <div class="header-favourite">
+                        </div>
+                        <div class="header-favourite">
                             <a href="wishlist.html" class="cart-item">
                                 <span>
                                     <svg width="35" height="27" viewBox="0 0 35 27" fill="none"
@@ -94,8 +129,8 @@
                                     Wishlist
                                 </span>
                             </a>
-                        </div> --}}
-                    {{-- <div class="header-cart">
+                        </div>
+                        <div class="header-cart">
                             <a href="cart.html" class="cart-item">
                                 <span>
                                     <svg width="35" height="28" viewBox="0 0 35 28" fill="none"
@@ -222,11 +257,23 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
-
+                        </div>
+                        <div class="header-user">
+                            <a href="user-profile.html">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                                        height="24" class="fill-current">
+                                        <path fill="none" d="M0 0h24v24H0z"></path>
+                                        <path
+                                            d="M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12z">
+                                        </path>
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
         <nav class="mobile-menu d-block d-lg-none">
             <div class="mobile-menu-header d-flex justify-content-between align-items-center">
@@ -265,7 +312,8 @@
                     </span>
                 </a>
             </div>
-            <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions">
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1"
+                id="offcanvasWithBothOptions">
                 <div class="offcanvas-body">
                     <div class="header-top">
                         <div class="header-cart ">
@@ -1035,62 +1083,9 @@
                                     <span class="list-text">Contact</span>
                                 </a>
                             </li>
-                            <div class="header-user">
-                                <a href="user-profile.html">
-                                    <span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                                            height="24" class="fill-current">
-                                            <path fill="none" d="M0 0h24v24H0z"></path>
-                                            <path fill="white"
-                                                d="M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12z">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="modal-main"
-                                style="background-color: rgb(232, 169, 75); width: 40px; height: 40px; border-radius: 50%;">
-                                <div class="header-search">
-                                    <button class="header-search-btn" onclick="modalAction('.search')">
-                                        <span>
-                                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M13.9708 16.4151C12.5227 17.4021 10.9758 17.9723 9.27353 18.0062C5.58462 18.0802 2.75802 16.483 1.05056 13.1945C-1.76315 7.77253 1.33485 1.37571 7.25086 0.167548C12.2281 -0.848249 17.2053 2.87895 17.7198 7.98579C17.9182 9.95558 17.5566 11.7939 16.5852 13.5061C16.4512 13.742 16.483 13.8725 16.6651 14.0553C18.2412 15.6386 19.8112 17.2272 21.3735 18.8244C22.1826 19.6513 22.2058 20.7559 21.456 21.4932C20.7697 22.1678 19.7047 22.1747 18.9764 21.4793C18.3623 20.8917 17.7774 20.2737 17.1796 19.6688C16.118 18.5929 15.0564 17.5153 13.9708 16.4151ZM2.89545 9.0364C2.91692 12.4172 5.59664 15.1164 8.91967 15.1042C12.2384 15.092 14.9138 12.3493 14.8889 8.98505C14.864 5.63213 12.1826 2.92508 8.89047 2.92857C5.58204 2.93118 2.87397 5.68958 2.89545 9.0364Z"
-                                                    fill="black" />
-                                            </svg>
-                                        </span>
-                                    </button>
-                                    <div class="modal-wrapper search">
-                                        <div onclick="modalAction('.search')" class="anywhere-away"></div>
-
-                                        <div class="modal-main">
-                                            <div class="wrapper-close-btn" onclick="modalAction('.search')">
-                                                <span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="red"
-                                                        class="w-6 h-6">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M6 18L18 6M6 6l12 12"></path>
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                            <div class="wrapper-main">
-                                                <div class="search-section">
-                                                    <input type="text" placeholder="Search Products.........">
-                                                    <div class="divider"></div>
-                                                    <button type="button">All Categories</button>
-                                                    <a href="#" class="shop-btn">Search</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
                         </ul>
                     </div>
-                    {{-- <div class="header-vendor-btn">
+                    <div class="header-vendor-btn">
                         <a href="become-vendor.html" class="shop-btn">
                             <span class="list-text shop-text">Became Vendor</span>
                             <span class="icon">
@@ -1101,18 +1096,6 @@
                                 </svg>
                             </span>
                         </a>
-                    </div> --}}
-                    <div class="header-vendor-btn">
-                        <a href="become-vendor.html" class="shop-btn">
-                            <span class="icon">
-                                <svg width="24" height="16" viewBox="0 0 24 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M3.74301 7.07205C3.96405 7.07205 4.15464 7.07205 4.34568 7.07205C6.51947 7.07205 8.69326 7.07205 10.8671 7.07205C13.8478 7.07205 16.8289 7.0725 19.8096 7.0725C20.6984 7.0725 21.5871 7.07024 22.4758 7.07295C22.881 7.07431 23.1902 7.25265 23.3743 7.62651C23.5613 8.00623 23.5118 8.37556 23.2623 8.70426C23.0677 8.96027 22.7947 9.08173 22.4713 9.08037C21.7905 9.07766 21.1097 9.07902 20.4289 9.07902C18.0472 9.07902 15.6659 9.07902 13.2842 9.07902C10.218 9.07902 7.15155 9.07902 4.08545 9.07902C3.97261 9.07902 3.86016 9.07902 3.71783 9.07902C3.81287 9.18332 3.88592 9.26865 3.96426 9.34857C4.43435 9.82672 4.90777 10.3022 5.37714 10.7812C5.86373 11.2779 6.34592 11.7791 6.83252 12.2757C7.50584 12.9634 8.18845 13.6415 8.85241 14.3391C9.09042 14.5893 9.15452 14.9157 9.05941 15.2575C8.84401 16.0305 7.94333 16.2499 7.38806 15.6769C6.56585 14.8286 5.73446 13.9892 4.90728 13.1458C4.30521 12.5317 3.70321 11.9172 3.10148 11.3023C2.40477 10.5902 1.70889 9.87729 1.0122 9.1648C0.89409 9.04425 0.77508 8.9246 0.656466 8.8045C0.30972 8.45367 0.276068 7.84278 0.605699 7.4766C1.00196 7.03683 1.41479 6.61241 1.82437 6.18573C2.20355 5.79066 2.58656 5.39965 2.96969 5.00909C3.32675 4.64473 3.68681 4.28306 4.04467 3.91915C4.38526 3.57284 4.72459 3.22563 5.0644 2.87887C5.48464 2.44948 5.90489 2.01964 6.32563 1.5907C6.74894 1.15861 7.18016 0.734188 7.59428 0.29261C7.96371 -0.101559 8.63028 -0.0816927 8.96557 0.257392C9.37618 0.672782 9.40012 1.26381 9.00505 1.68552C8.66215 2.0517 8.30432 2.40342 7.95349 2.76192C7.07108 3.66449 6.18886 4.56797 5.30627 5.47054C4.81706 5.97081 4.32647 6.47018 3.83681 6.97046C3.81154 6.99574 3.78771 7.02329 3.74301 7.07205Z">
-                                </svg>
-                            </span>
-                            <span class="list-text shop-text">kembali ke pengguna</span>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -1122,13 +1105,13 @@
 
     <section class="blog about-blog">
         <div class="container">
-            {{-- <div class="blog-bradcrum">
+            <div class="blog-bradcrum">
                 <span><a href="index.html">Home</a></span>
                 <span class="devider">/</span>
                 <span><a href="#">Dashboard</a></span>
-            </div> --}}
+            </div>
             <div class="blog-heading about-heading">
-                <h1 class="heading">Halaman Pengguna</h1>
+                <h1 class="heading">User Dashboard</h1>
             </div>
         </div>
     </section>
@@ -1138,10 +1121,10 @@
         <div class="container">
             <div class="user-profile-section">
                 <div class="dashboard-heading ">
-                    <h5 class="dashboard-title"></h5>
+                    <h5 class="dashboard-title">Change Password</h5>
                     <div class="dashboard-switch">
-                        {{-- <span class="text">Switch Dashboard</span>
-                        <span onclick="switchDashboard()" class="switch-icon"></span> --}}
+                        <span class="text">Switch Dashboard</span>
+                        <span onclick="switchDashboard()" class="switch-icon"></span>
                     </div>
                 </div>
                 <div class="user-dashboard">
@@ -1168,7 +1151,7 @@
                             </span>
                             <span class="text">Dashboard</span>
                         </button>
-                        {{-- <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill"
+                        <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-profile" type="button" role="tab"
                             aria-controls="v-pills-profile" aria-selected="false">
                             <span>
@@ -1183,8 +1166,8 @@
                             <span class="text">
                                 Parsonal Info
                             </span>
-                        </button> --}}
-                        {{-- <button class="nav-link" id="v-pills-payment-tab" data-bs-toggle="pill"
+                        </button>
+                        <button class="nav-link" id="v-pills-payment-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-payment" type="button" role="tab"
                             aria-controls="v-pills-payment" aria-selected="false">
                             <span>
@@ -1199,7 +1182,7 @@
                             <span class="text">
                                 Payment Method
                             </span>
-                        </button> --}}
+                        </button>
                         <button class="nav-link" id="v-pills-order-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-order" type="button" role="tab"
                             aria-controls="v-pills-order" aria-selected="false">
@@ -1213,7 +1196,7 @@
                                 </svg>
                             </span>
                             <span class="text">
-                                Produk
+                                Order
                             </span>
                         </button>
                         <button class="nav-link" id="v-pills-wishlist-tab" data-bs-toggle="pill"
@@ -1224,7 +1207,7 @@
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_113_3017)">
                                         <path
-                                            d="M12 3c-4.97 0-9 4.03-9 9v8a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-8c0-4.97-4.03-9-9-9zm-2 6H8v2c0 1.1.9 2 2 2s2-.9 2-2v-2h-2zm-1 4v2h4v-2h-4zm0-4h4V9h-4v2z" />
+                                            d="M8.00893 1.94252C8.25673 1.67321 8.45526 1.43486 8.67664 1.22099C10.387 -0.427293 13.0628 -0.40281 14.7246 1.2714C16.3985 2.95785 16.4356 5.687 14.7674 7.39721C12.6907 9.52652 10.5848 11.6263 8.48882 13.7369C8.13819 14.0897 7.85825 14.0876 7.50619 13.7326C5.4188 11.6306 3.32426 9.53588 1.25187 7.41953C-0.424185 5.70788 -0.410617 2.98738 1.25258 1.293C2.92721 -0.413611 5.62304 -0.434494 7.35265 1.24836C7.56475 1.4543 7.76042 1.67825 8.00893 1.94252Z" />
                                     </g>
                                     <defs>
                                         <clipPath id="clip0_113_3017">
@@ -1234,10 +1217,10 @@
                                 </svg>
                             </span>
                             <span class="text">
-                                Data Transaksi
+                                Wishlist
                             </span>
                         </button>
-                        {{-- <button class="nav-link" id="v-pills-address-tab" data-bs-toggle="pill"
+                        <button class="nav-link" id="v-pills-address-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-address" type="button" role="tab"
                             aria-controls="v-pills-address" aria-selected="false">
                             <span>
@@ -1261,7 +1244,7 @@
                             <span class="text">
                                 Address
                             </span>
-                        </button> --}}
+                        </button>
                         <button class="nav-link" id="v-pills-review-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-review" type="button" role="tab"
                             aria-controls="v-pills-review" aria-selected="false">
@@ -1288,10 +1271,10 @@
                                 </svg>
                             </span>
                             <span class="text">
-                                Data Pendapatan
+                                Reviews
                             </span>
                         </button>
-                        {{-- <button class="nav-link" id="v-pills-password-tab" data-bs-toggle="pill"
+                        <button class="nav-link" id="v-pills-password-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-password" type="button" role="tab"
                             aria-controls="v-pills-password" aria-selected="false">
                             <span>
@@ -1304,7 +1287,7 @@
                             <span class="text">
                                 Change Password
                             </span>
-                        </button> --}}
+                        </button>
                         <button class="nav-link" id="v-pills-ticket-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-ticket" type="button" role="tab"
                             aria-controls="v-pills-ticket" aria-selected="false">
@@ -1320,7 +1303,7 @@
                                 </svg>
                             </span>
                             <span class="text">
-                                Profile penjual
+                                Support Ticket
                             </span>
                         </button>
                         <div class="nav-link">
@@ -1353,7 +1336,7 @@
                             aria-labelledby="v-pills-home-tab" tabindex="0">
                             <div class="user-profile">
                                 <div class="user-title">
-                                    {{-- <p class="paragraph">Hello, Sajjad</p> --}}
+                                    <p class="paragraph">Hello, Sajjad</p>
                                     <h5 class="heading">Welcome to your Profile </h5>
                                 </div>
                                 <div class="profile-section">
@@ -1396,7 +1379,7 @@
                                                 </div>
                                                 <div class="wrapper-content">
                                                     <p class="paragraph">Delivery Completed</p>
-                                                    <h3 class="heading">99793</h3>
+                                                    <h3 class="heading">99783</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -1590,7 +1573,8 @@
                                 <div class="wrapper">
                                     <div class="wrapper-item">
                                         <div class="wrapper-img">
-                                            <img src="./assets/images/homepage-one/payment-img-1.png" alt="payment">
+                                            <img src="./assets/images/homepage-one/payment-img-1.png"
+                                                alt="payment">
                                         </div>
                                         <div class="wrapper-content">
                                             <h5 class="heading">Dutch Bangl Bank Lmtd</h5>
@@ -1752,16 +1736,16 @@
                                     <tbody>
                                         <tr class="table-row table-top-row">
                                             <td class="table-wrapper wrapper-product">
-                                                <h5 class="table-heading">PRODUK</h5>
+                                                <h5 class="table-heading">PRODUCT</h5>
                                             </td>
                                             <td class="table-wrapper">
                                                 <div class="table-wrapper-center">
-                                                    <h5 class="table-heading">HARGA</h5>
+                                                    <h5 class="table-heading">PRICE</h5>
                                                 </div>
                                             </td>
                                             <td class="table-wrapper">
                                                 <div class="table-wrapper-center">
-                                                    <h5 class="table-heading">JUMLAH</h5>
+                                                    <h5 class="table-heading">QUANTITY</h5>
                                                 </div>
                                             </td>
                                             <td class="table-wrapper wrapper-total">
@@ -1779,11 +1763,155 @@
                                             <td class="table-wrapper wrapper-product">
                                                 <div class="wrapper">
                                                     <div class="wrapper-img">
-                                                        <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
+                                                        <img src="./assets/images/homepage-one/product-img/product-img-1.webp"
                                                             alt="img">
                                                     </div>
                                                     <div class="wrapper-content">
                                                         <h5 class="heading">Classic Design Skart</h5>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <h5 class="heading">$20.00</h5>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <div class="quantity">
+                                                        <span class="minus">
+                                                            -
+                                                        </span>
+                                                        <span class="number">1</span>
+                                                        <span class="plus">
+                                                            +
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper wrapper-total">
+                                                <div class="table-wrapper-center">
+                                                    <h5 class="heading">$40.00</h5>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <span>
+                                                        <svg width="10" height="10" viewBox="0 0 10 10"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
+                                                                fill="#AAAAAA"></path>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="table-row ticket-row">
+                                            <td class="table-wrapper wrapper-product">
+                                                <div class="wrapper">
+                                                    <div class="wrapper-img">
+                                                        <img src="./assets/images/homepage-one/product-img/product-img-2.webp"
+                                                            alt="img">
+                                                    </div>
+                                                    <div class="wrapper-content">
+                                                        <h5 class="heading">Classic Black Suit</h5>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <h5 class="heading">$20.00</h5>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <div class="quantity">
+                                                        <span class="minus">
+                                                            -
+                                                        </span>
+                                                        <span class="number">1</span>
+                                                        <span class="plus">
+                                                            +
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper wrapper-total">
+                                                <div class="table-wrapper-center">
+                                                    <h5 class="heading">$40.00</h5>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper ">
+                                                <div class="table-wrapper-center">
+                                                    <span>
+                                                        <svg width="10" height="10" viewBox="0 0 10 10"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
+                                                                fill="#AAAAAA"></path>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="table-row ticket-row">
+                                            <td class="table-wrapper wrapper-product">
+                                                <div class="wrapper">
+                                                    <div class="wrapper-img">
+                                                        <img src="./assets/images/homepage-one/product-img/product-img-3.webp"
+                                                            alt="img">
+                                                    </div>
+                                                    <div class="wrapper-content">
+                                                        <h5 class="heading">Blue Party Dress</h5>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <h5 class="heading">$20.00</h5>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <div class="quantity">
+                                                        <span class="minus">
+                                                            -
+                                                        </span>
+                                                        <span class="number">1</span>
+                                                        <span class="plus">
+                                                            +
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper wrapper-total">
+                                                <div class="table-wrapper-center">
+                                                    <h5 class="heading">$40.00</h5>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <span>
+                                                        <svg width="10" height="10" viewBox="0 0 10 10"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
+                                                                fill="#AAAAAA"></path>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="table-row ticket-row">
+                                            <td class="table-wrapper wrapper-product">
+                                                <div class="wrapper">
+                                                    <div class="wrapper-img">
+                                                        <img src="./assets/images/homepage-one/product-img/product-img-4.webp"
+                                                            alt="img">
+                                                    </div>
+                                                    <div class="wrapper-content">
+                                                        <h5 class="heading">Classic Party Dress</h5>
                                                     </div>
                                                 </div>
                                             </td>
@@ -1831,7 +1959,7 @@
                             aria-labelledby="v-pills-wishlist-tab" tabindex="0">
                             <div class="wishlist">
                                 <div class="cart-content">
-                                    <h5 class="cart-heading">Data Transaksi</h5>
+                                    <h5 class="cart-heading">SpaceRace</h5>
                                     <p>Order ID: <span class="inner-text">#4345</span></p>
                                 </div>
                                 <div class="cart-section wishlist-section">
@@ -1839,29 +1967,24 @@
                                         <tbody>
                                             <tr class="table-row table-top-row">
                                                 <td class="table-wrapper wrapper-product">
-                                                    <h5 class="table-heading">PRODUK</h5>
+                                                    <h5 class="table-heading">PRODUCT</h5>
                                                 </td>
                                                 <td class="table-wrapper">
                                                     <div class="table-wrapper-center">
-                                                        <h5 class="table-heading">HARGA</h5>
+                                                        <h5 class="table-heading">PRICE</h5>
                                                     </div>
                                                 </td>
                                                 <td class="table-wrapper">
                                                     <div class="table-wrapper-center">
-                                                        <h5 class="table-heading">STATUS</h5>
+                                                        <h5 class="table-heading">ACTION</h5>
                                                     </div>
                                                 </td>
-                                                {{-- <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="table-heading">SALDO</h5>
-                                                    </div>
-                                                </td> --}}
                                             </tr>
                                             <tr class="table-row ticket-row">
                                                 <td class="table-wrapper wrapper-product">
                                                     <div class="wrapper">
                                                         <div class="wrapper-img">
-                                                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
+                                                            <img src="./assets/images/homepage-one/product-img/product-img-1.webp"
                                                                 alt="img">
                                                         </div>
                                                         <div class="wrapper-content">
@@ -1887,37 +2010,33 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="wishlist-btn">
-                                    <a href="#" class="clean-btn">Clean Wishlist</a>
-                                    <a href="#" class="shop-btn">View Cards</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-review" role="tabpanel"
-                            aria-labelledby="v-pills-wishlist-tab" tabindex="0">
-                            <div class="wishlist">
-                                <div class="cart-content">
-                                    <h5 class="cart-heading">Data Transaksi</h5>
-                                    <p>Order ID: <span class="inner-text">#4345</span></p>
-                                </div>
-                                <div class="cart-section wishlist-section">
-                                    <table>
-                                        <tbody>
-                                            <tr class="table-row table-top-row">
+                                            <tr class="table-row ticket-row">
                                                 <td class="table-wrapper wrapper-product">
-                                                    <h5 class="table-heading">PRODUK</h5>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="table-heading">HARGA</h5>
+                                                    <div class="wrapper">
+                                                        <div class="wrapper-img">
+                                                            <img src="./assets/images/homepage-one/product-img/product-img-2.webp"
+                                                                alt="img">
+                                                        </div>
+                                                        <div class="wrapper-content">
+                                                            <h5 class="heading">Classic Black Suit</h5>
+                                                        </div>
                                                     </div>
                                                 </td>
                                                 <td class="table-wrapper">
                                                     <div class="table-wrapper-center">
-                                                        <h5 class="table-heading">SALDO</h5>
+                                                        <h5 class="heading">$20.00</h5>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper ">
+                                                    <div class="table-wrapper-center">
+                                                        <span>
+                                                            <svg width="10" height="10" viewBox="0 0 10 10"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
+                                                                    fill="#AAAAAA"></path>
+                                                            </svg>
+                                                        </span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1925,11 +2044,41 @@
                                                 <td class="table-wrapper wrapper-product">
                                                     <div class="wrapper">
                                                         <div class="wrapper-img">
-                                                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
+                                                            <img src="./assets/images/homepage-one/product-img/product-img-3.webp"
                                                                 alt="img">
                                                         </div>
                                                         <div class="wrapper-content">
-                                                            <h5 class="heading">Classic Design Skart</h5>
+                                                            <h5 class="heading">Blue Party Dress</h5>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <h5 class="heading">$20.00</h5>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <span>
+                                                            <svg width="10" height="10" viewBox="0 0 10 10"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
+                                                                    fill="#AAAAAA"></path>
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row ticket-row">
+                                                <td class="table-wrapper wrapper-product">
+                                                    <div class="wrapper">
+                                                        <div class="wrapper-img">
+                                                            <img src="./assets/images/homepage-one/product-img/product-img-4.webp"
+                                                                alt="img">
+                                                        </div>
+                                                        <div class="wrapper-content">
+                                                            <h5 class="heading">Classic Party Dress</h5>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -2088,72 +2237,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- data pendapatan --}}
-                        {{-- <div class="tab-pane fade" id="v-pills-wishlist" role="tabpanel"
-                            aria-labelledby="v-pills-review-tab" tabindex="0">
-                            <div class="wishlist">
-                                <div class="cart-content">
-                                    <h5 class="cart-heading">Data Transaction</h5>
-                                    <p>Order ID: <span class="inner-text">#4345</span></p>
-                                </div>
-                                <div class="cart-section wishlist-section">
-                                    <table>
-                                        <tbody>
-                                            <tr class="table-row table-top-row">
-                                                <td class="table-wrapper wrapper-product">
-                                                    <h5 class="table-heading">PRODUK</h5>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="table-heading">HARGA</h5>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="table-heading">SALDO</h5>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="table-row ticket-row">
-                                                <td class="table-wrapper wrapper-product">
-                                                    <div class="wrapper">
-                                                        <div class="wrapper-img">
-                                                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
-                                                                alt="img">
-                                                        </div>
-                                                        <div class="wrapper-content">
-                                                            <h5 class="heading">Classic Design Skart</h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="heading">$20.00</h5>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <span>
-                                                            <svg width="10" height="10" viewBox="0 0 10 10"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
-                                                                    fill="#AAAAAA"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="wishlist-btn">
-                                    <a href="#" class="clean-btn">Clean Wishlist</a>
-                                    <a href="#" class="shop-btn">View Cards</a>
-                                </div>
-                            </div>
-                        </div> --}}
-
                         <div class="tab-pane fade" id="v-pills-review" role="tabpanel"
                             aria-labelledby="v-pills-review-tab" tabindex="0">
                             <div class="top-selling-section">
@@ -2380,180 +2463,405 @@
                         <div class="tab-pane fade" id="v-pills-ticket" role="tabpanel"
                             aria-labelledby="v-pills-ticket-tab" tabindex="0">
                             <div class="support-ticket">
-                                <a href="#" class="shop-btn" onclick="modalAction('.ticket')">Tambah
-                                    profile</a>
-                                <section class="blog about-blog">
-                                    <div class="container">
-                                        <div class="blog-bradcrum">
-                                            {{-- <span><a href="index.html">Home</a></span>
-                                                <span class="devider">/</span>
-                                                <span><a href="#">Seller Application</a></span> --}}
-                                        </div>
-                                        <div class="blog-heading about-heading">
-                                            <h1 class="heading">Menjadi Pengguna!</h1>
-                                        </div>
-                                    </div>
-                                </section>
+                                <a href="#" class="shop-btn" onclick="modalAction('.ticket')">Add New
+                                    Support</a>
 
+                                <div class="modal-wrapper ticket">
+                                    <div onclick="modalAction('.ticket')" class="anywhere-away"></div>
 
-                                <section class="seller-application product footer-padding">
-                                    <div class="container">
-                                        <div class="seller-application-section">
-                                            <div class="row ">
-                                                <div class="col-lg-7">
-                                                    <div class="row gy-5">
-                                                        <div class="col-lg-12">
-                                                            <div class="seller-information" data-aos="fade-right">
-                                                                <h5 class="comment-title">Informasi Penjual</h5>
-                                                                <p class="paragraph">Isi formulir di bawah ini atau
-                                                                    kirimkan pesan kepada kami. Kami akan membantu Anda
-                                                                    sesegera mungkin</p>
-                                                                <div class="review-form">
-                                                                    <div class="review-inner-form ">
-                                                                        <div class="review-form-name">
-                                                                            <label for="email"
-                                                                                class="form-label">Alamat
-                                                                                Email*</label>
-                                                                            <input type="email" id="email"
-                                                                                class="form-control"
-                                                                                placeholder="Masukkan alamat email anda">
-                                                                        </div>
-                                                                        <div class="review-form-name">
-                                                                            <label for="phone"
-                                                                                class="form-label">No Telepon*</label>
-                                                                            <input type="number" id="phone"
-                                                                                class="form-control"
-                                                                                placeholder="+88013**977957">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <div class="seller-information" data-aos="fade-right">
-                                                                <h5 class="comment-title">Informasi Toko</h5>
-                                                                <p class="paragraph">Isi formulir di bawah ini atau
-                                                                    kirimkan pesan kepada kami. Kami akan membantu Anda
-                                                                    sesegera mungkin</p>
-                                                                <div class="review-form">
-                                                                    <div class="review-inner-form ">
-                                                                        <div class="review-form-name">
-                                                                            <label for="name"
-                                                                                class="form-label">Nama Toko*</label>
-                                                                            <input type="text" id="name"
-                                                                                class="form-control"
-                                                                                placeholder="Nama">
-                                                                        </div>
-                                                                        <div class="review-form-name">
-                                                                            <label for="address"
-                                                                                class="form-label">Alamat*</label>
-                                                                            <input type="text" id="address"
-                                                                                class="form-control"
-                                                                                placeholder="Alamat">
-                                                                        </div>
-                                                                        <div class="review-form-name checkbox">
-                                                                            <input type="checkbox">
-                                                                            <label for="address"
-                                                                                class="form-label">
-                                                                                Saya menyetujui semua syarat dan
-                                                                                ketentuan di ShopUs</label>
-                                                                        </div>
-                                                                        <div class="form-btn">
-                                                                            <a href="create-account.html"
-                                                                                class="shop-btn">Buat Akun Penjual</a>
-                                                                            <span class="shop-account">Sudah memiliki
-                                                                                akun?<a href="login.html">Log
-                                                                                    in</a></span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                    <div class="login-section account-section modal-main">
+                                        <div class="review-form">
+                                            <div class="review-content">
+                                                <h5 class="comment-title">Add New Ticket</h5>
+                                                <div class="close-btn">
+                                                    <img src="./assets/images/homepage-one/close-btn.png"
+                                                        onclick="modalAction('.ticket')" alt="close-btn">
                                                 </div>
-                                                <div class="col-lg-5">
-                                                    <div class="img-upload-section" data-aos="fade-left">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="logo-wrapper">
-                                                                    <h5 class="comment-title">Perbarui Logo</h5>
-                                                                    <p class="paragraph">Profil minimal Ukuran300x300.
-                                                                        Gif juga berfungsi. Maks 5mb.
-                                                                    </p>
-                                                                    <div class="logo-upload">
-                                                                        <img src="assets/images/homepage-one/sallers-cover.png"
-                                                                            alt="upload" class="upload-img"
-                                                                            id="upload-img">
-                                                                        <div class="input-item upload-input">
-                                                                            <label for="input-file">
-                                                                                <span>
-                                                                                    <svg width="32"
-                                                                                        height="32"
-                                                                                        viewBox="0 0 32 32"
-                                                                                        fill="none"
-                                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                                        <path
-                                                                                            d="M16.5147 11.5C17.7284 12.7137 18.9234 13.9087 20.1296 15.115C19.9798 15.2611 19.8187 15.4109 19.6651 15.5683C17.4699 17.7635 15.271 19.9587 13.0758 22.1539C12.9334 22.2962 12.7948 22.4386 12.6524 22.5735C12.6187 22.6034 12.5663 22.6296 12.5213 22.6296C11.3788 22.6334 10.2362 22.6297 9.09365 22.6334C9.01498 22.6334 9 22.6034 9 22.536C9 21.4009 9 20.2621 9.00375 19.1271C9.00375 19.0746 9.02997 19.0109 9.06368 18.9772C10.4123 17.6249 11.7609 16.2763 13.1095 14.9277C14.2295 13.8076 15.3459 12.6913 16.466 11.5712C16.4884 11.5487 16.4997 11.5187 16.5147 11.5Z"
-                                                                                            fill="white"></path>
-                                                                                        <path
-                                                                                            d="M20.9499 14.2904C19.7436 13.0842 18.5449 11.8854 17.3499 10.6904C17.5634 10.4694 17.7844 10.2446 18.0054 10.0199C18.2639 9.76139 18.5261 9.50291 18.7884 9.24443C19.118 8.91852 19.5713 8.91852 19.8972 9.24443C20.7251 10.0611 21.5492 10.8815 22.3771 11.6981C22.6993 12.0165 22.7105 12.4698 22.3996 12.792C21.9238 13.2865 21.4443 13.7772 20.9686 14.2717C20.9648 14.2792 20.9536 14.2867 20.9499 14.2904Z"
-                                                                                            fill="white"></path>
-                                                                                    </svg>
-                                                                                </span>
-                                                                            </label>
-                                                                            <input type="file"
-                                                                                accept="image/jpeg, image/jpg, image/png, image/webp"
-                                                                                id="input-file">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12">
-                                                                <div class="logo-wrapper cover">
-                                                                    <h5 class="comment-title">Perbarui Sampul</h5>
-                                                                    <p class="paragraph">Sampul minimal Ukuran
-                                                                        1170x920.</p>
-                                                                    <div class="cover-upload logo-upload">
-                                                                        <img src="assets/images/homepage-one/sallers-cover.png"
-                                                                            alt="upload" class="cover-img"
-                                                                            id="cover-img">
-                                                                        <div class="input-item cover-input">
-                                                                            <label for="cover-file">
-                                                                                <span>
-                                                                                    <svg width="32"
-                                                                                        height="32"
-                                                                                        viewBox="0 0 32 32"
-                                                                                        fill="none"
-                                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                                        <path
-                                                                                            d="M16.5147 11.5C17.7284 12.7137 18.9234 13.9087 20.1296 15.115C19.9798 15.2611 19.8187 15.4109 19.6651 15.5683C17.4699 17.7635 15.271 19.9587 13.0758 22.1539C12.9334 22.2962 12.7948 22.4386 12.6524 22.5735C12.6187 22.6034 12.5663 22.6296 12.5213 22.6296C11.3788 22.6334 10.2362 22.6297 9.09365 22.6334C9.01498 22.6334 9 22.6034 9 22.536C9 21.4009 9 20.2621 9.00375 19.1271C9.00375 19.0746 9.02997 19.0109 9.06368 18.9772C10.4123 17.6249 11.7609 16.2763 13.1095 14.9277C14.2295 13.8076 15.3459 12.6913 16.466 11.5712C16.4884 11.5487 16.4997 11.5187 16.5147 11.5Z"
-                                                                                            fill="white"></path>
-                                                                                        <path
-                                                                                            d="M20.9499 14.2904C19.7436 13.0842 18.5449 11.8854 17.3499 10.6904C17.5634 10.4694 17.7844 10.2446 18.0054 10.0199C18.2639 9.76139 18.5261 9.50291 18.7884 9.24443C19.118 8.91852 19.5713 8.91852 19.8972 9.24443C20.7251 10.0611 21.5492 10.8815 22.3771 11.6981C22.6993 12.0165 22.7105 12.4698 22.3996 12.792C21.9238 13.2865 21.4443 13.7772 20.9686 14.2717C20.9648 14.2792 20.9536 14.2867 20.9499 14.2904Z"
-                                                                                            fill="white"></path>
-                                                                                    </svg>
-                                                                                </span>
-                                                                            </label>
-                                                                            <input type="file"
-                                                                                accept="image/jpeg, image/jpg, image/png, image/webp"
-                                                                                id="cover-file">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                            </div>
+                                            <div class="review-form-name address-form">
+                                                <label for="ticket" class="form-label">First Name*</label>
+                                                <input type="text" id="ticket" class="form-control"
+                                                    placeholder="Name">
+                                            </div>
+                                            <div class=" account-inner-form">
+                                                <div class="review-form-name">
+                                                    <label for="ticketaddress" class="form-label">Email
+                                                        Address*</label>
+                                                    <input type="email" id="ticketaddress" class="form-control"
+                                                        placeholder="email@gmail.com">
                                                 </div>
+                                                <div class="review-form-name">
+                                                    <label for="ticketphone" class="form-label">Phone
+                                                        Number*</label>
+                                                    <input type="tel" id="ticketphone" class="form-control"
+                                                        placeholder="******">
+                                                </div>
+                                            </div>
+                                            <div class="review-form-name address-form">
+                                                <label for="ticketmassage" class="form-label">Description*</label>
+                                                <textarea name="ticketmassage" id="ticketmassage" cols="10" rows="3" class="form-control"
+                                                    placeholder="Write Here your Description"></textarea>
+                                            </div>
+                                            <div class="login-btn text-center">
+                                                <a href="#" onclick="modalAction('.ticket')"
+                                                    class="shop-btn">Add Ticekt
+                                                    Now</a>
                                             </div>
                                         </div>
                                     </div>
-                                </section>
+
+                                </div>
+                                <div class="ticket-section">
+                                    <table>
+                                        <tbody>
+                                            <tr class="table-row table-top-row">
+                                                <td class="table-wrapper">
+                                                    <h5 class="table-heading">NO</h5>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <h5 class="table-heading">TIME</h5>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <h5 class="table-heading">REPORT</h5>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <h5 class="table-heading">ACTION</h5>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row ticket-row">
+                                                <td class="table-wrapper">
+                                                    <p class="ticker-number">#354</p>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <p class="ticket-date">11th Oct, 2023</p>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <p class="ticket-info">Printing and typesetting industry
+                                                            standard <span class="inner-text">dummy text ever
+                                                                since</span></p>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center table-wrapper-img">
+                                                        <div class="comment-img">
+                                                            <span>
+                                                                <svg width="18" height="17"
+                                                                    viewBox="0 0 18 17" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M9.34526 0.0234375C12.2264 0.133021 14.9269 1.30005 16.7549 4.04172C18.878 7.22662 18.2288 11.3601 15.1868 13.87C12.3535 16.2076 9.12958 16.6592 5.65976 15.5326C5.41809 15.4537 5.23754 15.4516 5.0071 15.5696C3.56972 16.3032 2.03046 16.7262 0.439223 16.9705C0.315577 16.9893 0.142753 16.923 0.0528284 16.8351C0.000840854 16.7841 0.0268346 16.5747 0.0914679 16.4986C0.912029 15.5403 1.12209 14.3635 1.33847 13.1811C1.42909 12.6855 1.33144 12.2891 1.06799 11.8466C-1.05226 8.27848 0.068284 3.93424 3.68564 1.57994C5.29725 0.530871 7.07607 0.043679 9.34526 0.0234375ZM7.79406 8.08444C7.80179 8.72589 8.33993 9.25705 8.98556 9.25845C9.64384 9.25984 10.189 8.71053 10.1813 8.05373C10.1735 7.40461 9.64665 6.88949 8.98978 6.8881C8.31886 6.8874 7.78633 7.42066 7.79406 8.08444ZM4.80618 6.8874C4.14018 6.87972 3.59009 7.41647 3.5915 8.07118C3.5929 8.70844 4.12894 9.24588 4.77457 9.25845C5.41809 9.27031 5.96326 8.74613 5.97731 8.10259C5.99206 7.42834 5.4778 6.89508 4.80618 6.8874ZM11.9966 8.08235C12.0022 8.72868 12.532 9.25635 13.1797 9.25984C13.8316 9.26333 14.3923 8.70355 14.3838 8.05722C14.3747 7.41298 13.8415 6.89089 13.1895 6.8888C12.5151 6.886 11.991 7.41089 11.9966 8.08235Z" />
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                        <div class="delete-img">
+                                                            <span>
+                                                                <svg width="16" height="19"
+                                                                    viewBox="0 0 16 19" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M14.7879 5.95508C14.7102 6.91333 14.6353 7.84896 14.5582 8.7853C14.3801 10.9315 14.2028 13.0776 14.0219 15.2238C13.9604 15.9503 13.9208 16.6802 13.8176 17.4018C13.7074 18.1756 13.0827 18.719 12.3039 18.7225C9.39528 18.7352 6.48733 18.7367 3.57867 18.7218C2.71582 18.7176 2.09748 18.0823 2.01904 17.158C1.79291 14.4959 1.58161 11.8332 1.36254 9.17114C1.28269 8.19735 1.19859 7.22426 1.11733 6.25117C1.10955 6.15931 1.10673 6.06744 1.10107 5.95578C5.66688 5.95508 10.2171 5.95508 14.7879 5.95508ZM4.26485 8.06096C4.26343 8.06096 4.26272 8.06096 4.26131 8.06096C4.28675 8.46023 4.31219 8.8595 4.33692 9.25877C4.47826 11.5258 4.61818 13.7921 4.76234 16.0591C4.78354 16.3926 5.0019 16.6067 5.29305 16.6053C5.59834 16.6039 5.81175 16.3665 5.8167 16.0188C5.81811 15.9368 5.81246 15.8541 5.8068 15.7722C5.66476 13.4818 5.52413 11.1915 5.37997 8.90119C5.34959 8.41995 5.32273 7.938 5.27256 7.45817C5.24076 7.15783 5.04289 7.00025 4.74185 7.00095C4.45635 7.00166 4.25142 7.22143 4.24153 7.53166C4.23729 7.70833 4.25707 7.885 4.26485 8.06096ZM11.6213 8.05813C11.6199 8.05813 11.6185 8.05813 11.6171 8.05813C11.6262 7.89348 11.6432 7.72883 11.6418 7.56488C11.6397 7.24758 11.451 7.0271 11.1733 7.00166C10.8991 6.97622 10.6595 7.16561 10.6072 7.46736C10.5775 7.64049 10.5726 7.81787 10.5613 7.99383C10.4737 9.39092 10.386 10.788 10.2998 12.1851C10.2214 13.4529 10.1387 14.7213 10.0687 15.9898C10.049 16.346 10.2574 16.5848 10.5606 16.6032C10.8673 16.6223 11.0991 16.4046 11.121 16.0534C11.2899 13.3886 11.4552 10.7237 11.6213 8.05813ZM8.47025 11.8169C8.47025 10.4757 8.47096 9.1344 8.47025 7.79384C8.47025 7.25394 8.29712 6.99742 7.93954 6.99954C7.57914 7.00095 7.41307 7.25111 7.41307 7.79879C7.41236 10.4693 7.41236 13.1398 7.41378 15.8103C7.41378 15.951 7.38197 16.1319 7.45405 16.2223C7.58055 16.3792 7.77701 16.5778 7.94307 16.5771C8.10914 16.5764 8.30418 16.3757 8.42856 16.2181C8.50064 16.1269 8.46813 15.946 8.46813 15.8061C8.47166 14.4754 8.47025 13.1462 8.47025 11.8169Z" />
+                                                                    <path
+                                                                        d="M4.21259 2.75226C4.22602 2.49644 4.22955 2.29646 4.24863 2.09788C4.32848 1.26118 4.94611 0.650617 5.78564 0.63931C7.22231 0.62023 8.66039 0.62023 10.0971 0.63931C10.9366 0.650617 11.5549 1.26048 11.6348 2.09718C11.6539 2.29575 11.6574 2.49574 11.6694 2.7353C11.7966 2.74095 11.9196 2.75085 12.0425 2.75155C12.9379 2.75297 13.8332 2.74873 14.7286 2.75367C15.4197 2.75721 15.8868 3.18969 15.8861 3.81439C15.8854 4.43838 15.419 4.87298 14.7272 4.87369C10.2038 4.87581 5.67964 4.87581 1.15623 4.87369C0.464398 4.87298 -0.0027105 4.43909 -0.00341717 3.8151C-0.00412384 3.1911 0.462987 2.75721 1.15411 2.75438C2.16536 2.74873 3.17661 2.75226 4.21259 2.75226ZM10.591 2.7353C10.591 2.59821 10.5917 2.49291 10.591 2.38832C10.5861 1.86821 10.4129 1.69508 9.88717 1.69437C8.56993 1.69296 7.2534 1.69155 5.93616 1.69508C5.49661 1.69649 5.31147 1.8774 5.2938 2.30706C5.28815 2.44415 5.29309 2.58195 5.29309 2.7353C7.06967 2.7353 8.80525 2.7353 10.591 2.7353Z"
+                                                                        fill="#EB5757" />
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row ticket-row">
+                                                <td class="table-wrapper">
+                                                    <p class="ticker-number">#355</p>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <p class="ticket-date">11th Oct, 2023</p>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <p class="ticket-info">Printing and typesetting industry
+                                                            standard <span class="inner-text">dummy text ever
+                                                                since</span></p>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center table-wrapper-img">
+                                                        <div class="comment-img">
+                                                            <span>
+                                                                <svg width="18" height="17"
+                                                                    viewBox="0 0 18 17" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M9.34526 0.0234375C12.2264 0.133021 14.9269 1.30005 16.7549 4.04172C18.878 7.22662 18.2288 11.3601 15.1868 13.87C12.3535 16.2076 9.12958 16.6592 5.65976 15.5326C5.41809 15.4537 5.23754 15.4516 5.0071 15.5696C3.56972 16.3032 2.03046 16.7262 0.439223 16.9705C0.315577 16.9893 0.142753 16.923 0.0528284 16.8351C0.000840854 16.7841 0.0268346 16.5747 0.0914679 16.4986C0.912029 15.5403 1.12209 14.3635 1.33847 13.1811C1.42909 12.6855 1.33144 12.2891 1.06799 11.8466C-1.05226 8.27848 0.068284 3.93424 3.68564 1.57994C5.29725 0.530871 7.07607 0.043679 9.34526 0.0234375ZM7.79406 8.08444C7.80179 8.72589 8.33993 9.25705 8.98556 9.25845C9.64384 9.25984 10.189 8.71053 10.1813 8.05373C10.1735 7.40461 9.64665 6.88949 8.98978 6.8881C8.31886 6.8874 7.78633 7.42066 7.79406 8.08444ZM4.80618 6.8874C4.14018 6.87972 3.59009 7.41647 3.5915 8.07118C3.5929 8.70844 4.12894 9.24588 4.77457 9.25845C5.41809 9.27031 5.96326 8.74613 5.97731 8.10259C5.99206 7.42834 5.4778 6.89508 4.80618 6.8874ZM11.9966 8.08235C12.0022 8.72868 12.532 9.25635 13.1797 9.25984C13.8316 9.26333 14.3923 8.70355 14.3838 8.05722C14.3747 7.41298 13.8415 6.89089 13.1895 6.8888C12.5151 6.886 11.991 7.41089 11.9966 8.08235Z"
+                                                                        fill="#27AE60" />
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                        <div class="delete-img">
+                                                            <span>
+                                                                <svg width="16" height="19"
+                                                                    viewBox="0 0 16 19" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M14.7879 5.95508C14.7102 6.91333 14.6353 7.84896 14.5582 8.7853C14.3801 10.9315 14.2028 13.0776 14.0219 15.2238C13.9604 15.9503 13.9208 16.6802 13.8176 17.4018C13.7074 18.1756 13.0827 18.719 12.3039 18.7225C9.39528 18.7352 6.48733 18.7367 3.57867 18.7218C2.71582 18.7176 2.09748 18.0823 2.01904 17.158C1.79291 14.4959 1.58161 11.8332 1.36254 9.17114C1.28269 8.19735 1.19859 7.22426 1.11733 6.25117C1.10955 6.15931 1.10673 6.06744 1.10107 5.95578C5.66688 5.95508 10.2171 5.95508 14.7879 5.95508ZM4.26485 8.06096C4.26343 8.06096 4.26272 8.06096 4.26131 8.06096C4.28675 8.46023 4.31219 8.8595 4.33692 9.25877C4.47826 11.5258 4.61818 13.7921 4.76234 16.0591C4.78354 16.3926 5.0019 16.6067 5.29305 16.6053C5.59834 16.6039 5.81175 16.3665 5.8167 16.0188C5.81811 15.9368 5.81246 15.8541 5.8068 15.7722C5.66476 13.4818 5.52413 11.1915 5.37997 8.90119C5.34959 8.41995 5.32273 7.938 5.27256 7.45817C5.24076 7.15783 5.04289 7.00025 4.74185 7.00095C4.45635 7.00166 4.25142 7.22143 4.24153 7.53166C4.23729 7.70833 4.25707 7.885 4.26485 8.06096ZM11.6213 8.05813C11.6199 8.05813 11.6185 8.05813 11.6171 8.05813C11.6262 7.89348 11.6432 7.72883 11.6418 7.56488C11.6397 7.24758 11.451 7.0271 11.1733 7.00166C10.8991 6.97622 10.6595 7.16561 10.6072 7.46736C10.5775 7.64049 10.5726 7.81787 10.5613 7.99383C10.4737 9.39092 10.386 10.788 10.2998 12.1851C10.2214 13.4529 10.1387 14.7213 10.0687 15.9898C10.049 16.346 10.2574 16.5848 10.5606 16.6032C10.8673 16.6223 11.0991 16.4046 11.121 16.0534C11.2899 13.3886 11.4552 10.7237 11.6213 8.05813ZM8.47025 11.8169C8.47025 10.4757 8.47096 9.1344 8.47025 7.79384C8.47025 7.25394 8.29712 6.99742 7.93954 6.99954C7.57914 7.00095 7.41307 7.25111 7.41307 7.79879C7.41236 10.4693 7.41236 13.1398 7.41378 15.8103C7.41378 15.951 7.38197 16.1319 7.45405 16.2223C7.58055 16.3792 7.77701 16.5778 7.94307 16.5771C8.10914 16.5764 8.30418 16.3757 8.42856 16.2181C8.50064 16.1269 8.46813 15.946 8.46813 15.8061C8.47166 14.4754 8.47025 13.1462 8.47025 11.8169Z"
+                                                                        fill="#EB5757" />
+                                                                    <path
+                                                                        d="M4.21259 2.75226C4.22602 2.49644 4.22955 2.29646 4.24863 2.09788C4.32848 1.26118 4.94611 0.650617 5.78564 0.63931C7.22231 0.62023 8.66039 0.62023 10.0971 0.63931C10.9366 0.650617 11.5549 1.26048 11.6348 2.09718C11.6539 2.29575 11.6574 2.49574 11.6694 2.7353C11.7966 2.74095 11.9196 2.75085 12.0425 2.75155C12.9379 2.75297 13.8332 2.74873 14.7286 2.75367C15.4197 2.75721 15.8868 3.18969 15.8861 3.81439C15.8854 4.43838 15.419 4.87298 14.7272 4.87369C10.2038 4.87581 5.67964 4.87581 1.15623 4.87369C0.464398 4.87298 -0.0027105 4.43909 -0.00341717 3.8151C-0.00412384 3.1911 0.462987 2.75721 1.15411 2.75438C2.16536 2.74873 3.17661 2.75226 4.21259 2.75226ZM10.591 2.7353C10.591 2.59821 10.5917 2.49291 10.591 2.38832C10.5861 1.86821 10.4129 1.69508 9.88717 1.69437C8.56993 1.69296 7.2534 1.69155 5.93616 1.69508C5.49661 1.69649 5.31147 1.8774 5.2938 2.30706C5.28815 2.44415 5.29309 2.58195 5.29309 2.7353C7.06967 2.7353 8.80525 2.7353 10.591 2.7353Z"
+                                                                        fill="#EB5757" />
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row ticket-row">
+                                                <td class="table-wrapper">
+                                                    <p class="ticker-number">#356</p>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <p class="ticket-date">11th Oct, 2023</p>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <p class="ticket-info">Printing and typesetting industry
+                                                            standard <span class="inner-text">dummy text ever
+                                                                since</span></p>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center table-wrapper-img">
+                                                        <div class="comment-img">
+                                                            <span>
+                                                                <svg width="18" height="17"
+                                                                    viewBox="0 0 18 17" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M9.34526 0.0234375C12.2264 0.133021 14.9269 1.30005 16.7549 4.04172C18.878 7.22662 18.2288 11.3601 15.1868 13.87C12.3535 16.2076 9.12958 16.6592 5.65976 15.5326C5.41809 15.4537 5.23754 15.4516 5.0071 15.5696C3.56972 16.3032 2.03046 16.7262 0.439223 16.9705C0.315577 16.9893 0.142753 16.923 0.0528284 16.8351C0.000840854 16.7841 0.0268346 16.5747 0.0914679 16.4986C0.912029 15.5403 1.12209 14.3635 1.33847 13.1811C1.42909 12.6855 1.33144 12.2891 1.06799 11.8466C-1.05226 8.27848 0.068284 3.93424 3.68564 1.57994C5.29725 0.530871 7.07607 0.043679 9.34526 0.0234375ZM7.79406 8.08444C7.80179 8.72589 8.33993 9.25705 8.98556 9.25845C9.64384 9.25984 10.189 8.71053 10.1813 8.05373C10.1735 7.40461 9.64665 6.88949 8.98978 6.8881C8.31886 6.8874 7.78633 7.42066 7.79406 8.08444ZM4.80618 6.8874C4.14018 6.87972 3.59009 7.41647 3.5915 8.07118C3.5929 8.70844 4.12894 9.24588 4.77457 9.25845C5.41809 9.27031 5.96326 8.74613 5.97731 8.10259C5.99206 7.42834 5.4778 6.89508 4.80618 6.8874ZM11.9966 8.08235C12.0022 8.72868 12.532 9.25635 13.1797 9.25984C13.8316 9.26333 14.3923 8.70355 14.3838 8.05722C14.3747 7.41298 13.8415 6.89089 13.1895 6.8888C12.5151 6.886 11.991 7.41089 11.9966 8.08235Z"
+                                                                        fill="#27AE60" />
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                        <div class="delete-img">
+                                                            <span>
+                                                                <svg width="16" height="19"
+                                                                    viewBox="0 0 16 19" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M14.7879 5.95508C14.7102 6.91333 14.6353 7.84896 14.5582 8.7853C14.3801 10.9315 14.2028 13.0776 14.0219 15.2238C13.9604 15.9503 13.9208 16.6802 13.8176 17.4018C13.7074 18.1756 13.0827 18.719 12.3039 18.7225C9.39528 18.7352 6.48733 18.7367 3.57867 18.7218C2.71582 18.7176 2.09748 18.0823 2.01904 17.158C1.79291 14.4959 1.58161 11.8332 1.36254 9.17114C1.28269 8.19735 1.19859 7.22426 1.11733 6.25117C1.10955 6.15931 1.10673 6.06744 1.10107 5.95578C5.66688 5.95508 10.2171 5.95508 14.7879 5.95508ZM4.26485 8.06096C4.26343 8.06096 4.26272 8.06096 4.26131 8.06096C4.28675 8.46023 4.31219 8.8595 4.33692 9.25877C4.47826 11.5258 4.61818 13.7921 4.76234 16.0591C4.78354 16.3926 5.0019 16.6067 5.29305 16.6053C5.59834 16.6039 5.81175 16.3665 5.8167 16.0188C5.81811 15.9368 5.81246 15.8541 5.8068 15.7722C5.66476 13.4818 5.52413 11.1915 5.37997 8.90119C5.34959 8.41995 5.32273 7.938 5.27256 7.45817C5.24076 7.15783 5.04289 7.00025 4.74185 7.00095C4.45635 7.00166 4.25142 7.22143 4.24153 7.53166C4.23729 7.70833 4.25707 7.885 4.26485 8.06096ZM11.6213 8.05813C11.6199 8.05813 11.6185 8.05813 11.6171 8.05813C11.6262 7.89348 11.6432 7.72883 11.6418 7.56488C11.6397 7.24758 11.451 7.0271 11.1733 7.00166C10.8991 6.97622 10.6595 7.16561 10.6072 7.46736C10.5775 7.64049 10.5726 7.81787 10.5613 7.99383C10.4737 9.39092 10.386 10.788 10.2998 12.1851C10.2214 13.4529 10.1387 14.7213 10.0687 15.9898C10.049 16.346 10.2574 16.5848 10.5606 16.6032C10.8673 16.6223 11.0991 16.4046 11.121 16.0534C11.2899 13.3886 11.4552 10.7237 11.6213 8.05813ZM8.47025 11.8169C8.47025 10.4757 8.47096 9.1344 8.47025 7.79384C8.47025 7.25394 8.29712 6.99742 7.93954 6.99954C7.57914 7.00095 7.41307 7.25111 7.41307 7.79879C7.41236 10.4693 7.41236 13.1398 7.41378 15.8103C7.41378 15.951 7.38197 16.1319 7.45405 16.2223C7.58055 16.3792 7.77701 16.5778 7.94307 16.5771C8.10914 16.5764 8.30418 16.3757 8.42856 16.2181C8.50064 16.1269 8.46813 15.946 8.46813 15.8061C8.47166 14.4754 8.47025 13.1462 8.47025 11.8169Z"
+                                                                        fill="#EB5757" />
+                                                                    <path
+                                                                        d="M4.21259 2.75226C4.22602 2.49644 4.22955 2.29646 4.24863 2.09788C4.32848 1.26118 4.94611 0.650617 5.78564 0.63931C7.22231 0.62023 8.66039 0.62023 10.0971 0.63931C10.9366 0.650617 11.5549 1.26048 11.6348 2.09718C11.6539 2.29575 11.6574 2.49574 11.6694 2.7353C11.7966 2.74095 11.9196 2.75085 12.0425 2.75155C12.9379 2.75297 13.8332 2.74873 14.7286 2.75367C15.4197 2.75721 15.8868 3.18969 15.8861 3.81439C15.8854 4.43838 15.419 4.87298 14.7272 4.87369C10.2038 4.87581 5.67964 4.87581 1.15623 4.87369C0.464398 4.87298 -0.0027105 4.43909 -0.00341717 3.8151C-0.00412384 3.1911 0.462987 2.75721 1.15411 2.75438C2.16536 2.74873 3.17661 2.75226 4.21259 2.75226ZM10.591 2.7353C10.591 2.59821 10.5917 2.49291 10.591 2.38832C10.5861 1.86821 10.4129 1.69508 9.88717 1.69437C8.56993 1.69296 7.2534 1.69155 5.93616 1.69508C5.49661 1.69649 5.31147 1.8774 5.2938 2.30706C5.28815 2.44415 5.29309 2.58195 5.29309 2.7353C7.06967 2.7353 8.80525 2.7353 10.591 2.7353Z"
+                                                                        fill="#EB5757" />
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row ticket-row">
+                                                <td class="table-wrapper">
+                                                    <p class="ticker-number">#357</p>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <p class="ticket-date">11th Oct, 2023</p>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <p class="ticket-info">Printing and typesetting industry
+                                                            standard <span class="inner-text">dummy text ever
+                                                                since</span></p>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center table-wrapper-img">
+                                                        <div class="comment-img">
+                                                            <span>
+                                                                <svg width="18" height="17"
+                                                                    viewBox="0 0 18 17" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M9.34526 0.0234375C12.2264 0.133021 14.9269 1.30005 16.7549 4.04172C18.878 7.22662 18.2288 11.3601 15.1868 13.87C12.3535 16.2076 9.12958 16.6592 5.65976 15.5326C5.41809 15.4537 5.23754 15.4516 5.0071 15.5696C3.56972 16.3032 2.03046 16.7262 0.439223 16.9705C0.315577 16.9893 0.142753 16.923 0.0528284 16.8351C0.000840854 16.7841 0.0268346 16.5747 0.0914679 16.4986C0.912029 15.5403 1.12209 14.3635 1.33847 13.1811C1.42909 12.6855 1.33144 12.2891 1.06799 11.8466C-1.05226 8.27848 0.068284 3.93424 3.68564 1.57994C5.29725 0.530871 7.07607 0.043679 9.34526 0.0234375ZM7.79406 8.08444C7.80179 8.72589 8.33993 9.25705 8.98556 9.25845C9.64384 9.25984 10.189 8.71053 10.1813 8.05373C10.1735 7.40461 9.64665 6.88949 8.98978 6.8881C8.31886 6.8874 7.78633 7.42066 7.79406 8.08444ZM4.80618 6.8874C4.14018 6.87972 3.59009 7.41647 3.5915 8.07118C3.5929 8.70844 4.12894 9.24588 4.77457 9.25845C5.41809 9.27031 5.96326 8.74613 5.97731 8.10259C5.99206 7.42834 5.4778 6.89508 4.80618 6.8874ZM11.9966 8.08235C12.0022 8.72868 12.532 9.25635 13.1797 9.25984C13.8316 9.26333 14.3923 8.70355 14.3838 8.05722C14.3747 7.41298 13.8415 6.89089 13.1895 6.8888C12.5151 6.886 11.991 7.41089 11.9966 8.08235Z"
+                                                                        fill="#27AE60" />
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                        <div class="delete-img">
+                                                            <span>
+                                                                <svg width="16" height="19"
+                                                                    viewBox="0 0 16 19" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M14.7879 5.95508C14.7102 6.91333 14.6353 7.84896 14.5582 8.7853C14.3801 10.9315 14.2028 13.0776 14.0219 15.2238C13.9604 15.9503 13.9208 16.6802 13.8176 17.4018C13.7074 18.1756 13.0827 18.719 12.3039 18.7225C9.39528 18.7352 6.48733 18.7367 3.57867 18.7218C2.71582 18.7176 2.09748 18.0823 2.01904 17.158C1.79291 14.4959 1.58161 11.8332 1.36254 9.17114C1.28269 8.19735 1.19859 7.22426 1.11733 6.25117C1.10955 6.15931 1.10673 6.06744 1.10107 5.95578C5.66688 5.95508 10.2171 5.95508 14.7879 5.95508ZM4.26485 8.06096C4.26343 8.06096 4.26272 8.06096 4.26131 8.06096C4.28675 8.46023 4.31219 8.8595 4.33692 9.25877C4.47826 11.5258 4.61818 13.7921 4.76234 16.0591C4.78354 16.3926 5.0019 16.6067 5.29305 16.6053C5.59834 16.6039 5.81175 16.3665 5.8167 16.0188C5.81811 15.9368 5.81246 15.8541 5.8068 15.7722C5.66476 13.4818 5.52413 11.1915 5.37997 8.90119C5.34959 8.41995 5.32273 7.938 5.27256 7.45817C5.24076 7.15783 5.04289 7.00025 4.74185 7.00095C4.45635 7.00166 4.25142 7.22143 4.24153 7.53166C4.23729 7.70833 4.25707 7.885 4.26485 8.06096ZM11.6213 8.05813C11.6199 8.05813 11.6185 8.05813 11.6171 8.05813C11.6262 7.89348 11.6432 7.72883 11.6418 7.56488C11.6397 7.24758 11.451 7.0271 11.1733 7.00166C10.8991 6.97622 10.6595 7.16561 10.6072 7.46736C10.5775 7.64049 10.5726 7.81787 10.5613 7.99383C10.4737 9.39092 10.386 10.788 10.2998 12.1851C10.2214 13.4529 10.1387 14.7213 10.0687 15.9898C10.049 16.346 10.2574 16.5848 10.5606 16.6032C10.8673 16.6223 11.0991 16.4046 11.121 16.0534C11.2899 13.3886 11.4552 10.7237 11.6213 8.05813ZM8.47025 11.8169C8.47025 10.4757 8.47096 9.1344 8.47025 7.79384C8.47025 7.25394 8.29712 6.99742 7.93954 6.99954C7.57914 7.00095 7.41307 7.25111 7.41307 7.79879C7.41236 10.4693 7.41236 13.1398 7.41378 15.8103C7.41378 15.951 7.38197 16.1319 7.45405 16.2223C7.58055 16.3792 7.77701 16.5778 7.94307 16.5771C8.10914 16.5764 8.30418 16.3757 8.42856 16.2181C8.50064 16.1269 8.46813 15.946 8.46813 15.8061C8.47166 14.4754 8.47025 13.1462 8.47025 11.8169Z"
+                                                                        fill="#EB5757" />
+                                                                    <path
+                                                                        d="M4.21259 2.75226C4.22602 2.49644 4.22955 2.29646 4.24863 2.09788C4.32848 1.26118 4.94611 0.650617 5.78564 0.63931C7.22231 0.62023 8.66039 0.62023 10.0971 0.63931C10.9366 0.650617 11.5549 1.26048 11.6348 2.09718C11.6539 2.29575 11.6574 2.49574 11.6694 2.7353C11.7966 2.74095 11.9196 2.75085 12.0425 2.75155C12.9379 2.75297 13.8332 2.74873 14.7286 2.75367C15.4197 2.75721 15.8868 3.18969 15.8861 3.81439C15.8854 4.43838 15.419 4.87298 14.7272 4.87369C10.2038 4.87581 5.67964 4.87581 1.15623 4.87369C0.464398 4.87298 -0.0027105 4.43909 -0.00341717 3.8151C-0.00412384 3.1911 0.462987 2.75721 1.15411 2.75438C2.16536 2.74873 3.17661 2.75226 4.21259 2.75226ZM10.591 2.7353C10.591 2.59821 10.5917 2.49291 10.591 2.38832C10.5861 1.86821 10.4129 1.69508 9.88717 1.69437C8.56993 1.69296 7.2534 1.69155 5.93616 1.69508C5.49661 1.69649 5.31147 1.8774 5.2938 2.30706C5.28815 2.44415 5.29309 2.58195 5.29309 2.7353C7.06967 2.7353 8.80525 2.7353 10.591 2.7353Z"
+                                                                        fill="#EB5757" />
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row ticket-row">
+                                                <td class="table-wrapper">
+                                                    <p class="ticker-number">#358</p>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <p class="ticket-date">11th Oct, 2023</p>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <p class="ticket-info">Printing and typesetting industry
+                                                            standard <span class="inner-text">dummy text ever
+                                                                since</span></p>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center table-wrapper-img">
+                                                        <div class="comment-img">
+                                                            <span>
+                                                                <svg width="18" height="17"
+                                                                    viewBox="0 0 18 17" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M9.34526 0.0234375C12.2264 0.133021 14.9269 1.30005 16.7549 4.04172C18.878 7.22662 18.2288 11.3601 15.1868 13.87C12.3535 16.2076 9.12958 16.6592 5.65976 15.5326C5.41809 15.4537 5.23754 15.4516 5.0071 15.5696C3.56972 16.3032 2.03046 16.7262 0.439223 16.9705C0.315577 16.9893 0.142753 16.923 0.0528284 16.8351C0.000840854 16.7841 0.0268346 16.5747 0.0914679 16.4986C0.912029 15.5403 1.12209 14.3635 1.33847 13.1811C1.42909 12.6855 1.33144 12.2891 1.06799 11.8466C-1.05226 8.27848 0.068284 3.93424 3.68564 1.57994C5.29725 0.530871 7.07607 0.043679 9.34526 0.0234375ZM7.79406 8.08444C7.80179 8.72589 8.33993 9.25705 8.98556 9.25845C9.64384 9.25984 10.189 8.71053 10.1813 8.05373C10.1735 7.40461 9.64665 6.88949 8.98978 6.8881C8.31886 6.8874 7.78633 7.42066 7.79406 8.08444ZM4.80618 6.8874C4.14018 6.87972 3.59009 7.41647 3.5915 8.07118C3.5929 8.70844 4.12894 9.24588 4.77457 9.25845C5.41809 9.27031 5.96326 8.74613 5.97731 8.10259C5.99206 7.42834 5.4778 6.89508 4.80618 6.8874ZM11.9966 8.08235C12.0022 8.72868 12.532 9.25635 13.1797 9.25984C13.8316 9.26333 14.3923 8.70355 14.3838 8.05722C14.3747 7.41298 13.8415 6.89089 13.1895 6.8888C12.5151 6.886 11.991 7.41089 11.9966 8.08235Z"
+                                                                        fill="#27AE60" />
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                        <div class="delete-img">
+                                                            <span>
+                                                                <svg width="16" height="19"
+                                                                    viewBox="0 0 16 19" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M14.7879 5.95508C14.7102 6.91333 14.6353 7.84896 14.5582 8.7853C14.3801 10.9315 14.2028 13.0776 14.0219 15.2238C13.9604 15.9503 13.9208 16.6802 13.8176 17.4018C13.7074 18.1756 13.0827 18.719 12.3039 18.7225C9.39528 18.7352 6.48733 18.7367 3.57867 18.7218C2.71582 18.7176 2.09748 18.0823 2.01904 17.158C1.79291 14.4959 1.58161 11.8332 1.36254 9.17114C1.28269 8.19735 1.19859 7.22426 1.11733 6.25117C1.10955 6.15931 1.10673 6.06744 1.10107 5.95578C5.66688 5.95508 10.2171 5.95508 14.7879 5.95508ZM4.26485 8.06096C4.26343 8.06096 4.26272 8.06096 4.26131 8.06096C4.28675 8.46023 4.31219 8.8595 4.33692 9.25877C4.47826 11.5258 4.61818 13.7921 4.76234 16.0591C4.78354 16.3926 5.0019 16.6067 5.29305 16.6053C5.59834 16.6039 5.81175 16.3665 5.8167 16.0188C5.81811 15.9368 5.81246 15.8541 5.8068 15.7722C5.66476 13.4818 5.52413 11.1915 5.37997 8.90119C5.34959 8.41995 5.32273 7.938 5.27256 7.45817C5.24076 7.15783 5.04289 7.00025 4.74185 7.00095C4.45635 7.00166 4.25142 7.22143 4.24153 7.53166C4.23729 7.70833 4.25707 7.885 4.26485 8.06096ZM11.6213 8.05813C11.6199 8.05813 11.6185 8.05813 11.6171 8.05813C11.6262 7.89348 11.6432 7.72883 11.6418 7.56488C11.6397 7.24758 11.451 7.0271 11.1733 7.00166C10.8991 6.97622 10.6595 7.16561 10.6072 7.46736C10.5775 7.64049 10.5726 7.81787 10.5613 7.99383C10.4737 9.39092 10.386 10.788 10.2998 12.1851C10.2214 13.4529 10.1387 14.7213 10.0687 15.9898C10.049 16.346 10.2574 16.5848 10.5606 16.6032C10.8673 16.6223 11.0991 16.4046 11.121 16.0534C11.2899 13.3886 11.4552 10.7237 11.6213 8.05813ZM8.47025 11.8169C8.47025 10.4757 8.47096 9.1344 8.47025 7.79384C8.47025 7.25394 8.29712 6.99742 7.93954 6.99954C7.57914 7.00095 7.41307 7.25111 7.41307 7.79879C7.41236 10.4693 7.41236 13.1398 7.41378 15.8103C7.41378 15.951 7.38197 16.1319 7.45405 16.2223C7.58055 16.3792 7.77701 16.5778 7.94307 16.5771C8.10914 16.5764 8.30418 16.3757 8.42856 16.2181C8.50064 16.1269 8.46813 15.946 8.46813 15.8061C8.47166 14.4754 8.47025 13.1462 8.47025 11.8169Z"
+                                                                        fill="#EB5757" />
+                                                                    <path
+                                                                        d="M4.21259 2.75226C4.22602 2.49644 4.22955 2.29646 4.24863 2.09788C4.32848 1.26118 4.94611 0.650617 5.78564 0.63931C7.22231 0.62023 8.66039 0.62023 10.0971 0.63931C10.9366 0.650617 11.5549 1.26048 11.6348 2.09718C11.6539 2.29575 11.6574 2.49574 11.6694 2.7353C11.7966 2.74095 11.9196 2.75085 12.0425 2.75155C12.9379 2.75297 13.8332 2.74873 14.7286 2.75367C15.4197 2.75721 15.8868 3.18969 15.8861 3.81439C15.8854 4.43838 15.419 4.87298 14.7272 4.87369C10.2038 4.87581 5.67964 4.87581 1.15623 4.87369C0.464398 4.87298 -0.0027105 4.43909 -0.00341717 3.8151C-0.00412384 3.1911 0.462987 2.75721 1.15411 2.75438C2.16536 2.74873 3.17661 2.75226 4.21259 2.75226ZM10.591 2.7353C10.591 2.59821 10.5917 2.49291 10.591 2.38832C10.5861 1.86821 10.4129 1.69508 9.88717 1.69437C8.56993 1.69296 7.2534 1.69155 5.93616 1.69508C5.49661 1.69649 5.31147 1.8774 5.2938 2.30706C5.28815 2.44415 5.29309 2.58195 5.29309 2.7353C7.06967 2.7353 8.80525 2.7353 10.591 2.7353Z"
+                                                                        fill="#EB5757" />
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row ticket-row">
+                                                <td class="table-wrapper">
+                                                    <p class="ticker-number">#359</p>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <p class="ticket-date">11th Oct, 2023</p>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <p class="ticket-info">Printing and typesetting industry
+                                                            standard <span class="inner-text">dummy text ever
+                                                                since</span></p>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center table-wrapper-img">
+                                                        <div class="comment-img">
+                                                            <span>
+                                                                <svg width="18" height="17"
+                                                                    viewBox="0 0 18 17" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M9.34526 0.0234375C12.2264 0.133021 14.9269 1.30005 16.7549 4.04172C18.878 7.22662 18.2288 11.3601 15.1868 13.87C12.3535 16.2076 9.12958 16.6592 5.65976 15.5326C5.41809 15.4537 5.23754 15.4516 5.0071 15.5696C3.56972 16.3032 2.03046 16.7262 0.439223 16.9705C0.315577 16.9893 0.142753 16.923 0.0528284 16.8351C0.000840854 16.7841 0.0268346 16.5747 0.0914679 16.4986C0.912029 15.5403 1.12209 14.3635 1.33847 13.1811C1.42909 12.6855 1.33144 12.2891 1.06799 11.8466C-1.05226 8.27848 0.068284 3.93424 3.68564 1.57994C5.29725 0.530871 7.07607 0.043679 9.34526 0.0234375ZM7.79406 8.08444C7.80179 8.72589 8.33993 9.25705 8.98556 9.25845C9.64384 9.25984 10.189 8.71053 10.1813 8.05373C10.1735 7.40461 9.64665 6.88949 8.98978 6.8881C8.31886 6.8874 7.78633 7.42066 7.79406 8.08444ZM4.80618 6.8874C4.14018 6.87972 3.59009 7.41647 3.5915 8.07118C3.5929 8.70844 4.12894 9.24588 4.77457 9.25845C5.41809 9.27031 5.96326 8.74613 5.97731 8.10259C5.99206 7.42834 5.4778 6.89508 4.80618 6.8874ZM11.9966 8.08235C12.0022 8.72868 12.532 9.25635 13.1797 9.25984C13.8316 9.26333 14.3923 8.70355 14.3838 8.05722C14.3747 7.41298 13.8415 6.89089 13.1895 6.8888C12.5151 6.886 11.991 7.41089 11.9966 8.08235Z"
+                                                                        fill="#27AE60" />
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                        <div class="delete-img">
+                                                            <span>
+                                                                <svg width="16" height="19"
+                                                                    viewBox="0 0 16 19" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M14.7879 5.95508C14.7102 6.91333 14.6353 7.84896 14.5582 8.7853C14.3801 10.9315 14.2028 13.0776 14.0219 15.2238C13.9604 15.9503 13.9208 16.6802 13.8176 17.4018C13.7074 18.1756 13.0827 18.719 12.3039 18.7225C9.39528 18.7352 6.48733 18.7367 3.57867 18.7218C2.71582 18.7176 2.09748 18.0823 2.01904 17.158C1.79291 14.4959 1.58161 11.8332 1.36254 9.17114C1.28269 8.19735 1.19859 7.22426 1.11733 6.25117C1.10955 6.15931 1.10673 6.06744 1.10107 5.95578C5.66688 5.95508 10.2171 5.95508 14.7879 5.95508ZM4.26485 8.06096C4.26343 8.06096 4.26272 8.06096 4.26131 8.06096C4.28675 8.46023 4.31219 8.8595 4.33692 9.25877C4.47826 11.5258 4.61818 13.7921 4.76234 16.0591C4.78354 16.3926 5.0019 16.6067 5.29305 16.6053C5.59834 16.6039 5.81175 16.3665 5.8167 16.0188C5.81811 15.9368 5.81246 15.8541 5.8068 15.7722C5.66476 13.4818 5.52413 11.1915 5.37997 8.90119C5.34959 8.41995 5.32273 7.938 5.27256 7.45817C5.24076 7.15783 5.04289 7.00025 4.74185 7.00095C4.45635 7.00166 4.25142 7.22143 4.24153 7.53166C4.23729 7.70833 4.25707 7.885 4.26485 8.06096ZM11.6213 8.05813C11.6199 8.05813 11.6185 8.05813 11.6171 8.05813C11.6262 7.89348 11.6432 7.72883 11.6418 7.56488C11.6397 7.24758 11.451 7.0271 11.1733 7.00166C10.8991 6.97622 10.6595 7.16561 10.6072 7.46736C10.5775 7.64049 10.5726 7.81787 10.5613 7.99383C10.4737 9.39092 10.386 10.788 10.2998 12.1851C10.2214 13.4529 10.1387 14.7213 10.0687 15.9898C10.049 16.346 10.2574 16.5848 10.5606 16.6032C10.8673 16.6223 11.0991 16.4046 11.121 16.0534C11.2899 13.3886 11.4552 10.7237 11.6213 8.05813ZM8.47025 11.8169C8.47025 10.4757 8.47096 9.1344 8.47025 7.79384C8.47025 7.25394 8.29712 6.99742 7.93954 6.99954C7.57914 7.00095 7.41307 7.25111 7.41307 7.79879C7.41236 10.4693 7.41236 13.1398 7.41378 15.8103C7.41378 15.951 7.38197 16.1319 7.45405 16.2223C7.58055 16.3792 7.77701 16.5778 7.94307 16.5771C8.10914 16.5764 8.30418 16.3757 8.42856 16.2181C8.50064 16.1269 8.46813 15.946 8.46813 15.8061C8.47166 14.4754 8.47025 13.1462 8.47025 11.8169Z"
+                                                                        fill="#EB5757" />
+                                                                    <path
+                                                                        d="M4.21259 2.75226C4.22602 2.49644 4.22955 2.29646 4.24863 2.09788C4.32848 1.26118 4.94611 0.650617 5.78564 0.63931C7.22231 0.62023 8.66039 0.62023 10.0971 0.63931C10.9366 0.650617 11.5549 1.26048 11.6348 2.09718C11.6539 2.29575 11.6574 2.49574 11.6694 2.7353C11.7966 2.74095 11.9196 2.75085 12.0425 2.75155C12.9379 2.75297 13.8332 2.74873 14.7286 2.75367C15.4197 2.75721 15.8868 3.18969 15.8861 3.81439C15.8854 4.43838 15.419 4.87298 14.7272 4.87369C10.2038 4.87581 5.67964 4.87581 1.15623 4.87369C0.464398 4.87298 -0.0027105 4.43909 -0.00341717 3.8151C-0.00412384 3.1911 0.462987 2.75721 1.15411 2.75438C2.16536 2.74873 3.17661 2.75226 4.21259 2.75226ZM10.591 2.7353C10.591 2.59821 10.5917 2.49291 10.591 2.38832C10.5861 1.86821 10.4129 1.69508 9.88717 1.69437C8.56993 1.69296 7.2534 1.69155 5.93616 1.69508C5.49661 1.69649 5.31147 1.8774 5.2938 2.30706C5.28815 2.44415 5.29309 2.58195 5.29309 2.7353C7.06967 2.7353 8.80525 2.7353 10.591 2.7353Z"
+                                                                        fill="#EB5757" />
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row ticket-row">
+                                                <td class="table-wrapper">
+                                                    <p class="ticker-number">#360</p>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <p class="ticket-date">11th Oct, 2023</p>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <p class="ticket-info">Printing and typesetting industry
+                                                            standard <span class="inner-text">dummy text ever
+                                                                since</span></p>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center table-wrapper-img">
+                                                        <div class="comment-img">
+                                                            <span>
+                                                                <svg width="18" height="17"
+                                                                    viewBox="0 0 18 17" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M9.34526 0.0234375C12.2264 0.133021 14.9269 1.30005 16.7549 4.04172C18.878 7.22662 18.2288 11.3601 15.1868 13.87C12.3535 16.2076 9.12958 16.6592 5.65976 15.5326C5.41809 15.4537 5.23754 15.4516 5.0071 15.5696C3.56972 16.3032 2.03046 16.7262 0.439223 16.9705C0.315577 16.9893 0.142753 16.923 0.0528284 16.8351C0.000840854 16.7841 0.0268346 16.5747 0.0914679 16.4986C0.912029 15.5403 1.12209 14.3635 1.33847 13.1811C1.42909 12.6855 1.33144 12.2891 1.06799 11.8466C-1.05226 8.27848 0.068284 3.93424 3.68564 1.57994C5.29725 0.530871 7.07607 0.043679 9.34526 0.0234375ZM7.79406 8.08444C7.80179 8.72589 8.33993 9.25705 8.98556 9.25845C9.64384 9.25984 10.189 8.71053 10.1813 8.05373C10.1735 7.40461 9.64665 6.88949 8.98978 6.8881C8.31886 6.8874 7.78633 7.42066 7.79406 8.08444ZM4.80618 6.8874C4.14018 6.87972 3.59009 7.41647 3.5915 8.07118C3.5929 8.70844 4.12894 9.24588 4.77457 9.25845C5.41809 9.27031 5.96326 8.74613 5.97731 8.10259C5.99206 7.42834 5.4778 6.89508 4.80618 6.8874ZM11.9966 8.08235C12.0022 8.72868 12.532 9.25635 13.1797 9.25984C13.8316 9.26333 14.3923 8.70355 14.3838 8.05722C14.3747 7.41298 13.8415 6.89089 13.1895 6.8888C12.5151 6.886 11.991 7.41089 11.9966 8.08235Z"
+                                                                        fill="#27AE60" />
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                        <div class="delete-img">
+                                                            <span>
+                                                                <svg width="16" height="19"
+                                                                    viewBox="0 0 16 19" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M14.7879 5.95508C14.7102 6.91333 14.6353 7.84896 14.5582 8.7853C14.3801 10.9315 14.2028 13.0776 14.0219 15.2238C13.9604 15.9503 13.9208 16.6802 13.8176 17.4018C13.7074 18.1756 13.0827 18.719 12.3039 18.7225C9.39528 18.7352 6.48733 18.7367 3.57867 18.7218C2.71582 18.7176 2.09748 18.0823 2.01904 17.158C1.79291 14.4959 1.58161 11.8332 1.36254 9.17114C1.28269 8.19735 1.19859 7.22426 1.11733 6.25117C1.10955 6.15931 1.10673 6.06744 1.10107 5.95578C5.66688 5.95508 10.2171 5.95508 14.7879 5.95508ZM4.26485 8.06096C4.26343 8.06096 4.26272 8.06096 4.26131 8.06096C4.28675 8.46023 4.31219 8.8595 4.33692 9.25877C4.47826 11.5258 4.61818 13.7921 4.76234 16.0591C4.78354 16.3926 5.0019 16.6067 5.29305 16.6053C5.59834 16.6039 5.81175 16.3665 5.8167 16.0188C5.81811 15.9368 5.81246 15.8541 5.8068 15.7722C5.66476 13.4818 5.52413 11.1915 5.37997 8.90119C5.34959 8.41995 5.32273 7.938 5.27256 7.45817C5.24076 7.15783 5.04289 7.00025 4.74185 7.00095C4.45635 7.00166 4.25142 7.22143 4.24153 7.53166C4.23729 7.70833 4.25707 7.885 4.26485 8.06096ZM11.6213 8.05813C11.6199 8.05813 11.6185 8.05813 11.6171 8.05813C11.6262 7.89348 11.6432 7.72883 11.6418 7.56488C11.6397 7.24758 11.451 7.0271 11.1733 7.00166C10.8991 6.97622 10.6595 7.16561 10.6072 7.46736C10.5775 7.64049 10.5726 7.81787 10.5613 7.99383C10.4737 9.39092 10.386 10.788 10.2998 12.1851C10.2214 13.4529 10.1387 14.7213 10.0687 15.9898C10.049 16.346 10.2574 16.5848 10.5606 16.6032C10.8673 16.6223 11.0991 16.4046 11.121 16.0534C11.2899 13.3886 11.4552 10.7237 11.6213 8.05813ZM8.47025 11.8169C8.47025 10.4757 8.47096 9.1344 8.47025 7.79384C8.47025 7.25394 8.29712 6.99742 7.93954 6.99954C7.57914 7.00095 7.41307 7.25111 7.41307 7.79879C7.41236 10.4693 7.41236 13.1398 7.41378 15.8103C7.41378 15.951 7.38197 16.1319 7.45405 16.2223C7.58055 16.3792 7.77701 16.5778 7.94307 16.5771C8.10914 16.5764 8.30418 16.3757 8.42856 16.2181C8.50064 16.1269 8.46813 15.946 8.46813 15.8061C8.47166 14.4754 8.47025 13.1462 8.47025 11.8169Z"
+                                                                        fill="#EB5757" />
+                                                                    <path
+                                                                        d="M4.21259 2.75226C4.22602 2.49644 4.22955 2.29646 4.24863 2.09788C4.32848 1.26118 4.94611 0.650617 5.78564 0.63931C7.22231 0.62023 8.66039 0.62023 10.0971 0.63931C10.9366 0.650617 11.5549 1.26048 11.6348 2.09718C11.6539 2.29575 11.6574 2.49574 11.6694 2.7353C11.7966 2.74095 11.9196 2.75085 12.0425 2.75155C12.9379 2.75297 13.8332 2.74873 14.7286 2.75367C15.4197 2.75721 15.8868 3.18969 15.8861 3.81439C15.8854 4.43838 15.419 4.87298 14.7272 4.87369C10.2038 4.87581 5.67964 4.87581 1.15623 4.87369C0.464398 4.87298 -0.0027105 4.43909 -0.00341717 3.8151C-0.00412384 3.1911 0.462987 2.75721 1.15411 2.75438C2.16536 2.74873 3.17661 2.75226 4.21259 2.75226ZM10.591 2.7353C10.591 2.59821 10.5917 2.49291 10.591 2.38832C10.5861 1.86821 10.4129 1.69508 9.88717 1.69437C8.56993 1.69296 7.2534 1.69155 5.93616 1.69508C5.49661 1.69649 5.31147 1.8774 5.2938 2.30706C5.28815 2.44415 5.29309 2.58195 5.29309 2.7353C7.06967 2.7353 8.80525 2.7353 10.591 2.7353Z"
+                                                                        fill="#EB5757" />
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
 
@@ -2785,15 +3093,15 @@
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="assets/js/jquery_3.7.1.min.js"></script>
 
-    <script src="{{ asset('template-assets/front/assets/js/bootstrap_5.3.2.bundle.min.js') }}"></script>
+    <script src="assets/js/bootstrap_5.3.2.bundle.min.js"></script>
 
-    <script src="{{ asset('template-assets/front/assets/js/nouislider.min.js') }}"></script>
+    <script src="assets/js/nouislider.min.js"></script>
 
-    <script src="{{ asset('template-assets/front/assets/js/aos-3.0.0.js') }}"></script>
+    <script src="assets/js/aos-3.0.0.js"></script>
 
-    <script src="{{ asset('template-assets/front/assets/js/swiper10-bundle.min.js') }}"></script>
+    <script src="assets/js/swiper10-bundle.min.js"></script>
 
-    <script src="{{ asset('template-assets/front/assets/js/shopus.js') }}"></script>
+    <script src="assets/js/shopus.js"></script>
 </body>
 
 </html>
