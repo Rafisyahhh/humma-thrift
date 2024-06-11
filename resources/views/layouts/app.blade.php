@@ -9,7 +9,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Fluid - Layouts | Vuexy - Bootstrap Admin Template</title>
+    <title>Admin</title>
 
     <meta name="description" content="" />
 
@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="template-assets/admin/assets/vendor/fonts/flag-icons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="template-assets/admin/assets/vendor/css/rtl/core-dark  .css" />
+    <link rel="stylesheet" href="template-assets/admin/assets/vendor/css/rtl/core-dark.css" />
     <link rel="stylesheet" href="template-assets/admin/assets/vendor/css/rtl/theme-bordered-dark.css" />
     <link rel="stylesheet" href="template-assets/admin/assets/css/demo.css" />
 
@@ -128,8 +128,45 @@
     <script src="template-assets/admin/assets/js/main.js"></script>
 
     <!-- Page JS -->
+
+
+    <!-- Vendors JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.css">
+    @if ($errors->any())
+    <script>
+        toastr.error(`{!! implode('\n', $errors->all()) !!}`);
+    </script>
+@endif
+
+@if (session('warning'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "{{ session('warning') }}"
+        });
+    </script>
+@endif
+
+
+@if (session('success'))
+    <script>
+        Swal.fire({
+            // title: "Good job!",
+            text: "{{ session('success') }}",
+            icon: "success"
+        });
+    </script>
+@endif
+
     @stack('js')
     @yield('js')
+
+
+
+
 </body>
 
 </html>

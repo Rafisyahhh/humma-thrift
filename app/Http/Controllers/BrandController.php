@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
@@ -31,7 +33,21 @@ class BrandController extends Controller
      */
     public function store(StoreBrandRequest $request)
     {
-        
+        try {
+        $gambar = $request->file('logo');
+        if ($gambar) {
+            $path_gambar = Storage::disk('public')->put('logo', $gambar);
+        }
+
+        Brand::create([
+            'title' => $request->title,
+            'logo' => $path_gambar,
+        ]);
+
+        return redirect()->route('brand.index')->with('success', 'Brand berhasil ditambahkan');
+    } catch (\Throwable $th) {
+        return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
+    }
     }
 
     /**
@@ -47,7 +63,8 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        $brands = Brand::all();
+        return view('admin.brand', compact('brands'));
     }
 
     /**
@@ -55,7 +72,34 @@ class BrandController extends Controller
      */
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        //
+        try {
+
+        $oldPhotoPath = $brand->logo;
+
+        $dataToUpdate = [
+            'title' => $request->input('title_update'),
+        ];
+
+        if ($request->hasFile('logo_update')) {
+            $foto = $request->file('logo_update');
+            $path = $foto->store('logo', 'public');
+            $dataToUpdate['logo'] = $path;
+        }
+
+        $brand->update($dataToUpdate);
+
+        if ($brand->wasChanged('logo') && $oldPhotoPath) {
+            Storage::disk('public')->delete($oldPhotoPath);
+            $localFilePath = public_path('storage/' . $oldPhotoPath);
+            if (File::exists($localFilePath)) {
+                File::delete($localFilePath);
+            }
+        }
+
+        return redirect()->route('brand.index')->with('success', 'Barnd berhasil di ubah');
+    } catch (\Throwable $th) {
+        return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
+    }
     }
 
     /**
