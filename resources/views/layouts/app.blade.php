@@ -609,7 +609,7 @@
                                         document.write(new Date().getFullYear());
                                     </script>
                                     made with ❤️ by
-                                    <a href="https://cakadi.id" target="_blank"
+                                    <a href="{{ url('/') }}" target="_blank"
                                         class="footer-link text-primary fw-medium">Humma Appreticenship Team</a>
                                 </div>
                             </div>
