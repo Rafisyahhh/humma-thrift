@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/penjual', function () {
+    return view('penjualan.penjualan');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -28,3 +32,5 @@ Route::prefix('/dev')->group(function() {
         return view('admin.index');
     });
 });
+
+
