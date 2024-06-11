@@ -122,7 +122,7 @@
             <div class="category-section">
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
                     <div class="wrapper-img">
-                        <img src="./assets/images/homepage-one/category-img/dresses.webp" alt="dress">
+                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/category-img/dresses.webp') }}" alt="dress">
                     </div>
                     <div class="wrapper-info">
                         <a href="product-sidebar.html" class="wrapper-details">Dresses</a>
@@ -143,7 +143,7 @@
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="./assets/images/homepage-one/brand-img-1.webp" alt="img">
+                            <img src="{{asset ('template-assets/front/assets/images/homepage-one/brand-img-1.webp') }}" alt="img">
                         </a>
                     </div>
                 </div>
@@ -163,7 +163,7 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="./assets/images/homepage-one/product-img/product-img-1.webp"
+                                <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                     alt="product-img">
                                 <div class="product-cart-items">
                                     <a href="#" class="cart cart-item">
@@ -306,7 +306,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
                             <div class="product-img">
-                                <img src="./assets/images/homepage-one/product-img/product-img-5.webp"
+                                <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-img-5.webp') }}"
                                     alt="product-img">
                                 <div class="product-cart-items">
                                     <a href="#" class="cart cart-item">
@@ -431,7 +431,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="product-wrapper" data-aos="fade-right">
                             <div class="product-img">
-                                <img src="./assets/images/homepage-one/product-img/product-img-5.webp"
+                                <img src="{{asset ("template-assets/front/assets/images/homepage-one/product-img/product-img-5.webp") }}"
                                     alt="product-img">
                                 <div class="product-cart-items">
                                     <a href="#" class="cart cart-item">
@@ -674,7 +674,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="./assets/images/homepage-one/product-img/product-img-5.webp"
+                                <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-img-5.webp') }}"
                                     alt="product-img">
                                 <div class="product-cart-items">
                                     <a href="#" class="cart cart-item">
@@ -848,7 +848,7 @@
                     <div class="col-xl-2 col-md-4">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="./assets/images/homepage-one/product-img/product-img-9.webp"
+                                <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-img-9.webp') }}"
                                     alt="product-img">
                             </div>
                             <div class="product-info">

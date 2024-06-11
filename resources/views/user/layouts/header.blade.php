@@ -23,7 +23,7 @@
                 <div class="header-center">
                     <div class="logo">
                         <a href="index.html">
-                            <img src="./assets/images/logos/logo.webp" alt="logo">
+                            <img src="{{asset ('template-assets/front/assets/images/logos/logo.webp') }}" alt="logo">
                         </a>
                     </div>
                     <div class="header-cart-items">

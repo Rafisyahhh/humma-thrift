@@ -205,11 +205,10 @@
                                 </div>
                             </div>
 
-
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-wrapper" data-aos="fade-up">
                                     <div class="product-img">
-                                        <img src="./assets/images/homepage-one/product-img/product-img-1.webp"
+                                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                             alt="product-img">
                                         <div class="product-cart-items">
                                             <a href="#" class="cart cart-item">
@@ -330,7 +329,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-wrapper" data-aos="fade-up">
                                     <div class="product-img">
-                                        <img src="./assets/images/homepage-one/product-img/product-img-1.webp"
+                                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                             alt="product-img">
                                         <div class="product-cart-items">
                                             <a href="#" class="cart cart-item">
