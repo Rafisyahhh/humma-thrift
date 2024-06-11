@@ -32,7 +32,7 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
-        <li class="menu-item">
+        <li class="menu-item {{ request()->routeIs('admin') ? 'active' : '' }}">
             <a href="{{ url('/admin') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-home"></i>
                 <div data-i18n="Dashboard">Dasbor</div>
@@ -41,7 +41,7 @@
 
         <li class="menu-item {{ request()->routeIs('brand.index') ? 'active' : '' }}">
             <a href="{{ url('/brand') }}" class="menu-link">
-                <i class="menu-icon fa-thin fa-font-awesome"></i>
+                <i class="menu-icon fa-regular fa-font-awesome"></i>
                 <div data-i18n="Brand">Brand</div>
             </a>
         </li>

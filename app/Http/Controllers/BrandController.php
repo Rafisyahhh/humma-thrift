@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
+use Exception;
 use Illuminate\Support\Facades\File;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
@@ -13,9 +15,12 @@ class BrandController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $brands = Brand::all();
+        $brands = Brand::when($request->has('search'), function ($query) use ($request) {
+            $a = $request->input('search');
+            return $query->where('title', 'LIKE', "%$a%");
+        })->paginate(5);
         return view('admin.brand', compact('brands'));
     }
 
@@ -96,7 +101,7 @@ class BrandController extends Controller
             }
         }
 
-        return redirect()->route('brand.index')->with('success', 'Barnd berhasil di ubah');
+        return redirect()->route('brand.index')->with('success', 'Brand berhasil di ubah');
     } catch (\Throwable $th) {
         return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
     }
@@ -107,6 +112,17 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+
+
+            // If category is not used, delete the photo if it exists
+            if (Storage::disk('public')->exists($brand->logo)) {
+                Storage::disk('public')->delete($brand->logo);
+            }
+
+            // Delete the category
+            $brand->delete();
+
+            return redirect()->route('brand.index')->with('success', 'Brand berhasil di hapus');
+
     }
 }

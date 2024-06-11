@@ -6,12 +6,13 @@
         <div class="card-header d-flex justify-content-between align-items-center">
 
             <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
-                style="background-color: rgb(128, 114, 97) ; color:#fff;">
+                style="background-color:	rgb(167, 146, 119)  ; color:#fff;">
                 Tambahkan Brand
             </a>
-            <form method="get">
+            <form action="{{ route('brand.index') }}" method="get">
                 <div class="input-group mb-3">
-                    <input type="search" name="search" class="form-control" placeholder="Cari Game&hellip;" />
+                    <input type="search" name="search" class="form-control" placeholder="Cari Brand&hellip;"
+                    value="{{ old('search', request('search')) }}" />
                     <button type="submit" class="btn btn-secondary">Cari</button>
                 </div>
             </form>
@@ -39,21 +40,16 @@
                                     data-bs-toggle="modal" data-bs-target="#editModal{{ $brand->id }}">
                                     <i class="ti ti-pencil"></i>
                                 </button>
-                                <form id="delete-form-{{ $brand->id }}"
-                                    action="{{ route('brand.destroy', ['brand' => $brand->id]) }}" method="POST"
-                                    style="display:inline">
+                                <form id="delete-form-{{ $brand->id }}" action="{{ route('brand.destroy', ['brand' => $brand->id]) }}" method="POST" style="display:inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" style="background: none"
-                                        class="badge bg-label-danger me-1 border-0"
-                                        onclick="confirmDeletion({{ $brand->id }});">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                            viewBox="0 0 24 24">
-                                            <path fill="#FA7070"
-                                                d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
+                                    <button type="button" style="background: none" class="badge bg-label-danger me-1 border-0" onclick="confirmDeletion({{ $brand->id }});">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
+                                            <path fill="#FA7070" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
                                         </svg>
                                     </button>
                                 </form>
+
 
                             </td>
                         </tr>
@@ -100,7 +96,7 @@
                                 <div class="pt-2 d-flex gap-3 justify-content-end">
                                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
                                     <button type="submit" class="btn btn"
-                                        style="background-color: rgb(128, 114, 97) ; color:#fff;">Tambahkan</button>
+                                        style="background-color:	rgb(167, 146, 119)  ; color:#fff;">Tambahkan</button>
                                 </div>
                             </form>
                         </div>
@@ -153,7 +149,8 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="submit"  class="btn btn"
+                                style="background-color:	rgb(167, 146, 119)  ; color:#fff;">Simpan</button>
                             </div>
                             </form>
                         </div>
@@ -166,7 +163,8 @@
     <!-- Bootstrap Table with Header - Light -->
 @endsection
 
-@section('script')
+@section('scripts')
+{{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
 <script>
     function confirmDeletion(brandId) {
         Swal.fire({
