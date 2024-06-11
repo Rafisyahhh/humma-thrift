@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/admin', function () {
+    return view('layouts.app');
+});
 
 Route::get('/penjual', function () {
     return view('penjualan.penjualan');
@@ -25,12 +28,3 @@ Route::get('/penjual', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-# For development only
-Route::prefix('/dev')->group(function() {
-    Route::get('/admin-view', function() {
-        return view('admin.index');
-    });
-});
-
-

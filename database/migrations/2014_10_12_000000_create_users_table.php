@@ -12,13 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            $table->id(); // Sama dengan BIGINT, auto-increment
+            $table->timestamps(); // Otomatis membuat created_at dan updated_at
+            $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
-            $table->timestamps();
+            $table->string('fullname');
+            $table->string('phone', 24);
+            $table->string('avatar')->nullable(); // Menambahkan nullable
+            $table->string('dbirth')->nullable(); // Menambahkan nullable
+            $table->binary('nic_photo'); // Tipe data untuk menyimpan file gambar
         });
     }
 
