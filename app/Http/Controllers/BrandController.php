@@ -13,7 +13,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $brands = Brand::all();
+        return view('admin.brand', compact('brands'));
     }
 
     /**
@@ -21,7 +22,8 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        $brands = Brand::all();
+        return view('admin.brand', compact('brands'));
     }
 
     /**
@@ -29,7 +31,7 @@ class BrandController extends Controller
      */
     public function store(StoreBrandRequest $request)
     {
-        //
+        
     }
 
     /**
