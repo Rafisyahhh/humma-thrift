@@ -7,9 +7,6 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-
-
-
         <div class="row">
             <!-- View sales -->
             <div class="col-xl-4 mb-4 col-lg-5 col-12">
