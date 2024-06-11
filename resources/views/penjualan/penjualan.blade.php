@@ -10,15 +10,15 @@
 
     <title>Shopus | Profile</title>
 
-    <link rel="stylesheet" href="{{ asset('tempate-assets/front/css/swiper10-bundle.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template-assets/front/css/swiper10-bundle.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('tempate-assets/front/css/bootstrap-5.3.2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template-assets/front/css/bootstrap-5.3.2.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('tempate-assets/front/css/nouislider.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template-assets/front/css/nouislider.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('tempate-assets/front/css/aos-3.0.0.css') }}">
+    <link rel="stylesheet" href="{{ asset('template-assets/front/css/aos-3.0.0.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('tempate-assets/front//css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('template-assets/front//css/style.css') }}">
 </head>
 
 <body>
@@ -46,7 +46,7 @@
                 <div class="header-center">
                     <div class="logo">
                         <a href="index.html">
-                            <img src="{{ asset('tempate-assets/front/assets/images/logos/logo.webp') }}" alt="logo">
+                            <img src="{{ asset('template-assets/front/assets/images/logos/logo.webp') }}" alt="logo">
                         </a>
                     </div>
 
@@ -1778,7 +1778,7 @@
                                             <td class="table-wrapper wrapper-product">
                                                 <div class="wrapper">
                                                     <div class="wrapper-img">
-                                                        <img src="{{ asset('tempate-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
+                                                        <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                                             alt="img">
                                                     </div>
                                                     <div class="wrapper-content">
@@ -1855,7 +1855,7 @@
                                                 <td class="table-wrapper wrapper-product">
                                                     <div class="wrapper">
                                                         <div class="wrapper-img">
-                                                            <img src="{{ asset('tempate-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
+                                                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                                                 alt="img">
                                                         </div>
                                                         <div class="wrapper-content">
@@ -2048,7 +2048,7 @@
                                                 <td class="table-wrapper wrapper-product">
                                                     <div class="wrapper">
                                                         <div class="wrapper-img">
-                                                            <img src="{{ asset('tempate-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
+                                                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                                                 alt="img">
                                                         </div>
                                                         <div class="wrapper-content">
@@ -2527,15 +2527,15 @@
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="assets/js/jquery_3.7.1.min.js"></script>
 
-    <script src="{{ asset('tempate-assets/front/assets/js/bootstrap_5.3.2.bundle.min.js') }}"></script>
+    <script src="{{ asset('template-assets/front/assets/js/bootstrap_5.3.2.bundle.min.js') }}"></script>
 
-    <script src="{{ asset('tempate-assets/front/assets/js/nouislider.min.js') }}"></script>
+    <script src="{{ asset('template-assets/front/assets/js/nouislider.min.js') }}"></script>
 
-    <script src="{{ asset('tempate-assets/front/assets/js/aos-3.0.0.js') }}"></script>
+    <script src="{{ asset('template-assets/front/assets/js/aos-3.0.0.js') }}"></script>
 
-    <script src="{{ asset('tempate-assets/front/assets/js/swiper10-bundle.min.js') }}"></script>
+    <script src="{{ asset('template-assets/front/assets/js/swiper10-bundle.min.js') }}"></script>
 
-    <script src="{{ asset('tempate-assets/front/assets/js/shopus.js') }}"></script>
+    <script src="{{ asset('template-assets/front/assets/js/shopus.js') }}"></script>
 </body>
 
 </html>
