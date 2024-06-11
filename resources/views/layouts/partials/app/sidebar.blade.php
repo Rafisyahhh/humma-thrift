@@ -38,6 +38,13 @@
                 <div data-i18n="Dashboard">Dasbor</div>
             </a>
         </li>
+
+        <li class="menu-item {{ request()->routeIs('brand.index') ? 'active' : '' }}">
+            <a href="{{ url('/brand') }}" class="menu-link">
+                <i class="menu-icon fa-thin fa-font-awesome"></i>
+                <div data-i18n="Brand">Brand</div>
+            </a>
+        </li>
     </ul>
 </aside>
 <!-- / Menu -->
