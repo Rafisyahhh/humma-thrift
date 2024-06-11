@@ -1830,7 +1830,7 @@
                             aria-labelledby="v-pills-wishlist-tab" tabindex="0">
                             <div class="wishlist">
                                 <div class="cart-content">
-                                    <h5 class="cart-heading">Data Transaction</h5>
+                                    <h5 class="cart-heading">Data Transaksi</h5>
                                     <p>Order ID: <span class="inner-text">#4345</span></p>
                                 </div>
                                 <div class="cart-section wishlist-section">
@@ -1848,6 +1848,11 @@
                                                 <td class="table-wrapper">
                                                     <div class="table-wrapper-center">
                                                         <h5 class="table-heading">STATUS</h5>
+                                                    </div>
+                                                </td>
+                                                <td class="table-wrapper">
+                                                    <div class="table-wrapper-center">
+                                                        <h5 class="table-heading">SALDO</h5>
                                                     </div>
                                                 </td>
                                             </tr>
