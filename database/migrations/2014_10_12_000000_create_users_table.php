@@ -12,18 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id(); // Sama dengan BIGINT, auto-increment
-            $table->timestamps(); // Otomatis membuat created_at dan updated_at
-            $table->string('username')->unique();
+            $table->id();
+            $table->timestamps();
+            $table->string('username')->nullable()->unique();
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->string('fullname');
-            $table->string('phone', 24);
-            $table->string('avatar')->nullable(); // Menambahkan nullable
-            $table->string('dbirth')->nullable(); // Menambahkan nullable
-            $table->binary('nic_photo'); // Tipe data untuk menyimpan file gambar
+            $table->char('phone', 24)->nullable();
+            $table->string('avatar')->nullable();
+            $table->string('pbirth')->nullable();
+            $table->date('dbirth')->nullable();
+            $table->char('nic', 16)->nullable();
+            $table->string('nic_photo')->nullable();
         });
     }
 
