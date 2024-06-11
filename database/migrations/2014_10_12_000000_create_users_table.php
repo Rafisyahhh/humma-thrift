@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id(); // Sama dengan BIGINT, auto-increment
-            $table->timestamps(); // Otomatis membuat created_at dan updated_at
+            $table->id();
+            $table->timestamps();
             $table->string('username')->nullable()->unique();
             $table->string('email')->unique();
             $table->string('password');
@@ -21,11 +21,11 @@ return new class extends Migration
             $table->rememberToken();
             $table->string('fullname');
             $table->char('phone', 24)->nullable();
-            $table->string('avatar')->nullable(); // Menambahkan nullable
-            $table->string('pbirth')->nullable(); // Menambahkan nullable
-            $table->date('dbirth')->nullable(); // Menambahkan nullable
-            $table->char('nic', 16)->nullable(); // Tipe data untuk menyimpan file gambar
-            $table->string('nic_photo')->nullable(); // Tipe data untuk menyimpan file gambar
+            $table->string('avatar')->nullable();
+            $table->string('pbirth')->nullable();
+            $table->date('dbirth')->nullable();
+            $table->char('nic', 16)->nullable();
+            $table->string('nic_photo')->nullable();
         });
     }
 
