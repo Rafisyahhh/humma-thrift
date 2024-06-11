@@ -25,6 +25,19 @@ Route::get('/penjual', function () {
     return view('penjualan.penjualan');
 });
 
+Route::get('/home', function () {
+    return view('user.home');
+});
+
+Route::get('/profil', function () {
+    return view('user.profil');
+});
+
+Route::get('/shop', function () {
+    return view('user.shop');
+});
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
