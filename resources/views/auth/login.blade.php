@@ -12,7 +12,7 @@
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" id="email"
                                     class="form-control @error('email') is-invalid @enderror" placeholder="Email"
-                                    value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                    value="{{ old('email') }}" name="email" required autocomplete="email" autofocus>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -21,7 +21,7 @@
                             </div>
                             <div class="review-form-name">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" id="password"
+                                <input type="password" name="password" id="password"
                                     class="form-control @error('password') is-invalid @enderror" placeholder="password"
                                     required autocomplete="current-password">
                                 @error('password')
@@ -31,10 +31,10 @@
                                 @enderror
                             </div>
                             <div class="review-form-name checkbox">
-                                <div class="checkbox-item">
-                                    <input type="checkbox" {{ old('remember') ? 'checked' : '' }}>
-                                    <span class="address">
-                                        Remember Me</span>
+                                <div class="checkbox-item d-flex align-items-center">
+                                    <input type="checkbox" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <label for="remember">
+                                        Remember Me</label>
                                 </div>
                                 <div class="forget-pass">
                                     @if (Route::has('password.request'))
