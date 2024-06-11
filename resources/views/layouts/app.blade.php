@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elegant Dashboard | Dashboard</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" href="./img/svg/logo.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('template-assets/admin/img/svg/logo.svg') }}" type="image/x-icon">
     <!-- Custom styles -->
-    <link rel="stylesheet" href="./css/style.min.css">
+    <link rel="stylesheet" href="{{ asset('template-assets/admin/css/style.min.css') }}">
 </head>
 
 <body>
@@ -760,11 +760,11 @@
         </div>
     </div>
     <!-- Chart library -->
-    <script src="./plugins/chart.min.js"></script>
+    <script src="{{ asset('template-assets/admin/plugins/chart.min.js') }}"></script>
     <!-- Icons library -->
-    <script src="plugins/feather.min.js"></script>
+    <script src="{{ asset('template-assets/admin/plugins/feather.min.js') }}"></script>
     <!-- Custom scripts -->
-    <script src="js/script.js"></script>
+    <script src="{{ asset('template-assets/admin/js/script.js') }}"></script>
 </body>
 
 </html>
