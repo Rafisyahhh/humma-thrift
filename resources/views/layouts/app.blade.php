@@ -37,6 +37,13 @@
     <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/node-waves/node-waves.css" />
     <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <style>
+        .menu-item.active{
+            background-color: #0000;
+        }
+    </style>
 
     <!-- Page CSS -->
     @stack('link')
@@ -126,8 +133,12 @@
 
     <!-- Main JS -->
     <script src="template-assets/admin/assets/js/main.js"></script>
+    <script src="template-assets/admin/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Page JS -->
+    <script src="template-assets/admin/assets/js/main.js"></script>
+    <script src="template-assets/admin/assets/js/app-ecommerce-dashboard.js"></script>
+
 
 
     <!-- Vendors JS -->

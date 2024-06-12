@@ -51,6 +51,12 @@
                 <div data-i18n="Kategori">Kategori</div>
             </a>
         </li>
+        <li class="menu-item {{ request()->routeIs('user.index') ? 'active' : '' }}">
+            <a href="{{ url('/user') }}" class="menu-link">
+                <i class="menu-icon ti ti-users"></i>
+                <div data-i18n="Pengguna">Pengguna</div>
+            </a>
+        </li>
     </ul>
 </aside>
 <!-- / Menu -->
