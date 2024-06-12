@@ -20,13 +20,13 @@
                     </li>
                 </ul>
 
-                <form action="{{ request()->fullUrl() }}" method="GET" class="d-flex mt-n3">
-                    @if (request()->input('role'))
-                        <input type="hidden" name="role" value="{{ old('role', request()->input('role')) }}" />
-                    @endif
-                    @if (request()->input('action'))
-                        <input type="hidden" name="action" value="{{ old('action', request()->input('action')) }}" />
-                    @endif
+            <form action="{{ request()->fullUrl() }}" method="GET" class="d-flex mt-n3">
+                @if (request()->input('role'))
+                    <input type="hidden" name="role" value="{{ old('role', request()->input('role')) }}" />
+                @endif
+                @if (request()->input('action'))
+                    <input type="hidden" name="action" value="{{ old('action', request()->input('action')) }}" />
+                @endif
 
                     <div class="input-group mb-3 mt-2">
                         <input type="search" name="search" class="form-control" placeholder="Cari User&hellip;"
@@ -66,28 +66,26 @@
                                 @endforeach
                             </td>
                             <td>
-                                @if ($roleuser != 'admin')
-                                    <form id="delete-form-{{ $user->id }}"
-                                        action="{{ route('admin.user.destroy', ['user' => $user->id]) }}" method="POST"
-                                        style="display:inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="button" style="background: none"
-                                            class="badge bg-label-danger me-1 border-0"
-                                            onclick="confirmDeletion({{ $user->id }});">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                                viewBox="0 0 24 24">
-                                                <path fill="#FA7070"
-                                                    d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
-                                            </svg>
-                                        </button>
-                                    </form>
-                                @endif
+                            @if ($roleuser != 'admin')
+                                <form id="delete-form-{{ $user->id }}" action="{{ route('user.destroy', ['user' => $user->id]) }}" method="POST" style="display:inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" style="background: none" class="badge bg-label-danger me-1 border-0" onclick="confirmDeletion({{ $user->id }});">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
+                                            <path fill="#FA7070" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
+                                        </svg>
+                                    </button>
+                                </form>
+
+
+                            @endif
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+
+
         </div>
     </div>
     <!-- Bootstrap Table with Header - Light -->

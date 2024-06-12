@@ -24,14 +24,26 @@ Route::get('/', function () {
 Route::get('/admin', function () {
     return view('layouts.app');
 });
-Route::get('/seller', function () {
-    return view('penjualan.penjualan');
-});
+Route::get('/seller/home', function () {
+    return view('penjualan.index');
+})->name('seller.home');
+Route::get('/seller/transaction', function () {
+    return view('penjualan.transaksi');
+})->name('seller.transaction');
+Route::get('/seller/income', function () {
+    return view('penjualan.penghasilan');
+})->name('seller.income');
+Route::get('/seller/product', function () {
+    return view('penjualan.produk');
+})->name('seller.product');
+Route::get('/seller/profil', function () {
+    return view('penjualan.profil');
+})->name('seller.profil');
 Route::get('/tambahproduk', function () {
     return view('penjualan.tambahproduk');
 });
 //USER
-Route::get('/user', function () {
+Route::get('/user/home', function () {
     return view('user.user');
 });
 Route::get('/detailproduct', function () {
@@ -74,10 +86,6 @@ Route::prefix('/dev')->group(function() {
     Route::get('/admin-view', function() {
         return view('admin.index');
     });
-});
-
-Route::get('/landing', function () {
-    return view('Landing.landing');
 });
 
 Route::get('/produk', function () {
