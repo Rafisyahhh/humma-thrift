@@ -29,7 +29,7 @@ class UpdateProductCategoryRequest extends FormRequest
                 'required',
                 Rule::unique('product_categories', 'title')->ignore($categoryId)
             ],
-            'color' => 'required'
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ];
     }
 
@@ -38,7 +38,9 @@ class UpdateProductCategoryRequest extends FormRequest
         return [
             'title.required' => 'Nama Kategori Wajib Diisi',
             'title.unique' => 'Nama Kategori sudah digunakan.',
-            'color.required' => 'Warna Kategori Wajib Diisi',
+            'icon.image' => 'Masukan harus berupa Logo',
+            'icon.mimes' => 'Logo harus berupa file jpeg,png,jpg',
+            'icon.max' => 'Ukuran Logo harus kurang 2MB',
           ];
     }
 }

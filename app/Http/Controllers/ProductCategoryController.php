@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests\StoreProductCategoryRequest;
 use App\Http\Requests\UpdateProductCategoryRequest;
 
@@ -16,7 +18,7 @@ class ProductCategoryController extends Controller
     {
         $categories = ProductCategory::when($request->has('search'), function ($query) use ($request) {
             $a = $request->input('search');
-            return $query->where('name', 'LIKE', "%$a%");
+            return $query->where('title', 'LIKE', "%$a%");
         })->paginate(5);
 
         return view('admin.productcategory', compact('categories'));
@@ -37,7 +39,15 @@ class ProductCategoryController extends Controller
     public function store(StoreProductCategoryRequest $request)
     {
         try {
-            ProductCategory::create($request->all());
+            $gambar = $request->file('icon');
+        if ($gambar) {
+            $path_gambar = Storage::disk('public')->put('icon', $gambar);
+        }
+
+        ProductCategory::create([
+            'title' => $request->title,
+            'icon' => $path_gambar,
+        ]);
             return redirect()->route('category.index')->with('success', 'Kategori berhasil ditambahkan');
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
@@ -64,10 +74,31 @@ class ProductCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory, $id)
+    public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory,$id)
     {
         try {
-            ProductCategory::findOrFail($id)->update($request->all());
+            $category = ProductCategory::findOrFail($id);
+            $oldPhotoPath = $category->icon;
+
+        $dataToUpdate = [
+            'title' => $request->input('title'),
+        ];
+
+        if ($request->hasFile('icon')) {
+            $foto = $request->file('icon');
+            $path = $foto->store('icon', 'public');
+            $dataToUpdate['icon'] = $path;
+        }
+
+        $category->update($dataToUpdate);
+
+        if ($category->wasChanged('icon') && $oldPhotoPath) {
+            Storage::disk('public')->delete($oldPhotoPath);
+            $localFilePath = public_path('storage/' . $oldPhotoPath);
+            if (File::exists($localFilePath)) {
+                File::delete($localFilePath);
+            }
+        }
             return redirect()->route('category.index')->with('success', 'Kategori berhasil diupdate');
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
@@ -79,6 +110,11 @@ class ProductCategoryController extends Controller
      */
     public function destroy(ProductCategory $productCategory, $id)
     {
+        // Delete the category
+        // If category is not used, delete the photo if it exists
+        if (Storage::disk('public')->exists($productCategory->icon)) {
+            Storage::disk('public')->delete($productCategory->icon);
+        }
         // Delete the category
         ProductCategory::findOrFail($id)->delete();
         return redirect()->route('category.index')->with('success', 'Kategori berhasil di hapus');

@@ -30,6 +30,9 @@ Route::get('/seller', function () {
 Route::get('/user', function () {
     return view('user.home');
 });
+Route::get('/detailproduct', function () {
+    return view('user.detailproduct');
+});
 
 Route::get('/profil', function () {
     return view('user.profil');
@@ -62,7 +65,7 @@ Route::get('/produk', function () {
     return view('Landing.produk');
 });
 
-Route::get('/brand', function () {
+Route::get('/brandindex', function () {
     return view('Landing.brand');
 });
 
