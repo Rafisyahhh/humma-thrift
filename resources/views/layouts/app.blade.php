@@ -81,7 +81,7 @@
                     <!-- Content -->
 
                     <div class="container-fluid flex-grow-1 container-p-y">
-                        {{-- @yield('content') --}}
+                        @yield('content')
                     </div>
                     <!-- / Content -->
 
