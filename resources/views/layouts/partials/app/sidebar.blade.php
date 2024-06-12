@@ -78,15 +78,9 @@
         </li>
 
         <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
+            <a href="{{ route('admin.user.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-users"></i>
                 <div data-i18n="Users">Pengguna</div>
-            </a>
-        </li>
-        <li class="menu-item {{ request()->routeIs('user.index') ? 'active' : '' }}">
-            <a href="{{ url('/user') }}" class="menu-link">
-                <i class="menu-icon ti ti-users"></i>
-                <div data-i18n="Pengguna">Pengguna</div>
             </a>
         </li>
     </ul>

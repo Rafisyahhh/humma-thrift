@@ -102,6 +102,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', fn() => view('admin.index'))->name('index');
     Route::resource('brand', BrandController::class);
     Route::resource('category', ProductCategoryController::class);
-    Route::get('/user', [UserController::class, 'index'])->name('user.index');
-    Route::delete('/userDestroy/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::resource('user', UserController::class);
 });
