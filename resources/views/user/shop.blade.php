@@ -169,7 +169,7 @@
                                     <div class="result">
                                         <p>Showing <span>1–16 of 66 results</span></p>
                                     </div>
-                                    <div class="product-sorting">
+                                    {{-- <div class="product-sorting">
                                         <span class="product-sort">Sort by:</span>
                                         <div class="product-list">
                                             <span class="default">Bawaan</span>
@@ -180,7 +180,7 @@
                                                 </svg>
                                             </span>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
 
@@ -259,7 +259,7 @@
                                         </div>
                                     </div>
                                     <div class="product-info">
-                                        <div class="ratings">
+                                        {{-- <div class="ratings">
                                             <span>
                                                 <svg width="75" height="15" viewBox="0 0 75 15"
                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -280,12 +280,12 @@
                                                         fill="#FFA800" />
                                                 </svg>
                                             </span>
-                                        </div>
+                                        </div> --}}
                                         <div class="product-description">
                                             <a href="/detailproduct" class="product-details">Flower Design Skart
                                             </a>
                                             <div class="price">
-                                                <span class="price-cut">$31.99</span>
+                                                {{-- <span class="price-cut">$31.99</span> --}}
                                                 <span class="new-price">$15.99</span>
                                             </div>
                                         </div>
@@ -380,7 +380,7 @@
                                         </div>
                                     </div>
                                     <div class="product-info">
-                                        <div class="ratings">
+                                        {{-- <div class="ratings">
                                             <span>
                                                 <svg width="75" height="15" viewBox="0 0 75 15"
                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -401,12 +401,12 @@
                                                         fill="#FFA800" />
                                                 </svg>
                                             </span>
-                                        </div>
+                                        </div> --}}
                                         <div class="product-description">
                                             <a href="/detailproduct" class="product-details">Rainbow Sequin Skart
                                             </a>
                                             <div class="price">
-                                                <span class="price-cut">$36.99</span>
+                                                {{-- <span class="price-cut">$36.99</span> --}}
                                                 <span class="new-price">$16.99</span>
                                             </div>
                                         </div>
