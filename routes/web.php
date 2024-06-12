@@ -27,8 +27,9 @@ Route::get('/seller', function () {
     return view('penjualan.penjualan');
 });
 
+//USER
 Route::get('/user', function () {
-    return view('user.home');
+    return view('user.user');
 });
 
 Route::get('/profil', function () {
@@ -37,6 +38,22 @@ Route::get('/profil', function () {
 
 Route::get('/shop', function () {
     return view('user.shop');
+});
+
+Route::get('/tentang', function () {
+    return view('user.tentang');
+});
+
+Route::get('/merek', function () {
+    return view('user.merek');
+});
+
+Route::get('/store', function () {
+    return view('user.store');
+});
+
+Route::get('/rincian', function () {
+    return view('user.detail');
 });
 
 

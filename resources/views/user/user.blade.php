@@ -1,5 +1,5 @@
 @extends('user.layouts.app')
-@section('tittle','Home')
+@section('tittle','User')
 @section('content')
 
     <section id="hero" class="hero">
@@ -14,8 +14,8 @@
                                         OFF
                                     </h5>
                                     <h1 class="wrapper-details">Fashion Collection
-                                        Summer Sale</h1>
-                                    <a href="product-sidebar.html" class="shop-btn">Shop Now</a>
+                                        Penjualan Musim Panas</h1>
+                                    <a href="product-sidebar.html" class="shop-btn">Berbelanja sekarang</a>
                                 </div>
                             </div>
                         </div>
@@ -30,8 +30,8 @@
                                         OFF
                                     </h5>
                                     <h1 class="wrapper-details">Fashion Collection
-                                        Summer Sale</h1>
-                                    <a href="#" class="shop-btn">Shop Now</a>
+                                        Penjualan Musim Panas</h1>
+                                    <a href="#" class="shop-btn">Berbelanja Sekarang</a>
                                 </div>
                             </div>
                         </div>
@@ -46,8 +46,8 @@
                                         OFF
                                     </h5>
                                     <h1 class="wrapper-details">Fashion Collection
-                                        Summer Sale</h1>
-                                    <a href="#" class="shop-btn">Shop Now</a>
+                                        Penjualan Musim Panas</h1>
+                                    <a href="#" class="shop-btn">Berbelanja sekarang</a>
                                 </div>
                             </div>
                         </div>
@@ -57,67 +57,13 @@
             <div class="swiper-pagination"></div>
         </div>
     </section>
-
-
-    <section class="product fashion-style">
-        <div class="container">
-            <div class="style-section">
-                <div class="row gy-4 gx-5 gy-lg-0">
-                    <div class="col-lg-6">
-                        <div class="product-wrapper wrapper-one" data-aos="fade-right">
-                            <div class="wrapper-info">
-                                <span class="wrapper-subtitle">NEW STYLE</span>
-                                <h4 class="wrapper-details">Get 65% Offer
-                                    <span class="wrapper-inner-title">& Make New</span> Fusion.
-                                </h4>
-                                <a href="product-sidebar.html" class="shop-btn">Shop Now
-                                    <span>
-                                        <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="1.45312" y="0.914062" width="9.25346" height="2.05632"
-                                                transform="rotate(45 1.45312 0.914062)" />
-                                            <rect x="8" y="7.45703" width="9.25346" height="2.05632"
-                                                transform="rotate(135 8 7.45703)" />
-                                        </svg>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="product-wrapper wrapper-two" data-aos="fade-up">
-                            <div class="wrapper-info">
-                                <span class="wrapper-subtitle">Mega OFFER</span>
-                                <h4 class="wrapper-details">
-                                    Make your New
-                                    <span class="wrapper-inner-title">Styles with Our</span>
-                                    Products
-                                </h4>
-                                <a href="product-sidebar.html" class="shop-btn">Shop Now
-                                    <span>
-                                        <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="1.45312" y="0.914062" width="9.25346" height="2.05632"
-                                                transform="rotate(45 1.45312 0.914062)" />
-                                            <rect x="8" y="7.45703" width="9.25346" height="2.05632"
-                                                transform="rotate(135 8 7.45703)" />
-                                        </svg>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <br>
 
     <section class="product-category">
         <div class="container">
             <div class="section-title">
-                <h5>Our Categories</h5>
-                <a href="product-sidebar.html" class="view">View All</a>
+                <h5>Semua Kategori</h5>
+                <a href="product-sidebar.html" class="view">Lihat Semua</a>
             </div>
             <div class="category-section">
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
@@ -125,7 +71,7 @@
                         <img src="{{asset ('template-assets/front/assets/images/homepage-one/category-img/dresses.webp') }}" alt="dress">
                     </div>
                     <div class="wrapper-info">
-                        <a href="product-sidebar.html" class="wrapper-details">Dresses</a>
+                        <a href="product-sidebar.html" class="wrapper-details">Gaun</a>
                     </div>
                 </div>
             </div>
@@ -136,8 +82,8 @@
     <section class="product brand" data-aos="fade-up">
         <div class="container">
             <div class="section-title">
-                <h5>Brand of Prodcuts</h5>
-                <a href="product-sidebar.html" class="view">View All</a>
+                <h5>Brand Produk</h5>
+                <a href="product-sidebar.html" class="view">Lihat Semua</a>
             </div>
             <div class="brand-section">
                 <div class="product-wrapper">
@@ -152,11 +98,11 @@
     </section>
 
 
-    <section class="product arrival">
+    <section class="product arrival mt-4">
         <div class="container">
             <div class="section-title">
-                <h5>NEW ARRIVALS</h5>
-                <a href="product-sidebar.html" class="view">View All</a>
+                <h5>PENDATANG BARU</h5>
+                <a href="product-sidebar.html" class="view">Lihat Semua</a>
             </div>
             <div class="arrival-section">
                 <div class="row g-5">
@@ -267,7 +213,7 @@
                                 </div>
                             </div>
                             <div class="product-cart-btn">
-                                <a href="cart.html" class="product-btn">Add To Cart</a>
+                                <a href="cart.html" class="product-btn">Masukan keranjang</a>
                             </div>
                         </div>
                     </div>
@@ -277,29 +223,29 @@
     </section>
 
 
-    <section class="product flash-sale">
+    <section class="product flash-sale mt-5">
         <div class="container">
             <div class="section-title">
-                <h5>Flash Sale</h5>
+                <h5>Diskon Promo</h5>
                 <div class="countdown-section">
                     <div class="countdown-items">
                         <span id="day" class="number" style="color: red;">0</span>
-                        <span class="text">Days</span>
+                        <span class="text">Hari</span>
                     </div>
                     <div class="countdown-items">
                         <span id="hour" class="number" style="color: skyblue;">0</span>
-                        <span class="text">Hours</span>
+                        <span class="text">Jam</span>
                     </div>
                     <div class="countdown-items">
                         <span id="minute" class="number" style="color: green;">0</span>
-                        <span class="text">Minutes</span>
+                        <span class="text">Menit</span>
                     </div>
                     <div class="countdown-items">
                         <span id="second" class="number" style="color: red;">0</span>
-                        <span class="text">seconds</span>
+                        <span class="text">Detik</span>
                     </div>
                 </div>
-                <a href="flash-sale.html" class="view">View All</a>
+                <a href="flash-sale.html" class="view">Lihat Semua</a>
             </div>
             <div class="flash-sale-section">
                 <div class="row g-5">
@@ -410,7 +356,7 @@
                                 </div>
                             </div>
                             <div class="product-cart-btn">
-                                <a href="cart.html" class="product-btn">Add To Cart</a>
+                                <a href="cart.html" class="product-btn">Masukkan Keranjang</a>
                             </div>
                         </div>
                     </div>
@@ -423,8 +369,8 @@
     <section class="product top-selling">
         <div class="container">
             <div class="section-title">
-                <h5>Top Selling Prodcuts</h5>
-                <a href="product-sidebar.html" class="view">View All</a>
+                <h5>Produk Terlaris</h5>
+                <a href="product-sidebar.html" class="view">Lihat Semua</a>
             </div>
             <div class="top-selling-section">
                 <div class="row g-5">
@@ -537,7 +483,7 @@
                                 </div>
                             </div>
                             <div class="product-cart-btn">
-                                <a href="cart.html" class="product-btn">Add To Cart</a>
+                                <a href="cart.html" class="product-btn">Masukkan keranjang</a>
                             </div>
                         </div>
                     </div>
@@ -551,8 +497,8 @@
         <div class="container">
             <div class="best-selling-section">
                 <div class="section-title">
-                    <h5>Best Sellers</h5>
-                    <a href="sellers.html" class="view">View All</a>
+                    <h5>Penjualan terbaik</h5>
+                    <a href="sellers.html" class="view">Lihat Semua</a>
                 </div>
                 <div class="best-selling-items">
                     <div class="product-wrapper">
@@ -666,9 +612,10 @@
     <section class="product weekly-sale">
         <div class="container">
             <div class="section-title">
-                <h5>Best Sell in this Week</h5>
-                <a href="product-sidebar.html" class="view">View All</a>
+                <h5>Penjualan Terbaik Minggu Ini</h5>
+                <a href="product-sidebar.html" class="view">Lihat Semua</a>
             </div>
+            <br>
             <div class="weekly-sale-section">
                 <div class="row g-5">
                     <div class="col-lg-3 col-md-6">
@@ -778,14 +725,14 @@
                                 </div>
                             </div>
                             <div class="product-cart-btn">
-                                <a href="cart.html" class="product-btn">Add To Cart</a>
+                                <a href="cart.html" class="product-btn">Masukkan Keranjang</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="style-section">
+            {{-- <div class="style-section">
                 <div class="row gy-4 gx-5 gy-lg-0">
                     <div class="col-lg-6">
                         <div class="product-wrapper wrapper-one" data-aos="fade-right">
@@ -832,16 +779,20 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
 
 
-    <section class="product best-product">
+    <section class="product best-product mt-5">
         <div class="container">
+            <br>
+            <br>
+            <br>
+            <br>
             <div class="section-title">
-                <h5>Flash Sale</h5>
-                <a href="flash-sale.html" class="view">View All</a>
+                <h5>Diskon Promo</h5>
+                <a href="flash-sale.html" class="view">Lihat Semua</a>
             </div>
             <div class="best-product-section">
                 <div class="row g-4">
