@@ -43,6 +43,36 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::prefix('/dev')->group(function() {
+    Route::get('/admin-view', function() {
+        return view('admin.index');
+    });
+});
+
+Route::get('/landing', function () {
+    return view('Landing.landing');
+});
+
+Route::get('/produk', function () {
+    return view('Landing.produk');
+});
+
+Route::get('/brand', function () {
+    return view('Landing.brand');
+});
+
+Route::get('/toko', function () {
+    return view('Landing.toko');
+});
+
+Route::get('/detail', function () {
+    return view('Landing.detail');
+});
+
+Route::get('/about', function () {
+    return view('Landing.about');
+});
+
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', fn() => view('admin.index'))->name('admin');
     Route::resource('brand', BrandController::class);
