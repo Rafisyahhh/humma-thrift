@@ -114,12 +114,10 @@ class BrandController extends Controller
     {
 
 
-            // If category is not used, delete the photo if it exists
             if (Storage::disk('public')->exists($brand->logo)) {
                 Storage::disk('public')->delete($brand->logo);
             }
 
-            // Delete the category
             $brand->delete();
 
             return redirect()->route('brand.index')->with('success', 'Brand berhasil di hapus');

@@ -24,7 +24,7 @@ id="layout-navbar">
         @include('layouts.partials.app.dark-mode')
 
         <!-- Language -->
-        <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
+        {{-- <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                 data-bs-toggle="dropdown">
                 <i class="ti ti-language rounded-circle ti-md"></i>
@@ -61,11 +61,11 @@ id="layout-navbar">
                     </a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
         <!--/ Language -->
 
         <!-- Quick links  -->
-        <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-2 me-xl-0">
+        {{-- <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-2 me-xl-0">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                 data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                 <i class="ti ti-layout-grid-add ti-md"></i>
@@ -149,7 +149,7 @@ id="layout-navbar">
                     </div>
                 </div>
             </div>
-        </li>
+        </li> --}}
         <!-- Quick links -->
 
         <!-- Notification -->
