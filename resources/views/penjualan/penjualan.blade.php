@@ -1,5 +1,12 @@
 @extends('penjualan.layouts.app')
 @section('tittle', 'Home')
+@section('css')
+<style>
+    .table-row.ticket-row:hover {
+        background: rgb(167, 146, 119)!important;
+    }
+</style>
+@endsection
 @section('content')
 
     <section class="blog about-blog">

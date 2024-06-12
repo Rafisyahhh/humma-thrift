@@ -1,5 +1,12 @@
 @extends('penjualan.layouts.app')
 @section('tittle', 'Penghasilan')
+@section('css')
+<style>
+    .table-row.ticket-row:hover {
+        background: rgba(167, 146, 119, 0.40)!important;
+    }
+</style>
+@endsection
 @section('content')
     <div class="wishlist">
         <div class="cart-content">

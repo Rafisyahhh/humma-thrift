@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="{{ asset('template-assets/front//css/style.css') }}">
 </head>
 
+@yield('css') 
+
 @include('penjualan.layouts.header')
 
 <section class="blog about-blog">
