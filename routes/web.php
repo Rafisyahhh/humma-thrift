@@ -39,9 +39,11 @@ Route::get('/seller/product', function () {
 Route::get('/seller/profil', function () {
     return view('penjualan.profil');
 })->name('seller.profil');
-Route::get('/tambahproduk', function () {
+Route::get('/seller/tambahproduk', function () {
     return view('penjualan.tambahproduk');
 });
+
+
 //USER
 Route::get('/user/home', function () {
     return view('user.user');

@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="{{ asset('template-assets/front/css/aos-3.0.0.css') }}">
 
     <link rel="stylesheet" href="{{ asset('template-assets/front//css/style.css') }}">
+
+    @yield('style')
+
 </head>
 
 @yield('css') 
@@ -186,6 +189,9 @@
 <script src="{{ asset('template-assets/front/assets/js/swiper10-bundle.min.js') }}"></script>
 
 <script src="{{ asset('template-assets/front/assets/js/shopus.js') }}"></script>
+
+@yield('script')
+
 </body>
 
 </html>
