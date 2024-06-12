@@ -11,6 +11,10 @@ class RedirectUserController extends Controller
      */
     public function __invoke(Request $request)
     {
-        //
+        if(auth()->user()->getUserRoleInstance()->value === 'admin') {
+            return redirect()->route('admin.index');
+        }
+
+        return redirect()->url('/dasbor');
     }
 }
