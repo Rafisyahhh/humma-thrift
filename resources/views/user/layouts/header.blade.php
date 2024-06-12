@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <body>
     <header id="header" class="header">
         {{-- <div class="header-top-section">
@@ -209,18 +211,33 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="header-user">
-                            <a href="/profil">
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                                        height="24" class="fill-current">
-                                        <path fill="none" d="M0 0h24v24H0z"></path>
-                                        <path
-                                            d="M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12z">
-                                        </path>
-                                    </svg>
-                                </span>
-                            </a>
+
+                        <div class="header-cart">
+                            <div class="header-user">
+                                <a href="/profil">
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                                            height="24" class="fill-current">
+                                            <path fill="none" d="M0 0h24v24H0z"></path>
+                                            <path
+                                                d="M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="cart-submenu">
+                                <div class="cart-wrapper-section">
+                                    <div class="cart-btn">
+                                        <a href="/profil" class="shop-btn view-btn">
+                                            <i class="fas fa-user"></i> Profil
+                                        </a>
+                                        <a href="checkout.html" class="shop-btn checkout-btn">
+                                            <i class="fas fa-sign-out-alt"></i> Logout
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
