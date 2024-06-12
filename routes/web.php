@@ -43,7 +43,9 @@ Route::get('/shop', function () {
     return view('user.shop');
 });
 
-Auth::routes();
+Auth::routes([
+    'verify' => true,
+]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

@@ -81,7 +81,7 @@
                     <!-- Content -->
 
                     <div class="container-fluid flex-grow-1 container-p-y">
-                        @yield('content')
+                        {{-- @yield('content') --}}
                     </div>
                     <!-- / Content -->
 
@@ -139,11 +139,9 @@
     @yield('scripts')
 
     <!-- Main JS -->
-    <<<<<<< HEAD <script src="{{ asset('template-assets/admin/assets/js/main.js') }}"></script>
-    =======
+    <script src="{{ asset('template-assets/admin/assets/js/main.js') }}"></script>
     <script src="template-assets/admin/assets/js/main.js"></script>
     <script src="template-assets/admin/assets/vendor/libs/apex-charts/apexcharts.js"></script>
-    >>>>>>> 4b63774996ee2dba829dc67fd918a37bad91f84a
 
     <!-- Page JS -->
     <script src="template-assets/admin/assets/js/main.js"></script>

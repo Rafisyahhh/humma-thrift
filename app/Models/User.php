@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserLevelEnum;
+use App\Traits\VerifyEmailTrait;
 use Creativeorange\Gravatar\Facades\Gravatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,9 +12,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, MustVerifyEmail;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, VerifyEmailTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -63,7 +64,12 @@ class User extends Authenticatable
      */
     public function getUserRoleInstance()
     {
-        $roleName = $this->getRoleNames()[0];
-        return UserLevelEnum::from($roleName);
+        $roles = $this->getRoleNames();
+
+        // Ensure $roles is an array and has at least one element before accessing $roles[0]
+        $roleName = !empty($roles) && isset($roles[0]) ? $roles[0] : null;
+
+        // Return the corresponding UserLevelEnum or default to UserLevelEnum::USER
+        return $roleName ? UserLevelEnum::from($roleName) : UserLevelEnum::USER;
     }
 }
