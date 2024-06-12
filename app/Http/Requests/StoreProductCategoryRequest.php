@@ -22,7 +22,17 @@ class StoreProductCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|unique:product_categories,title',
+            'color' => 'required'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'Nama Kategori Wajib Diisi',
+            'title.unique' => 'Nama Kategori sudah digunakan.',
+            'color.required' => 'Warna Kategori Wajib Diisi',
         ];
     }
 }

@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ProductCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +27,7 @@ Route::get('/seller', function () {
     return view('penjualan.penjualan');
 });
 
-Route::get('/home', function () {
+Route::get('/user', function () {
     return view('user.home');
 });
 
@@ -40,3 +43,9 @@ Route::get('/shop', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin', function () {
+    return view('admin.index');
+})->name('admin');
+
+Route::resource('brand', BrandController::class);
+Route::resource('category', ProductCategoryController::class);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductCategory;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductCategoryRequest;
 use App\Http\Requests\UpdateProductCategoryRequest;
 
@@ -11,9 +12,14 @@ class ProductCategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $categories = ProductCategory::when($request->has('search'), function ($query) use ($request) {
+            $a = $request->input('search');
+            return $query->where('name', 'LIKE', "%$a%");
+        })->paginate(5);
+
+        return view('admin.productcategory', compact('categories'));
     }
 
     /**
@@ -21,7 +27,8 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        //
+        $category = ProductCategory::all();
+        return view('admin.productcategory', compact('category'));
     }
 
     /**
@@ -29,7 +36,12 @@ class ProductCategoryController extends Controller
      */
     public function store(StoreProductCategoryRequest $request)
     {
-        //
+        try {
+            ProductCategory::create($request->all());
+            return redirect()->route('category.index')->with('success', 'Kategori berhasil ditambahkan');
+        } catch (\Throwable $th) {
+            return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
+        }
     }
 
     /**
@@ -45,22 +57,30 @@ class ProductCategoryController extends Controller
      */
     public function edit(ProductCategory $productCategory)
     {
-        //
+        $categories = ProductCategory::all();
+        return view('admin.productcategory', compact('categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory)
+    public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory, $id)
     {
-        //
+        try {
+            ProductCategory::findOrFail($id)->update($request->all());
+            return redirect()->route('category.index')->with('success', 'Kategori berhasil diupdate');
+        } catch (\Throwable $th) {
+            return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductCategory $productCategory)
+    public function destroy(ProductCategory $productCategory, $id)
     {
-        //
+        // Delete the category
+        ProductCategory::findOrFail($id)->delete();
+        return redirect()->route('category.index')->with('success', 'Kategori berhasil di hapus');
     }
 }

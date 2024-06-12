@@ -32,10 +32,23 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
-        <li class="menu-item">
+        <li class="menu-item {{ request()->routeIs('admin') ? 'active' : '' }}">
             <a href="{{ url('/admin') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-home"></i>
                 <div data-i18n="Dashboard">Dasbor</div>
+            </a>
+        </li>
+
+        <li class="menu-item {{ request()->routeIs('brand.index') ? 'active' : '' }}">
+            <a href="{{ url('/brand') }}" class="menu-link">
+                <i class="menu-icon fa-regular fa-font-awesome"></i>
+                <div data-i18n="Brand">Brand</div>
+            </a>
+        </li>
+        <li class="menu-item {{ request()->routeIs('category.index') ? 'active' : '' }}">
+            <a href="{{ url('/category') }}" class="menu-link">
+                <i class="menu-icon fa-thin fa-font-awesome"></i>
+                <div data-i18n="Kategori">Kategori</div>
             </a>
         </li>
     </ul>
