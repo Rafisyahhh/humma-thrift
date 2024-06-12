@@ -14,9 +14,9 @@
                                     <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span>
                                         OFF
                                     </h5>
-                                    <h1 class="wrapper-details">Fashion Collection
-                                        Summer Sale</h1>
-                                    <a href="product-sidebar.html" class="shop-btn">Shop Now</a>
+                                    <h1 class="wrapper-details">HUMMA THRIFT</h1>
+                                    <h5>Penjualan Pada Musim Panas</h5> 
+                                    <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
                                 </div>
                             </div>
                         </div>
@@ -30,8 +30,8 @@
                                     <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span>
                                         OFF
                                     </h5>
-                                    <h1 class="wrapper-details">Fashion Collection
-                                        Summer Sale</h1>
+                                    <h1 class="wrapper-details">HUMMA TRHIFT
+                                        Penjualan Pada Musim Panas</h1>
                                     <a href="#" class="shop-btn">Shop Now</a>
                                 </div>
                             </div>
@@ -46,8 +46,8 @@
                                     <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span>
                                         OFF
                                     </h5>
-                                    <h1 class="wrapper-details">Fashion Collection
-                                        Summer Sale</h1>
+                                    <h1 class="wrapper-details">HUMMA TRHIFT
+                                        Penjualan Pada Musim Panas</h1>
                                     <a href="#" class="shop-btn">Shop Now</a>
                                 </div>
                             </div>
@@ -68,7 +68,8 @@
             <div class="category-section">
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
                     <div class="wrapper-img">
-                        <img src="{{asset('template-assets/front/assets/images/homepage-one/category-img/dresses.webp')}}" alt="dress">
+                        <img src="{{ asset('template-assets/front/assets/images/homepage-one/category-img/dresses.webp') }}"
+                            alt="dress">
                     </div>
                     <div class="wrapper-info">
                         <a href="product-sidebar.html" class="wrapper-details">Dresses</a>
@@ -76,7 +77,8 @@
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="200">
                     <div class="wrapper-img">
-                        <img src="{{asset('template-assets/front/assets/images/homepage-one/category-img/bags.webp')}}" alt="dress">
+                        <img src="{{ asset('template-assets/front/assets/images/homepage-one/category-img/bags.webp') }}"
+                            alt="dress">
                     </div>
                     <div class="wrapper-info">
                         <a href="product-sidebar.html" class="wrapper-details">Leather Bags</a>
@@ -84,7 +86,8 @@
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="300">
                     <div class="wrapper-img">
-                        <img src="{{asset('template-assets/front/assets/images/homepage-one/category-img/sweaters.webp')}}" alt="dress">
+                        <img src="{{ asset('template-assets/front/assets/images/homepage-one/category-img/sweaters.webp') }}"
+                            alt="dress">
                     </div>
                     <div class="wrapper-info">
                         <a href="product-sidebar.html" class="wrapper-details">Sweaters</a>
@@ -92,7 +95,8 @@
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="400">
                     <div class="wrapper-img">
-                        <img src="{{asset('template-assets/front/assets/images/homepage-one/category-img/shoes.webp')}}" alt="dress">
+                        <img src="{{ asset('template-assets/front/assets/images/homepage-one/category-img/shoes.webp') }}"
+                            alt="dress">
                     </div>
                     <div class="wrapper-info">
                         <a href="product-sidebar.html" class="wrapper-details">Boots</a>
@@ -101,7 +105,8 @@
 
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="300">
                     <div class="wrapper-img">
-                        <img src="{{asset('template-assets/front/assets/images/homepage-one/category-img/cap.webp')}}" alt="dress">
+                        <img src="{{ asset('template-assets/front/assets/images/homepage-one/category-img/cap.webp') }}"
+                            alt="dress">
                     </div>
                     <div class="wrapper-info">
                         <a href="product-sidebar.html" class="wrapper-details">Cap</a>
@@ -110,7 +115,8 @@
 
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="500">
                     <div class="wrapper-img">
-                        <img src="{{asset('template-assets/front/assets/images/homepage-one/category-img/baby.webp')}}" alt="dress">
+                        <img src="{{ asset('template-assets/front/assets/images/homepage-one/category-img/baby.webp') }}"
+                            alt="dress">
                     </div>
                     <div class="wrapper-info">
                         <a href="product-sidebar.html" class="wrapper-details">Baby Shop</a>
@@ -132,84 +138,96 @@
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="{{asset('template-assets/front/assets/images/homepage-one/brand-img-1.webp')}}" alt="img">
+                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/brand-img-1.webp') }}"
+                                alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="{{asset('template-assets/front/assets/images/homepage-one/brand-img-2.webp')}}" alt="img">
+                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/brand-img-2.webp') }}"
+                                alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="{{asset('template-assets/front/assets/images/homepage-one/brand-img-3.webp')}}" alt="img">
+                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/brand-img-3.webp') }}"
+                                alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="{{asset('template-assets/front/assets/images/homepage-one/brand-img-4.webp')}}" alt="img">
+                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/brand-img-4.webp') }}"
+                                alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="{{asset('template-assets/front/assets/images/homepage-one/brand-img-5.webp')}}" alt="img">
+                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/brand-img-5.webp') }}"
+                                alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="{{asset('template-assets/front/assets/images/homepage-one/brand-img-6.webp')}}" alt="img">
+                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/brand-img-6.webp') }}"
+                                alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="{{asset('template-assets/front/assets/images/homepage-one/brand-img-7.webp')}}" alt="img">
+                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/brand-img-7.webp') }}"
+                                alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="{{asset('template-assets/front/assets/images/homepage-one/brand-img-8.webp')}}" alt="img">
+                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/brand-img-8.webp') }}"
+                                alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="{{asset('template-assets/front/assets/images/homepage-one/brand-img-9.webp')}}" alt="img">
+                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/brand-img-9.webp') }}"
+                                alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="{{asset('template-assets/front/assets/images/homepage-one/brand-img-10.webp')}}" alt="img">
+                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/brand-img-10.webp') }}"
+                                alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="{{asset('template-assets/front/assets/images/homepage-one/brand-img-11.webp')}}" alt="img">
+                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/brand-img-11.webp') }}"
+                                alt="img">
                         </a>
                     </div>
                 </div>
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="{{asset('template-assets/front/assets/images/homepage-one/brand-img-12.webp')}}" alt="img">
+                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/brand-img-12.webp') }}"
+                                alt="img">
                         </a>
                     </div>
                 </div>
@@ -229,15 +247,14 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="{{asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp')}}"
+                                <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                     alt="product-img">
                                 <div class="product-cart-items">
                                     <a href="#" class="cart cart-item">
                                         <span>
-                                            <svg width="40" height="40" viewBox="0 0 40 40"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <rect width="40" height="40" rx="20"
-                                                    fill="white" />
+                                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="40" height="40" rx="20" fill="white" />
                                                 <path
                                                     d="M12 14.4482V16.5664H12.5466H13.0933V15.3957V14.2204L15.6214 16.7486L18.1496 19.2767L18.5459 18.8759L18.9468 18.4796L16.4186 15.9514L13.8904 13.4232H15.0657H16.2364V12.8766V12.33H14.1182H12V14.4482Z"
                                                     fill="#181818" />
@@ -267,10 +284,9 @@
                                     </a>
                                     <a href="wishlist.html" class="favourite cart-item">
                                         <span>
-                                            <svg width="40" height="40" viewBox="0 0 40 40"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <rect width="40" height="40" rx="20"
-                                                    fill="#AE1C9A" />
+                                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="40" height="40" rx="20" fill="#AE1C9A" />
                                                 <path
                                                     d="M14.6928 12.3935C13.5057 12.54 12.512 13.0197 11.671 13.8546C10.9155 14.6016 10.4615 15.3926 10.201 16.4216C9.73957 18.2049 10.0745 19.9626 11.1835 21.6141C11.8943 22.6723 12.8135 23.6427 14.4993 25.1221C15.571 26.0632 18.8422 28.8096 19.0022 28.9011C19.1511 28.989 19.2069 29 19.5232 29C19.8395 29 19.8953 28.989 20.0442 28.9011C20.2042 28.8096 23.4828 26.0595 24.5471 25.1221C26.2404 23.6354 27.1521 22.6687 27.8629 21.6141C28.9719 19.9626 29.3068 18.2049 28.8454 16.4216C28.5849 15.3926 28.1309 14.6016 27.3754 13.8546C26.6237 13.1113 25.8199 12.6828 24.7667 12.4631C24.2383 12.3533 23.2632 12.3423 22.8018 12.4448C21.5142 12.7194 20.528 13.3529 19.6274 14.4808L19.5232 14.609L19.4227 14.4808C18.5333 13.3749 17.562 12.7414 16.3228 12.4631C15.9544 12.3789 15.1059 12.3423 14.6928 12.3935ZM15.9357 13.5104C16.9926 13.6935 17.9044 14.294 18.6263 15.2864C18.7491 15.4585 18.9017 15.6636 18.9613 15.7478C19.2367 16.1286 19.8098 16.1286 20.0851 15.7478C20.1447 15.6636 20.2973 15.4585 20.4201 15.2864C21.4062 13.9315 22.7795 13.2944 24.2755 13.4958C25.9352 13.7191 27.2303 14.8616 27.7252 16.5424C28.116 17.8717 27.9448 19.2668 27.234 20.5228C26.6386 21.5738 25.645 22.676 23.9145 24.203C23.0772 24.939 19.5567 27.9198 19.5232 27.9198C19.486 27.9198 15.9804 24.95 15.1319 24.203C12.4711 21.8557 11.4217 20.391 11.1686 18.6736C11.0049 17.5641 11.2393 16.3703 11.8087 15.4292C12.6646 14.0121 14.3318 13.2358 15.9357 13.5104Z"
                                                     fill="#000" />
@@ -279,10 +295,9 @@
                                     </a>
                                     <a href="compaire.html" class="compaire cart-item">
                                         <span>
-                                            <svg width="40" height="40" viewBox="0 0 40 40"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <rect width="40" height="40" rx="20"
-                                                    fill="white" />
+                                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="40" height="40" rx="20" fill="white" />
                                                 <path
                                                     d="M18.8948 10.6751C18.8948 11.0444 18.8829 11.3502 18.871 11.3502C18.8591 11.3502 18.6645 11.3859 18.4461 11.4336C14.674 12.1959 11.8588 15.1779 11.3346 18.966C11.2115 19.8316 11.2632 21.1499 11.4498 22.0314C11.9223 24.2867 13.3875 26.4031 15.3252 27.642L15.5515 27.7849L16.1114 27.364C16.4171 27.1337 16.6712 26.9352 16.6712 26.9193C16.6712 26.9074 16.572 26.8439 16.4529 26.7803C15.8453 26.4627 15.0552 25.8274 14.5191 25.2278C13.5026 24.0882 12.8514 22.6984 12.641 21.2372C12.5655 20.6972 12.5655 19.6251 12.641 19.1129C12.8038 18.0289 13.185 17.0044 13.7568 16.1071C14.4715 14.9913 15.5594 14.0145 16.7507 13.4149C17.3542 13.1132 18.192 12.8273 18.7678 12.724L18.8948 12.7002V13.2561C18.8948 13.5618 18.9028 13.812 18.9147 13.812C18.9544 13.812 21.4361 11.9339 21.4361 11.9061C21.4361 11.8783 18.9544 10.0001 18.9147 10.0001C18.9028 10.0001 18.8948 10.3019 18.8948 10.6751Z"
                                                     fill="#181818" />
@@ -314,7 +329,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -332,15 +347,14 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
                             <div class="product-img">
-                                <img src="{{asset('template-assets/front/assets/images/homepage-one/product-img/product-img-5.webp')}}"
+                                <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-5.webp') }}"
                                     alt="product-img">
                                 <div class="product-cart-items">
                                     <a href="#" class="cart cart-item">
                                         <span>
-                                            <svg width="40" height="40" viewBox="0 0 40 40"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <rect width="40" height="40" rx="20"
-                                                    fill="white" />
+                                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="40" height="40" rx="20" fill="white" />
                                                 <path
                                                     d="M12 14.4482V16.5664H12.5466H13.0933V15.3957V14.2204L15.6214 16.7486L18.1496 19.2767L18.5459 18.8759L18.9468 18.4796L16.4186 15.9514L13.8904 13.4232H15.0657H16.2364V12.8766V12.33H14.1182H12V14.4482Z"
                                                     fill="#181818" />
@@ -370,10 +384,9 @@
                                     </a>
                                     <a href="wishlist.html" class="favourite cart-item">
                                         <span>
-                                            <svg width="40" height="40" viewBox="0 0 40 40"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <rect width="40" height="40" rx="20"
-                                                    fill="#AE1C9A" />
+                                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="40" height="40" rx="20" fill="#AE1C9A" />
                                                 <path
                                                     d="M14.6928 12.3935C13.5057 12.54 12.512 13.0197 11.671 13.8546C10.9155 14.6016 10.4615 15.3926 10.201 16.4216C9.73957 18.2049 10.0745 19.9626 11.1835 21.6141C11.8943 22.6723 12.8135 23.6427 14.4993 25.1221C15.571 26.0632 18.8422 28.8096 19.0022 28.9011C19.1511 28.989 19.2069 29 19.5232 29C19.8395 29 19.8953 28.989 20.0442 28.9011C20.2042 28.8096 23.4828 26.0595 24.5471 25.1221C26.2404 23.6354 27.1521 22.6687 27.8629 21.6141C28.9719 19.9626 29.3068 18.2049 28.8454 16.4216C28.5849 15.3926 28.1309 14.6016 27.3754 13.8546C26.6237 13.1113 25.8199 12.6828 24.7667 12.4631C24.2383 12.3533 23.2632 12.3423 22.8018 12.4448C21.5142 12.7194 20.528 13.3529 19.6274 14.4808L19.5232 14.609L19.4227 14.4808C18.5333 13.3749 17.562 12.7414 16.3228 12.4631C15.9544 12.3789 15.1059 12.3423 14.6928 12.3935ZM15.9357 13.5104C16.9926 13.6935 17.9044 14.294 18.6263 15.2864C18.7491 15.4585 18.9017 15.6636 18.9613 15.7478C19.2367 16.1286 19.8098 16.1286 20.0851 15.7478C20.1447 15.6636 20.2973 15.4585 20.4201 15.2864C21.4062 13.9315 22.7795 13.2944 24.2755 13.4958C25.9352 13.7191 27.2303 14.8616 27.7252 16.5424C28.116 17.8717 27.9448 19.2668 27.234 20.5228C26.6386 21.5738 25.645 22.676 23.9145 24.203C23.0772 24.939 19.5567 27.9198 19.5232 27.9198C19.486 27.9198 15.9804 24.95 15.1319 24.203C12.4711 21.8557 11.4217 20.391 11.1686 18.6736C11.0049 17.5641 11.2393 16.3703 11.8087 15.4292C12.6646 14.0121 14.3318 13.2358 15.9357 13.5104Z"
                                                     fill="#000" />
@@ -382,10 +395,9 @@
                                     </a>
                                     <a href="compaire.html" class="compaire cart-item">
                                         <span>
-                                            <svg width="40" height="40" viewBox="0 0 40 40"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <rect width="40" height="40" rx="20"
-                                                    fill="white" />
+                                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="40" height="40" rx="20" fill="white" />
                                                 <path
                                                     d="M18.8948 10.6751C18.8948 11.0444 18.8829 11.3502 18.871 11.3502C18.8591 11.3502 18.6645 11.3859 18.4461 11.4336C14.674 12.1959 11.8588 15.1779 11.3346 18.966C11.2115 19.8316 11.2632 21.1499 11.4498 22.0314C11.9223 24.2867 13.3875 26.4031 15.3252 27.642L15.5515 27.7849L16.1114 27.364C16.4171 27.1337 16.6712 26.9352 16.6712 26.9193C16.6712 26.9074 16.572 26.8439 16.4529 26.7803C15.8453 26.4627 15.0552 25.8274 14.5191 25.2278C13.5026 24.0882 12.8514 22.6984 12.641 21.2372C12.5655 20.6972 12.5655 19.6251 12.641 19.1129C12.8038 18.0289 13.185 17.0044 13.7568 16.1071C14.4715 14.9913 15.5594 14.0145 16.7507 13.4149C17.3542 13.1132 18.192 12.8273 18.7678 12.724L18.8948 12.7002V13.2561C18.8948 13.5618 18.9028 13.812 18.9147 13.812C18.9544 13.812 21.4361 11.9339 21.4361 11.9061C21.4361 11.8783 18.9544 10.0001 18.9147 10.0001C18.9028 10.0001 18.8948 10.3019 18.8948 10.6751Z"
                                                     fill="#181818" />
@@ -539,4 +551,3 @@
     </section>
 
 @endsection
-

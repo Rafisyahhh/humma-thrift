@@ -387,14 +387,14 @@ button {
 .product-btn {
     padding: 1.2rem 1.6rem 1.2rem 2.5rem;
     border-top-left-radius: 3rem;
-    background: rgb(209, 187, 158);
+    background: rgb(119, 105, 87);
     color: rgb(255, 255, 255)
 ;
     font-size: 1.6rem;
     transition: all 0.4s;
 }
 .product-btn:hover {
-    background-color: rgb(167, 146, 119);
+    background-color: rgb(39, 34, 27);
     color: #fff;
 }
 .section-title {
@@ -1687,7 +1687,7 @@ button {
     text-align: center;
     border-radius: 3rem;
     display: inline-block;
-    background: rgb(167, 146, 119);
+    background: rgb(119, 105, 87);
     font-size: 1.6rem;
     font-weight: 500;
     position: relative;
@@ -2431,7 +2431,7 @@ button {
     }
 }
 .weekly-sale {
-    background-color: #f9edf7;
+    background-color: rgb(234, 216, 192);
 }
 .weekly-sale .style-section {
     padding-top: 6rem;
@@ -2456,7 +2456,7 @@ button {
 }
 .best-product {
     padding-top: 0;
-    background-color: #f9edf7;
+    background: linear-gradient(90deg, rgb(255, 242, 225) 0%, rgb(155, 135, 110) 100%);
     padding-bottom: 11.2rem;
 }
 .best-product .product-wrapper {
@@ -4541,7 +4541,7 @@ table .ticket-row:hover {
     font-weight: 600;
 }
 .blog {
-    background: #fffafe;
+    background: #ffffff;
     padding: 6rem 0;
 }
 .blog .heading {

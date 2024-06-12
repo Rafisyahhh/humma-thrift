@@ -28,8 +28,9 @@ Route::get('/seller', function () {
     return view('penjualan.penjualan');
 });
 
+//USER
 Route::get('/user', function () {
-    return view('user.home');
+    return view('user.user');
 });
 Route::get('/detailproduct', function () {
     return view('user.detailproduct');
@@ -46,6 +47,24 @@ Route::get('/shop', function () {
 Auth::routes([
     'verify' => true,
 ]);
+Route::get('/tentang', function () {
+    return view('user.tentang');
+});
+
+Route::get('/merek', function () {
+    return view('user.merek');
+});
+
+Route::get('/store', function () {
+    return view('user.store');
+});
+
+Route::get('/rincian', function () {
+    return view('user.detail');
+});
+
+
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

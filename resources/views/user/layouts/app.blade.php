@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{asset ('template-assets/front/css/aos-3.0.0.css') }}">
     <link rel="stylesheet" href="{{asset ('template-assets/front/css/style.css') }}">
 </head>
+<body>
 
 @include('user.layouts.header')
 @yield('content')
