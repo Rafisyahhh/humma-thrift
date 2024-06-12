@@ -282,7 +282,7 @@
                                             </span>
                                         </div>
                                         <div class="product-description">
-                                            <a href="product-info.html" class="product-details">Flower Design Skart
+                                            <a href="/detailproduct" class="product-details">Flower Design Skart
                                             </a>
                                             <div class="price">
                                                 <span class="price-cut">$31.99</span>

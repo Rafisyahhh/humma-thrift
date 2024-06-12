@@ -122,7 +122,7 @@ button {
     text-align: center;
     border-radius: 3rem;
     display: inline-block;
-    background:rgb(167, 146, 119)
+    background:rgb(119, 105, 87);
     ;
     font-size: 1.4rem;
     font-weight: 500;
@@ -157,7 +157,7 @@ button {
 }
 .shop-btn:hover {
     color: #fff;
-    background-color: rgb(167, 146, 119)
+    background-color: #232532;
     ;
 }
 .shop-btn:hover::after {
