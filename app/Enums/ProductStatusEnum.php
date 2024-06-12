@@ -12,10 +12,10 @@ enum ProductStatusEnum: string
     public function label(): string
     {
         return match($this) {
-            self::PENDING => 'Pending Approval',
-            self::APPROVED => 'Approved',
-            self::REJECTED => 'Rejected',
-            self::SOLD => 'Sold',
+            self::PENDING => 'Draf',
+            self::APPROVED => 'Dipublikasikan',
+            self::REJECTED => 'Ditolak',
+            self::SOLD => 'Terjual',
         };
     }
 
