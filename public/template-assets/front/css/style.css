@@ -3813,7 +3813,7 @@ table .ticket-row:hover {
     fill: #797979;
 }
 .close-btn svg:hover {
-    fill: red;
+    fill: rgb(204, 186, 161);
 }
 .wishlist-section .table-wrapper {
     width: 38rem;
