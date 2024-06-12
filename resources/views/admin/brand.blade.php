@@ -14,7 +14,8 @@
                 <div class="input-group mb-3">
                     <input type="search" name="search" class="form-control" placeholder="Cari Brand&hellip;"
                         value="{{ old('search', request('search')) }}" />
-                    <button type="submit" class="btn btn-secondary">Cari</button>
+                    <button type="submit" class="btn"
+                        style="background-color: rgb(167, 146, 119); color:#fff;">Cari</button>
                 </div>
             </form>
 
@@ -56,8 +57,6 @@
                                         </svg>
                                     </button>
                                 </form>
-
-
                             </td>
                         </tr>
                     @endforeach
@@ -67,7 +66,10 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Tambahkan Brand</h6>
+                            <h6 class="m-0 font-weight-bold d-flex align-items-center gap-2"><i
+                                    class="fas fa-newspaper me-1"></i>Tambahkan Brand</h6>
+
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form action="{{ route('admin.brand.store') }}" method="POST" enctype="multipart/form-data">
@@ -103,7 +105,7 @@
                                 <div class="pt-2 d-flex gap-3 justify-content-end">
                                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
                                     <button type="submit" class="btn btn"
-                                        style="background-color:	rgb(167, 146, 119)  ; color:#fff;">Tambahkan</button>
+                                        style="background-color: rgb(167, 146, 119); color: #fff;">Tambahkan</button>
                                 </div>
                             </form>
                         </div>
@@ -117,6 +119,8 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit Kategori</h6>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <form action="{{ route('admin.brand.update', $brand->id) }}" method="POST"
@@ -156,9 +160,9 @@
                                     </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
                                 <button type="submit" class="btn btn"
-                                    style="background-color:	rgb(167, 146, 119)  ; color:#fff;">Simpan</button>
+                                    style="background-color: rgb(167, 146, 119); color:#fff;">Simpan</button>
                             </div>
                             </form>
                         </div>

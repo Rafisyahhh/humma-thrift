@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en" class="layout-compact dark-style layout-menu-fixed layout-navbar-fixed" dir="ltr"
+<html lang="id" class="layout-compact dark-style layout-menu-fixed layout-navbar-fixed" dir="ltr"
     data-theme="theme-default" data-assets-path="template-assets/admin/assets/"
     data-template="vertical-menu-template-no-customizer">
 

@@ -2,7 +2,7 @@
 @section('title', 'Admin - Product Category')
 @section('content')
 
-    <!-- Bootstrap Table with Header - Light -->
+    <!-- Tabel -->
     <div class="card">
         <h5 class="card-header">Kategori</h5>
         <div class="table-responsive text-nowrap">
@@ -62,7 +62,7 @@
             </table>
         </div>
     </div>
-    <!-- Bootstrap Table with Header - Light -->
+    <!-- Tabel -->
 
     {{-- Modal Tambah --}}
     <div class="modal fade" tabindex="-1" id="tambahModal">
