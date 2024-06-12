@@ -53,20 +53,15 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $user->email }}</span></td>
+                            <td><img src="{{ $user->avatar ? asset("storage/{$user->avatar}") : $user->getGravatarLink() }}" class="rounded-3 rounded-circle" height="64px" />
+                            </td>
                             <td>{{ \Carbon\Carbon::parse($user->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}
-                            <td><img src="{{ asset("storage/{$user->nic_photo}") }}" class="rounded-3" height="96px"></td>
                             <td>
-                                @foreach ($user->getRoleNames() as $roleuser)
-                                    {{-- <span class="badge bg-primary">{{ $roleuser }}</span> --}}
-                                    @if ($roleuser === 'user')
-                                        <span class="badge bg-label-success">Pengguna</span>
-                                    @elseif($roleuser === 'admin')
-                                        <span class="badge bg-label-primary">Administrator</span>
-                                    @endif
-                                @endforeach
+                                <span
+                                    class="badge bg-{{ $user->getUserRoleInstance()->color() }}">{{ $user->getUserRoleInstance()->label() }}</span>
                             </td>
                             <td>
-                                @if ($roleuser != 'admin')
+                                @if ($user->getUserRoleInstance()->value != 'admin')
                                     <form id="delete-form-{{ $user->id }}"
                                         action="{{ route('admin.user.destroy', ['user' => $user->id]) }}" method="POST"
                                         style="display:inline">
