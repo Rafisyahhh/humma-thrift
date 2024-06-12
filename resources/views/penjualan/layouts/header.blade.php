@@ -1,4 +1,3 @@
-<body>
     <header id="header" class="header">
         <div class="header-center-section d-none d-lg-block">
             <div class="container">

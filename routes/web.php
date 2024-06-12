@@ -27,7 +27,9 @@ Route::get('/admin', function () {
 Route::get('/seller', function () {
     return view('penjualan.penjualan');
 });
-
+Route::get('/tambahproduk', function () {
+    return view('penjualan.tambahproduk');
+});
 //USER
 Route::get('/user', function () {
     return view('user.user');

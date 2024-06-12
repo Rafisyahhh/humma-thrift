@@ -282,7 +282,7 @@
                                             </span>
                                         </div>
                                         <div class="product-description">
-                                            <a href="product-info.html" class="product-details">Flower Design Skart
+                                            <a href="/detailproduct" class="product-details">Flower Design Skart
                                             </a>
                                             <div class="price">
                                                 <span class="price-cut">$31.99</span>
@@ -403,7 +403,7 @@
                                             </span>
                                         </div>
                                         <div class="product-description">
-                                            <a href="product-info.html" class="product-details">Rainbow Sequin Skart
+                                            <a href="/detailproduct" class="product-details">Rainbow Sequin Skart
                                             </a>
                                             <div class="price">
                                                 <span class="price-cut">$36.99</span>

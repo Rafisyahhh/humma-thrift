@@ -204,7 +204,7 @@
                                     </span>
                                 </div> --}}
                                 <div class="product-description">
-                                    <a href="product-info.html" class="product-details">Rainbow Sequin Dress
+                                    <a href="/detailproduct" class="product-details">Rainbow Sequin Dress
                                     </a>
                                     <div class="price">
                                         {{-- <span class="price-cut">$12.99</span> --}}
@@ -448,8 +448,6 @@
                                     </a>
                                 </div>
                             </div>
-
-
                             <div class="product-info">
                                 {{-- <div class="ratings">
                                     <span>
@@ -474,10 +472,9 @@
                                     </span>
                                 </div> --}}
                                 <div class="product-description">
-                                    <a href="product-info.html" class="product-details">Leather Dress Shoes
+                                    <a href="/detailproduct" class="product-details">Leather Dress Shoes
                                     </a>
                                     <div class="price">
-                                        {{-- <span class="price-cut">$19.99</span> --}}
                                         <span class="new-price">Rp 13.99</span>
                                     </div>
                                 </div>
@@ -492,7 +489,6 @@
         </div>
     </section>
     <br>
-
 
     {{-- <section class="product best-seller">
         <div class="container">
@@ -841,6 +837,5 @@
             </div>
         </div>
     </section> --}}
-
 
 @endsection
