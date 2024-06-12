@@ -2,7 +2,7 @@
 @section('title', 'Admin - Product Category')
 @section('content')
 
-    <!-- Bootstrap Table with Header - Light -->
+    <!-- Tabel -->
     <div class="card">
         <h5 class="card-header">Kategori</h5>
         <div class="table-responsive text-nowrap">
@@ -33,16 +33,15 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $category->title }}</td>
-                            <td><span class="badge rounded-pill"
-                                    style="background-color: {{ $category->color }}">{{ $category->color }}</span></td>
+                            <td><img src="{{ asset("storage/{$category->icon}") }}" class="rounded-3" height="96px"></td>
                             <td>
                                 <button type="button" class="badge bg-label-warning me-1 border-0" style="background: none"
                                     data-bs-toggle="modal" data-bs-target="#editModal{{ $category->id }}">
                                     <i class="ti ti-pencil"></i>
                                 </button>
                                 <form id="delete-form-{{ $category->id }}"
-                                    action="{{ route('category.destroy', ['category' => $category->id]) }}" method="POST"
-                                    style="display:inline">
+                                    action="{{ route('admin.category.destroy', ['category' => $category->id]) }}"
+                                    method="POST" style="display:inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" style="background: none"
@@ -62,17 +61,20 @@
             </table>
         </div>
     </div>
-    <!-- Bootstrap Table with Header - Light -->
+    <!-- Tabel -->
 
     {{-- Modal Tambah --}}
     <div class="modal fade" tabindex="-1" id="tambahModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Tambahkan Kategori</h6>
+                    <h6 class="m-0 font-weight-bold d-flex gap-2 align-items-center"><i
+                            class="fas fa-newspaper me-1"></i>Tambahkan Kategori</h6>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.category.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama Kategori</label>
@@ -84,11 +86,16 @@
                                 </span>
                             @enderror
                         </div>
+
                         <div class="mb-3">
-                            <label for="membersPerTeam" class="form-label">Warna Kategori</label>
-                            <input type="color" class="form-control @error('color') is-invalid @enderror" id="color"
-                                value="{{ old('color') }}" name="color">
-                            @error('color')
+                            <label for="icon" class="form-label">Icon</label>
+                            <input type="file" class="form-control @error('icon') is-invalid @enderror"
+                                id="icon" name="icon">
+                            @if (old('icon'))
+                                <img id="preview" src="{{ asset('storage/' . old('icon')) }}" alt="Old gambar"
+                                    style="max-width: 100px; max-height: 100px;">
+                            @endif
+                            @error('logo')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -115,7 +122,7 @@
                         <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit Kategori</h6>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('category.update', $category->id) }}" method="POST">
+                        <form action="{{ route('admin.category.update', $category->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
@@ -129,10 +136,18 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="title" class="form-label">Warna Kategori</label>
-                                <input type="color" class="form-control @error('color') is-invalid @enderror"
-                                    id="title" name="color" value="{{ old('color', $category->color) }}">
-                                @error('color')
+                                <label for="icon" class="form-label">Icon</label>
+                                <input type="file"
+                                    class="form-control @error('icon') is-invalid @enderror"
+                                    id="icon" name="icon" />
+
+                                @if ($category->icon)
+                                    <img src="{{ asset('storage/' . $category->icon) }}"
+                                        class="w-100 mt-3 rounded-3" alt="{{ $category->title }}" />
+                                @else
+                                    No Image
+                                @endif
+                                @error('icon')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -152,22 +167,22 @@
     {{-- end --}}
 @endsection
 @section('scripts')
-{{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
-<script>
-    function confirmDeletion(categoryId) {
-        Swal.fire({
-            title: "Apa kamu yakin?",
-            text: "Anda tidak akan dapat mengembalikan ini!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Ya, Hapus"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('delete-form-' + categoryId).submit();
-            }
-        });
-    }
-</script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+    <script>
+        function confirmDeletion(categoryId) {
+            Swal.fire({
+                title: "Apa kamu yakin?",
+                text: "Anda tidak akan dapat mengembalikan ini!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, Hapus"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + categoryId).submit();
+                }
+            });
+        }
+    </script>
 @endsection

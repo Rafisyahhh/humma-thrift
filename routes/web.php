@@ -19,7 +19,7 @@ use App\Http\Controllers\ProductCategoryController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing.landing');
 });
 Route::get('/admin', function () {
     return view('layouts.app');
@@ -27,13 +27,15 @@ Route::get('/admin', function () {
 Route::get('/seller', function () {
     return view('penjualan.penjualan');
 });
-
 Route::get('/tambahproduk', function () {
     return view('penjualan.tambahproduk');
 });
-
+//USER
 Route::get('/user', function () {
-    return view('user.home');
+    return view('user.user');
+});
+Route::get('/detailproduct', function () {
+    return view('user.detailproduct');
 });
 
 Route::get('/profil', function () {
@@ -44,14 +46,29 @@ Route::get('/shop', function () {
     return view('user.shop');
 });
 
+Auth::routes([
+    'verify' => true,
+]);
+Route::get('/tentang', function () {
+    return view('user.tentang');
+});
+
+Route::get('/merek', function () {
+    return view('user.merek');
+});
+
+Route::get('/store', function () {
+    return view('user.store');
+});
+
+Route::get('/rincian', function () {
+    return view('user.detail');
+});
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/admin', function () {
-    return view('admin.index');
-})->name('admin');
-
+Route::get('/home', \App\Http\Controllers\RedirectUserController::class)->name('home');
 
 Route::prefix('/dev')->group(function() {
     Route::get('/admin-view', function() {
@@ -67,7 +84,7 @@ Route::get('/produk', function () {
     return view('Landing.produk');
 });
 
-Route::get('/brand', function () {
+Route::get('/brandindex', function () {
     return view('Landing.brand');
 });
 
@@ -83,7 +100,9 @@ Route::get('/about', function () {
     return view('Landing.about');
 });
 
-Route::get('/user', [UserController::class, 'index'])->name('user.index');
-Route::delete('/userDestroy/{user}', [UserController::class, 'destroy'])->name('user.destroy');
-Route::resource('brand', BrandController::class);
-Route::resource('category', ProductCategoryController::class);
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', fn() => view('admin.index'))->name('index');
+    Route::resource('brand', BrandController::class);
+    Route::resource('category', ProductCategoryController::class);
+    Route::resource('user', UserController::class);
+});

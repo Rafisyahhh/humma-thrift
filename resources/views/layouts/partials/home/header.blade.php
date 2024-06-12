@@ -82,8 +82,9 @@
                             </div>
                         </div>
                         <div class="header-auth">
-                            <a href="{{ route('login') }}" class="shop-btn" >Login</a>
-                            <a href="{{ route('register') }}" class="shop-btn">Register</a>
+                            <a href="{{ route('login') }}" class="btn btn-login">Login</a>
+                            <span>|</span>
+                            <a href="{{ route('register') }}" class="btn btn-register">Register</a>
                         </div>
                     </div>
                 </div>
@@ -123,7 +124,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/brandindex">
+                                <a href="/brand">
                                     <span class="list-text">Brand</span>
                                 </a>
                             </li>
