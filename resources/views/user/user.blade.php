@@ -101,7 +101,7 @@
     <section class="product arrival mt-4">
         <div class="container">
             <div class="section-title">
-                <h5>PENDATANG BARU</h5>
+                <h5>TERBARU</h5>
                 <a href="product-sidebar.html" class="view">Lihat Semua</a>
             </div>
             <div class="arrival-section">
@@ -181,7 +181,7 @@
                                 </div>
                             </div>
                             <div class="product-info">
-                                <div class="ratings">
+                                {{-- <div class="ratings">
                                     <span>
                                         <svg width="75" height="15" viewBox="0 0 75 15" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -202,18 +202,18 @@
                                                 fill="#FFA800" />
                                         </svg>
                                     </span>
-                                </div>
+                                </div> --}}
                                 <div class="product-description">
                                     <a href="product-info.html" class="product-details">Rainbow Sequin Dress
                                     </a>
                                     <div class="price">
-                                        <span class="price-cut">$12.99</span>
-                                        <span class="new-price">$6.99</span>
+                                        {{-- <span class="price-cut">$12.99</span> --}}
+                                        <span class="new-price">Rp 6.99</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="product-cart-btn">
-                                <a href="cart.html" class="product-btn">Masukan keranjang</a>
+                                <a href="cart.html" class="product-btn">Masukkan keranjang</a>
                             </div>
                         </div>
                     </div>
@@ -223,7 +223,7 @@
     </section>
 
 
-    <section class="product flash-sale mt-5">
+    {{-- <section class="product flash-sale mt-5">
         <div class="container">
             <div class="section-title">
                 <h5>Diskon Promo</h5>
@@ -363,13 +363,13 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
 
     <section class="product top-selling">
         <div class="container">
             <div class="section-title">
-                <h5>Produk Terlaris</h5>
+                <h5>SESI LELANG</h5>
                 <a href="product-sidebar.html" class="view">Lihat Semua</a>
             </div>
             <div class="top-selling-section">
@@ -451,7 +451,7 @@
 
 
                             <div class="product-info">
-                                <div class="ratings">
+                                {{-- <div class="ratings">
                                     <span>
                                         <svg width="75" height="15" viewBox="0 0 75 15" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -472,13 +472,13 @@
                                                 fill="#FFA800" />
                                         </svg>
                                     </span>
-                                </div>
+                                </div> --}}
                                 <div class="product-description">
                                     <a href="product-info.html" class="product-details">Leather Dress Shoes
                                     </a>
                                     <div class="price">
-                                        <span class="price-cut">$19.99</span>
-                                        <span class="new-price">$13.99</span>
+                                        {{-- <span class="price-cut">$19.99</span> --}}
+                                        <span class="new-price">Rp 13.99</span>
                                     </div>
                                 </div>
                             </div>
@@ -491,9 +491,10 @@
             </div>
         </div>
     </section>
+    <br>
 
 
-    <section class="product best-seller">
+    {{-- <section class="product best-seller">
         <div class="container">
             <div class="best-selling-section">
                 <div class="section-title">
@@ -606,10 +607,10 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
 
-    <section class="product weekly-sale">
+    {{-- <section class="product weekly-sale">
         <div class="container">
             <div class="section-title">
                 <h5>Penjualan Terbaik Minggu Ini</h5>
@@ -732,7 +733,7 @@
                 </div>
             </div>
 
-            {{-- <div class="style-section">
+            <div class="style-section">
                 <div class="row gy-4 gx-5 gy-lg-0">
                     <div class="col-lg-6">
                         <div class="product-wrapper wrapper-one" data-aos="fade-right">
@@ -779,12 +780,12 @@
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
-    </section>
+    </section> --}}
 
 
-    <section class="product best-product mt-5">
+    {{-- <section class="product best-product mt-5">
         <div class="container">
             <br>
             <br>
@@ -839,7 +840,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
 
 @endsection
