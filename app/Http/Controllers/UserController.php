@@ -18,6 +18,7 @@ class UserController extends Controller
             return $query->where('email', 'LIKE', "%$a%");
         })->get();
         $role = $user->getRoleNames();
+
         return view('admin.user', compact('users','role'));
     }
 

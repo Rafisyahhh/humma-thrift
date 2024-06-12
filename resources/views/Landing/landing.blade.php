@@ -14,7 +14,7 @@
                                     <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span>
                                         OFF
                                     </h5>
-                                    <h1 class="wrapper-details">HUMMA TRHIFT</h1>
+                                    <h1 class="wrapper-details">HUMMA THRIFT</h1>
                                     <h5>Penjualan Pada Musim Panas</h5> 
                                     <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
                                 </div>

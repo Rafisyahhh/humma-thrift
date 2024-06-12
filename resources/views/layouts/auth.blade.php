@@ -16,9 +16,9 @@
 
     <link rel="stylesheet" href="{{ asset('template-assets/front/css/nouislider.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('template-assets/front/css/aos-3.0.0.css')}}">
+    <link rel="stylesheet" href="{{ asset('template-assets/front/css/aos-3.0.0.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('template-assets/front/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('template-assets/front/css/style.css') }}">
 </head>
 
 <body>
@@ -28,7 +28,8 @@
                 <div class="header-center">
                     <div class="logo">
                         <a href="index.html">
-                            <img src="{{ asset('template-assets/front/assets/images/logos/logo.webp')}}" alt="logo">
+                            <img src="{{ asset('template-assets/front/assets/images/logos/logo.webp') }}"
+                                alt="logo">
                         </a>
                     </div>
                 </div>
@@ -148,7 +149,8 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="footer-order">
                             <div class="logo">
-                                <img src="{{ asset('template-assets/front/assets/images/logos/footer-logo.webp') }}" alt="logo">
+                                <img src="{{ asset('template-assets/front/assets/images/logos/footer-logo.webp') }}"
+                                    alt="logo">
                             </div>
                             <div class="footer-link order-link">
                                 <ul>
@@ -227,8 +229,8 @@
                                 <div class="phone address">
                                     <div class="icon">
                                         <span>
-                                            <svg width="44" height="45" viewBox="0 0 44 45"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg width="44" height="45" viewBox="0 0 44 45" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
                                                 <circle cx="21.9995" cy="22.9961" r="21.5" stroke="#424242">
                                                 </circle>
                                                 <g clip-path="url(#clip0_56_7)">
@@ -259,18 +261,17 @@
         </div>
     </section>
 
+    <script src="{{ asset('template-assets/front/assets/js/jquery_3.7.1.min.js') }}"></script>
 
-    <script src="{{ asset('template-assets/admin/assets/js/jquery_3.7.1.min.js')}}"></script>
+    <script src="{{ asset('template-assets/front/assets/js/bootstrap_5.3.2.bundle.min.js') }}"></script>
 
-    <script src="{{ asset('template-assets/admin/assets/js/bootstrap_5.3.2.bundle.min.js')}}"></script>
+    <script src="{{ asset('template-assets/front/assets/js/nouislider.min.js') }}"></script>
 
-    <script src="{{ asset('template-assets/admin/assets/js/nouislider.min.js')}}"></script>
+    <script src="{{ asset('template-assets/front/assets/js/aos-3.0.0.js') }}"></script>
 
-    <script src="{{ asset('template-assets/admin/assets/js/aos-3.0.0.js')}}"></script>
+    <script src="{{ asset('template-assets/front/assets/js/swiper10-bundle.min.js') }}"></script>
 
-    <script src="{{ asset('template-assets/admin/assets/js/swiper10-bundle.min.js')}}"></script>
-
-    <script src="{{ asset('template-assets/admin/assets/js/shopus.js')}}"></script>
+    <script src="{{ asset('template-assets/front/assets/js/shopus.js') }}"></script>
 </body>
 
 </html>

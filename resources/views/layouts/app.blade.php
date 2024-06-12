@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en" class="layout-compact dark-style layout-menu-fixed layout-navbar-fixed" dir="ltr"
+<html lang="id" class="layout-compact dark-style layout-menu-fixed layout-navbar-fixed" dir="ltr"
     data-theme="theme-default" data-assets-path="template-assets/admin/assets/"
     data-template="vertical-menu-template-no-customizer">
 
@@ -14,7 +14,8 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="template-assets/admin/assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon"
+        href="{{ asset('template-assets/admin/assets/img/favicon/favicon.ico') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,23 +25,29 @@
         rel="stylesheet" />
 
     <!-- Icons -->
-    <link rel="stylesheet" href="template-assets/admin/assets/vendor/fonts/fontawesome.css" />
-    <link rel="stylesheet" href="template-assets/admin/assets/vendor/fonts/tabler-icons.css" />
-    <link rel="stylesheet" href="template-assets/admin/assets/vendor/fonts/flag-icons.css" />
+    <link rel="stylesheet" href="{{ asset('template-assets/admin/assets/vendor/fonts/fontawesome.css') }}" />
+    <link rel="stylesheet" href="{{ asset('template-assets/admin/assets/vendor/fonts/tabler-icons.css') }}" />
+    <link rel="stylesheet" href="{{ asset('template-assets/admin/assets/vendor/fonts/flag-icons.css') }}" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" id="stylesheet-core" href="template-assets/admin/assets/vendor/css/rtl/core.css" />
-    <link rel="stylesheet" id="stylesheet-theme" href="template-assets/admin/assets/vendor/css/rtl/theme-bordered.css" />
-    <link rel="stylesheet" href="template-assets/admin/assets/css/demo.css" />
+    <link rel="stylesheet" id="stylesheet-core"
+        href="{{ asset('template-assets/admin/assets/vendor/css/rtl/core.css') }}" />
+    <link rel="stylesheet" id="stylesheet-theme"
+        href="{{ asset('template-assets/admin/assets/vendor/css/rtl/theme-bordered.css') }}" />
+    <link rel="stylesheet" href="{{ asset('template-assets/admin/assets/css/demo.css') }}" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="{{ asset('template-assets/admin/assets/vendor/libs/node-waves/node-waves.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('template-assets/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+    <link rel="stylesheet" href="{{ asset('template-assets/admin/assets/vendor/libs/typeahead-js/typeahead.css') }}" />
+    {{-- <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/node-waves/node-waves.css" />
     <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/apex-charts/apex-charts.css" /> --}}
 
     <style>
-        .menu-item.active{
+        .menu-item.active {
             background-color: #0000;
         }
     </style>
@@ -50,10 +57,10 @@
     @yield('link')
 
     <!-- Helpers -->
-    <script src="template-assets/admin/assets/vendor/js/helpers.js"></script>
+    <script src="{{ asset('template-assets/admin/assets/vendor/js/helpers.js') }}"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="template-assets/admin/assets/js/config.js"></script>
+    <script src="{{ asset('template-assets/admin/assets/js/config.js') }}"></script>
 
     @stack('style')
     @yield('style')
@@ -115,15 +122,15 @@
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
 
-    <script src="template-assets/admin/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="template-assets/admin/assets/vendor/libs/popper/popper.js"></script>
-    <script src="template-assets/admin/assets/vendor/js/bootstrap.js"></script>
-    <script src="template-assets/admin/assets/vendor/libs/node-waves/node-waves.js"></script>
-    <script src="template-assets/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="template-assets/admin/assets/vendor/libs/hammer/hammer.js"></script>
-    <script src="template-assets/admin/assets/vendor/libs/i18n/i18n.js"></script>
-    <script src="template-assets/admin/assets/vendor/libs/typeahead-js/typeahead.js"></script>
-    <script src="template-assets/admin/assets/vendor/js/menu.js"></script>
+    <script src="{{ asset('template-assets/admin/assets/vendor/libs/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('template-assets/admin/assets/vendor/libs/popper/popper.js') }}"></script>
+    <script src="{{ asset('template-assets/admin/assets/vendor/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('template-assets/admin/assets/vendor/libs/node-waves/node-waves.js') }}"></script>
+    <script src="{{ asset('template-assets/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('template-assets/admin/assets/vendor/libs/hammer/hammer.js') }}"></script>
+    <script src="{{ asset('template-assets/admin/assets/vendor/libs/i18n/i18n.js') }}"></script>
+    <script src="{{ asset('template-assets/admin/assets/vendor/libs/typeahead-js/typeahead.js') }}"></script>
+    <script src="{{ asset('template-assets/admin/assets/vendor/js/menu.js') }}"></script>
 
     <!-- endbuild -->
 
@@ -132,6 +139,7 @@
     @yield('scripts')
 
     <!-- Main JS -->
+    <script src="{{ asset('template-assets/admin/assets/js/main.js') }}"></script>
     <script src="template-assets/admin/assets/js/main.js"></script>
     <script src="template-assets/admin/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
@@ -140,44 +148,11 @@
     <script src="template-assets/admin/assets/js/app-ecommerce-dashboard.js"></script>
 
 
-
     <!-- Vendors JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.css">
-    @if ($errors->any())
-    <script>
-        toastr.error(`{!! implode('\n', $errors->all()) !!}`);
-    </script>
-@endif
+    @include('components.sweetalert')
 
-@if (session('warning'))
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: "{{ session('warning') }}"
-        });
-    </script>
-@endif
-
-
-@if (session('success'))
-    <script>
-        Swal.fire({
-            // title: "Good job!",
-            text: "{{ session('success') }}",
-            icon: "success"
-        });
-    </script>
-@endif
-
-    @stack('js')
     @yield('js')
-
-
-
-
+    @stack('js')
 </body>
 
 </html>

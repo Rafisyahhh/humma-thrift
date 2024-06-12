@@ -19,7 +19,7 @@ use App\Http\Controllers\ProductCategoryController;
 */
 
 Route::get('/', function () {
-    return view('');
+    return view('landing.landing');
 });
 Route::get('/admin', function () {
     return view('layouts.app');
@@ -44,6 +44,9 @@ Route::get('/shop', function () {
     return view('user.shop');
 });
 
+Auth::routes([
+    'verify' => true,
+]);
 Route::get('/tentang', function () {
     return view('user.tentang');
 });
@@ -63,11 +66,7 @@ Route::get('/rincian', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/admin', function () {
-    return view('admin.index');
-})->name('admin');
-
+Route::get('/home', \App\Http\Controllers\RedirectUserController::class)->name('home');
 
 Route::prefix('/dev')->group(function() {
     Route::get('/admin-view', function() {
@@ -99,8 +98,9 @@ Route::get('/about', function () {
     return view('Landing.about');
 });
 
-Route::get('/user', [UserController::class, 'index'])->name('user.index');
-Route::delete('/userDestroy/{user}', [UserController::class, 'destroy'])->name('user.destroy');
-
-Route::resource('brand', BrandController::class);
-Route::resource('category', ProductCategoryController::class);
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', fn() => view('admin.index'))->name('index');
+    Route::resource('brand', BrandController::class);
+    Route::resource('category', ProductCategoryController::class);
+    Route::resource('user', UserController::class);
+});

@@ -9,9 +9,9 @@
                         @csrf
                         <div class="review-inner-form ">
                             <div class="review-form-name">
-                                <label for="email" class="form-label">Email</label>
+                                <label for="email" class="form-label">Surat Elektronik</label>
                                 <input type="email" id="email"
-                                    class="form-control @error('email') is-invalid @enderror" placeholder="Email"
+                                    class="form-control @error('email') is-invalid @enderror" placeholder="Surat elektronik"
                                     value="{{ old('email') }}" name="email" required autocomplete="email" autofocus>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -20,9 +20,9 @@
                                 @enderror
                             </div>
                             <div class="review-form-name">
-                                <label for="password" class="form-label">Password</label>
+                                <label for="password" class="form-label">Kata Sandi</label>
                                 <input type="password" name="password" id="password"
-                                    class="form-control @error('password') is-invalid @enderror" placeholder="password"
+                                    class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan kata sandimu"
                                     required autocomplete="current-password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -33,7 +33,7 @@
                             <div class="review-form-name checkbox">
                                 <div class="checkbox-item d-flex align-items-center">
                                     <input type="checkbox" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                    <label for="remember">
+                                    <label for="remember" class="m-0">
                                         Remember Me</label>
                                 </div>
                                 <div class="forget-pass">
