@@ -49,8 +49,6 @@
                                         </svg>
                                     </button>
                                 </form>
-
-
                             </td>
                         </tr>
                     @endforeach
