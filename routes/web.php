@@ -28,6 +28,10 @@ Route::get('/seller', function () {
     return view('penjualan.penjualan');
 });
 
+Route::get('/tambahproduk', function () {
+    return view('penjualan.tambahproduk');
+});
+
 Route::get('/user', function () {
     return view('user.home');
 });
@@ -81,6 +85,5 @@ Route::get('/about', function () {
 
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::delete('/userDestroy/{user}', [UserController::class, 'destroy'])->name('user.destroy');
-
 Route::resource('brand', BrandController::class);
 Route::resource('category', ProductCategoryController::class);
