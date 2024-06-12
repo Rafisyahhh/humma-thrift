@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
     <!-- Bootstrap Table with Header - Light -->
     <div class="card">
@@ -9,11 +10,12 @@
                 style="background-color:	rgb(167, 146, 119)  ; color:#fff;">
                 Tambahkan Brand
             </a>
-            <form action="{{ route('brand.index') }}" method="get">
+            <form action="{{ route('admin.brand.index') }}" method="get">
                 <div class="input-group mb-3">
                     <input type="search" name="search" class="form-control" placeholder="Cari Brand&hellip;"
-                    value="{{ old('search', request('search')) }}" />
-                    <button type="submit" class="btn btn-secondary">Cari</button>
+                        value="{{ old('search', request('search')) }}" />
+                    <button type="submit" class="btn"
+                        style="background-color: rgb(167, 146, 119); color:#fff;">Cari</button>
                 </div>
             </form>
 
@@ -40,12 +42,18 @@
                                     data-bs-toggle="modal" data-bs-target="#editModal{{ $brand->id }}">
                                     <i class="ti ti-pencil"></i>
                                 </button>
-                                <form id="delete-form-{{ $brand->id }}" action="{{ route('brand.destroy', ['brand' => $brand->id]) }}" method="POST" style="display:inline">
+                                <form id="delete-form-{{ $brand->id }}"
+                                    action="{{ route('admin.brand.destroy', ['brand' => $brand->id]) }}" method="POST"
+                                    style="display:inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" style="background: none" class="badge bg-label-danger me-1 border-0" onclick="confirmDeletion({{ $brand->id }});">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
-                                            <path fill="#FA7070" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
+                                    <button type="button" style="background: none"
+                                        class="badge bg-label-danger me-1 border-0"
+                                        onclick="confirmDeletion({{ $brand->id }});">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                            viewBox="0 0 24 24">
+                                            <path fill="#FA7070"
+                                                d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
                                         </svg>
                                     </button>
                                 </form>
@@ -58,10 +66,13 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Tambahkan Brand</h6>
+                            <h6 class="m-0 font-weight-bold d-flex align-items-center gap-2"><i
+                                    class="fas fa-newspaper me-1"></i>Tambahkan Brand</h6>
+
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('brand.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.brand.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="mb-3">
@@ -94,7 +105,7 @@
                                 <div class="pt-2 d-flex gap-3 justify-content-end">
                                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
                                     <button type="submit" class="btn btn"
-                                        style="background-color:	rgb(167, 146, 119)  ; color:#fff;">Tambahkan</button>
+                                        style="background-color: rgb(167, 146, 119); color: #fff;">Tambahkan</button>
                                 </div>
                             </form>
                         </div>
@@ -108,9 +119,11 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit Kategori</h6>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="{{ route('brand.update', $brand->id) }}" method="POST"
+                                <form action="{{ route('admin.brand.update', $brand->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
@@ -118,8 +131,9 @@
                                     <div class="mb-3">
                                         <label for="title" class="form-label">Nama Brand</label>
                                         <input type="text"
-                                            class="form-control @error('title_update') is-invalid @enderror" id="title"
-                                            name="title_update" value="{{ old('title_update', $brand->title ) }}">
+                                            class="form-control @error('title_update') is-invalid @enderror"
+                                            id="title" name="title_update"
+                                            value="{{ old('title_update', $brand->title) }}">
                                         @error('title_update')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -129,8 +143,8 @@
                                     <div class="mb-3">
                                         <label for="logo" class="form-label">Foto Cover</label>
                                         <input type="file"
-                                            class="form-control @error('logo_update') is-invalid @enderror"
-                                            id="logo" name="logo_update" />
+                                            class="form-control @error('logo_update') is-invalid @enderror" id="logo"
+                                            name="logo_update" />
 
                                         @if ($brand->logo)
                                             <img src="{{ asset('storage/' . $brand->logo) }}"
@@ -146,9 +160,9 @@
                                     </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                <button type="submit"  class="btn btn"
-                                style="background-color:	rgb(167, 146, 119)  ; color:#fff;">Simpan</button>
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn"
+                                    style="background-color: rgb(167, 146, 119); color:#fff;">Simpan</button>
                             </div>
                             </form>
                         </div>
@@ -162,22 +176,22 @@
 @endsection
 
 @section('scripts')
-{{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
-<script>
-    function confirmDeletion(brandId) {
-        Swal.fire({
-            title: "Apa kamu yakin?",
-            text: "Anda tidak akan dapat mengembalikan ini!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Ya, Hapus"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('delete-form-' + brandId).submit();
-            }
-        });
-    }
-</script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+    <script>
+        function confirmDeletion(brandId) {
+            Swal.fire({
+                title: "Apa kamu yakin?",
+                text: "Anda tidak akan dapat mengembalikan ini!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, Hapus"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + brandId).submit();
+                }
+            });
+        }
+    </script>
 @endsection

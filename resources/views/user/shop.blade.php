@@ -1,5 +1,5 @@
 @extends('user.layouts.app')
-@section('tittle','Home')
+@section('tittle','Shop')
 @section('content')
 
     <section class="product product-sidebar footer-padding">
@@ -9,16 +9,12 @@
                     <div class="sidebar" data-aos="fade-right">
                         <div class="sidebar-section">
                             <div class="sidebar-wrapper">
-                                <h5 class="wrapper-heading">Product Categories</h5>
+                                <h5 class="wrapper-heading">Kategori Produk</h5>
                                 <div class="sidebar-item">
                                     <ul class="sidebar-list">
                                         <li>
-                                            <input type="checkbox" id="mobile" name="mobile">
-                                            <label for="mobile">Mobile & Laptops</label>
-                                        </li>
-                                        <li>
                                             <input type="checkbox" id="bags" name="bags">
-                                            <label for="bags">Bags</label>
+                                            <label for="bags">Tas</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="sweatshirt" name="sweatshirt">
@@ -26,42 +22,30 @@
                                         </li>
                                         <li>
                                             <input type="checkbox" id="boots" name="boots">
-                                            <label for="boots">Boots</label>
+                                            <label for="boots">Sepatu Boot</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="accessories" name="accessories">
-                                            <label for="accessories">Accessories</label>
+                                            <label for="accessories">Aksesoris</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="sneakers" name="sneakers">
                                             <label for="sneakers">Sneakers</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" id="outerwear" name="outerwear">
-                                            <label for="outerwear">Outerwear</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="activewear" name="activewear">
-                                            <label for="activewear">Activewear</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="grooming" name="grooming">
-                                            <label for="grooming">Grooming</label>
-                                        </li>
-                                        <li>
                                             <input type="checkbox" id="cosmatics" name="cosmatics">
-                                            <label for="cosmatics">Cosmetics</label>
+                                            <label for="cosmatics">Kosmetik</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="watch" name="watch">
-                                            <label for="watch">Watch</label>
+                                            <label for="watch">Jam Tangan</label>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                             <hr>
                             <div class="sidebar-wrapper sidebar-range">
-                                <h5 class="wrapper-heading">Price Range</h5>
+                                <h5 class="wrapper-heading">Kisaran harga</h5>
                                 <div class="price-slide range-slider">
                                     <div class="price">
                                         <div class="range-slider style-1">
@@ -128,16 +112,16 @@
                             </div>
                             <hr>
                             <div class="sidebar-wrapper">
-                                <h5 class="wrapper-heading">Color</h5>
+                                <h5 class="wrapper-heading">Warna</h5>
                                 <div class="sidebar-item">
                                     <ul class="sidebar-list">
                                         <li>
                                             <input type="checkbox" id="red" name="red">
-                                            <label for="red">Red</label>
+                                            <label for="red">Merah</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="blue" name="blue">
-                                            <label for="blue">blue</label>
+                                            <label for="blue">Biru</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="navy" name="navy">
@@ -148,20 +132,20 @@
                             </div>
                             <hr>
                             <div class="sidebar-wrapper">
-                                <h5 class="wrapper-heading">Size</h5>
+                                <h5 class="wrapper-heading">Ukuran</h5>
                                 <div class="sidebar-item">
                                     <ul class="sidebar-list">
                                         <li>
                                             <input type="checkbox" id="small" name="small">
-                                            <label for="small">Small</label>
+                                            <label for="small">Kecil</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="medium" name="medium">
-                                            <label for="medium">Medium</label>
+                                            <label for="medium">Sedang</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="large" name="large">
-                                            <label for="large">Large</label>
+                                            <label for="large">Besar</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="xl" name="xl">
@@ -175,11 +159,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="sidebar-shop-section">
-                            <span class="wrapper-subtitle">TRENDY</span>
-                            <h5 class="wrapper-heading">Best wireless Shoes</h5>
-                            <a href="seller-sidebar.html" class="shop-btn deal-btn">Shop Now </a>
-                        </div>
                     </div>
                 </div>
                 <div class="col-lg-9">
@@ -190,10 +169,10 @@
                                     <div class="result">
                                         <p>Showing <span>1–16 of 66 results</span></p>
                                     </div>
-                                    <div class="product-sorting">
+                                    {{-- <div class="product-sorting">
                                         <span class="product-sort">Sort by:</span>
                                         <div class="product-list">
-                                            <span class="default">Default</span>
+                                            <span class="default">Bawaan</span>
                                             <span>
                                                 <svg width="10" height="6" viewBox="0 0 10 6"
                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -201,7 +180,7 @@
                                                 </svg>
                                             </span>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
 
@@ -280,7 +259,7 @@
                                         </div>
                                     </div>
                                     <div class="product-info">
-                                        <div class="ratings">
+                                        {{-- <div class="ratings">
                                             <span>
                                                 <svg width="75" height="15" viewBox="0 0 75 15"
                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -301,18 +280,18 @@
                                                         fill="#FFA800" />
                                                 </svg>
                                             </span>
-                                        </div>
+                                        </div> --}}
                                         <div class="product-description">
-                                            <a href="product-info.html" class="product-details">Flower Design Skart
+                                            <a href="/detailproduct" class="product-details">Flower Design Skart
                                             </a>
                                             <div class="price">
-                                                <span class="price-cut">$31.99</span>
+                                                {{-- <span class="price-cut">$31.99</span> --}}
                                                 <span class="new-price">$15.99</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="product-cart-btn">
-                                        <a href="cart.html" class="product-btn">Add To Cart</a>
+                                        <a href="cart.html" class="product-btn">Masukkan Keranjang</a>
                                     </div>
                                 </div>
                             </div>
@@ -320,8 +299,8 @@
 
                             <div class="col-lg-12">
                                 <div class="product-deal-section" data-aos="fade-up">
-                                    <h5 class="wrapper-heading">Get the best deal for Headphones</h5>
-                                    <a href="seller-sidebar.html" class="shop-btn">Shop Now</a>
+                                    <h5 class="wrapper-heading">Dapatkan penawaran terbaik untuk Dress</h5>
+                                    <a href="seller-sidebar.html" class="shop-btn">Belanja Sekarang</a>
                                 </div>
                             </div>
 
@@ -401,7 +380,7 @@
                                         </div>
                                     </div>
                                     <div class="product-info">
-                                        <div class="ratings">
+                                        {{-- <div class="ratings">
                                             <span>
                                                 <svg width="75" height="15" viewBox="0 0 75 15"
                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -422,18 +401,18 @@
                                                         fill="#FFA800" />
                                                 </svg>
                                             </span>
-                                        </div>
+                                        </div> --}}
                                         <div class="product-description">
-                                            <a href="product-info.html" class="product-details">Rainbow Sequin Skart
+                                            <a href="/detailproduct" class="product-details">Rainbow Sequin Skart
                                             </a>
                                             <div class="price">
-                                                <span class="price-cut">$36.99</span>
+                                                {{-- <span class="price-cut">$36.99</span> --}}
                                                 <span class="new-price">$16.99</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="product-cart-btn">
-                                        <a href="cart.html" class="product-btn">Add To Cart</a>
+                                        <a href="cart.html" class="product-btn">Masukkan keranjang</a>
                                     </div>
                                 </div>
                             </div>
@@ -443,5 +422,4 @@
             </div>
         </div>
     </section>
-
 @endsection

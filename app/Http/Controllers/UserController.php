@@ -13,12 +13,15 @@ class UserController extends Controller
      */
     public function index(Request $request, User $user)
     {
-        $users = User::when($request->has('search'), function ($query) use ($request) {
-            $a = $request->input('search');
-            return $query->where('email', 'LIKE', "%$a%");
-        })->get();
-        $role = $user->getRoleNames();
-        return view('admin.user', compact('users','role'));
+        $search = $request->input('search');
+        $role = $request->input('role');
+
+        $users = User::when($search, fn ($query) => $query->where('email', 'LIKE', "%$search%"))
+            ->when($role === 'user', fn ($query) => $query->whereHas('roles', fn ($q) => $q->where('name', $role))->orderBy('created_at', 'asc'))
+            ->when($role === 'seller', fn ($query) => $query->whereHas('roles', fn ($q) => $q->where('name', $role))->orderBy('created_at', 'asc'))
+            ->paginate(10);
+
+        return view('admin.user', compact('users'));
     }
 
     /**
@@ -74,6 +77,5 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('user.index')->with('success', 'Pengguna berhasil di hapus');
-
-  }
+    }
 }
