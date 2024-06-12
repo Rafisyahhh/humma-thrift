@@ -3,24 +3,24 @@
 @section('content')
     <!-- Bootstrap Table with Header - Light -->
     <div class="card">
-        <h6 class="card-header pb-0 pt-0 mb-0 mt-4">
+        <h6 class="card-header p-1 px-3">
             <div class="d-flex justify-content-between align-items-center">
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('user') && !request()->has('action') && !request()->has('role') ? 'active' : '' }}"
+                        <a class="nav-link {{ request()->routeIs('admin.user.index') && !request()->has('action') && !request()->has('role') ? 'active' : '' }}"
                             href="{{ route('admin.user.index') }}">Semua Pengguna</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('user') && request()->has('role') && request()->role == 'user' ? 'active' : '' }}"
-                            href="{{ route('admin.user.index', ['role' => 'user']) }}">Pengguna Aktif</a>
+                        <a class="nav-link {{ request()->routeIs('admin.user.index') && request()->has('role') && request()->role == 'user' ? 'active' : '' }}"
+                            href="{{ route('admin.user.index', ['role' => 'user']) }}">Pengguna</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('user') && request()->has('role') && request()->role == 'organizer' ? 'active' : '' }}"
-                            href="{{ route('admin.user.index', ['role' => 'organizer']) }}">Seller Aktif</a>
+                        <a class="nav-link {{ request()->routeIs('admin.user.index') && request()->has('role') && request()->role == 'seller' ? 'active' : '' }}"
+                            href="{{ route('admin.user.index', ['role' => 'seller']) }}">Penjual</a>
                     </li>
                 </ul>
 
-                <form action="{{ request()->fullUrl() }}" method="GET" class="d-flex mt-n3">
+                <form action="{{ request()->fullUrl() }}" method="GET" class="d-flex">
                     @if (request()->input('role'))
                         <input type="hidden" name="role" value="{{ old('role', request()->input('role')) }}" />
                     @endif
@@ -29,7 +29,7 @@
                     @endif
 
                     <div class="input-group mb-3 mt-2">
-                        <input type="search" name="search" class="form-control" placeholder="Cari User&hellip;"
+                        <input type="search" name="search" class="form-control" placeholder="Cari surelnya&hellip;"
                             value="{{ old('search', request('search')) }}" />
                         <button type="submit" class="btn btn-secondary">Cari</button>
                     </div>
@@ -41,19 +41,26 @@
                 <thead class="table-light">
                     <tr>
                         <th>No.</th>
-                        <th>Email</th>
-                        <th>Profil</th>
+                        <th>Nama Akun</th>
                         <th>Tanggal</th>
                         <th>Role</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @foreach ($users as $user)
+                    @forelse ($users as $user)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $user->email }}</span></td>
-                            <td><img src="{{ $user->avatar ? asset("storage/{$user->avatar}") : $user->getGravatarLink() }}" class="rounded-3 rounded-circle" height="64px" />
+                            <td>
+                                <div class="d-flex gap-3 align-items-center">
+                                    <img src="{{ $user->avatar ? asset("storage/{$user->avatar}") : $user->getGravatarLink() }}"
+                                        class="rounded-3 rounded-circle" height="48px" />
+
+                                    <div class="d-flex flex-column gap-1">
+                                        <strong>{{ $user->fullname }}</strong>
+                                        <span class="text-muted">{{ $user->email }}</span>
+                                    </div>
+                                </div>
                             </td>
                             <td>{{ \Carbon\Carbon::parse($user->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}
                             <td>
@@ -80,9 +87,17 @@
                                 @endif
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center">Tidak ada data</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
+        </div>
+
+        <div class="pt-3 px-3">
+            {{ $users->links() }}
         </div>
     </div>
     <!-- Bootstrap Table with Header - Light -->

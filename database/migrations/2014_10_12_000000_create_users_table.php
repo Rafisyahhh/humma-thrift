@@ -26,6 +26,7 @@ return new class extends Migration
             $table->date('dbirth')->nullable();
             $table->char('nic', 16)->nullable();
             $table->string('nic_photo')->nullable();
+            $table->boolean('banned')->default(false);
         });
     }
 
