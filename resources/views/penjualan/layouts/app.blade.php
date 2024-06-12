@@ -41,11 +41,9 @@
                 </div>
             </div>
             <div class="user-dashboard">
-                <div class="nav nav-item nav-pills  me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <div class="nav nav-item nav-pills  me-3" aria-orientation="vertical">
 
-                    <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill"
-                        data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
-                        aria-selected="true">
+                    <a href="{{route('seller.home')}}" class="nav-link {{ request()->routeIs('seller.home') ? 'active' : '' }}">
                         <span>
                             <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -62,10 +60,8 @@
                             </svg>
                         </span>
                         <span class="text">Dashboard</span>
-                    </button>
-                    <button class="nav-link" id="v-pills-order-tab" data-bs-toggle="pill"
-                        data-bs-target="#v-pills-order" type="button" role="tab" aria-controls="v-pills-order"
-                        aria-selected="false">
+                    </a>
+                    <a href="{{route('seller.product')}}" class="nav-link {{ request()->routeIs('seller.product') ? 'active' : '' }}">
                         <span>
                             <svg width="15" height="18" viewBox="0 0 15 18" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -78,10 +74,8 @@
                         <span class="text">
                             Produk
                         </span>
-                    </button>
-                    <button class="nav-link" id="v-pills-wishlist-tab" data-bs-toggle="pill"
-                        data-bs-target="#v-pills-wishlist" type="button" role="tab"
-                        aria-controls="v-pills-wishlist" aria-selected="false">
+                    </a>
+                    <a href="{{route('seller.transaction')}}" class="nav-link {{ request()->routeIs('seller.transaction') ? 'active' : '' }}">
                         <span>
                             <svg width="16" height="14" viewBox="0 0 16 14" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -99,10 +93,8 @@
                         <span class="text">
                             Data Transaksi
                         </span>
-                    </button>
-                    <button class="nav-link" id="v-pills-review-tab" data-bs-toggle="pill"
-                        data-bs-target="#v-pills-review" type="button" role="tab" aria-controls="v-pills-review"
-                        aria-selected="false">
+                    </a>
+                    <a href="{{route('seller.income')}}" class="nav-link {{ request()->routeIs('seller.income') ? 'active' : '' }}">
                         <span>
                             <svg width="16" height="18" viewBox="0 0 16 18" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -126,10 +118,8 @@
                         <span class="text">
                             Penghasilan
                         </span>
-                    </button>
-                    <button class="nav-link" id="v-pills-ticket-tab" data-bs-toggle="pill"
-                        data-bs-target="#v-pills-ticket" type="button" role="tab"
-                        aria-controls="v-pills-ticket" aria-selected="false">
+                    </a>
+                    <a href="{{route('seller.profil')}}" class="nav-link {{ request()->routeIs('seller.profil') ? 'active' : '' }}">
                         <span>
                             <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -144,7 +134,7 @@
                         <span class="text">
                             Profile penjual
                         </span>
-                    </button>
+                    </a>
                     <div class="nav-link">
                         <a href="login.html">
                             <span>

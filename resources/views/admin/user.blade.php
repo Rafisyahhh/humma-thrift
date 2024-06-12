@@ -116,6 +116,8 @@
                     @endforelse
                 </tbody>
             </table>
+
+
         </div>
 
         @if ($users->hasPages())
