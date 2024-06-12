@@ -39,13 +39,12 @@ Route::get('/shop', function () {
     return view('user.shop');
 });
 
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/admin', function () {
-    return view('admin.index');
-})->name('admin');
 
-Route::resource('brand', BrandController::class);
-Route::resource('category', ProductCategoryController::class);
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', fn() => view('admin.index'))->name('admin');
+    Route::resource('brand', BrandController::class);
+    Route::resource('category', ProductCategoryController::class);
+});

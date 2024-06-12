@@ -39,16 +39,16 @@
             </a>
         </li>
 
-        <li class="menu-item {{ request()->routeIs('brand.index') ? 'active' : '' }}">
-            <a href="{{ url('/brand') }}" class="menu-link">
-                <i class="menu-icon fa-regular fa-font-awesome"></i>
-                <div data-i18n="Brand">Brand</div>
+        <li class="menu-item {{ request()->routeIs('admin.brand.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.brand.index') }}" class="menu-link">
+                <i class="menu-icon ti ti-flag"></i>
+                <div data-i18n="Brand">Merk</div>
             </a>
         </li>
-        <li class="menu-item {{ request()->routeIs('category.index') ? 'active' : '' }}">
-            <a href="{{ url('/category') }}" class="menu-link">
-                <i class="menu-icon fa-thin fa-font-awesome"></i>
-                <div data-i18n="Kategori">Kategori</div>
+        <li class="menu-item {{ request()->routeIs('admin.category.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.category.index') }}" class="menu-link">
+                <i class="menu-icon ti ti-list"></i>
+                <div data-i18n="Category">Kategori</div>
             </a>
         </li>
     </ul>
