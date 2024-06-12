@@ -542,7 +542,7 @@
                             <div class="cart-section">
                                 <table>
                                     <tbody>
-                                        
+
                                         <div class="col-lg-6">
                                             <a href="#" class="shop-btn" onclick="modalAction('.submit')">Add
                                                 New

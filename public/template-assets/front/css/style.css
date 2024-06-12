@@ -78,7 +78,7 @@ a span {
 }
 p {
     font-size: 15px;
-    color: #797979;
+    color: #1a1919;
     font-weight: 400;
     font-family: inter, sans-serif;
     margin-bottom: 0;
@@ -3719,7 +3719,7 @@ table .ticket-row:hover {
     }
 }
 .table-row {
-    background: rgba(174, 28, 154, 0.08);
+    background: rgb(249, 225, 192, 0.30);
     border: 1px solid #e9e7e7;
 }
 .table-row .table-wrapper {
@@ -5237,7 +5237,7 @@ table .ticket-row:hover {
     gap: 2rem;
     height: auto;
     padding: 2.6rem;
-    background-color: rgba(174, 28, 154, 0.08);
+    background-color: rgb(249, 225, 192, 0.30);
     border: none;
     box-shadow: none;
 }
@@ -5270,7 +5270,7 @@ table .ticket-row:hover {
     justify-content: space-between;
     gap: 0;
     padding: 4rem;
-    background: rgba(174, 28, 154, 0.08);
+    background: rgb(249, 225, 192 , 0.30);
     border-radius: 0.5rem;
 }
 .user-dashboard .nav-content .profile-section .info-section .heading {
