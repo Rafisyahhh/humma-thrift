@@ -1,113 +1,11 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="keywords"
-        content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template,dashboard,bootstrap-dashboard">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="./assets/images/homepage-one/icon.png">
-
-    <title>Hummathrift - Seller</title>
-
-    <link rel="stylesheet" href="{{ asset('template-assets/front/css/swiper10-bundle.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('template-assets/front/css/bootstrap-5.3.2.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('template-assets/front/css/nouislider.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('template-assets/front/css/aos-3.0.0.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('template-assets/front//css/style.css') }}">
-</head>
-
-<body>
-
-    <header id="header" class="header">
-        <div class="header-center-section d-none d-lg-block">
-            <div class="container">
-                <div class="header-center">
-                    <div class="logo">
-                        <a href="index.html">
-                            <img src="{{ asset('template-assets/front/assets/images/logos/logo.webp') }}"
-                                alt="logo">
-                        </a>
-                    </div>
-                    <div class="float-end d-flex gap-4">
-                        <div class="header-vendor-btn">
-                            <a href="become-vendor.html" class="shop-btn">
-                                <span class="icon">
-                                    <svg width="24" height="16" viewBox="0 0 24 16" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M3.74301 7.07205C3.96405 7.07205 4.15464 7.07205 4.34568 7.07205C6.51947 7.07205 8.69326 7.07205 10.8671 7.07205C13.8478 7.07205 16.8289 7.0725 19.8096 7.0725C20.6984 7.0725 21.5871 7.07024 22.4758 7.07295C22.881 7.07431 23.1902 7.25265 23.3743 7.62651C23.5613 8.00623 23.5118 8.37556 23.2623 8.70426C23.0677 8.96027 22.7947 9.08173 22.4713 9.08037C21.7905 9.07766 21.1097 9.07902 20.4289 9.07902C18.0472 9.07902 15.6659 9.07902 13.2842 9.07902C10.218 9.07902 7.15155 9.07902 4.08545 9.07902C3.97261 9.07902 3.86016 9.07902 3.71783 9.07902C3.81287 9.18332 3.88592 9.26865 3.96426 9.34857C4.43435 9.82672 4.90777 10.3022 5.37714 10.7812C5.86373 11.2779 6.34592 11.7791 6.83252 12.2757C7.50584 12.9634 8.18845 13.6415 8.85241 14.3391C9.09042 14.5893 9.15452 14.9157 9.05941 15.2575C8.84401 16.0305 7.94333 16.2499 7.38806 15.6769C6.56585 14.8286 5.73446 13.9892 4.90728 13.1458C4.30521 12.5317 3.70321 11.9172 3.10148 11.3023C2.40477 10.5902 1.70889 9.87729 1.0122 9.1648C0.89409 9.04425 0.77508 8.9246 0.656466 8.8045C0.30972 8.45367 0.276068 7.84278 0.605699 7.4766C1.00196 7.03683 1.41479 6.61241 1.82437 6.18573C2.20355 5.79066 2.58656 5.39965 2.96969 5.00909C3.32675 4.64473 3.68681 4.28306 4.04467 3.91915C4.38526 3.57284 4.72459 3.22563 5.0644 2.87887C5.48464 2.44948 5.90489 2.01964 6.32563 1.5907C6.74894 1.15861 7.18016 0.734188 7.59428 0.29261C7.96371 -0.101559 8.63028 -0.0816927 8.96557 0.257392C9.37618 0.672782 9.40012 1.26381 9.00505 1.68552C8.66215 2.0517 8.30432 2.40342 7.95349 2.76192C7.07108 3.66449 6.18886 4.56797 5.30627 5.47054C4.81706 5.97081 4.32647 6.47018 3.83681 6.97046C3.81154 6.99574 3.78771 7.02329 3.74301 7.07205Z">
-                                    </svg>
-                                </span>
-                                <span class="list-text shop-text">kembali ke pengguna</span>
-                            </a>
-                        </div>
-                        <div class="modal-main mt-1"
-                            style="background-color: rgb(232, 169, 75); width: 40px; height: 40px; border-radius: 50%;">
-                            <div class="header-search">
-                                <button class="header-search-btn" onclick="modalAction('.search')">
-                                    <span>
-                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M13.9708 16.4151C12.5227 17.4021 10.9758 17.9723 9.27353 18.0062C5.58462 18.0802 2.75802 16.483 1.05056 13.1945C-1.76315 7.77253 1.33485 1.37571 7.25086 0.167548C12.2281 -0.848249 17.2053 2.87895 17.7198 7.98579C17.9182 9.95558 17.5566 11.7939 16.5852 13.5061C16.4512 13.742 16.483 13.8725 16.6651 14.0553C18.2412 15.6386 19.8112 17.2272 21.3735 18.8244C22.1826 19.6513 22.2058 20.7559 21.456 21.4932C20.7697 22.1678 19.7047 22.1747 18.9764 21.4793C18.3623 20.8917 17.7774 20.2737 17.1796 19.6688C16.118 18.5929 15.0564 17.5153 13.9708 16.4151ZM2.89545 9.0364C2.91692 12.4172 5.59664 15.1164 8.91967 15.1042C12.2384 15.092 14.9138 12.3493 14.8889 8.98505C14.864 5.63213 12.1826 2.92508 8.89047 2.92857C5.58204 2.93118 2.87397 5.68958 2.89545 9.0364Z"
-                                                fill="black" />
-                                        </svg>
-                                    </span>
-                                </button>
-                                <div class="modal-wrapper search">
-                                    <div onclick="modalAction('.search')" class="anywhere-away"></div>
-                                    <div class="modal-main">
-                                        <div class="wrapper-close-btn" onclick="modalAction('.search')">
-                                            <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="red"
-                                                    class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M6 18L18 6M6 6l12 12">
-                                                    </path>
-                                                </svg>
-                                            </span>
-                                        </div>
-                                        <div class="wrapper-main">
-                                            <div class="search-section">
-                                                <input type="text" placeholder="Search Products.........">
-                                                <div class="divider"></div>
-                                                <button type="button">All Categories</button>
-                                                <a href="#" class="shop-btn">Search</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="header-user mt-2">
-                            <a href="user-profile.html">
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                                        height="24" class="fill-current">
-                                        <path fill="none" d="M0 0h24v24H0z"></path>
-                                        <path
-                                            d="M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12z">
-                                        </path>
-                                    </svg>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+@extends('penjualan.layouts.app')
+@section('tittle', 'Home')
+@section('content')
 
     <section class="blog about-blog">
         <div class="container">
             <div class="blog-heading about-heading">
-                <h1 class="heading">Halaman Pengguna</h1>
+                <h1 class="heading">Halaman Seller</h1>
             </div>
         </div>
     </section>
@@ -119,13 +17,10 @@
                 <div class="dashboard-heading ">
                     <h5 class="dashboard-title"></h5>
                     <div class="dashboard-switch">
-                        {{-- <span class="text">Switch Dashboard</span>
-                        <span onclick="switchDashboard()" class="switch-icon"></span> --}}
                     </div>
                 </div>
                 <div class="user-dashboard">
-                    <div class="nav nav-item nav-pills  me-3" id="v-pills-tab" role="tablist"
-                        aria-orientation="vertical">
+                    <div class="nav nav-item nav-pills  me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
                         <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
@@ -148,8 +43,8 @@
                             <span class="text">Dashboard</span>
                         </button>
                         <button class="nav-link" id="v-pills-order-tab" data-bs-toggle="pill"
-                            data-bs-target="#v-pills-order" type="button" role="tab"
-                            aria-controls="v-pills-order" aria-selected="false">
+                            data-bs-target="#v-pills-order" type="button" role="tab" aria-controls="v-pills-order"
+                            aria-selected="false">
                             <span>
                                 <svg width="15" height="18" viewBox="0 0 15 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -185,22 +80,19 @@
                             </span>
                         </button>
                         <button class="nav-link" id="v-pills-review-tab" data-bs-toggle="pill"
-                            data-bs-target="#v-pills-review" type="button" role="tab"
-                            aria-controls="v-pills-review" aria-selected="false">
+                            data-bs-target="#v-pills-review" type="button" role="tab" aria-controls="v-pills-review"
+                            aria-selected="false">
                             <span>
                                 <svg width="16" height="18" viewBox="0 0 16 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_113_3028)">
                                         <path
-                                            d="M9.2481 10.6955C9.42603 10.6955 9.5544 10.6955 9.68504 10.6955C10.8044 10.6955 11.9238 10.6933 13.0431 10.6955C14.2729 10.7 14.8224 11.6158 14.2413 12.6692C14.2008 12.7401 14.2053 12.8665 14.2413 12.9419C14.4801 13.4365 14.4328 13.8888 14.104 14.3301C14.0454 14.41 14.0274 14.563 14.0612 14.6606C14.2278 15.1462 14.1625 15.5764 13.8382 15.9822C13.7706 16.0665 13.7436 16.2328 13.7751 16.3392C14.0341 17.1974 13.4756 17.9825 12.5612 17.9869C10.4418 17.9958 8.32242 17.9913 6.20305 17.9891C5.67603 17.9891 5.63549 17.9403 5.63549 17.4325C5.63549 15.0752 5.63098 12.718 5.6445 10.3629C5.64675 10.1633 5.72783 9.92604 5.8517 9.76859C6.6445 8.78178 7.16251 7.68408 7.35396 6.43781C7.48459 5.58404 8.0026 5.35563 8.74585 5.82354C9.45305 6.26927 9.71206 6.9545 9.76161 7.7373C9.81792 8.60437 9.61747 9.43596 9.37422 10.2609C9.34044 10.3851 9.30441 10.507 9.2481 10.6955Z" />
+                                            d="M2 3C1.44772 3 1 3.44772 1 4V14C1 14.5523 1.44772 15 2 15H14C14.5523 15 15 14.5523 15 14V4C15 3.44772 14.5523 3 14 3H2Z"
+                                            fill="#808080" />
+                                        <path d="M14 4V6H2V4H14Z" fill="#A9A9A9" />
                                         <path
-                                            d="M4.78 14.1924C4.78 15.2236 4.78 16.2548 4.78 17.2859C4.78 17.7272 4.57504 17.9778 4.13135 17.9845C3.10883 18.0022 2.08405 18.0044 1.06153 17.9845C0.570537 17.9756 0.270987 17.592 0.270987 17.0398C0.268735 15.2702 0.270987 13.5006 0.270987 11.7309C0.270987 11.5668 0.26423 11.4027 0.273239 11.2386C0.298014 10.7352 0.629095 10.3982 1.1336 10.3937C2.10883 10.3849 3.08405 10.3826 4.05928 10.3937C4.56603 10.3982 4.78 10.6332 4.78 11.1322C4.78 12.1523 4.78 13.1724 4.78 14.1924ZM1.92189 12.3629C2.31828 12.3674 2.53225 12.221 2.53225 11.9438C2.53225 11.6777 2.32054 11.5225 1.95792 11.5203C1.58855 11.518 1.3791 11.6622 1.36783 11.9261C1.35432 12.1966 1.56153 12.3585 1.92189 12.3629Z" />
-                                        <path
-                                            d="M6.03852 4.91866C6.10834 4.58159 6.1669 4.18686 6.27276 3.80322C6.34033 3.55929 6.26375 3.41293 6.08132 3.26435C5.80654 3.04038 5.53177 2.80975 5.29979 2.54586C5.18492 2.41724 5.08132 2.17331 5.13087 2.03804C5.18267 1.90055 5.4169 1.78302 5.59033 1.74532C5.93717 1.66992 6.29528 1.63444 6.65114 1.61892C6.88988 1.60783 7.00925 1.51691 7.09483 1.30402C7.23447 0.955863 7.38537 0.609923 7.57231 0.286158C7.64889 0.153104 7.83357 -0.00434352 7.9642 9.16175e-05C8.11285 0.00674432 8.31105 0.148669 8.39213 0.286158C8.59258 0.629881 8.72546 1.0113 8.91465 1.36168C8.97321 1.46812 9.12186 1.57013 9.24573 1.59231C9.61961 1.66105 10.0047 1.66549 10.3741 1.74532C10.5475 1.78302 10.7818 1.90277 10.8336 2.04025C10.8831 2.17553 10.7795 2.41946 10.6647 2.54808C10.4237 2.81862 10.1376 3.0559 9.85609 3.28875C9.69168 3.42402 9.63087 3.55264 9.68717 3.76996C9.78402 4.13142 9.8651 4.49954 9.90339 4.87209C9.91916 5.03397 9.86285 5.28899 9.75024 5.35774C9.61735 5.43757 9.3651 5.41318 9.20519 5.34221C8.84934 5.18477 8.52276 4.96079 8.17141 4.79004C8.0678 4.73904 7.89438 4.74125 7.79078 4.79226C7.41916 4.9741 7.0678 5.19585 6.69843 5.38657C6.32907 5.57284 6.016 5.37326 6.03852 4.91866Z" />
-                                        <path
-                                            d="M0.725777 6.07841C0.802353 5.68591 0.87893 5.37766 0.917218 5.06499C0.930732 4.94967 0.883434 4.79444 0.804606 4.71018C0.615416 4.50172 0.367669 4.34206 0.187488 4.12917C0.0793803 4.00055 -0.03098 3.78323 0.00956053 3.64796C0.0478488 3.51491 0.277579 3.34194 0.417218 3.34859C1.27082 3.38407 1.77758 3.01817 1.99605 2.20432C2.02983 2.07792 2.25731 1.91604 2.38569 1.92491C2.53659 1.93156 2.77082 2.08457 2.80461 2.21763C3.01407 3.02704 3.52082 3.37076 4.35866 3.34194C4.50506 3.3375 4.73929 3.51934 4.78884 3.66127C4.83163 3.78545 4.71902 4.04934 4.59515 4.12917C3.91046 4.56825 3.73479 5.1293 4.02082 5.87883C4.07488 6.01854 3.98479 6.30682 3.86316 6.39109C3.7438 6.47536 3.43974 6.46205 3.32262 6.3667C2.68298 5.85222 2.09064 5.88327 1.45776 6.37557C1.34064 6.46649 1.08839 6.46427 0.937488 6.40661C0.822624 6.36005 0.773074 6.15825 0.725777 6.07841Z" />
-                                        <path
-                                            d="M16.0005 3.82313C15.9509 3.89409 15.8946 4.05598 15.782 4.12694C15.1086 4.55493 14.8788 5.10045 15.1851 5.86108C15.2414 6.003 15.1649 6.30459 15.0477 6.37777C14.9104 6.46426 14.6018 6.45539 14.4757 6.35559C13.8608 5.86773 13.291 5.86995 12.6716 6.34672C12.541 6.44873 12.255 6.45982 12.0905 6.39329C11.8428 6.29129 11.8608 6.01852 11.9487 5.80564C12.2369 5.10932 12.0545 4.59041 11.4216 4.17572C11.2775 4.08037 11.1626 3.82978 11.1671 3.6546C11.1739 3.39071 11.4396 3.29979 11.6739 3.31974C12.4959 3.39071 12.9239 2.98933 13.1446 2.24866C13.1874 2.1023 13.4216 1.93376 13.577 1.92268C13.7077 1.91381 13.9419 2.09565 13.9802 2.23314C14.1964 3.01815 14.6829 3.38184 15.5117 3.32861C15.773 3.31309 15.9644 3.45502 16.0005 3.82313Z" />
+                                            d="M11 8H12.5C12.7761 8 13 8.22386 13 8.5V9.5C13 9.77614 12.7761 10 12.5 10H11C10.7239 10 10.5 9.77614 10.5 9.5V8.5C10.5 8.22386 10.7239 8 11 8Z"
+                                            fill="#A9A9A9" />
                                     </g>
                                     <defs>
                                         <clipPath id="clip0_113_3028">
@@ -208,14 +100,15 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
+
                             </span>
                             <span class="text">
-                                Data Pendapatan
+                                Penghasilan
                             </span>
                         </button>
                         <button class="nav-link" id="v-pills-ticket-tab" data-bs-toggle="pill"
-                            data-bs-target="#v-pills-ticket" type="button" role="tab"
-                            aria-controls="v-pills-ticket" aria-selected="false">
+                            data-bs-target="#v-pills-ticket" type="button" role="tab" aria-controls="v-pills-ticket"
+                            aria-selected="false">
                             <span>
                                 <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -261,7 +154,7 @@
                             aria-labelledby="v-pills-home-tab" tabindex="0">
                             <div class="user-profile">
                                 <div class="user-title">
-                                    <h5 class="heading">Welcome to your Profile </h5>
+                                    <h5 class="heading">Selamat datang di profil anda </h5>
                                 </div>
                                 <div class="profile-section">
                                     <div class="row g-5">
@@ -282,7 +175,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="wrapper-content">
-                                                    <p class="paragraph">New Orders</p>
+                                                    <p class="paragraph">Pesanan baru</p>
                                                     <h3 class="heading">656</h3>
                                                 </div>
                                             </div>
@@ -302,7 +195,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="wrapper-content">
-                                                    <p class="paragraph">Delivery Completed</p>
+                                                    <p class="paragraph">Pengiriman Selesai</p>
                                                     <h3 class="heading">99793</h3>
                                                 </div>
                                             </div>
@@ -328,7 +221,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="wrapper-content">
-                                                    <p class="paragraph">Support Tickets</p>
+                                                    <p class="paragraph">Tiket Dukungan</p>
                                                     <h3 class="heading">09</h3>
                                                 </div>
                                             </div>
@@ -336,19 +229,18 @@
                                         <div class="col-lg-12">
                                             <div class="info-section">
                                                 <div class="seller-info">
-                                                    <h5 class="heading">Personal Information</h5>
+                                                    <h5 class="heading">Informasi pribadi</h5>
                                                     <div class="info-list">
                                                         <div class="info-title">
-                                                            <p>Name:</p>
+                                                            <p>Nama:</p>
                                                             <p>Email:</p>
-                                                            <p>Phone:</p>
-                                                            <p>City:</p>
+                                                            <p>No Telepon:</p>
+                                                            <p>Kota/Kabupaten:</p>
                                                             <p>Zip:</p>
                                                         </div>
                                                         <div class="info-details">
                                                             <p>Sajjad</p>
-                                                            <p><a href="/cdn-cgi/l/email-protection"
-                                                                    class="__cf_email__"
+                                                            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
                                                                     data-cfemail="82e6e7efede7efe3ebeec2e5efe3ebeeace1edef">[email&#160;protected]</a>
                                                             </p>
                                                             <p>023 434 54354</p>
@@ -359,19 +251,18 @@
                                                 </div>
                                                 <div class="devider"></div>
                                                 <div class="shop-info">
-                                                    <h5 class="heading">Shop Information</h5>
+                                                    <h5 class="heading">Informasi Toko</h5>
                                                     <div class="info-list">
                                                         <div class="info-title">
-                                                            <p>Name:</p>
+                                                            <p>Nama:</p>
                                                             <p>Email:</p>
-                                                            <p>Phone:</p>
-                                                            <p>City:</p>
+                                                            <p>No Telepon:</p>
+                                                            <p>Kota/Kabupaten:</p>
                                                             <p>Zip:</p>
                                                         </div>
                                                         <div class="info-details">
                                                             <p>ShopUs Super-Shop</p>
-                                                            <p><a href="/cdn-cgi/l/email-protection"
-                                                                    class="__cf_email__"
+                                                            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
                                                                     data-cfemail="1276777f7d777f737b7e52757f737b7e3c717d7f">[email&#160;protected]</a>
                                                             </p>
                                                             <p>023 434 54354</p>
@@ -395,12 +286,12 @@
                                             <div class="review-form">
                                                 <div class=" account-inner-form">
                                                     <div class="review-form-name">
-                                                        <label for="firname" class="form-label">First Name*</label>
+                                                        <label for="firname" class="form-label">Nama depan*</label>
                                                         <input type="text" id="firname" class="form-control"
                                                             placeholder="First Name">
                                                     </div>
                                                     <div class="review-form-name">
-                                                        <label for="latname" class="form-label">Last Name*</label>
+                                                        <label for="latname" class="form-label">Nama lengkap*</label>
                                                         <input type="text" id="latname" class="form-control"
                                                             placeholder="Last Name">
                                                     </div>
@@ -412,13 +303,13 @@
                                                             placeholder="user@gmail.com">
                                                     </div>
                                                     <div class="review-form-name">
-                                                        <label for="telephone" class="form-label">Phone*</label>
+                                                        <label for="telephone" class="form-label">No Telepon*</label>
                                                         <input type="tel" id="telephone" class="form-control"
                                                             placeholder="+880388**0899">
                                                     </div>
                                                 </div>
                                                 <div class="review-form-name">
-                                                    <label for="region" class="form-label">Country*</label>
+                                                    <label for="region" class="form-label">Negara*</label>
                                                     <select id="region" class="form-select">
                                                         <option>Choose...</option>
                                                         <option>Bangladesh</option>
@@ -427,7 +318,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="review-form-name address-form">
-                                                    <label for="addres" class="form-label">Address*</label>
+                                                    <label for="addres" class="form-label">Alamat*</label>
                                                     <input type="text" id="addres" class="form-control"
                                                         placeholder="Enter your Address">
                                                 </div>
@@ -463,14 +354,13 @@
                                                 <p class="paragraph">Size300x300. Gifs work
                                                     too.Max 5mb.</p>
                                                 <div class="logo-upload">
-                                                    <img src="assets/images/homepage-one/sallers-cover.png"
-                                                        alt="upload" class="upload-img" id="upload-img">
+                                                    <img src="assets/images/homepage-one/sallers-cover.png" alt="upload"
+                                                        class="upload-img" id="upload-img">
                                                     <div class="upload-input">
                                                         <label for="input-file">
                                                             <span>
-                                                                <svg width="32" height="32"
-                                                                    viewBox="0 0 32 32" fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                <svg width="32" height="32" viewBox="0 0 32 32"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path
                                                                         d="M16.5147 11.5C17.7284 12.7137 18.9234 13.9087 20.1296 15.115C19.9798 15.2611 19.8187 15.4109 19.6651 15.5683C17.4699 17.7635 15.271 19.9587 13.0758 22.1539C12.9334 22.2962 12.7948 22.4386 12.6524 22.5735C12.6187 22.6034 12.5663 22.6296 12.5213 22.6296C11.3788 22.6334 10.2362 22.6297 9.09365 22.6334C9.01498 22.6334 9 22.6034 9 22.536C9 21.4009 9 20.2621 9.00375 19.1271C9.00375 19.0746 9.02997 19.0109 9.06368 18.9772C10.4123 17.6249 11.7609 16.2763 13.1095 14.9277C14.2295 13.8076 15.3459 12.6913 16.466 11.5712C16.4884 11.5487 16.4997 11.5187 16.5147 11.5Z"
                                                                         fill="white"></path>
@@ -589,8 +479,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="login-btn text-center">
-                                                    <a href="#" onclick="modalAction('.cart')"
-                                                        class="shop-btn">Add
+                                                    <a href="#" onclick="modalAction('.cart')" class="shop-btn">Add
                                                         Card</a>
                                                 </div>
                                             </div>
@@ -637,8 +526,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="login-btn text-center">
-                                                    <a href="#" onclick="modalAction('.bank')"
-                                                        class="shop-btn">Add Bank
+                                                    <a href="#" onclick="modalAction('.bank')" class="shop-btn">Add
+                                                        Bank
                                                         Account</a>
                                                 </div>
                                             </div>
@@ -653,6 +542,83 @@
                             <div class="cart-section">
                                 <table>
                                     <tbody>
+                                        
+                                        <div class="col-lg-6">
+                                            <a href="#" class="shop-btn" onclick="modalAction('.submit')">Add
+                                                New
+                                                Address</a>
+
+                                            <div class="modal-wrapper submit">
+                                                <div onclick="modalAction('.submit')" class="anywhere-away"></div>
+
+                                                <div class="login-section account-section modal-main">
+                                                    <div class="review-form">
+                                                        <div class="review-content">
+                                                            <h5 class="comment-title">Add Your Address</h5>
+                                                            <div class="close-btn">
+                                                                <img src="./assets/images/homepage-one/close-btn.png"
+                                                                    onclick="modalAction('.submit')" alt="close-btn">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" account-inner-form">
+                                                            <div class="review-form-name">
+                                                                <label for="firstname" class="form-label">First
+                                                                    Name*</label>
+                                                                <input type="text" id="firstname"
+                                                                    class="form-control" placeholder="First Name">
+                                                            </div>
+                                                            <div class="review-form-name">
+                                                                <label for="lastname" class="form-label">Last
+                                                                    Name*</label>
+                                                                <input type="text" id="lastname"
+                                                                    class="form-control" placeholder="Last Name">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" account-inner-form">
+                                                            <div class="review-form-name">
+                                                                <label for="useremail" class="form-label">Email*</label>
+                                                                <input type="email" id="useremail"
+                                                                    class="form-control" placeholder="user@gmail.com">
+                                                            </div>
+                                                            <div class="review-form-name">
+                                                                <label for="userphone" class="form-label">Phone*</label>
+                                                                <input type="tel" id="userphone"
+                                                                    class="form-control" placeholder="+880388**0899">
+                                                            </div>
+                                                        </div>
+                                                        <div class="review-form-name address-form">
+                                                            <label for="useraddress" class="form-label">Address*</label>
+                                                            <input type="text" id="useraddress"
+                                                                class="form-control" placeholder="Enter your Address">
+                                                        </div>
+                                                        <div class=" account-inner-form city-inner-form">
+                                                            <div class="review-form-name">
+                                                                <label for="usercity" class="form-label">Town /
+                                                                    City*</label>
+                                                                <select id="usercity" class="form-select">
+                                                                    <option>Choose...</option>
+                                                                    <option>Newyork</option>
+                                                                    <option>Dhaka</option>
+                                                                    <option selected>London</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="review-form-name">
+                                                                <label for="usernumber" class="form-label">Postcode /
+                                                                    ZIP*</label>
+                                                                <input type="number" id="usernumber"
+                                                                    class="form-control" placeholder="0000">
+                                                            </div>
+                                                        </div>
+                                                        <div class="login-btn text-center">
+                                                            <a href="#" onclick="modalAction('.submit')"
+                                                                class="shop-btn">Add Address</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
                                         <tr class="table-row table-top-row">
                                             <td class="table-wrapper wrapper-product">
                                                 <h5 class="table-heading">PRODUK</h5>
@@ -975,8 +941,8 @@
                                                         <div class="review-form-name">
                                                             <label for="usernumber" class="form-label">Postcode /
                                                                 ZIP*</label>
-                                                            <input type="number" id="usernumber"
-                                                                class="form-control" placeholder="0000">
+                                                            <input type="number" id="usernumber" class="form-control"
+                                                                placeholder="0000">
                                                         </div>
                                                     </div>
                                                     <div class="login-btn text-center">
@@ -1256,8 +1222,8 @@
                                                                                 placeholder="Masukkan alamat email anda">
                                                                         </div>
                                                                         <div class="review-form-name">
-                                                                            <label for="phone"
-                                                                                class="form-label">No Telepon*</label>
+                                                                            <label for="phone" class="form-label">No
+                                                                                Telepon*</label>
                                                                             <input type="number" id="phone"
                                                                                 class="form-control"
                                                                                 placeholder="+88013**977957">
@@ -1275,18 +1241,16 @@
                                                                 <div class="review-form">
                                                                     <div class="review-inner-form ">
                                                                         <div class="review-form-name">
-                                                                            <label for="name"
-                                                                                class="form-label">Nama Toko*</label>
+                                                                            <label for="name" class="form-label">Nama
+                                                                                Toko*</label>
                                                                             <input type="text" id="name"
-                                                                                class="form-control"
-                                                                                placeholder="Nama">
+                                                                                class="form-control" placeholder="Nama">
                                                                         </div>
                                                                         <div class="review-form-name">
                                                                             <label for="address"
                                                                                 class="form-label">Alamat*</label>
                                                                             <input type="text" id="address"
-                                                                                class="form-control"
-                                                                                placeholder="Alamat">
+                                                                                class="form-control" placeholder="Alamat">
                                                                         </div>
                                                                         <div class="review-form-name checkbox">
                                                                             <input type="checkbox">
@@ -1324,8 +1288,7 @@
                                                                             <label for="input-file">
                                                                                 <span>
                                                                                     <svg width="32" height="32"
-                                                                                        viewBox="0 0 32 32"
-                                                                                        fill="none"
+                                                                                        viewBox="0 0 32 32" fill="none"
                                                                                         xmlns="http://www.w3.org/2000/svg">
                                                                                         <path
                                                                                             d="M16.5147 11.5C17.7284 12.7137 18.9234 13.9087 20.1296 15.115C19.9798 15.2611 19.8187 15.4109 19.6651 15.5683C17.4699 17.7635 15.271 19.9587 13.0758 22.1539C12.9334 22.2962 12.7948 22.4386 12.6524 22.5735C12.6187 22.6034 12.5663 22.6296 12.5213 22.6296C11.3788 22.6334 10.2362 22.6297 9.09365 22.6334C9.01498 22.6334 9 22.6034 9 22.536C9 21.4009 9 20.2621 9.00375 19.1271C9.00375 19.0746 9.02997 19.0109 9.06368 18.9772C10.4123 17.6249 11.7609 16.2763 13.1095 14.9277C14.2295 13.8076 15.3459 12.6913 16.466 11.5712C16.4884 11.5487 16.4997 11.5187 16.5147 11.5Z"
@@ -1356,8 +1319,7 @@
                                                                             <label for="cover-file">
                                                                                 <span>
                                                                                     <svg width="32" height="32"
-                                                                                        viewBox="0 0 32 32"
-                                                                                        fill="none"
+                                                                                        viewBox="0 0 32 32" fill="none"
                                                                                         xmlns="http://www.w3.org/2000/svg">
                                                                                         <path
                                                                                             d="M16.5147 11.5C17.7284 12.7137 18.9234 13.9087 20.1296 15.115C19.9798 15.2611 19.8187 15.4109 19.6651 15.5683C17.4699 17.7635 15.271 19.9587 13.0758 22.1539C12.9334 22.2962 12.7948 22.4386 12.6524 22.5735C12.6187 22.6034 12.5663 22.6296 12.5213 22.6296C11.3788 22.6334 10.2362 22.6297 9.09365 22.6334C9.01498 22.6334 9 22.6034 9 22.536C9 21.4009 9 20.2621 9.00375 19.1271C9.00375 19.0746 9.02997 19.0109 9.06368 18.9772C10.4123 17.6249 11.7609 16.2763 13.1095 14.9277C14.2295 13.8076 15.3459 12.6913 16.466 11.5712C16.4884 11.5487 16.4997 11.5187 16.5147 11.5Z"
@@ -1390,244 +1352,4 @@
         </div>
         </div>
     </section>
-
-
-    <section class="product footer">
-        <div class="container">
-            <div class="footer-service-section">
-                <div class="row gy-4">
-                    <div class="col-lg-3  col-sm-6">
-                        <div class="service-wrapper free-shipping">
-                            <div class="service-img">
-                                <span>
-                                    <svg width="32" height="37" viewBox="0 0 36 37" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 1H5.63636V24.1818H35" stroke="#F9FFFB" stroke-width="2"
-                                            stroke-miterlimit="10" stroke-linecap="square" />
-                                        <path
-                                            d="M8.72763 35.0021C10.4347 35.0021 11.8185 33.6183 11.8185 31.9112C11.8185 30.2042 10.4347 28.8203 8.72763 28.8203C7.02057 28.8203 5.63672 30.2042 5.63672 31.9112C5.63672 33.6183 7.02057 35.0021 8.72763 35.0021Z"
-                                            stroke="#F9FFFB" stroke-width="2" stroke-miterlimit="10"
-                                            stroke-linecap="square" />
-                                        <path
-                                            d="M31.9073 35.0021C33.6144 35.0021 34.9982 33.6183 34.9982 31.9112C34.9982 30.2042 33.6144 28.8203 31.9073 28.8203C30.2003 28.8203 28.8164 30.2042 28.8164 31.9112C28.8164 33.6183 30.2003 35.0021 31.9073 35.0021Z"
-                                            stroke="#F9FFFB" stroke-width="2" stroke-miterlimit="10"
-                                            stroke-linecap="square" />
-                                        <path d="M34.9982 1H11.8164V18H34.9982V1Z" stroke="#F9FFFB" stroke-width="2"
-                                            stroke-miterlimit="10" stroke-linecap="square" />
-                                        <path d="M11.8164 7.17969H34.9982" stroke="#F9FFFB" stroke-width="2"
-                                            stroke-miterlimit="10" stroke-linecap="square" />
-                                    </svg>
-                                </span>
-                            </div>
-                            <div class="service-content">
-                                <h5 class="service-info service-title">Free Shipping</h5>
-                                <p class="service-info service-details">When ordering over $100</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="service-wrapper free-shipping">
-                            <div class="service-img">
-                                <span>
-                                    <svg width="32" height="37" viewBox="0 0 32 34" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M31 17.4492C31 25.6992 24.25 32.4492 16 32.4492C7.75 32.4492 1 25.6992 1 17.4492C1 9.19922 7.75 2.44922 16 2.44922C21.85 2.44922 26.95 5.74922 29.35 10.6992"
-                                            stroke="#F9FFFB" stroke-width="2" stroke-miterlimit="10" />
-                                        <path d="M30.7 2L29.5 10.85L20.5 9.65" stroke="#F9FFFB" stroke-width="2"
-                                            stroke-miterlimit="10" stroke-linecap="square" />
-                                    </svg>
-                                </span>
-                            </div>
-                            <div class="service-content">
-                                <h5 class="service-info service-title">Free Return</h5>
-                                <p class="service-info service-details">Get Return within 30 days</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="service-wrapper free-shipping">
-                            <div class="service-img">
-                                <span>
-                                    <svg width="32" height="37" viewBox="0 0 32 38" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M22.6654 18.668H9.33203V27.0013H22.6654V18.668Z" stroke="#F9FFFB"
-                                            stroke-width="2" stroke-miterlimit="10" stroke-linecap="square" />
-                                        <path
-                                            d="M12.668 18.6654V13.6654C12.668 11.832 14.168 10.332 16.0013 10.332C17.8346 10.332 19.3346 11.832 19.3346 13.6654V18.6654"
-                                            stroke="#F9FFFB" stroke-width="2" stroke-miterlimit="10"
-                                            stroke-linecap="square" />
-                                        <path
-                                            d="M31 22C31 30.3333 24.3333 37 16 37C7.66667 37 1 30.3333 1 22V5.33333L16 2L31 5.33333V22Z"
-                                            stroke="#F9FFFB" stroke-width="2" stroke-miterlimit="10"
-                                            stroke-linecap="square" />
-                                    </svg>
-                                </span>
-                            </div>
-                            <div class="service-content">
-                                <h5 class="service-info service-title">Secure Payment</h5>
-                                <p class="service-info service-details">100% Secure Online Payment</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="service-wrapper free-shipping">
-                            <div class="service-img">
-                                <span>
-                                    <svg width="32" height="37" viewBox="0 0 32 35" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M7 13H5.5C2.95 13 1 11.05 1 8.5V1H7" stroke="#F9FFFB"
-                                            stroke-width="2" stroke-miterlimit="10" />
-                                        <path d="M25 13H26.5C29.05 13 31 11.05 31 8.5V1H25" stroke="#F9FFFB"
-                                            stroke-width="2" stroke-miterlimit="10" />
-                                        <path d="M16 28V22" stroke="#F9FFFB" stroke-width="2"
-                                            stroke-miterlimit="10" />
-                                        <path d="M16 22C11.05 22 7 17.95 7 13V1H25V13C25 17.95 20.95 22 16 22Z"
-                                            stroke="#F9FFFB" stroke-width="2" stroke-miterlimit="10"
-                                            stroke-linecap="square" />
-                                        <path d="M25 34H7C7 30.7 9.7 28 13 28H19C22.3 28 25 30.7 25 34Z"
-                                            stroke="#F9FFFB" stroke-width="2" stroke-miterlimit="10"
-                                            stroke-linecap="square" />
-                                    </svg>
-                                </span>
-                            </div>
-                            <div class="service-content">
-                                <h5 class="service-info service-title">Best Quality</h5>
-                                <p class="service-info service-details">Original Product Guarenteed</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-section">
-                <div class="row gy-5">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="footer-order">
-                            <div class="logo">
-                                <img src="assets/images/logos/footer-logo.webp" alt="logo">
-                            </div>
-                            <div class="footer-link order-link">
-                                <ul>
-                                    <li><a href="order.html">Track Order</a></li>
-                                    <li><a href="cart.html">Delivery & Returns</a></li>
-                                    <li><a href="about.html">Warranty</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="about-us">
-                            <h4 class="footer-heading footer-title">
-                                About Us
-                            </h4>
-                            <div class="footer-link about-link">
-                                <ul>
-                                    <li><a href="about.html">Rave’s Story</a></li>
-                                    <li><a href="about.html">Work With Us</a></li>
-                                    <li><a href="about.html">Coporate News</a></li>
-                                    <li><a href="about.html">Investors</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="links">
-                            <h4 class="footer-heading footer-title">
-                                Useful Links
-                            </h4>
-                            <div class="footer-link useful-link">
-                                <ul>
-                                    <li><a href="about.html">Secure Payment</a></li>
-                                    <li><a href="privacy.html">Privacy Policy</a></li>
-                                    <li><a href="terms.html">Terms of Use</a></li>
-                                    <li><a href="product-sidebar.html">Archived Products</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="contact-info">
-                            <h4 class="footer-heading footer-title">
-                                Contact Info
-                            </h4>
-                            <div class="footer-link contact-link">
-                                <div class="address">
-                                    <div class="icon">
-                                        <span>
-                                            <svg width="44" height="45" viewBox="0 0 44 45"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <circle cx="21.9995" cy="22.9961" r="21.5" stroke="#424242">
-                                                </circle>
-                                                <g clip-path="url(#clip0_2343_13859)">
-                                                    <path
-                                                        d="M22.0218 13.9961C26.4153 14.0049 29.7134 17.7202 28.8665 21.6964C28.4484 23.66 27.5123 25.4261 26.3138 27.0614C25.1774 28.6116 23.9185 30.0879 22.6867 31.5779C22.2178 32.1454 21.804 32.1262 21.3001 31.5795C19.1664 29.2642 17.2295 26.8278 15.9102 24.0253C15.3696 22.8757 14.9978 21.6836 14.9995 20.4176C15.003 16.8701 18.1568 13.9881 22.0218 13.9961ZM22.0297 30.36C22.9045 29.2763 23.7479 28.3049 24.5037 27.2782C25.8116 25.5008 26.9568 23.6407 27.4616 21.5142C28.0739 18.934 26.466 16.3499 23.7566 15.5367C21.0149 14.713 18.0326 15.9324 16.8743 18.344C16.1858 19.777 16.3188 21.2091 16.8647 22.6413C17.6756 24.7695 18.9512 26.6632 20.399 28.4655C20.8889 29.0764 21.4226 29.6576 22.0297 30.36Z"
-                                                        fill="white"></path>
-                                                    <path
-                                                        d="M24.7977 20.4357C24.7916 21.8486 23.5204 22.9982 21.9728 22.9886C20.4567 22.9797 19.2005 21.8197 19.1987 20.4253C19.1961 19.0148 20.4664 17.85 22.0043 17.8516C23.5432 17.8532 24.8029 19.0188 24.7977 20.4357ZM23.3953 20.4213C23.3953 19.7156 22.7873 19.1481 22.021 19.1384C21.2371 19.128 20.6011 19.702 20.6011 20.4213C20.6011 21.1253 21.2109 21.6937 21.9772 21.7033C22.7663 21.7121 23.3953 21.143 23.3953 20.4213Z"
-                                                        fill="white"></path>
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_2343_13859">
-                                                        <rect width="14" height="18" fill="white"
-                                                            transform="translate(14.9995 13.9961)"></rect>
-                                                    </clipPath>
-                                                </defs>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <div class="details">
-                                        <h4 class="footer-heading">Address:</h4>
-                                        <p>4517 Washington Ave. Manchester, Kentucky 39495</p>
-                                    </div>
-                                </div>
-                                <div class="phone address">
-                                    <div class="icon">
-                                        <span>
-                                            <svg width="44" height="45" viewBox="0 0 44 45"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <circle cx="21.9995" cy="22.9961" r="21.5" stroke="#424242">
-                                                </circle>
-                                                <g clip-path="url(#clip0_56_7)">
-                                                    <path
-                                                        d="M26.9779 30.9959C25.7937 30.9581 24.6221 30.5625 23.5005 30.0096C19.5679 28.0716 16.6582 25.1275 14.8109 21.1599C14.2944 20.0502 13.9265 18.8947 14.0112 17.6423C14.0558 16.9879 14.2937 16.4177 14.7489 15.9459C15.1954 15.4839 15.6439 15.0233 16.1124 14.5833C16.9448 13.8008 17.8545 13.7981 18.6795 14.5866C19.3846 15.2596 20.075 15.9492 20.7514 16.6514C21.5858 17.5175 21.5732 18.3743 20.7348 19.2431C20.3969 19.5935 20.051 19.9387 19.6925 20.2685C19.5419 20.4072 19.5299 20.5161 19.6205 20.692C20.257 21.9198 21.1526 22.9459 22.1916 23.8359C22.8434 24.3941 23.5884 24.8434 24.2909 25.3425C24.4555 25.46 24.5754 25.4295 24.7174 25.2814C25.1092 24.8753 25.5058 24.4704 25.9276 24.0954C26.6407 23.4616 27.5164 23.4689 28.2035 24.1259C28.9725 24.8607 29.7269 25.6113 30.4647 26.3772C31.1558 27.0953 31.1784 27.9907 30.5187 28.7333C30.0415 29.2709 29.5317 29.782 29.0105 30.2784C28.4727 30.7915 27.8003 30.9952 26.9779 30.9959ZM27.0239 30.1377C27.6637 30.1616 28.1902 29.9307 28.6247 29.4647C28.9645 29.1004 29.3198 28.7499 29.6703 28.3962C30.2688 27.7922 30.2734 27.4119 29.6796 26.8199C29.0365 26.1781 28.3921 25.5376 27.7463 24.8985C27.2265 24.3841 26.8546 24.3848 26.3241 24.9045C25.9203 25.3 25.5244 25.7036 25.1206 26.0985C24.7974 26.415 24.5148 26.4774 24.1316 26.2418C23.4165 25.8011 22.6768 25.3823 22.0303 24.8534C20.6835 23.7523 19.5132 22.4853 18.7561 20.8917C18.5062 20.3661 18.5576 20.1597 18.9861 19.7502C19.3706 19.3825 19.7545 19.0141 20.1243 18.6325C20.6122 18.1301 20.6115 17.7518 20.1237 17.2586C19.4472 16.5724 18.7641 15.8921 18.0764 15.2171C17.5952 14.7446 17.1827 14.7512 16.6922 15.2284C16.311 15.5994 15.9478 15.989 15.5586 16.3507C15.0221 16.8491 14.8255 17.4597 14.8695 18.1739C14.9275 19.117 15.2221 19.9964 15.6179 20.838C17.3853 24.5985 20.1457 27.402 23.8823 29.2424C24.8707 29.7302 25.9036 30.0959 27.0239 30.1377Z"
-                                                        fill="white"></path>
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_56_7">
-                                                        <rect width="17" height="17" fill="white"
-                                                            transform="translate(13.9995 13.9961)"></rect>
-                                                    </clipPath>
-                                                </defs>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <div class="details">
-                                        <h4 class="footer-heading">Phone:</h4>
-                                        <p>+880171889547</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-        </div>
-    </section>
-
-
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="assets/js/jquery_3.7.1.min.js"></script>
-
-    <script src="{{ asset('template-assets/front/assets/js/bootstrap_5.3.2.bundle.min.js') }}"></script>
-
-    <script src="{{ asset('template-assets/front/assets/js/nouislider.min.js') }}"></script>
-
-    <script src="{{ asset('template-assets/front/assets/js/aos-3.0.0.js') }}"></script>
-
-    <script src="{{ asset('template-assets/front/assets/js/swiper10-bundle.min.js') }}"></script>
-
-    <script src="{{ asset('template-assets/front/assets/js/shopus.js') }}"></script>
-</body>
-
-</html>
+@endsection
