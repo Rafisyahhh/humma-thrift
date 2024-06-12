@@ -29,8 +29,8 @@
     <link rel="stylesheet" href="template-assets/admin/assets/vendor/fonts/flag-icons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" id="stylesheet-core" href="template-assets/admin/assets/vendor/css/rtl/core-dark.css" />
-    <link rel="stylesheet" id="stylesheet-theme" href="template-assets/admin/assets/vendor/css/rtl/theme-bordered-dark.css" />
+    <link rel="stylesheet" id="stylesheet-core" href="template-assets/admin/assets/vendor/css/rtl/core.css" />
+    <link rel="stylesheet" id="stylesheet-theme" href="template-assets/admin/assets/vendor/css/rtl/theme-bordered.css" />
     <link rel="stylesheet" href="template-assets/admin/assets/css/demo.css" />
 
     <!-- Vendors CSS -->
