@@ -1,7 +1,7 @@
 <!doctype html>
 
 <html lang="id" class="layout-compact dark-style layout-menu-fixed layout-navbar-fixed" dir="ltr"
-    data-theme="theme-default" data-assets-path="template-assets/admin/assets/"
+    data-theme="theme-default" data-assets-path="{{ asset('template-assets/admin/assets/') }}"
     data-template="vertical-menu-template-no-customizer">
 
 <head>
@@ -140,12 +140,10 @@
 
     <!-- Main JS -->
     <script src="{{ asset('template-assets/admin/assets/js/main.js') }}"></script>
-    <script src="template-assets/admin/assets/js/main.js"></script>
-    <script src="template-assets/admin/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Page JS -->
-    <script src="template-assets/admin/assets/js/main.js"></script>
-    <script src="template-assets/admin/assets/js/app-ecommerce-dashboard.js"></script>
+    <script src="{{ asset('template-assets/admin/assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
+    <script src="{{ asset('template-assets/admin/assets/js/app-ecommerce-dashboard.js') }}"></script>
 
 
     <!-- Vendors JS -->

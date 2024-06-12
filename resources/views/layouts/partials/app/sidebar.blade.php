@@ -36,6 +36,13 @@
             </a>
         </li>
 
+        <li class="menu-item {{ request()->routeIs('admin') ? 'active' : '' }}">
+            <a href="{{ url('/admin') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-building"></i>
+                <div data-i18n="Stores">Toko</div>
+            </a>
+        </li>
+
         <li class="menu-item {{ request()->routeIs('admin.brand.*') ? 'active' : '' }}">
             <a href="{{ route('admin.brand.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-flag"></i>

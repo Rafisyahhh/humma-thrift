@@ -105,7 +105,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getGravatarLink()
     {
-        return Gravatar::get($this->email);
+        return Gravatar::get($this->getAttribute('email'));
     }
 
     /**
@@ -122,5 +122,21 @@ class User extends Authenticatable implements MustVerifyEmail
 
         // Return the corresponding UserLevelEnum or default to UserLevelEnum::USER
         return $roleName ? UserLevelEnum::from($roleName) : UserLevelEnum::USER;
+    }
+
+    /**
+     * Getting user status
+     *
+     * @return array
+     */
+    public function getUserStatusInstance()
+    {
+        $label = ['Aktif', 'Nonaktif'];
+        $color = ['success', 'danger'];
+
+        return [
+            'label' => $label[$this->getAttribute('banned')],
+            'color' => $color[$this->getAttribute('banned')],
+        ];
     }
 }
