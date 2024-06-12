@@ -18,7 +18,7 @@ use App\Http\Controllers\ProductCategoryController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing.landing');
 });
 Route::get('/admin', function () {
     return view('layouts.app');

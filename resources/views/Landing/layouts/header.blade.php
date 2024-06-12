@@ -1,3 +1,4 @@
+@push('css')
 <style>
     .header-auth {
     display: flex;
@@ -30,6 +31,8 @@
 }
 
 </style>
+@endpush
+
 <body>
 
     <header id="header" class="header">
@@ -79,9 +82,9 @@
                             </div>
                         </div>
                         <div class="header-auth">
-                            <button class="btn btn-login">Login</button>
+                            <a href="{{ route('login') }}" class="btn btn-login">Login</a>
                             <span>|</span>
-                            <button class="btn btn-register">Register</button>
+                            <a href="{{ route('register') }}" class="btn btn-register">Register</a>
                         </div>
                     </div>
                 </div>

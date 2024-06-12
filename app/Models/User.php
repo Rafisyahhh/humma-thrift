@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\UserLevelEnum;
+use Creativeorange\Gravatar\Facades\Gravatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, MustVerifyEmail;
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +21,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
+        'fullname',
         'email',
         'password',
     ];
@@ -42,4 +45,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get Gravatar URL Image
+     *
+     * @return string
+     */
+    public function getGravatarLink()
+    {
+        return Gravatar::get($this->email);
+    }
+
+    /**
+     * Get user role instance
+     *
+     * @return UserLevelEnum
+     */
+    public function getUserRoleInstance()
+    {
+        $roleName = $this->getRoleNames()[0];
+        return UserLevelEnum::from($roleName);
+    }
 }
