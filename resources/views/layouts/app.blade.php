@@ -41,6 +41,16 @@
     <link rel="stylesheet"
         href="{{ asset('template-assets/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('template-assets/admin/assets/vendor/libs/typeahead-js/typeahead.css') }}" />
+    {{-- <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/apex-charts/apex-charts.css" /> --}}
+
+    <style>
+        .menu-item.active {
+            background-color: #0000;
+        }
+    </style>
 
     <!-- Page CSS -->
     @stack('link')
@@ -129,9 +139,16 @@
     @yield('scripts')
 
     <!-- Main JS -->
-    <script src="{{ asset('template-assets/admin/assets/js/main.js') }}"></script>
+    <<<<<<< HEAD <script src="{{ asset('template-assets/admin/assets/js/main.js') }}"></script>
+    =======
+    <script src="template-assets/admin/assets/js/main.js"></script>
+    <script src="template-assets/admin/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    >>>>>>> 4b63774996ee2dba829dc67fd918a37bad91f84a
 
     <!-- Page JS -->
+    <script src="template-assets/admin/assets/js/main.js"></script>
+    <script src="template-assets/admin/assets/js/app-ecommerce-dashboard.js"></script>
+
 
     <!-- Vendors JS -->
     @include('components.sweetalert')
@@ -139,4 +156,5 @@
     @yield('js')
     @stack('js')
 </body>
+
 </html>

@@ -33,8 +33,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $category->title }}</td>
-                            <td><span class="badge rounded-pill"
-                                    style="background-color: {{ $category->color }}">{{ $category->color }}</span></td>
+                            <td><img src="{{ asset("storage/{$category->icon}") }}" class="rounded-3" height="96px"></td>
                             <td>
                                 <button type="button" class="badge bg-label-warning me-1 border-0" style="background: none"
                                     data-bs-toggle="modal" data-bs-target="#editModal{{ $category->id }}">
@@ -89,10 +88,14 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="color" class="form-label">Warna Kategori</label>
-                            <input type="color" class="form-control @error('color') is-invalid @enderror" id="color"
-                                value="{{ old('color') }}" name="color">
-                            @error('color')
+                            <label for="icon" class="form-label">Icon</label>
+                            <input type="file" class="form-control @error('icon') is-invalid @enderror"
+                                id="icon" name="icon">
+                            @if (old('icon'))
+                                <img id="preview" src="{{ asset('storage/' . old('icon')) }}" alt="Old gambar"
+                                    style="max-width: 100px; max-height: 100px;">
+                            @endif
+                            @error('logo')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -133,10 +136,18 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="title" class="form-label">Warna Kategori</label>
-                                <input type="color" class="form-control @error('color') is-invalid @enderror"
-                                    id="title" name="color" value="{{ old('color', $category->color) }}">
-                                @error('color')
+                                <label for="icon" class="form-label">Icon</label>
+                                <input type="file"
+                                    class="form-control @error('icon') is-invalid @enderror"
+                                    id="icon" name="icon" />
+
+                                @if ($category->icon)
+                                    <img src="{{ asset('storage/' . $category->icon) }}"
+                                        class="w-100 mt-3 rounded-3" alt="{{ $category->title }}" />
+                                @else
+                                    No Image
+                                @endif
+                                @error('icon')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

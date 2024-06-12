@@ -1,34 +1,34 @@
 @push('css')
 <style>
-    .header-auth {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Atur jarak antara elemen */
-    font-size: 20px; /* Atur ukuran font untuk konten di dalam .header-auth */
-}
+        .header-auth {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Atur jarak antara elemen */
+        font-size: 20px; /* Atur ukuran font untuk konten di dalam .header-auth */
+    }
 
-.header-auth .btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
+    .header-auth .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
 
-.header-auth .btn-login {
-    color: rgb(94, 94, 94);
-    border: none;
-    border-radius: 5px; /* Border radius untuk tombol Login */
-}
+    .header-auth .btn-login {
+        color: rgb(94, 94, 94);
+        border: none;
+        border-radius: 5px; /* Border radius untuk tombol Login */
+    }
 
-.header-auth .btn-register {
+    .header-auth .btn-register {
 
-    color: rgb(94, 94, 94);
-    border: none;
-    border-radius: 5px; /* Border radius untuk tombol Register */
-}
+        color: rgb(94, 94, 94);
+        border: none;
+        border-radius: 5px; /* Border radius untuk tombol Register */
+    }
 
-.header-auth span {
-    font-size: 20px; /* Atur ukuran font untuk span */
-}
+    .header-auth span {
+        font-size: 20px; /* Atur ukuran font untuk span */
+    }
 
 </style>
 @endpush

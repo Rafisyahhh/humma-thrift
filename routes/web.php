@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductCategoryController;
@@ -30,6 +31,9 @@ Route::get('/seller', function () {
 Route::get('/user', function () {
     return view('user.home');
 });
+Route::get('/detailproduct', function () {
+    return view('user.detailproduct');
+});
 
 Route::get('/profil', function () {
     return view('user.profil');
@@ -57,7 +61,7 @@ Route::get('/produk', function () {
     return view('Landing.produk');
 });
 
-Route::get('/brand', function () {
+Route::get('/brandindex', function () {
     return view('Landing.brand');
 });
 
@@ -78,3 +82,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('brand', BrandController::class);
     Route::resource('category', ProductCategoryController::class);
 });
+Route::get('/user', [UserController::class, 'index'])->name('user.index');
+Route::delete('/userDestroy/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+
+Route::resource('brand', BrandController::class);
+Route::resource('category', ProductCategoryController::class);

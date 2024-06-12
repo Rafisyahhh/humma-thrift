@@ -1,5 +1,4 @@
 <body>
-
     <header id="header" class="header">
         <div class="header-top-section">
             <div class="container">
