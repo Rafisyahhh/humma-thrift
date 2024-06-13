@@ -1,3 +1,47 @@
+@php
+  $user = [
+      'name' => 'SyauqiAli',
+      'address' => [
+          [
+              'id' => 2,
+              'title' => 'Rumah',
+              'address' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, quisquam?',
+          ],
+          [
+              'id' => 6,
+              'title' => 'Home',
+              'address' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, quisquam?',
+          ],
+      ],
+  ];
+  $products = [
+      [
+          'cover_image' => 'https://placehold.co/400',
+          'title' => 'Apple Watch X1',
+          'description' => '64GB, Black, 44mm, Chain Belt',
+          'price' => '10',
+      ],
+      [
+          'cover_image' => 'https://placehold.co/400',
+          'title' => 'Apple Watch X1',
+          'description' => '64GB, Black, 44mm, Chain Belt',
+          'price' => '10',
+      ],
+      [
+          'cover_image' => 'https://placehold.co/400',
+          'title' => 'Apple Watch X1',
+          'description' => '64GB, Black, 44mm, Chain Belt',
+          'price' => '10',
+      ],
+      [
+          'cover_image' => 'https://placehold.co/400',
+          'title' => 'Apple Watch X1',
+          'description' => '64GB, Black, 44mm, Chain Belt',
+          'price' => '10',
+      ],
+  ];
+@endphp
+
 @extends('user.layouts.app')
 @section('tittle', 'Checkout')
 @section('content')
@@ -11,7 +55,7 @@
   <section class="checkout product footer-padding">
     <div class="container">
       <div class="checkout-section">
-        <div class="row gy-5">
+        <form class="row gy-5">
           <div class="col-lg-8">
             <div class="checkout-wrapper">
               <div class="account-section billing-section">
@@ -28,8 +72,30 @@
                     </h5>
                   </div>
                   <div>
-                    <a class="border btn">Ganti alamat</a>
-                    <a class="border btn">Kirim kebeberapa alamat</a>
+                    <button class="border btn" type="button" data-bs-toggle="modal" data-bs-target="#modal-1">Ganti
+                      alamat</button>
+                    {{-- Modal --}}
+                    <div id="modal-1" class="modal fade" role="dialog" tabindex="-1">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content" action method="post">
+                          <div class="modal-header border-0">
+                            <h4 class="modal-title ms-auto">Daftar Alamat</h4><button class="btn-close" aria-label="Close"
+                              data-bs-dismiss="modal" type="button"></button>
+                          </div>
+                          <div class="modal-body d-flex flex-column gap-2"><input class="form-control" type="search" />
+                            @foreach ($user['address'] as $item)
+                              <label class="card" for="alamat{{ $item['id'] }}" role="button">
+                                <div class="card-body">
+                                  <h4 class="card-title">{{ $item['title'] }}</h4>
+                                  <p class="card-text">{{ $item['address'] }}</p>
+                                </div>
+                                <input type="radio" id="alamat{{ $item['id'] }}" name="alamat" class="d-none">
+                              </label>
+                            @endforeach
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -41,17 +107,17 @@
                   <hr>
                   <div class="subtotal product-total">
                     <ul class="product-list">
-                      @foreach ([['src' => 'https://placehold.co/400', 'judul' => 'Apple Watch X1', 'deskripsi' => '64GB, Black, 44mm, Chain Belt', 'harga' => '10'], ['src' => 'https://placehold.co/400', 'judul' => 'Apple Watch X1', 'deskripsi' => '64GB, Black, 44mm, Chain Belt', 'harga' => '10'], ['src' => 'https://placehold.co/400', 'judul' => 'Apple Watch X1', 'deskripsi' => '64GB, Black, 44mm, Chain Belt', 'harga' => '10'], ['src' => 'https://placehold.co/400', 'judul' => 'Apple Watch X1', 'deskripsi' => '64GB, Black, 44mm, Chain Belt', 'harga' => '10']] as $item)
+                      @foreach ($products as $item)
                         <li>
                           <div class="d-flex gap-3">
-                            <img src="{{ $item['src'] }}" width="40" />
+                            <img src="{{ $item['cover_image'] }}" width="40" />
                             <div class="mt-1">
-                              <h5 class="wrapper-heading">{{ $item['judul'] }}</h5>
-                              <p class="paragraph">{{ $item['deskripsi'] }}</p>
+                              <h5 class="wrapper-heading">{{ $item['title'] }}</h5>
+                              <p class="paragraph">{{ $item['description'] }}</p>
                             </div>
                           </div>
                           <div class="price mt-3">
-                            <h5 class="wrapper-heading">${{ $item['harga'] }}</h5>
+                            <h5 class="wrapper-heading">${{ $item['price'] }}</h5>
                           </div>
                         </li>
                       @endforeach
@@ -74,12 +140,12 @@
                     <h5 class="wrapper-heading">Total Belanja</h5>
                     <h5 class="wrapper-heading price">$365</h5>
                   </div>
-                  <a href="#" class="shop-btn">Place Order Now</a>
+                  <button type="button" class="shop-btn">Place Order Now</button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </section>
