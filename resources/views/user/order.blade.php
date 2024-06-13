@@ -15,11 +15,6 @@
                 </td>
                 <td class="table-wrapper">
                     <div class="table-wrapper-center">
-                        <h5 class="table-heading">JUMLAH</h5>
-                    </div>
-                </td>
-                <td class="table-wrapper">
-                    <div class="table-wrapper-center">
                         <h5 class="table-heading">Status</h5>
                     </div>
                 </td>
@@ -30,7 +25,7 @@
                 </td>
                 <td class="table-wrapper">
                     <div class="table-wrapper-center">
-                        <h5 class="table-heading">AKSI</h5>
+                        <h5 class="table-heading">DETAIL ORDER</h5>
                     </div>
                 </td>
             </tr>
@@ -49,20 +44,6 @@
                 <td class="table-wrapper">
                     <div class="table-wrapper-center">
                         <h5 class="heading">$20.00</h5>
-                    </div>
-                </td>
-
-                <td class="table-wrapper">
-                    <div class="table-wrapper-center">
-                        <div class="quantity">
-                            <span class="minus">
-                                -
-                            </span>
-                            <span class="number">1</span>
-                            <span class="plus">
-                                +
-                            </span>
-                        </div>
                     </div>
                 </td>
                 <td class="table-wrapper">

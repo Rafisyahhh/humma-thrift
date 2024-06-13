@@ -1,9 +1,9 @@
 @extends('penjualan.layouts.app')
 @section('tittle', 'Profil')
 @section('content')
-        <section class="seller-application product footer-padding">
+        <section class="seller-application ">
             <div class="container">
-                <div class="seller-application-section">
+                <div class="seller-application-section-profil">
                     <div class="row ">
                         <div class="col-lg-7">
                             <div class="row gy-5">
