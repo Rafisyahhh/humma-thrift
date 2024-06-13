@@ -465,7 +465,7 @@ button {
 }
 .modal-main {
     position: relative;
-    background: rgb(167, 146, 119);
+    background: rgb(109, 100, 87);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1146,7 +1146,7 @@ button {
     color: #fff;
 }
 .header-nav .shop-text {
-    color: #232532;
+    color: #fff;
 }
 .header-nav .header-nav-menu .menu-list {
     display: flex;
