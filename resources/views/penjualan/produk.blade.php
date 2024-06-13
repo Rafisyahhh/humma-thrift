@@ -26,7 +26,12 @@
                         </td>
                         <td class="table-wrapper">
                             <div class="table-wrapper-center">
-                                <h5 class="table-heading">SALDO</h5>
+                                <h5 class="table-heading">AKSI</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">STATUS</h5>
                             </div>
                         </td>
                     </tr>
@@ -50,6 +55,22 @@
                         <td class="table-wrapper">
                             <div class="table-wrapper-center">
                                 <span>
+
+                                        <button type="button" class="shop-btn" data-bs-toggle="modal"
+                                            data-bs-target="#detailModal">
+                                            Detail
+                                        </button>
+                                        <button type="button" class="shop-btn" data-bs-toggle="modal"
+                                            data-bs-target="#lelangModal">
+                                            Lelang
+                                        </button>
+
+                                </span>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <span>
                                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -66,6 +87,61 @@
         <div class="wishlist-btn">
             <a href="#" class="clean-btn">Clean Wishlist</a>
             <a href="#" class="shop-btn">View Cards</a>
+        </div>
+    </div>
+
+    {{-- modal --}}
+    <div class="modal fade" id="detailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="lelangModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">NAMA PRODUK</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table ">
+                        <thead>
+                          <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Pengguna</th>
+                            <th scope="col">Harga</th>
+                            <th scope="col">Aksi</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td colspan="2">Larry the Bird</td>
+                            <td>@twitter</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
