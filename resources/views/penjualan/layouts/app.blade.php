@@ -22,7 +22,6 @@
     @yield('style')
 
 </head>
-
 @yield('css')
 @include('penjualan.layouts.header')
 <h5 class="heading blog-heading about-heading text-center">Halaman Seller</h5>
