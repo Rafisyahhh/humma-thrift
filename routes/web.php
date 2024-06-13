@@ -18,6 +18,12 @@ use App\Http\Controllers\ProductCategoryController;
 |
 */
 
+# Tolong ini jangan dipindah!
+Auth::routes([
+    'verify' => true,
+]);
+# Tolong ini jangan dipindah!
+
 Route::get('/', function () {
     return view('landing.landing');
 });
@@ -60,9 +66,6 @@ Route::get('/shop', function () {
     return view('user.shop');
 });
 
-Auth::routes([
-    'verify' => true,
-]);
 Route::get('/user/about', function () {
     return view('user.tentang');
 });
@@ -84,8 +87,8 @@ Auth::routes();
 
 Route::get('/home', \App\Http\Controllers\RedirectUserController::class)->name('home');
 
-Route::prefix('/dev')->group(function() {
-    Route::get('/admin-view', function() {
+Route::prefix('/dev')->group(function () {
+    Route::get('/admin-view', function () {
         return view('admin.index');
     });
 });
@@ -111,7 +114,7 @@ Route::get('/about', function () {
 });
 
 Route::prefix('admin')->middleware('role:admin')->name('admin.')->group(function () {
-    Route::get('/', fn() => view('admin.index'))->name('index');
+    Route::get('/', fn () => view('admin.index'))->name('index');
     Route::resource('brand', BrandController::class);
     Route::resource('category', ProductCategoryController::class);
     Route::resource('user', UserController::class);
