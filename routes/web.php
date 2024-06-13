@@ -51,6 +51,9 @@ Route::get('/user/home', function () {
 Route::get('/detailproduct', function () {
     return view('user.detailproduct');
 });
+Route::get('/checkout', function () {
+    return view('user.checkout');
+});
 
 Route::get('/profil', function () {
     return view('user.profil');
