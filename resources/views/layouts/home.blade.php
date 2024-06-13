@@ -40,7 +40,7 @@
 
     <script src="{{ asset('template-assets/front/assets/js/aos-3.0.0.js') }}"></script>
 
-    <script src="{{ asset('template-assets/frontassets/js/swiper10-bundle.min.js') }}"></script>
+    <script src="{{ asset('template-assets/front/assets/js/swiper10-bundle.min.js') }}"></script>
 
     <script src="{{ asset('template-assets/front/assets/js/shopus.js') }}"></script>
 </body>

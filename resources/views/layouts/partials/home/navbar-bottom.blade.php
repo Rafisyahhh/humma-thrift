@@ -419,7 +419,7 @@
             </div>
             <div class="header-vendor-btn">
                 <a href="become-vendor.html" class="shop-btn">
-                    <span class="list-text shop-text">Became Vendor</span>
+                    <span class="list-text shop-text text-white">Jualan Yuk</span>
                     <span class="icon">
                         <svg width="24" height="16" viewBox="0 0 24 16" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
