@@ -69,11 +69,11 @@ Route::get('/shop', function () {
 Auth::routes([
     'verify' => true,
 ]);
-Route::get('/tentang', function () {
+Route::get('/user/about', function () {
     return view('user.tentang');
 });
 
-Route::get('/merek', function () {
+Route::get('/user/brand', function () {
     return view('user.merek');
 });
 
@@ -81,7 +81,7 @@ Route::get('/store', function () {
     return view('user.store');
 });
 
-Route::get('/rincian', function () {
+Route::get('/user/detail', function () {
     return view('user.detail');
 });
 

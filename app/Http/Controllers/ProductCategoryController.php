@@ -48,7 +48,7 @@ class ProductCategoryController extends Controller
             'title' => $request->title,
             'icon' => $path_gambar,
         ]);
-            return redirect()->route('category.index')->with('success', 'Kategori berhasil ditambahkan');
+            return redirect()->back()->with('success', 'Kategori berhasil ditambahkan');
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
         }
