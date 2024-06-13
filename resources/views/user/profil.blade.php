@@ -1,6 +1,13 @@
 @extends('user.layouts.app')
 @section('tittle','Profil')
 @section('content')
+@section('css')
+<style>
+    .table-row.ticket-row:hover {
+        background: rgba(167, 146, 119, 0.40)!important;
+    }
+</style>
+@endsection
 
     <section class="blog about-blog">
         <div class="container">
@@ -16,7 +23,7 @@
                     <h5 class="dashboard-title">Dashboard</h5>
                 </div>
                 <div class="user-dashboard">
-                    <div class="nav nav-item nav-pills  me-3" id="v-pills-tab" role="tablist"
+                    <div class="nav nav-item nav-profile  me-3" id="v-pills-profile-tab" role="tab"
                         aria-orientation="vertical">
                         <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-profile" type="button" role="tab"
@@ -34,6 +41,8 @@
                                 Profil
                             </span>
                         </button>
+
+
                         <button class="nav-link" id="v-pills-order-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-order" type="button" role="tab"
                             aria-controls="v-pills-order" aria-selected="false">
@@ -51,9 +60,10 @@
                             </span>
                         </button>
 
-                        <button class="nav-link" id="v-pills-order-tab" data-bs-toggle="pill"
-                            data-bs-target="#v-pills-order" type="button" role="tab"
-                            aria-controls="v-pills-order" aria-selected="false">
+
+                        <button class="nav-link" id="v-pills-keranjang-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-keranjang" type="button" role="tab"
+                            aria-controls="v-pills-keranjang" aria-selected="false">
                             <span>
                                 <svg width="15" height="18" viewBox="0 0 15 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -65,6 +75,7 @@
                                 Keranjang
                             </span>
                         </button>
+
 
                         <button class="nav-link" id="v-pills-wishlist-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-wishlist" type="button" role="tab"
@@ -87,6 +98,7 @@
                                 Daftar Keinginan
                             </span>
                         </button>
+
 
                         <div class="nav-link">
                             <a href="login.html">
@@ -112,6 +124,7 @@
                             </a>
                         </div>
                     </div>
+
 
                     <div class="tab-content nav-content" id="v-pills-tabContent" style="flex: 1 0%;">
                         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
@@ -255,7 +268,7 @@
                                 </div>
                                 <hr>
                                 <div class="wrapper-btn">
-                                    <a href="#" class="shop-btn" onclick="modalAction('.cart')">Add Cart</a>
+                                    <a href="#" class="shop-btn" onclick="modalAction('.cart')">Masukkan Keranjang</a>
 
                                     <div class="modal-wrapper cart">
                                         <div onclick="modalAction('.cart')" class="anywhere-away"></div>
@@ -360,16 +373,16 @@
                                     <tbody>
                                         <tr class="table-row table-top-row">
                                             <td class="table-wrapper wrapper-product">
-                                                <h5 class="table-heading">PRODUCT</h5>
+                                                <h5 class="table-heading">PRODUK</h5>
                                             </td>
                                             <td class="table-wrapper">
                                                 <div class="table-wrapper-center">
-                                                    <h5 class="table-heading">PRICE</h5>
+                                                    <h5 class="table-heading">STOK</h5>
                                                 </div>
                                             </td>
                                             <td class="table-wrapper">
                                                 <div class="table-wrapper-center">
-                                                    <h5 class="table-heading">QUANTITY</h5>
+                                                    <h5 class="table-heading">JUMLAH</h5>
                                                 </div>
                                             </td>
                                             <td class="table-wrapper wrapper-total">
@@ -379,7 +392,7 @@
                                             </td>
                                             <td class="table-wrapper">
                                                 <div class="table-wrapper-center">
-                                                    <h5 class="table-heading">ACTION</h5>
+                                                    <h5 class="table-heading">AKSI</h5>
                                                 </div>
                                             </td>
                                         </tr>
@@ -387,55 +400,7 @@
                                             <td class="table-wrapper wrapper-product">
                                                 <div class="wrapper">
                                                     <div class="wrapper-img">
-                                                        <img src="./assets/images/homepage-one/product-img/product-img-1.webp"
-                                                            alt="img">
-                                                    </div>
-                                                    <div class="wrapper-content">
-                                                        <h5 class="heading">Classic Design Skart</h5>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="table-wrapper">
-                                                <div class="table-wrapper-center">
-                                                    <h5 class="heading">$20.00</h5>
-                                                </div>
-                                            </td>
-                                            <td class="table-wrapper">
-                                                <div class="table-wrapper-center">
-                                                    <div class="quantity">
-                                                        <span class="minus">
-                                                            -
-                                                        </span>
-                                                        <span class="number">1</span>
-                                                        <span class="plus">
-                                                            +
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="table-wrapper wrapper-total">
-                                                <div class="table-wrapper-center">
-                                                    <h5 class="heading">$40.00</h5>
-                                                </div>
-                                            </td>
-                                            <td class="table-wrapper">
-                                                <div class="table-wrapper-center">
-                                                    <span>
-                                                        <svg width="10" height="10" viewBox="0 0 10 10"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
-                                                                fill="#AAAAAA"></path>
-                                                        </svg>
-                                                    </span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="table-row ticket-row">
-                                            <td class="table-wrapper wrapper-product">
-                                                <div class="wrapper">
-                                                    <div class="wrapper-img">
-                                                        <img src="./assets/images/homepage-one/product-img/product-img-2.webp"
+                                                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-img-2.webp') }}"
                                                             alt="img">
                                                     </div>
                                                     <div class="wrapper-content">
@@ -479,51 +444,38 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr class="table-row ticket-row">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="v-pills-keranjang" role="tabpanel"
+                            aria-labelledby="v-pills-keranjang-tab" tabindex="0">
+                            <div class="cart-section">
+                                <table>
+                                    <tbody>
+                                        <tr class="table-row table-top-row">
                                             <td class="table-wrapper wrapper-product">
-                                                <div class="wrapper">
-                                                    <div class="wrapper-img">
-                                                        <img src="./assets/images/homepage-one/product-img/product-img-3.webp"
-                                                            alt="img">
-                                                    </div>
-                                                    <div class="wrapper-content">
-                                                        <h5 class="heading">Blue Party Dress</h5>
-                                                    </div>
+                                                <h5 class="table-heading">PRODUK</h5>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <h5 class="table-heading">STOK</h5>
                                                 </div>
                                             </td>
                                             <td class="table-wrapper">
                                                 <div class="table-wrapper-center">
-                                                    <h5 class="heading">$20.00</h5>
-                                                </div>
-                                            </td>
-                                            <td class="table-wrapper">
-                                                <div class="table-wrapper-center">
-                                                    <div class="quantity">
-                                                        <span class="minus">
-                                                            -
-                                                        </span>
-                                                        <span class="number">1</span>
-                                                        <span class="plus">
-                                                            +
-                                                        </span>
-                                                    </div>
+                                                    <h5 class="table-heading">JUMLAH</h5>
                                                 </div>
                                             </td>
                                             <td class="table-wrapper wrapper-total">
                                                 <div class="table-wrapper-center">
-                                                    <h5 class="heading">$40.00</h5>
+                                                    <h5 class="table-heading">TOTAL</h5>
                                                 </div>
                                             </td>
                                             <td class="table-wrapper">
                                                 <div class="table-wrapper-center">
-                                                    <span>
-                                                        <svg width="10" height="10" viewBox="0 0 10 10"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
-                                                                fill="#AAAAAA"></path>
-                                                        </svg>
-                                                    </span>
+                                                    <h5 class="table-heading">AKSI</h5>
                                                 </div>
                                             </td>
                                         </tr>
@@ -531,11 +483,11 @@
                                             <td class="table-wrapper wrapper-product">
                                                 <div class="wrapper">
                                                     <div class="wrapper-img">
-                                                        <img src="./assets/images/homepage-one/product-img/product-img-4.webp"
+                                                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-img-2.webp') }}"
                                                             alt="img">
                                                     </div>
                                                     <div class="wrapper-content">
-                                                        <h5 class="heading">Classic Party Dress</h5>
+                                                        <h5 class="heading">Classic Black Suit</h5>
                                                     </div>
                                                 </div>
                                             </td>
@@ -562,7 +514,7 @@
                                                     <h5 class="heading">$40.00</h5>
                                                 </div>
                                             </td>
-                                            <td class="table-wrapper">
+                                            <td class="table-wrapper ">
                                                 <div class="table-wrapper-center">
                                                     <span>
                                                         <svg width="10" height="10" viewBox="0 0 10 10"
@@ -591,16 +543,16 @@
                                     <tbody>
                                         <tr class="table-row table-top-row">
                                             <td class="table-wrapper wrapper-product">
-                                                <h5 class="table-heading">PRODUCT</h5>
+                                                <h5 class="table-heading">PRODUK</h5>
                                             </td>
                                             <td class="table-wrapper">
                                                 <div class="table-wrapper-center">
-                                                    <h5 class="table-heading">PRICE</h5>
+                                                    <h5 class="table-heading">STOK</h5>
                                                 </div>
                                             </td>
                                             <td class="table-wrapper">
                                                 <div class="table-wrapper-center">
-                                                    <h5 class="table-heading">ACTION</h5>
+                                                    <h5 class="table-heading">AKSI</h5>
                                                 </div>
                                             </td>
                                         </tr>
@@ -608,101 +560,11 @@
                                             <td class="table-wrapper wrapper-product">
                                                 <div class="wrapper">
                                                     <div class="wrapper-img">
-                                                        <img src="./assets/images/homepage-one/product-img/product-img-1.webp"
+                                                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                                             alt="img">
                                                     </div>
                                                     <div class="wrapper-content">
                                                         <h5 class="heading">Classic Design Skart</h5>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="table-wrapper">
-                                                <div class="table-wrapper-center">
-                                                    <h5 class="heading">$20.00</h5>
-                                                </div>
-                                            </td>
-                                            <td class="table-wrapper">
-                                                <div class="table-wrapper-center">
-                                                    <span>
-                                                        <svg width="10" height="10" viewBox="0 0 10 10"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
-                                                                fill="#AAAAAA"></path>
-                                                        </svg>
-                                                    </span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="table-row ticket-row">
-                                            <td class="table-wrapper wrapper-product">
-                                                <div class="wrapper">
-                                                    <div class="wrapper-img">
-                                                        <img src="./assets/images/homepage-one/product-img/product-img-2.webp"
-                                                            alt="img">
-                                                    </div>
-                                                    <div class="wrapper-content">
-                                                        <h5 class="heading">Classic Black Suit</h5>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="table-wrapper">
-                                                <div class="table-wrapper-center">
-                                                    <h5 class="heading">$20.00</h5>
-                                                </div>
-                                            </td>
-                                            <td class="table-wrapper ">
-                                                <div class="table-wrapper-center">
-                                                    <span>
-                                                        <svg width="10" height="10" viewBox="0 0 10 10"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
-                                                                fill="#AAAAAA"></path>
-                                                        </svg>
-                                                    </span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="table-row ticket-row">
-                                            <td class="table-wrapper wrapper-product">
-                                                <div class="wrapper">
-                                                    <div class="wrapper-img">
-                                                        <img src="./assets/images/homepage-one/product-img/product-img-3.webp"
-                                                            alt="img">
-                                                    </div>
-                                                    <div class="wrapper-content">
-                                                        <h5 class="heading">Blue Party Dress</h5>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="table-wrapper">
-                                                <div class="table-wrapper-center">
-                                                    <h5 class="heading">$20.00</h5>
-                                                </div>
-                                            </td>
-                                            <td class="table-wrapper">
-                                                <div class="table-wrapper-center">
-                                                    <span>
-                                                        <svg width="10" height="10" viewBox="0 0 10 10"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
-                                                                fill="#AAAAAA"></path>
-                                                        </svg>
-                                                    </span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="table-row ticket-row">
-                                            <td class="table-wrapper wrapper-product">
-                                                <div class="wrapper">
-                                                    <div class="wrapper-img">
-                                                        <img src="./assets/images/homepage-one/product-img/product-img-4.webp"
-                                                            alt="img">
-                                                    </div>
-                                                    <div class="wrapper-content">
-                                                        <h5 class="heading">Classic Party Dress</h5>
                                                     </div>
                                                 </div>
                                             </td>
@@ -734,161 +596,7 @@
                         </div>
                     </div>
 
-                        <div class="tab-pane fade" id="v-pills-wishlist" role="tabpanel"
-                            aria-labelledby="v-pills-wishlist-tab" tabindex="0">
-                            <div class="wishlist">
-                                <div class="cart-content">
-                                    <h5 class="cart-heading">SpaceRace</h5>
-                                    <p>Order ID: <span class="inner-text">#4345</span></p>
-                                </div>
-                                <div class="cart-section wishlist-section">
-                                    <table>
-                                        <tbody>
-                                            <tr class="table-row table-top-row">
-                                                <td class="table-wrapper wrapper-product">
-                                                    <h5 class="table-heading">PRODUCT</h5>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="table-heading">PRICE</h5>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="table-heading">ACTION</h5>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="table-row ticket-row">
-                                                <td class="table-wrapper wrapper-product">
-                                                    <div class="wrapper">
-                                                        <div class="wrapper-img">
-                                                            <img src="./assets/images/homepage-one/product-img/product-img-1.webp"
-                                                                alt="img">
-                                                        </div>
-                                                        <div class="wrapper-content">
-                                                            <h5 class="heading">Classic Design Skart</h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="heading">$20.00</h5>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <span>
-                                                            <svg width="10" height="10" viewBox="0 0 10 10"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
-                                                                    fill="#AAAAAA"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="table-row ticket-row">
-                                                <td class="table-wrapper wrapper-product">
-                                                    <div class="wrapper">
-                                                        <div class="wrapper-img">
-                                                            <img src="./assets/images/homepage-one/product-img/product-img-2.webp"
-                                                                alt="img">
-                                                        </div>
-                                                        <div class="wrapper-content">
-                                                            <h5 class="heading">Classic Black Suit</h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="heading">$20.00</h5>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper ">
-                                                    <div class="table-wrapper-center">
-                                                        <span>
-                                                            <svg width="10" height="10" viewBox="0 0 10 10"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
-                                                                    fill="#AAAAAA"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="table-row ticket-row">
-                                                <td class="table-wrapper wrapper-product">
-                                                    <div class="wrapper">
-                                                        <div class="wrapper-img">
-                                                            <img src="./assets/images/homepage-one/product-img/product-img-3.webp"
-                                                                alt="img">
-                                                        </div>
-                                                        <div class="wrapper-content">
-                                                            <h5 class="heading">Blue Party Dress</h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="heading">$20.00</h5>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <span>
-                                                            <svg width="10" height="10" viewBox="0 0 10 10"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
-                                                                    fill="#AAAAAA"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="table-row ticket-row">
-                                                <td class="table-wrapper wrapper-product">
-                                                    <div class="wrapper">
-                                                        <div class="wrapper-img">
-                                                            <img src="./assets/images/homepage-one/product-img/product-img-4.webp"
-                                                                alt="img">
-                                                        </div>
-                                                        <div class="wrapper-content">
-                                                            <h5 class="heading">Classic Party Dress</h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="heading">$20.00</h5>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <span>
-                                                            <svg width="10" height="10" viewBox="0 0 10 10"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
-                                                                    fill="#AAAAAA"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="wishlist-btn">
-                                    <a href="#" class="clean-btn">Clean Wishlist</a>
-                                    <a href="#" class="shop-btn">View Cards</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-address" role="tabpanel"
+                        {{-- <div class="tab-pane fade" id="v-pills-address" role="tabpanel"
                             aria-labelledby="v-pills-address-tab" tabindex="0">
                             <div class="profile-section address-section addresses ">
                                 <div class="row gy-md-0 g-5">
@@ -1015,8 +723,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-review" role="tabpanel"
+                        </div> --}}
+
+                        {{-- <div class="tab-pane fade" id="v-pills-review" role="tabpanel"
                             aria-labelledby="v-pills-review-tab" tabindex="0">
                             <div class="top-selling-section">
                                 <div class="row g-5">
@@ -1202,8 +911,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-password" role="tabpanel"
+                        </div> --}}
+
+                        {{-- <div class="tab-pane fade" id="v-pills-password" role="tabpanel"
                             aria-labelledby="v-pills-password-tab" tabindex="0">
                             <div class="row align-items-center">
                                 <div class="col-lg-6">
@@ -1238,8 +948,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-ticket" role="tabpanel"
+                        </div> --}}
+
+                        {{-- <div class="tab-pane fade" id="v-pills-ticket" role="tabpanel"
                             aria-labelledby="v-pills-ticket-tab" tabindex="0">
                             <div class="support-ticket">
                                 <a href="#" class="shop-btn" onclick="modalAction('.ticket')">Add New
@@ -1637,11 +1348,11 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
+
                     </div>
                 </div>
             </div>
         </div>
     </section>
 @endsection
-

@@ -32,46 +32,46 @@
         <li class="menu-item {{ request()->routeIs('admin') ? 'active' : '' }}">
             <a href="{{ url('/admin') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-home"></i>
-                <div data-i18n="Dashboard">Dasbor</div>
+                <div >Dasbor</div>
             </a>
         </li>
 
         <li class="menu-item {{ request()->routeIs('admin') ? 'active' : '' }}">
             <a href="{{ url('/admin') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-building"></i>
-                <div data-i18n="Stores">Toko</div>
+                <div >Toko</div>
             </a>
         </li>
 
         <li class="menu-item {{ request()->routeIs('admin.brand.*') ? 'active' : '' }}">
             <a href="{{ route('admin.brand.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-flag"></i>
-                <div data-i18n="Brand">Merk</div>
+                <div >Merk</div>
             </a>
         </li>
 
         <li class="menu-item {{ request()->routeIs('admin.category.*') ? 'active' : '' }}">
             <a href="{{ route('admin.category.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-list"></i>
-                <div data-i18n="Category">Kategori</div>
+                <div >Kategori</div>
             </a>
         </li>
 
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-box"></i>
-                <div data-i18n="Products">Produk</div>
+                <div >Produk</div>
             </a>
 
             <ul class="menu-sub">
                 <li class="menu-item">
                     <a href="javascript:void(0)" class="menu-link">
-                        <div data-i18n="Approval Product">Persetujuan Produk</div>
+                        <div >Persetujuan Produk</div>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="javascript:void(0)" class="menu-link">
-                        <div data-i18n="Product List">Daftar Produk</div>
+                        <div >Daftar Produk</div>
                     </a>
                 </li>
             </ul>
@@ -80,14 +80,14 @@
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-wallet"></i>
-                <div data-i18n="Transactions">Transaksi</div>
+                <div >Transaksi</div>
             </a>
         </li>
 
         <li class="menu-item">
             <a href="{{ route('admin.user.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-users"></i>
-                <div data-i18n="Users">Pengguna</div>
+                <div >Pengguna</div>
             </a>
         </li>
     </ul>
