@@ -1,18 +1,15 @@
 @extends('penjualan.layouts.app')
 @section('tittle', 'Transaksi')
 @section('css')
-<style>
-    .table-row.ticket-row:hover {
-        background: rgba(167, 146, 119, 0.40)!important;
-    }
-</style>
+    <style>
+        .table-row.ticket-row:hover {
+            background: rgba(167, 146, 119, 0.40) !important;
+        }
+    </style>
 @endsection
 @section('content')
     <div class="wishlist">
-        <div class="cart-content">
-            <h5 class="cart-heading">Data Transaksi</h5>
-            <p>Order ID: <span class="inner-text">#4345</span></p>
-        </div>
+        <h5 class="mb-4">Data Transaksi</h5>
         <div class="cart-section wishlist-section">
             <table>
                 <tbody>
