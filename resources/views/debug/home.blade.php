@@ -232,7 +232,6 @@
         </div>
     </section>
 
-
     <section class="product arrival mt-5">
         <div class="container">
             <div class="section-title">
@@ -332,7 +331,6 @@
         </div>
     </section>
 
-
     <section class="product flash-sale mt-5">
         <div class="container">
             <div class="section-title">
@@ -430,7 +428,6 @@
             </div>
         </div>
     </section>
-
 
     <section class="product best-seller mt-5">
         <div class="container">
