@@ -919,7 +919,7 @@
                     <div class="header-nav-menu">
                         <ul class="menu-list">
                             <li>
-                                <a href="/user">
+                                <a href="/user/home">
                                     <span class="list-text">Home</span>
                                 </a>
                             </li>
