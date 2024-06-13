@@ -465,7 +465,7 @@ button {
 }
 .modal-main {
     position: relative;
-    background: rgb(167, 146, 119);
+    background: rgb(109, 100, 87);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1146,7 +1146,7 @@ button {
     color: #fff;
 }
 .header-nav .shop-text {
-    color: #232532;
+    color: #fff;
 }
 .header-nav .header-nav-menu .menu-list {
     display: flex;
@@ -4843,9 +4843,7 @@ table .ticket-row:hover {
         font-size: 1.6rem;
     }
 }
-.user-profile {
-    margin-top: 2rem;
-}
+
 .user-profile-section {
     background: #fff;
     padding: 4rem 3.6rem;
@@ -5178,7 +5176,7 @@ table .ticket-row:hover {
     gap: 3rem;
 }
 .user-dashboard .nav-item {
-    width: 23.1rem;
+    width: 18rem;
     border-right: 2px solid rgba(174, 28, 154, 0.08);
     padding: 0 0 2rem;
     display: flex;
