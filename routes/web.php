@@ -110,7 +110,7 @@ Route::get('/about', function () {
     return view('Landing.about');
 });
 
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->middleware('role:admin')->name('admin.')->group(function () {
     Route::get('/', fn() => view('admin.index'))->name('index');
     Route::resource('brand', BrandController::class);
     Route::resource('category', ProductCategoryController::class);
