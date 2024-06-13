@@ -1,11 +1,11 @@
 @extends('penjualan.layouts.app')
 @section('tittle', 'Home')
 @section('content')
-    <section class="user-profile footer-padding">
-        <div class="tab-content nav-content" style="flex: 1 0%;">
-            <div class="tab-pane fade show active" tabindex="0">
+        <div class="tab-content nav-content" id="v-pills-tabContent" style="flex: 1 0%;">
                 <div class="user-profile">
-                    <h5>Selamat datang di profil anda</h5>
+                    <div class="user-title">
+                        <h5 class="heading">Selamat datang di profil anda</h5>
+                    </div>
                     <div class="profile-section">
                         <div class="row g-5">
                             <div class="col-lg-4 col-sm-6">
@@ -124,6 +124,5 @@
                         </div>
                     </div>
                 </div>
-            </div>
-    </section>
+        </div>
 @endsection

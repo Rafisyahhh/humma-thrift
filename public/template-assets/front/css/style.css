@@ -21,7 +21,6 @@
 html {
     font-size: 10px;
     overflow-x: hidden;
-
 }
 body {
     margin: 0;
@@ -108,8 +107,7 @@ input {
     font-size: 1.3rem;
 }
 input[type="checkbox"] {
-    accent-color: rgb(167, 146, 119)
-    ;
+    accent-color: rgb(167, 146, 119);
 }
 button {
     border: none;
@@ -122,8 +120,7 @@ button {
     text-align: center;
     border-radius: 3rem;
     display: inline-block;
-    background:rgb(167, 146, 119)
-    ;
+    background: rgb(167, 146, 119);
     font-size: 1.4rem;
     font-weight: 500;
     position: relative;
@@ -157,8 +154,7 @@ button {
 }
 .shop-btn:hover {
     color: #fff;
-    background-color: rgb(167, 146, 119)
-    ;
+    background-color: rgb(167, 146, 119);
 }
 .shop-btn:hover::after {
     right: auto;
@@ -229,8 +225,7 @@ button {
 }
 .product-wrapper .product-img .product-cart-items .cart-item:hover svg rect {
     fill: currentColor;
-    fill: rgb(167, 146, 119)
-    ;
+    fill: rgb(167, 146, 119);
 }
 .product-wrapper .product-img .product-cart-items .cart-item:hover svg path {
     fill: currentColor;
@@ -257,8 +252,7 @@ button {
     transition: all 0.4s;
 }
 .product-wrapper:hover {
-    border: 1px solid rgb(167, 146, 119)
-    ;
+    border: 1px solid rgb(167, 146, 119);
 }
 .product-wrapper:hover .product-cart-items {
     bottom: 15%;
@@ -376,8 +370,7 @@ button {
     text-decoration: line-through;
 }
 .price .new-price {
-    color: rgb(167, 146, 119)
-    ;
+    color: rgb(167, 146, 119);
 }
 .price span {
     font-size: 1.6rem;
@@ -388,8 +381,7 @@ button {
     padding: 1.2rem 1.6rem 1.2rem 2.5rem;
     border-top-left-radius: 3rem;
     background: rgb(119, 105, 87);
-    color: rgb(255, 255, 255)
-;
+    color: rgb(255, 255, 255);
     font-size: 1.6rem;
     transition: all 0.4s;
 }
@@ -473,7 +465,7 @@ button {
 }
 .modal-main {
     position: relative;
-    background: #fff;
+    background: rgb(109, 100, 87);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -840,7 +832,7 @@ button {
     .modal-main
     .search-section
     input {
-    color: rgb(167, 146, 119)
+    color: rgb(167, 146, 119);
 }
 .header-center
     .header-cart-items
@@ -982,7 +974,7 @@ button {
     span
     rect {
     fill: currentColor;
-    fill:rgb(167, 146, 119);
+    fill: rgb(167, 146, 119);
 }
 .header-bottom {
     background: rgb(167, 146, 119);
@@ -1154,7 +1146,7 @@ button {
     color: #fff;
 }
 .header-nav .shop-text {
-    color: #232532;
+    color: #fff;
 }
 .header-nav .header-nav-menu .menu-list {
     display: flex;
@@ -1321,7 +1313,7 @@ button {
     text-align: center;
     border-radius: 3rem;
     display: inline-block;
-    background: #ffbb38;
+    background: rgb(102, 88, 69);
     font-size: 1.4rem;
     font-weight: 500;
     position: relative;
@@ -1354,7 +1346,7 @@ button {
 }
 .header-vendor-btn .shop-btn:hover {
     color: #fff;
-    background-color: #ffbb38;
+    background-color: rgb(167, 146, 119);
 }
 .header-vendor-btn .shop-btn:hover::after {
     right: auto;
@@ -1373,7 +1365,7 @@ button {
     color: #232532;
 }
 .header-vendor-btn .shop-btn svg {
-    fill: #232532;
+    fill: #fff;
 }
 .header-two {
     background: #fff;
@@ -1720,7 +1712,7 @@ button {
 }
 .wrapper-section .shop-btn:hover {
     color: #fff;
-    background-color:rgb(167, 146, 119);
+    background-color: rgb(167, 146, 119);
 }
 .wrapper-section .shop-btn:hover::after {
     right: auto;
@@ -2099,7 +2091,7 @@ button {
     cursor: pointer;
     box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
     background: #fff;
-    border: 1px solid rgb(167, 146, 119) ;
+    border: 1px solid rgb(167, 146, 119);
     box-shadow: none;
 }
 .brand-section .product-wrapper .wrapper-img {
@@ -2230,8 +2222,7 @@ button {
     }
 }
 .arrival {
-    background:rgb(234, 216, 192)
-    ;
+    background: rgb(234, 216, 192);
 }
 .flash-sale {
     background: rgb(255, 255, 255);
@@ -2374,7 +2365,11 @@ button {
     padding-bottom: 0;
 }
 .best-selling-section {
-    background: linear-gradient(92deg, rgb(255, 242, 225) 1.23%,rgb(155, 135, 110) 97.37%);
+    background: linear-gradient(
+        92deg,
+        rgb(255, 242, 225) 1.23%,
+        rgb(155, 135, 110) 97.37%
+    );
     padding: 3rem;
     border-radius: 1.2rem;
 }
@@ -2456,7 +2451,11 @@ button {
 }
 .best-product {
     padding-top: 0;
-    background: linear-gradient(90deg, rgb(255, 242, 225) 0%, rgb(155, 135, 110) 100%);
+    background: linear-gradient(
+        90deg,
+        rgb(255, 242, 225) 0%,
+        rgb(155, 135, 110) 100%
+    );
     padding-bottom: 11.2rem;
 }
 .best-product .product-wrapper {
@@ -3719,7 +3718,7 @@ table .ticket-row:hover {
     }
 }
 .table-row {
-    background: rgb(249, 225, 192, 0.30);
+    background: rgb(249, 225, 192, 0.3);
     border: 1px solid #e9e7e7;
 }
 .table-row .table-wrapper {
@@ -4629,7 +4628,7 @@ table .ticket-row:hover {
 .about-service .seperator {
     width: 1px;
     height: 19.7rem;
-    background: rgb(136, 119, 96) ;
+    background: rgb(136, 119, 96);
 }
 @media (max-width: 767px) {
     .about-service .seperator {
@@ -4844,9 +4843,7 @@ table .ticket-row:hover {
         font-size: 1.6rem;
     }
 }
-.user-profile {
-    margin-top: 2rem;
-}
+
 .user-profile-section {
     background: #fff;
     padding: 4rem 3.6rem;
@@ -5179,7 +5176,7 @@ table .ticket-row:hover {
     gap: 3rem;
 }
 .user-dashboard .nav-item {
-    width: 23.1rem;
+    width: 18rem;
     border-right: 2px solid rgba(174, 28, 154, 0.08);
     padding: 0 0 2rem;
     display: flex;
@@ -5237,7 +5234,7 @@ table .ticket-row:hover {
     gap: 2rem;
     height: auto;
     padding: 2.6rem;
-    background-color: rgb(249, 225, 192, 0.30);
+    background-color: rgb(249, 225, 192, 0.3);
     border: none;
     box-shadow: none;
 }
@@ -5270,7 +5267,7 @@ table .ticket-row:hover {
     justify-content: space-between;
     gap: 0;
     padding: 4rem;
-    background: rgb(249, 225, 192 , 0.30);
+    background: rgb(249, 225, 192, 0.3);
     border-radius: 0.5rem;
 }
 .user-dashboard .nav-content .profile-section .info-section .heading {

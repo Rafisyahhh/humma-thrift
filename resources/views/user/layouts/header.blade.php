@@ -1,23 +1,5 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 <body>
     <header id="header" class="header">
-        {{-- <div class="header-top-section">
-            <div class="container">
-                <div class="header-top">
-                    <div class="header-profile">
-                        <a href="user-profile.html"><span>Akun</span></a>
-                        <a href="order.html"><span>Lacak Pesanan</span></a>
-                    </div>
-                    <div class="header-contact d-none d-lg-block">
-                        <a href="#">
-                            <span>Butuh bantuan? Hubungi kami:</span>
-                            <span class="contact-number">+ 00645 4568</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
         <div class="header-center-section d-none d-lg-block">
             <div class="container">
                 <div class="header-center">
@@ -929,7 +911,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/merek">
+                                <a href="/user/brand">
                                     <span class="list-text">Brand</span>
                                 </a>
                             </li>
@@ -939,15 +921,10 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/tentang">
+                                <a href="/user/about">
                                     <span class="list-text">Tentang Kami</span>
                                 </a>
                             </li>
-                            {{-- <li>
-                                <a href="user-profile.html">
-                                    <span class="list-text">Profil</span>
-                                </a>
-                            </li> --}}
                         </ul>
                     </div>
                     <div class="header-vendor-btn">
