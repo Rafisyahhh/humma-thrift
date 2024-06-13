@@ -8,30 +8,40 @@
                     <div class="review-form">
                         <div class=" account-inner-form">
                             <div class="review-form-name">
-                                <label for="firname" class="form-label">Nama Depan*</label>
-                                <input type="text" id="firname" class="form-control" placeholder="Nama Depan">
+                                <label for="firname" class="form-label">Nama Pengguna</label>
+                                <input type="text" id="firname" class="form-control" placeholder="mis.hilma_scf" value="hilmas_scf">
                             </div>
                             <div class="review-form-name">
-                                <label for="latname" class="form-label">Nama Lengkap*</label>
-                                <input type="text" id="latname" class="form-control" placeholder="Nama Lengkap">
+                                <label for="latname" class="form-label">Nama Lengkap</label>
+                                <input type="text" id="latname" class="form-control" placeholder="Hilma Schaefer" value="Hilma Schaefer">
                             </div>
                         </div>
                         <div class=" account-inner-form">
                             <div class="review-form-name">
-                                <label for="gmail" class="form-label">Email*</label>
-                                <input type="email" id="gmail" class="form-control" placeholder="example@gmail.com">
+                                <label for="gmail" class="form-label">Email</label>
+                                <input type="email" id="gmail" class="form-control" placeholder="example@gmail.com" value="hilmascfr@gmail.com">
                             </div>
                             <div class="review-form-name">
-                                <label for="telephone" class="form-label">Nomor Telepon*</label>
-                                <input type="tel" id="telephone" class="form-control" placeholder="+880388**0899">
+                                <label for="telephone" class="form-label">Nomor Telepon</label>
+                                <input type="number" id="telephone" class="form-control" placeholder="+880388**0899" value="087658765458">
                             </div>
                         </div>
-                        <div class="review-form-name address-form">
+                        <div class=" account-inner-form">
+                            <div class="review-form-name">
+                                <label for="gmail" class="form-label">Tempat Lahir</label>
+                                <input type="text" id="gmail" class="form-control" placeholder="mis.Malang" value="Malang">
+                            </div>
+                            <div class="review-form-name">
+                                <label for="telephone" class="form-label">Tanggal Lahir</label>
+                                <input type="date" id="telephone" class="form-control" placeholder="08-06-12" value="08-06-12">
+                            </div>
+                        </div>
+                        {{-- <div class="review-form-name address-form">
                             <label for="addres" class="form-label">Alamat*</label>
                             <textarea type="text" id="addres" class="form-control" placeholder="Masukkan Alamat Anda"></textarea>
-                        </div>
+                        </div> --}}
                         <div class="submit-btn">
-                            <a href="#" class="shop-btn cancel-btn">Batal</a>
+                            {{-- <a href="#" class="shop-btn cancel-btn">Batal</a> --}}
                             <a href="#" class="shop-btn update-btn">Perbarui Profil</a>
                         </div>
                     </div>
@@ -41,8 +51,7 @@
                 <div class="img-upload-section">
                     <div class="logo-wrapper">
                         <h5 class="comment-title">Perbarui Foto Profil</h5>
-                        <p class="paragraph">Ukuran 300x300. Gif berfungsi
-                            juga. Maks 5mb.</p>
+                        <p class="paragraph">Ukuran 300x300.</p>
                         <div class="logo-upload">
                             <img src="template-assets/front/assets/images/homepage-one/sallers-cover.png" alt="upload" class="upload-img"
                                 id="upload-img">
