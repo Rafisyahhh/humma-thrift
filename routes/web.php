@@ -24,6 +24,10 @@ Auth::routes([
 ]);
 # Tolong ini jangan dipindah!
 
+Route::prefix('/debug')->group(function() {
+    Route::get('home', fn() => view('debug.home'));
+});
+
 Route::get('/', function () {
     return view('landing.landing');
 });

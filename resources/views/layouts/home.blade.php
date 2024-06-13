@@ -26,6 +26,11 @@
 </head>
 
 <body>
+    @include('layouts.partials.home.header')
+
+    @yield('content')
+
+    @include('layouts.partials.home.footer')
 
     <script src="{{ asset('template-assets/front/assets/js/jquery_3.7.1.min.js') }}"></script>
 
