@@ -1,3 +1,47 @@
+@php
+  $user = [
+      'name' => 'SyauqiAli',
+      'address' => [
+          [
+              'id' => 2,
+              'title' => 'Rumah',
+              'address' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, quisquam?',
+          ],
+          [
+              'id' => 6,
+              'title' => 'Home',
+              'address' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, quisquam?',
+          ],
+      ],
+  ];
+  $products = [
+      [
+          'cover_image' => 'https://placehold.co/400',
+          'title' => 'Apple Watch X1',
+          'description' => '64GB, Black, 44mm, Chain Belt',
+          'price' => '10',
+      ],
+      [
+          'cover_image' => 'https://placehold.co/400',
+          'title' => 'Apple Watch X1',
+          'description' => '64GB, Black, 44mm, Chain Belt',
+          'price' => '10',
+      ],
+      [
+          'cover_image' => 'https://placehold.co/400',
+          'title' => 'Apple Watch X1',
+          'description' => '64GB, Black, 44mm, Chain Belt',
+          'price' => '10',
+      ],
+      [
+          'cover_image' => 'https://placehold.co/400',
+          'title' => 'Apple Watch X1',
+          'description' => '64GB, Black, 44mm, Chain Belt',
+          'price' => '10',
+      ],
+  ];
+@endphp
+
 @extends('user.layouts.app')
 @section('tittle', 'Checkout')
 @section('content')
@@ -39,26 +83,15 @@
                               data-bs-dismiss="modal" type="button"></button>
                           </div>
                           <div class="modal-body d-flex flex-column gap-2"><input class="form-control" type="search" />
-                            <label class="card" for="alamat" role="button">
-                              <div class="card-body">
-                                <h4 class="card-title">Rumah</h4>
-                                <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo
-                                  odio, dapibus
-                                  ac
-                                  facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                              </div>
-                              <input type="radio" id="alamat" name="alamat" class="d-none">
-                            </label>
-                            <label class="card" for="alamat2">
-                              <div class="card-body">
-                                <h4 class="card-title">Rumah</h4>
-                                <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo
-                                  odio, dapibus
-                                  ac
-                                  facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                              </div>
-                              <input type="radio" id="alamat2" name="alamat" class="d-none">
-                            </label>
+                            @foreach ($user['address'] as $item)
+                              <label class="card" for="alamat{{ $item['id'] }}" role="button">
+                                <div class="card-body">
+                                  <h4 class="card-title">{{ $item['title'] }}</h4>
+                                  <p class="card-text">{{ $item['address'] }}</p>
+                                </div>
+                                <input type="radio" id="alamat{{ $item['id'] }}" name="alamat" class="d-none">
+                              </label>
+                            @endforeach
                           </div>
                         </div>
                       </div>
@@ -74,7 +107,7 @@
                   <hr>
                   <div class="subtotal product-total">
                     <ul class="product-list">
-                      @foreach ([['cover_image' => 'https://placehold.co/400', 'title' => 'Apple Watch X1', 'description' => '64GB, Black, 44mm, Chain Belt', 'price' => '10'], ['cover_image' => 'https://placehold.co/400', 'title' => 'Apple Watch X1', 'description' => '64GB, Black, 44mm, Chain Belt', 'price' => '10'], ['cover_image' => 'https://placehold.co/400', 'title' => 'Apple Watch X1', 'description' => '64GB, Black, 44mm, Chain Belt', 'price' => '10'], ['cover_image' => 'https://placehold.co/400', 'title' => 'Apple Watch X1', 'description' => '64GB, Black, 44mm, Chain Belt', 'price' => '10']] as $item)
+                      @foreach ($products as $item)
                         <li>
                           <div class="d-flex gap-3">
                             <img src="{{ $item['cover_image'] }}" width="40" />
