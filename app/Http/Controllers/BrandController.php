@@ -25,8 +25,9 @@ class BrandController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $hasRequestSearch = $request->has('search');
 
-        $brands = $this->brands->when($request->has('search'), fn ($query) => $query->where("title", 'LIKE', "%{$search}%"))
+        $brands = $this->brands->when($hasRequestSearch, fn ($query) => $query->where("title", 'LIKE', "%{$search}%"))
             ->paginate(5);
 
         return view('admin.brand', compact('brands'));
@@ -51,7 +52,7 @@ class BrandController extends Controller
 
             $this->brands->create($data);
 
-            return redirect()->route('brand.index')->with('success', 'Brand berhasil ditambahkan');
+            return redirect()->back()->with('success', 'Brand berhasil ditambahkan');
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
         }
@@ -70,8 +71,8 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        $brands = Brand::all();
-        return view('admin.brand', compact('brands'));
+        // $brands = $this->brands->all();
+        // return view('admin.brand', compact('brands'));
     }
 
     /**
