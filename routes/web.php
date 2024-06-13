@@ -71,6 +71,9 @@ Route::get('/detailproduct', function () {
 Route::get('/checkout', function () {
     return view('user.checkout');
 });
+Route::get('/registstore', function () {
+    return view('user.registstore');
+});
 
 Route::get('/profil', function () {
     return view('user.profil');
