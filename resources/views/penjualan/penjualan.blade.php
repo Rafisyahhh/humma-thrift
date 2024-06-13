@@ -3,7 +3,7 @@
 @section('css')
 <style>
     .table-row.ticket-row:hover {
-        background: rgb(167, 146, 119)!important;
+        background: rgb(167, 146, 119 , 0.40)!important;
     }
 </style>
 @endsection
