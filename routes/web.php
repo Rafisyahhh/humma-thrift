@@ -18,6 +18,17 @@ use App\Http\Controllers\ProductCategoryController;
 |
 */
 
+# Tolong ini jangan dipindah!
+Auth::routes([
+    'verify' => true,
+]);
+# Tolong ini jangan dipindah!
+
+Route::prefix('/debug')->group(function() {
+    Route::get('home', fn() => view('debug.home'));
+    Route::get('modal', fn() => view('debug.modal'));
+});
+
 Route::get('/', function () {
     return view('landing.landing');
 });
@@ -57,6 +68,9 @@ Route::get('/user/home', function () {
 Route::get('/detailproduct', function () {
     return view('user.detailproduct');
 });
+Route::get('/checkout', function () {
+    return view('user.checkout');
+});
 
 Route::get('/profil', function () {
     return view('user.profil');
@@ -75,9 +89,6 @@ Route::get('/shop', function () {
     return view('user.shop');
 });
 
-Auth::routes([
-    'verify' => true,
-]);
 Route::get('/user/about', function () {
     return view('user.tentang');
 });
@@ -99,8 +110,8 @@ Auth::routes();
 
 Route::get('/home', \App\Http\Controllers\RedirectUserController::class)->name('home');
 
-Route::prefix('/dev')->group(function() {
-    Route::get('/admin-view', function() {
+Route::prefix('/dev')->group(function () {
+    Route::get('/admin-view', function () {
         return view('admin.index');
     });
 });
@@ -125,8 +136,8 @@ Route::get('/about', function () {
     return view('Landing.about');
 });
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', fn() => view('admin.index'))->name('index');
+Route::prefix('admin')->middleware('role:admin')->name('admin.')->group(function () {
+    Route::get('/', fn () => view('admin.index'))->name('index');
     Route::resource('brand', BrandController::class);
     Route::resource('category', ProductCategoryController::class);
     Route::resource('user', UserController::class);

@@ -93,6 +93,17 @@
                     </div>
                 </div>
             </div>
+            <div class="account-inner-form">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="review-form-name">
+                            <label for="gambar" class="form-label">Galeri Produk</label>
+                            <input type="file" class="form-control @error('galeri') is-invalid @enderror"
+                                id="gambar" multiple>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="review-form-name">
                     <label for="deskripsi" class="form-label">Deskripsi</label>

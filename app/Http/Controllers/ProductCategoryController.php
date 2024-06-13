@@ -78,7 +78,7 @@ class ProductCategoryController extends Controller
     {
         try {
             $category = ProductCategory::findOrFail($id);
-            $oldPhotoPath = $category->icon;
+            $oldPhotoPath = $category->getAttribute('icon');
 
         $dataToUpdate = [
             'title' => $request->input('title'),
@@ -112,8 +112,8 @@ class ProductCategoryController extends Controller
     {
         // Delete the category
         // If category is not used, delete the photo if it exists
-        if (Storage::disk('public')->exists($productCategory->icon)) {
-            Storage::disk('public')->delete($productCategory->icon);
+        if (Storage::disk('public')->exists($productCategory->getAttribute('icon'))) {
+            Storage::disk('public')->delete($productCategory->getAttribute('icon'));
         }
         // Delete the category
         ProductCategory::findOrFail($id)->delete();

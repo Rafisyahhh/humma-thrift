@@ -6,16 +6,16 @@
         <tbody>
             <tr class="table-row table-top-row">
                 <td class="table-wrapper wrapper-product">
-                    <h5 class="table-heading">PRODUCT</h5>
+                    <h5 class="table-heading">PRODUK</h5>
                 </td>
                 <td class="table-wrapper">
                     <div class="table-wrapper-center">
-                        <h5 class="table-heading">PRICE</h5>
+                        <h5 class="table-heading">HARGA</h5>
                     </div>
                 </td>
                 <td class="table-wrapper">
                     <div class="table-wrapper-center">
-                        <h5 class="table-heading">QUANTITY</h5>
+                        <h5 class="table-heading">JUMLAH</h5>
                     </div>
                 </td>
                 <td class="table-wrapper wrapper-total">
@@ -25,7 +25,7 @@
                 </td>
                 <td class="table-wrapper">
                     <div class="table-wrapper-center">
-                        <h5 class="table-heading">ACTION</h5>
+                        <h5 class="table-heading">AKSI</h5>
                     </div>
                 </td>
             </tr>
