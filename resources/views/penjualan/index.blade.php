@@ -2,13 +2,10 @@
 @section('tittle', 'Home')
 @section('content')
     <section class="user-profile footer-padding">
-        <div class="tab-content nav-content" id="v-pills-tabContent" style="flex: 1 0%;">
-            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
-                tabindex="0">
+        <div class="tab-content nav-content" style="flex: 1 0%;">
+            <div class="tab-pane fade show active" tabindex="0">
                 <div class="user-profile">
-                    <div class="user-title">
-                        <h5 class="heading">Selamat datang di profil anda</h5>
-                    </div>
+                    <h5>Selamat datang di profil anda</h5>
                     <div class="profile-section">
                         <div class="row g-5">
                             <div class="col-lg-4 col-sm-6">
