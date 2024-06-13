@@ -115,8 +115,6 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-
-
         if (Storage::disk('public')->exists($brand->logo)) {
             Storage::disk('public')->delete($brand->logo);
         }
