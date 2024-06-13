@@ -1321,7 +1321,7 @@ button {
     text-align: center;
     border-radius: 3rem;
     display: inline-block;
-    background: #ffbb38;
+    background: rgb(102, 88, 69);
     font-size: 1.4rem;
     font-weight: 500;
     position: relative;
@@ -1373,7 +1373,7 @@ button {
     color: #232532;
 }
 .header-vendor-btn .shop-btn svg {
-    fill: #232532;
+    fill: #fff;
 }
 .header-two {
     background: #fff;

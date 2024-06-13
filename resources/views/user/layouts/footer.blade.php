@@ -116,7 +116,7 @@
                             <ul>
                                 <li><a href="order.html">Lacak Pesanan</a></li>
                                 <li><a href="cart.html">Pengiriman & Pengembalian</a></li>
-                                <li><a href="about.html">Jaminan</a></li>
+                                <li><a href="/user/about">Jaminan</a></li>
                             </ul>
                         </div>
                     </div>
@@ -129,9 +129,9 @@
                         <div class="footer-link about-link">
                             <ul>
                                 <li><a href="about.html">Kisah Rave</a></li>
-                                <li><a href="about.html">Bekerja dengan kami</a></li>
+                                <li><a href="/user/about">Bekerja dengan kami</a></li>
                                 <li><a href="about.html">Berita perusahaan</a></li>
-                                <li><a href="about.html">Investor</a></li>
+                                <li><a href="/user/about">Investor</a></li>
                             </ul>
                         </div>
                     </div>

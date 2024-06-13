@@ -34,21 +34,27 @@ Route::get('/', function () {
 Route::get('/admin', function () {
     return view('layouts.app');
 });
+
 Route::get('/seller/home', function () {
     return view('penjualan.index');
 })->name('seller.home');
+
 Route::get('/seller/transaction', function () {
     return view('penjualan.transaksi');
 })->name('seller.transaction');
+
 Route::get('/seller/income', function () {
     return view('penjualan.penghasilan');
 })->name('seller.income');
+
 Route::get('/seller/product', function () {
     return view('penjualan.produk');
 })->name('seller.product');
+
 Route::get('/seller/profil', function () {
     return view('penjualan.profil');
 })->name('seller.profil');
+
 Route::get('/seller/tambahproduk', function () {
     return view('penjualan.tambahproduk');
 });
