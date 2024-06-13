@@ -47,6 +47,6 @@ class LoginController extends Controller
      */
     protected function credentials(Request $request)
     {
-        return collect($request->only($this->username(), 'password'))->push(['banned' => 0])->toArray();
+        return collect($request->only($this->username(), 'password'))->put('banned', 0)->toArray();
     }
 }
