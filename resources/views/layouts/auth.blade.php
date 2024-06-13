@@ -36,7 +36,9 @@
             </div>
         </div>
     </header>
+
     @yield('content')
+
     <section class="product footer">
         <div class="container">
             <div class="footer-service-section">
