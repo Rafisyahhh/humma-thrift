@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
-
-<head>
+<head>  
     <meta charset="utf-8">
     <meta name="keywords"
         content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template,dashboard,bootstrap-dashboard">

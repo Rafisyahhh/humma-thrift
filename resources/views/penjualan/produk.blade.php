@@ -1,5 +1,5 @@
 @extends('penjualan.layouts.app')
-@section('tittle', 'Produk')
+@section('title', 'Produk')
 @section('css')
     <style>
         .table-row.ticket-row:hover {
@@ -56,15 +56,15 @@
                             <div class="table-wrapper-center">
                                 <span>
 
-                                        <button type="button" class="shop-btn" data-bs-toggle="modal"
-                                            data-bs-target="#detailModal">
-                                            Detail
-                                        </button>
-                                        <button type="button" class="shop-btn" data-bs-toggle="modal"
-                                            data-bs-target="#lelangModal">
-                                            Lelang
-                                        </button>
+                                    <button type="button" class="shop-btn" data-bs-toggle="modal"
+                                        data-bs-target="#detailModal">
+                                        Detail
+                                    </button>
 
+                                    <button type="button" class="shop-btn" data-bs-toggle="modal"
+                                        data-bs-target="#detailLelang">
+                                        Lelang
+                                    </button>
                                 </span>
                             </div>
                         </td>
@@ -90,58 +90,99 @@
         </div>
     </div>
 
-    {{-- modal --}}
-    <div class="modal fade" id="detailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+{{-- DETAIL --}}
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
+                <div class="login-section account-section p-0">
+                    <div class="review-form m-0">
+                        <div class="text-end">
+                            <div class="close-btn">
+                                <img src="{{ asset('template-assets/front/assets/images/homepage-one/close-btn.png') }}"
+                                    onclick="modalAction('.cart')" alt="close-btn">
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <h5 class="comment-title">Add New Card</h5>
+
+                        </div>
+                        <div class="review-form-name address-form">
+                            <label for="cnumber" class="form-label">Card Number*</label>
+                            <input type="number" id="cnumber" class="form-control" placeholder="*** *** ***">
+                        </div>
+                        <div class="review-form-name address-form">
+                            <label for="holdername" class="form-label">Card Holder Name*</label>
+                            <input type="text" id="holdername" class="form-control" placeholder="Demo Name">
+                        </div>
+                        <div class=" account-inner-form">
+                            <div class="review-form-name">
+                                <label for="expirydate" class="form-label">Expiry Date*</label>
+                                <input type="date" id="expirydate" class="form-control">
+                            </div>
+                            <div class="review-form-name">
+                                <label for="cvv" class="form-label">CVV*</label>
+                                <input type="number" id="cvv" class="form-control" placeholder="21232">
+                            </div>
+                        </div>
+                        <div class="login-btn text-center">
+                            <a href="#" onclick="modalAction('.cart')" class="shop-btn">Add Card</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="lelangModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    {{-- LELANG --}}
+    <div class="modal fade" id="detailLelang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">NAMA PRODUK</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <table class="table ">
-                        <thead>
-                          <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama Pengguna</th>
-                            <th scope="col">Harga</th>
-                            <th scope="col">Aksi</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
+                <div class="login-section account-section p-0">
+                    <div class="review-form m-0">
+                        <div class="text-end">
+                            <div class="close-btn">
+                                <img src="{{ asset('template-assets/front/assets/images/homepage-one/close-btn.png') }}"
+                                    onclick="modalAction('.cart')" alt="close-btn">
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <h5 class="comment-title">Add New Card</h5>
+
+                        </div>
+                        <div class="review-form-name address-form">
+                            <label for="cnumber" class="form-label">Card Number*</label>
+                            <input type="number" id="cnumber" class="form-control" placeholder="*** *** ***">
+                        </div>
+                        <div class="review-form-name address-form">
+                            <label for="holdername" class="form-label">Card Holder Name*</label>
+                            <input type="text" id="holdername" class="form-control" placeholder="Demo Name">
+                        </div>
+                        <div class=" account-inner-form">
+                            <div class="review-form-name">
+                                <label for="expirydate" class="form-label">Expiry Date*</label>
+                                <input type="date" id="expirydate" class="form-control">
+                            </div>
+                            <div class="review-form-name">
+                                <label for="cvv" class="form-label">CVV*</label>
+                                <input type="number" id="cvv" class="form-control" placeholder="21232">
+                            </div>
+                        </div>
+                        <div class="login-btn text-center">
+                            <a href="#" onclick="modalAction('.cart')" class="shop-btn">Add Card</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+@endsection
+
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function modalAction(modalClass) {
+            $(modalClass).toggleClass('active');
+        }
+    </script>
 @endsection
