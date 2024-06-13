@@ -6,7 +6,7 @@
     <meta name="keywords"
         content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template,dashboard,bootstrap-dashboard">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="./assets/images/homepage-one/icon.png">
+    <link rel="icon" href="{{asset('template-assets/front/assets/images/homepage-one/icon.png')}}">
 
     <title>Hummathrift - Seller</title>
 
@@ -24,17 +24,10 @@
 
 </head>
 
-@yield('css') 
+@yield('css')
 
 @include('penjualan.layouts.header')
-
-<section class="blog about-blog">
-    <div class="container">
-        <div class="blog-heading about-heading">
-            <h1 class="heading">Halaman Seller</h1>
-        </div>
-    </div>
-</section>
+<h5 class="heading blog-heading about-heading text-center">Halaman Seller</h5>
 
 
 <section class="user-profile footer-padding">
@@ -178,7 +171,7 @@
 @include('user.layouts.footer')
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script src="assets/js/jquery_3.7.1.min.js"></script>
+<script src="{{asset('template-assets/front/assets/js/jquery_3.7.1.min.js')}}"></script>
 
 <script src="{{ asset('template-assets/front/assets/js/bootstrap_5.3.2.bundle.min.js') }}"></script>
 
