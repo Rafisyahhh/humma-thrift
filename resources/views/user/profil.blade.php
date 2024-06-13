@@ -44,7 +44,7 @@
                         <p class="paragraph">Ukuran 300x300. Gif berfungsi
                             juga. Maks 5mb.</p>
                         <div class="logo-upload">
-                            <img src="assets/images/homepage-one/sallers-cover.png" alt="upload" class="upload-img"
+                            <img src="template-assets/front/assets/images/homepage-one/sallers-cover.png" alt="upload" class="upload-img"
                                 id="upload-img">
                             <div class="upload-input">
                                 <label for="input-file">
