@@ -111,28 +111,28 @@
             <div class="container">
                 <div class="header-nav">
                     <div class="header-nav-menu" style="width:50cm">
-                        <ul class="menu-list" >
-                            <li>
-                                <a href="/landing">
+                        <ul class="menu-list">
+                            <li class="active">
+                                <a href="/home">
                                     <span class="list-text">Home</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="/produk">
                                     <span class="list-text">Produk</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="/brandindex">
                                     <span class="list-text">Brand</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="/toko">
                                     <span class="list-text">Toko</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="/about">
                                     <span class="list-text">Tentang Kami</span>
                                 </a>
