@@ -10,12 +10,13 @@
 
     <title>Shopus: Your One-Stop Destination for Fashion and Style</title>
 
-    <link rel="stylesheet" href="{{asset ('template-assets/front/css/swiper10-bundle.min.css') }}">
-    <link rel="stylesheet" href="{{asset ('template-assets/front/css/bootstrap-5.3.2.min.css') }}">
-    <link rel="stylesheet" href="{{asset ('template-assets/front/css/nouislider.min.css') }}">
-    <link rel="stylesheet" href="{{asset ('template-assets/front/css/aos-3.0.0.css') }}">
-    <link rel="stylesheet" href="{{asset ('template-assets/front/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('template-assets/front/css/swiper10-bundle.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template-assets/front/css/bootstrap-5.3.2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template-assets/front/css/nouislider.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template-assets/front/css/aos-3.0.0.css') }}">
+    <link rel="stylesheet" href="{{ asset('template-assets/front/css/style.css') }}">
 </head>
+
 <body>
 
 @include('user.layouts.header')
@@ -23,11 +24,12 @@
 @yield('css')
 @include('user.layouts.footer')
 
-    <script src="{{asset ('template-assets/front/assets/js/jquery_3.7.1.min.js') }}"></script>
-    <script src="{{asset ('template-assets/front/assets/js/bootstrap_5.3.2.bundle.min.js') }}"></script>
-    <script src="{{asset ('template-assets/front/assets/js/nouislider.min.js') }}"></script>
-    <script src="{{asset ('template-assets/front/assets/js/aos-3.0.0.js') }}"></script>
-    <script src="{{asset ('template-assets/front/assets/js/swiper10-bundle.min.js') }}"></script>
-    <script src="{{asset ('template-assets/front/assets/js/shopus.js') }}"></script>
+        <script src="{{ asset('template-assets/front/assets/js/jquery_3.7.1.min.js') }}"></script>
+        <script src="{{ asset('template-assets/front/assets/js/bootstrap_5.3.2.bundle.min.js') }}"></script>
+        <script src="{{ asset('template-assets/front/assets/js/nouislider.min.js') }}"></script>
+        <script src="{{ asset('template-assets/front/assets/js/aos-3.0.0.js') }}"></script>
+        <script src="{{ asset('template-assets/front/assets/js/swiper10-bundle.min.js') }}"></script>
+        <script src="{{ asset('template-assets/front/assets/js/shopus.js') }}"></script>
 </body>
+
 </html>
