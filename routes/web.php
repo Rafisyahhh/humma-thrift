@@ -26,6 +26,7 @@ Auth::routes([
 
 Route::prefix('/debug')->group(function() {
     Route::get('home', fn() => view('debug.home'));
+    Route::get('modal', fn() => view('debug.modal'));
 });
 
 Route::get('/', function () {

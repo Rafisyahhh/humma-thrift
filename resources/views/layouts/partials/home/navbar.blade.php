@@ -2,7 +2,7 @@
     <div class="container">
         <div class="header-center">
             <div class="logo">
-                <a href="index.html">
+                <a href="{{ url('/') }}">
                     <img src="{{ asset('template-assets/front/assets/images/logos/logo.webp') }}" alt="logo">
                 </a>
             </div>
