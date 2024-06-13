@@ -23,24 +23,14 @@
     @yield('style')
 
 </head>
-
 @yield('css')
-
 @include('penjualan.layouts.header')
 <h5 class="heading blog-heading about-heading text-center">Halaman Seller</h5>
-
-
 <section class="user-profile footer-padding">
     <div class="container">
         <div class="user-profile-section">
-            <div class="dashboard-heading ">
-                <h5 class="dashboard-title"></h5>
-                <div class="dashboard-switch">
-                </div>
-            </div>
             <div class="user-dashboard">
-                <div class="nav nav-item nav-pills  me-3" aria-orientation="vertical">
-
+                <div class="nav nav-item nav-pills " aria-orientation="vertical">
                     <a href="{{route('seller.home')}}" class="nav-link {{ request()->routeIs('seller.home') ? 'active' : '' }}">
                         <span>
                             <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
@@ -182,6 +172,7 @@
 <script src="{{ asset('template-assets/front/assets/js/swiper10-bundle.min.js') }}"></script>
 
 <script src="{{ asset('template-assets/front/assets/js/shopus.js') }}"></script>
+
 
 @yield('script')
 

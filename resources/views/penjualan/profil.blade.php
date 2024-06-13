@@ -10,22 +10,22 @@
                                 <div class="col-lg-12">
                                     <div class="seller-information" data-aos="fade-right">
                                         <h5 class="comment-title">Informasi Penjual</h5>
-                                        <p class="paragraph">Isi formulir di bawah ini atau
-                                            kirimkan pesan kepada kami. Kami akan membantu Anda
-                                            sesegera mungkin</p>
                                         <div class="review-form">
                                             <div class="review-inner-form ">
                                                 <div class="review-form-name">
-                                                    <label for="email" class="form-label">Alamat
-                                                        Email*</label>
-                                                    <input type="email" id="email" class="form-control"
-                                                        placeholder="Masukkan alamat email anda">
+                                                    <label for="name" class="form-label">Nama Lengkap</label>
+                                                    <input type="text" id="name" class="form-control"
+                                                        placeholder="mis.Hilma Schaefer" value="Hilma Schaefer">
                                                 </div>
                                                 <div class="review-form-name">
-                                                    <label for="phone" class="form-label">No
-                                                        Telepon*</label>
+                                                    <label for="name" class="form-label">Email</label>
+                                                    <input type="text" id="name" class="form-control"
+                                                        placeholder="mis.hilmaschaefer@gmail.com" value="hilmaschaefer@gmail.com">
+                                                </div>
+                                                <div class="review-form-name">
+                                                    <label for="phone" class="form-label">Telepon</label>
                                                     <input type="number" id="phone" class="form-control"
-                                                        placeholder="+88013**977957">
+                                                        placeholder="+88013**977957" value="08213888977957">
                                                 </div>
                                             </div>
                                         </div>
@@ -34,34 +34,24 @@
                                 <div class="col-lg-12">
                                     <div class="seller-information" data-aos="fade-right">
                                         <h5 class="comment-title">Informasi Toko</h5>
-                                        <p class="paragraph">Isi formulir di bawah ini atau
-                                            kirimkan pesan kepada kami. Kami akan membantu Anda
-                                            sesegera mungkin</p>
+                                        <p class="paragraph">Isi formulir untuk melengkapi profil Toko Anda!</p>
                                         <div class="review-form">
                                             <div class="review-inner-form ">
                                                 <div class="review-form-name">
                                                     <label for="name" class="form-label">Nama
-                                                        Toko*</label>
+                                                        Toko</label>
                                                     <input type="text" id="name" class="form-control"
-                                                        placeholder="Nama">
+                                                        placeholder="mis.Hilma Store" value="Hilma Store">
                                                 </div>
                                                 <div class="review-form-name">
-                                                    <label for="address" class="form-label">Alamat*</label>
-                                                    <input type="text" id="address" class="form-control"
-                                                        placeholder="Alamat">
+                                                    <label for="nic" class="form-label">Nic</label>
+                                                    <input type="number" id="nic" class="form-control"
+                                                        placeholder="masukkan nic" value="002781623916">
                                                 </div>
-                                                <div class="review-form-name checkbox">
-                                                    <input type="checkbox">
-                                                    <label for="address" class="form-label">
-                                                        Saya menyetujui semua syarat dan
-                                                        ketentuan di ShopUs</label>
-                                                </div>
+
                                                 <div class="form-btn">
-                                                    <a href="create-account.html" class="shop-btn">Buat Akun
-                                                        Penjual</a>
-                                                    <span class="shop-account">Sudah memiliki
-                                                        akun?<a href="login.html">Log
-                                                            in</a></span>
+                                                    <a href="create-account.html" class="shop-btn">Simpan</a>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -75,11 +65,9 @@
                                     <div class="col-lg-12">
                                         <div class="logo-wrapper">
                                             <h5 class="comment-title">Perbarui Logo</h5>
-                                            <p class="paragraph">Profil minimal Ukuran300x300.
-                                                Gif juga berfungsi. Maks 5mb.
-                                            </p>
+                                            <p class="paragraph">Profil minimal Ukuran300x300.</p>
                                             <div class="logo-upload">
-                                                <img src="assets/images/homepage-one/sallers-cover.png" alt="upload"
+                                                <img src="{{ asset('template-assets/front/assets/images/homepage-one/sallers-cover.png') }}" alt="upload"
                                                     class="upload-img" id="upload-img">
                                                 <div class="input-item upload-input">
                                                     <label for="input-file">
@@ -108,7 +96,7 @@
                                             <p class="paragraph">Sampul minimal Ukuran
                                                 1170x920.</p>
                                             <div class="cover-upload logo-upload">
-                                                <img src="assets/images/homepage-one/sallers-cover.png" alt="upload"
+                                                <img src="{{ asset('template-assets/front/assets/images/homepage-one/sallers-cover.png') }}" alt="upload"
                                                     class="cover-img" id="cover-img">
                                                 <div class="input-item cover-input">
                                                     <label for="cover-file">

@@ -29,7 +29,7 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
-        <li class="menu-item {{ request()->routeIs('admin') ? 'active' : '' }}">
+        <li class="menu-item {{ request()->routeIs('/admin') ? 'active' : '' }}">
             <a href="{{ url('/admin') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-home"></i>
                 <div >Dasbor</div>
