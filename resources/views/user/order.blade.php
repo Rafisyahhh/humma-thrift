@@ -15,7 +15,7 @@
                 </td>
                 <td class="table-wrapper">
                     <div class="table-wrapper-center">
-                        <h5 class="table-heading">Status</h5>
+                        <h5 class="table-heading">STATUS</h5>
                     </div>
                 </td>
                 <td class="table-wrapper wrapper-total">
@@ -70,7 +70,7 @@
                 </td>
             </tr>
 
-            <tr class="table-row ticket-row">
+            {{-- <tr class="table-row ticket-row">
                 <td class="table-wrapper wrapper-product">
                     <div class="wrapper">
                         <div class="wrapper-img">
@@ -123,7 +123,7 @@
                         </span>
                     </div>
                 </td>
-            </tr>
+            </tr> --}}
         </tbody>
     </table>
 </div>

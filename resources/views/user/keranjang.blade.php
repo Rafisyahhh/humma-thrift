@@ -78,7 +78,7 @@
                 </td>
             </tr>
 
-            <tr class="table-row ticket-row">
+            {{-- <tr class="table-row ticket-row">
                 <td class="table-wrapper wrapper-product">
                     <div class="wrapper">
                         <div class="wrapper-img">
@@ -125,7 +125,7 @@
                         </span>
                     </div>
                 </td>
-            </tr>
+            </tr> --}}
         </tbody>
     </table>
 </div>

@@ -182,7 +182,7 @@
                         </span>
                     </div>
                     <div class="wrapper-info">
-                        <h5 class="wrapper-details about-details">Pengiriman cepat</h5>
+                        <h5 class="wrapper-details about-details">Pengiriman Cepat</h5>
                         <p>Nikmati belanja online tanpa repot dengan layanan kami! nikmati pengiriman cepat langsung ke rumah Anda
                             ambang pintu.</p>
                     </div>
