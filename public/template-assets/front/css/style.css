@@ -170,7 +170,7 @@ button {
     color: #fff;
 }
 .product {
-    padding: 6rem 0;
+    padding: 0rem 0;
 }
 @media (max-width: 1023px) {
     .product {
@@ -4064,8 +4064,8 @@ table .ticket-row:hover {
     font-size: 1.5rem;
 }
 .account-section .review-form {
-    width: 57.2rem;
-    height: 79.1rem;
+    width: 100rem;
+    height: 87rem;
 }
 .account-section .account-inner-form {
     display: flex;
