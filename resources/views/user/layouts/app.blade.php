@@ -20,6 +20,7 @@
 
 @include('user.layouts.header')
 @yield('content')
+@yield('css')
 @include('user.layouts.footer')
 
     <script src="{{asset ('template-assets/front/assets/js/jquery_3.7.1.min.js') }}"></script>
