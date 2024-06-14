@@ -465,7 +465,7 @@ button {
 }
 .modal-main {
     position: relative;
-    background: rgba(109, 100, 87, 0.35);
+    background: white;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -824,12 +824,12 @@ button {
     button {
     border: none;
     outline: none;
-    background: rgb(167, 146, 119);
+    /* background: rgb(167, 146, 119); */
     height: 100%;
     padding: 0 2rem;
     font-size: 1.5rem;
     font-weight: 500;
-    color: white;
+    color: black;
     flex: 1 1 0%;
 }
 .header-center
@@ -838,7 +838,7 @@ button {
     .modal-main
     .search-section
     input {
-    background: rgb(167, 146, 119);
+    /* background: rgb(167, 146, 119); */
     color: rgb(167, 146, 119);
 }
 .header-center
@@ -847,7 +847,7 @@ button {
     .modal-main
     .search-section
     input::placeholder {
-    color: white;
+    color: black;
 }
 .header-center
     .header-cart-items
@@ -855,7 +855,7 @@ button {
     .modal-main
     .search-section
     .shop-btn {
-    background: rgb(102, 88, 69);
+    /* background: rgb(102, 88, 69); */
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     padding: 2rem 3rem;
