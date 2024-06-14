@@ -104,7 +104,7 @@
             </tbody>
         </table>
         {{-- Detail --}}
-        <div class="modal-wrapper cart">
+        <div class="modal-wrapper cart ">
             <div onclick="modalAction('.cart')" class="anywhere-away"></div>
             <div class="login-section account-section modal-main">
                 <div class="review-form">
