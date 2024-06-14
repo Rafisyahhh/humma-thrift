@@ -28,7 +28,6 @@ Route::prefix('/debug')->group(function() {
 
 # Public Routes
 Route::view('/', 'landing.home');
-Route::view('/admin', 'layouts.app');
 
 # Seller Routes
 Route::prefix('seller')->name('seller.')->group(function() {
@@ -41,8 +40,8 @@ Route::prefix('seller')->name('seller.')->group(function() {
 });
 
 # User Routes
-Route::prefix('user')->name('user.')->group(function() {
-    // Route::view('/home', 'user.user')->name('home');
+Route::prefix('user')->middleware('role:user')->name('user.')->group(function() {
+    Route::view('/home', 'user.user')->name('home');
     Route::view('/detailproduct', 'user.detailproduct')->name('detailproduct');
     Route::view('/checkout', 'user.checkout')->name('checkout');
     Route::view('/registstore', 'user.registstore')->name('registstore');
@@ -73,6 +72,7 @@ Route::view('/about', 'Landing.about');
 Route::get('/home', \App\Http\Controllers\RedirectUserController::class)->name('home');
 
 # Admin Routes
+// Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function() {
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function() {
     Route::view('/', 'admin.index')->name('index');
     Route::resource('brand', BrandController::class);

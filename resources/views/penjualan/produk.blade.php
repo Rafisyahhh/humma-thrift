@@ -1,4 +1,4 @@
-@extends('penjualan.layouts.app')
+@extends('layouts.panel')
 
 @section('title', 'Produk')
 

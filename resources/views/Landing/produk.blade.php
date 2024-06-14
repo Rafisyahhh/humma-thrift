@@ -1,6 +1,7 @@
-@extends('Landing.layouts.app')
+@extends('layouts.home')
 
 @section('tittle', 'produk')
+
 @section('content')
 
     <section class="product product-sidebar footer-padding">
@@ -188,7 +189,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
