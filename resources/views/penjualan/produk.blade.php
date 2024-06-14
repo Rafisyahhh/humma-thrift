@@ -1,5 +1,7 @@
 @extends('penjualan.layouts.app')
+
 @section('title', 'Produk')
+
 @section('css')
     <style>
         .table-row.ticket-row:hover {
@@ -7,6 +9,7 @@
         }
     </style>
 @endsection
+
 @section('content')
     <div class="wishlist">
         <h5>Data Produk</h5>

@@ -7,7 +7,6 @@
                 </a>
             </div>
             <div class="header-cart-items">
-                {{-- If Route Is Login / Register --}}
                 @includeWhen(!request()->routeIs(['register', 'login']), 'layouts.partials.home.navbar.other-links')
                 @includeWhen(auth()->check() && auth()->user()->getUserRoleInstance()->value !== 'admin' && !request()->routeIs(['register', 'login']), 'layouts.partials.home.navbar.cart-links')
                 @include('layouts.partials.home.navbar.login-links')

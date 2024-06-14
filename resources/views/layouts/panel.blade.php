@@ -55,12 +55,9 @@
         <div class="container">
             <div class="user-profile-section">
                 <div class="user-dashboard w-100">
-                    <div class="row gx-5 w-100">
-                        <div class="col-md-3">
-                            <div class="nav d-none d-md-none d-lg-flex nav-item nav-pills w-100 flex-shrink-0 me-3" id="v-pills-tab" role="tablist"
-                                aria-orientation="vertical">
-                                @include('layouts.partials.home.sidebar-user')
-                            </div>
+                    <div class="row gx-0 gy-0 gy-md-5 gx-md-5 w-100 align-items-stretch">
+                        <div class="col-md-3 h-100">
+                            @include('layouts.partials.home.sidebar-user')
                         </div>
                         <div class="col-md-9">
                             @yield('content')

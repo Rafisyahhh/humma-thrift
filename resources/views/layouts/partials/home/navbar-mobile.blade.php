@@ -11,7 +11,7 @@
             </span>
         </button>
         <a href="index.html" class="mobile-header-logo">
-            <img src="./assets/images/logos/logo.webp" alt="logo">
+            <img src="{{ asset('template-assets/front/assets/images/logos/logo.webp') }}" alt="logo">
         </a>
         <a href="cart.html" class="header-cart cart-item">
             <span>
