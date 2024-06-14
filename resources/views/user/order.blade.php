@@ -120,7 +120,7 @@
                                 <div class="container">
                                     <div class="product-info-section">
                                         <div class="row ">
-                                            <div class="col-md-6">
+                                            <div class="col-md-5">
                                                 <div class="product-info-img" data-aos="fade-right">
                                                     <div class="swiper product-top">
                                                         <div class="swiper-wrapper">

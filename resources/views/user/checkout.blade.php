@@ -106,7 +106,7 @@
               </div>
             </div>
             <div class="checkout-wrapper">
-              <div class="account-section billing-section">
+              <div class="account-section billing-section" style="margin-top: 2.5rem;">
                 <h5 class="wrapper-heading">Daftar Order</h5>
                 <div class="order-summery">
                   <hr>

@@ -465,12 +465,18 @@ button {
 }
 .modal-main {
     position: relative;
-    background: rgb(109, 100, 87);
+    background: rgba(109, 100, 87, 0.35);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 0;
+}
+.text-white {
+    color: white;
+}
+.text-white::placeholder {
+    color: white;
 }
 .modal-main .wrapper-close-btn {
     position: absolute;
@@ -818,12 +824,12 @@ button {
     button {
     border: none;
     outline: none;
-    background: 0 0;
+    background: rgb(167, 146, 119);
     height: 100%;
     padding: 0 2rem;
     font-size: 1.5rem;
     font-weight: 500;
-    color: #797979;
+    color: white;
     flex: 1 1 0%;
 }
 .header-center
@@ -832,6 +838,7 @@ button {
     .modal-main
     .search-section
     input {
+    background: rgb(167, 146, 119);
     color: rgb(167, 146, 119);
 }
 .header-center
@@ -839,7 +846,16 @@ button {
     .header-search
     .modal-main
     .search-section
+    input::placeholder {
+    color: white;
+}
+.header-center
+    .header-cart-items
+    .header-search
+    .modal-main
+    .search-section
     .shop-btn {
+    background: rgb(102, 88, 69);
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     padding: 2rem 3rem;
@@ -3887,7 +3903,7 @@ table .ticket-row:hover {
 .billing-section {
     background: 0 0;
     padding: 2rem;
-    margin-top: 2.5rem;
+    /* margin-top: 2.5rem; */
     border: 1px solid rgba(174, 28, 154, 0.08);
     border-radius: 0.5rem;
 }
@@ -4064,8 +4080,8 @@ table .ticket-row:hover {
     font-size: 1.5rem;
 }
 .account-section .review-form {
-    width: 100rem;
-    height: 87rem;
+    width: 57.2rem;
+    height: 79.1rem;
 }
 .account-section .account-inner-form {
     display: flex;
