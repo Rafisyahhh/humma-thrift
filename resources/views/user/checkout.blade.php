@@ -79,10 +79,11 @@
                       <div class="modal-dialog" role="document">
                         <div class="modal-content" action method="post">
                           <div class="modal-header border-0">
-                            <h4 class="modal-title ms-auto">Daftar Alamat</h4><button class="btn-close" aria-label="Close"
-                              data-bs-dismiss="modal" type="button"></button>
+                            <h4 class="modal-title ms-auto">Daftar Alamat</h4>
+                            <button class="btn-close" aria-label="Close" data-bs-dismiss="modal" type="button"></button>
                           </div>
-                          <div class="modal-body d-flex flex-column gap-2"><input class="form-control" type="search" />
+                          <div class="modal-body d-flex flex-column gap-2">
+                            <input class="form-control" type="search" placeholder="Cari alamat" />
                             @foreach ($user['address'] as $item)
                               <label class="card" for="alamat{{ $item['id'] }}" role="button">
                                 <div class="card-body">
