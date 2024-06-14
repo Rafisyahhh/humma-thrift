@@ -92,7 +92,7 @@
             </tr> --}}
       </tbody>
     </table>
-    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="detailModal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="login-section account-section p-0">
