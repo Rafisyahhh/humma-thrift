@@ -63,8 +63,10 @@
                             <img src="template-assets/front/assets/images/homepage-one/product-img/product-img-4.webp"
                                 alt="img">
                         </div>
-                        <div class="wrapper-content">
-                            <h5 class="heading">Classic Party Dress</h5>
+                    </td>
+                    <td class="table-wrapper wrapper-total">
+                        <div class="table-wrapper-center">
+                            <h5 class="table-heading">TOTAL</h5>
                         </div>
                     </div>
                 </td>

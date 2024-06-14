@@ -1,11 +1,12 @@
 <!doctype html>
 <html lang="en">
-<head>  
+
+<head>
     <meta charset="utf-8">
     <meta name="keywords"
         content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template,dashboard,bootstrap-dashboard">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{{asset('template-assets/front/assets/images/homepage-one/icon.png')}}">
+    <link rel="icon" href="{{ asset('template-assets/front/assets/images/homepage-one/icon.png') }}">
 
     <title>Hummathrift - Seller</title>
 
@@ -30,7 +31,8 @@
         <div class="user-profile-section">
             <div class="user-dashboard">
                 <div class="nav nav-item nav-pills " aria-orientation="vertical">
-                    <a href="{{route('seller.home')}}" class="nav-link {{ request()->routeIs('seller.home') ? 'active' : '' }}">
+                    <a href="{{ route('seller.home') }}"
+                        class="nav-link {{ request()->routeIs('seller.home') ? 'active' : '' }}">
                         <span>
                             <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +50,8 @@
                         </span>
                         <span class="text">Dashboard</span>
                     </a>
-                    <a href="{{route('seller.product')}}" class="nav-link {{ request()->routeIs('seller.product') ? 'active' : '' }}">
+                    <a href="{{ route('seller.product') }}"
+                        class="nav-link {{ request()->routeIs('seller.product') ? 'active' : '' }}">
                         <span>
                             <svg width="15" height="18" viewBox="0 0 15 18" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +65,8 @@
                             Produk
                         </span>
                     </a>
-                    <a href="{{route('seller.transaction')}}" class="nav-link {{ request()->routeIs('seller.transaction') ? 'active' : '' }}">
+                    <a href="{{ route('seller.transaction') }}"
+                        class="nav-link {{ request()->routeIs('seller.transaction') ? 'active' : '' }}">
                         <span>
                             <svg width="16" height="14" viewBox="0 0 16 14" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -81,7 +85,8 @@
                             Data Transaksi
                         </span>
                     </a>
-                    <a href="{{route('seller.income')}}" class="nav-link {{ request()->routeIs('seller.income') ? 'active' : '' }}">
+                    <a href="{{ route('seller.income') }}"
+                        class="nav-link {{ request()->routeIs('seller.income') ? 'active' : '' }}">
                         <span>
                             <svg width="16" height="18" viewBox="0 0 16 18" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -106,7 +111,8 @@
                             Penghasilan
                         </span>
                     </a>
-                    <a href="{{route('seller.profil')}}" class="nav-link {{ request()->routeIs('seller.profil') ? 'active' : '' }}">
+                    <a href="{{ route('seller.profil') }}"
+                        class="nav-link {{ request()->routeIs('seller.profil') ? 'active' : '' }}">
                         <span>
                             <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -149,18 +155,18 @@
 
 
 
-                    @yield('content')
+                @yield('content')
 
-                </div>
             </div>
         </div>
+    </div>
     </div>
     </div>
 </section>
 @include('user.layouts.footer')
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script src="{{asset('template-assets/front/assets/js/jquery_3.7.1.min.js')}}"></script>
+<script src="{{ asset('template-assets/front/assets/js/jquery_3.7.1.min.js') }}"></script>
 
 <script src="{{ asset('template-assets/front/assets/js/bootstrap_5.3.2.bundle.min.js') }}"></script>
 

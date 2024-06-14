@@ -9,9 +9,7 @@
 
         .card.selected {
             background-color: rgb(234, 216, 192);
-            /* Ubah sesuai warna yang diinginkan */
             color: #fff;
-            /* Ubah warna teks jika diperlukan */
         }
 
         .wrapper-content {
@@ -31,15 +29,14 @@
                     <h5 class="text-center mb-4">Daftar Sebagai Penjual</h5>
                     <form method="POST" action="">
                         @csrf
-
                         <div class=" account-inner-form">
                             <div class="review-form-name">
                                 <label for="storename" class="form-label">Nama Toko</label>
-                                <input id="storename" type="text"
-                                    class="form-control @error('storename') is-invalid @enderror" name="storename"
-                                    value="{{ old('storename') }}" placeholder="Mis: Akbar Rafsyah" required
-                                    autocomplete="storename" autofocus />
-                                @error('storename')
+                                <input id="name" type="text"
+                                    class="form-control @error('name') is-invalid @enderror" name="name"
+                                    value="{{ old('name') }}" placeholder="Mis: Akbar Rafsyah" required
+                                    autocomplete="name" autofocus />
+                                @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -50,22 +47,22 @@
                             <div class="review-form-name">
                                 <div class="row">
                                     <div class="col-6">
-                                        <label for="photostore" class="form-label">Profil Toko</label>
-                                        <input id="photostore" type="file" placeholder="user@gmail.com"
-                                            class="form-control @error('photostore') is-invalid @enderror" name="photostore"
-                                            value="{{ old('photostore') }}">
-                                        @error('photostore')
+                                        <label for="store_logo" class="form-label">Profil Toko</label>
+                                        <input id="store_logo" type="file" placeholder="user@gmail.com"
+                                            class="form-control @error('store_logo') is-invalid @enderror" name="store_logo"
+                                            value="{{ old('store_logo') }}">
+                                        @error('store_logo')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
                                     <div class="col-6">
-                                        <label for="profilbanner" class="form-label">Sampul Toko</label>
-                                        <input id="profilbanner" type="file"
-                                            class="form-control @error('profilbanner') is-invalid @enderror"
-                                            name="profilbanner" required autocomplete="new-profilbanner">
-                                        @error('profilbanner')
+                                        <label for="store_cover" class="form-label">Sampul Toko</label>
+                                        <input id="store_cover" type="file"
+                                            class="form-control @error('store_cover') is-invalid @enderror"
+                                            name="store_cover" required autocomplete="new-store_cover">
+                                        @error('store_cover')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -76,11 +73,11 @@
                         </div>
                         <div class="account-inner-form">
                             <div class="review-form-name">
-                                <label for="nic" class="form-label">Nomer Identitas</label>
-                                <input id="nic" type="text" class="form-control @error('nic') is-invalid @enderror"
-                                    name="nic" value="{{ old('nic') }}" placeholder="Mis: 0077845356" required
-                                    autocomplete="nic" autofocus />
-                                @error('nic')
+                                <label for="nic_owner" class="form-label">Nomer Identitas</label>
+                                <input id="nic_owner" type="text" class="form-control @error('nic_owner') is-invalid @enderror"
+                                    name="nic_owner" value="{{ old('nic_owner') }}" placeholder="Mis: 0077845356" required
+                                    autocomplete="nic_owner" autofocus />
+                                @error('nic_owner')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
