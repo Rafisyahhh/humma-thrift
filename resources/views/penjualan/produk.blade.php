@@ -9,8 +9,9 @@
 @endsection
 @section('content')
     <div class="wishlist">
-        <h5>Data Produk</h5>
-            <a href="tambahproduk" class="shop-btn float-left mb-4" onclick="modalAction('.submit')">Tambah Produk</a>
+        <h5>Data Produk
+            <a href="tambahproduk" class="shop-btn float-end mb-4" onclick="modalAction('.submit')">Tambah Produk</a>
+        </h5>
         <div class="cart-section wishlist-section">
             <table>
                 <tbody>
@@ -54,8 +55,6 @@
                         <td class="table-wrapper">
                             <div class="table-wrapper-center">
                                 <span>
-                                    <div class="col-lg-6">
-                                        <a href="#" class="shop-btn" onclick="modalAction('.submit')">Detail</a>
 
                                     <button type="button" class="shop-btn" data-bs-toggle="modal"
                                         data-bs-target="#detailModal">
@@ -85,10 +84,7 @@
                 </tbody>
             </table>
         </div>
-        {{-- <div class="wishlist-btn">
-            <a href="#" class="clean-btn">Clean Wishlist</a>
-            <a href="#" class="shop-btn">View Cards</a>
-        </div> --}}
+      
     </div>
 
    {{-- DETAIL --}}
