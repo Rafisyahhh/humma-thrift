@@ -84,9 +84,9 @@ Route::get('/order', function () {
 Route::get('/keranjang', function () {
     return view('user.keranjang');
 })->name('keranjang');
-Route::get('/whislist', function () {
-    return view('user.whislist');
-})->name('whislist');
+Route::get('/wishlist', function () {
+    return view('user.wishlist');
+})->name('wishlist');
 
 Route::get('/shop', function () {
     return view('user.shop');

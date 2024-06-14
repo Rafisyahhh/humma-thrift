@@ -4,23 +4,22 @@
 <div class="wishlist">
     <div class="cart-content">
         <h5 class="cart-heading">Daftar Keinginan</h5>
-        {{-- <p>Order ID: <span class="inner-text">#4345</span></p> --}}
     </div>
     <div class="cart-section wishlist-section">
         <table>
             <tbody>
                 <tr class="table-row table-top-row">
                     <td class="table-wrapper wrapper-product">
-                        <h5 class="table-heading">PRODUCT</h5>
+                        <h5 class="table-heading">PRODUK</h5>
                     </td>
                     <td class="table-wrapper">
                         <div class="table-wrapper-center">
-                            <h5 class="table-heading">PRICE</h5>
+                            <h5 class="table-heading">STOK</h5>
                         </div>
                     </td>
                     <td class="table-wrapper">
                         <div class="table-wrapper-center">
-                            <h5 class="table-heading">ACTION</h5>
+                            <h5 class="table-heading">AKSI</h5>
                         </div>
                     </td>
                 </tr>
@@ -55,7 +54,7 @@
                     </td>
                 </tr>
 
-                <tr class="table-row ticket-row">
+                {{-- <tr class="table-row ticket-row">
                     <td class="table-wrapper wrapper-product">
                         <div class="wrapper">
                             <div class="wrapper-img">
@@ -84,13 +83,13 @@
                             </span>
                         </div>
                     </td>
-                </tr>
+                </tr> --}}
             </tbody>
         </table>
     </div>
-    <div class="wishlist-btn">
+    {{-- <div class="wishlist-btn">
         <a href="#" class="clean-btn">Clean Wishlist</a>
         <a href="#" class="shop-btn">View Cards</a>
-    </div>
+    </div> --}}
 </div>
 @endsection

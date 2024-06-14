@@ -1,5 +1,5 @@
 @extends('penjualan.layouts.app')
-@section('tittle', 'Produk')
+@section('title', 'Produk')
 @section('css')
     <style>
         .table-row.ticket-row:hover {
@@ -9,9 +9,8 @@
 @endsection
 @section('content')
     <div class="wishlist">
-        <h5>Data Produk
-            <a href="tambahproduk" class="shop-btn float-end mb-4" onclick="modalAction('.submit')">Tambah Produk</a>
-        </h5>
+        <h5>Data Produk</h5>
+            <a href="tambahproduk" class="shop-btn float-left mb-4" onclick="modalAction('.submit')">Tambah Produk</a>
         <div class="cart-section wishlist-section">
             <table>
                 <tbody>
@@ -58,70 +57,15 @@
                                     <div class="col-lg-6">
                                         <a href="#" class="shop-btn" onclick="modalAction('.submit')">Detail</a>
 
-                                        <div class="modal-wrapper submit">
-                                            <div onclick="modalAction('.submit')" class="anywhere-away"></div>
+                                    <button type="button" class="shop-btn" data-bs-toggle="modal"
+                                        data-bs-target="#detailModal">
+                                        Detail
+                                    </button>
 
-                                            <div class="login-section account-section modal-main">
-                                                <div class="review-form">
-                                                    <div class="review-content">
-                                                        <h5 class="comment-title">Add Your Address</h5>
-                                                        <div class="close-btn">
-                                                            <img src="./assets/images/homepage-one/close-btn.png"
-                                                                onclick="modalAction('#detailModal')" alt="close-btn">
-                                                        </div>
-                                                    </div>
-                                                    <div class="account-inner-form">
-                                                        <div class="review-form-name">
-                                                            <label for="firstname" class="form-label">First Name*</label>
-                                                            <input type="text" id="firstname" class="form-control" placeholder="First Name">
-                                                        </div>
-                                                        <div class="review-form-name">
-                                                            <label for="lastname" class="form-label">Last Name*</label>
-                                                            <input type="text" id="lastname" class="form-control" placeholder="Last Name">
-                                                        </div>
-                                                    </div>
-                                                    <div class="account-inner-form">
-                                                        <div class="review-form-name">
-                                                            <label for="useremail" class="form-label">Email*</label>
-                                                            <input type="email" id="useremail" class="form-control" placeholder="user@gmail.com">
-                                                        </div>
-                                                        <div class="review-form-name">
-                                                            <label for="userphone" class="form-label">Phone*</label>
-                                                            <input type="tel" id="userphone" class="form-control" placeholder="+880388**0899">
-                                                        </div>
-                                                    </div>
-                                                    <div class="review-form-name address-form">
-                                                        <label for="useraddress" class="form-label">Address*</label>
-                                                        <input type="text" id="useraddress" class="form-control" placeholder="Enter your Address">
-                                                    </div>
-                                                    <div class="account-inner-form city-inner-form">
-                                                        <div class="review-form-name">
-                                                            <label for="usercity" class="form-label">Town / City*</label>
-                                                            <select id="usercity" class="form-select">
-                                                                <option>Choose...</option>
-                                                                <option>Newyork</option>
-                                                                <option>Dhaka</option>
-                                                                <option selected>London</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="review-form-name">
-                                                            <label for="usernumber" class="form-label">Postcode / ZIP*</label>
-                                                            <input type="number" id="usernumber" class="form-control" placeholder="0000">
-                                                        </div>
-                                                    </div>
-                                                    <div class="login-btn text-center">
-                                                        <a href="#" onclick="modalAction('#detailModal')" class="shop-btn">Add Address</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                        {{-- <button type="button" class="shop-btn" data-bs-toggle="modal"
-                                            data-bs-target="#lelangModal">
-                                            Lelang
-                                        </button> --}}
-
+                                    <button type="button" class="shop-btn" data-bs-toggle="modal"
+                                        data-bs-target="#detailLelang">
+                                        Lelang
+                                    </button>
                                 </span>
                             </div>
                         </td>
@@ -141,46 +85,105 @@
                 </tbody>
             </table>
         </div>
-        <div class="wishlist-btn">
+        {{-- <div class="wishlist-btn">
             <a href="#" class="clean-btn">Clean Wishlist</a>
             <a href="#" class="shop-btn">View Cards</a>
-        </div>
+        </div> --}}
     </div>
 
-
-
-    <div class="modal fade" id="lelangModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+{{-- DETAIL --}}
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">NAMA PRODUK</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <table class="table ">
-                        <thead>
-                          <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama Pengguna</th>
-                            <th scope="col">Harga</th>
-                            <th scope="col">Aksi</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
+                <div class="login-section account-section p-0">
+                    <div class="review-form m-0">
+                        <div class="text-end">
+                            <div class="close-btn">
+                                <img src="{{ asset('template-assets/front/assets/images/homepage-one/close-btn.png') }}"
+                                    onclick="modalAction('.cart')" alt="close-btn">
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <h5 class="comment-title">Add New Card</h5>
+
+                        </div>
+                        <div class="review-form-name address-form">
+                            <label for="cnumber" class="form-label">Card Number*</label>
+                            <input type="number" id="cnumber" class="form-control" placeholder="*** *** ***">
+                        </div>
+                        <div class="review-form-name address-form">
+                            <label for="holdername" class="form-label">Card Holder Name*</label>
+                            <input type="text" id="holdername" class="form-control" placeholder="Demo Name">
+                        </div>
+                        <div class=" account-inner-form">
+                            <div class="review-form-name">
+                                <label for="expirydate" class="form-label">Expiry Date*</label>
+                                <input type="date" id="expirydate" class="form-control">
+                            </div>
+                            <div class="review-form-name">
+                                <label for="cvv" class="form-label">CVV*</label>
+                                <input type="number" id="cvv" class="form-control" placeholder="21232">
+                            </div>
+                        </div>
+                        <div class="login-btn text-center">
+                            <a href="#" onclick="modalAction('.cart')" class="shop-btn">Add Card</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    {{-- LELANG --}}
+    <div class="modal fade" id="detailLelang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="login-section account-section p-0">
+                    <div class="review-form m-0">
+                        <div class="text-end">
+                            <div class="close-btn">
+                                <img src="{{ asset('template-assets/front/assets/images/homepage-one/close-btn.png') }}"
+                                    onclick="modalAction('.cart')" alt="close-btn">
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <h5 class="comment-title">Add New Card</h5>
+
+                        </div>
+                        <div class="review-form-name address-form">
+                            <label for="cnumber" class="form-label">Card Number*</label>
+                            <input type="number" id="cnumber" class="form-control" placeholder="*** *** ***">
+                        </div>
+                        <div class="review-form-name address-form">
+                            <label for="holdername" class="form-label">Card Holder Name*</label>
+                            <input type="text" id="holdername" class="form-control" placeholder="Demo Name">
+                        </div>
+                        <div class=" account-inner-form">
+                            <div class="review-form-name">
+                                <label for="expirydate" class="form-label">Expiry Date*</label>
+                                <input type="date" id="expirydate" class="form-control">
+                            </div>
+                            <div class="review-form-name">
+                                <label for="cvv" class="form-label">CVV*</label>
+                                <input type="number" id="cvv" class="form-control" placeholder="21232">
+                            </div>
+                        </div>
+                        <div class="login-btn text-center">
+                            <a href="#" onclick="modalAction('.cart')" class="shop-btn">Add Card</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function modalAction(modalClass) {
+            $(modalClass).toggleClass('active');
+        }
+    </script>
 @endsection

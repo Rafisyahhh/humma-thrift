@@ -8,16 +8,12 @@
 </style>
 @endsection
 @section('content')
-
+<br>
+<br>
     <h5 class="blog-heading about-heading text-center mt-4 mb-4">Profil</h1>
-
-
         <section class="user-profile footer-padding">
             <div class="container">
                 <div class="user-profile-section">
-                    {{-- <div class="dashboard-heading ">
-                        <h5 class="dashboard-title">Dashboard</h5>
-                    </div> --}}
                     <div class="user-dashboard">
                         <div class="nav nav-item nav-pills  me-3"  aria-orientation="vertical">
                             <a href="{{ route('profil') }}" class="nav-link {{ request()->routeIs('profil') ? 'active' : '' }}">
@@ -62,7 +58,7 @@
                                 </span>
                             </a>
 
-                            <a href="{{ route('whislist') }}" class="nav-link {{ request()->routeIs('whislist') ? 'active' : '' }}" >                                <span>
+                            <a href="{{ route('wishlist') }}" class="nav-link {{ request()->routeIs('wishlist') ? 'active' : '' }}" >                                <span>
                                     <svg width="16" height="14" viewBox="0 0 16 14" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <g clip-path="url(#clip0_113_3017)">
@@ -106,13 +102,10 @@
                             </div>
                         </div>
                         <div class="tab-content nav-content" id="v-pills-tabContent" style="flex: 1 0%;">
-
-                        @yield('profil')
+                            @yield('profil')
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
     @endsection
-

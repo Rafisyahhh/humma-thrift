@@ -169,9 +169,9 @@ button {
 .shop-btn:hover span {
     color: #fff;
 }
-/* .product {
+.product {
     padding: 6rem 0;
-} */
+}
 @media (max-width: 1023px) {
     .product {
         padding: 3rem 0;
@@ -4064,8 +4064,8 @@ table .ticket-row:hover {
     font-size: 1.5rem;
 }
 .account-section .review-form {
-    width: 57.2rem;
-    height: 79.1rem;
+    width: 100rem;
+    height: 87rem;
 }
 .account-section .account-inner-form {
     display: flex;
@@ -4239,9 +4239,15 @@ table .ticket-row:hover {
 }
 .seller-application-section {
     background: #fff;
-    /* padding: 3rem 2.5rem; */
+    padding: 3rem 2.5rem;
     border-radius: 0.5rem;
 }
+
+.seller-application-section-profil {
+    background: #fff;
+    border-radius: 0.5rem;
+}
+
 .seller-application-section .row > * {
     --bs-gutter-x: 4rem;
 }
