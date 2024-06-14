@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\BrandController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +29,7 @@ Route::prefix('/debug')->group(function() {
 });
 
 Route::get('/', function () {
-    return view('landing.landing');
+    return view('landing.home');
 });
 Route::get('/admin', function () {
     return view('layouts.app');
@@ -133,7 +132,7 @@ Route::get('/about', function () {
     return view('Landing.about');
 });
 
-Route::prefix('admin')->middleware('role:admin')->name('admin.')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function () {
     Route::get('/', fn () => view('admin.index'))->name('index');
     Route::resource('brand', BrandController::class);
     Route::resource('category', ProductCategoryController::class);

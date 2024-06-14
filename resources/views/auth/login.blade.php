@@ -1,4 +1,5 @@
-@extends('layouts.auth')
+@extends('layouts.home')
+
 @section('content')
     <section class="login footer-padding">
         <div class="container">

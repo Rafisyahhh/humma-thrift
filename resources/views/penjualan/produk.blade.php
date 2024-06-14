@@ -55,16 +55,14 @@
                         <td class="table-wrapper">
                             <div class="table-wrapper-center">
                                 <span>
-
-                                        <button type="button" class="shop-btn" data-bs-toggle="modal"
-                                            data-bs-target="#detailModal">
-                                            Detail
-                                        </button>
-                                        <button type="button" class="shop-btn" data-bs-toggle="modal"
-                                            data-bs-target="#lelangModal">
-                                            Lelang
-                                        </button>
-
+                                    <button type="button" class="shop-btn" data-bs-toggle="modal"
+                                        data-bs-target="#detailModal">
+                                        Detail
+                                    </button>
+                                    <button type="button" class="shop-btn" data-bs-toggle="modal"
+                                        data-bs-target="#lelangModal">
+                                        Lelang
+                                    </button>
                                 </span>
                             </div>
                         </td>
@@ -121,21 +119,21 @@
                 <div class="modal-body">
                     <table class="table ">
                         <thead>
-                          <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama Pengguna</th>
-                            <th scope="col">Harga</th>
-                            <th scope="col">Aksi</th>
-                          </tr>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Nama Pengguna</th>
+                                <th scope="col">Harga</th>
+                                <th scope="col">Aksi</th>
+                            </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                          </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td colspan="2">Larry the Bird</td>
+                                <td>@twitter</td>
+                            </tr>
                         </tbody>
-                      </table>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
