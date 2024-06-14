@@ -4064,8 +4064,8 @@ table .ticket-row:hover {
     font-size: 1.5rem;
 }
 .account-section .review-form {
-    width: 57.2rem;
-    height: 79.1rem;
+    width: 100rem;
+    height: 87rem;
 }
 .account-section .account-inner-form {
     display: flex;
@@ -4242,6 +4242,12 @@ table .ticket-row:hover {
     padding: 3rem 2.5rem;
     border-radius: 0.5rem;
 }
+
+.seller-application-section-profil {
+    background: #fff;
+    border-radius: 0.5rem;
+}
+
 .seller-application-section .row > * {
     --bs-gutter-x: 4rem;
 }

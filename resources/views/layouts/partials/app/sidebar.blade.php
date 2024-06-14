@@ -29,15 +29,15 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
-        <li class="menu-item {{ request()->routeIs('admin') ? 'active' : '' }}">
-            <a href="{{ url('/admin') }}" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">
+            <a href="{{ route('admin.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-home"></i>
                 <div >Dasbor</div>
             </a>
         </li>
 
-        <li class="menu-item {{ request()->routeIs('admin') ? 'active' : '' }}">
-            <a href="{{ url('/admin') }}" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">
+            <a href="{{ route('admin.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-building"></i>
                 <div >Toko</div>
             </a>

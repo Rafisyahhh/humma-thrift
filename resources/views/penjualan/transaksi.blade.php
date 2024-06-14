@@ -66,9 +66,9 @@
                 </tbody>
             </table>
         </div>
-        <div class="wishlist-btn">
+        {{-- <div class="wishlist-btn">
             <a href="#" class="clean-btn">Clean Wishlist</a>
             <a href="#" class="shop-btn">View Cards</a>
-        </div>
+        </div> --}}
     </div>
 @endsection

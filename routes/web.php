@@ -67,6 +67,12 @@ Route::get('/user/home', function () {
 Route::get('/detailproduct', function () {
     return view('user.detailproduct');
 });
+Route::get('/checkout', function () {
+    return view('user.checkout');
+});
+Route::get('/registstore', function () {
+    return view('user.registstore');
+});
 
 Route::get('/profil', function () {
     return view('user.profil');
@@ -77,9 +83,9 @@ Route::get('/order', function () {
 Route::get('/keranjang', function () {
     return view('user.keranjang');
 })->name('keranjang');
-Route::get('/whislist', function () {
-    return view('user.whislist');
-})->name('whislist');
+Route::get('/wishlist', function () {
+    return view('user.wishlist');
+})->name('wishlist');
 
 Route::get('/shop', function () {
     return view('user.shop');
