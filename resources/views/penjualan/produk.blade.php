@@ -159,7 +159,7 @@
     {{-- LELANG --}}
     <div class="modal fade" id="detailLelang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
         style="height: 99%;">
-        <div class="modal-dialog">
+        <div class="modal-dialog" style="margin-left: auto;">
             {{-- <div class="modal-content"> --}}
                 <div class="login-section account-section p-0">
                     <div class="review-form m-0 " style="height: 80%; width: 75rem;">
