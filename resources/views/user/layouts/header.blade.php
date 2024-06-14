@@ -16,7 +16,7 @@
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M13.9708 16.4151C12.5227 17.4021 10.9758 17.9723 9.27353 18.0062C5.58462 18.0802 2.75802 16.483 1.05056 13.1945C-1.76315 7.77253 1.33485 1.37571 7.25086 0.167548C12.2281 -0.848249 17.2053 2.87895 17.7198 7.98579C17.9182 9.95558 17.5566 11.7939 16.5852 13.5061C16.4512 13.742 16.483 13.8725 16.6651 14.0553C18.2412 15.6386 19.8112 17.2272 21.3735 18.8244C22.1826 19.6513 22.2058 20.7559 21.456 21.4932C20.7697 22.1678 19.7047 22.1747 18.9764 21.4793C18.3623 20.8917 17.7774 20.2737 17.1796 19.6688C16.118 18.5929 15.0564 17.5153 13.9708 16.4151ZM2.89545 9.0364C2.91692 12.4172 5.59664 15.1164 8.91967 15.1042C12.2384 15.092 14.9138 12.3493 14.8889 8.98505C14.864 5.63213 12.1826 2.92508 8.89047 2.92857C5.58204 2.93118 2.87397 5.68958 2.89545 9.0364Z"
-                                            fill="black" />
+                                            fill="white" />
                                     </svg>
                                 </span>
                             </button>
@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="header-favourite">
-                            <a href="{{ route('whislist') }}" class="cart-item">
+                            <a href="{{ route('wishlist') }}" class="cart-item">
                                 <span>
                                     <svg width="35" height="27" viewBox="0 0 35 27" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -94,7 +94,7 @@
                                     <div class="wrapper">
                                         <div class="wrapper-item">
                                             <div class="wrapper-img">
-                                                <img src="assets/images/homepage-one/product-img/product-img-1.webp"
+                                                <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                                     alt="img">
                                             </div>
                                             <div class="wrapper-content">
@@ -116,57 +116,13 @@
                                     <div class="wrapper">
                                         <div class="wrapper-item">
                                             <div class="wrapper-img">
-                                                <img src="assets/images/homepage-one/product-img/product-img-2.webp"
+                                                <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-img-2.webp') }}"
                                                     alt="img">
                                             </div>
                                             <div class="wrapper-content">
                                                 <h5 class="wrapper-title">Black Suit</h5>
                                                 <div class="price">
                                                     <p class="new-price">$10.00</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <span class="close-btn">
-                                            <svg viewBox="0 0 10 10" fill="none" class="fill-current"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z">
-                                                </path>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <div class="wrapper">
-                                        <div class="wrapper-item">
-                                            <div class="wrapper-img">
-                                                <img src="assets/images/homepage-one/product-img/product-img-3.webp"
-                                                    alt="img">
-                                            </div>
-                                            <div class="wrapper-content">
-                                                <h5 class="wrapper-title">Blue Party Dress</h5>
-                                                <div class="price">
-                                                    <p class="new-price">$15.00</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <span class="close-btn">
-                                            <svg viewBox="0 0 10 10" fill="none" class="fill-current"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z">
-                                                </path>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <div class="wrapper">
-                                        <div class="wrapper-item">
-                                            <div class="wrapper-img">
-                                                <img src="assets/images/homepage-one/product-img/product-img-4.webp"
-                                                    alt="img">
-                                            </div>
-                                            <div class="wrapper-content">
-                                                <h5 class="wrapper-title">Classic Red Dress</h5>
-                                                <div class="price">
-                                                    <p class="new-price">$18.00</p>
                                                 </div>
                                             </div>
                                         </div>
