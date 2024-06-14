@@ -176,19 +176,19 @@
                                     </div>
                                     <div class="product-info">
                                         <div class="product-description">
-                                            <a href="product-info.html" class="product-details">Nama Produk
+                                            <a href="product-info.html" class="product-details">Vintage Clothes
                                             </a>
                                             <div class="price">
-                                                <span class="new-price">Harga</span>
+                                                <span class="new-price">$12.23</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="product-cart-btn">
-                                        <a href="cart.html" class="product-btn">Masukkan Keranjang</a>
+                                        <a href="cart.html" class="product-btn">Beli Sekarang</a>
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
