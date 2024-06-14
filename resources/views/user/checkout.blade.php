@@ -1,3 +1,51 @@
+@php
+  $user = [
+      'name' => 'SyauqiAli',
+      'address' => [
+          [
+              'id' => 2,
+              'title' => 'Rumah',
+              'address' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, quisquam?',
+          ],
+          [
+              'id' => 6,
+              'title' => 'Home',
+              'address' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, quisquam?',
+          ],
+      ],
+  ];
+  $products = [
+      [
+          'cover_image' => 'https://placehold.co/400',
+          'title' => 'Apple Watch X1',
+          'description' => '64GB, Black, 44mm, Chain Belt',
+          'price' => 10,
+      ],
+      [
+          'cover_image' => 'https://placehold.co/400',
+          'title' => 'Apple Watch X1',
+          'description' => '64GB, Black, 44mm, Chain Belt',
+          'price' => 10,
+      ],
+      [
+          'cover_image' => 'https://placehold.co/400',
+          'title' => 'Apple Watch X1',
+          'description' => '64GB, Black, 44mm, Chain Belt',
+          'price' => 10,
+      ],
+      [
+          'cover_image' => 'https://placehold.co/400',
+          'title' => 'Apple Watch X1',
+          'description' => '64GB, Black, 44mm, Chain Belt',
+          'price' => 10,
+      ],
+  ];
+  $prices = array_column($products, 'price');
+
+  // Menghitung total harga
+  $total_price = array_sum($prices);
+@endphp
+
 @extends('user.layouts.app')
 @section('tittle', 'Checkout')
 @section('content')
@@ -28,37 +76,27 @@
                     </h5>
                   </div>
                   <div>
-                    <button class="border btn" type="button" data-bs-toggle="modal" data-bs-target="#modal-1">Ganti
+                    <button class="border btn btn" type="button" data-bs-toggle="modal" data-bs-target="#modal-1">Ganti
                       alamat</button>
                     {{-- Modal --}}
                     <div id="modal-1" class="modal fade" role="dialog" tabindex="-1">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content" action method="post">
                           <div class="modal-header border-0">
-                            <h4 class="modal-title ms-auto">Daftar Alamat</h4><button class="btn-close" aria-label="Close"
-                              data-bs-dismiss="modal" type="button"></button>
+                            <h4 class="modal-title ms-auto">Daftar Alamat</h4>
+                            <button class="btn-close" aria-label="Close" data-bs-dismiss="modal" type="button"></button>
                           </div>
-                          <div class="modal-body d-flex flex-column gap-2"><input class="form-control" type="search" />
-                            <label class="card" for="alamat" role="button">
-                              <div class="card-body">
-                                <h4 class="card-title">Rumah</h4>
-                                <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo
-                                  odio, dapibus
-                                  ac
-                                  facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                              </div>
-                              <input type="radio" id="alamat" name="alamat" class="d-none">
-                            </label>
-                            <label class="card" for="alamat2">
-                              <div class="card-body">
-                                <h4 class="card-title">Rumah</h4>
-                                <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo
-                                  odio, dapibus
-                                  ac
-                                  facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                              </div>
-                              <input type="radio" id="alamat2" name="alamat" class="d-none">
-                            </label>
+                          <div class="modal-body d-flex flex-column gap-2">
+                            <input class="form-control" type="search" placeholder="Cari alamat" />
+                            @foreach ($user['address'] as $item)
+                              <label class="card" for="alamat{{ $item['id'] }}" role="button">
+                                <div class="card-body">
+                                  <h4 class="card-title">{{ $item['title'] }}</h4>
+                                  <p class="card-text">{{ $item['address'] }}</p>
+                                </div>
+                                <input type="radio" id="alamat{{ $item['id'] }}" name="alamat" class="d-none">
+                              </label>
+                            @endforeach
                           </div>
                         </div>
                       </div>
@@ -68,13 +106,13 @@
               </div>
             </div>
             <div class="checkout-wrapper">
-              <div class="account-section billing-section">
+              <div class="account-section billing-section" style="margin-top: 2.5rem;">
                 <h5 class="wrapper-heading">Daftar Order</h5>
                 <div class="order-summery">
                   <hr>
                   <div class="subtotal product-total">
                     <ul class="product-list">
-                      @foreach ([['cover_image' => 'https://placehold.co/400', 'title' => 'Apple Watch X1', 'description' => '64GB, Black, 44mm, Chain Belt', 'price' => '10'], ['cover_image' => 'https://placehold.co/400', 'title' => 'Apple Watch X1', 'description' => '64GB, Black, 44mm, Chain Belt', 'price' => '10'], ['cover_image' => 'https://placehold.co/400', 'title' => 'Apple Watch X1', 'description' => '64GB, Black, 44mm, Chain Belt', 'price' => '10'], ['cover_image' => 'https://placehold.co/400', 'title' => 'Apple Watch X1', 'description' => '64GB, Black, 44mm, Chain Belt', 'price' => '10']] as $item)
+                      @foreach ($products as $item)
                         <li>
                           <div class="d-flex gap-3">
                             <img src="{{ $item['cover_image'] }}" width="40" />
@@ -101,11 +139,11 @@
                 <div class="order-summery">
                   <div class="subtotal product-total">
                     <h5 class="wrapper-heading">Total Harga</h5>
-                    <h5 class="wrapper-heading">$365</h5>
+                    <h5 class="wrapper-heading">${{ $total_price }}</h5>
                   </div>
                   <div class="subtotal total">
                     <h5 class="wrapper-heading">Total Belanja</h5>
-                    <h5 class="wrapper-heading price">$365</h5>
+                    <h5 class="wrapper-heading price">${{ $total_price }}</h5>
                   </div>
                   <button type="button" class="shop-btn">Place Order Now</button>
                 </div>
