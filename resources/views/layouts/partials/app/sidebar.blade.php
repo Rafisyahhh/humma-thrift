@@ -36,8 +36,8 @@
             </a>
         </li>
 
-        <li class="menu-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">
-            <a href="{{ route('admin.index') }}" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('/admin') ? 'active' : '' }}">
+            <a href="{{ url('/admin') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-building"></i>
                 <div >Toko</div>
             </a>

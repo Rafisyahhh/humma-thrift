@@ -49,7 +49,7 @@
                         </td>
                         <td class="table-wrapper">
                             <div class="table-wrapper-center">
-                                <h5 class="heading">$20.00</h5>
+                                <h5 class="heading">Rp.100.000,00 - 200.000,00</h5>
                             </div>
                         </td>
                         <td class="table-wrapper">
@@ -90,89 +90,136 @@
         </div>
     </div>
 
-{{-- DETAIL --}}
-    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="login-section account-section p-0">
-                    <div class="review-form m-0">
-                        <div class="text-end">
-                            <div class="close-btn">
-                                <img src="{{ asset('template-assets/front/assets/images/homepage-one/close-btn.png') }}"
-                                    onclick="modalAction('.cart')" alt="close-btn">
-                            </div>
-                        </div>
-                        <div class="review-content">
-                            <h5 class="comment-title">Add New Card</h5>
+   {{-- DETAIL --}}
+   <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+   style="height: 99%;">
+   <div class="modal-dialog">
+       <div class="modal-content">
+           <div class="login-section account-section p-0">
+               <div class="review-form m-0" style="height: 80%; width: 95rem;">
+                   <div class="text-end">
+                       <div class="close-btn">
 
-                        </div>
-                        <div class="review-form-name address-form">
-                            <label for="cnumber" class="form-label">Card Number*</label>
-                            <input type="number" id="cnumber" class="form-control" placeholder="*** *** ***">
-                        </div>
-                        <div class="review-form-name address-form">
-                            <label for="holdername" class="form-label">Card Holder Name*</label>
-                            <input type="text" id="holdername" class="form-control" placeholder="Demo Name">
-                        </div>
-                        <div class=" account-inner-form">
-                            <div class="review-form-name">
-                                <label for="expirydate" class="form-label">Expiry Date*</label>
-                                <input type="date" id="expirydate" class="form-control">
-                            </div>
-                            <div class="review-form-name">
-                                <label for="cvv" class="form-label">CVV*</label>
-                                <input type="number" id="cvv" class="form-control" placeholder="21232">
-                            </div>
-                        </div>
-                        <div class="login-btn text-center">
-                            <a href="#" onclick="modalAction('.cart')" class="shop-btn">Add Card</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                           <button type="button" class="btn-close" data-bs-dismiss="modal"
+                               aria-label="Close"></button>
+
+                       </div>
+                   </div>
+
+
+                   <section class="product product-info" style="width:85rem; height:60%;">
+                       {{-- <div class="container">
+                           <div class="product-info-section"> --}}
+                               <div class="row ">
+                                   <div class="col-md-6">
+                                       <div class="product-info-img" data-aos="fade-right">
+                                           <div class="swiper product-top" style="height:50rem;">
+                                               <div class="swiper-wrapper">
+                                                   <div class="swiper-slide slider-top-img" >
+                                                       <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
+                                                           alt="img">
+                                                   </div>
+                                               </div>
+                                           </div>
+
+                                       </div>
+                                   </div>
+                                   <div class="col-md-6">
+                                       <div class="product-info-content" data-aos="fade-left">
+                                           <h5>Classic Design Skart</h5>
+                                           <div class="price">
+                                               <span class="new-price">Rp.100.000,00 - 200.000,00</span>
+                                           </div>
+                                           <hr>
+
+                                           <div class="product-details">
+                                               <p class="fs-2">Kategori : <span class="inner-text">Dress</span></p>
+                                               <p class="fs-2">Brand : <span class="inner-text">Adidas</span></p>
+                                               <p class="fs-2">Ukuran : <span class="inner-text">XL</span></p>
+                                               <p class="fs-2">Stok : <span class="inner-text">2</span></p>
+                                               <p class="fs-2">Deskripsi : <span class="inner-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet cumque perferendis libero nesciunt minima odio autem ratione quia, eligendi temporibus!</span></p>
+                                               <b>
+                                                   <p class="fs-2">Status : <span class="inner-text">Diterima</span>
+                                                   </p>
+                                               </b>
+                                           </div>
+                                           <hr>
+                                       </div>
+                                   </div>
+                               </div>
+                           {{-- </div>
+                       </div> --}}
+                   </section>
+
+
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
 
     {{-- LELANG --}}
-    <div class="modal fade" id="detailLelang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="detailLelang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        style="height: 99%;">
         <div class="modal-dialog">
-            <div class="modal-content">
+            {{-- <div class="modal-content"> --}}
                 <div class="login-section account-section p-0">
-                    <div class="review-form m-0">
-                        <div class="text-end">
+                    <div class="review-form m-0 " style="height: 80%; width: 75rem;">
+                        <div class="text-end mb-4">
                             <div class="close-btn">
-                                <img src="{{ asset('template-assets/front/assets/images/homepage-one/close-btn.png') }}"
-                                    onclick="modalAction('.cart')" alt="close-btn">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
                         </div>
-                        <div class="review-content">
-                            <h5 class="comment-title">Add New Card</h5>
+                        <table  style="width:65rem;">
+                            <tbody>
+                                <tr class="table-row table-top-row">
+                                    <td class="table-wrapper">
+                                        <div class="table-wrapper-center">
 
-                        </div>
-                        <div class="review-form-name address-form">
-                            <label for="cnumber" class="form-label">Card Number*</label>
-                            <input type="number" id="cnumber" class="form-control" placeholder="*** *** ***">
-                        </div>
-                        <div class="review-form-name address-form">
-                            <label for="holdername" class="form-label">Card Holder Name*</label>
-                            <input type="text" id="holdername" class="form-control" placeholder="Demo Name">
-                        </div>
-                        <div class=" account-inner-form">
-                            <div class="review-form-name">
-                                <label for="expirydate" class="form-label">Expiry Date*</label>
-                                <input type="date" id="expirydate" class="form-control">
-                            </div>
-                            <div class="review-form-name">
-                                <label for="cvv" class="form-label">CVV*</label>
-                                <input type="number" id="cvv" class="form-control" placeholder="21232">
-                            </div>
-                        </div>
-                        <div class="login-btn text-center">
-                            <a href="#" onclick="modalAction('.cart')" class="shop-btn">Add Card</a>
-                        </div>
+                                            <h5 class="table-heading">PRODUK</h5>
+                                        </div>
+                                    </td>
+                                    <td class="table-wrapper">
+                                        <div class="table-wrapper-center">
+                                            <h5 class="table-heading">HARGA</h5>
+                                        </div>
+                                    </td>
+                                    <td class="table-wrapper">
+                                        <div class="table-wrapper-center">
+                                            <h5 class="table-heading">AKSI</h5>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="table-row ticket-row">
+                                    <td class="table-wrapper">
+                                        <div class="table-wrapper-center">
+                                            <h5 class="heading">Classic Design Skart</h5>
+                                        </div>
+                                    </td>
+                                    <td class="table-wrapper">
+                                        <div class="table-wrapper-center">
+                                            <h5 class="heading">Rp.100.000,00 - 200.000,00</h5>
+                                        </div>
+                                    </td>
+
+                                    <td class="table-wrapper">
+                                        <div class="table-wrapper-center">
+                                            <a href="#">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                                    viewBox="0 0 24 24">
+                                                    <path fill="currentColor"
+                                                        d="m9.55 17.308l-4.97-4.97l.714-.713l4.256 4.256l9.156-9.156l.713.714z" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
     </div>
 
