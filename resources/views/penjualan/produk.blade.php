@@ -5,6 +5,14 @@
         .table-row.ticket-row:hover {
             background: rgba(167, 146, 119, 0.40) !important;
         }
+
+        /* @media (min-width: 576px) {
+            .modal-dialog {
+                max-width: var(--bs-modal-width);
+                margin-right: auto;
+                margin-left: auto;
+            }
+        } */
     </style>
 @endsection
 @section('content')
@@ -84,73 +92,72 @@
         </div>
     </div>
 
-   {{-- DETAIL --}}
-   <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-   style="height: 99%;">
-   <div class="modal-dialog">
-       <div class="modal-content">
-           <div class="login-section account-section p-0" >
-               <div class="review-form m-0" style="height: 80%; width: 95rem;">
-                   <div class="text-end">
-                       <div class="close-btn">
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    style="height: 99%;">
+    <div class="modal-dialog" style="margin-left: auto;">
+        {{-- <div class="modal-content"> --}}
+            <div class="login-section account-section p-0">
+                <div class="review-form m-0" style="height: 80%; width: 95rem;">
+                    <div class="text-end mb-4">
+                        <div class="close-btn">
 
-                           <button type="button" class="btn-close" data-bs-dismiss="modal"
-                               aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
 
-                       </div>
-                   </div>
-
-
-                   <section class="product product-info" style="width:85rem; height:60%;">
-                       {{-- <div class="container">
-                           <div class="product-info-section"> --}}
-                               <div class="row ">
-                                   <div class="col-md-6">
-                                       <div class="product-info-img" data-aos="fade-right">
-                                           <div class="swiper product-top" style="height:50rem;">
-                                               <div class="swiper-wrapper">
-                                                   <div class="swiper-slide slider-top-img" >
-                                                       <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
-                                                           alt="img">
-                                                   </div>
-                                               </div>
-                                           </div>
-
-                                       </div>
-                                   </div>
-                                   <div class="col-md-6">
-                                       <div class="product-info-content" data-aos="fade-left">
-                                           <h5>Classic Design Skart</h5>
-                                           <div class="price">
-                                               <span class="new-price">Rp.100.000,00 - 200.000,00</span>
-                                           </div>
-                                           <hr>
-
-                                           <div class="product-details">
-                                               <p class="fs-2">Kategori : <span class="inner-text">Dress</span></p>
-                                               <p class="fs-2">Brand : <span class="inner-text">Adidas</span></p>
-                                               <p class="fs-2">Ukuran : <span class="inner-text">XL</span></p>
-                                               <p class="fs-2">Stok : <span class="inner-text">2</span></p>
-                                               <p class="fs-2">Deskripsi : <span class="inner-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet cumque perferendis libero nesciunt minima odio autem ratione quia, eligendi temporibus!</span></p>
-                                               <b>
-                                                   <p class="fs-2">Status : <span class="inner-text">Diterima</span>
-                                                   </p>
-                                               </b>
-                                           </div>
-                                           <hr>
-                                       </div>
-                                   </div>
-                               </div>
-                           {{-- </div>
-                       </div> --}}
-                   </section>
+                        </div>
+                    </div>
 
 
-               </div>
-           </div>
-       </div>
-   </div>
-</div>
+                    <section class="product product-info" style="width:85rem; height:60%;">
+                        {{-- <div class="container">
+                            <div class="product-info-section"> --}}
+                                <div class="row ">
+                                    <div class="col-md-6">
+                                        <div class="product-info-img" data-aos="fade-right">
+                                            <div class="swiper product-top" style="height:50rem;">
+                                                <div class="swiper-wrapper">
+                                                    <div class="swiper-slide slider-top-img" >
+                                                        <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
+                                                            alt="img">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="product-info-content" data-aos="fade-left">
+                                            <h5>Classic Design Skart</h5>
+                                            <div class="price">
+                                                <span class="new-price">Rp.100.000,00 - 200.000,00</span>
+                                            </div>
+                                            <hr>
+
+                                            <div class="product-details">
+                                                <p class="fs-2">Kategori : <span class="inner-text">Dress</span></p>
+                                                <p class="fs-2">Brand : <span class="inner-text">Adidas</span></p>
+                                                <p class="fs-2">Ukuran : <span class="inner-text">XL</span></p>
+                                                <p class="fs-2">Stok : <span class="inner-text">2</span></p>
+                                                <p class="fs-2">Deskripsi : <span class="inner-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet cumque perferendis libero nesciunt minima odio autem ratione quia, eligendi temporibus!</span></p>
+                                                <b>
+                                                    <p class="fs-2">Status : <span class="inner-text">Diterima</span>
+                                                    </p>
+                                                </b>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{-- </div>
+                        </div> --}}
+                    </section>
+
+
+                </div>
+            </div>
+        {{-- </div> --}}
+    </div>
+ </div>
 
     {{-- LELANG --}}
     <div class="modal fade" id="detailLelang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
