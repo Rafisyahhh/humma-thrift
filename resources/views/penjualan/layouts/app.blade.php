@@ -172,7 +172,6 @@
 
 <script src="{{ asset('template-assets/front/assets/js/shopus.js') }}"></script>
 
-
 @yield('script')
 
 </body>

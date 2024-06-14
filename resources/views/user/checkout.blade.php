@@ -19,27 +19,31 @@
           'cover_image' => 'https://placehold.co/400',
           'title' => 'Apple Watch X1',
           'description' => '64GB, Black, 44mm, Chain Belt',
-          'price' => '10',
+          'price' => 10,
       ],
       [
           'cover_image' => 'https://placehold.co/400',
           'title' => 'Apple Watch X1',
           'description' => '64GB, Black, 44mm, Chain Belt',
-          'price' => '10',
+          'price' => 10,
       ],
       [
           'cover_image' => 'https://placehold.co/400',
           'title' => 'Apple Watch X1',
           'description' => '64GB, Black, 44mm, Chain Belt',
-          'price' => '10',
+          'price' => 10,
       ],
       [
           'cover_image' => 'https://placehold.co/400',
           'title' => 'Apple Watch X1',
           'description' => '64GB, Black, 44mm, Chain Belt',
-          'price' => '10',
+          'price' => 10,
       ],
   ];
+  $prices = array_column($products, 'price');
+
+  // Menghitung total harga
+  $total_price = array_sum($prices);
 @endphp
 
 @extends('user.layouts.app')
@@ -72,7 +76,7 @@
                     </h5>
                   </div>
                   <div>
-                    <button class="border btn" type="button" data-bs-toggle="modal" data-bs-target="#modal-1">Ganti
+                    <button class="border btn btn" type="button" data-bs-toggle="modal" data-bs-target="#modal-1">Ganti
                       alamat</button>
                     {{-- Modal --}}
                     <div id="modal-1" class="modal fade" role="dialog" tabindex="-1">
@@ -135,11 +139,11 @@
                 <div class="order-summery">
                   <div class="subtotal product-total">
                     <h5 class="wrapper-heading">Total Harga</h5>
-                    <h5 class="wrapper-heading">$365</h5>
+                    <h5 class="wrapper-heading">${{ $total_price }}</h5>
                   </div>
                   <div class="subtotal total">
                     <h5 class="wrapper-heading">Total Belanja</h5>
-                    <h5 class="wrapper-heading price">$365</h5>
+                    <h5 class="wrapper-heading price">${{ $total_price }}</h5>
                   </div>
                   <button type="button" class="shop-btn">Place Order Now</button>
                 </div>
