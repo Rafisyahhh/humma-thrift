@@ -54,6 +54,8 @@
                         <td class="table-wrapper">
                             <div class="table-wrapper-center">
                                 <span>
+                                    <div class="col-lg-6">
+                                        <a href="#" class="shop-btn" onclick="modalAction('.submit')">Detail</a>
 
                                     <button type="button" class="shop-btn" data-bs-toggle="modal"
                                         data-bs-target="#detailModal">

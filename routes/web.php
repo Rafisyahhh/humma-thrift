@@ -78,12 +78,15 @@ Route::get('/registstore', function () {
 Route::get('/profil', function () {
     return view('user.profil');
 })->name('profil');
+
 Route::get('/order', function () {
     return view('user.order');
 })->name('order');
+
 Route::get('/keranjang', function () {
     return view('user.keranjang');
 })->name('keranjang');
+
 Route::get('/wishlist', function () {
     return view('user.wishlist');
 })->name('wishlist');

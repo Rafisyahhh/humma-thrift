@@ -92,7 +92,7 @@
             </tr> --}}
       </tbody>
     </table>
-    <div class="modal fade" id="detailModal" tabindex="-1">
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="login-section account-section p-0">
@@ -169,7 +169,8 @@
                           <p class="content-paragraph">Deskripsi Produk
                             <hr>
                           <div class="product-details">
-                            <p class="category"> Ukuran : <span class="inner-text">xxl</span></p>
+                            <p class="category"> Ukuran : <span class="inner-text">xxl</span>
+                            </p>
                           </div>
                           <hr>
                           <div class="product-share">
