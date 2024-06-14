@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="header-favourite">
-                            <a href="{{ route('wishlist') }}" class="cart-item">
+                            <a href="{{ route('user.wishlist') }}" class="cart-item">
                                 <span>
                                     <svg width="35" height="27" viewBox="0 0 35 27" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +66,7 @@
                             </a>
                         </div>
                         <div class="header-cart">
-                            <a href="{{ route('keranjang') }}" class="cart-item">
+                            <a href="{{ route('user.cart') }}" class="cart-item">
                                 <span>
                                     <svg width="35" height="28" viewBox="0 0 35 28" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">

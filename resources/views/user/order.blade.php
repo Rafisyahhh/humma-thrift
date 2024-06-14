@@ -1,6 +1,6 @@
-@extends('user.layouts.profile')
+@extends('layouts.panel')
 
-@section('profil')
+@section('content')
     <div class="cart-section">
         <table>
             <tbody>

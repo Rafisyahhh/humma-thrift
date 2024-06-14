@@ -1,7 +1,8 @@
-@extends('user.layouts.app')
-@section('tittle', 'User')
-@section('content')
+@extends('layouts.panel')
 
+@section('tittle', 'User')
+
+@section('content')
     <section id="hero" class="hero">
         <div class="swiper hero-swiper">
             <div class="swiper-wrapper hero-wrapper">
