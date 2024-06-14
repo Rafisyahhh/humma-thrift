@@ -1,6 +1,7 @@
-@extends('Landing.layouts.app')
+@extends('layouts.home')
 
-@section('tittle', 'brand')
+@section('title', 'Brand')
+
 @section('content')
 <section class="blog about-blog">
     <div class="col-lg-5 mx-5 mb-5 ">

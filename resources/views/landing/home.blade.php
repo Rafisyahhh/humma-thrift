@@ -1,5 +1,7 @@
 @extends('layouts.home')
 
+@section('title', 'Beranda')
+
 @section('content')
     <section id="hero" class="hero">
         <div class="swiper hero-swiper">

@@ -22,8 +22,8 @@ Auth::routes(['verify' => true]);
 
 # Debug Routes
 Route::prefix('/debug')->group(function() {
-    Route::get('home', fn() => view('debug.home'));
-    Route::get('modal', fn() => view('debug.modal'));
+    Route::view('home', 'debug.home');
+    Route::view('modal', 'debug.modal');
 });
 
 # Public Routes
@@ -62,11 +62,11 @@ Route::prefix('dev')->group(function() {
 });
 
 # Landing Pages
-Route::view('/produk', 'Landing.produk');
-Route::view('/brandindex', 'Landing.brand');
-Route::view('/toko', 'Landing.toko');
-Route::view('/detail', 'Landing.detail');
-Route::view('/about', 'Landing.about');
+Route::view('/produk', 'landing.produk');
+Route::view('/brandindex', 'landing.brand');
+Route::view('/toko', 'landing.toko');
+Route::view('/detail', 'landing.detail');
+Route::view('/about-us', 'landing.about');
 
 # Home Redirect
 Route::get('/home', \App\Http\Controllers\RedirectUserController::class)->name('home');
