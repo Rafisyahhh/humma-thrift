@@ -73,7 +73,7 @@ Route::get('/checkout', function () {
 });
 Route::get('/registstore', function () {
     return view('user.registstore');
-});
+})->name('registstore');
 
 Route::get('/profil', function () {
     return view('user.profil');

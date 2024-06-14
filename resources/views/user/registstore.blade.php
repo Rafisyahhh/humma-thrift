@@ -9,9 +9,7 @@
 
         .card.selected {
             background-color: rgb(234, 216, 192);
-            /* Ubah sesuai warna yang diinginkan */
             color: #fff;
-            /* Ubah warna teks jika diperlukan */
         }
 
         .wrapper-content {
@@ -101,7 +99,7 @@
                             </div>
                         </div>
                         <div class="login-btn text-center">
-                            <button type="submit" class="shop-btn">Daftar</button>
+                            <a href="{{ route('seller.home') }}" type="submit" class="shop-btn">Daftar</a>
                         </div>
                     </form>
                 </div>

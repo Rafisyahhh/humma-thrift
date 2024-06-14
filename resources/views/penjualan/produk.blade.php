@@ -82,10 +82,6 @@
                 </tbody>
             </table>
         </div>
-        {{-- <div class="wishlist-btn">
-            <a href="#" class="clean-btn">Clean Wishlist</a>
-            <a href="#" class="shop-btn">View Cards</a>
-        </div> --}}
     </div>
 
    {{-- DETAIL --}}
@@ -93,7 +89,7 @@
    style="height: 99%;">
    <div class="modal-dialog">
        <div class="modal-content">
-           <div class="login-section account-section p-0">
+           <div class="login-section account-section p-0" >
                <div class="review-form m-0" style="height: 80%; width: 95rem;">
                    <div class="text-end">
                        <div class="close-btn">
@@ -160,7 +156,7 @@
     <div class="modal fade" id="detailLelang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
         style="height: 99%;">
         <div class="modal-dialog">
-            {{-- <div class="modal-content"> --}}
+            <div class="modal-content">
                 <div class="login-section account-section p-0">
                     <div class="review-form m-0 " style="height: 80%; width: 75rem;">
                         <div class="text-end mb-4">
@@ -175,7 +171,7 @@
                                     <td class="table-wrapper">
                                         <div class="table-wrapper-center">
 
-                                            <h5 class="table-heading">PRODUK</h5>
+                                            <h5 class="table-heading">Pembeli</h5>
                                         </div>
                                     </td>
                                     <td class="table-wrapper">
@@ -192,12 +188,12 @@
                                 <tr class="table-row ticket-row">
                                     <td class="table-wrapper">
                                         <div class="table-wrapper-center">
-                                            <h5 class="heading">Classic Design Skart</h5>
+                                            <h5 class="heading">Hilma</h5>
                                         </div>
                                     </td>
                                     <td class="table-wrapper">
                                         <div class="table-wrapper-center">
-                                            <h5 class="heading">Rp.100.000,00 - 200.000,00</h5>
+                                            <h5 class="heading">Rp.120.000,00</h5>
                                         </div>
                                     </td>
 
@@ -217,7 +213,7 @@
                         </table>
                     </div>
                 </div>
-            {{-- </div> --}}
+            </div>
         </div>
     </div>
 
