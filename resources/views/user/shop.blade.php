@@ -1,4 +1,4 @@
-@extends('layouts.panel')
+@extends('layouts.home')
 @section('tittle', 'Shop')
 @section('content')
 
@@ -211,7 +211,7 @@
                                                     </svg>
                                                 </span>
                                             </a> --}}
-                                            <a href="wishlist" class="favourite cart-item">
+                                            <a href="/user/wishlist" class="favourite cart-item">
                                                 <span>
                                                     <svg width="40" height="40" viewBox="0 0 40 40"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -223,7 +223,7 @@
                                                     </svg>
                                                 </span>
                                             </a>
-                                            <a href="/checkout" class="compaire cart-item">
+                                            <a href="/user/checkout" class="compaire cart-item">
                                                 <span>
                                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <rect width="40" height="40" rx="20" fill="white" />
@@ -237,7 +237,7 @@
                                     </div>
                                     <div class="product-info">
                                         <div class="product-description">
-                                            <a href="/detailproduct" class="product-details">Flower Design Skart
+                                            <a href="/user/detailproduct" class="product-details">Flower Design Skart
                                             </a>
                                             <div class="price">
                                                 <span class="new-price">$15.99</span>
@@ -245,7 +245,7 @@
                                         </div>
                                     </div>
                                     <div class="product-cart-btn">
-                                        <a href="cart.html" class="product-btn">Beli sekarang</a>
+                                        <a href="/user/checkout" class="product-btn">Beli sekarang</a>
                                     </div>
                                 </div>
                             </div>

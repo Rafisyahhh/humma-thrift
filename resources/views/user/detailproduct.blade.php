@@ -1,4 +1,4 @@
-@extends('layouts.panel')
+@extends('layouts.home')
 @section('tittle', 'Detail Product')
 @section('content')
     <section class="product product-info">
@@ -10,43 +10,43 @@
                             <div class="swiper product-top">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide slider-top-img">
-                                        <img src="template-assets/front/assets/images/homepage-one/product-img/product-img-14.webp"
+                                        <img src="{{asset ("template-assets/front/assets/images/homepage-one/product-img/product-img-14.webp") }}"
                                             alt="img">
                                     </div>
                                     <div class="swiper-slide slider-top-img">
-                                        <img src="template-assets/front/assets/images/homepage-one/product-img/product-slider-img-1.webp"
+                                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-slider-img-1.webp') }}"
                                             alt="img">
                                     </div>
                                     <div class="swiper-slide slider-top-img">
-                                        <img src="template-assets/front/assets/images/homepage-one/product-img/product-slider-img-2.webp"
+                                        <img src="{{asset ("template-assets/front/assets/images/homepage-one/product-img/product-slider-img-2.webp") }}"
                                             alt="img">
                                     </div>
                                     <div class="swiper-slide slider-top-img">
-                                        <img src="template-assets/front/assets/images/homepage-one/product-img/product-slider-img-3.webp"
+                                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-slider-img-3.webp') }}"
                                             alt="img">
                                     </div>
                                     <div class="swiper-slide slider-top-img">
-                                        <img src="template-assets/front/assets/images/homepage-one/product-img/product-slider-img-1.webp"
+                                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-slider-img-1.webp') }}"
                                             alt="img">
                                     </div>
                                     <div class="swiper-slide slider-top-img">
-                                        <img src="template-assets/front/assets/images/homepage-one/product-img/product-slider-img-2.webp"
+                                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-slider-img-2.webp') }}"
                                             alt="img">
                                     </div>
                                     <div class="swiper-slide slider-top-img">
-                                        <img src="template-assets/front/assets/images/homepage-one/product-img/product-slider-img-3.webp"
+                                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-slider-img-3.webp') }}"
                                             alt="img">
                                     </div>
                                     <div class="swiper-slide slider-top-img">
-                                        <img src="template-assets/front/assets/images/homepage-one/product-img/product-slider-img-1.webp"
+                                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-slider-img-1.webp') }}"
                                             alt="img">
                                     </div>
                                     <div class="swiper-slide slider-top-img">
-                                        <img src="template-assets/front/assets/images/homepage-one/product-img/product-slider-img-2.webp"
+                                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-slider-img-2.webp') }}"
                                             alt="img">
                                     </div>
                                     <div class="swiper-slide slider-top-img">
-                                        <img src="template-assets/front/assets/images/homepage-one/product-img/product-slider-img-3.webp"
+                                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-slider-img-3.webp') }}"
                                             alt="img">
                                     </div>
                                 </div>
@@ -54,15 +54,15 @@
                             <div class="swiper product-bottom">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide slider-bottom-img">
-                                        <img src="template-assets/front/assets/images/homepage-one/product-img/product-img-16.png"
+                                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-img-16.png') }}"
                                             alt="img">
                                     </div>
                                     <div class="swiper-slide slider-bottom-img">
-                                        <img src="template-assets/front/assets/images/homepage-one/product-img/product-img-17.png"
+                                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-img-17.png') }}"
                                             alt="img">
                                     </div>
                                     <div class="swiper-slide slider-bottom-img">
-                                        <img src="template-assets/front/assets/images/homepage-one/product-img/product-slider-img-2.webp"
+                                        <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-slider-img-2.webp') }}"
                                             alt="img">
                                     </div>
                                 </div>
@@ -159,7 +159,7 @@
                                     <div class="wrapper-aurthor">
                                         <div class="wrapper-info">
                                             <div class="aurthor-img">
-                                                <img src="template-assets/front/assets/images/homepage-one/aurthor-img-1.webp"
+                                                <img src="{{asset ('template-assets/front/assets/images/homepage-one/aurthor-img-1.webp') }}"
                                                     alt="aurthor-img">
                                             </div>
                                             <div class="author-details">

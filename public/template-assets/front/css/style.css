@@ -2117,7 +2117,7 @@ button {
     cursor: pointer;
     box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
     background: #fff;
-    border: 1px solid #1C3879;
+    /* border: 1px solid #1C3879; */
     box-shadow: none;
 }
 .brand-section .product-wrapper .wrapper-img {

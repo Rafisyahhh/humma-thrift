@@ -1,4 +1,4 @@
-@extends('layouts.panel')
+@extends('layouts.home')
 @section('tittle','Store')
 @section('content')
 
@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                             <div class="product-cart-btn">
-                                <a href="/user/detail" class="product-btn">Detail</a>
+                                <a href="/user/detailproduct" class="product-btn">Detail</a>
                             </div>
                         </div>
                     </div>
