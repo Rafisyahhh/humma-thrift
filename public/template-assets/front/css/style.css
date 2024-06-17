@@ -164,7 +164,7 @@ button {
 }
 .shop-btn:hover {
     color: #fff;
-    background-color: #EAE3D2;
+    background-color: rgba(126, 163, 219, 0.40);
 }
 .shop-btn:hover::after {
     right: auto;
@@ -396,7 +396,7 @@ button {
     transition: all 0.4s;
 }
 .product-btn:hover {
-    background-color: #EAE3D2;
+    background-color: rgba(126, 163, 219, 0.40);
     color: #000000;
 }
 .section-title {
@@ -4759,7 +4759,7 @@ table .ticket-row:hover {
     animation: btnAnimation 2s linear 0s infinite;
 }
 .about-feedback {
-    background: #fffafe;
+    background: #ffffff;
 }
 .about-feedback .swiper {
     padding: 3rem 0;

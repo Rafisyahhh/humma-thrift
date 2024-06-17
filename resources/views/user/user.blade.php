@@ -66,7 +66,7 @@
         <div class="container">
             <div class="section-title">
                 <h5>Semua Kategori</h5>
-                <a href="/shop" class="view">Lihat Semua</a>
+                <a href="/user/shop" class="view">Lihat Semua</a>
             </div>
             <div class="category-section">
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
@@ -87,7 +87,7 @@
         <div class="container">
             <div class="section-title">
                 <h5>Brand Produk</h5>
-                <a href="/shop" class="view">Lihat Semua</a>
+                <a href="/user/shop" class="view">Lihat Semua</a>
             </div>
             <div class="brand-section">
                 <div class="product-wrapper">
@@ -107,7 +107,7 @@
         <div class="container">
             <div class="section-title">
                 <h5>TERBARU</h5>
-                <a href="/shop" class="view">Lihat Semua</a>
+                <a href="/user/shop" class="view">Lihat Semua</a>
             </div>
             <div class="arrival-section">
                 <div class="row g-5">
@@ -198,7 +198,7 @@
         <div class="container">
             <div class="section-title">
                 <h5>SESI LELANG</h5>
-                <a href="/shop" class="view">Lihat Semua</a>
+                <a href="/user/shop" class="view">Lihat Semua</a>
             </div>
             <div class="top-selling-section">
                 <div class="row g-5">
