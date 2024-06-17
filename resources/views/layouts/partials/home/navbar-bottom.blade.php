@@ -310,7 +310,7 @@
             <div class="header-nav-menu">
                 <ul class="menu-list">
                     <li>
-                        <a href="/user/home">
+                        <a href="/user/userhome">
                             <span class="list-text">Home</span>
                         </a>
                     </li>
