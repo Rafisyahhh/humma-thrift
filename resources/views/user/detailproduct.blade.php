@@ -8,8 +8,6 @@
                     <div class="col-md-6">
                         <div class="product-info-img" data-aos="fade-right">
                             <div class="swiper product-top">
-                                <div class="product-discount-content">
-                                </div>
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide slider-top-img">
                                         <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-14.webp') }}"
@@ -229,37 +227,37 @@
                         </div>
                     </div>
 
-                    <div class="tab-pane fade" id="nav-seller" role="tabpanel"
-                                        aria-labelledby="nav-seller-tab" tabindex="0">
-                                        <div class="product-seller-section" data-aos="fade-up">
-                                            <h5 class="intro-heading">Info Seller</h5>
-                                            <div class="review-wrapper">
-                                                <div class="wrapper">
-                                                    <div class="wrapper-aurthor">
-                                                        <div class="wrapper-info">
-                                                            <div class="aurthor-img">
-                                                                <img src="{{ asset('template-assets/front/assets/images/homepage-one/aurthor-img-1.webp') }}"
-                                                                    alt="aurthor-img">
-                                                            </div>
-                                                            <div class="author-details">
-                                                                <h5>Asoy Store</h5>
-                                                                <p>Karangploso, Malang</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="wrapper-review mt-4">
-                                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                                            Perferendis ad nostrum
-                                                            suscipit
-                                                            neque error laborum, odit, optio, vero provident consequatur
-                                                            modi fuga commodi
-                                                            quod
-                                                            quibusdam repellendus dolore nam corrupti nemo.</p>
-                                                    </div>
-                                                </div>
+                    <div class="tab-pane fade" id="nav-seller" role="tabpanel" aria-labelledby="nav-seller-tab"
+                        tabindex="0">
+                        <div class="product-seller-section" data-aos="fade-up">
+                            <h5 class="intro-heading">Info Seller</h5>
+                            <div class="review-wrapper">
+                                <div class="wrapper">
+                                    <div class="wrapper-aurthor">
+                                        <div class="wrapper-info">
+                                            <div class="aurthor-img">
+                                                <img src="{{ asset('template-assets/front/assets/images/homepage-one/aurthor-img-1.webp') }}"
+                                                    alt="aurthor-img">
+                                            </div>
+                                            <div class="author-details">
+                                                <h5>Asoy Store</h5>
+                                                <p>Karangploso, Malang</p>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="wrapper-review mt-4">
+                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                            Perferendis ad nostrum
+                                            suscipit
+                                            neque error laborum, odit, optio, vero provident consequatur
+                                            modi fuga commodi
+                                            quod
+                                            quibusdam repellendus dolore nam corrupti nemo.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
