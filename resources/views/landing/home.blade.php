@@ -30,9 +30,9 @@
                                     <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span>
                                         OFF
                                     </h5>
-                                    <h1 class="wrapper-details">HUMMA TRHIFT
-                                        Penjualan Pada Musim Panas</h1>
-                                    <a href="#" class="shop-btn">Shop Now</a>
+                                    <h1 class="wrapper-details">HUMMA THRIFT</h1>
+                                    <h5>Penjualan Pada Musim Panas</h5>
+                                    <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
                                 </div>
                             </div>
                         </div>
@@ -46,9 +46,9 @@
                                     <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span>
                                         OFF
                                     </h5>
-                                    <h1 class="wrapper-details">HUMMA TRHIFT
-                                        Penjualan Pada Musim Panas</h1>
-                                    <a href="#" class="shop-btn">Shop Now</a>
+                                    <h1 class="wrapper-details">HUMMA THRIFT</h1>
+                                    <h5>Penjualan Pada Musim Panas</h5>
+                                    <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
                                 </div>
                             </div>
                         </div>
@@ -248,7 +248,7 @@
                                 <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp"
                                     alt="product-img">
                                 <div class="product-cart-items">
-                                    <a href="#" class="cart cart-item">
+                                    {{-- <a href="#" class="cart cart-item">
                                         <span>
                                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -279,7 +279,7 @@
                                                     fill="black" fill-opacity="0.2" />
                                             </svg>
                                         </span>
-                                    </a>
+                                    </a> --}}
                                     <a href="wishlist.html" class="favourite cart-item">
                                         <span>
                                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
@@ -317,7 +317,7 @@
                                 </div>
                             </div>
                             <div class="product-cart-btn">
-                                <a href="cart.html" class="product-btn">Masukkan Keranjang</a>
+                                <a href="cart.html" class="product-btn">Beli Sekarang</a>
                             </div>
                         </div>
                     </div>
@@ -341,7 +341,7 @@
                                 <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/product-img/product-img-5.webp"
                                     alt="product-img">
                                 <div class="product-cart-items">
-                                    <a href="#" class="cart cart-item">
+                                    {{-- <a href="#" class="cart cart-item">
                                         <span>
                                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -372,7 +372,7 @@
                                                     fill="black" fill-opacity="0.2" />
                                             </svg>
                                         </span>
-                                    </a>
+                                    </a> --}}
                                     <a href="wishlist.html" class="favourite cart-item">
                                         <span>
                                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
