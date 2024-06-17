@@ -1,9 +1,9 @@
-@extends('user.layouts.profile')
+@extends('layouts.panel')
 
-@section('profil')
+@section('content')
 <div class="wishlist">
     <div class="cart-content">
-        <h5 class="cart-heading">Daftar Keinginan</h5>
+        <h5 class="cart-heading mb-3">Daftar Produk Keinginan</h5>
     </div>
     <div class="cart-section wishlist-section">
         <table>

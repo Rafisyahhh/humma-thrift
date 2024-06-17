@@ -1,5 +1,7 @@
-@extends('penjualan.layouts.app')
+@extends('layouts.panel')
+
 @section('tittle', 'Transaksi')
+
 @section('css')
     <style>
         .table-row.ticket-row:hover {

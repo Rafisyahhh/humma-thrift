@@ -24,6 +24,6 @@ class RedirectUserController extends Controller
             return redirect()->route('admin.index');
         }
 
-        return redirect()->to('/dasbor');
+        return redirect()->to('/');
     }
 }

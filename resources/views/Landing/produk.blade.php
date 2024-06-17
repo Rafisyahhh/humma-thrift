@@ -1,8 +1,8 @@
-@extends('Landing.layouts.app')
+@extends('layouts.home')
 
-@section('tittle', 'produk')
+@section('title', 'Brand')
+
 @section('content')
-
     <section class="product product-sidebar footer-padding">
         <div class="container">
             <div class="row g-5">

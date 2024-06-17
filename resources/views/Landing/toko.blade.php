@@ -1,8 +1,8 @@
-@extends('Landing.layouts.app')
+@extends('layouts.home')
 
-@section('tittle', 'brand')
+@section('title', 'Toko')
+
 @section('content')
-
     <section class="product top-selling">
         <div class="container">
             <div class="section-title">

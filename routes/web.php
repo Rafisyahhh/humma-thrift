@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\BrandController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -18,132 +17,63 @@ use App\Http\Controllers\ProductCategoryController;
 |
 */
 
-# Tolong ini jangan dipindah!
-Auth::routes([
-    'verify' => true,
-]);
-# Tolong ini jangan dipindah!
+# Authentication Routes
+Auth::routes(['verify' => true]);
 
+# Debug Routes
 Route::prefix('/debug')->group(function() {
-    Route::get('home', fn() => view('debug.home'));
-    Route::get('modal', fn() => view('debug.modal'));
+    Route::view('home', 'debug.home');
+    Route::view('modal', 'debug.modal');
 });
 
-Route::get('/', function () {
-    return view('landing.landing');
-});
-Route::get('/admin', function () {
-    return view('layouts.app');
-});
+# Public Routes
+Route::view('/', 'landing.home');
 
-Route::get('/seller/home', function () {
-    return view('penjualan.index');
-})->name('seller.home');
-
-Route::get('/seller/transaction', function () {
-    return view('penjualan.transaksi');
-})->name('seller.transaction');
-
-Route::get('/seller/income', function () {
-    return view('penjualan.penghasilan');
-})->name('seller.income');
-
-Route::get('/seller/product', function () {
-    return view('penjualan.produk');
-})->name('seller.product');
-
-Route::get('/seller/profil', function () {
-    return view('penjualan.profil');
-})->name('seller.profil');
-
-Route::get('/seller/tambahproduk', function () {
-    return view('penjualan.tambahproduk');
+# Seller Routes
+Route::prefix('seller')->middleware('auth')->name('seller.')->group(function() {
+    Route::view('/home', 'seller.index')->name('home');
+    Route::view('/transaction', 'seller.transaksi')->name('transaction');
+    Route::view('/income', 'seller.penghasilan')->name('income');
+    Route::view('/product', 'seller.produk')->name('product');
+    Route::view('/profil', 'seller.profil')->name('profil');
+    Route::view('/tambahproduk', 'seller.tambahproduk')->name('tambahproduk');
 });
 
-
-//USER
-Route::get('/user/home', function () {
-    return view('user.user');
-});
-Route::get('/detailproduct', function () {
-    return view('user.detailproduct');
-});
-Route::get('/checkout', function () {
-    return view('user.checkout');
-});
-Route::get('/registstore', function () {
-    return view('user.registstore');
-})->name('registstore');
-
-Route::get('/profil', function () {
-    return view('user.profil');
-})->name('profil');
-
-Route::get('/order', function () {
-    return view('user.order');
-})->name('order');
-
-Route::get('/keranjang', function () {
-    return view('user.keranjang');
-})->name('keranjang');
-
-Route::get('/wishlist', function () {
-    return view('user.wishlist');
-})->name('wishlist');
-
-Route::get('/shop', function () {
-    return view('user.shop');
+# User Routes
+Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function() {
+    Route::view('/home', 'user.user')->name('home');
+    Route::view('/detailproduct', 'user.detailproduct')->name('detailproduct');
+    Route::view('/checkout', 'user.checkout')->name('checkout');
+    Route::view('/open-shop', 'user.registstore')->name('registstore');
+    Route::view('/about', 'user.tentang')->name('about');
+    Route::view('/brand', 'user.merek')->name('brand');
+    Route::view('/detail', 'user.detail')->name('detail');
+    Route::view('/profile', 'user.profil')->name('profile');
+    Route::view('/order', 'user.order')->name('order');
+    Route::view('/keranjang', 'user.keranjang')->name('cart');
+    Route::view('/wishlist', 'user.wishlist')->name('wishlist');
+    Route::view('/shop', 'user.shop')->name('shop');
+    Route::view('/store', 'user.store')->name('store');
 });
 
-Route::get('/user/about', function () {
-    return view('user.tentang');
+# Dev Routes
+Route::prefix('dev')->group(function() {
+    Route::view('/admin-view', 'admin.index');
 });
 
-Route::get('/user/brand', function () {
-    return view('user.merek');
-});
+# Landing Pages
+Route::view('/produk', 'landing.produk');
+Route::view('/brandindex', 'landing.brand');
+Route::view('/toko', 'landing.toko');
+Route::view('/detail', 'landing.detail');
+Route::view('/about-us', 'landing.about');
 
-Route::get('/store', function () {
-    return view('user.store');
-});
-
-Route::get('/user/detail', function () {
-    return view('user.detail');
-});
-
-
-Auth::routes();
-
+# Home Redirect
 Route::get('/home', \App\Http\Controllers\RedirectUserController::class)->name('home');
 
-Route::prefix('/dev')->group(function () {
-    Route::get('/admin-view', function () {
-        return view('admin.index');
-    });
-});
-
-Route::get('/produk', function () {
-    return view('Landing.produk');
-});
-
-Route::get('/brandindex', function () {
-    return view('Landing.brand');
-});
-
-Route::get('/toko', function () {
-    return view('Landing.toko');
-});
-
-Route::get('/detail', function () {
-    return view('Landing.detail');
-});
-
-Route::get('/about', function () {
-    return view('Landing.about');
-});
-
-Route::prefix('admin')->middleware('role:admin')->name('admin.')->group(function () {
-    Route::get('/', fn () => view('admin.index'))->name('index');
+# Admin Routes
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function() {
+    Route::view('/', 'admin.index')->name('index');
     Route::resource('brand', BrandController::class);
     Route::resource('category', ProductCategoryController::class);
     Route::resource('user', UserController::class);

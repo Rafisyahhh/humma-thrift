@@ -1,8 +1,8 @@
-@extends('Landing.layouts.app')
+@extends('layouts.home')
 
-@section('tittle', 'produk')
+@section('title', 'Tentang Kami')
+
 @section('content')
-
     <section class="about">
         <div class="container">
             <div class="about-section">
@@ -31,7 +31,7 @@
                                         </span>
                                         <p>Produk dengan kualitas terjamin</p>
                                     </li>
-                                    
+
                                 </ul>
                             </div>
                             <a href="contact-us.html" class="shop-btn">

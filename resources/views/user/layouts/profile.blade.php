@@ -1,5 +1,7 @@
-@extends('user.layouts.app')
+@extends('layouts.panel')
+
 @section('tittle', 'Profil')
+
 @section('css')
 <style>
     .table-row.ticket-row:hover {
@@ -7,16 +9,15 @@
     }
 </style>
 @endsection
+
 @section('content')
-<br>
-<br>
     <h5 class="blog-heading about-heading text-center mt-4 mb-4">Profil</h1>
         <section class="user-profile footer-padding">
             <div class="container">
                 <div class="user-profile-section">
                     <div class="user-dashboard">
                         <div class="nav nav-item nav-pills  me-3"  aria-orientation="vertical">
-                            <a href="{{ route('profil') }}" class="nav-link {{ request()->routeIs('profil') ? 'active' : '' }}">
+                            <a href="{{ route('user.profile') }}" class="nav-link {{ request()->routeIs('profil') ? 'active' : '' }}">
                                 <span>
                                     <svg width="14" height="19" viewBox="0 0 14 19" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -30,7 +31,7 @@
                                     Profil
                                 </span>
                             </a>
-                            <a href="{{ route('order') }}" class="nav-link {{ request()->routeIs('order') ? 'active' : '' }}">
+                            <a href="{{ route('user.order') }}" class="nav-link {{ request()->routeIs('order') ? 'active' : '' }}">
                                 <span>
                                     <svg width="15" height="18" viewBox="0 0 15 18" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +46,7 @@
                                 </span>
                             </a>
 
-                            <a href="{{ route('keranjang') }}" class="nav-link {{ request()->routeIs('keranjang') ? 'active' : '' }}">
+                            <a href="{{ route('user.cart') }}" class="nav-link {{ request()->routeIs('keranjang') ? 'active' : '' }}">
                                 <span>
                                     <svg width="15" height="18" viewBox="0 0 15 18" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -58,7 +59,7 @@
                                 </span>
                             </a>
 
-                            <a href="{{ route('wishlist') }}" class="nav-link {{ request()->routeIs('wishlist') ? 'active' : '' }}" >                                <span>
+                            <a href="{{ route('user.wishlist') }}" class="nav-link {{ request()->routeIs('wishlist') ? 'active' : '' }}" >                                <span>
                                     <svg width="16" height="14" viewBox="0 0 16 14" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <g clip-path="url(#clip0_113_3017)">

@@ -1,10 +1,10 @@
-@extends('layouts.auth')
+@extends('layouts.home')
 
 @section('content')
     <section class="login account footer-padding">
         <div class="container">
-            <div class="login-section account-section">
-                <div class="review-form" style="height: 100%">
+            <div class="login-section account-section row">
+                <div class="review-form col-md-6 mx-auto" style="height: 100%">
                     @include('components.show-errors')
 
                     <h5 class="comment-title">Daftar</h5>
