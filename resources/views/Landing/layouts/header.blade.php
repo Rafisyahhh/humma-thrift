@@ -113,7 +113,7 @@
                     <div class="header-nav-menu" style="width:50cm">
                         <ul class="menu-list">
                             <li class="active">
-                                <a href="/home">
+                                <a href="/">
                                     <span class="list-text">Home</span>
                                 </a>
                             </li>
@@ -133,7 +133,7 @@
                                 </a>
                             </li>
                             <li class="active">
-                                <a href="/about">
+                                <a href="/about-us">
                                     <span class="list-text">Tentang Kami</span>
                                 </a>
                             </li>
