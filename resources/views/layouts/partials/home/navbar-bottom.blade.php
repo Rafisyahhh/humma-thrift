@@ -310,27 +310,27 @@
             <div class="header-nav-menu">
                 <ul class="menu-list">
                     <li>
-                        <a href="index-2.html">
+                        <a href="/user/home">
                             <span class="list-text">Home</span>
                         </a>
                     </li>
                     <li>
-                        <a href="about.html">
+                        <a href="/user/shop">
                             <span class="list-text">Produk</span>
                         </a>
                     </li>
                     <li>
-                        <a href="user-profile.html">
+                        <a href="/user/brand">
                             <span class="list-text">Brand</span>
                         </a>
                     </li>
                     <li>
-                        <a href="contact-us.html">
+                        <a href="/user/store">
                             <span class="list-text">Toko</span>
                         </a>
                     </li>
                     <li>
-                        <a href="contact-us.html">
+                        <a href="/user/about">
                             <span class="list-text">Tentang Kami</span>
                         </a>
                     </li>
