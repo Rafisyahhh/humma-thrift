@@ -33,7 +33,7 @@
                     <td class="table-wrapper wrapper-product">
                         <div class="wrapper">
                             <div class="wrapper-img">
-                                <img src="template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp"
+                                <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                     alt="img">
                             </div>
                             <div class="wrapper-content">
