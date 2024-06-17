@@ -1,4 +1,4 @@
-@extends('user.layouts.app')
+@extends('layouts.panel')
 @section('tittle', 'Regist Store')
 @section('style')
     <style>

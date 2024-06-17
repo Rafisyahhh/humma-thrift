@@ -13,7 +13,7 @@
                         </svg>
                     </span>
                     <span class="list-text">
-                        All Categories
+                        Semua Kategori
                     </span>
                 </button>
                 <div class="category-dropdown position-absolute" id="subMenu">

@@ -1,5 +1,11 @@
 @extends('layouts.panel')
-
+@section('css')
+<style>
+    .table-row.ticket-row:hover {
+        background-color: rgba(28, 56, 121, 0.1)!important;
+    }
+</style>
+@endsection
 @section('content')
 <div class="wishlist">
     <div class="cart-content">

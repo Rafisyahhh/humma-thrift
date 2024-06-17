@@ -1,4 +1,4 @@
-@extends('user.layouts.app')
+@extends('layouts.panel')
 @section('tittle', 'Shop')
 @section('content')
 
@@ -178,7 +178,7 @@
                                         <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                             alt="product-img">
                                         <div class="product-cart-items">
-                                            <a href="/detailproduct" class="cart cart-item">
+                                            {{-- <a href="/detailproduct" class="cart cart-item">
                                                 <span>
                                                     <svg width="40" height="40" viewBox="0 0 40 40"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -210,7 +210,7 @@
                                                             fill="black" fill-opacity="0.2" />
                                                     </svg>
                                                 </span>
-                                            </a>
+                                            </a> --}}
                                             <a href="wishlist" class="favourite cart-item">
                                                 <span>
                                                     <svg width="40" height="40" viewBox="0 0 40 40"
