@@ -1014,7 +1014,7 @@
                 </a>
               </li>
               <li>
-                <a href="">
+                <a href="/about-us">
                   <span class="list-text">Tentang Kami</span>
                 </a>
               </li>

@@ -330,7 +330,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/user/about">
+                        <a href="/about-us">
                             <span class="list-text">Tentang Kami</span>
                         </a>
                     </li>
