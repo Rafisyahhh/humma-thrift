@@ -1817,7 +1817,15 @@
         </div>
     </section>
 
+
     @include('layouts.partials.home.footer')
+
+    <!-- Vendors JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.css">
+
+    @stack('js')
 
     <script src="{{ asset('template-assets/front/assets/js/jquery_3.7.1.min.js') }}"></script>
 
