@@ -133,7 +133,7 @@
                         <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review"
                             type="button" role="tab" aria-controls="nav-review"
                             aria-selected="false">Reviews</button>
-                        <button class="nav-link" id="nnav-seller-tab" data-bs-toggle="tab" data-bs-target="#nav-seller"
+                        <button class="nav-link" id="nav-seller-tab" data-bs-toggle="tab" data-bs-target="#nav-seller"
                             type="button" role="tab" aria-controls="nav-seller" aria-selected="false">Info
                             Seller</button>
                     </div>
@@ -214,7 +214,22 @@
                                             <span>(5.0)</span>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="nav-seller" role="tabpanel"
+
+                                    <div class="wrapper-description">
+                                        <p class="wrapper-details">Lorem Ipsum is simply dummy text of the printing
+                                            and
+                                            typesetting industry. Lorem Ipsum has been the industry's standard dummy
+                                            text ever since the redi 1500s, when an unknown printer took a galley of
+                                            type and scrambled it to make a type specimen book. It has survived not only
+                                            five centuries but also the on leap into electronic typesetting, remaining
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-seller" role="tabpanel"
                                         aria-labelledby="nav-seller-tab" tabindex="0">
                                         <div class="product-seller-section" data-aos="fade-up">
                                             <h5 class="intro-heading">Info Seller</h5>
@@ -245,19 +260,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="wrapper-description">
-                                        <p class="wrapper-details">Lorem Ipsum is simply dummy text of the printing
-                                            and
-                                            typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                                            text ever since the redi 1500s, when an unknown printer took a galley of
-                                            type and scrambled it to make a type specimen book. It has survived not only
-                                            five centuries but also the on leap into electronic typesetting, remaining
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
