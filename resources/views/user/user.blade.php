@@ -176,7 +176,7 @@
                             </div>
                             <div class="product-info">
                                 <div class="product-description">
-                                    <a href="/detailproduct" class="product-details">Rainbow Sequin Dress
+                                    <a href="/user/detailproduct" class="product-details">Rainbow Sequin Dress
                                     </a>
                                     <div class="price">
                                         <span class="new-price">Rp 6.99</span>
@@ -267,7 +267,7 @@
                             </div>
                             <div class="product-info">
                                 <div class="product-description">
-                                    <a href="/detailproduct" class="product-details">Leather Dress Shoes
+                                    <a href="/user/detailproduct" class="product-details">Leather Dress Shoes
                                     </a>
                                     <div class="price">
                                         <span class="new-price">Rp 13.99</span>

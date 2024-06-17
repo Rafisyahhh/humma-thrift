@@ -1,4 +1,4 @@
-@extends('layouts.panel')
+@extends('layouts.home')
 @section('tittle', 'Detail Product')
 @section('content')
     <section class="product product-info">
