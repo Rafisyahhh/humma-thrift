@@ -26,8 +26,8 @@
                             </span>
                         </div>
                         <div class="service-content">
-                            <h5 class="service-info service-title">Free Shipping</h5>
-                            <p class="service-info service-details">When ordering over $100</p>
+                            <h5 class="service-info service-title">Bebas biaya kirim</h5>
+                            <p class="service-info service-details">Saat memesan lebih dari Rp 100.000</p>
                         </div>
                     </div>
                 </div>
@@ -46,8 +46,8 @@
                             </span>
                         </div>
                         <div class="service-content">
-                            <h5 class="service-info service-title">Free Return</h5>
-                            <p class="service-info service-details">Get Return within 30 days</p>
+                            <h5 class="service-info service-title">Pengembalian Gratis</h5>
+                            <p class="service-info service-details">Dapatkan Pengembalian dalam 30 hari</p>
                         </div>
                     </div>
                 </div>
@@ -71,8 +71,8 @@
                             </span>
                         </div>
                         <div class="service-content">
-                            <h5 class="service-info service-title">Secure Payment</h5>
-                            <p class="service-info service-details">100% Secure Online Payment</p>
+                            <h5 class="service-info service-title">Cari pembayaran yang aman?</h5>
+                            <p class="service-info service-details">Pembayaran Online 100% Aman</p>
                         </div>
                     </div>
                 </div>
@@ -96,8 +96,8 @@
                             </span>
                         </div>
                         <div class="service-content">
-                            <h5 class="service-info service-title">Best Quality</h5>
-                            <p class="service-info service-details">Original Product Guarenteed</p>
+                            <h5 class="service-info service-title">Kualitas terbaik</h5>
+                            <p class="service-info service-details">Produk Asli Dijamin</p>
                         </div>
                     </div>
                 </div>
@@ -112,9 +112,9 @@
                         </div>
                         <div class="footer-link order-link">
                             <ul>
-                                <li><a href="order.html">Track Order</a></li>
-                                <li><a href="cart.html">Delivery &amp; Returns</a></li>
-                                <li><a href="about.html">Warranty</a></li>
+                                <li><a href="order.html">Lacak Pesanan</a></li>
+                                <li><a href="cart.html">Pengiriman & Pengembalian</a></li>
+                                <li><a href="#">Jaminan</a></li>
                             </ul>
                         </div>
                     </div>
@@ -126,10 +126,10 @@
                         </h4>
                         <div class="footer-link about-link">
                             <ul>
-                                <li><a href="about.html">Rave’s Story</a></li>
-                                <li><a href="about.html">Work With Us</a></li>
-                                <li><a href="about.html">Coporate News</a></li>
-                                <li><a href="about.html">Investors</a></li>
+                                <li><a href="about.html">Kisah Rave</a></li>
+                                <li><a href="#">Bekerja dengan kami</a></li>
+                                <li><a href="about.html">Berita perusahaan</a></li>
+                                <li><a href="#">Investor</a></li>
                             </ul>
                         </div>
                     </div>
@@ -137,14 +137,14 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="links">
                         <h4 class="footer-heading footer-title">
-                            Useful Links
+                            Tautan Pengguna
                         </h4>
                         <div class="footer-link useful-link">
                             <ul>
-                                <li><a href="about.html">Secure Payment</a></li>
-                                <li><a href="privacy.html">Privacy Policy</a></li>
-                                <li><a href="terms.html">Terms of Use</a></li>
-                                <li><a href="product-sidebar.html">Archived Products</a></li>
+                                <li><a href="about.html">Pembayaran yang aman</a></li>
+                                <li><a href="privacy.html">Kebijakan pribadi</a></li>
+                                <li><a href="terms.html">Syarat Penggunaan</a></li>
+                                <li><a href="product-sidebar.html">Produk yang Diarsipkan</a></li>
                             </ul>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="contact-info">
                         <h4 class="footer-heading footer-title">
-                            Contact Info
+                            Info Kontak
                         </h4>
                         <div class="footer-link contact-link">
                             <div class="address">
@@ -179,8 +179,8 @@
                                     </span>
                                 </div>
                                 <div class="details">
-                                    <h4 class="footer-heading">Address:</h4>
-                                    <p>4517 Washington Ave. Manchester, Kentucky 39495</p>
+                                    <h4 class="footer-heading">Alamat:</h4>
+                                    <p>PT.HUMMA THRIFT MALANG JAWA TIMUR</p>
                                 </div>
                             </div>
                             <div class="phone address">
@@ -204,7 +204,7 @@
                                     </span>
                                 </div>
                                 <div class="details">
-                                    <h4 class="footer-heading">Phone:</h4>
+                                    <h4 class="footer-heading">No telepon:</h4>
                                     <p>+880171889547</p>
                                 </div>
                             </div>

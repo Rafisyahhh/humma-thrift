@@ -1,5 +1,12 @@
 @extends('layouts.panel')
 
+@section('css')
+<style>
+    .table-row.ticket-row:hover {
+        background-color: rgba(28, 56, 121, 0.1)!important;
+    }
+</style>
+@endsection
 @section('content')
     <div class="cart-section">
         <table>
@@ -33,7 +40,7 @@
                     <td class="table-wrapper wrapper-product">
                         <div class="wrapper">
                             <div class="wrapper-img">
-                                <img src="template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp"
+                                <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                     alt="img">
                             </div>
                             <div class="wrapper-content">
