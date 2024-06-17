@@ -55,14 +55,14 @@
         <div class="container">
             <div class="user-profile-section">
                 <div class="user-dashboard w-100">
-                    {{-- <div class="row gx-0 gy-0 gy-md-5 gx-md-5 w-100 align-items-stretch">
+                    <div class="row gx-0 gy-0 gy-md-5 gx-md-5 w-100 align-items-stretch">
                         <div class="col-md-3 h-100">
                             @include('layouts.partials.home.sidebar-user')
-                        </div> --}}
+                        </div>
                         <div class="col-md-9">
                             @yield('content')
                         </div>
-                    {{-- </div> --}}
+                    </div>
 
                     {{-- <div class="nav nav-item nav-pills flex-shrink-0 me-3" id="v-pills-tab" role="tablist"
                         aria-orientation="vertical">
@@ -293,7 +293,7 @@
                                 </span>
                             </a>
                         </div>
-                    </div> --}}
+                    </div>
 
                     {{-- <div class="tab-content nav-content" id="v-pills-tabContent" style="flex: 1 0%;">
                         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
