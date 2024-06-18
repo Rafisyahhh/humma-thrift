@@ -54,6 +54,8 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::view('/wishlist', 'user.wishlist')->name('wishlist');
     Route::view('/shop', 'user.shop')->name('shop');
     Route::view('/store', 'user.store')->name('store');
+    Route::view('/history', 'user.history')->name('history');
+    Route::view('/updatePassword', 'user.updatepassword')->name('updatePassword');
 });
 
 # Dev Routes
