@@ -1,4 +1,4 @@
-@extends('penjualan.layouts.app')
+@extends('layouts.panel')
 @section('tittle', 'Home')
 @section('style')
     <style>
@@ -178,8 +178,8 @@
 
 
             <div class="submit-btn">
-                <a href="#" class="shop-btn cancel-btn">Cancel</a>
-                <a href="#" class="shop-btn update-btn">Update Profile</a>
+                <a href="#" class="shop-btn cancel-btn">Batal</a>
+                <a href="#" class="shop-btn update-btn">Perbarui Profil</a>
             </div>
         </div>
     </div>

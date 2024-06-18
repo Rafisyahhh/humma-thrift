@@ -1,5 +1,12 @@
 @extends('layouts.panel')
 
+@section('css')
+<style>
+    .table-row.ticket-row:hover {
+        background-color: rgba(28, 56, 121, 0.1)!important;
+    }
+</style>
+@endsection
 @section('content')
     <div class="cart-section">
         <table>
@@ -33,7 +40,7 @@
                     <td class="table-wrapper wrapper-product">
                         <div class="wrapper">
                             <div class="wrapper-img">
-                                <img src="template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp"
+                                <img src="{{asset ('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                     alt="img">
                             </div>
                             <div class="wrapper-content">
@@ -59,7 +66,10 @@
                     <td class="table-wrapper">
                         <div class="table-wrapper-center">
                             <div class="wrapper-btn">
-                                <a href="#" class="shop-btn" onclick="modalAction('.cart')">Detail</a></a>
+                                <button type="button" class="shop-btn" data-bs-toggle="modal"
+                                    data-bs-target="#detailModal">
+                                    Detail
+                                </button>
                             </div>
                         </div>
                     </td>
@@ -104,58 +114,58 @@
             </tbody>
         </table>
         {{-- Detail --}}
-        <div class="modal-wrapper cart ">
-            <div onclick="modalAction('.cart')" class="anywhere-away"></div>
-            <div class="login-section account-section modal-main">
-                <div class="review-form">
-                    <div class="review-content">
-                        <h5 class="comment-title">Detail Produk</h5>
-                        <div class="close-btn">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                                alt="close-btn" onclick="modalAction('.cart')"></button>
+        <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+            style="height: 99%;">
+            <div class="modal-dialog" style="margin-left: auto;">
+                <div class="login-section account-section p-0">
+                    <div class="review-form m-0" style="height: 80%; width: 95rem;">
+                        <div class="text-end mb-4">
+                            <div class="close-btn">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
                         </div>
-                    </div>
-                    <section class="product product-info" style="width:85rem; height:60%;">
-                        <div class="row ">
-                            <div class="col-md-6">
-                                <div class="product-info-img" data-aos="fade-right">
-                                    <div class="swiper product-top" style="height:50rem;">
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide slider-top-img">
-                                                <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
-                                                    alt="img">
+                        <section class="product product-info" style="width:85rem; height:60%;">
+                            <div class="row ">
+                                <div class="col-md-6">
+                                    <div class="product-info-img" data-aos="fade-right">
+                                        <div class="swiper product-top" style="height:50rem;">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide slider-top-img">
+                                                    <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
+                                                        alt="img">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="product-info-content" data-aos="fade-left">
+                                        <h5>Classic Design Skart</h5>
+                                        <div class="price">
+                                            <span class="new-price">Rp.100.000,00 - 200.000,00</span>
+                                        </div>
+                                        <hr>
+                                        <div class="product-details">
+                                            <p class="fs-2">Kategori : <span class="inner-text">Dress</span></p>
+                                            <p class="fs-2">Brand : <span class="inner-text">Adidas</span></p>
+                                            <p class="fs-2">Ukuran : <span class="inner-text">XL</span></p>
+                                            <p class="fs-2">Stok : <span class="inner-text">2</span></p>
+                                            <p class="fs-2">Deskripsi : <span class="inner-text">Lorem ipsum dolor sit
+                                                    amet
+                                                    consectetur adipisicing elit. Eveniet cumque perferendis libero nesciunt
+                                                    minima odio autem ratione quia, eligendi temporibus!</span></p>
+                                            <b>
+                                                <p class="fs-2">Status : <span class="inner-text">Diterima</span>
+                                                </p>
+                                            </b>
+                                        </div>
+                                        <hr>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="product-info-content" data-aos="fade-left">
-                                    <h5>Classic Design Skart</h5>
-                                    <div class="price">
-                                        <span class="new-price">Rp.100.000,00 - 200.000,00</span>
-                                    </div>
-                                    <hr>
-
-                                    <div class="product-details">
-                                        <p class="fs-2">Kategori : <span class="inner-text">Dress</span></p>
-                                        <p class="fs-2">Brand : <span class="inner-text">Adidas</span></p>
-                                        <p class="fs-2">Ukuran : <span class="inner-text">XL</span></p>
-                                        <p class="fs-2">Stok : <span class="inner-text">2</span></p>
-                                        <p class="fs-2">Deskripsi : <span class="inner-text">Lorem ipsum dolor sit amet
-                                                consectetur adipisicing elit. Eveniet cumque perferendis libero nesciunt
-                                                minima odio autem ratione quia, eligendi temporibus!</span></p>
-                                        <b>
-                                            <p class="fs-2">Status : <span class="inner-text">Diterima</span>
-                                            </p>
-                                        </b>
-                                    </div>
-                                    <hr>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
                 </div>
             </div>
         </div>

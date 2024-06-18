@@ -41,7 +41,7 @@ Route::prefix('seller')->middleware('auth')->name('seller.')->group(function() {
 
 # User Routes
 Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function() {
-    Route::view('/home', 'user.user')->name('home');
+    Route::view('/userhome', 'user.user')->name('userhome');
     Route::view('/detailproduct', 'user.detailproduct')->name('detailproduct');
     Route::view('/checkout', 'user.checkout')->name('checkout');
     Route::view('/open-shop', 'user.registstore')->name('registstore');
@@ -54,6 +54,8 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::view('/wishlist', 'user.wishlist')->name('wishlist');
     Route::view('/shop', 'user.shop')->name('shop');
     Route::view('/store', 'user.store')->name('store');
+    Route::view('/history', 'user.history')->name('history');
+    Route::view('/updatePassword', 'user.updatepassword')->name('updatePassword');
 });
 
 # Dev Routes
@@ -67,6 +69,8 @@ Route::view('/brandindex', 'landing.brand');
 Route::view('/toko', 'landing.toko');
 Route::view('/detail', 'landing.detail');
 Route::view('/about-us', 'landing.about');
+Route::view('/detail-about', 'landing.detailContactus');
+Route::view('/detail-new', 'landing.detailNews');
 
 # Home Redirect
 Route::get('/home', \App\Http\Controllers\RedirectUserController::class)->name('home');

@@ -13,7 +13,7 @@
                         </svg>
                     </span>
                     <span class="list-text">
-                        All Categories
+                        Semua Kategori
                     </span>
                 </button>
                 <div class="category-dropdown position-absolute" id="subMenu">
@@ -310,27 +310,27 @@
             <div class="header-nav-menu">
                 <ul class="menu-list">
                     <li>
-                        <a href="index-2.html">
+                        <a href="/user/userhome">
                             <span class="list-text">Home</span>
                         </a>
                     </li>
                     <li>
-                        <a href="about.html">
+                        <a href="/user/shop">
                             <span class="list-text">Produk</span>
                         </a>
                     </li>
                     <li>
-                        <a href="user-profile.html">
+                        <a href="/user/brand">
                             <span class="list-text">Brand</span>
                         </a>
                     </li>
                     <li>
-                        <a href="contact-us.html">
+                        <a href="/user/store">
                             <span class="list-text">Toko</span>
                         </a>
                     </li>
                     <li>
-                        <a href="contact-us.html">
+                        <a href="/about-us">
                             <span class="list-text">Tentang Kami</span>
                         </a>
                     </li>
@@ -338,7 +338,7 @@
             </div>
             <div class="header-vendor-btn">
                 <a href="become-vendor.html" class="shop-btn">
-                    <span class="list-text shop-text text-white">Jualan Yuk</span>
+                    <span class="list-text shop-text text-black">Jualan Yuk</span>
                     <span class="icon">
                         <svg width="24" height="16" viewBox="0 0 24 16" fill="none"
                             xmlns="http://www.w3.org/2000/svg">

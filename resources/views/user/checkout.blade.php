@@ -46,7 +46,7 @@
   $total_price = array_sum($prices);
 @endphp
 
-@extends('user.layouts.app')
+@extends('layouts.panel')
 @section('tittle', 'Checkout')
 @section('content')
   <section class="blog about-blog">

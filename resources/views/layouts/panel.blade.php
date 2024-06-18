@@ -293,7 +293,7 @@
                                 </span>
                             </a>
                         </div>
-                    </div> --}}
+                    </div>
 
                     {{-- <div class="tab-content nav-content" id="v-pills-tabContent" style="flex: 1 0%;">
                         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
@@ -1817,7 +1817,15 @@
         </div>
     </section>
 
+
     @include('layouts.partials.home.footer')
+
+    <!-- Vendors JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.css">
+
+    @stack('js')
 
     <script src="{{ asset('template-assets/front/assets/js/jquery_3.7.1.min.js') }}"></script>
 
@@ -1830,6 +1838,8 @@
     <script src="{{ asset('template-assets/front/assets/js/swiper10-bundle.min.js') }}"></script>
 
     <script src="{{ asset('template-assets/front/assets/js/shopus.js') }}"></script>
+    
+    @yield('script')
 </body>
 
 </html>
