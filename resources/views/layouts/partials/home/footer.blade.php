@@ -122,7 +122,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="about-us">
                         <h4 class="footer-heading footer-title">
-                            About Us
+                            Tentang Kami
                         </h4>
                         <div class="footer-link about-link">
                             <ul>

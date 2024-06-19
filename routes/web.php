@@ -1,11 +1,14 @@
 <?php
 
-use App\Http\Controllers\AboutUsController;
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\UserUpdatePasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,16 +25,16 @@ use App\Http\Controllers\ProductCategoryController;
 Auth::routes(['verify' => true]);
 
 # Debug Routes
-Route::prefix('/debug')->group(function() {
+Route::prefix('/debug')->group(function () {
     Route::view('home', 'debug.home');
     Route::view('modal', 'debug.modal');
 });
 
 # Public Routes
-Route::view('/', 'landing.home');
+Route::get('/', [LandingpageController::class,'index']);
 
 # Seller Routes
-Route::prefix('seller')->middleware('auth')->name('seller.')->group(function() {
+Route::prefix('seller')->middleware('auth')->name('seller.')->group(function () {
     Route::view('/home', 'seller.index')->name('home');
     Route::view('/transaction', 'seller.transaksi')->name('transaction');
     Route::view('/income', 'seller.penghasilan')->name('income');
@@ -41,7 +44,7 @@ Route::prefix('seller')->middleware('auth')->name('seller.')->group(function() {
 });
 
 # User Routes
-Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function() {
+Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function () {
     Route::view('/userhome', 'user.user')->name('userhome');
     Route::view('/detailproduct', 'user.detailproduct')->name('detailproduct');
     Route::view('/checkout', 'user.checkout')->name('checkout');
@@ -55,10 +58,12 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::view('/wishlist', 'user.wishlist')->name('wishlist');
     Route::view('/shop', 'user.shop')->name('shop');
     Route::view('/store', 'user.store')->name('store');
+    Route::view('/history', 'user.history')->name('history');
+    Route::resource('update-password', UserUpdatePasswordController::class);
 });
 
 # Dev Routes
-Route::prefix('dev')->group(function() {
+Route::prefix('dev')->group(function () {
     Route::view('/admin-view', 'admin.index');
 });
 
@@ -75,10 +80,11 @@ Route::view('/detail-new', 'landing.detailNews');
 Route::get('/home', \App\Http\Controllers\RedirectUserController::class)->name('home');
 
 # Admin Routes
-Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function() {
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function () {
     Route::view('/', 'admin.index')->name('index');
     Route::resource('about', AboutUsController::class);
     Route::resource('brand', BrandController::class);
     Route::resource('category', ProductCategoryController::class);
     Route::resource('user', UserController::class);
+    Route::resource('event', EventController::class);
 });

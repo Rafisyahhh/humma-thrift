@@ -41,8 +41,9 @@
         </a>
     </div>
 
+    {{-- ICON PROFILE --}}
     <div class="header-cart header-right-dropdown">
-        <a href="cart.html" class="cart-item">
+        <a href="/user/profile" class="cart-item">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                     class="fill-current">
@@ -52,6 +53,8 @@
                 </svg>
             </span>
         </a>
+
+
         <div class="cart-submenu">
             <div class="cart-wrapper-section">
                 <div class="d-flex gap-4 mb-4">

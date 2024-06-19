@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                             <div class="product-cart-btn">
-                                <a href="/user/detailproduct" class="product-btn">Detail</a>
+                                <a href="/user/detail" class="product-btn">Detail</a>
                             </div>
                         </div>
                     </div>

@@ -96,6 +96,13 @@
                 <div >Pengguna</div>
             </a>
         </li>
+
+        <li class="menu-item">
+            <a href="{{ route('admin.event.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-file"></i>
+                <div >Event</div>
+            </a>
+        </li>
     </ul>
 </aside>
 <!-- / Menu -->
