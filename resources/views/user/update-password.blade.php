@@ -4,44 +4,27 @@
   <div class="container">
     <form action="{{ route('user.update-password.update', auth()->id()) }}" method="POST">
       @csrf
-      @method('put')
+      @method('PUT')
       <h5 class="comment-title">Update Password</h5>
       <p class="paragraph">Silahkan update password anda.</p>
       <div class="review-form">
         <div class="account-inner-form">
-          <div class="review-form-name mb-4">
-            <label for="old-password" class="form-label">Password Lama*</label>
-            <input type="password" id="old-password" name="old-password" @class(['form-control', 'is-invalid' => $errors->has('old-password')]) placeholder="******"
-              autofocus required />
-            @error('old-password')
-              <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-              </span>
-            @enderror
-          </div>
-          <div class="review-form-name mb-4">
-            <label for="password" class="form-label">Password Baru*</label>
-            <input type="password" id="password" name="password" @class(['form-control', 'is-invalid' => $errors->has('password')]) placeholder="******"
-              required />
-            @error('password')
-              <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-              </span>
-            @enderror
-          </div>
-          <div class="review-form-name mb-4">
-            <label for="password-confirm" class="form-label">Ulangi Password*</label>
-            <input type="password" id="password-confirm" name="password_confirmation" @class([
-                'form-control',
-                'is-invalid' => $errors->has('password_confirmation'),
-            ])
-              placeholder="******" required />
-            @error('password_confirmation')
-              <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-              </span>
-            @enderror
-          </div>
+          @foreach ([
+          'old-password' => 'Password Lama*',
+          'password' => 'Password Baru*',
+          'password_confirmation' => 'Ulangi Password*',
+      ] as $field => $label)
+            <div class="review-form-name mb-4">
+              <label for="{{ $field }}" class="form-label">{{ $label }}</label>
+              <input type="password" id="{{ $field }}" name="{{ $field }}"
+                class="form-control @error($field) is-invalid @enderror" placeholder="******" required />
+              @error($field)
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+            </div>
+          @endforeach
         </div>
       </div>
       <div class="submit-btn">

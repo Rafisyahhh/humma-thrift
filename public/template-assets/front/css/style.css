@@ -144,7 +144,7 @@ button {
     content: " ";
     width: 0%;
     height: 100%;
-    background: #232532;
+    background: rgba(126, 163, 219, 0.4);
     position: absolute;
     transition: all 0.4s ease-in-out;
     right: 0;
@@ -164,7 +164,7 @@ button {
 }
 .shop-btn:hover {
     color: #fff;
-    background-color: rgba(126, 163, 219, 0.4);
+    background-color: rgba(126, 163, 219, 0.40);
 }
 .shop-btn:hover::after {
     right: auto;
@@ -367,7 +367,7 @@ button {
     color: #fff;
 }
 .product-wrapper-three:hover {
-    border: 1px solid #232532;
+    border: 1px solid #322823;
 }
 .price {
     display: flex;
@@ -396,7 +396,7 @@ button {
     transition: all 0.4s;
 }
 .product-btn:hover {
-    background-color: rgba(126, 163, 219, 0.4);
+    background-color: rgba(126, 163, 219, 0.40);
     color: #000000;
 }
 .section-title {
@@ -498,8 +498,8 @@ button {
 }
 .modal-main .wrapper-close-btn svg {
     fill: currentColor;
-    fill: red;
-    stroke: red;
+    fill: rgb(0, 0, 0);
+    stroke: rgb(0, 0, 0);
 }
 .modal-main .wrapper-main .divider {
     height: 3rem;
@@ -1352,7 +1352,7 @@ button {
     content: " ";
     width: 0%;
     height: 100%;
-    background: #232532;
+    background: rgb(202, 219, 245);
     position: absolute;
     transition: all 0.4s ease-in-out;
     right: 0;
@@ -1381,7 +1381,7 @@ button {
 }
 .header-vendor-btn .shop-btn:hover svg {
     fill: currentColor;
-    fill: #fff;
+    fill: #000000;
     transform: translate(5px);
 }
 .header-vendor-btn .shop-btn:hover span {
@@ -1665,16 +1665,13 @@ button {
     padding: 10px;
 }
 .hero-slider-one {
-    background: url("../assets/images/homepage-one/hero-slider-one.webp")
-        no-repeat center/cover;
+    background: no-repeat center/cover;
 }
 .hero-slider-two {
-    background: url("../assets/images/homepage-one/hero-slider-two.webp")
-        no-repeat center/cover;
+    background: no-repeat center/cover;
 }
 .hero-slider-three {
-    background: url("../assets/images/homepage-one/hero-slider-three.webp")
-        no-repeat center/cover;
+    background: no-repeat center/cover;
 }
 @media (max-width: 767px) {
     .hero-slider-one,
@@ -1718,7 +1715,7 @@ button {
     content: " ";
     width: 0%;
     height: 100%;
-    background: #232532;
+    background: rgb(103, 136, 184);
     position: absolute;
     transition: all 0.4s ease-in-out;
     right: 0;
@@ -2724,7 +2721,7 @@ button {
     font-weight: 300;
 }
 .footer-section .footer-link a:hover {
-    color: #1c3879;
+    color: #1C3879;
     text-decoration: underline;
 }
 .footer-section .footer-link p {
@@ -3736,7 +3733,7 @@ table .ticket-row {
     transition: all 0.3s;
 }
 table .ticket-row:hover {
-    background-color: rgba(174, 28, 154, 0.08);
+    background-color: rgba(126, 163, 219, 0.4);
 }
 @media (max-width: 1023px) {
     table .table-wrapper {
