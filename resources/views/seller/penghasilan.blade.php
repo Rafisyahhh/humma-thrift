@@ -8,10 +8,10 @@
 @extends('layouts.panel')
 
 @section('content')
-  <section class="seller-application ">
+  <section>
     <div class="container">
-      <div class="user-profile">
-        <div class="user-title">
+      <div>
+        <div>
           <h5 class="heading">Data Penghasilan</h5>
         </div>
         <div class="profile-section">
@@ -25,7 +25,8 @@
 @section('script')
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
   <script>
-    new Chart($('#data-penghasilan'), {
+    const canvas = $('#data-penghasilan');
+    new Chart(canvas, {
       type: 'bar',
       data: {
         labels: @json($data['tahun']),
