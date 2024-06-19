@@ -10,42 +10,33 @@
                 background: rgba(167, 146, 119, 0.40) !important;
             }
 
-            .nav-tabs {
-                border-bottom: none;
-            }
 
-            .nav-tabs .nav-item.show .nav-link,
-            .nav-tabs .nav-link.active {
-                color: var(--bs-nav-tabs-link-active-color);
-                background-color: #ff0000;
-                border-color: var(--bs-nav-tabs-link-active-border-color);
-            }
         </style>
     </head>
 @endsection
 @section('content')
 
-    <section class="product product-description">
+    <section class="product-description">
         <div class="container">
             <div class="product-detail-section">
                 <h5 class="mb-4">Data Transaksi</h5>
 
                 <nav>
-                    <div class="nav nav-tabs  " id="nav-tab" style="border:none;" role="tablist">
+                    <div class="nav nav-tabs" id="nav-tab" style="border:none;" role="tablist">
                         <button class="nav-link active" id="nav-produk-tab" data-bs-toggle="tab" data-bs-target="#nav-produk"
                             type="button" role="tab" aria-controls="nav-produk" aria-selected="true">
-                            <p> Produk </p>
+                            <p>Produk</p>
                         </button>
                         <button class="nav-link" id="nav-lelang-tab" data-bs-toggle="tab" data-bs-target="#nav-lelang"
                             type="button" role="tab" aria-controls="nav-lelang" aria-selected="false">
-                            <p> Lelang </p>
+                            <p>Lelang</p>
                         </button>
                     </div>
                 </nav>
                 <div class="tab-content tab-item" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-produk" role="tabpanel" aria-labelledby="nav-produk-tab"
                         tabindex="0" data-aos="fade-up">
-                        <div class="wishlist">
+                        <div class="produk">
                             <div class="cart-section wishlist-section">
 
                                 <div class="profile-section">
@@ -60,14 +51,10 @@
                                                 <div class="wrappxer-content" style="position: relative; height:13rem;">
                                                     <p class="paragraph mt-4 ms-4" style="font-size: 20px;"><b>Hilma yumma</b></p>
                                                     <p class="mt-2 ms-4">Jumlah produk : <b>2</b></p>
-                                                    <a href="" data-bs-toggle="modal" data-bs-target="#detailModal">
-                                                    <span class="bottom-right" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail Transaksi"
-                                                        style="position: absolute; bottom: 10px; right: 10px; display: flex; justify-content: right; align-items: right; margin-bottom: 10px;">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="32"
-                                                            height="32" viewBox="0 0 24 24">
-                                                            <path fill="currentColor"
-                                                                d="m14 18l-1.4-1.45L16.15 13H4v-2h12.15L12.6 7.45L14 6l6 6z" />
-                                                        </svg>
+                                                    <a data-bs-toggle="modal" data-bs-target="#detailModal">
+                                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Detail Transaksi"
+                                                        style="position: absolute; bottom: 10px; right: 10px; display: flex; justify-content: right; align-items: right; margin-bottom: 10px; border-radius: 50%; border:1px solid;">
+                                                        <svg style="display: flex; justify-content: center; align-items:center;" class="mt-1 me-1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.692 17.308l-.707-.72l4.088-4.088H5v-1h12.073l-4.088-4.088l.707-.72L19 12z"/></svg>
                                                     </span></a>
                                                     <p class="bottom-right mb-3 ms-2"
                                                         style="position: absolute; bottom: 10px; left: 10px; display: flex; justify-content: left; align-items: left; margin-bottom: 10px;">
@@ -84,7 +71,6 @@
                     <div class="tab-pane fade" id="nav-lelang" role="tabpanel" aria-labelledby="nav-lelang-tab"
                         tabindex="0">
                         <div class="wishlist">
-                            <h5 class="mb-4">Lelang</h5>
                             <div class="cart-section wishlist-section">
                                 <table style="width: 100rem;">
                                     <tbody>

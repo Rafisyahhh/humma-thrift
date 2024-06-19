@@ -31,7 +31,6 @@
               </td>
             </tr>
           @empty
-            Anda belum memesan apapun
           @endforelse
         </tbody>
       </table>
