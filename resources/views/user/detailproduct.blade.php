@@ -91,6 +91,30 @@
                                             </span>
                                         </div>
                                     </div>
+                                    {{-- <div class="share-icons">
+                                    <a href="/user/checkout" class="share-icon">
+                                        <span>
+                                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="40" height="40" rx="20" fill="white" />
+                                                <g transform="translate(7.7, 7.7)">
+                                                    <path fill="currentColor" d="M9 8V6h6v2zM7 22q-.825 0-1.412-.587T5 20t.588-1.412T7 18t1.413.588T9 20t-.587 1.413T7 22m10 0q-.825 0-1.412-.587T15 20t.588-1.412T17 18t1.413.588T19 20t-.587 1.413T17 22M1 4V2h3.275l4.25 9h7l3.9-7H21.7l-4.975 9H8.1L7 15h12v2H3.625L6.6 11.6L3 4z" />
+                                                </g>
+                                            </svg>
+                                        </span>
+                                    </a>
+                                    </div> --}}
+                                    <div class="share-icons">
+                                        <a href="#" class="share-icon">
+                                            <span>
+                                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <rect width="40" height="40" rx="20" fill="white" />
+                                                    <g transform="translate(7.7, 7.7)">
+                                                        <path fill="currentColor" d="M9 8V6h6v2zM7 22q-.825 0-1.412-.587T5 20t.588-1.412T7 18t1.413.588T9 20t-.587 1.413T7 22m10 0q-.825 0-1.412-.587T15 20t.588-1.412T17 18t1.413.588T19 20t-.587 1.413T17 22M1 4V2h3.275l4.25 9h7l3.9-7H21.7l-4.975 9H8.1L7 15h12v2H3.625L6.6 11.6L3 4z" />
+                                                    </g>
+                                                </svg>
+                                            </span>
+                                        </a>
+                                    </div>
                                     <div class="share-icons">
                                         <a href="#" class="share-icon">
                                             <i class="fas fa-share-alt" style="font-size: 18px; color: #797979;"></i>
@@ -252,10 +276,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
                     <section class="product weekly-sale product-weekly footer-padding">
                         <div class="container">
                             <div class="section-title">
