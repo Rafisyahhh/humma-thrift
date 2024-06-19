@@ -34,8 +34,8 @@
           datasets: [{
             label: 'Penghasilan',
             data: @json($data['penghasilan']),
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(126, 163, 219, 0.40)',
+            borderColor: 'rgba(28, 56, 121, 1)',
             borderWidth: 1
           }]
         },
