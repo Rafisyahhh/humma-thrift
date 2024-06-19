@@ -68,7 +68,7 @@
             <div class="category-section">
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
                     <div class="wrapper-img">
-                        <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/category-img/dresses.webp"
+                        <img src="template-assets/front/assets/images/homepage-one/category-img/dresses.webp"
                             alt="dress">
                     </div>
                     <div class="wrapper-info">
@@ -77,7 +77,7 @@
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="200">
                     <div class="wrapper-img">
-                        <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/category-img/bags.webp"
+                        <img src="template-assets/front/assets/images/homepage-one/category-img/bags.webp"
                             alt="dress">
                     </div>
                     <div class="wrapper-info">
@@ -86,7 +86,7 @@
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="300">
                     <div class="wrapper-img">
-                        <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/category-img/sweaters.webp"
+                        <img src="template-assets/front/assets/images/homepage-one/category-img/sweaters.webp"
                             alt="dress">
                     </div>
                     <div class="wrapper-info">
@@ -95,7 +95,7 @@
                 </div>
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="400">
                     <div class="wrapper-img">
-                        <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/category-img/shoes.webp"
+                        <img src="template-assets/front/assets/images/homepage-one/category-img/shoes.webp"
                             alt="dress">
                     </div>
                     <div class="wrapper-info">
@@ -105,7 +105,7 @@
 
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="300">
                     <div class="wrapper-img">
-                        <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/category-img/cap.webp"
+                        <img src="template-assets/front/assets/images/homepage-one/category-img/cap.webp"
                             alt="dress">
                     </div>
                     <div class="wrapper-info">
@@ -115,7 +115,7 @@
 
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="500">
                     <div class="wrapper-img">
-                        <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/category-img/baby.webp"
+                        <img src="template-assets/front/assets/images/homepage-one/category-img/baby.webp"
                             alt="dress">
                     </div>
                     <div class="wrapper-info">
@@ -137,7 +137,7 @@
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/brand-img-1.webp"
+                            <img src="template-assets/front/assets/images/homepage-one/brand-img-1.webp"
                                 alt="img">
                         </a>
                     </div>
@@ -145,7 +145,7 @@
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/brand-img-2.webp"
+                            <img src="template-assets/front/assets/images/homepage-one/brand-img-2.webp"
                                 alt="img">
                         </a>
                     </div>
@@ -153,7 +153,7 @@
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/brand-img-3.webp"
+                            <img src="template-assets/front/assets/images/homepage-one/brand-img-3.webp"
                                 alt="img">
                         </a>
                     </div>
@@ -161,7 +161,7 @@
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/brand-img-4.webp"
+                            <img src="template-assets/front/assets/images/homepage-one/brand-img-4.webp"
                                 alt="img">
                         </a>
                     </div>
@@ -169,7 +169,7 @@
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/brand-img-5.webp"
+                            <img src="template-assets/front/assets/images/homepage-one/brand-img-5.webp"
                                 alt="img">
                         </a>
                     </div>
@@ -177,7 +177,7 @@
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/brand-img-6.webp"
+                            <img src="template-assets/front/assets/images/homepage-one/brand-img-6.webp"
                                 alt="img">
                         </a>
                     </div>
@@ -185,7 +185,7 @@
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/brand-img-7.webp"
+                            <img src="template-assets/front/assets/images/homepage-one/brand-img-7.webp"
                                 alt="img">
                         </a>
                     </div>
@@ -193,7 +193,7 @@
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/brand-img-8.webp"
+                            <img src="template-assets/front/assets/images/homepage-one/brand-img-8.webp"
                                 alt="img">
                         </a>
                     </div>
@@ -201,7 +201,7 @@
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/brand-img-9.webp"
+                            <img src="template-assets/front/assets/images/homepage-one/brand-img-9.webp"
                                 alt="img">
                         </a>
                     </div>
@@ -209,7 +209,7 @@
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/brand-img-10.webp"
+                            <img src="template-assets/front/assets/images/homepage-one/brand-img-10.webp"
                                 alt="img">
                         </a>
                     </div>
@@ -217,7 +217,7 @@
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/brand-img-11.webp"
+                            <img src="template-assets/front/assets/images/homepage-one/brand-img-11.webp"
                                 alt="img">
                         </a>
                     </div>
@@ -225,7 +225,7 @@
                 <div class="product-wrapper">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/brand-img-12.webp"
+                            <img src="template-assets/front/assets/images/homepage-one/brand-img-12.webp"
                                 alt="img">
                         </a>
                     </div>
@@ -245,7 +245,7 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp"
+                                <img src="template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp"
                                     alt="product-img">
                                 <div class="product-cart-items">
                                     {{-- <a href="#" class="cart cart-item">
@@ -338,7 +338,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
                             <div class="product-img">
-                                <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/product-img/product-img-5.webp"
+                                <img src="template-assets/front/assets/images/homepage-one/product-img/product-img-5.webp"
                                     alt="product-img">
                                 <div class="product-cart-items">
                                     {{-- <a href="#" class="cart cart-item">
