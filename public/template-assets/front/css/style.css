@@ -2981,7 +2981,7 @@ button {
     justify-content: center;
     gap: 2rem;
     height: 5rem;
-    border: 1px solid rgba(174, 28, 154, 0.08);
+    border: 1px solid rgba(126, 163, 219, 0.40);
     border-radius: 0.5rem;
 }
 .product-info-content .product-quantity .quantity {
@@ -3069,7 +3069,7 @@ hr {
     color: rgba(126, 163, 219, 0.40);
 }
 .product-description .nav-item {
-    border-bottom: 1px solid rgba(174, 28, 154, 0.08);
+    border-bottom: 1px solid rgba(126, 163, 219, 0.40);
     gap: 2rem;
 }
 .product-description .nav-item .nav-link {
@@ -3081,7 +3081,7 @@ hr {
     font-weight: 600;
 }
 .product-description .nav-item .nav-link:hover {
-    border-color: rgba(174, 28, 154, 0.08);
+    border-color: rgba(126, 163, 219, 0.40);
 }
 .product-description .nav-item .nav-link.active {
     background: #1c3879;
@@ -5605,7 +5605,7 @@ table .ticket-row:hover {
 
 .wishlist span:hover,
 .share-icons .share-icon:hover {
-    background-color: #444499;
+    background-color: #1C3879;
     color: #ffff;
 }
 
