@@ -254,11 +254,31 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6" style="align-items: center; display: flex;">
-                <div id="input-a" class="input-section" style="display: none;">
+              <div class="col-lg-6" id="input-a" style="align-items: center; display: none;">
+                <div class="input-section">
                   <div class="form-group">
                     <label for="inputA">Harga</label>
                     <input type="number" id="inputA" class="form-control" placeholder="Masukkan harga">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6" id="input-b" style="align-items: center; display: none;">
+                <div class="row mt-4" style="align-items: center; display: flex;">
+                  <div class="col-lg-6">
+                    <div class="input-section">
+                      <div class="form-group">
+                        <label for="inputB">Harga mulai dari</label>
+                        <input type="number" id="inputB" class="form-control" placeholder="Harga awal">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6" id="input-c" style="display: none;">
+                    <div class="input-section">
+                      <div class="form-group">
+                        <label for="inputC">Sampai dari</label>
+                        <input type="number" id="inputC" class="form-control" placeholder="harga akhir">
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -533,6 +553,8 @@
     //     }
     // }
 
+    const form = $("#formDropzone");
+
     function selectCard(id) {
       // Deselect all cards
       var cards = document.querySelectorAll('.card');
@@ -547,6 +569,7 @@
       selectedCard.querySelector('input[type="radio"]').checked = true;
 
       // Hide all input sections
+      //   $("#input-a").hide("toggle");
       document.getElementById('input-a').style.display = 'none';
       document.getElementById('input-b').style.display = 'none';
       document.getElementById('input-c').style.display = 'none';
@@ -554,11 +577,11 @@
       // Show the input section(s) based on the selected card
       if (id === 'phone') {
         document.getElementById('input-a').style.display = 'block';
-        form.action = "{{ route('seller.produkauction.store') }}";
+        form.attr("action", "{{ route('seller.produkauction.store') }}");
       } else if (id === 'email') {
         document.getElementById('input-b').style.display = 'block';
         document.getElementById('input-c').style.display = 'block';
-        form.action = "{{ route('seller.produk.store') }}";
+        form.attr("{{ route('seller.produk.store') }}");
       }
     }
 
