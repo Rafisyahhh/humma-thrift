@@ -163,7 +163,7 @@ button {
     transition: all 0.4s ease-in-out;
 }
 .shop-btn:hover {
-    color: #fff;
+    color: #000000;
     background-color: rgba(126, 163, 219, 0.40);
 }
 .shop-btn:hover::after {
@@ -177,7 +177,7 @@ button {
     transform: translate(5px);
 }
 .shop-btn:hover span {
-    color: #fff;
+    color: #000000;
 }
 .product {
     padding: 6rem 0;
@@ -195,7 +195,7 @@ button {
     background-color: #fff;
     font-family: jost, sans-serif;
     cursor: pointer;
-    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+    box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;
     position: relative;
     transition: all 0.2s;
     border: 1px solid #fff;
@@ -1899,7 +1899,7 @@ button {
     background-color: #fff;
     font-family: jost, sans-serif;
     cursor: pointer;
-    box-shadow: rgba(11, 120, 228, 0.2) 0 8px 24px;
+    box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;
     background-color: transparent;
     border: none;
     box-shadow: none;
@@ -2108,7 +2108,7 @@ button {
     background-color: #fff;
     font-family: jost, sans-serif;
     cursor: pointer;
-    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+    box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;
     background: #fff;
     /* border: 1px solid #1C3879; */
     box-shadow: none;
@@ -2212,7 +2212,7 @@ button {
     background-color: #fff;
     font-family: jost, sans-serif;
     cursor: pointer;
-    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+    box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;
     background: 0 0;
     box-shadow: none;
     border: none;
@@ -2340,7 +2340,7 @@ button {
     background-color: #fff;
     font-family: jost, sans-serif;
     cursor: pointer;
-    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+    box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -2413,7 +2413,7 @@ button {
     background-color: #fff;
     font-family: jost, sans-serif;
     cursor: pointer;
-    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+    box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;
     background: 0 0;
     border: none;
     box-shadow: none;
@@ -3498,7 +3498,7 @@ hr {
 }
 .review-form .form-control,
 .review-form .form-select {
-    border: 1px solid rgba(174, 28, 154, 0.08);
+    border: 1px solid rgba(126, 163, 219, 0.40);
     box-shadow: none;
     color: #232532;
 }
