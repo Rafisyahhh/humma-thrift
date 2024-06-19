@@ -14,6 +14,8 @@ use App\Http\Controllers\{
     StoreProfileController,
     UserUpdatePasswordController,
     OpenShopController,
+    ProductAuctionController,
+    ProductController,
     RedirectUserController
 };
 
@@ -47,7 +49,9 @@ Route::prefix('seller')->middleware('auth')->name('seller.')->group(function () 
     Route::view('/income', 'seller.penghasilan')->name('income');
     Route::view('/product', 'seller.produk')->name('product');
     Route::view('/profil', 'seller.profil')->name('profil');
-    Route::view('/tambahproduk', 'seller.tambahproduk')->name('tambahproduk');
+    // Route::view('/tambahproduk', 'seller.tambahproduk')->name('tambahproduk');
+    Route::resource('produk', ProductController::class);
+    Route::resource('produkauction', ProductAuctionController::class);
 });
 
 # User Routes

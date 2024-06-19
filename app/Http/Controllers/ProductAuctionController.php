@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
+use App\Models\ProductAuction;
+use App\Http\Requests\StoreProductAuctionRequest;
+use App\Http\Requests\UpdateProductAuctionRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class ProductController extends Controller
+class ProductAuctionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $products = Product::all();
-        return view('seller.produk', compact('products'));
+        $productAuction = ProductAuction::all();
+        return view('seller.produk', compact('productAuction'));
     }
 
     /**
@@ -24,14 +24,14 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $products = Product::all();
-        return view('seller.tambahproduk', compact('products'));
+        $productAuction = ProductAuction::all();
+        return view('seller.tambahproduk', compact('productAuction'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequest $request)
+    public function store(StoreProductAuctionRequest $request)
     {
         try {
             $description = $request->description;
@@ -62,7 +62,7 @@ class ProductController extends Controller
             $path_gambar = Storage::disk('public')->put('product', $gambar);
 
 
-            Product::create([
+            ProductAuction::create([
                 'description' => $description,
                 'cover_image' => $path_gambar,
                 'title' => $request->title,
@@ -71,8 +71,9 @@ class ProductController extends Controller
                 'brand_id' => $request->brand_id,
                 'size' => $request->size,
                 'status' => 'pending',
-                'open_bid' => false,
-                'price' => $request->price,
+                'open_bid' => true,
+                'bid_price_start' => $request->bid_price_start,
+                'bid_price_end' => $request->bid_price_end,
             ]);
 
 
@@ -85,7 +86,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show(ProductAuction $productAuction)
     {
         //
     }
@@ -93,7 +94,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(ProductAuction $productAuction)
     {
         //
     }
@@ -101,7 +102,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateProductAuctionRequest $request, ProductAuction $productAuction)
     {
         //
     }
@@ -109,7 +110,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(ProductAuction $productAuction)
     {
         //
     }

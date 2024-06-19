@@ -9,7 +9,7 @@
         <div class="card-header d-flex justify-content-between align-items-center">
 
             <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
-                style="background-color:	rgb(167, 146, 119)  ; color:#fff;">
+                style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">
                 Tambahkan Event
             </a>
             <form action="{{ route('admin.brand.index') }}" method="get">
@@ -17,7 +17,7 @@
                     <input type="search" name="search" class="form-control" placeholder="Cari Brand&hellip;"
                         value="{{ old('search', request('search')) }}" />
                     <button type="submit" class="btn"
-                        style="background-color: rgb(167, 146, 119); color:#fff;">Cari</button>
+                        style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">Cari</button>
                 </div>
             </form>
 
@@ -121,7 +121,7 @@
                                 <div class="pt-2 d-flex gap-3 justify-content-end">
                                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
                                     <button type="submit" class="btn btn"
-                                        style="background-color: rgb(167, 146, 119); color: #fff;">Tambahkan</button>
+                                        style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color: #fff;">Tambahkan</button>
                                 </div>
                             </form>
                         </div>
@@ -191,7 +191,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
                                 <button type="submit" class="btn btn"
-                                    style="background-color: rgb(167, 146, 119); color:#fff;">Simpan</button>
+                                    style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">Simpan</button>
                             </div>
                             </form>
                         </div>
