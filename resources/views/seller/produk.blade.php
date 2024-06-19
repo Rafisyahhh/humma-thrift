@@ -5,7 +5,7 @@
 @section('css')
     <style>
         .table-row.ticket-row:hover {
-            background: rgba(167, 146, 119, 0.40) !important;
+            background: rgba(126, 163, 219, 0.40) !important;
         }
 
         /* @media (min-width: 576px) {
