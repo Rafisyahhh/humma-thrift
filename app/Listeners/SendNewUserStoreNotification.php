@@ -6,8 +6,7 @@ use App\Events\NewUserStoreCreated;
 use App\Mail\NewUserStoreNotificationToAdmin;
 use App\Mail\VerifyUserStoreNotification;
 use App\Models\User;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Notifications\NewStoreToAdminNotification;
 use Log;
 use Mail;
 
@@ -33,6 +32,8 @@ class SendNewUserStoreNotification
         foreach ($admins as $admin) {
             try {
                 Mail::to($admin->email)->send(new NewUserStoreNotificationToAdmin($event->userStore));
+                $admin->notifyNow(new NewStoreToAdminNotification($event->userStore));
+
                 Log::info("Email sent to admin: {$admin->email}");
             } catch (\Exception $e) {
                 Log::error("Failed to send email to admin {$admin->email}: " . $e->getMessage());

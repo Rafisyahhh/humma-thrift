@@ -1,19 +1,19 @@
 @if (request()->routeIs(['register', 'login']))
     <div class="header-user">
         <a href="{{ url('/') }}" class="d-flex gap-2 align-items-center lh-1">
-            <i style="font-size: 1.5em" class="fas fa-arrow-left"></i>
+            <i style="font-size: 1em" class="fas fa-arrow-left"></i>
             <span>Kembali</span>
         </a>
     </div>
 @elseif(auth()->check() && auth()->user()->getUserRoleInstance()->value === 'admin')
     <div class="header-user d-flex gap-4 h-100">
-        <a href="{{ route('register') }}" class="d-flex gap-3 align-items-center lh-1">
+        <a href="{{ route('admin.dashboard') }}" class="d-flex gap-3 align-items-center lh-1">
             <span>Ke Dasbor Penjual</span>
             <i style="font-size: 1.5em" class="fas fa-arrow-right"></i>
         </a>
     </div>
     <div class="header-user d-flex gap-4 h-100">
-        <a href="{{ route('register') }}" class="d-flex gap-3 align-items-center lh-1">
+        <a href="{{ route('admin.dashboard') }}" class="d-flex gap-3 align-items-center lh-1">
             <span>Ke Dasbor</span>
             <i style="font-size: 1.5em" class="fas fa-arrow-right"></i>
         </a>
@@ -56,8 +56,10 @@
                 </div>
                 <div class="wrapper-line"></div>
                 <div class="cart-btn">
-                    @if(auth()->user()->store) <a href="cart.html" class="shop-btn view-btn">Ke Dasbor Penjual</a> @endif
-                    <a href="cart.html" class="shop-btn view-btn">Ke Dasbor</a>
+                    @if(auth()->user()->store)
+                        <a href="{{ route('seller.home') }}" class="shop-btn view-btn">Ke Dasbor Penjual</a>
+                    @endif
+                    <a href="{{ route('user.home') }}" class="shop-btn view-btn">Ke Dasbor</a>
                     <a href="#" class="shop-btn checkout-btn" id="logout-link">Keluar</a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
