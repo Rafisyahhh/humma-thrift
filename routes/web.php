@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -45,7 +46,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::view('/detailproduct', 'user.detailproduct')->name('detailproduct');
     Route::view('/checkout', 'user.checkout')->name('checkout');
     Route::view('/open-shop', 'user.registstore')->name('registstore');
-    Route::view('/about', 'user.tentang')->name('about');
+    Route::get('/about', [AboutUsController::class, 'user'])->name('about');
     Route::view('/brand', 'user.merek')->name('brand');
     Route::view('/detail', 'user.detail')->name('detail');
     Route::view('/profile', 'user.profil')->name('profile');
@@ -66,7 +67,7 @@ Route::view('/produk', 'landing.produk');
 Route::view('/brandindex', 'landing.brand');
 Route::view('/toko', 'landing.toko');
 Route::view('/detail', 'landing.detail');
-Route::view('/about-us', 'landing.about');
+Route::get('/about-us', [AboutUsController::class, 'landingpage']);
 Route::view('/detail-about', 'landing.detailContactus');
 Route::view('/detail-new', 'landing.detailNews');
 
@@ -76,6 +77,7 @@ Route::get('/home', \App\Http\Controllers\RedirectUserController::class)->name('
 # Admin Routes
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function() {
     Route::view('/', 'admin.index')->name('index');
+    Route::resource('about', AboutUsController::class);
     Route::resource('brand', BrandController::class);
     Route::resource('category', ProductCategoryController::class);
     Route::resource('user', UserController::class);
