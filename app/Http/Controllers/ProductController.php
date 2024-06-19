@@ -33,6 +33,16 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
+    switch($request->type) {
+      case "non-auction":
+        dd("ini bukan lelang");
+      break;
+      case "auction":
+        dd("ini lelang");
+      break;
+      default: break;
+    }
+    //dd($request->all());
         try {
             $description = $request->description;
 
