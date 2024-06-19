@@ -15,7 +15,7 @@
           <h5 class="heading">Data Penghasilan</h5>
         </div>
         <div class="profile-section">
-          <canvas class="wrapper-img" id="data-penghasilan"></canvas>
+          <canvas class="w-100" id="data-penghasilan"></canvas>
         </div>
       </div>
     </div>
