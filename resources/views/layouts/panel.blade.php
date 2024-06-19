@@ -1838,6 +1838,8 @@
     <script src="{{ asset('template-assets/front/assets/js/swiper10-bundle.min.js') }}"></script>
 
     <script src="{{ asset('template-assets/front/assets/js/shopus.js') }}"></script>
+    
+    @yield('script')
 </body>
 
 </html>
