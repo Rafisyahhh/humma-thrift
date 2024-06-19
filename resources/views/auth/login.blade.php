@@ -1,5 +1,7 @@
 @extends('layouts.home')
 
+@section('title', 'Masuk')
+
 @section('content')
     <section class="login footer-padding">
         <div class="container">
@@ -47,7 +49,7 @@
                             </div>
                         </div>
                         <div class="login-btn text-center">
-                            <button type="submit" class="shop-btn">Masuk</button>
+                            <button type="submit" class="shop-btn text-white">Masuk</button>
                             <span class="shop-account">Belum punya akun?<a href="{{ route('register') }}">Daftar
                                     disini</a></span>
                         </div>

@@ -7,6 +7,7 @@ use App\Enums\UserLevelEnum;
 use App\Traits\VerifyEmailTrait;
 use Creativeorange\Gravatar\Facades\Gravatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -65,7 +66,7 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, VerifyEmailTrait;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, VerifyEmailTrait, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -138,5 +139,15 @@ class User extends Authenticatable implements MustVerifyEmail
             'label' => $label[$this->getAttribute('banned')],
             'color' => $color[$this->getAttribute('banned')],
         ];
+    }
+
+    /**
+     * Getting user store
+     *
+     * @return HasOne
+     */
+    public function store()
+    {
+        return $this->hasOne(UserStore::class);
     }
 }
