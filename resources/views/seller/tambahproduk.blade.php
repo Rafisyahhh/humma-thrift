@@ -254,7 +254,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6" id="input-a" style="align-items: center; display: none;">
+              <div class="col-lg-6 mt-4" id="input-a" style="align-items: center; display: none;">
                 <div class="input-section">
                   <div class="form-group">
                     <label for="inputA">Harga</label>
