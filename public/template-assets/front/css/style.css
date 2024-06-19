@@ -1665,14 +1665,10 @@ button {
     padding: 10px;
 }
 .hero-slider-one {
+
     background: no-repeat center/cover;
 }
-.hero-slider-two {
-    background: no-repeat center/cover;
-}
-.hero-slider-three {
-    background: no-repeat center/cover;
-}
+
 @media (max-width: 767px) {
     .hero-slider-one,
     .hero-slider-two,
