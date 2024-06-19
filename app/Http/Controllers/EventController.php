@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\event;
+use App\Models\Event;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreEventRequest;
+use App\Http\Requests\UpdateEventRequest;
 
 class EventController extends Controller
 {
@@ -15,11 +16,12 @@ class EventController extends Controller
      */
     public function index(Request $request)
     {
-        $event = Event::when($request->has('search'), function ($query) use ($request) {
-            $a = $request->input('search');
-            return $query->where('title', 'LIKE', "%$a%");
+        $events = Event::when($request->has('search'), function ($query) use ($request) {
+            $searchTerm = $request->input('search');
+            return $query->where('title', 'LIKE', "%$searchTerm%");
         })->paginate(5);
-        return view('admin.event',compact('event'));
+
+        return view('admin.event.index', compact('events'));
     }
 
     /**
@@ -27,27 +29,28 @@ class EventController extends Controller
      */
     public function create()
     {
-        $event = Event::all();
-        return view('admin.event', compact('event'));
+        return view('admin.event.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEventRequest $request)
     {
         try {
-            $gambar = $request->file('foto');
-        if ($gambar) {
-            $path_gambar = Storage::disk('public')->put('foto', $gambar);
-        }
+            $path_gambar = null;
+            if ($request->hasFile('foto')) {
+                $gambar = $request->file('foto');
+                $path_gambar = Storage::disk('public')->put('foto', $gambar);
+            }
 
-        Event::create([
-            'judul' => $request->judul,
-            'subjudul' => $request->subjudul,
-            'foto' => $path_gambar,
-        ]);
-            return redirect()->back()->with('success', 'Kategori berhasil ditambahkan');
+            Event::create([
+                'judul' => $request->judul,
+                'subjudul' => $request->subjudul,
+                'foto' => $path_gambar,
+            ]);
+
+            return redirect()->route('event.index')->with('success', 'Event berhasil ditambahkan');
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
         }
@@ -56,50 +59,49 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(event $event)
+    public function show(Event $event)
     {
-        //
+        return view('admin.event.show', compact('event'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(event $event)
+    public function edit(Event $event)
     {
-        $event = Event::all();
-        return view('admin.event', compact('event'));
+        return view('admin.event.edit', compact('event'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(UpdateEventRequest $request, Event $event)
     {
         try {
-            $event = event::findOrFail($id);
-            $oldPhotoPath = $event->getAttribute('icon');
+            $oldPhotoPath = $event->foto;
 
-        $dataToUpdate = [
-            'judul' => $request->input('judul'),
-            'subjudul' => $request->input('subjudul'),
-        ];
+            $dataToUpdate = [
+                'judul' => $request->input('judul'),
+                'subjudul' => $request->input('subjudul'),
+            ];
 
-        if ($request->hasFile('foto')) {
-            $foto = $request->file('foto');
-            $path = $foto->store('foto', 'public');
-            $dataToUpdate['foto'] = $path;
-        }
-
-        $event->update($dataToUpdate);
-
-        if ($event->wasChanged('foto') && $oldPhotoPath) {
-            Storage::disk('public')->delete($oldPhotoPath);
-            $localFilePath = public_path('storage/' . $oldPhotoPath);
-            if (File::exists($localFilePath)) {
-                File::delete($localFilePath);
+            if ($request->hasFile('foto')) {
+                $foto = $request->file('foto');
+                $path = $foto->store('foto', 'public');
+                $dataToUpdate['foto'] = $path;
             }
-        }
-            return redirect()->back()->with('success', 'Kategori berhasil ditambahkan');
+
+            $event->update($dataToUpdate);
+
+            if (isset($dataToUpdate['foto']) && $oldPhotoPath) {
+                Storage::disk('public')->delete($oldPhotoPath);
+                $localFilePath = public_path('storage/' . $oldPhotoPath);
+                if (File::exists($localFilePath)) {
+                    File::delete($localFilePath);
+                }
+            }
+
+            return redirect()->route('event.index')->with('success', 'Event berhasil diperbarui');
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
         }
@@ -108,13 +110,18 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(event $event, $id)
+    public function destroy(Event $event)
     {
-        if (Storage::disk('public')->exists($event->getAttribute('foto'))) {
-            Storage::disk('public')->delete($event->getAttribute('foto'));
+        try {
+            if (Storage::disk('public')->exists($event->foto)) {
+                Storage::disk('public')->delete($event->foto);
+            }
+
+            $event->delete();
+
+            return redirect()->route('event.index')->with('success', 'Event berhasil dihapus');
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(['error' => $th->getMessage()]);
         }
-        // Delete the category
-        Event::findOrFail($id)->delete();
-        return redirect()->route('event.index')->with('success', 'Kategori berhasil di hapus');
     }
 }
