@@ -42,6 +42,12 @@
                 <div >Toko</div>
             </a>
         </li>
+        <li class="menu-item {{ request()->routeIs('/admin') ? 'active' : '' }}">
+            <a href="{{ url('/admin') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-building"></i>
+                <div >Tentang kami</div>
+            </a>
+        </li>
 
         <li class="menu-item {{ request()->routeIs('admin.brand.*') ? 'active' : '' }}">
             <a href="{{ route('admin.brand.index') }}" class="menu-link">
@@ -88,6 +94,13 @@
             <a href="{{ route('admin.user.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-users"></i>
                 <div >Pengguna</div>
+            </a>
+        </li>
+
+        <li class="menu-item">
+            <a href="{{ route('admin.event.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-file"></i>
+                <div >Event</div>
             </a>
         </li>
     </ul>

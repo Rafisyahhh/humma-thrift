@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBrandRequest extends FormRequest
+class StoreAboutRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,21 +22,19 @@ class StoreBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'judul' => 'required',
-            'subjudul' => 'required',
-            'logo' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'description' => 'required'
         ];
     }
 
     public function messages(): array
     {
         return [
-            'judul.required' => 'Judul Event Wajib Diisi',
-            'subjudul.required' => 'Keterangan Event Wajib Diisi',
-            'logo.required' => 'Logo Wajib Diisi',
-            'logo.image' => 'Masukan harus berupa Logo',
-            'logo.mimes' => 'Logo harus berupa file jpeg,png,jpg',
-            'logo.max' => 'Ukuran Logo harus kurang 2MB',
+            'image.required' => 'gambar Wajib Diisi',
+            'image.image' => 'Masukan harus berupa gambar',
+            'image.mimes' => 'gambar harus berupa file jpeg,png,jpg',
+            'image.max' => 'Ukuran gambar harus kurang 2MB',
+            'description.required' => 'Deskripsi Wajib Diisi',
         ];
     }
 }

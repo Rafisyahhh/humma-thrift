@@ -1,11 +1,15 @@
 <?php
 
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\StoreProfileController;
+use App\Http\Controllers\UserUpdatePasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +32,7 @@ Route::prefix('/debug')->group(function () {
 });
 
 # Public Routes
-Route::view('/', 'landing.home');
+Route::get('/', [LandingpageController::class,'index']);
 
 # Seller Routes
 Route::prefix('seller')->middleware('auth')->name('seller.')->group(function () {
@@ -60,6 +64,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::get('/open-shop', [\App\Http\Controllers\OpenShopController::class, 'index'])->name('register-seller');
     Route::post('/open-shop', [\App\Http\Controllers\OpenShopController::class, 'register'])->name('register-seller');
     Route::get('/verify-store/{token:verification_code}', [\App\Http\Controllers\OpenShopController::class, 'verifyStore'])->name('verify.store');
+    Route::resource('update-password', UserUpdatePasswordController::class);
 });
 
 # Dev Routes
@@ -72,7 +77,7 @@ Route::view('/produk', 'landing.produk');
 Route::view('/brandindex', 'landing.brand');
 Route::view('/toko', 'landing.toko');
 Route::view('/detail', 'landing.detail');
-Route::view('/about-us', 'landing.about');
+Route::get('/about-us', [AboutUsController::class, 'landingpage']);
 Route::view('/detail-about', 'landing.detailContactus');
 Route::view('/detail-new', 'landing.detailNews');
 
@@ -82,9 +87,11 @@ Route::get('/home', \App\Http\Controllers\RedirectUserController::class)->name('
 # Admin Routes
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function () {
     Route::view('/', 'admin.index')->name('index');
+    Route::resource('about', AboutUsController::class);
     Route::resource('brand', BrandController::class);
     Route::resource('category', ProductCategoryController::class);
     Route::resource('user', UserController::class);
+    Route::resource('event', EventController::class);
 });
 
 Route::prefix('@{store:username}')->group(function () {
