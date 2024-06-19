@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('product_auctions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('store_id');
@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string('cover_image');
             $table->string('size');
             $table->enum('status', ['pending', 'approved', 'rejected','sold'])->default('pending');
-            $table->boolean('open_bid')->default(false);
-            $table->bigInteger('price');
+            $table->boolean('open_bid')->default(true);
+            $table->bigInteger('bid_price_start')->nullable();
+            $table->bigInteger('bid_price_end')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('product_auctions');
     }
 };

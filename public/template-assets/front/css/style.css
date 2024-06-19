@@ -5613,3 +5613,22 @@ table .ticket-row:hover {
     color: #ffff;
 }
 
+.produk span,
+.share-icons .share-icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #c9c9c9;
+    color: #000000;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.produk span:hover,
+.share-icons .share-icon:hover {
+    background-color: #7ea3db;
+    color: #000000;
+}
+
