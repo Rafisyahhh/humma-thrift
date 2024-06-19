@@ -5206,7 +5206,7 @@ table .ticket-row:hover {
 }
 .user-dashboard .nav-item {
     width: 18rem;
-    border-right: 2px solid rgba(174, 28, 154, 0.08);
+    border-right: 2px solid rgba(126, 163, 219, 0.40);
     padding: 0 0 2rem;
     display: flex;
     flex-direction: column;
