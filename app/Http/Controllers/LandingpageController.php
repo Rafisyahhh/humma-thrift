@@ -10,7 +10,7 @@ class LandingpageController extends Controller
 {
     public function index() {
         $event =  Event::all();
-        return view('landing.home',compact('event'));
+        return view('landing.home', compact('event'));
     }
 
 }
