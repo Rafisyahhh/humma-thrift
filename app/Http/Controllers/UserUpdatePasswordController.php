@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserUpdatePasswordRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserUpdatePasswordController extends Controller {
     /**
@@ -44,9 +47,25 @@ class UserUpdatePasswordController extends Controller {
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id) {
-        //
+    public function update(UserUpdatePasswordRequest $request, $id) {
+        $validatedRequest = $request->validated();
+        $user = User::findOrFail($id);
+
+        if (!password_verify($validatedRequest['old-password'], $user->password)) {
+            return redirect()->back()->with('error', 'Anda memasukkan password yang salah');
+        }
+
+        if (password_verify($validatedRequest['password'], $user->password)) {
+            return redirect()->back()->with('error', 'Password tidak boleh sama dengan password lama');
+        }
+
+        $user->update([
+            'password' => Hash::make($validatedRequest['password'])
+        ]);
+
+        return redirect()->back()->with('success', 'Password berhasil diubah');
     }
+
 
     /**
      * Remove the specified resource from storage.
