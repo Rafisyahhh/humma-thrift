@@ -25,26 +25,28 @@
 @section('script')
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
   <script>
-    const canvas = $('#data-penghasilan');
-    new Chart(canvas, {
-      type: 'bar',
-      data: {
-        labels: @json($data['tahun']),
-        datasets: [{
-          label: 'Penghasilan',
-          data: @json($data['penghasilan']),
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+    $(document).ready(function() {
+      const canvas = $('#data-penghasilan');
+      new Chart(canvas, {
+        type: 'bar',
+        data: {
+          labels: @json($data['tahun']),
+          datasets: [{
+            label: 'Penghasilan',
+            data: @json($data['penghasilan']),
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
           }
         }
-      }
+      });
     });
   </script>
 @endsection
