@@ -5,7 +5,7 @@
 @section('css')
     <style>
         .table-row.ticket-row:hover {
-            background: rgba(167, 146, 119, 0.40) !important;
+            background: rgba(126, 163, 219, 0.40) !important;
         }
 
         /* @media (min-width: 576px) {
@@ -158,24 +158,40 @@
 
     {{-- LELANG --}}
     <div class="modal fade" id="detailLelang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-        style="height: 99%;">
+        style="height: 99%; margin-top:1px;">
         <div class="modal-dialog" style="margin-left: auto;">
             {{-- <div class="modal-content"> --}}
-            <div class="login-section account-section p-0">
-                <div class="review-form m-0" style="height: 80%; width: 75rem;">
-                    <div class="text-end mb-4">
+            <div class="login-section account-section p-0" style="height: 100rem;">
+                <div class="review-form m-0" style="height: 80%; width:400%;">
+                    <div class="text-end mb-2">
                         <div class="close-btn">
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
                     </div>
-                    <table style="width:65rem;">
+                    <h3 style="text-align: center">SESI LELANG HOODIE</h3>
+                    <hr><br><br>
+                    <table style="width:120rem;">
                         <tbody>
                             <tr class="table-row table-top-row">
                                 <td class="table-wrapper">
                                     <div class="table-wrapper-center">
-
-                                        <h5 class="table-heading">Pembeli</h5>
+                                        <h5 class="table-heading">NO</h5>
+                                    </div>
+                                </td>
+                                <td class="table-wrapper">
+                                    <div class="table-wrapper-center">
+                                        <h5 class="table-heading">USER NAME</h5>
+                                    </div>
+                                </td>
+                                <td class="table-wrapper">
+                                    <div class="table-wrapper-center">
+                                        <h5 class="table-heading">NO HP</h5>
+                                    </div>
+                                </td>
+                                <td class="table-wrapper">
+                                    <div class="table-wrapper-center">
+                                        <h5 class="table-heading">EMAIL</h5>
                                     </div>
                                 </td>
                                 <td class="table-wrapper">
@@ -192,7 +208,22 @@
                             <tr class="table-row ticket-row">
                                 <td class="table-wrapper">
                                     <div class="table-wrapper-center">
+                                        <h5 class="heading">1.</h5>
+                                    </div>
+                                </td>
+                                <td class="table-wrapper">
+                                    <div class="table-wrapper-center">
                                         <h5 class="heading">Hilma</h5>
+                                    </div>
+                                </td>
+                                <td class="table-wrapper">
+                                    <div class="table-wrapper-center">
+                                        <h5 class="heading">085707062531</h5>
+                                    </div>
+                                </td>
+                                <td class="table-wrapper">
+                                    <div class="table-wrapper-center">
+                                        <h5 class="heading">hilma@gmail.com</h5>
                                     </div>
                                 </td>
                                 <td class="table-wrapper">

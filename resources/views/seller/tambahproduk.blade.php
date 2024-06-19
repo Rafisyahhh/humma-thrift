@@ -7,10 +7,12 @@
         transition: background-color 0.3s, color 0.3s;
     }
 
-    .card.selected {
-        background-color: rgb(234, 216, 192);
-        color: #fff;
-    }
+        .card.selected {
+            background-color: rgba(126, 163, 219, 0.40);
+            /* Ubah sesuai warna yang diinginkan */
+            color: #fff;
+            /* Ubah warna teks jika diperlukan */
+        }
 
     .wrapper-content {
         height: 100%;
