@@ -163,8 +163,8 @@ button {
     transition: all 0.4s ease-in-out;
 }
 .shop-btn:hover {
-    color: #1c3879;
-    background-color: rgba(126, 163, 219, 0.4);
+    color: #fff;
+    background-color: rgba(126, 163, 219, 0.40);
 }
 .shop-btn:hover::after {
     right: auto;
@@ -396,8 +396,8 @@ button {
     transition: all 0.4s;
 }
 .product-btn:hover {
-    background-color: rgba(126, 163, 219, 0.4);
-    color: #1c3879;
+    background-color: rgba(126, 163, 219, 0.40);
+    color: #000000;
 }
 .section-title {
     margin-bottom: 2rem;
@@ -1694,7 +1694,7 @@ button {
 }
 .wrapper-section .wrapper-subtitle .wrapper-inner-title {
     font-size: 4rem;
-    color: #1C3879;
+    color: #1c3879;
 }
 .wrapper-section .shop-btn {
     padding: 1.4rem 4.6rem;
@@ -2721,7 +2721,7 @@ button {
     font-weight: 300;
 }
 .footer-section .footer-link a:hover {
-    color: #ffffff;
+    color: #1C3879;
     text-decoration: underline;
 }
 .footer-section .footer-link p {
@@ -5587,4 +5587,28 @@ table .ticket-row:hover {
 }
 .user-dashboard .nav-content .modal-wrapper.active {
     display: flex;
+}
+.product-quantity {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wishlist span,
+.share-icons .share-icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #f1f1f1;
+    color: #797979;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.wishlist span:hover,
+.share-icons .share-icon:hover {
+    background-color: #333;
+    color: #fff;
 }
