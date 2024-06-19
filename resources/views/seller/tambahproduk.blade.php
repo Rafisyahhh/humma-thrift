@@ -132,6 +132,7 @@
 @section('content')
   <div class="col-lg-9 justify-content-center">
     <form action="{{ route('seller.produk.store') }}" id="formDropzone" method="post" enctype="multipart/form-data">
+    @csrf
       <div class="review-form">
         <div class="account-inner-form">
           <div class="row">
@@ -144,9 +145,9 @@
             <div class="col-md-6 mb-3">
               <div class="review-form-name">
                 <label for="brand" class="form-label">Brand</label>
-                <select id="brand" class="form-select">
+                <select id="brand" name="brand" class="form-select">
                   <option>Pilih Brand</option>
-                  <option>Brand 1</option>
+                  <option value="1">Brand 1</option>
                   <option>Brand 2</option>
                   <option>Brand 3</option>
                 </select>
@@ -161,13 +162,13 @@
                 <div class="col-md-6 mb-3">
                   <div class="review-form-name">
                     <label for="Stok" class="form-label">Stok</label>
-                    <input type="number" id="Stok" class="form-control" placeholder="Masukkan stok">
+                    <input type="number" id="Stok" name="stock" class="form-control" placeholder="Masukkan stok">
                   </div>
                 </div>
                 <div class="col-md-6 mb-3">
                   <div class="review-form-name">
                     <label for="Size" class="form-label">Size</label>
-                    <input type="number" id="Size" class="form-control" placeholder="Masukkan Ukuran">
+                    <input type="number" id="Size" name="size" class="form-control" placeholder="Masukkan Ukuran">
                   </div>
                 </div>
               </div>
@@ -175,9 +176,9 @@
             <div class="col-md-6 mb-3">
               <div class="review-form-name">
                 <label for="kategori" class="form-label">Kategori</label>
-                <select id="kategori" class="form-select">
+                <select id="kategori" name="category_id" class="form-select">
                   <option>Pilih Kategori</option>
-                  <option>Kategori 1</option>
+                  <option value="1">Kategori 1</option>
                   <option>Kategori 2</option>
                   <option>Kategori 3</option>
                 </select>
@@ -190,11 +191,11 @@
             <div class="col-md-6 mb-3">
               <div class="review-form-name">
                 <label for="gambar" class="form-label">Gambar Produk</label>
-                <input type="file" class="form-control @error('logo') is-invalid @enderror" id="gambar">
+                <input type="file" name="image" class="form-control @error('logo') is-invalid @enderror" id="gambar">
               </div>
               <div class="review-form-name mt-4">
                 <label for="deskripsi" class="form-label">Deskripsi</label>
-                <textarea id="deskripsi" class="form-control" placeholder="Masukkan Deskripsi" rows="7"></textarea>
+                <textarea id="deskripsi" name="description" class="form-control" placeholder="Masukkan Deskripsi" rows="7"></textarea>
               </div>
             </div>
             <div class="col-md-6 mb-3">
@@ -233,8 +234,7 @@
                       <div class="row gy-5">
                         <div class="col-sm-6">
                           <div class="card phone" onclick="selectCard('phone')" style="height: 80px">
-                            <input type="radio" id="phone" name="contact" class="radio-input"
-                              style="display: none">
+                            <input type="radio" id="phone" name="type" class="radio-input" style="display: none" value="non-auction">
                             <div class="wrapper-content">
                               <p>Harga tetap</p>
                             </div>
@@ -242,8 +242,7 @@
                         </div>
                         <div class="col-sm-6">
                           <div class="card email" onclick="selectCard('email')" style="height: 80px">
-                            <input type="radio" id="email" name="contact" class="radio-input"
-                              style="display: none">
+                            <input type="radio" id="email" name="type" class="radio-input" style="display: none" value="auction">
                             <div class="wrapper-content">
                               <p>Lelang</p>
                             </div>
@@ -254,11 +253,31 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6" style="align-items: center; display: flex;">
-                <div id="input-a" class="input-section" style="display: none;">
+              <div class="col-lg-6 mt-4" id="input-a" style="align-items: center; display: none;">
+                <div class="input-section">
                   <div class="form-group">
                     <label for="inputA">Harga</label>
-                    <input type="number" id="inputA" class="form-control" placeholder="Masukkan harga">
+                    <input type="number" id="inputA" class="form-control" name="price" placeholder="Masukkan harga">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6" id="input-b" style="align-items: center; display: none;">
+                <div class="row mt-4" style="align-items: center; display: flex;">
+                  <div class="col-lg-6">
+                    <div class="input-section">
+                      <div class="form-group">
+                        <label for="inputB">Harga mulai dari</label>
+                        <input type="number" id="inputB" name="min-price" class="form-control" placeholder="Harga awal">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6" id="input-c" style="display: none;">
+                    <div class="input-section">
+                      <div class="form-group">
+                        <label for="inputC">Sampai dari</label>
+                        <input type="number" id="inputC" name="max-price" class="form-control" placeholder="harga akhir">
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -266,7 +285,7 @@
           </div>
           <div class="submit-btn">
             <a href="#" class="shop-btn cancel-btn">Batal</a>
-            <a href="#" class="shop-btn update-btn">Perbarui Profil</a>
+            <button type="submit" class="shop-btn update-btn">Tambah Produk</button>
           </div>
         </div>
       </div>
@@ -533,6 +552,8 @@
     //     }
     // }
 
+    const form = $("#formDropzone");
+
     function selectCard(id) {
       // Deselect all cards
       var cards = document.querySelectorAll('.card');
@@ -547,6 +568,7 @@
       selectedCard.querySelector('input[type="radio"]').checked = true;
 
       // Hide all input sections
+      //   $("#input-a").hide("toggle");
       document.getElementById('input-a').style.display = 'none';
       document.getElementById('input-b').style.display = 'none';
       document.getElementById('input-c').style.display = 'none';
@@ -554,11 +576,11 @@
       // Show the input section(s) based on the selected card
       if (id === 'phone') {
         document.getElementById('input-a').style.display = 'block';
-        form.action = "{{ route('seller.produkauction.store') }}";
+        form.attr("action", "{{ route('seller.produk.store') }}");
       } else if (id === 'email') {
         document.getElementById('input-b').style.display = 'block';
         document.getElementById('input-c').style.display = 'block';
-        form.action = "{{ route('seller.produk.store') }}";
+        form.attr("{{ route('seller.produkauction.store') }}");
       }
     }
 
