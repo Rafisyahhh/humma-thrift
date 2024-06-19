@@ -73,7 +73,7 @@ class OpenShopController extends Controller
         $token->verified_at = now();
         $token->save();
 
-        // Kirim notifikasi
+        // Kirim notifikasi ke user yang bersangkutan
         Notification::send($token->user, new NotificationIfStoreIsVerified($token));
 
         // Redirect atau tampilkan pesan sukses

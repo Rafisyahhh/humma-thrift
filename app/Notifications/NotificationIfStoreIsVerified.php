@@ -5,7 +5,6 @@ namespace App\Notifications;
 use App\Models\User;
 use App\Models\UserStore;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -62,6 +61,7 @@ class NotificationIfStoreIsVerified extends Notification
     {
         return (new MailMessage)
             ->subject('Toko anda telah diverifikasi')
+            ->greeting("Halo {$notifiable->name}")
             ->line("Toko anda yang bernama \"{$this->token->name}\" telah diverifikasi. Namun masih menunggu verifikasi dari admin untuk aktivasi toko anda.")
             ->line('Terimakasih.');
     }
