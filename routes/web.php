@@ -9,7 +9,9 @@ use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\LandingpageController;
+use App\Http\Controllers\ProductAuctionController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserUpdatePasswordController;
 
 /*
@@ -42,7 +44,9 @@ Route::prefix('seller')->middleware('auth')->name('seller.')->group(function () 
     Route::view('/income', 'seller.penghasilan')->name('income');
     Route::view('/product', 'seller.produk')->name('product');
     Route::view('/profil', 'seller.profil')->name('profil');
-    Route::view('/tambahproduk', 'seller.tambahproduk')->name('tambahproduk');
+    // Route::view('/tambahproduk', 'seller.tambahproduk')->name('tambahproduk');
+    Route::resource('produk', ProductController::class);
+    Route::resource('produkauction', ProductAuctionController::class);
 });
 
 # User Routes
