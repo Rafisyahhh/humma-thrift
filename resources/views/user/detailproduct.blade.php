@@ -336,7 +336,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="product-description">
-                                                    <a href="product-info.html" class="product-details">White Checked
+                                                    <a href="/user/detailproduct" class="product-details">White Checked
                                                         Shirt
                                                     </a>
                                                     <div class="price">
