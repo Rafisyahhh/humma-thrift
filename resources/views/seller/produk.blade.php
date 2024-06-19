@@ -9,12 +9,12 @@
         }
 
         /* @media (min-width: 576px) {
-                .modal-dialog {
-                    max-width: var(--bs-modal-width);
-                    margin-right: auto;
-                    margin-left: auto;
-                }
-            } */
+                    .modal-dialog {
+                        max-width: var(--bs-modal-width);
+                        margin-right: auto;
+                        margin-left: auto;
+                    }
+                } */
     </style>
 @endsection
 
@@ -64,28 +64,25 @@
                         </td>
                         <td class="table-wrapper">
                             <div class="table-wrapper-center">
-                                <span>
                                     <button type="button" class="shop-btn" data-bs-toggle="modal"
                                         data-bs-target="#detailModal">
                                         Detail
                                     </button>
-
                                     <button type="button" class="shop-btn" data-bs-toggle="modal"
                                         data-bs-target="#detailLelang">
                                         Lelang
                                     </button>
                             </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="heading">Diterima</h5>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        </td>
-        <td class="table-wrapper">
-            <div class="table-wrapper-center">
-                <h5 class="heading">Diterima</h5>
-            </div>
-        </td>
-        </tr>
-        </tbody>
-        </table>
-    </div>
     </div>
 
     <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
