@@ -9,6 +9,7 @@ use App\Http\Controllers\{
     DashboardUserController,
     EventController,
     LandingpageController,
+    NotificationController,
     ProductCategoryController,
     StoreProfileController,
     UserUpdatePasswordController,
@@ -99,6 +100,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::resource('category', ProductCategoryController::class);
     Route::resource('user', UserController::class);
     Route::resource('event', EventController::class);
+    Route::resource('notification', NotificationController::class);
 });
 
 # Store Profile Routes
