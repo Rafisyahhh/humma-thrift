@@ -1665,15 +1665,15 @@ button {
     padding: 10px;
 }
 .hero-slider-one {
-    background: url("../assets/images/homepage-one/hero-slider-one.webp")
+    background:
         no-repeat center/cover;
 }
 .hero-slider-two {
-    background: url("../assets/images/homepage-one/hero-slider-two.webp")
+    background:
         no-repeat center/cover;
 }
 .hero-slider-three {
-    background: url("../assets/images/homepage-one/hero-slider-three.webp")
+    background:
         no-repeat center/cover;
 }
 @media (max-width: 767px) {

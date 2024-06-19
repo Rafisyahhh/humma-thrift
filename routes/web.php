@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\UserUpdatePasswordController;
 
@@ -28,7 +30,7 @@ Route::prefix('/debug')->group(function () {
 });
 
 # Public Routes
-Route::view('/', 'landing.home');
+Route::get('/', [LandingpageController::class,'index']);
 
 # Seller Routes
 Route::prefix('seller')->middleware('auth')->name('seller.')->group(function () {
@@ -82,4 +84,5 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::resource('brand', BrandController::class);
     Route::resource('category', ProductCategoryController::class);
     Route::resource('user', UserController::class);
+    Route::resource('event', EventController::class);
 });
