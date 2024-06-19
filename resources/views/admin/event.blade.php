@@ -93,9 +93,9 @@
 
                                 <div class="mb-3">
                                     <label for="subjudul" class="form-label">Sub Judul</label>
-                                    <input type="text" class="form-control @error('subjudul') is-invalid @enderror"
-                                        id="subjudul" name="subjudul" value="{{ old('subjudul') }}"
-                                        placeholder="Masukkan nama kategori" />
+                                    <textarea type="text" class="form-control @error('subjudul') is-invalid @enderror"
+                                        id="subjudul" name="subjudul"
+                                        placeholder="Masukkan sub judul">{{ old('subjudul') }}</textarea>
                                     @error('subjudul')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -161,8 +161,7 @@
                                         <label for="subjudul" class="form-label">Sub Judul</label>
                                         <textarea type="text"
                                             class="form-control @error('subjudul') is-invalid @enderror"
-                                            id="subjudul" name="subjudul"
-                                            value="{{ old('subjudul', $even->subjudul) }}"></textarea>
+                                            id="subjudul" name="subjudul">{{ old('subjudul', $even->subjudul) }}</textarea>
                                         @error('subjudul')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

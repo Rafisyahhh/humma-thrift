@@ -3,11 +3,12 @@
 @section('title', 'Beranda')
 
 @section('content')
-@foreach ( $event as $key => $even )
+
 
 <section id="hero" class="hero">
     <div class="swiper hero-swiper">
         <div class="swiper-wrapper hero-wrapper">
+            @foreach ( $event as $key => $even )
             <div id="slide{{ $key }}" class="swiper-slide hero-slider-one" style="background-image: url('{{ asset("storage/{$even->foto}") }}');">
                 <div class="container">
                     <div class="row"> <!-- Menambahkan row di sini untuk pembagian kolom -->
@@ -25,40 +26,7 @@
                     </div>
                 </div>
             </div>
-            <div id="slide{{ $key }}" class="swiper-slide hero-slider-two" style="background-image: url('{{ asset("storage/{$even->foto}") }}');">
-                <div class="container">
-                    <div class="row"> <!-- Menambahkan row di sini untuk pembagian kolom -->
-                        <div class="col-lg-6">
-                            <div class="wrapper-section" data-aos="fade-up">
-                                <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">
-                                        {{ $even->subjudul }}
-                                    </h5>
-                                    <h1 class="wrapper-details">{{ $even->judul }}</h1>
-                                    <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="slide{{ $key }}" class="swiper-slide hero-slider-three" style="background-image: url('{{ asset("storage/{$even->foto}") }}');">
-                <div class="container">
-                    <div class="row"> <!-- Menambahkan row di sini untuk pembagian kolom -->
-                        <div class="col-lg-6">
-                            <div class="wrapper-section" data-aos="fade-up">
-                                <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">
-                                        {{ $even->subjudul }}
-                                    </h5>
-                                    <h1 class="wrapper-details">{{ $even->judul }}</h1>
-                                    <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <div class="swiper-pagination"></div>
     </div>
@@ -538,6 +506,4 @@
             </div>
         </div>
     </section>
-
-@endforeach
 @endsection
