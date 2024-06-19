@@ -15,8 +15,8 @@
                                 <input type="text" id="username" class="form-control" placeholder="akbar" />
                             </div>
                             <div class="review-form-name mb-4">
-                                <label for="fullname" class="form-label">Nama Lengkap</label>
-                                <input type="text" id="fullname" class="form-control" placeholder="Akbar Rafsyah" />
+                                <label for="name" class="form-label">Nama Lengkap</label>
+                                <input type="text" id="name" class="form-control" placeholder="Akbar Rafsyah" />
                             </div>
                         </div>
                         <div class="account-inner-form">

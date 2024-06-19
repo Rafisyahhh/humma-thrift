@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::factory()->withRole('admin')->create([
-            'fullname' => 'Super Admin',
+            'name' => 'Super Admin',
             'email' => 'admin@humma-thrift.com',
         ]);
 
