@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\User;
 use App\Models\UserStore;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -27,15 +28,37 @@ class NotificationIfStoreIsVerified extends Notification
      *
      * @return array<int, string>
      */
-    public function via(object $notifiable): array
+    public function via(User $notifiable): array
     {
         return ['mail', 'database'];
     }
 
     /**
+     * Determine if the notification should be sent to the given user.
+     *
+     * @return bool
+     */
+    public function shouldSend(User $notifiable): bool
+    {
+        // Only send the notification to the user who owns the verified store
+        return $notifiable->id === $this->token->user_id;
+    }
+
+    /**
+     * Determine if the notification should be sent to the given user.
+     *
+     * @return bool
+     */
+    public function shouldBypassFilter(User $notifiable): bool
+    {
+        // Always send the notification to the user's inbox, even if they have disabled less important notifications
+        return true;
+    }
+
+    /**
      * Get the mail representation of the notification.
      */
-    public function toMail(object $notifiable): MailMessage
+    public function toMail(User $notifiable): MailMessage
     {
         return (new MailMessage)
             ->subject('Toko anda telah diverifikasi')
@@ -48,7 +71,7 @@ class NotificationIfStoreIsVerified extends Notification
      *
      * @return array<string, mixed>
      */
-    public function toArray(object $notifiable): array
+    public function toArray(User $notifiable): array
     {
         return [
             'message' => "Toko anda yang bernama \"{$this->token->name}\" telah berhasil diverifikasi otomatis. Namun masih menunggu verifikasi dari admin untuk aktivasi toko anda.",
