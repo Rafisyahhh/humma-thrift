@@ -50,6 +50,8 @@
     <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/apex-charts/apex-charts.css" /> --}}
 
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet" />
+
     <style>
         .menu-item.active {
             background-color: #0000;

@@ -76,32 +76,64 @@
                                 <span class="new-price">Rp.100.000,00</span>
                             </div>
                             <hr>
-                            <div class="product-quantity">
-                                <div class="quantity-wrapper">
-                                    <div class="wishlist">
+                            <div class="row">
+                                <div class="product-quantity" style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="quantity-wrapper">
+                                        <div class="wishlist">
+                                            <span>
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M17 1C14.9 1 13.1 2.1 12 3.7C10.9 2.1 9.1 1 7 1C3.7 1 1 3.7 1 7C1 13 12 22 12 22C12 22 23 13 23 7C23 3.7 20.3 1 17 1Z"
+                                                        stroke="#797979" stroke-width="2" stroke-miterlimit="10"
+                                                        stroke-linecap="square" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    {{-- <div class="share-icons">
+                                    <a href="/user/checkout" class="share-icon">
                                         <span>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M17 1C14.9 1 13.1 2.1 12 3.7C10.9 2.1 9.1 1 7 1C3.7 1 1 3.7 1 7C1 13 12 22 12 22C12 22 23 13 23 7C23 3.7 20.3 1 17 1Z"
-                                                    stroke="#797979" stroke-width="2" stroke-miterlimit="10"
-                                                    stroke-linecap="square" />
+                                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="40" height="40" rx="20" fill="white" />
+                                                <g transform="translate(7.7, 7.7)">
+                                                    <path fill="currentColor" d="M9 8V6h6v2zM7 22q-.825 0-1.412-.587T5 20t.588-1.412T7 18t1.413.588T9 20t-.587 1.413T7 22m10 0q-.825 0-1.412-.587T15 20t.588-1.412T17 18t1.413.588T19 20t-.587 1.413T17 22M1 4V2h3.275l4.25 9h7l3.9-7H21.7l-4.975 9H8.1L7 15h12v2H3.625L6.6 11.6L3 4z" />
+                                                </g>
                                             </svg>
                                         </span>
+                                    </a>
+                                    </div> --}}
+                                    <div class="share-icons">
+                                        <a href="#" class="share-icon">
+                                            <span>
+                                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <rect width="40" height="40" rx="20" fill="white" />
+                                                    <g transform="translate(7.7, 7.7)">
+                                                        <path fill="currentColor" d="M9 8V6h6v2zM7 22q-.825 0-1.412-.587T5 20t.588-1.412T7 18t1.413.588T9 20t-.587 1.413T7 22m10 0q-.825 0-1.412-.587T15 20t.588-1.412T17 18t1.413.588T19 20t-.587 1.413T17 22M1 4V2h3.275l4.25 9h7l3.9-7H21.7l-4.975 9H8.1L7 15h12v2H3.625L6.6 11.6L3 4z" />
+                                                    </g>
+                                                </svg>
+                                            </span>
+                                        </a>
                                     </div>
+                                    <div class="share-icons">
+                                        <a href="#" class="share-icon">
+                                            <i class="fas fa-share-alt" style="font-size: 18px; color: #797979;"></i>
+                                        </a>
+                                    </div>
+                                    <a href="#" style="width :10px" class="shop-btn"
+                                        style="display: flex; align-items: center; gap: 5px;">
+                                        <span style="width: 37rem; align-items:center; justify-content:center;">
+                                            <svg class="me-4" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M8.25357 3.32575C8.25357 4.00929 8.25193 4.69283 8.25467 5.37583C8.25576 5.68424 8.31536 5.74439 8.62431 5.74439C9.964 5.74603 11.3031 5.74275 12.6428 5.74603C13.2728 5.74767 13.7397 6.05663 13.9246 6.58104C14.2209 7.42098 13.614 8.24232 12.6762 8.25052C11.5919 8.25982 10.5075 8.25271 9.4232 8.25271C9.17714 8.25271 8.93107 8.25216 8.68501 8.25271C8.2913 8.2538 8.25412 8.29154 8.25412 8.69838C8.25357 10.0195 8.25686 11.3412 8.25248 12.6624C8.25029 13.2836 7.92603 13.7544 7.39891 13.9305C6.56448 14.2088 5.75848 13.6062 5.74863 12.6821C5.73824 11.7251 5.74645 10.7687 5.7459 9.81173C5.7459 9.41965 5.74754 9.02812 5.74535 8.63604C5.74371 8.30849 5.69012 8.2538 5.36204 8.25326C4.02235 8.25162 2.68321 8.25545 1.34352 8.25107C0.719613 8.24943 0.249902 7.93008 0.0710952 7.40348C-0.212153 6.57065 0.388245 5.75916 1.31017 5.74658C2.14843 5.73564 2.98669 5.74384 3.82495 5.74384C4.30779 5.74384 4.79062 5.74384 5.274 5.74384C5.72184 5.7433 5.7459 5.71869 5.7459 5.25716C5.7459 3.95406 5.74317 2.65096 5.74699 1.34786C5.74863 0.720643 6.0625 0.253102 6.58799 0.0704598C7.40875 -0.213893 8.21803 0.370671 8.25248 1.27349C8.25303 1.29154 8.25303 1.31013 8.25303 1.32817C8.25357 1.99531 8.25357 2.66026 8.25357 3.32575Z"
+                                                    fill="white" />
+                                            </svg>
+                                        Masukkan keranjang</span>
+                                    </a>
                                 </div>
-                                <a href="#" class="shop-btn">
-                                    <span>
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M8.25357 3.32575C8.25357 4.00929 8.25193 4.69283 8.25467 5.37583C8.25576 5.68424 8.31536 5.74439 8.62431 5.74439C9.964 5.74603 11.3031 5.74275 12.6428 5.74603C13.2728 5.74767 13.7397 6.05663 13.9246 6.58104C14.2209 7.42098 13.614 8.24232 12.6762 8.25052C11.5919 8.25982 10.5075 8.25271 9.4232 8.25271C9.17714 8.25271 8.93107 8.25216 8.68501 8.25271C8.2913 8.2538 8.25412 8.29154 8.25412 8.69838C8.25357 10.0195 8.25686 11.3412 8.25248 12.6624C8.25029 13.2836 7.92603 13.7544 7.39891 13.9305C6.56448 14.2088 5.75848 13.6062 5.74863 12.6821C5.73824 11.7251 5.74645 10.7687 5.7459 9.81173C5.7459 9.41965 5.74754 9.02812 5.74535 8.63604C5.74371 8.30849 5.69012 8.2538 5.36204 8.25326C4.02235 8.25162 2.68321 8.25545 1.34352 8.25107C0.719613 8.24943 0.249902 7.93008 0.0710952 7.40348C-0.212153 6.57065 0.388245 5.75916 1.31017 5.74658C2.14843 5.73564 2.98669 5.74384 3.82495 5.74384C4.30779 5.74384 4.79062 5.74384 5.274 5.74384C5.72184 5.7433 5.7459 5.71869 5.7459 5.25716C5.7459 3.95406 5.74317 2.65096 5.74699 1.34786C5.74863 0.720643 6.0625 0.253102 6.58799 0.0704598C7.40875 -0.213893 8.21803 0.370671 8.25248 1.27349C8.25303 1.29154 8.25303 1.31013 8.25303 1.32817C8.25357 1.99531 8.25357 2.66026 8.25357 3.32575Z"
-                                                fill="white" />
-                                        </svg>
-                                    </span>
-                                    <span>Masukkan keranjang</span>
-                                </a>
                             </div>
+
                             <hr>
                             <div class="product-details">
                                 <p class="fs-2">Kategori : <span class="inner-text">Baju</span></p>
@@ -123,7 +155,8 @@
                                                             style="height: 45px; margin-left: 10px;"
                                                             src="{{ asset('template-assets/front/assets/images/homepage-one/aurthor-img-1.webp') }}"
                                                             alt="aurthor-img" class="me-2">
-                                                        <div style="margin-left: 10px;"> Asoy Store <div class="text-secondary"
+                                                        <div style="margin-left: 10px;"> Asoy Store <div
+                                                                class="text-secondary"
                                                                 style="font-size: 16px; margin-left: 4px;">Karangploso,
                                                                 Malang</div>
                                                         </div>
@@ -141,7 +174,7 @@
 
 
     <section class="product product-description">
-        <div class="container">
+        <div class="container">m
             <div class="product-detail-section">
                 <nav>
                     <div class="nav nav-tabs nav-item" id="nav-tab" role="tablist">
@@ -243,10 +276,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
                     <section class="product weekly-sale product-weekly footer-padding">
                         <div class="container">
                             <div class="section-title">
@@ -704,4 +733,7 @@
                             </div>
                         </div>
                     </section>
-                @endsection
+                </div>
+            </div>
+        </div>
+    @endsection

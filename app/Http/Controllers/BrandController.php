@@ -103,7 +103,7 @@ class BrandController extends Controller
                 }
             }
 
-            return redirect()->route('brand.index')->with('success', 'Brand berhasil di ubah');
+            return redirect()->back()->with('success', 'Brand berhasil di ubah');
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
         }
@@ -120,6 +120,6 @@ class BrandController extends Controller
 
         $brand->delete();
 
-        return redirect()->route('brand.index')->with('success', 'Brand berhasil di hapus');
+        return redirect()->back()->with('success', 'Brand berhasil di hapus');
     }
 }
