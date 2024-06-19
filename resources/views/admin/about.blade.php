@@ -28,8 +28,9 @@
                 <thead class="table-light">
                     <tr>
                         <th>No.</th>
+                        <th>Title</th>
                         <th>Gambar</th>
-                        <th>Deskripi</th>
+                        <th>Deskripsi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -37,6 +38,7 @@
                     @foreach ($aboutUs as $about)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>{{ $about->title }}</td>
                             <td><img src="{{ asset("storage/{$about->image}") }}" class="rounded-3" height="96px"></td>
                             <td>{!! $about->description !!}</span></td>
                             <td>
@@ -61,6 +63,17 @@
                         <div class="modal-body">
                             <form action="{{ route('admin.about.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Title</label>
+                                    <input type="text" class="form-control @error('title') is-invalid @enderror"
+                                        id="title" name="title">
+
+                                    @error('title')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
 
                                 <div class="mb-3">
                                     <label for="image" class="form-label">Gambar</label>
@@ -112,6 +125,18 @@
                                     @csrf
                                     @method('PUT')
 
+                                    <div class="mb-3">
+                                        <label for="title" class="form-label">Title</label>
+                                        <input type="text" class="form-control @error('title') is-invalid @enderror"
+                                            id="title" name="title">
+    
+                                        @error('title')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+    
                                     <div class="mb-3">
                                         <label for="image" class="form-label">Gambar</label>
                                         <input type="file"

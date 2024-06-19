@@ -5,57 +5,30 @@
 @section('content')
     <section id="hero" class="hero">
         <div class="swiper hero-swiper">
-            <div class="swiper-wrapper hero-wrapper">
-                <div class="swiper-slide hero-slider-one">
-                    <div class="container">
-                        <div class="col-lg-6">
-                            <div class="wrapper-section" data-aos="fade-up">
-                                <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span>
-                                        OFF
-                                    </h5>
-                                    <h1 class="wrapper-details">HUMMA THRIFT</h1>
-                                    <h5>Penjualan Pada Musim Panas</h5>
-                                    <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
-                                </div>
-                            </div>
+        <div class="swiper-wrapper hero-wrapper">
+            @foreach ($event as $key => $even)
+            <div id="slide{{ $key }}" class="swiper-slide hero-slider-one "
+                style="background-image: url('{{ asset("storage/{$even->foto}") }}');">
+                <div class="hero-slider-one"
+                style="background-color: rgba(2, 17, 36, 0.39); position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+                </div>
+                <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                    <div class="position-absolute" data-aos="fade-up">
+                        <div class="wrapper-info">
+                        <h5 style="color:white;">{{ $even->subjudul }}</h5>
+                        <h1 style="color:white;">{{ $even->judul }}</h1>
+                        <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
                         </div>
+                    </div>
                     </div>
                 </div>
-                <div class="swiper-slide hero-slider-two">
-                    <div class="container">
-                        <div class="col-lg-6">
-                            <div class="wrapper-section">
-                                <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span>
-                                        OFF
-                                    </h5>
-                                    <h1 class="wrapper-details">HUMMA THRIFT</h1>
-                                    <h5>Penjualan Pada Musim Panas</h5>
-                                    <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide hero-slider-three">
-                    <div class="container">
-                        <div class="col-lg-6">
-                            <div class="wrapper-section">
-                                <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span>
-                                        OFF
-                                    </h5>
-                                    <h1 class="wrapper-details">HUMMA THRIFT</h1>
-                                    <h5>Penjualan Pada Musim Panas</h5>
-                                    <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-            <div class="swiper-pagination"></div>
+            @endforeach
+        </div>
+        <div class="swiper-pagination"></div>
         </div>
     </section>
     <br>

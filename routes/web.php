@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\LandingpageController;
@@ -46,7 +47,7 @@ Route::prefix('seller')->middleware('auth')->name('seller.')->group(function () 
 
 # User Routes
 Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function () {
-    Route::view('/userhome', 'user.user')->name('userhome');
+    Route::get('/userhome', [DashboardUserController::class, 'dashboard'])->name('userhome');
     Route::view('/detailproduct', 'user.detailproduct')->name('detailproduct');
     Route::view('/checkout', 'user.checkout')->name('checkout');
     Route::view('/open-shop', 'user.registstore')->name('registstore');

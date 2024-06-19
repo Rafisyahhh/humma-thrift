@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="about-content" data-aos="fade-up">
-                            <h3 class="about-title">Ingin Tahu tentang kami?</h3>
+                            <h3 class="about-title">{{$about->title}}</h3>
                             <p class="about-info">
                             {!! $about->description !!}
                             </p>
