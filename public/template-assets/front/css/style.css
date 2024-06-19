@@ -162,7 +162,7 @@ button {
     transition: all 0.4s ease-in-out;
 }
 .shop-btn:hover {
-    color: #fff;
+    color: #000000;
     background-color: rgba(126, 163, 219, 0.40);
 }
 .shop-btn:hover::after {
@@ -176,7 +176,7 @@ button {
     transform: translate(5px);
 }
 .shop-btn:hover span {
-    color: #fff;
+    color: #000000;
 }
 .product {
     padding: 6rem 0;
@@ -194,7 +194,7 @@ button {
     background-color: #fff;
     font-family: jost, sans-serif;
     cursor: pointer;
-    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+    box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;
     position: relative;
     transition: all 0.2s;
     border: 1px solid #fff;
@@ -1897,7 +1897,7 @@ button {
     background-color: #fff;
     font-family: jost, sans-serif;
     cursor: pointer;
-    box-shadow: rgba(11, 120, 228, 0.2) 0 8px 24px;
+    box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;
     background-color: transparent;
     border: none;
     box-shadow: none;
@@ -2106,7 +2106,7 @@ button {
     background-color: #fff;
     font-family: jost, sans-serif;
     cursor: pointer;
-    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+    box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;
     background: #fff;
     /* border: 1px solid #1C3879; */
     box-shadow: none;
@@ -2210,7 +2210,7 @@ button {
     background-color: #fff;
     font-family: jost, sans-serif;
     cursor: pointer;
-    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+    box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;
     background: 0 0;
     box-shadow: none;
     border: none;
@@ -2338,7 +2338,7 @@ button {
     background-color: #fff;
     font-family: jost, sans-serif;
     cursor: pointer;
-    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+    box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -2411,7 +2411,7 @@ button {
     background-color: #fff;
     font-family: jost, sans-serif;
     cursor: pointer;
-    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+    box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;
     background: 0 0;
     border: none;
     box-shadow: none;
@@ -2823,7 +2823,7 @@ button {
     height: 9rem !important;
     width: 9rem !important;
     padding: 1rem;
-    border: 1px solid rgba(174, 28, 154, 0.08);
+    border: 1px solid rgba(126, 163, 219, 0.40);
     border-radius: 1rem;
     opacity: 0.4;
 }
@@ -2874,7 +2874,7 @@ button {
     font-size: 1.6rem;
     font-weight: 500;
     padding: 10px 15px;
-    background-color: rgba(174, 28, 154, 0.08);
+    background-color: rgba(126, 163, 219, 0.40);
     border-radius: 1.2rem;
     display: inline-block;
     margin: 1rem 0;
@@ -2979,7 +2979,7 @@ button {
     justify-content: center;
     gap: 2rem;
     height: 5rem;
-    border: 1px solid rgba(174, 28, 154, 0.08);
+    border: 1px solid rgba(126, 163, 219, 0.40);
     border-radius: 0.5rem;
 }
 .product-info-content .product-quantity .quantity {
@@ -3067,7 +3067,7 @@ hr {
     color: rgba(126, 163, 219, 0.40);
 }
 .product-description .nav-item {
-    border-bottom: 1px solid rgba(174, 28, 154, 0.08);
+    border-bottom: 1px solid rgba(126, 163, 219, 0.40);
     gap: 2rem;
 }
 .product-description .nav-item .nav-link {
@@ -3079,7 +3079,7 @@ hr {
     font-weight: 600;
 }
 .product-description .nav-item .nav-link:hover {
-    border-color: rgba(174, 28, 154, 0.08);
+    border-color: rgba(126, 163, 219, 0.40);
 }
 .product-description .nav-item .nav-link.active {
     background: #1c3879;
@@ -3496,7 +3496,7 @@ hr {
 }
 .review-form .form-control,
 .review-form .form-select {
-    border: 1px solid rgba(174, 28, 154, 0.08);
+    border: 1px solid rgba(126, 163, 219, 0.40);
     box-shadow: none;
     color: #232532;
 }
@@ -4763,7 +4763,7 @@ table .ticket-row:hover {
     padding: 3rem;
     min-height: 27.5rem;
     box-shadow: none;
-    border: 1px solid #f5f2f4;
+    border: 1px solid rgba(126, 163, 219, 0.40);
     margin-bottom: 2rem;
 }
 .about-feedback .swiper-pagination {
@@ -4843,7 +4843,7 @@ table .ticket-row:hover {
     }
 }
 .divider {
-    background: rgba(174, 28, 154, 0.08);
+    background: rgba(126, 163, 219, 0.40);
     width: 100%;
     height: 1px;
     border-radius: 50%;
@@ -5603,7 +5603,7 @@ table .ticket-row:hover {
 
 .wishlist span:hover,
 .share-icons .share-icon:hover {
-    background-color: #444499;
+    background-color: #1C3879;
     color: #ffff;
 }
 

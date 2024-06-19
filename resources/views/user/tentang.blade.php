@@ -18,7 +18,7 @@
                     <div class="col-lg-6">
 
                         <div class="about-content" data-aos="fade-up">
-                            <h3 class="about-title">Ingin Tahu tentang kami?</h3>
+                            <h3 class="about-title">{{$about->title}}</h3>
                             {{-- <p class="about-info">
                                 Thrifting artinya membeli barang bekas, seperti pakaian, mainan, buku, dan sebagainya. Sekarang, aktivitas tersebut sering dilakukan melalui platform e-commerce dan media sosial. Tapi kalau mau melihat barangnya secara langsung, ada juga beberapa thrift shop atau toko thrift dalam bentuk fisik.
                             </p> --}}

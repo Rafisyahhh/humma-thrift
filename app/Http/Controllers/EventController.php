@@ -99,7 +99,7 @@ class EventController extends Controller
                 File::delete($localFilePath);
             }
         }
-            return redirect()->route('event.index')->with('success', 'Kategori berhasil diupdate');
+            return redirect()->route('index')->with('success', 'Kategori berhasil diupdate');
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
         }

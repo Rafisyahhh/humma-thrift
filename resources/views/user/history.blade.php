@@ -1,22 +1,3 @@
-@php
-  use App\Http\Controllers\HistoryController;
-
-  $data = [
-      [
-          'title' => 'Classic Design Skart',
-          'price' => '20',
-          'image' => 'template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp',
-          'purchased_date' => '2024-02-08',
-      ],
-      [
-          'title' => 'Classic Design Skart',
-          'price' => '20',
-          'image' => 'template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp',
-          'purchased_date' => '2024-04-08',
-      ],
-  ];
-@endphp
-
 @extends('layouts.panel')
 
 @section('content')
@@ -27,24 +8,24 @@
     <div class="cart-section wishlist-section">
       <table>
         <tbody>
-          @forelse ($data as $item)
+          @forelse ($transaction as $item)
             <tr class="table-row ticket-row">
               <td class="table-wrapper wrapper-product">
                 <div class="wrapper">
                   <div class="wrapper-img">
-                    <img src="{{ asset($item['image']) }}" alt="img">
+                    <img src="{{ asset($item['order']['product']['cover_image']) }}" alt="img">
                   </div>
                   <div class="wrapper-content">
-                    <h5 class="heading">{{ $item['title'] }}</h5>
-                    <p class="paragraph">${{ $item['price'] }}</p>
+                    <h5 class="heading">{{ $item['order']['product']['title'] }}</h5>
+                    <p class="paragraph">{{ $item['price_format'] }}</p>
                   </div>
                 </div>
               </td>
               <td class="table-wrapper">
                 <div class="wrapper-content me-5" style="float: right; text-align: end;">
-                  <h5 class="heading">{{ HistoryController::formatTanggal($item['purchased_date']) }}</h5>
+                  <h5 class="heading">{{ $item['date_diff_format'] }}</h5>
                   <p class="paragraph opacity-75 pt-1">
-                    {{ Carbon\Carbon::parse($item['purchased_date'])->format('d F Y') }}
+                    {{ $item['date_format'] }}
                   </p>
                 </div>
               </td>
