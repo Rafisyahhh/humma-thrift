@@ -6,6 +6,7 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\UserUpdatePasswordController;
@@ -58,7 +59,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::view('/wishlist', 'user.wishlist')->name('wishlist');
     Route::view('/shop', 'user.shop')->name('shop');
     Route::view('/store', 'user.store')->name('store');
-    Route::resource('history', UserUpdatePasswordController::class);
+    Route::resource('history', HistoryController::class);
     Route::resource('update-password', UserUpdatePasswordController::class);
 });
 

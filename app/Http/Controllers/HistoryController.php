@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Carbon\Carbon;
+use Faker\Provider\bn_BD\Company;
 use Illuminate\Http\Request;
 
 class HistoryController extends Controller {
@@ -10,7 +12,34 @@ class HistoryController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        return view('user.history');
+        $transaction = [
+            'id' => 1,
+            'created_at' => '18-03-2024',
+            'updated_at' => '18-03-2024',
+            'user_id' => 17,
+            'order_id' => 2,
+            'total' => 1_000_000,
+            'transaction_id' => 'String',
+            'reference_id' => 'String',
+            'status' => 'PAID',
+            'user' => User::find(17),
+            'order' => [
+                'id' => 2,
+                'created_at' => '18-03-2024',
+                'updated_at' => '18-03-2024',
+                'user_id' => 1,
+                'product_id' => 1,
+                'status' => 'diterima',
+                'product' => [
+                    'id' => 1,
+                    'created_at' => '18-03-2024',
+                    'updated_at' => '18-03-2024',
+                    'user_id' => 2,
+                    'price' => 100_000
+                ]
+            ]
+        ];
+        return view('user.history', compact('transaksi'));
     }
 
     /**
