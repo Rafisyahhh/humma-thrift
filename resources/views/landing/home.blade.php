@@ -17,7 +17,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-lg-6">
-                  <div class="wrapper-section" data-aos="fade-up" style="position: absolute;">
+                  <div class="position-absolute" data-aos="fade-up">
                     <div class="wrapper-info">
                       <h5 style="color:white;">{{ $even->subjudul }}</h5>
                       <h1 style="color:white;">{{ $even->judul }}</h1>
