@@ -33,7 +33,7 @@ class NewUserStoreNotificationToAdmin extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Ada Pengguna Toko!',
+            subject: 'Ada Toko Baru Saja Dibuat!',
         );
     }
 
@@ -43,7 +43,7 @@ class NewUserStoreNotificationToAdmin extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.notify.new-user-to-admin',
+            markdown: 'emails.notify.new-store-to-admin',
             with: [
                 'userStore' => $this->userStore
             ]

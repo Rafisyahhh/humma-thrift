@@ -33,7 +33,7 @@ class VerifyUserStoreNotification extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Verify User Store Notification'
+            subject: 'Verifikasikan Toko Anda'
         );
     }
 
@@ -43,7 +43,7 @@ class VerifyUserStoreNotification extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.notify.new-user-verify',
+            markdown: 'emails.notify.new-store-verify',
             with: [
                 'userStore' => $this->userStore
             ]

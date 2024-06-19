@@ -8,7 +8,13 @@
 @elseif(auth()->check() && auth()->user()->getUserRoleInstance()->value === 'admin')
     <div class="header-user d-flex gap-4 h-100">
         <a href="{{ route('register') }}" class="d-flex gap-3 align-items-center lh-1">
-            <span>Kembali Ke Dasbor</span>
+            <span>Ke Dasbor Penjual</span>
+            <i style="font-size: 1.5em" class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    <div class="header-user d-flex gap-4 h-100">
+        <a href="{{ route('register') }}" class="d-flex gap-3 align-items-center lh-1">
+            <span>Ke Dasbor</span>
             <i style="font-size: 1.5em" class="fas fa-arrow-right"></i>
         </a>
     </div>
@@ -50,7 +56,8 @@
                 </div>
                 <div class="wrapper-line"></div>
                 <div class="cart-btn">
-                    <a href="cart.html" class="shop-btn view-btn">Kembali Ke Dasbor</a>
+                    @if(auth()->user()->store) <a href="cart.html" class="shop-btn view-btn">Ke Dasbor Penjual</a> @endif
+                    <a href="cart.html" class="shop-btn view-btn">Ke Dasbor</a>
                     <a href="#" class="shop-btn checkout-btn" id="logout-link">Keluar</a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -63,12 +70,12 @@
 @else
     <div class="header-user d-flex gap-4 h-100">
         <a href="{{ route('register') }}" class="d-flex gap-3 align-items-center lh-1">
-            <i style="font-size: 1.5em" class="fas fa-user-plus"></i>
+            <i style="font-size: 1.125em" class="fas fa-user-plus"></i>
             <span>Daftar</span>
         </a>
         <div class="vr"></div>
         <a href="{{ route('login') }}" class="d-flex gap-3 align-items-center lh-1">
-            <i style="font-size: 1.5em" class="fas fa-sign-in-alt"></i>
+            <i style="font-size: 1.125em" class="fas fa-sign-in-alt"></i>
             <span>Masuk</span>
         </a>
     </div>
