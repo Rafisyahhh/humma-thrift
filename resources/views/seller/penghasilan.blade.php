@@ -8,14 +8,14 @@
 @extends('layouts.panel')
 
 @section('content')
-  <section class="seller-application ">
+  <section>
     <div class="container">
-      <div class="user-profile">
-        <div class="user-title">
+      <div>
+        <div>
           <h5 class="heading">Data Penghasilan</h5>
         </div>
         <div class="profile-section">
-          <canvas class="wrapper-img" id="data-penghasilan"></canvas>
+          <canvas class="w-100" id="data-penghasilan"></canvas>
         </div>
       </div>
     </div>
@@ -25,25 +25,28 @@
 @section('script')
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
   <script>
-    new Chart($('#data-penghasilan'), {
-      type: 'bar',
-      data: {
-        labels: @json($data['tahun']),
-        datasets: [{
-          label: 'Penghasilan',
-          data: @json($data['penghasilan']),
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+    $(document).ready(function() {
+      const canvas = $('#data-penghasilan');
+      new Chart(canvas, {
+        type: 'bar',
+        data: {
+          labels: @json($data['tahun']),
+          datasets: [{
+            label: 'Penghasilan',
+            data: @json($data['penghasilan']),
+            backgroundColor: 'rgba(126, 163, 219, 0.40)',
+            borderColor: 'rgba(28, 56, 121, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
           }
         }
-      }
+      });
     });
   </script>
 @endsection
