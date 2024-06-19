@@ -74,43 +74,6 @@
                         </div>
                     </td>
                 </tr>
-
-                {{-- <tr class="table-row ticket-row">
-                <td class="table-wrapper wrapper-product">
-                    <div class="wrapper">
-                        <div class="wrapper-img">
-                            <img src="template-assets/front/assets/images/homepage-one/product-img/product-img-4.webp"
-                                alt="img">
-                        </div>
-                        <div class="wrapper-content">
-                            <h5 class="heading">Classic Party Dress</h5>
-                        </div>
-                    </div>
-                </td>
-                <td class="table-wrapper">
-                    <div class="table-wrapper-center">
-                        <h5 class="heading">$20.00</h5>
-                    </div>
-                </td>
-                <td class="table-wrapper">
-                    <div class="table-wrapper-center">
-                        <h5 class="heading">Selesai</h5>
-                    </div>
-                </td>
-                <td class="table-wrapper wrapper-total">
-                    <div class="table-wrapper-center">
-                        <h5 class="heading">$40.00</h5>
-                    </div>
-                </td>
-
-                <td class="table-wrapper">
-                    <div class="table-wrapper-center">
-                        <button class="shop-btn">
-                            Detail
-                        </button>
-                    </div>
-                </td>
-            </tr> --}}
             </tbody>
         </table>
         {{-- Detail --}}
