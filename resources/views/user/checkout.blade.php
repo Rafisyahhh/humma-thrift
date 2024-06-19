@@ -46,7 +46,7 @@
   $total_price = array_sum($prices);
 @endphp
 
-@extends('layouts.panel')
+@extends('layouts.home')
 @section('tittle', 'Checkout')
 @section('content')
   <section class="blog about-blog">
@@ -145,7 +145,7 @@
                     <h5 class="wrapper-heading">Total Belanja</h5>
                     <h5 class="wrapper-heading price">${{ $total_price }}</h5>
                   </div>
-                  <button type="button" class="shop-btn">Place Order Now</button>
+                  <button type="button" class="shop-btn">Pesan sekarang</button>
                 </div>
               </div>
             </div>
