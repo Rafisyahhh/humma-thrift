@@ -2825,7 +2825,7 @@ button {
     height: 9rem !important;
     width: 9rem !important;
     padding: 1rem;
-    border: 1px solid rgba(174, 28, 154, 0.08);
+    border: 1px solid rgba(126, 163, 219, 0.40);
     border-radius: 1rem;
     opacity: 0.4;
 }
@@ -2876,7 +2876,7 @@ button {
     font-size: 1.6rem;
     font-weight: 500;
     padding: 10px 15px;
-    background-color: rgba(174, 28, 154, 0.08);
+    background-color: rgba(126, 163, 219, 0.40);
     border-radius: 1.2rem;
     display: inline-block;
     margin: 1rem 0;
