@@ -52,18 +52,18 @@ class UserUpdatePasswordController extends Controller {
         $user = User::findOrFail($id);
 
         if (!password_verify($validatedRequest['old-password'], $user->password)) {
-            return redirect()->back()->with('error', 'Anda memasukkan password yang salah');
+            return redirect()->back()->with('message', 'wrong password');
         }
 
         if (password_verify($validatedRequest['password'], $user->password)) {
-            return redirect()->back()->with('error', 'Password tidak boleh sama dengan password lama');
+            return redirect()->back()->with('message', 'password cant same with old password');
         }
 
         $user->update([
             'password' => Hash::make($validatedRequest['password'])
         ]);
 
-        return redirect()->back()->with('success', 'Password berhasil diubah');
+        return redirect()->back()->with('message', 'password changed');
     }
 
 
