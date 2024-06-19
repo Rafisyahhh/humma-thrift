@@ -3,51 +3,21 @@
 @section('title', 'Beranda')
 
 @section('content')
-    <section id="hero" class="hero">
-        <div class="swiper hero-swiper">
-            <div class="swiper-wrapper hero-wrapper">
-                <div class="swiper-slide hero-slider-one">
-                    <div class="container">
+@foreach ( $event as $key => $even )
+
+<section id="hero" class="hero">
+    <div class="swiper hero-swiper">
+        <div class="swiper-wrapper hero-wrapper">
+            <div id="slide{{ $key }}" class="swiper-slide hero-slider-one" style="background-image: url('{{ asset("storage/{$even->foto}") }}');">
+                <div class="container">
+                    <div class="row"> <!-- Menambahkan row di sini untuk pembagian kolom -->
                         <div class="col-lg-6">
                             <div class="wrapper-section" data-aos="fade-up">
                                 <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span>
-                                        OFF
+                                    <h5 class="wrapper-subtitle">
+                                        {{ $even->subjudul }}
                                     </h5>
-                                    <h1 class="wrapper-details">HUMMA THRIFT</h1>
-                                    <h5>Penjualan Pada Musim Panas</h5>
-                                    <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide hero-slider-two">
-                    <div class="container">
-                        <div class="col-lg-6">
-                            <div class="wrapper-section">
-                                <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span>
-                                        OFF
-                                    </h5>
-                                    <h1 class="wrapper-details">HUMMA THRIFT</h1>
-                                    <h5>Penjualan Pada Musim Panas</h5>
-                                    <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide hero-slider-three">
-                    <div class="container">
-                        <div class="col-lg-6">
-                            <div class="wrapper-section">
-                                <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span>
-                                        OFF
-                                    </h5>
-                                    <h1 class="wrapper-details">HUMMA THRIFT</h1>
-                                    <h5>Penjualan Pada Musim Panas</h5>
+                                    <h1 class="wrapper-details">{{ $even->judul }}</h1>
                                     <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
                                 </div>
                             </div>
@@ -55,9 +25,44 @@
                     </div>
                 </div>
             </div>
-            <div class="swiper-pagination"></div>
+            <div id="slide{{ $key }}" class="swiper-slide hero-slider-two" style="background-image: url('{{ asset("storage/{$even->foto}") }}');">
+                <div class="container">
+                    <div class="row"> <!-- Menambahkan row di sini untuk pembagian kolom -->
+                        <div class="col-lg-6">
+                            <div class="wrapper-section" data-aos="fade-up">
+                                <div class="wrapper-info">
+                                    <h5 class="wrapper-subtitle">
+                                        {{ $even->subjudul }}
+                                    </h5>
+                                    <h1 class="wrapper-details">{{ $even->judul }}</h1>
+                                    <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="slide{{ $key }}" class="swiper-slide hero-slider-three" style="background-image: url('{{ asset("storage/{$even->foto}") }}');">
+                <div class="container">
+                    <div class="row"> <!-- Menambahkan row di sini untuk pembagian kolom -->
+                        <div class="col-lg-6">
+                            <div class="wrapper-section" data-aos="fade-up">
+                                <div class="wrapper-info">
+                                    <h5 class="wrapper-subtitle">
+                                        {{ $even->subjudul }}
+                                    </h5>
+                                    <h1 class="wrapper-details">{{ $even->judul }}</h1>
+                                    <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
 
     <section class="product-category mt-5">
         <div class="container">
@@ -533,4 +538,6 @@
             </div>
         </div>
     </section>
+
+@endforeach
 @endsection

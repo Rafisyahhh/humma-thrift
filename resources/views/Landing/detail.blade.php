@@ -3,17 +3,32 @@
 @section('title', 'Brand')
 
 @section('content')
-<section class="blog about-blog">
-    <div class="col-lg-5 mx-5 mb-5 ">
+<style>
+    .responsive-img {
+        width: 100%;
+        height: 20rem;
+        border-radius: 15px;
+    }
+</style>
+
+<section style="background-color: rgb(253, 253, 253);">
+    <div class=" mx-5 mt-4">
+        <img src="{{asset('template-assets/front/assets/images/homepage-one/sallers-cover.png')}}" alt="upload" class="responsive-img " id="responsive-img ">
+    </div>
+</section>
+
+
+<section class="blog about-blog" style="padding:10px;">
+    <div class="col-lg-4 mx-5 " >
         <div class="img-upload-section">
             <div class="logo-wrapper">
                 <div class="logo-upload">
-                    <img src="{{asset('template-assets/front/assets/images/homepage-one/sallers-cover.png')}}" alt="upload" class="upload-img" id="upload-img">
+                    <img src="{{asset('template-assets/front/assets/images/homepage-one/sallers-cover.png')}}" alt="upload" class="upload-img" id="upload-img" style="width: 15rem; height:15rem;">
                     <div class="product-description mx-5">
                         <h5 class="product-details"> Nama Toko
                         </h5>
                         <div class="price">
-                            <span class="new-price">Jumlah Produk : 0</span>
+                            <span class="new-price">Jumlah Produk : 1</span>
                         </div>
                     </div>
                 </div>

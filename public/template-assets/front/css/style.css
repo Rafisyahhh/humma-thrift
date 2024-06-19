@@ -1665,16 +1665,13 @@ button {
     padding: 10px;
 }
 .hero-slider-one {
-    background: url("../assets/images/homepage-one/hero-slider-one.webp")
-        no-repeat center/cover;
+    background: no-repeat center/cover;
 }
 .hero-slider-two {
-    background: url("../assets/images/homepage-one/hero-slider-two.webp")
-        no-repeat center/cover;
+    background: no-repeat center/cover;
 }
 .hero-slider-three {
-    background: url("../assets/images/homepage-one/hero-slider-three.webp")
-        no-repeat center/cover;
+    background: no-repeat center/cover;
 }
 @media (max-width: 767px) {
     .hero-slider-one,
@@ -2724,7 +2721,7 @@ button {
     font-weight: 300;
 }
 .footer-section .footer-link a:hover {
-    color: #1c3879;
+    color: #ffffff;
     text-decoration: underline;
 }
 .footer-section .footer-link p {
