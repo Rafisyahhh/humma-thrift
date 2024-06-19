@@ -32,6 +32,8 @@
 
     <link rel="stylesheet" href="{{ asset('template-assets/front/css/style.css') }}">
 
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet" />
+
     <style>
         .header-right-dropdown > div {
             right: 0 !important;
@@ -64,6 +66,7 @@
     <script src="{{ asset('template-assets/front/assets/js/swiper10-bundle.min.js') }}"></script>
 
     <script src="{{ asset('template-assets/front/assets/js/shopus.js') }}"></script>
+
 
     @stack('script')
     @yield('script')

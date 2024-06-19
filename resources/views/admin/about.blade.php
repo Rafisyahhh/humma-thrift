@@ -1,0 +1,197 @@
+@extends('layouts.app')
+
+@section('title', 'About Us')
+
+@section('style')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet" />
+<link href="summernote-bs5.css" rel="stylesheet">
+<script src="summernote-bs5.js"></script>
+
+@endsection
+@section('content')
+    <!-- Bootstrap Table with Header - Light -->
+    <div class="card">
+        <h5 class="card-header">About Us</h5>
+        <div class="card-header d-flex justify-content-between align-items-center">
+            @if ($aboutUs->isEmpty())
+            <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
+            style="background-color:	rgb(167, 146, 119)  ; color:#fff;">
+            Tambahkan About Us
+        </a>
+        @endif
+
+
+        </div>
+
+        <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead class="table-light">
+                    <tr>
+                        <th>No.</th>
+                        <th>Gambar</th>
+                        <th>Deskripi</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach ($aboutUs as $about)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td><img src="{{ asset("storage/{$about->image}") }}" class="rounded-3" height="96px"></td>
+                            <td>{!! $about->description !!}</span></td>
+                            <td>
+                                <button type="button" class="badge bg-label-warning me-1 border-0" style="background: none"
+                                    data-bs-toggle="modal" data-bs-target="#editModal{{ $about->id }}">
+                                    <i class="ti ti-pencil"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <div class="modal fade" tabindex="-1" id="tambahModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6 class="m-0 font-weight-bold d-flex align-items-center gap-2"><i
+                                    class="fas fa-newspaper me-1"></i>Tambahkan About</h6>
+
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('admin.about.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Gambar</label>
+                                    <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                        id="image" name="image">
+
+                                    @error('image')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Deskripsi</label>
+                                    <textarea class="custom-summernote @error('description') is-invalid @enderror"
+                                    id="custom-summernote" name="description"
+                                     aria-label="With textarea">{{ old('description') }}</textarea>
+                                    @error('description')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="pt-2 d-flex gap-3 justify-content-end">
+                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn"
+                                        style="background-color: rgb(167, 146, 119); color: #fff;">Tambahkan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @foreach ($aboutUs as $key => $about)
+                <div class="modal fade" tabindex="-1" id="editModal{{ $about->id }}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit About Us</h6>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('admin.about.update', $about->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <div class="mb-3">
+                                        <label for="image" class="form-label">Gambar</label>
+                                        <input type="file"
+                                            class="form-control @error('image_update') is-invalid @enderror" id="image"
+                                            name="image_update" />
+
+                                        @if ($about->image)
+                                            <img src="{{ asset('storage/' . $about->image) }}"
+                                                class="w-100 mt-3 rounded-3" alt="image" />
+                                        @else
+                                            No Image
+                                        @endif
+                                        @error('image_update')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Deskripsi</label>
+                                        <textarea
+                                            class="custom-summernote @error('description_update') is-invalid @enderror"
+                                            id="custom-summernote" name="description_update" aria-label="With textarea"
+                                           >{{ old('description_update', $about->description) }}</textarea>
+                                        @error('description_update')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn"
+                                    style="background-color: rgb(167, 146, 119); color:#fff;">Simpan</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
+        </div>
+    </div>
+    <!-- Bootstrap Table with Header - Light -->
+@endsection
+
+
+@section('js')
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.custom-summernote').summernote({
+            placeholder: 'Isi deskripsi about us',
+            tabsize: 2,
+            height: 120,
+            toolbar: [
+                ['font', ['bold', 'underline', 'clear']],
+                ['insert', ['link', 'picture']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+            ],
+            callbacks: {
+                onInit: function() {
+                    // Set background color to white
+                    $('.custom-summernote .note-editor').css('background-color', 'white');
+                    // Set text color to white
+                    $('.custom-summernote .note-editable').css('color', 'white');
+                },
+                onChange: function(contents, $editable) {
+                    // Set text color to white
+                    $('.custom-summernote .note-editable').css('color', 'white');
+                }
+            }
+        });
+    });
+</script>
+@endsection

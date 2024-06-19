@@ -2721,7 +2721,7 @@ button {
     font-weight: 300;
 }
 .footer-section .footer-link a:hover {
-    color: #1C3879;
+    color: #ffffff;
     text-decoration: underline;
 }
 .footer-section .footer-link p {
@@ -2804,7 +2804,7 @@ button {
 }
 .product-info-img .product-top {
     height: 60rem;
-    border: 1px solid rgba(174, 28, 154, 0.08);
+    border: 1px solid rgba(126, 163, 219, 0.40);
     border-radius: 1rem;
 }
 .product-info-img .product-top .swiper-wrapper {
@@ -3070,7 +3070,7 @@ button {
     }
 }
 hr {
-    color: #f3b4ea;
+    color: rgba(126, 163, 219, 0.40);
 }
 .product-description .nav-item {
     border-bottom: 1px solid rgba(174, 28, 154, 0.08);
@@ -5206,7 +5206,7 @@ table .ticket-row:hover {
 }
 .user-dashboard .nav-item {
     width: 18rem;
-    border-right: 2px solid rgba(174, 28, 154, 0.08);
+    border-right: 2px solid rgba(126, 163, 219, 0.40);
     padding: 0 0 2rem;
     display: flex;
     flex-direction: column;
