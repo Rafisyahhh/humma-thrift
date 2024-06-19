@@ -31,7 +31,7 @@ Route::prefix('/debug')->group(function () {
 });
 
 # Public Routes
-Route::get('/', [LandingpageController::class,'index']);
+Route::get('/', [LandingpageController::class, 'index']);
 
 # Seller Routes
 Route::prefix('seller')->middleware('auth')->name('seller.')->group(function () {
@@ -58,7 +58,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::view('/wishlist', 'user.wishlist')->name('wishlist');
     Route::view('/shop', 'user.shop')->name('shop');
     Route::view('/store', 'user.store')->name('store');
-    Route::view('/history', 'user.history')->name('history');
+    Route::resource('history', UserUpdatePasswordController::class);
     Route::resource('update-password', UserUpdatePasswordController::class);
 });
 
