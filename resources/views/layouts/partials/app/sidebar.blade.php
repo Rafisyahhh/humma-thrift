@@ -42,8 +42,8 @@
                 <div >Toko</div>
             </a>
         </li>
-        <li class="menu-item {{ request()->routeIs('/admin') ? 'active' : '' }}">
-            <a href="{{ url('/admin') }}" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('admin.about.*') ? 'active' : '' }}">
+            <a href="{{ url('/admin/about') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-building"></i>
                 <div >Tentang kami</div>
             </a>

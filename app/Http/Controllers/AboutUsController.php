@@ -75,6 +75,7 @@ class AboutUsController extends Controller
 
 
             AboutUs::create([
+                'title' => $request->title,
                 'description' => $request->description,
                 'image' => $path_gambar,
             ]);
@@ -136,6 +137,7 @@ class AboutUsController extends Controller
             $oldPhotoPath = $about->image;
 
             $dataToUpdate = [
+                'title' => $request->input(),
                 'description' => $request->input('description_update'),
             ];
 

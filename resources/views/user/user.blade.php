@@ -5,57 +5,30 @@
 @section('content')
     <section id="hero" class="hero">
         <div class="swiper hero-swiper">
-            <div class="swiper-wrapper hero-wrapper">
-                <div class="swiper-slide hero-slider-one">
-                    <div class="container">
-                        <div class="col-lg-6">
-                            <div class="wrapper-section" data-aos="fade-up">
-                                <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span>
-                                        OFF
-                                    </h5>
-                                    <h1 class="wrapper-details">HUMMA THRIFT</h1>
-                                    <h5>Penjualan Pada Musim Panas</h5>
-                                    <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
-                                </div>
-                            </div>
+        <div class="swiper-wrapper hero-wrapper">
+            @foreach ($event as $key => $even)
+            <div id="slide{{ $key }}" class="swiper-slide hero-slider-one "
+                style="background-image: url('{{ asset("storage/{$even->foto}") }}');">
+                <div class="hero-slider-one"
+                style="background-color: rgba(2, 17, 36, 0.39); position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+                </div>
+                <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                    <div class="position-absolute" data-aos="fade-up">
+                        <div class="wrapper-info">
+                        <h5 style="color:white;">{{ $even->subjudul }}</h5>
+                        <h1 style="color:white;">{{ $even->judul }}</h1>
+                        <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
                         </div>
+                    </div>
                     </div>
                 </div>
-                <div class="swiper-slide hero-slider-two">
-                    <div class="container">
-                        <div class="col-lg-6">
-                            <div class="wrapper-section">
-                                <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span>
-                                        OFF
-                                    </h5>
-                                    <h1 class="wrapper-details">HUMMA THRIFT</h1>
-                                    <h5>Penjualan Pada Musim Panas</h5>
-                                    <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide hero-slider-three">
-                    <div class="container">
-                        <div class="col-lg-6">
-                            <div class="wrapper-section">
-                                <div class="wrapper-info">
-                                    <h5 class="wrapper-subtitle">UP TO <span class="wrapper-inner-title">70%</span>
-                                        OFF
-                                    </h5>
-                                    <h1 class="wrapper-details">HUMMA THRIFT</h1>
-                                    <h5>Penjualan Pada Musim Panas</h5>
-                                    <a href="product-sidebar.html" class="shop-btn">Belanja Sekarang</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-            <div class="swiper-pagination"></div>
+            @endforeach
+        </div>
+        <div class="swiper-pagination"></div>
         </div>
     </section>
     <br>
@@ -90,7 +63,7 @@
                 <a href="/user/shop" class="view">Lihat Semua</a>
             </div>
             <div class="brand-section">
-                <div class="product-wrapper">
+                <div class="product">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
                             <img src="{{ asset('template-assets/front/assets/images/homepage-one/brand-img-1.webp') }}"
@@ -117,38 +90,6 @@
                                 <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                     alt="product-img">
                                 <div class="product-cart-items">
-                                    {{-- <a href="/detailproduct" class="cart cart-item">
-                                        <span>
-                                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <rect width="40" height="40" rx="20" fill="white" />
-                                                <path
-                                                    d="M12 14.4482V16.5664H12.5466H13.0933V15.3957V14.2204L15.6214 16.7486L18.1496 19.2767L18.5459 18.8759L18.9468 18.4796L16.4186 15.9514L13.8904 13.4232H15.0657H16.2364V12.8766V12.33H14.1182H12V14.4482Z"
-                                                    fill="#181818" />
-                                                <path
-                                                    d="M12 14.4482V16.5664H12.5466H13.0933V15.3957V14.2204L15.6214 16.7486L18.1496 19.2767L18.5459 18.8759L18.9468 18.4796L16.4186 15.9514L13.8904 13.4232H15.0657H16.2364V12.8766V12.33H14.1182H12V14.4482Z"
-                                                    fill="black" fill-opacity="0.2" />
-                                                <path
-                                                    d="M23.4345 12.8766V13.4232H24.6052H25.7805L23.2523 15.9514L20.7241 18.4796L21.125 18.8759L21.5213 19.2767L24.0495 16.7486L26.5776 14.2204V15.3957V16.5664H27.1243H27.6709V14.4482V12.33H25.5527H23.4345V12.8766Z"
-                                                    fill="#181818" />
-                                                <path
-                                                    d="M23.4345 12.8766V13.4232H24.6052H25.7805L23.2523 15.9514L20.7241 18.4796L21.125 18.8759L21.5213 19.2767L24.0495 16.7486L26.5776 14.2204V15.3957V16.5664H27.1243H27.6709V14.4482V12.33H25.5527H23.4345V12.8766Z"
-                                                    fill="black" fill-opacity="0.2" />
-                                                <path
-                                                    d="M15.6078 23.5905L13.0933 26.1096V24.9343V23.7636H12.5466H12V25.8818V28H14.1182H16.2364V27.4534V26.9067H15.0657H13.8904L16.4186 24.3786L18.9468 21.8504L18.5596 21.4632C18.35 21.2491 18.1633 21.076 18.1496 21.076C18.1359 21.076 16.9926 22.2103 15.6078 23.5905Z"
-                                                    fill="#181818" />
-                                                <path
-                                                    d="M15.6078 23.5905L13.0933 26.1096V24.9343V23.7636H12.5466H12V25.8818V28H14.1182H16.2364V27.4534V26.9067H15.0657H13.8904L16.4186 24.3786L18.9468 21.8504L18.5596 21.4632C18.35 21.2491 18.1633 21.076 18.1496 21.076C18.1359 21.076 16.9926 22.2103 15.6078 23.5905Z"
-                                                    fill="black" fill-opacity="0.2" />
-                                                <path
-                                                    d="M21.1113 21.4632L20.7241 21.8504L23.2523 24.3786L25.7805 26.9067H24.6052H23.4345V27.4534V28H25.5527H27.6709V25.8818V23.7636H27.1243H26.5776V24.9343V26.1096L24.0586 23.5905C22.6783 22.2103 21.535 21.076 21.5213 21.076C21.5076 21.076 21.3209 21.2491 21.1113 21.4632Z"
-                                                    fill="#181818" />
-                                                <path
-                                                    d="M21.1113 21.4632L20.7241 21.8504L23.2523 24.3786L25.7805 26.9067H24.6052H23.4345V27.4534V28H25.5527H27.6709V25.8818V23.7636H27.1243H26.5776V24.9343V26.1096L24.0586 23.5905C22.6783 22.2103 21.535 21.076 21.5213 21.076C21.5076 21.076 21.3209 21.2491 21.1113 21.4632Z"
-                                                    fill="black" fill-opacity="0.2" />
-                                            </svg>
-                                        </span>
-                                    </a> --}}
                                     <a href="/user/wishlist" class="favourite cart-item">
                                         <span>
                                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
@@ -172,6 +113,15 @@
                                             </svg>
                                         </span>
                                     </a>
+                                    <div class="share-icons">
+                                        <a href="#" class="share-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                viewBox="0 0 1024 1024">
+                                                <path fill="currentColor"
+                                                    d="M33.935 942.336c.336 0 .72 0 1.088-.031c16.193-.529 26.4-13.088 27.777-29.216C63.888 901.217 95.775 614 544.048 614.305l1.008 183.664c0 12.368 7.12 23.664 18.335 28.944c11.088 5.312 24.432 3.68 33.968-4.224l414.976-343.776a31.864 31.864 0 0 0 11.681-24.784c-.032-9.6-4.336-18.687-11.776-24.752L597.28 88.817c-9.569-7.807-22.785-9.311-33.937-4.095c-11.152 5.311-18.288 16.56-18.288 28.91l-1.008 179.633c-185.952 5.887-329.968 65.712-423.328 174.96C-31.217 646 2.69 904.385 4.287 915.137c2.368 15.68 13.872 27.199 29.649 27.199zm543.121-392.527h-.063c-320.208.192-442.591 108.32-512.464 203.824c10.224-76.496 40.064-168.72 105.008-244.031c86.336-100.096 225.44-152.848 407.536-152.848c17.68 0 32-14.32 32-32V180.978l332.433 273.344l-332.448 275.904v-148.4a31.953 31.953 0 0 0-9.409-22.656a31.96 31.96 0 0 0-22.592-9.36z" />
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="product-info">
@@ -208,38 +158,6 @@
                                 <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-5.webp') }}"
                                     alt="product-img">
                                 <div class="product-cart-items">
-                                    {{-- <a href="#" class="cart cart-item">
-                                        <span>
-                                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <rect width="40" height="40" rx="20" fill="white" />
-                                                <path
-                                                    d="M12 14.4482V16.5664H12.5466H13.0933V15.3957V14.2204L15.6214 16.7486L18.1496 19.2767L18.5459 18.8759L18.9468 18.4796L16.4186 15.9514L13.8904 13.4232H15.0657H16.2364V12.8766V12.33H14.1182H12V14.4482Z"
-                                                    fill="#181818" />
-                                                <path
-                                                    d="M12 14.4482V16.5664H12.5466H13.0933V15.3957V14.2204L15.6214 16.7486L18.1496 19.2767L18.5459 18.8759L18.9468 18.4796L16.4186 15.9514L13.8904 13.4232H15.0657H16.2364V12.8766V12.33H14.1182H12V14.4482Z"
-                                                    fill="black" fill-opacity="0.2" />
-                                                <path
-                                                    d="M23.4345 12.8766V13.4232H24.6052H25.7805L23.2523 15.9514L20.7241 18.4796L21.125 18.8759L21.5213 19.2767L24.0495 16.7486L26.5776 14.2204V15.3957V16.5664H27.1243H27.6709V14.4482V12.33H25.5527H23.4345V12.8766Z"
-                                                    fill="#181818" />
-                                                <path
-                                                    d="M23.4345 12.8766V13.4232H24.6052H25.7805L23.2523 15.9514L20.7241 18.4796L21.125 18.8759L21.5213 19.2767L24.0495 16.7486L26.5776 14.2204V15.3957V16.5664H27.1243H27.6709V14.4482V12.33H25.5527H23.4345V12.8766Z"
-                                                    fill="black" fill-opacity="0.2" />
-                                                <path
-                                                    d="M15.6078 23.5905L13.0933 26.1096V24.9343V23.7636H12.5466H12V25.8818V28H14.1182H16.2364V27.4534V26.9067H15.0657H13.8904L16.4186 24.3786L18.9468 21.8504L18.5596 21.4632C18.35 21.2491 18.1633 21.076 18.1496 21.076C18.1359 21.076 16.9926 22.2103 15.6078 23.5905Z"
-                                                    fill="#181818" />
-                                                <path
-                                                    d="M15.6078 23.5905L13.0933 26.1096V24.9343V23.7636H12.5466H12V25.8818V28H14.1182H16.2364V27.4534V26.9067H15.0657H13.8904L16.4186 24.3786L18.9468 21.8504L18.5596 21.4632C18.35 21.2491 18.1633 21.076 18.1496 21.076C18.1359 21.076 16.9926 22.2103 15.6078 23.5905Z"
-                                                    fill="black" fill-opacity="0.2" />
-                                                <path
-                                                    d="M21.1113 21.4632L20.7241 21.8504L23.2523 24.3786L25.7805 26.9067H24.6052H23.4345V27.4534V28H25.5527H27.6709V25.8818V23.7636H27.1243H26.5776V24.9343V26.1096L24.0586 23.5905C22.6783 22.2103 21.535 21.076 21.5213 21.076C21.5076 21.076 21.3209 21.2491 21.1113 21.4632Z"
-                                                    fill="#181818" />
-                                                <path
-                                                    d="M21.1113 21.4632L20.7241 21.8504L23.2523 24.3786L25.7805 26.9067H24.6052H23.4345V27.4534V28H25.5527H27.6709V25.8818V23.7636H27.1243H26.5776V24.9343V26.1096L24.0586 23.5905C22.6783 22.2103 21.535 21.076 21.5213 21.076C21.5076 21.076 21.3209 21.2491 21.1113 21.4632Z"
-                                                    fill="black" fill-opacity="0.2" />
-                                            </svg>
-                                        </span>
-                                    </a> --}}
                                     <a href="/user/wishlist" class="favourite cart-item">
                                         <span>
                                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
@@ -263,6 +181,15 @@
                                             </svg>
                                         </span>
                                     </a>
+                                    <div class="share-icons">
+                                        <a href="#" class="share-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                viewBox="0 0 1024 1024">
+                                                <path fill="currentColor"
+                                                    d="M33.935 942.336c.336 0 .72 0 1.088-.031c16.193-.529 26.4-13.088 27.777-29.216C63.888 901.217 95.775 614 544.048 614.305l1.008 183.664c0 12.368 7.12 23.664 18.335 28.944c11.088 5.312 24.432 3.68 33.968-4.224l414.976-343.776a31.864 31.864 0 0 0 11.681-24.784c-.032-9.6-4.336-18.687-11.776-24.752L597.28 88.817c-9.569-7.807-22.785-9.311-33.937-4.095c-11.152 5.311-18.288 16.56-18.288 28.91l-1.008 179.633c-185.952 5.887-329.968 65.712-423.328 174.96C-31.217 646 2.69 904.385 4.287 915.137c2.368 15.68 13.872 27.199 29.649 27.199zm543.121-392.527h-.063c-320.208.192-442.591 108.32-512.464 203.824c10.224-76.496 40.064-168.72 105.008-244.031c86.336-100.096 225.44-152.848 407.536-152.848c17.68 0 32-14.32 32-32V180.978l332.433 273.344l-332.448 275.904v-148.4a31.953 31.953 0 0 0-9.409-22.656a31.96 31.96 0 0 0-22.592-9.36z" />
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="product-info">

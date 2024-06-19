@@ -19,8 +19,8 @@
           'role' => 'seller',
       ],
       [
-          'title' => 'Transaksi',
-          'route' => 'seller.transaction', // Menyesuaikan sesuai konteks
+          'title' => 'Data Penghasilan',
+          'route' => 'seller.income', // Menyesuaikan sesuai konteks
           'icon' => 'wallet',
           'role' => 'seller',
       ],
