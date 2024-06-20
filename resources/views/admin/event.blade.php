@@ -29,7 +29,8 @@
                     <tr>
                         <th>No.</th>
                         <th>Judul</th>
-                        <th>Sub Judul</th></th>
+                        <th>Sub Judul</th>
+                        </th>
                         <th>Foto</th>
                         <th>Actions</th>
                     </tr>
@@ -44,8 +45,15 @@
                             <td>
                                 <button type="button" class="badge bg-label-warning me-1 border-0" style="background: none"
                                     data-bs-toggle="modal" data-bs-target="#editModal{{ $even->id }}">
-                                    <i class="ti ti-pencil"></i>
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 21h9" stroke="currentColor" stroke-width="2" />
+                                        <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7.5 18.5 3 21l2.5-4.5L16.5 3.5z"
+                                            fill="currentColor" />
+                                    </svg>
                                 </button>
+
+
                                 <form id="delete-form-{{ $even->id }}"
                                     action="{{ route('admin.event.destroy', ['event' => $even->id]) }}" method="POST"
                                     style="display:inline">
@@ -93,8 +101,7 @@
 
                                 <div class="mb-3">
                                     <label for="subjudul" class="form-label">Sub Judul</label>
-                                    <textarea type="text" class="form-control @error('subjudul') is-invalid @enderror"
-                                        id="subjudul" name="subjudul"
+                                    <textarea type="text" class="form-control @error('subjudul') is-invalid @enderror" id="subjudul" name="subjudul"
                                         placeholder="Masukkan sub judul">{{ old('subjudul') }}</textarea>
                                     @error('subjudul')
                                         <span class="invalid-feedback" role="alert">
@@ -146,10 +153,8 @@
 
                                     <div class="mb-3">
                                         <label for="judul" class="form-label">Judul</label>
-                                        <input type="text"
-                                            class="form-control @error('judul') is-invalid @enderror"
-                                            id="judul" name="judul"
-                                            value="{{ old('judul', $even->judul) }}">
+                                        <input type="text" class="form-control @error('judul') is-invalid @enderror"
+                                            id="judul" name="judul" value="{{ old('judul', $even->judul) }}">
                                         @error('judul')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -159,9 +164,8 @@
 
                                     <div class="mb-3">
                                         <label for="subjudul" class="form-label">Sub Judul</label>
-                                        <textarea type="text"
-                                            class="form-control @error('subjudul') is-invalid @enderror"
-                                            id="subjudul" name="subjudul">{{ old('subjudul', $even->subjudul) }}</textarea>
+                                        <textarea type="text" class="form-control @error('subjudul') is-invalid @enderror" id="subjudul"
+                                            name="subjudul">{{ old('subjudul', $even->subjudul) }}</textarea>
                                         @error('subjudul')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -171,13 +175,12 @@
 
                                     <div class="mb-3">
                                         <label for="foto" class="form-label">Foto Cover</label>
-                                        <input type="file"
-                                            class="form-control @error('foto') is-invalid @enderror" id="foto"
-                                            name="foto" />
+                                        <input type="file" class="form-control @error('foto') is-invalid @enderror"
+                                            id="foto" name="foto" />
 
                                         @if ($even->logo)
-                                            <img src="{{ asset('storage/' . $even->foto) }}"
-                                                class="w-100 mt-3 rounded-3" alt="{{ $even->judul }}" />
+                                            <img src="{{ asset('storage/' . $even->foto) }}" class="w-100 mt-3 rounded-3"
+                                                alt="{{ $even->judul }}" />
                                         @else
                                             No Image
                                         @endif
