@@ -1,5 +1,32 @@
 @extends('layouts.home')
 @section('tittle', 'Detail Product')
+@section('style')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        .share-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .share-buttons {
+            display: flex;
+            /* Menyusun ikon berbagi dalam satu baris */
+            list-style-type: none;
+            /* Menghilangkan default styling dari <ul> */
+            padding: 0;
+            margin: 0;
+        }
+
+        .share-buttons li {
+            margin-right: 10px;
+        }
+
+        .social-buttons {
+            display: inline-block;
+            /* Setiap ikon dijadikan inline-block agar berada dalam satu baris */
+        }
+    </style>
+@endsection
 @section('content')
     <section class="product product-info">
         <div class="container">
@@ -100,15 +127,6 @@
                                             </span>
                                         </a>
                                     </div>
-                                    <div class="share-icons">
-                                        <a href="#" class="share-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                viewBox="0 0 1024 1024">
-                                                <path fill="currentColor"
-                                                    d="M33.935 942.336c.336 0 .72 0 1.088-.031c16.193-.529 26.4-13.088 27.777-29.216C63.888 901.217 95.775 614 544.048 614.305l1.008 183.664c0 12.368 7.12 23.664 18.335 28.944c11.088 5.312 24.432 3.68 33.968-4.224l414.976-343.776a31.864 31.864 0 0 0 11.681-24.784c-.032-9.6-4.336-18.687-11.776-24.752L597.28 88.817c-9.569-7.807-22.785-9.311-33.937-4.095c-11.152 5.311-18.288 16.56-18.288 28.91l-1.008 179.633c-185.952 5.887-329.968 65.712-423.328 174.96C-31.217 646 2.69 904.385 4.287 915.137c2.368 15.68 13.872 27.199 29.649 27.199zm543.121-392.527h-.063c-320.208.192-442.591 108.32-512.464 203.824c10.224-76.496 40.064-168.72 105.008-244.031c86.336-100.096 225.44-152.848 407.536-152.848c17.68 0 32-14.32 32-32V180.978l332.433 273.344l-332.448 275.904v-148.4a31.953 31.953 0 0 0-9.409-22.656a31.96 31.96 0 0 0-22.592-9.36z" />
-                                            </svg>
-                                        </a>
-                                    </div>
                                     <a href="#" style="width :10px" class="shop-btn"
                                         style="display: flex; align-items: center; gap: 5px;">
                                         <span style="width: 37rem; align-items:center; justify-content:center;">
@@ -131,7 +149,28 @@
                                 <p class="fs-2">Kondisi : <span class="inner-text">Bagus</span></p>
                                 <p class="fs-2">Warna : <span class="inner-text">Pink</span></p>
                             </div>
-                            <br>
+                            <hr>
+                            <p class="fs-2 d-flex">Bagikan ke:
+                                <span class="share-container share-buttons gap-3" style="margin-left: 7px">
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($url) }}"
+                                        target="_blank" class="social-buttons">
+                                        <i class="fab fa-facebook-f fa-lg"></i>
+                                    </a>
+                                    <a href="https://twitter.com/intent/tweet?url={{ urlencode($url) }}&text={{ urlencode($text) }}"
+                                        target="_blank" class="social-buttons">
+                                        <i class="fab fa-twitter fa-lg"></i>
+                                    </a>
+                                    <a href="https://t.me/share/url?url={{ urlencode($url) }}&text={{ urlencode($text) }}"
+                                        target="_blank" class="social-buttons">
+                                        <i class="fab fa-telegram-plane fa-lg"></i>
+                                    </a>
+                                    <a href="https://api.whatsapp.com/send?text={{ urlencode($text . ' ' . $url) }}"
+                                        target="_blank" class="social-buttons">
+                                        <i class="fab fa-whatsapp fa-lg"></i>
+                                    </a>
+                                </span>
+                            </p>
+                            <hr>
                             <div class="product-seller-section" data-aos="fade-up">
                                 <h5 class="intro-heading" style="font-size: 25px ">Info Seller</h5>
                                 <br>
@@ -349,10 +388,15 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
     </section>
+@endsection
+@section('script')
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/share.js') }}"></script>
 @endsection
