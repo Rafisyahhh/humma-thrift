@@ -2,7 +2,7 @@
 
 @section('title', 'Brand')
 
-@section('style')
+@push('style')
     <style>
         .responsive-img {
             width: 100%;
