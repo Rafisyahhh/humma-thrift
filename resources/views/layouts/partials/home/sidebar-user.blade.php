@@ -43,6 +43,12 @@
           'role' => 'user',
       ],
       [
+          'title' => 'Riwayat Transaksi',
+          'route' => 'user.history.index',
+          'icon' => 'history',
+          'role' => 'user',
+      ],
+      [
           'title' => 'Order',
           'route' => 'user.order',
           'icon' => 'list',
