@@ -60,7 +60,7 @@
                     @if(auth()->user()->store)
                         <a href="{{ route('seller.home') }}" class="shop-btn view-btn">Ke Dasbor Penjual</a>
                     @endif
-                    <a href="{{ route('user.home') }}" class="shop-btn view-btn">Ke Dasbor</a>
+                    <a href="{{ route('user.userhome') }}" class="shop-btn view-btn">Ke Dasbor</a>
                     <a href="#" class="shop-btn checkout-btn" id="logout-link">Keluar</a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
