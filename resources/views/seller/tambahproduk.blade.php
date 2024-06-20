@@ -1,13 +1,9 @@
 @extends('layouts.panel')
-@section('tittle', 'Home')
-@section('style')
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet" />
-<link href="summernote-bs5.css" rel="stylesheet">
-<script src="summernote-bs5.js"></script>
 
+@section('style')
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-  <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
+  {{-- <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" /> --}}
   <link rel="stylesheet" href="{{ asset('template-assets/front/css/image-uploader.css') }}">
   <style>
     .card {
@@ -133,14 +129,12 @@
       border: 0;
       box-shadow: none;
     }
-
-
   </style>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" rel="stylesheet">
 @endsection
 
 @section('content')
-  <div class="col-lg-9 justify-content-center">
+  <div class="justify-content-center">
     <form action="{{ route('seller.produk.store') }}" id="formDropzone" method="post" enctype="multipart/form-data">
       @csrf
       <div class="review-form">
@@ -174,14 +168,14 @@
                 <label for="Size" class="form-label">Size</label>
                 <input type="text" id="Size" name="size" class="form-control" placeholder="Masukkan Ukuran">
               </div>
-
             </div>
             <div class="col-md-6 mb-3">
               <div class="review-form-name">
                 <label for="kategori" class="form-label">Kategori</label>
-
                 <select class="form-select @error('category_ids') is-invalid @enderror" id="kategori"
                   name="category_ids[]" multiple>
+                  <option value="1">Select Brand</option>
+                  <option value="1">Select Brand</option>
                   @foreach ($categories as $category)
                     <option value="{{ $category->id }}"
                       {{ in_array($category->id, old('category_ids', [])) ? 'selected' : '' }}>
@@ -191,17 +185,6 @@
                 </select>
               </div>
             </div>
-            {{-- <div class="review-form-name">
-                <label for="kategori" class="form-label">Kategori</label>
-                <select class="js-example-basic-multiple" id="kategori" name="category_ids[]" multiple="multiple">
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}"
-                            {{ in_array($category->id, old('category_ids', [])) ? 'selected' : '' }}>
-                            {{ $category->title }}
-                        </option>
-                    @endforeach
-                </select>
-            </div> --}}
           </div>
         </div>
         <div class="account-inner-form">
@@ -214,17 +197,14 @@
               </div>
               <div class="review-form-name mt-4">
                 <label for="deskripsi" class="form-label">Deskripsi</label>
-                <textarea
-                class="custom-summernote @error('description') is-invalid @enderror"
-                id="custom-summernote" name="description" aria-label="With textarea"
-               >{{ old('description') }}</textarea>
-
+                <textarea id="deskripsi" name="description" class="form-control" placeholder="Masukkan Deskripsi" rows="7"></textarea>
               </div>
             </div>
             <div class="col-md-6 mb-3">
               <div class="form-group">
-                <label class="form-label text-muted opacity-75 fw-medium" for="formImage">Galleri Produk</label>
-                <div class="dropzone-drag-area form-control" id="previews">
+                <label class="form-label text-muted opacity-75 fw-medium" for="formImage">Galeri Produk</label>
+                <div class="input-images"></div>
+                {{-- <div class="dropzone-drag-area form-control" id="previews">
                   <div class="dz-message text-muted opacity-50" data-dz-message>
                     <span>Drag file ke sini untuk diunggah (max 4 Foto)</span>
                   </div>
@@ -242,7 +222,7 @@
                       </svg>
                     </button>
                   </div>
-                </div>
+                </div> --}}
               </div>
             </div>
           </div>
@@ -257,8 +237,8 @@
                       <div class="row gy-5">
                         <div class="col-sm-6">
                           <div class="card phone" onclick="selectCard('phone')" style="height: 80px">
-                            <input type="radio" id="phone" name="open_bid" class="radio-input"
-                              style="display: none" value="0">
+                            <input type="radio" id="phone" name="open_bid" class="radio-input" style="display: none"
+                              value="0">
                             <div class="wrapper-content">
                               <p>Harga tetap</p>
                             </div>
@@ -314,118 +294,92 @@
         </div>
         <div class="submit-btn">
           <button type="button" class="shop-btn cancel-btn">Batal</button>
-          <button type="submit"  class="shop-btn update-btn">Tambah Produk</button>
+          <button type="submit" id="formSubmit" class="shop-btn update-btn">Tambah Produk</button>
         </div>
       </div>
     </form>
   </div>
-  <form action="url" enctype="multipart/form-data">
-    <div class="input-images"></div>
-  </form>
 @endsection
 
 @section('script')
-
-
-
-  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.custom-summernote').summernote({
-            placeholder: 'Isi deskripsi produk',
-            tabsize: 2,
-            height: 120,
-            toolbar: [
-                ['font', ['bold', 'underline', 'clear']],
-                ['insert', ['link', 'picture']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-            ],
-            callbacks: {
-                onInit: function() {
-                    // Set background color to white
-                    $('.custom-summernote .note-editor').css('background-color', 'white');
-                    // Set text color to white
-                    $('.custom-summernote .note-editable').css('color', 'white');
-                },
-                onChange: function(contents, $editable) {
-                    // Set text color to white
-                    $('.custom-summernote .note-editable').css('color', 'white');
-                }
-            }
-        });
-    });
-</script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
   <script src="{{ asset('template-assets/front/assets/js/image-uploader.js') }}"></script>
-
   <script>
-    $(document).ready(function() {
-        $('.js-example-basic-multiple').select2();
-    });
-    </script>
-    
-  <script>
-    Dropzone.autoDiscover = false;
-    $(document).ready(function() {
-      const formDropzone = $("#formDropzone");
-      const kategori = $('#kategori').select2({
-        theme: 'bootstrap-5'
-      });
-      kategori.addClass("form-select");
-
-      formDropzone.dropzone({
-        paramName: "cover_image",
-        url: "{{ route('seller.produk.store') }}",
-        previewTemplate: $('#dzPreviewContainer').html(),
-        addRemoveLinks: true,
-        autoProcessQueue: false,
-        uploadMultiple: true,
-        parallelUploads: 1,
+    $(function() {
+      const inputImages = $('.input-images');
+      const kategori = $('#kategori');
+      inputImages.imageUploader({
+        extensions: ['.jpg', '.jpeg', '.png', '.gif', '.svg'],
         maxFiles: 4,
-        acceptedFiles: '.jpeg,.jpg,.png,.gif',
-        thumbnailWidth: 200,
-        thumbnailHeight: 200,
-        previewsContainer: "#previews",
-        timeout: 0,
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        init: function() {
-          const myDropzone = this;
-
-          $("#formSubmit").on("click", function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            if (myDropzone.files.length > 0) {
-              myDropzone.processQueue();
-            } else {
-              alert("Please add at least one image.");
-            }
-          });
-
-          this.on("sendingmultiple", function(data, xhr, formData) {
-            const formDataArray = formDropzone.serializeArray();
-            $.each(formDataArray, function(key, el) {
-              formData.append(el.name, el.value);
-            });
-          });
-
-          this.on("successmultiple", function(files, response) {
-            window.location.href = response.redirect_url;
-          });
-
-          this.on("errormultiple", function(files, response) {
-            alert(JSON.parse(response));
-          });
-        },
+        imagesInputName: 'cover_image',
+        label: 'Drag file kesini untuk mengunggah (max 4)'
       });
-
+      // inputImages.find(".image-uploade").addClass("form-control");
+      kategori.select2({
+        containerCssClass: "form-control",
+        width: 'resolve'
+        // theme: 'bootstrap-5'
+      });
     });
+
+    // Dropzone.autoDiscover = false;
+    // $(document).ready(function() {
+    //   const formDropzone = $("#formDropzone");
+    //   const kategori = $('#kategori').select2({
+    //     theme: 'bootstrap-5'
+    //   });
+    //   kategori.addClass("form-select");
+
+    //   formDropzone.dropzone({
+    //     paramName: "cover_image",
+    //     url: "{{ route('seller.produk.store') }}",
+    //     previewTemplate: $('#dzPreviewContainer').html(),
+    //     addRemoveLinks: true,
+    //     autoProcessQueue: false,
+    //     uploadMultiple: true,
+    //     parallelUploads: 1,
+    //     maxFiles: 4,
+    //     acceptedFiles: '.jpeg,.jpg,.png,.gif',
+    //     thumbnailWidth: 200,
+    //     thumbnailHeight: 200,
+    //     previewsContainer: "#previews",
+    //     timeout: 0,
+    //     headers: {
+    //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //     },
+    //     init: function() {
+    //       const myDropzone = this;
+
+    //       $("#formSubmit").on("click", function(e) {
+    //         e.preventDefault();
+    //         e.stopPropagation();
+
+    //         if (myDropzone.files.length > 0) {
+    //           myDropzone.processQueue();
+    //         } else {
+    //           alert("Please add at least one image.");
+    //         }
+    //       });
+
+    //       this.on("sendingmultiple", function(data, xhr, formData) {
+    //         const formDataArray = formDropzone.serializeArray();
+    //         $.each(formDataArray, function(key, el) {
+    //           formData.append(el.name, el.value);
+    //         });
+    //       });
+
+    //       this.on("successmultiple", function(files, response) {
+    //         window.location.href = response.redirect_url;
+    //       });
+
+    //       this.on("errormultiple", function(files, response) {
+    //         alert(JSON.parse(response));
+    //       });
+    //     },
+    //   });
+
+    // });
 
     function selectCard(id) {
       $('.card').removeClass('selected').find('input[type="radio"]').prop('checked', false);
@@ -445,4 +399,3 @@
     selectCard('phone');
   </script>
 @endsection
-

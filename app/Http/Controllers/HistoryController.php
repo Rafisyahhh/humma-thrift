@@ -13,7 +13,7 @@ class HistoryController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $NumberFormatter = new NumberFormatter('id_ID', NumberFormatter::CURRENCY);
+        $NumberFormatter = number_format(1_000, 0, '', '.');
         $transaction = [
             [
                 'id' => 1,
@@ -70,12 +70,12 @@ class HistoryController extends Controller {
                 ]
             ]
         ];
-        foreach ($transaction as &$key) {
-            $key['date_diff_format'] = $this->formatTanggal($key['created_at']);
-            $key['date_format'] = Carbon::parse($key['created_at'])->format('d F Y');
-            $key['price_format'] = str_replace(',00', '', $NumberFormatter->formatCurrency($key['order']['product']['price'], 'IDR'));
-        }
-        unset($key);
+        // foreach ($transaction as &$key) {
+        //     $key['date_diff_format'] = $this->formatTanggal($key['created_at']);
+        //     $key['date_format'] = Carbon::parse($key['created_at'])->format('d F Y');
+        // $key['price_format'] = str_replace(',00', '', number_format(1_000, 0, '', '.'));
+        // }
+        // unset($key);
         return view('user.history', compact('transaction'));
     }
 
