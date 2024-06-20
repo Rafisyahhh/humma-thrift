@@ -81,7 +81,7 @@
                                     <label for="title" class="form-label">Name Brand</label>
                                     <input type="text" class="form-control @error('title') is-invalid @enderror"
                                         id="title" name="title" value="{{ old('title') }}"
-                                        placeholder="Masukkan nama kategori" />
+                                        placeholder="Masukkan nama brand" />
                                     @error('title')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

@@ -12,31 +12,31 @@
                         <div class="account-inner-form">
                             <div class="review-form-name mb-4">
                                 <label for="username" class="form-label">Nama Pengguna</label>
-                                <input type="text" id="username" class="form-control" placeholder="akbar" />
+                                <input type="text" id="username" class="form-control" placeholder="akbar" value="akbar"/>
                             </div>
                             <div class="review-form-name mb-4">
                                 <label for="name" class="form-label">Nama Lengkap</label>
-                                <input type="text" id="name" class="form-control" placeholder="Akbar Rafsyah" />
+                                <input type="text" id="name" class="form-control" placeholder="Akbar Rafsyah" value="Akbar Rafsyah"/>
                             </div>
                         </div>
                         <div class="account-inner-form">
                             <div class="review-form-name mb-4">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" id="email" class="form-control" placeholder="email@kamu.tld" />
+                                <input type="email" id="email" class="form-control" placeholder="email@kamu.tld" value="akbarfyh@gmail.com"/>
                             </div>
                             <div class="review-form-name mb-4">
                                 <label for="telephone" class="form-label">Nomor Telepon</label>
-                                <input type="number" id="telephone" class="form-control" placeholder="+6281234567890" />
+                                <input type="number" id="telephone" class="form-control" placeholder="+6281234567890" value="081234567890"/>
                             </div>
                         </div>
                         <div class="account-inner-form">
                             <div class="review-form-name mb-4">
                                 <label for="birthplace" class="form-label">Tempat Lahir</label>
-                                <input type="text" id="birthplace" class="form-control" placeholder="Mis: Malang" />
+                                <input type="text" id="birthplace" class="form-control" placeholder="Mis: Malang" value="Malang"/>
                             </div>
                             <div class="review-form-name mb-4">
                                 <label for="birthdate" class="form-label">Tanggal Lahir</label>
-                                <input type="date" id="birthdate" class="form-control" placeholder="Mis: 08-06-12" />
+                                <input type="date" id="birthdate" class="form-control" placeholder="Mis: 08-06-12" value="08/06/12"/>
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                         <h5 class="comment-title">Perbarui Foto Profil</h5>
                         <p class="paragraph">Ukuran 300x300.</p>
                         <div class="logo-upload">
-                            <img src="template-assets/front/assets/images/homepage-one/sallers-cover.png" alt="upload"
+                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/sallers-cover.png') }}" alt="upload"
                                 class="upload-img" id="upload-img">
                             <div class="upload-input">
                                 <label for="input-file">
