@@ -78,8 +78,6 @@ Route::prefix('seller')->middleware('auth')->name('seller.')->group(function () 
 # User Routes
 Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function () {
     Route::view('/home', 'user.user')->name('home');
-    Route::view('/product/detail', 'user.detailproduct')->name('detailproduct');
-    Route::get('/userhome', [DashboardUserController::class, 'dashboard'])->name('userhome');
     Route::view('/detailproduct', 'user.detailproduct')->name('detailproduct');
     Route::view('/checkout', 'user.checkout')->name('checkout');
     Route::view('/about', 'user.tentang')->name('about');
