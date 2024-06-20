@@ -174,8 +174,6 @@
                 <label for="kategori" class="form-label">Kategori</label>
                 <select class="form-select @error('category_ids') is-invalid @enderror" id="kategori"
                   name="category_ids[]" multiple>
-                  <option value="1">Select Brand</option>
-                  <option value="1">Select Brand</option>
                   @foreach ($categories as $category)
                     <option value="{{ $category->id }}"
                       {{ in_array($category->id, old('category_ids', [])) ? 'selected' : '' }}>
