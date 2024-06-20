@@ -161,7 +161,7 @@ div.dataTables_wrapper .dt-button-collection > div[role=menu] {
 }
 
 .bg-primary {
-  background-color: rgba(28, 56, 121, 1) !important;
+    background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus {
@@ -196,9 +196,7 @@ a.bg-primary:hover, a.bg-primary:focus {
 
 .page-item.active .page-link,
 .pagination li.active > a:not(.page-link) {
-  border-color: rgba(28, 56, 121, 1);
-  background-color: rgba(28, 56, 121, 1);
-  color: #fff;
+    background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;
 }
 
 .page-item > .page-link.active {
@@ -503,8 +501,8 @@ button.list-group-item-primary.active {
 }
 
 .nav-pills .nav-link.active, .nav-pills .nav-link.active:hover, .nav-pills .nav-link.active:focus {
-  background-color: rgba(28, 56, 121, 1);
-  color: #fff;
+    background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%);
+    color:#fff;
 }
 
 .nav-tabs .nav-link.active, .nav-tabs .nav-link.active:hover, .nav-tabs .nav-link.active:focus,
