@@ -30,7 +30,7 @@
             <div class="login-section account-section">
                 <div class="review-form" style="height: 100%">
                     <h5 class="text-center mb-4">Daftar Sebagai Penjual</h5>
-                    <form method="POST" action="{{ route('user.register-seller') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('user.register-seller.submit') }}" enctype="multipart/form-data">
                         @csrf
                         <div class=" account-inner-form">
                             <div class="review-form-name">

@@ -1,23 +1,3 @@
-<style>
-    .header-favourite a {
-    color:#6e6d79; /* Color for the anchor link */
-}
-
-.header-favourite i {
-    color: #6e6d79; /* Color for the icons in header-favourite */
-    font-size: 1.5em; /* Font size for the icon */
-}
-
-.header-cart a {
-    color: #6e6d79; /* Color for the anchor link */
-}
-
-.header-cart i {
-    color:#6e6d79; /* Color for the icon in header-cart */
-    font-size: 1.5em; /* Font size for the icon */
-}
-
-</style>
 
 @if (request()->routeIs(['register', 'login']))
     <div class="header-user">
@@ -28,13 +8,13 @@
     </div>
 @elseif(auth()->check() && auth()->user()->getUserRoleInstance()->value === 'admin')
     <div class="header-user d-flex gap-4 h-100">
-        <a href="{{ route('admin.dashboard') }}" class="d-flex gap-3 align-items-center lh-1">
+        <a href="{{ route('admin.index') }}" class="d-flex gap-3 align-items-center lh-1">
             <span>Ke Dasbor Penjual</span>
             <i style="font-size: 1.5em" class="fas fa-arrow-right"></i>
         </a>
     </div>
     <div class="header-user d-flex gap-4 h-100">
-        <a href="{{ route('admin.dashboard') }}" class="d-flex gap-3 align-items-center lh-1">
+        <a href="{{ route('admin.index') }}" class="d-flex gap-3 align-items-center lh-1">
             <span>Ke Dasbor</span>
             <i style="font-size: 1.5em" class="fas fa-arrow-right"></i>
         </a>

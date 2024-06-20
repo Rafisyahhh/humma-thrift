@@ -35,6 +35,7 @@ class OpenShopController extends Controller
     {
         $data = collect($request->validated());
 
+        // Assign Value To Collection
         $data->put('store_logo', $request->file('store_logo') ? $request->file('store_logo')->store('store-logo', 'public') : null);
         $data->put('nic_photo', $request->file('nic_photo') ? $request->file('nic_photo')->store('nic-photo', 'public') : null);
         $data->put('user_id', Auth::id());
@@ -43,6 +44,7 @@ class OpenShopController extends Controller
         $data->put('verified_at', null);
         $data->put('active', false);
 
+        // Create User Store
         $userStore = UserStore::create($data->toArray());
 
         Notification::send(auth()->user(), new SellerWelcomeNotification($userStore));

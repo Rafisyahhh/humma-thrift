@@ -1,14 +1,3 @@
-<style>
-    .shop-btn {
-    color: rgb(255, 255, 255); /* General color for the anchor link */
-}
-
-.shop-btn .icon i {
-    color: #6e6d79; /* Color for the icon */
-    font-size: 1.5em; /* Font size for the icon */
-}
-
-</style>
 
 @php
     $user = auth()->user();
