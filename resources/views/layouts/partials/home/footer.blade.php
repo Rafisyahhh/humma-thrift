@@ -108,7 +108,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="footer-order">
                         <div class="logo">
-                            <img src="{{ asset('template-assets/front/assets/images/logos/footer-logo.webp') }}" alt="logo">
+                            <img src="{{ asset('images/brands/png/logo-white-8.png') }}" height="36px" alt="logo">
                         </div>
                         <div class="footer-link order-link">
                             <ul>
