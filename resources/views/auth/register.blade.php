@@ -76,8 +76,7 @@
                         </div>
                         <div class="login-btn text-center">
                             <button type="submit" class="shop-btn">Daftar</button>
-                            <span class="shop-account">Sudah punya akun?<a href="{{ route('login') }}">Masuk
-                                    disini</a></span>
+                            <span class="shop-account">Sudah punya akun?<a href="{{ route('login') }}">Masuk disini</a></span>
                         </div>
                     </form>
                 </div>

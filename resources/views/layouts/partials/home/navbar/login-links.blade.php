@@ -1,23 +1,3 @@
-<style>
-    .header-favourite a {
-    color:#6e6d79; /* Color for the anchor link */
-}
-
-.header-favourite i {
-    color: #6e6d79; /* Color for the icons in header-favourite */
-    font-size: 1.5em; /* Font size for the icon */
-}
-
-.header-cart a {
-    color: #6e6d79; /* Color for the anchor link */
-}
-
-.header-cart i {
-    color:#6e6d79; /* Color for the icon in header-cart */
-    font-size: 1.5em; /* Font size for the icon */
-}
-
-</style>
 
 @if (request()->routeIs(['register', 'login']))
     <div class="header-user">

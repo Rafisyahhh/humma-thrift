@@ -5633,3 +5633,41 @@ a.shop-btn:hover {
     color: black;
   }
 
+.shop-btn {
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.shop-account a:hover {
+    text-decoration: underline;
+}
+
+.shop-btn {
+    color: rgb(255, 255, 255);
+}
+
+.shop-btn .icon i {
+    color: #6e6d79;
+    font-size: 1.5em;
+}
+
+.header-favourite a {
+    color:#6e6d79;
+}
+
+.header-favourite i {
+    color: #6e6d79;
+    font-size: 1.5em;
+}
+
+.header-cart a {
+    color: #6e6d79;
+}
+
+.header-cart i {
+    color:#6e6d79;
+    font-size: 1.5em; 
+}
