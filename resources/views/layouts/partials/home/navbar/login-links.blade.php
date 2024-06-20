@@ -9,14 +9,8 @@
 @elseif(auth()->check() && auth()->user()->getUserRoleInstance()->value === 'admin')
     <div class="header-user d-flex gap-4 h-100">
         <a href="{{ route('admin.index') }}" class="d-flex gap-3 align-items-center lh-1">
-            <span>Ke Dasbor Penjual</span>
-            <i style="font-size: 1.5em" class="fas fa-arrow-right"></i>
-        </a>
-    </div>
-    <div class="header-user d-flex gap-4 h-100">
-        <a href="{{ route('admin.index') }}" class="d-flex gap-3 align-items-center lh-1">
             <span>Ke Dasbor</span>
-            <i style="font-size: 1.5em" class="fas fa-arrow-right"></i>
+            <i style="font-size: 1.25em" class="fas fa-arrow-right"></i>
         </a>
     </div>
 @elseif(auth()->check())
@@ -58,7 +52,7 @@
                 <div class="wrapper-line"></div>
                 <div class="cart-btn">
                     @if(auth()->user()->store)
-                        <a href="{{ route('seller.home') }}" class="shop-btn view-btn">Ke Dasbor Penjual</a>
+                        <a href="{{ route('seller.home') }}" class="shop-btn view-btn"> Ke Dasbor Penjual</a>
                     @endif
                     <a href="{{ route('user.userhome') }}" class="shop-btn view-btn">Ke Dasbor</a>
                     <a href="#" class="shop-btn checkout-btn" id="logout-link">Keluar</a>

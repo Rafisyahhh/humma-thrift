@@ -124,7 +124,12 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::resource('category', ProductCategoryController::class);
     Route::resource('user', UserController::class);
     Route::resource('event', EventController::class);
-    Route::resource('notification', NotificationController::class);
+
+    Route::prefix('/notification')->name('notification.')->group(function() {
+        Route::get('/', [NotificationController::class, 'index'])->name('index');
+        Route::get('/read-all', [NotificationController::class, 'readAll'])->name('readAll');
+        Route::get('/{id}', [NotificationController::class, 'show'])->name('show');
+    });
 });
 
 # Store Profile Routes

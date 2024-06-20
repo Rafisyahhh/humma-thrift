@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notification;
-use App\Http\Requests\StoreNotificationRequest;
-use App\Http\Requests\UpdateNotificationRequest;
 use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
@@ -19,43 +17,25 @@ class NotificationController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreNotificationRequest $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(Notification $notification)
     {
-        //
+        $notification->markAsRead();
+
+        $notifications = Auth::user()->notifications()->paginate(10);
+        return view('admin.notification.show', compact('notifications', 'notification'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Read All Notification
+     *
+     * @return void
      */
-    public function edit(Notification $notification)
+    public function readAll()
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateNotificationRequest $request, Notification $notification)
-    {
-        //
+        Auth::user()->getAttribute('unreadNotifications')->markAsRead();
+        return redirect()->route('admin.notification.index');
     }
 
     /**
@@ -63,6 +43,14 @@ class NotificationController extends Controller
      */
     public function destroy(Notification $notification)
     {
-        //
+        try {
+            $notification->delete();
+
+            return redirect()->route('admin.notification.index')->with('success', 'Berhasil menghapus notifikasi');
+        } catch (\Throwable $th) {
+            return redirect()->route('admin.notification.index')->with('error', 'Gagal menghapus notifikasi');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.notification.index')->with('error', 'Gagal menghapus notifikasi');
+        }
     }
 }
