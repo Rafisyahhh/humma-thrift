@@ -24,7 +24,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Kategori</th>
-                        <th>Warna Kategori</th>
+                        <th>Gambar Kategori</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>

@@ -37,12 +37,6 @@
           'role' => 'user',
       ],
       [
-          'title' => 'Update Password',
-          'route' => 'user.update-password.index',
-          'icon' => 'lock',
-          'role' => 'user',
-      ],
-      [
           'title' => 'Riwayat Transaksi',
           'route' => 'user.history.index',
           'icon' => 'history',
@@ -64,6 +58,12 @@
           'title' => 'Daftar Keinginan',
           'route' => 'user.wishlist',
           'icon' => 'heart',
+          'role' => 'user',
+      ],
+      [
+          'title' => 'Update Password',
+          'route' => 'user.update-password.index',
+          'icon' => 'lock',
           'role' => 'user',
       ],
   ];
