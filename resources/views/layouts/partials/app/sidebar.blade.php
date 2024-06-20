@@ -3,17 +3,15 @@
     <div class="app-brand demo">
         <a href="index.html" class="app-brand-link">
             <span class="app-brand-logo demo">
-                <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
-                        fill="#7367F0" />
-                    <path opacity="0.06" fill-rule="evenodd" clip-rule="evenodd"
-                        d="M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z" fill="#161616" />
-                    <path opacity="0.06" fill-rule="evenodd" clip-rule="evenodd"
-                        d="M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z" fill="#161616" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z"
-                        fill="#7367F0" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 133.79 127.59">
+                    <g id="Layer_2" data-name="Layer 2">
+                        <g id="Layer_1-2" data-name="Layer 1">
+                            <path fill="#1c3879"
+                                d="M40.37,97.49l-6.69,4.24,3.73-7A96.86,96.86,0,0,1,67,61.33l1.2-.83v-35l-.57-.21A34.16,34.16,0,0,1,46.17,0H26.4L0,9.77,13.19,45.42l17-6.28v88.45h38V84.87A109.48,109.48,0,0,0,40.37,97.49Z" />
+                            <path fill="#d7e4f4"
+                                d="M133.79,0V127.59h-38V78.37A111.76,111.76,0,0,0,39.25,95.73a94.17,94.17,0,0,1,56.52-46V0Z" />
+                        </g>
+                    </g>
                 </svg>
             </span>
             <span class="app-brand-text demo menu-text fw-bold">Thrifting</span>
@@ -32,52 +30,52 @@
         <li class="menu-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">
             <a href="{{ route('admin.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-home"></i>
-                <div >Dasbor</div>
+                <div>Dasbor</div>
             </a>
         </li>
 
         <li class="menu-item {{ request()->routeIs('/admin') ? 'active' : '' }}">
             <a href="{{ url('/admin') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-building"></i>
-                <div >Toko</div>
+                <div>Toko</div>
             </a>
         </li>
         <li class="menu-item {{ request()->routeIs('admin.about.*') ? 'active' : '' }}">
             <a href="{{ url('/admin/about') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-building"></i>
-                <div >Tentang kami</div>
+                <i class="me-2"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="currentColor" d="M8 16h12v-3h-2.55q-.525.925-1.45 1.463T14 15q-1.05 0-1.975-.537T10.55 13H8zm6-3q.85 0 1.425-.587T16 11h4V4H8v7h4q0 .825.588 1.413T14 13m-8 5V2h16v16zm-4 4V6h2v14h14v2zm6-6h12z"/></svg>
+                </i><div> Tentang kami</div>
             </a>
         </li>
 
         <li class="menu-item {{ request()->routeIs('admin.brand.*') ? 'active' : '' }}">
             <a href="{{ route('admin.brand.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-flag"></i>
-                <div >Merk</div>
+                <div>Merk</div>
             </a>
         </li>
 
         <li class="menu-item {{ request()->routeIs('admin.category.*') ? 'active' : '' }}">
             <a href="{{ route('admin.category.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-list"></i>
-                <div >Kategori</div>
+                <div>Kategori</div>
             </a>
         </li>
 
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-box"></i>
-                <div >Produk</div>
+                <div>Produk</div>
             </a>
 
             <ul class="menu-sub">
                 <li class="menu-item">
                     <a href="javascript:void(0)" class="menu-link">
-                        <div >Persetujuan Produk</div>
+                        <div>Persetujuan Produk</div>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="javascript:void(0)" class="menu-link">
-                        <div >Daftar Produk</div>
+                        <div>Daftar Produk</div>
                     </a>
                 </li>
             </ul>
@@ -86,21 +84,21 @@
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-wallet"></i>
-                <div >Transaksi</div>
+                <div>Transaksi</div>
             </a>
         </li>
 
         <li class="menu-item">
             <a href="{{ route('admin.user.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-users"></i>
-                <div >Pengguna</div>
+                <div>Pengguna</div>
             </a>
         </li>
 
         <li class="menu-item">
             <a href="{{ route('admin.event.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-file"></i>
-                <div >Event</div>
+                <div>Event</div>
             </a>
         </li>
     </ul>

@@ -21,7 +21,7 @@
 @section('content')
     <div class="wishlist">
         <h5>Data Produk</h5>
-        <a href="tambahproduk" class="shop-btn float-left mb-4" onclick="modalAction('.submit')" style="color: white;">Tambah Produk</a>
+        <a href="produk/create" class="shop-btn float-left mb-4" onclick="modalAction('.submit')" style="color: white;">Tambah Produk</a>
         <div class="cart-section wishlist-section">
             <table>
                 <tbody>
