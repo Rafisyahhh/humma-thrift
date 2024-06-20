@@ -190,7 +190,7 @@
             <div class="col-md-6 mb-3">
               <div class="review-form-name">
                 <label for="gambar" class="form-label">Gambar Produk</label>
-                <input type="file" name="cover_image" class="form-control @error('cover_image') is-invalid @enderror"
+                <input type="file" name="thumbnail" class="form-control @error('thumbnail') is-invalid @enderror"
                   id="gambar">
               </div>
               <div class="review-form-name mt-4">
