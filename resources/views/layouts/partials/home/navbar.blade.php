@@ -3,7 +3,7 @@
         <div class="header-center">
             <div class="logo">
                 <a href="{{ url('/') }}">
-                    <img src="{{ asset('template-assets/front/assets/images/logos/logo.webp') }}" alt="logo">
+                    <img src="{{ asset('images/brands/png/logo-color-dark.png') }}" alt="logo" height="36px" />
                 </a>
             </div>
             <div class="header-cart-items">
