@@ -12,19 +12,19 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $notifications = Auth::user()->notifications()->paginate(10);
+        $notifications = Auth::user()->notifications()->paginate(20);
         return view('admin.notification.index', compact('notifications'));
     }
 
     /**
-     * Display the specified resource.
+     * Display the notification
      */
-    public function show(Notification $notification)
+    public function show(string $notificationId)
     {
-        $notification->markAsRead();
+        Auth::user()->notifications()->find($notificationId)->markAsRead();
 
-        $notifications = Auth::user()->notifications()->paginate(10);
-        return view('admin.notification.show', compact('notifications', 'notification'));
+        $notifications = Auth::user()->notifications()->paginate(20);
+        return view('admin.notification.show', compact('notifications', 'notificationId'));
     }
 
     /**
@@ -38,6 +38,18 @@ class NotificationController extends Controller
         return redirect()->route('admin.notification.index');
     }
 
+    public function unread(string $notification)
+    {
+        Auth::user()->notifications()->find($notification)->markAsUnread();
+        return redirect()->route('admin.notification.index');
+    }
+
+    public function read(string $notification)
+    {
+        Auth::user()->notifications()->find($notification)->markAsRead();
+        return redirect()->route('admin.notification.index');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -45,7 +57,6 @@ class NotificationController extends Controller
     {
         try {
             $notification->delete();
-
             return redirect()->route('admin.notification.index')->with('success', 'Berhasil menghapus notifikasi');
         } catch (\Throwable $th) {
             return redirect()->route('admin.notification.index')->with('error', 'Gagal menghapus notifikasi');

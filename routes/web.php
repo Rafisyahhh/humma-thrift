@@ -128,7 +128,10 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::prefix('/notification')->name('notification.')->group(function() {
         Route::get('/', [NotificationController::class, 'index'])->name('index');
         Route::get('/read-all', [NotificationController::class, 'readAll'])->name('readAll');
+        Route::get('/read/{id}', [NotificationController::class, 'read'])->name('read');
+        Route::get('/unread/{id}', [NotificationController::class, 'unread'])->name('unread');
         Route::get('/{id}', [NotificationController::class, 'show'])->name('show');
+        Route::delete('/{id}', [NotificationController::class, 'destroy'])->name('destroy');
     });
 });
 
