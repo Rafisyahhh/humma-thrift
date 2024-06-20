@@ -24,7 +24,7 @@ class StoreEventRequest extends FormRequest
         return [
             'judul' => 'required',
             'subjudul' => 'required',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+            'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ];
     }
 

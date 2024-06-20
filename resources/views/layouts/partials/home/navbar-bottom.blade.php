@@ -1,3 +1,15 @@
+<style>
+    .shop-btn {
+    color: rgb(255, 255, 255); /* General color for the anchor link */
+}
+
+.shop-btn .icon i {
+    color: #6e6d79; /* Color for the icon */
+    font-size: 1.5em; /* Font size for the icon */
+}
+
+</style>
+
 @php
     $user = auth()->user();
     $store = $user?->store;
@@ -343,12 +355,13 @@
             <div class="header-vendor-btn">
                 @if (auth()->check())
                     @if (!$store)
-                        <a href="{{ url('user/open-shop') }}" class="shop-btn">
-                            <span class="list-text shop-text">Jualan Yuk</span>
-                            <span class="icon">
-                                <i class="fas fa-store"></i>
-                            </span>
-                        </a>
+                    <a href="{{ url('user/open-shop') }}" class="shop-btn">
+                        <span class="list-text shop-text">Jualan Yuk</span>
+                        <span class="icon">
+                            <i class="fas fa-store"></i>
+                        </span>
+                    </a>
+
                     @else
                         <a href="{{ request()->routeIs('store.profile') ? url('/') : url('@' . $store->username) }}"
                             class="shop-btn">

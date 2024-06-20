@@ -1,3 +1,24 @@
+<style>
+    .header-favourite a {
+    color:#6e6d79; /* Color for the anchor link */
+}
+
+.header-favourite i {
+    color: #6e6d79; /* Color for the icons in header-favourite */
+    font-size: 1.5em; /* Font size for the icon */
+}
+
+.header-cart a {
+    color: #6e6d79; /* Color for the anchor link */
+}
+
+.header-cart i {
+    color:#6e6d79; /* Color for the icon in header-cart */
+    font-size: 1.5em; /* Font size for the icon */
+}
+
+</style>
+
 @if (request()->routeIs(['register', 'login']))
     <div class="header-user">
         <a href="{{ url('/') }}" class="d-flex gap-2 align-items-center lh-1">
@@ -19,29 +40,29 @@
         </a>
     </div>
 @elseif(auth()->check())
-    <div class="header-favourite">
-        <a href="wishlist.html" class="cart-item">
-            <span>
-                <i style="font-size: 1.5em" class="fas fa-bell"></i>
-            </span>
-        </a>
-    </div>
+<div class="header-favourite">
+    <a href="wishlist.html" class="cart-item">
+        <span>
+            <i class="fas fa-bell"></i>
+        </span>
+    </a>
+</div>
 
-    <div class="header-favourite">
-        <a href="wishlist.html" class="cart-item">
-            <span>
-                <i style="font-size: 1.5em" class="fas fa-heart"></i>
-            </span>
-        </a>
-    </div>
+<div class="header-favourite">
+    <a href="wishlist.html" class="cart-item">
+        <span>
+            <i class="fas fa-heart"></i>
+        </span>
+    </a>
+</div>
 
-    {{-- ICON PROFILE --}}
-    <div class="header-cart header-right-dropdown">
-        <a href="/user/profile" class="cart-item">
-            <span>
-                <i style="font-size: 1.5em" class="fas fa-user"></i>
-            </span>
-        </a>
+{{-- ICON PROFILE --}}
+<div class="header-cart header-right-dropdown">
+    <a href="/user/profile" class="cart-item">
+        <span>
+            <i class="fas fa-user"></i>
+        </span>
+    </a>
 
         <div class="cart-submenu">
             <div class="cart-wrapper-section">

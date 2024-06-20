@@ -21,7 +21,7 @@
 @section('content')
     <div class="wishlist">
         <h5>Data Produk</h5>
-        <a href="tambahproduk" class="shop-btn float-left mb-4" onclick="modalAction('.submit')">Tambah Produk</a>
+        <a href="tambahproduk" class="shop-btn float-left mb-4" onclick="modalAction('.submit')" style="color: white;">Tambah Produk</a>
         <div class="cart-section wishlist-section">
             <table>
                 <tbody>
@@ -64,11 +64,11 @@
                         </td>
                         <td class="table-wrapper">
                             <div class="table-wrapper-center">
-                                    <button type="button" class="shop-btn" data-bs-toggle="modal"
+                                    <button type="button" class="shop-btn"  style="color: white;" data-bs-toggle="modal"
                                         data-bs-target="#detailModal">
                                         Detail
                                     </button>
-                                    <button type="button" class="shop-btn" data-bs-toggle="modal"
+                                    <button type="button" class="shop-btn"  style="color: white;" data-bs-toggle="modal"
                                         data-bs-target="#detailLelang">
                                         Lelang
                                     </button>

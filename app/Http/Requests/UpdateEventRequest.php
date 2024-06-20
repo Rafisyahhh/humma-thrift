@@ -22,21 +22,21 @@ class UpdateEventRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'judul' => 'required',
-            'subjudul' => 'required',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+            'judul_update' => 'required',
+            'subjudul_update' => 'required',
+            'foto_update' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ];
     }
 
     public function messages(): array
     {
         return [
-            'judul.required' => 'Judul Event Wajib Diisi',
-            'subjudul.required' => 'Keterangan Event Wajib Diisi',
-            'foto.required' => 'foto Wajib Diisi',
-            'foto.image' => 'Masukan harus berupa foto',
-            'foto.mimes' => 'foto harus berupa file jpeg,png,jpg',
-            'foto.max' => 'Ukuran foto harus kurang 2MB',
+            'judul_update.required' => 'Judul Event Wajib Diisi',
+            'subjudul_update.required' => 'Keterangan Event Wajib Diisi',
+            'foto_update.required' => 'foto Wajib Diisi',
+            'foto_update.image' => 'Masukan harus berupa foto',
+            'foto_update.mimes' => 'foto harus berupa file jpeg,png,jpg',
+            'foto_update.max' => 'Ukuran foto harus kurang 2MB',
         ];
     }
 }

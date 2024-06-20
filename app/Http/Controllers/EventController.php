@@ -16,12 +16,12 @@ class EventController extends Controller
      */
     public function index(Request $request)
     {
-        $events = Event::when($request->has('search'), function ($query) use ($request) {
+        $event = Event::when($request->has('search'), function ($query) use ($request) {
             $searchTerm = $request->input('search');
             return $query->where('title', 'LIKE', "%$searchTerm%");
         })->paginate(5);
 
-        return view('admin.event.index', compact('events'));
+        return view('admin.event', compact('event'));
     }
 
     /**
@@ -29,7 +29,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('admin.event.create');
+        return view('admin.event');
     }
 
     /**
@@ -50,7 +50,7 @@ class EventController extends Controller
                 'foto' => $path_gambar,
             ]);
 
-            return redirect()->route('event.index')->with('success', 'Event berhasil ditambahkan');
+            return redirect()->back()->with('success', 'Event berhasil ditambahkan');
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
         }
@@ -61,7 +61,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        return view('admin.event.show', compact('event'));
+        return view('admin.event', compact('event'));
     }
 
     /**
@@ -69,7 +69,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        return view('admin.event.edit', compact('event'));
+        return view('admin.event', compact('event'));
     }
 
     /**
@@ -81,13 +81,13 @@ class EventController extends Controller
             $oldPhotoPath = $event->foto;
 
             $dataToUpdate = [
-                'judul' => $request->input('judul'),
-                'subjudul' => $request->input('subjudul'),
+                'judul' => $request->input('judul_update'),
+                'subjudul' => $request->input('subjudul_update'),
             ];
 
-            if ($request->hasFile('foto')) {
-                $foto = $request->file('foto');
-                $path = $foto->store('foto', 'public');
+            if ($request->hasFile('foto_update')) {
+                $foto = $request->file('foto_update');
+                $path = $foto->store('foto_update', 'public');
                 $dataToUpdate['foto'] = $path;
             }
 
@@ -101,7 +101,7 @@ class EventController extends Controller
                 }
             }
 
-            return redirect()->route('event.index')->with('success', 'Event berhasil diperbarui');
+            return redirect()->back()->with('success', 'Event berhasil diperbarui');
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
         }
