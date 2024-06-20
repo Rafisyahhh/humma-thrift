@@ -30,4 +30,13 @@ class Brand extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function product()
+    {
+        return $this->hasMany(product::class, 'brand_id');
+    }
+    public function productauction()
+    {
+        return $this->hasMany(productauction::class, 'brand_id');
+    }
 }

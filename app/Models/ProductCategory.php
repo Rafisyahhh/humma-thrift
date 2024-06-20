@@ -30,4 +30,9 @@ class ProductCategory extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_category_pivots');
+    }
 }

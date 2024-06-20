@@ -95,7 +95,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::view('/update-password', 'user.updatepassword')->name('updatePassword');
 
     Route::get('/open-shop', [OpenShopController::class, 'index'])->name('register-seller');
-    Route::post('/open-shop', [OpenShopController::class, 'register'])->name('register-seller');
+    Route::post('/open-shop', [OpenShopController::class, 'register']);
     Route::get('/verify-store/{token:verification_code}', [OpenShopController::class, 'verifyStore'])->name('verify.store');
     Route::resource('update-password', UserUpdatePasswordController::class);
 });
