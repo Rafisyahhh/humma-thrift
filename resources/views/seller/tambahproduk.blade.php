@@ -1,7 +1,10 @@
 @extends('layouts.panel')
 @section('tittle', 'Home')
-
 @section('style')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet" />
+<link href="summernote-bs5.css" rel="stylesheet">
+<script src="summernote-bs5.js"></script>
+
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
@@ -129,6 +132,8 @@
       border: 0;
       box-shadow: none;
     }
+
+
   </style>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" rel="stylesheet">
 @endsection
@@ -185,6 +190,17 @@
                 </select>
               </div>
             </div>
+            {{-- <div class="review-form-name">
+                <label for="kategori" class="form-label">Kategori</label>
+                <select class="js-example-basic-multiple" id="kategori" name="category_ids[]" multiple="multiple">
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}"
+                            {{ in_array($category->id, old('category_ids', [])) ? 'selected' : '' }}>
+                            {{ $category->title }}
+                        </option>
+                    @endforeach
+                </select>
+            </div> --}}
           </div>
         </div>
         <div class="account-inner-form">
@@ -197,7 +213,11 @@
               </div>
               <div class="review-form-name mt-4">
                 <label for="deskripsi" class="form-label">Deskripsi</label>
-                <textarea id="deskripsi" name="description" class="form-control" placeholder="Masukkan Deskripsi" rows="7"></textarea>
+                <textarea
+                class="custom-summernote @error('description') is-invalid @enderror"
+                id="custom-summernote" name="description" aria-label="With textarea"
+               >{{ old('description') }}</textarea>
+
               </div>
             </div>
             <div class="col-md-6 mb-3">
@@ -293,7 +313,7 @@
         </div>
         <div class="submit-btn">
           <button type="button" class="shop-btn cancel-btn">Batal</button>
-          <button type="submit" id="formSubmit" class="shop-btn update-btn">Tambah Produk</button>
+          <button type="submit"  class="shop-btn update-btn">Tambah Produk</button>
         </div>
       </div>
   </div>
@@ -303,9 +323,51 @@
 @endsection
 
 @section('script')
+
+<!-- jQuery (necessary for Select2) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Select2 JS -->
+<link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
+<script src="vendor/select2/dist/js/select2.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+});
+</script>
+
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.custom-summernote').summernote({
+            placeholder: 'Isi deskripsi produk',
+            tabsize: 2,
+            height: 120,
+            toolbar: [
+                ['font', ['bold', 'underline', 'clear']],
+                ['insert', ['link', 'picture']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+            ],
+            callbacks: {
+                onInit: function() {
+                    // Set background color to white
+                    $('.custom-summernote .note-editor').css('background-color', 'white');
+                    // Set text color to white
+                    $('.custom-summernote .note-editable').css('color', 'white');
+                },
+                onChange: function(contents, $editable) {
+                    // Set text color to white
+                    $('.custom-summernote .note-editable').css('color', 'white');
+                }
+            }
+        });
+    });
+</script>
   <script>
     // Dropzone.autoDiscover = false;
 
@@ -456,3 +518,4 @@
     });
   </script>
 @endsection
+
