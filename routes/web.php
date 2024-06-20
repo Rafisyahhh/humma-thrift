@@ -59,7 +59,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::view('/home', 'user.user')->name('home');
     Route::view('/product/detail', 'user.detailproduct')->name('detailproduct');
     Route::get('/userhome', [DashboardUserController::class, 'dashboard'])->name('userhome');
-    Route::view('/detailproduct', 'user.detailproduct')->name('detailproduct');
+    // Route::view('/detailproduct', 'user.detailproduct')->name('detailproduct');
     Route::view('/checkout', 'user.checkout')->name('checkout');
     Route::view('/about', 'user.tentang')->name('about');
     Route::view('/brand', 'user.merek')->name('brand');
@@ -74,7 +74,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::view('/update-password', 'user.updatepassword')->name('updatePassword');
 
     Route::get('/open-shop', [OpenShopController::class, 'index'])->name('register-seller');
-    Route::post('/open-shop', [OpenShopController::class, 'register'])->name('register-seller');
+    Route::post('/open-shop', [OpenShopController::class, 'register']);
     Route::get('/verify-store/{token:verification_code}', [OpenShopController::class, 'verifyStore'])->name('verify.store');
     Route::resource('update-password', UserUpdatePasswordController::class);
 });

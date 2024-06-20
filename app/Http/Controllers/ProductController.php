@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Brand;
+use App\Models\ProductAuction;
+use App\Models\ProductCategory;
+use App\Models\ProductGallery;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,7 +29,9 @@ class ProductController extends Controller
     public function create()
     {
         $products = Product::all();
-        return view('seller.tambahproduk', compact('products'));
+        $brands = Brand::all();
+        $categories = ProductCategory::all();
+        return view('seller.tambahproduk', compact('products','brands','categories'));
     }
 
     /**
@@ -33,16 +39,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-    switch($request->type) {
-      case "non-auction":
-        dd("ini bukan lelang");
-      break;
-      case "auction":
-        dd("ini lelang");
-      break;
-      default: break;
-    }
-    //dd($request->all());
+
         try {
             $description = $request->description;
 
@@ -72,22 +69,67 @@ class ProductController extends Controller
             $path_gambar = Storage::disk('public')->put('product', $gambar);
 
 
-            Product::create([
-                'description' => $description,
-                'cover_image' => $path_gambar,
-                'title' => $request->title,
-                'user_id' => $user->id,
-                'store_id' => $request->store_id,
-                'brand_id' => $request->brand_id,
-                'size' => $request->size,
-                'status' => 'pending',
-                'open_bid' => false,
-                'price' => $request->price,
-            ]);
+            if ($request->open_bid == 0) {
+                   $product = Product::create([
+                        'description' => $request->description,
+                        'cover_image' => $path_gambar,
+                        'title' => $request->title,
+                        'user_id' => $user->id,
+                        'brand_id' => $request->brand_id,
+                        'size' => $request->size,
+                        'status' => 'pending',
+                        'open_bid' => 0,
+                        'price' => $request->price,
+                        'bid_price_start' => $request->bid_price_start,
+                        'bid_price_end' => $request->bid_price_end,
+                    ]);
+                    // dd($produk);
+            } elseif($request->open_bid == 1){
+
+                   $product =  ProductAuction::create([
+                        'description' => $request->description,
+                        'cover_image' => $path_gambar,
+                        'title' => $request->title,
+                        'user_id' => $user->id,
+                        'brand_id' => $request->brand_id,
+                        'size' => $request->size,
+                        'status' => 'pending',
+                        'open_bid' => 1,
+                        'bid_price_start' => $request->bid_price_start,
+                        'bid_price_end' => $request->bid_price_end,
+                    ]);
+              }
 
 
-            return redirect()->back()->with('success', 'Produk berhasil ditambahkan');
+              $product->categories()->attach($request->category_ids);
+
+
+            if ($request->hasFile('file')) {
+                foreach ($request->file('file') as $image) {
+                    $path_gambar = Storage::disk('public')->put('product_galleries', $image);
+                    ProductGallery::create([
+                        'product_id' => $product->id,
+                        'image' => $path_gambar,
+                    ]);
+                }
+            }
+
+            //   Product::create([
+            //     'description' => $description,
+            //     'cover_image' => $path_gambar,
+            //     'title' => $request->title,
+            //     'user_id' => $user->id,
+            //     'brand_id' => $request->brand_id,
+            //     'size' => $request->size,
+            //     'status' => 'pending',
+            //     'open_bid' => false,
+            //     'price' => $request->price,
+            //   ]);
+            // return redirect()->route('seller.produk.index')->with('success', 'Produk berhasil ditambahkan');
+            return response()->json(['redirect_url' => route('seller.produk.index')]);
+
         } catch (\Throwable $th) {
+            dd($th);
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
         }
     }

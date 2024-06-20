@@ -22,8 +22,7 @@ class StoreBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'judul' => 'required',
-            'subjudul' => 'required',
+            'title' => 'required|unique:brands,title',
             'logo' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ];
     }
@@ -31,8 +30,8 @@ class StoreBrandRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'judul.required' => 'Judul Event Wajib Diisi',
-            'subjudul.required' => 'Keterangan Event Wajib Diisi',
+            'title.required' => 'Nama Brand Wajib Diisi',
+            'title.unique' => 'Nama Brand sudah digunakan.',
             'logo.required' => 'Logo Wajib Diisi',
             'logo.image' => 'Masukan harus berupa Logo',
             'logo.mimes' => 'Logo harus berupa file jpeg,png,jpg',
