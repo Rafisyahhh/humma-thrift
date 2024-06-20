@@ -2,8 +2,9 @@
 @section('tittle', 'Home')
 
 @section('style')
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
   <style>
     .card {
       cursor: pointer;
@@ -135,7 +136,7 @@
 @section('content')
   <div class="col-lg-9 justify-content-center">
     <form action="{{ route('seller.produk.store') }}" id="formDropzone" method="post" enctype="multipart/form-data">
-    @csrf
+      @csrf
       <div class="review-form">
         <div class="account-inner-form">
           <div class="row">
@@ -148,16 +149,14 @@
             <div class="col-md-6 mb-3">
               <div class="review-form-name">
                 <label for="brand" class="form-label">Brand</label>
-                <select class="form-select @error('brand_id') is-invalid @enderror" id="brand"
-                name="brand_id">
-                <option value="" selected>Select Brand</option>
-                @foreach ($brands as $brand)
-                    <option value="{{ $brand->id }}"
-                        {{ old('brand_id') == $brand->id ? 'selected' : '' }}>
-                        {{ $brand->title }}
+                <select class="form-select @error('brand_id') is-invalid @enderror" id="brand" name="brand_id">
+                  <option value="" selected>Select Brand</option>
+                  @foreach ($brands as $brand)
+                    <option value="{{ $brand->id }}" {{ old('brand_id') == $brand->id ? 'selected' : '' }}>
+                      {{ $brand->title }}
                     </option>
-                @endforeach
-            </select>
+                  @endforeach
+                </select>
               </div>
             </div>
           </div>
@@ -165,23 +164,24 @@
         <div class="account-inner-form">
           <div class="row">
             <div class="col-md-6 mb-3">
-                  <div class="review-form-name">
-                    <label for="Size" class="form-label">Size</label>
-                    <input type="text" id="Size" name="size" class="form-control" placeholder="Masukkan Ukuran">
-                  </div>
+              <div class="review-form-name">
+                <label for="Size" class="form-label">Size</label>
+                <input type="text" id="Size" name="size" class="form-control" placeholder="Masukkan Ukuran">
+              </div>
 
             </div>
             <div class="col-md-6 mb-3">
               <div class="review-form-name">
                 <label for="kategori" class="form-label">Kategori</label>
 
-                <select class="form-select @error('category_ids') is-invalid @enderror" id="kategori" name="category_ids[]" multiple>
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}"
-                            {{ in_array($category->id, old('category_ids', [])) ? 'selected' : '' }}>
-                            {{ $category->title }}
-                        </option>
-                    @endforeach
+                <select class="form-select @error('category_ids') is-invalid @enderror" id="kategori"
+                  name="category_ids[]" multiple>
+                  @foreach ($categories as $category)
+                    <option value="{{ $category->id }}"
+                      {{ in_array($category->id, old('category_ids', [])) ? 'selected' : '' }}>
+                      {{ $category->title }}
+                    </option>
+                  @endforeach
                 </select>
               </div>
             </div>
@@ -192,7 +192,8 @@
             <div class="col-md-6 mb-3">
               <div class="review-form-name">
                 <label for="gambar" class="form-label">Gambar Produk</label>
-                <input type="file" name="cover_image" class="form-control @error('cover_image') is-invalid @enderror" id="gambar">
+                <input type="file" name="cover_image" class="form-control @error('cover_image') is-invalid @enderror"
+                  id="gambar">
               </div>
               <div class="review-form-name mt-4">
                 <label for="deskripsi" class="form-label">Deskripsi</label>
@@ -200,27 +201,28 @@
               </div>
             </div>
             <div class="col-md-6 mb-3">
-                <div class="form-group">
-                    <label class="form-label text-muted opacity-75 fw-medium" for="formImage">Galleri Produk</label>
-                    <div class="dropzone-drag-area form-control" id="previews">
-                        <div class="dz-message text-muted opacity-50" data-dz-message>
-                            <span>Drag file ke sini untuk diunggah (max 4 Foto)</span>
-                        </div>
-                    </div>
-                    <div class="d-none" id="dzPreviewContainer">
-                        <div class="dz-preview dz-file-preview">
-                            <div class="dz-photo">
-                                <img class="dz-thumbnail" data-dz-thumbnail>
-                            </div>
-                            <button class="dz-delete border-0 p-0" type="button" data-dz-remove>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="times">
-                                    <path fill="#FFFFFF" d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
+              <div class="form-group">
+                <label class="form-label text-muted opacity-75 fw-medium" for="formImage">Galleri Produk</label>
+                <div class="dropzone-drag-area form-control" id="previews">
+                  <div class="dz-message text-muted opacity-50" data-dz-message>
+                    <span>Drag file ke sini untuk diunggah (max 4 Foto)</span>
+                  </div>
                 </div>
+                <div class="d-none" id="dzPreviewContainer">
+                  <div class="dz-preview dz-file-preview">
+                    <div class="dz-photo">
+                      <img class="dz-thumbnail" data-dz-thumbnail>
+                    </div>
+                    <button class="dz-delete border-0 p-0" type="button" data-dz-remove>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="times">
+                        <path fill="#FFFFFF"
+                          d="M13.41,12l4.3-4.29a1,1,0,1,0-1.42-1.42L12,10.59,7.71,6.29A1,1,0,0,0,6.29,7.71L10.59,12l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l4.29,4.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z">
+                        </path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -233,22 +235,23 @@
                     <div class="contact-wrapper">
                       <div class="row gy-5">
                         <div class="col-sm-6">
-                            <div class="card phone" onclick="selectCard('phone')" style="height: 80px">
-                              <input type="radio" id="phone" name="open_bid" class="radio-input" style="display: none" value="0">
-                              <div class="wrapper-content">
-                                <p>Harga tetap</p>
-                              </div>
+                          <div class="card phone" onclick="selectCard('phone')" style="height: 80px">
+                            <input type="radio" id="phone" name="open_bid" class="radio-input"
+                              style="display: none" value="0">
+                            <div class="wrapper-content">
+                              <p>Harga tetap</p>
                             </div>
                           </div>
-                          <div class="col-sm-6">
-                            <div class="card email" onclick="selectCard('email')" style="height: 80px">
-                              <input type="radio" id="email" name="open_bid" class="radio-input" style="display: none" value="1">
-                              <div class="wrapper-content">
-                                <p>Lelang</p>
-                              </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="card email" onclick="selectCard('email')" style="height: 80px">
+                            <input type="radio" id="email" name="open_bid" class="radio-input"
+                              style="display: none" value="1">
+                            <div class="wrapper-content">
+                              <p>Lelang</p>
                             </div>
                           </div>
-
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -258,7 +261,8 @@
                 <div class="input-section">
                   <div class="form-group">
                     <label for="inputA">Harga</label>
-                    <input type="number" id="inputA" class="form-control" name="price" placeholder="Masukkan harga">
+                    <input type="number" id="inputA" class="form-control" name="price"
+                      placeholder="Masukkan harga">
                   </div>
                 </div>
               </div>
@@ -268,7 +272,8 @@
                     <div class="input-section">
                       <div class="form-group">
                         <label for="inputB">Harga mulai dari</label>
-                        <input type="number" id="inputB" name="bid_price_start" class="form-control" placeholder="Harga awal">
+                        <input type="number" id="inputB" name="bid_price_start" class="form-control"
+                          placeholder="Harga awal">
                       </div>
                     </div>
                   </div>
@@ -276,7 +281,8 @@
                     <div class="input-section">
                       <div class="form-group">
                         <label for="inputC">Sampai dari</label>
-                        <input type="number" id="inputC" name="bid_price_end" class="form-control" placeholder="harga akhir">
+                        <input type="number" id="inputC" name="bid_price_end" class="form-control"
+                          placeholder="harga akhir">
                       </div>
                     </div>
                   </div>
@@ -284,13 +290,14 @@
               </div>
             </div>
           </div>
-          <div class="submit-btn">
-            <a href="#" class="shop-btn cancel-btn">Batal</a>
-            <button type="submit" id="formSubmit" class="shop-btn update-btn">Tambah Produk</button>
-          </div>
+        </div>
+        <div class="submit-btn">
+          <button type="button" class="shop-btn cancel-btn">Batal</button>
+          <button type="submit" id="formSubmit" class="shop-btn update-btn">Tambah Produk</button>
         </div>
       </div>
-    </form>
+  </div>
+  </form>
 
   </div>
 @endsection
@@ -298,6 +305,7 @@
 @section('script')
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
   <script>
     // Dropzone.autoDiscover = false;
 
@@ -374,9 +382,15 @@
     //   }
     // });
     Dropzone.autoDiscover = false;
+    $(document).ready(function() {
+      const formDropzone = $("#formDropzone");
+      const kategori = $('#kategori').select2({
+        theme: 'bootstrap-5'
+      });
+      kategori.addClass("form-select");
 
-$(document).ready(function () {
-    var myDropzone = new Dropzone("#previews", {
+      formDropzone.dropzone({
+        paramName: "cover_image",
         url: "{{ route('seller.produk.store') }}",
         previewTemplate: $('#dzPreviewContainer').html(),
         addRemoveLinks: true,
@@ -390,87 +404,55 @@ $(document).ready(function () {
         previewsContainer: "#previews",
         timeout: 0,
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        init: function () {
-            var submitButton = document.querySelector("#formSubmit");
-            var myDropzone = this;
+        init: function() {
+          const myDropzone = this;
 
-            submitButton.addEventListener("click", function (e) {
-                e.preventDefault();
-                e.stopPropagation();
+          $("#formSubmit").on("click", function(e) {
+            e.preventDefault();
+            e.stopPropagation();
 
-                if (myDropzone.files.length > 0) {
-                    myDropzone.processQueue();
-                } else {
-                    alert("Please add at least one image.");
-                }
+            if (myDropzone.files.length > 0) {
+              myDropzone.processQueue();
+            } else {
+              alert("Please add at least one image.");
+            }
+          });
+
+          this.on("sendingmultiple", function(data, xhr, formData) {
+            const formDataArray = formDropzone.serializeArray();
+            $.each(formDataArray, function(key, el) {
+              formData.append(el.name, el.value);
             });
+          });
 
-            this.on("sendingmultiple", function (data, xhr, formData) {
-                var data = $('#formDropzone').serializeArray();
-                $.each(data, function (key, el) {
-                    formData.append(el.name, el.value);
-                });
-            });
+          this.on("successmultiple", function(files, response) {
+            window.location.href = response.redirect_url;
+          });
 
-            this.on("successmultiple", function (files, response) {
-                window.location.href = response.redirect_url;
-            });
-
-            this.on("errormultiple", function (files, response) {
-                alert("An error occurred while uploading the images.");
-            });
+          this.on("errormultiple", function(files, response) {
+            alert(JSON.parse(response));
+          });
         },
-    });
-});
+      });
 
+      function selectCard(id) {
+        $('.card').removeClass('selected').find('input[type="radio"]').prop('checked', false);
 
+        const selectedCard = $('.' + id);
+        selectedCard.addClass('selected').find('input[type="radio"]').prop('checked', true);
 
+        $('#input-a, #input-b, #input-c').hide();
 
-const form = $("#formDropzone");
+        if (id === 'phone') {
+          $('#input-a').show();
+        } else if (id === 'email') {
+          $('#input-b, #input-c').show();
+        }
+      }
 
-function selectCard(id) {
-  // Deselect all cards
-  var cards = document.querySelectorAll('.card');
-  cards.forEach(function(card) {
-    card.classList.remove('selected');
-    card.querySelector('input[type="radio"]').checked = false;
-  });
-
-  // Select the clicked card
-  var selectedCard = document.querySelector('.' + id);
-  selectedCard.classList.add('selected');
-  selectedCard.querySelector('input[type="radio"]').checked = true;
-
-  // Hide all input sections
-  document.getElementById('input-a').style.display = 'none';
-  document.getElementById('input-b').style.display = 'none';
-  document.getElementById('input-c').style.display = 'none';
-
-  // Show the input section(s) based on the selected card
-  if (id === 'phone') {
-    document.getElementById('input-a').style.display = 'block';
-  } else if (id === 'email') {
-    document.getElementById('input-b').style.display = 'block';
-    document.getElementById('input-c').style.display = 'block';
-  }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  selectCard('phone');
-});
-
-
-    // Automatically select the first card on page load
-    document.addEventListener('DOMContentLoaded', function() {
       selectCard('phone');
     });
-
-
-
-
-
-
   </script>
 @endsection

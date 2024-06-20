@@ -12,13 +12,11 @@ use App\Models\ProductGallery;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class ProductController extends Controller
-{
+class ProductController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
+    public function index() {
         $products = Product::all();
         return view('seller.produk', compact('products'));
     }
@@ -26,20 +24,18 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
+    public function create() {
         $products = Product::all();
         $brands = Brand::all();
         $categories = ProductCategory::all();
-        return view('seller.tambahproduk', compact('products','brands','categories'));
+        return view('seller.tambahproduk', compact('products', 'brands', 'categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequest $request)
-    {
-
+    public function store(StoreProductRequest $request) {
+        dd($request->all());
         try {
             $description = $request->description;
 
@@ -70,38 +66,38 @@ class ProductController extends Controller
 
 
             if ($request->open_bid == 0) {
-                   $product = Product::create([
-                        'description' => $request->description,
-                        'cover_image' => $path_gambar,
-                        'title' => $request->title,
-                        'user_id' => $user->id,
-                        'brand_id' => $request->brand_id,
-                        'size' => $request->size,
-                        'status' => 'pending',
-                        'open_bid' => 0,
-                        'price' => $request->price,
-                        'bid_price_start' => $request->bid_price_start,
-                        'bid_price_end' => $request->bid_price_end,
-                    ]);
-                    // dd($produk);
-            } elseif($request->open_bid == 1){
+                $product = Product::create([
+                    'description' => $request->description,
+                    'cover_image' => $path_gambar,
+                    'title' => $request->title,
+                    'user_id' => $user->id,
+                    'brand_id' => $request->brand_id,
+                    'size' => $request->size,
+                    'status' => 'pending',
+                    'open_bid' => 0,
+                    'price' => $request->price,
+                    'bid_price_start' => $request->bid_price_start,
+                    'bid_price_end' => $request->bid_price_end,
+                ]);
+                // dd($produk);
+            } elseif ($request->open_bid == 1) {
 
-                   $product =  ProductAuction::create([
-                        'description' => $request->description,
-                        'cover_image' => $path_gambar,
-                        'title' => $request->title,
-                        'user_id' => $user->id,
-                        'brand_id' => $request->brand_id,
-                        'size' => $request->size,
-                        'status' => 'pending',
-                        'open_bid' => 1,
-                        'bid_price_start' => $request->bid_price_start,
-                        'bid_price_end' => $request->bid_price_end,
-                    ]);
-              }
+                $product = ProductAuction::create([
+                    'description' => $request->description,
+                    'cover_image' => $path_gambar,
+                    'title' => $request->title,
+                    'user_id' => $user->id,
+                    'brand_id' => $request->brand_id,
+                    'size' => $request->size,
+                    'status' => 'pending',
+                    'open_bid' => 1,
+                    'bid_price_start' => $request->bid_price_start,
+                    'bid_price_end' => $request->bid_price_end,
+                ]);
+            }
 
 
-              $product->categories()->attach($request->category_ids);
+            $product->categories()->attach($request->category_ids);
 
 
             if ($request->hasFile('file')) {
@@ -137,32 +133,28 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
-    {
+    public function show(Product $product) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
-    {
+    public function edit(Product $product) {
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
-    {
+    public function update(UpdateProductRequest $request, Product $product) {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
-    {
+    public function destroy(Product $product) {
         //
     }
 }
