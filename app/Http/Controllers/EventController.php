@@ -16,12 +16,12 @@ class EventController extends Controller
      */
     public function index(Request $request)
     {
-        $events = Event::when($request->has('search'), function ($query) use ($request) {
+        $event = Event::when($request->has('search'), function ($query) use ($request) {
             $searchTerm = $request->input('search');
             return $query->where('title', 'LIKE', "%$searchTerm%");
         })->paginate(5);
 
-        return view('admin.event.index', compact('events'));
+        return view('admin.event', compact('event'));
     }
 
     /**
