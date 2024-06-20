@@ -22,6 +22,7 @@ class UpdateAboutRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'title'=> 'required',
             'image_update' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'description_update' => 'required'
         ];
@@ -29,6 +30,7 @@ class UpdateAboutRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'title.required' => 'judul wajib diisi',
             'description_update.required' => 'Description Wajib Diisi',
             'images_update.image' => 'Masukan harus berupa gambar',
             'images_update.mimes' => 'gambar harus berupa file jpeg,png,jpg',
