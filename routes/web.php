@@ -17,7 +17,8 @@ use App\Http\Controllers\{
     ProductAuctionController,
     ProductController,
     RedirectUserController,
-    SocialShareButtonsController
+    SocialShareButtonsController,
+    HistoryController
 };
 use App\Models\User;
 use App\Notifications\SellerWelcomeNotification;
@@ -90,13 +91,12 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::view('/wishlist', 'user.wishlist')->name('wishlist');
     Route::view('/shop', 'user.shop')->name('shop');
     Route::view('/store', 'user.store')->name('store');
-    Route::view('/history', 'user.history')->name('history');
-    Route::view('/update-password', 'user.updatepassword')->name('updatePassword');
-    Route::get('/detailproduct', [SocialShareButtonsController::class,'show']);
+    Route::get('/detailproduct', [SocialShareButtonsController::class, 'show']);
 
     Route::get('/open-shop', [OpenShopController::class, 'index'])->name('register-seller');
     Route::post('/open-shop', [OpenShopController::class, 'register'])->name('register-seller.submit');
     Route::get('/verify-store/{token:verification_code}', [OpenShopController::class, 'verifyStore'])->name('verify.store');
+    Route::resource('history', HistoryController::class);
     Route::resource('update-password', UserUpdatePasswordController::class);
 });
 
