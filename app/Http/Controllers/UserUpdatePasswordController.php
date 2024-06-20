@@ -6,6 +6,7 @@ use App\Http\Requests\UserUpdatePasswordRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Flasher\Toastr\Prime\ToastrInterface;
 
 class UserUpdatePasswordController extends Controller {
     /**

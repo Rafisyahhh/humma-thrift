@@ -333,9 +333,9 @@ button.list-group-item-primary.active {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #685dd8;
-  border-color: #685dd8;
+    background: linear-gradient(72.47deg, #776bf0 22.16%, rgba(119, 107, 240, 0.7) 76.47%);
+    box-shadow: 0px 2px 6px 0px rgba(119, 107, 240, 0.48);
+    color: #fff !important;
 }
 .btn-primary:hover {
   color: #fff !important;

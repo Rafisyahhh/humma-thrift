@@ -15,7 +15,7 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             @if ($aboutUs->isEmpty())
             <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
-            style="background-color:	rgb(167, 146, 119)  ; color:#fff;">
+            style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">
             Tambahkan About Us
         </a>
         @endif
@@ -102,7 +102,7 @@
                                 <div class="pt-2 d-flex gap-3 justify-content-end">
                                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
                                     <button type="submit" class="btn btn"
-                                        style="background-color: rgb(167, 146, 119); color: #fff;">Tambahkan</button>
+                                        style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color: #fff;">Tambahkan</button>
                                 </div>
                             </form>
                         </div>
@@ -129,14 +129,14 @@
                                         <label for="title" class="form-label">Title</label>
                                         <input type="text" class="form-control @error('title') is-invalid @enderror"
                                             id="title" name="title">
-    
+
                                         @error('title')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
-    
+
                                     <div class="mb-3">
                                         <label for="image" class="form-label">Gambar</label>
                                         <input type="file"
@@ -173,7 +173,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
                                 <button type="submit" class="btn btn"
-                                    style="background-color: rgb(167, 146, 119); color:#fff;">Simpan</button>
+                                    style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">Simpan</button>
                             </div>
                             </form>
                         </div>

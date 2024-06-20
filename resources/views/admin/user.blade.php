@@ -75,7 +75,7 @@
                                         class="rounded-3 rounded-circle" height="48px" />
 
                                     <div class="d-flex flex-column gap-1">
-                                        <strong>{{ $user->fullname }}</strong>
+                                        <strong>{{ $user->name }}</strong>
                                         <span class="text-muted">{{ $user->email }}</span>
                                     </div>
                                 </div>

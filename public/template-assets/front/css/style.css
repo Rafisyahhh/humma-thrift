@@ -134,7 +134,6 @@ button {
     font-size: 1.4rem;
     font-weight: 500;
     position: relative;
-    color: #fff;
     font-family: inter, sans-serif;
     transition: all 0.3s;
     overflow: hidden;
@@ -541,7 +540,7 @@ button {
 }
 .header-top-section {
     border-bottom: 1px solid #1c3879;
-    background: rgba(174, 28, 154, 0.08);
+    background: rgba(126, 163, 219, 0.40);
 }
 .header-top {
     display: flex;
@@ -673,7 +672,7 @@ button {
     .wrapper-img {
     width: 6.5rem;
     height: auto;
-    background: rgba(174, 28, 154, 0.08);
+    background: rgba(126, 163, 219, 0.40);
     border-radius: 0.5rem;
 }
 .header-center
@@ -695,7 +694,7 @@ button {
     .cart-wrapper-item::-webkit-scrollbar {
     width: 2px;
     height: 15rem;
-    background: rgba(174, 28, 154, 0.08);
+    background: rgba(126, 163, 219, 0.40);
 }
 .header-center
     .header-cart-items
@@ -934,7 +933,7 @@ button {
     justify-content: space-between;
     gap: 0;
     background: #fff;
-    border: 1px solid rgba(174, 28, 154, 0.08);
+    border: 1px solid rgba(126, 163, 219, 0.40);
     margin-bottom: 2rem;
     padding: 1rem;
     border-radius: 0.5rem;
@@ -1067,7 +1066,7 @@ button {
 .header-nav .category-menu-section .category-dropdown .category-list-item {
     background: #fff;
     padding: 0.8rem 2rem;
-    border-top: 1px solid rgba(174, 28, 154, 0.08);
+    border-top: 1px solid rgba(126, 163, 219, 0.40);
     transition: all 0.5s;
     width: 100%;
 }
@@ -1343,7 +1342,6 @@ button {
     font-size: 1.4rem;
     font-weight: 500;
     position: relative;
-    color: #fff;
     font-family: inter, sans-serif;
     transition: all 0.3s;
     overflow: hidden;
@@ -2351,7 +2349,7 @@ button {
 .top-selling-section .product-wrapper .product-img {
     height: 17.4rem;
     width: 16.7rem;
-    background: rgba(174, 28, 154, 0.08);
+    background: rgba(126, 163, 219, 0.40);
 }
 .top-selling-section .product-wrapper .product-img img {
     object-fit: cover;
@@ -3579,7 +3577,7 @@ hr {
     border-radius: 0.6rem;
 }
 .blog-post-section .blog-post .search-btn {
-    background: rgba(174, 28, 154, 0.08);
+    background: rgba(126, 163, 219, 0.40);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -3693,7 +3691,7 @@ hr {
 .cart-section .table-row .table-wrapper .wrapper-img {
     width: 8rem;
     height: 8rem;
-    border: 1px solid rgba(174, 28, 154, 0.08);
+    border: 1px solid rgba(126, 163, 219, 0.40);
     border-radius: 0.5rem;
     background: #fff;
 }
@@ -3718,7 +3716,7 @@ hr {
 @media (max-width: 1023px) {
     .cart-section {
         overflow-x: scroll;
-        border: 1px solid rgba(174, 28, 154, 0.08);
+        border: 1px solid rgba(126, 163, 219, 0.40);
     }
 }
 table {
@@ -3753,7 +3751,7 @@ table .ticket-row:hover {
 .table-row .table-wrapper .wrapper-img {
     width: 8rem;
     height: 8rem;
-    border: 1px solid rgba(174, 28, 154, 0.08);
+    border: 1px solid rgba(126, 163, 219, 0.40);
     border-radius: 0.5rem;
     background: #fff;
 }
@@ -3818,7 +3816,7 @@ table .ticket-row:hover {
     width: 12rem;
     height: 4rem;
     padding: 0 4rem;
-    border: 1px solid rgba(174, 28, 154, 0.08);
+    border: 1px solid rgba(126, 163, 219, 0.40);
     border-radius: 0.5rem;
 }
 .quantity span {
@@ -3907,7 +3905,7 @@ table .ticket-row:hover {
     background: 0 0;
     padding: 2rem;
     /* margin-top: 2.5rem; */
-    border: 1px solid rgba(174, 28, 154, 0.08);
+    border: 1px solid rgba(126, 163, 219, 0.40);
     border-radius: 0.5rem;
 }
 .billing-section .review-form {
@@ -3983,7 +3981,7 @@ table .ticket-row:hover {
     accent-color: #1c3879;
 }
 .order-summery .payment-type .checkbox-item:hover {
-    background-color: rgba(174, 28, 154, 0.08);
+    background-color: rgba(126, 163, 219, 0.40);
 }
 .order-summery .payment-type .inner-text {
     display: block;
@@ -4485,7 +4483,7 @@ table .ticket-row:hover {
     margin-top: 1.5rem;
 }
 .product-compair tbody {
-    border: 1px solid rgba(174, 28, 154, 0.08);
+    border: 1px solid rgba(126, 163, 219, 0.40);
 }
 .product-compair .cart-top {
     background-color: #fff;
@@ -4501,7 +4499,7 @@ table .ticket-row:hover {
     vertical-align: top;
 }
 .product-compair .cart-center {
-    border: 1px solid rgba(174, 28, 154, 0.08);
+    border: 1px solid rgba(126, 163, 219, 0.40);
 }
 .product-compair .cart-center .wrapper-data {
     display: flex;
@@ -4516,7 +4514,7 @@ table .ticket-row:hover {
     align-items: center;
     justify-content: space-between;
     gap: 0;
-    border: 1px solid rgba(174, 28, 154, 0.08);
+    border: 1px solid rgba(126, 163, 219, 0.40);
     border-radius: 0.5rem;
     padding: 1rem;
     background-color: #fff;
@@ -5106,7 +5104,7 @@ table .ticket-row:hover {
         .nav-content
         .address-section
         .seller-info {
-        background-color: rgba(174, 28, 154, 0.08);
+        background-color: rgba(126, 163, 219, 0.40);
         padding: 2rem;
     }
     .user-profile-section
@@ -5445,7 +5443,7 @@ table .ticket-row:hover {
     margin-top: 0;
 }
 .user-dashboard .nav-content .address-section .seller-info {
-    background-color: rgba(174, 28, 154, 0.08);
+    background-color: rgba(126, 163, 219, 0.40);
     padding: 3rem;
 }
 .user-dashboard .nav-content .address-section .seller-info .info-list {
@@ -5607,5 +5605,24 @@ table .ticket-row:hover {
 .share-icons .share-icon:hover {
     background-color: #1C3879;
     color: #ffff;
+}
+
+.produk span,
+.share-icons .share-icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #c9c9c9;
+    color: #000000;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.produk span:hover,
+.share-icons .share-icon:hover {
+    background-color: #7ea3db;
+    color: #000000;
 }
 

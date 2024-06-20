@@ -7,6 +7,7 @@ use App\Enums\UserLevelEnum;
 use App\Traits\VerifyEmailTrait;
 use Creativeorange\Gravatar\Facades\Gravatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -23,7 +24,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $password
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string|null $remember_token
- * @property string $fullname
+ * @property string $name
  * @property string|null $phone
  * @property string|null $avatar
  * @property string|null $pbirth
@@ -49,7 +50,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereDbirth($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereFullname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherename($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereNic($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereNicPhoto($value)
@@ -74,7 +75,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'username',
-        'fullname',
+        'name',
         'email',
         'password',
     ];
@@ -138,5 +139,15 @@ class User extends Authenticatable implements MustVerifyEmail
             'label' => $label[$this->getAttribute('banned')],
             'color' => $color[$this->getAttribute('banned')],
         ];
+    }
+
+    /**
+     * Getting user store
+     *
+     * @return HasOne
+     */
+    public function store()
+    {
+        return $this->hasOne(UserStore::class);
     }
 }

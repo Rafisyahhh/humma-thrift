@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('store_id');
-            $table->foreignId('brand_id');
+            $table->foreignId('user_id')->constrained();
+            // $table->foreignId('store_id')->constrained();
+            $table->foreignId('brand_id')->constrained();
             $table->string('title')->unique();
             $table->text('description');
-            $table->integer('stock');
             $table->string('cover_image');
             $table->string('size');
             $table->enum('status', ['pending', 'approved', 'rejected','sold'])->default('pending');
