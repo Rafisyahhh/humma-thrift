@@ -17,15 +17,16 @@
                   </div>
                   <div class="wrapper-content">
                     <h5 class="heading">{{ $item['order']['product']['title'] }}</h5>
-                    <p class="paragraph">{{ $item['price_format'] }}</p>
+                    <p class="paragraph">Rp{{ number_format($item['order']['product']['price'], 0, '', '.') }}</p>
                   </div>
                 </div>
               </td>
               <td class="table-wrapper">
                 <div class="wrapper-content me-5" style="float: right; text-align: end;">
-                  <h5 class="heading">{{ $item['date_diff_format'] }}</h5>
+                  <h5 class="heading">{{ App\Http\Controllers\HistoryController::formatTanggal($item['created_at']) }}
+                  </h5>
                   <p class="paragraph opacity-75 pt-1">
-                    {{ $item['date_format'] }}
+                    {{ Carbon\Carbon::parse($item['created_at'])->format('d F Y') }}
                   </p>
                 </div>
               </td>
