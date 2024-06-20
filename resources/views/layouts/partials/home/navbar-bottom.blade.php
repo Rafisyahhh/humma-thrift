@@ -350,7 +350,6 @@
                             <i class="fas fa-store"></i>
                         </span>
                     </a>
-
                     @else
                         <a href="{{ request()->routeIs('store.profile') ? url('/') : url('@' . $store->username) }}"
                             class="shop-btn">
@@ -361,13 +360,6 @@
                                 class="list-text shop-text">{{ request()->routeIs('store.profile') ? 'Ke Beranda' : 'Ke Tokomu' }}</span>
                         </a>
                     @endif
-                @else
-                    <a href="{{ url('login') }}" class="shop-btn">
-                        <span class="list-text shop-text">Jualan Yuk</span>
-                        <span class="icon">
-                            <i class="fas fa-store"></i>
-                        </span>
-                    </a>
                 @endif
             </div>
         </div>
