@@ -41,17 +41,19 @@
                 <h5>Semua Kategori</h5>
                 <a href="/user/shop" class="view">Lihat Semua</a>
             </div>
+            @foreach ( $categories as $kategori )
             <div class="category-section">
                 <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
                     <div class="wrapper-img">
-                        <img src="{{ asset('template-assets/front/assets/images/homepage-one/category-img/dresses.webp') }}"
+                        <img src="{{ asset("storage/{$kategori->icon}") }}"
                             alt="dress">
                     </div>
                     <div class="wrapper-info">
-                        <a href="product-sidebar.html" class="wrapper-details">Gaun</a>
+                        <a href="product-sidebar.html" class="wrapper-details">{{$kategori->title}}</a>
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
     </section>
 
@@ -62,16 +64,19 @@
                 <h5>Brand Produk</h5>
                 <a href="/user/shop" class="view">Lihat Semua</a>
             </div>
+            @foreach ($brands as $brand)
             <div class="brand-section">
                 <div class="product">
                     <div class="wrapper-img">
                         <a href="product-sidebar.html">
-                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/brand-img-1.webp') }}"
+                            <img src="{{ asset("storage/{$brand->logo}") }}"
                                 alt="img">
                         </a>
                     </div>
                 </div>
             </div>
+            @endforeach
+
         </div>
     </section>
 
