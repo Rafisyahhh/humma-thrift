@@ -27,6 +27,7 @@ class StoreBrandRequest extends FormRequest
         ];
     }
 
+
     public function messages(): array
     {
         return [
@@ -35,7 +36,7 @@ class StoreBrandRequest extends FormRequest
             'logo.required' => 'Logo Wajib Diisi',
             'logo.image' => 'Masukan harus berupa Logo',
             'logo.mimes' => 'Logo harus berupa file jpeg,png,jpg',
-            'logo.max' => 'Ukuran Logo harus kurang 2MB',
+
         ];
     }
 }

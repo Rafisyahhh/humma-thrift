@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-medium d-block">{{ auth()->user()->fullname }}</span>
+                                    <span class="fw-medium d-block">{{ auth()->user()->name }}</span>
                                     <small
                                         class="text-muted">{{ auth()->user()->getUserRoleInstance()->label() }}</small>
                                 </div>

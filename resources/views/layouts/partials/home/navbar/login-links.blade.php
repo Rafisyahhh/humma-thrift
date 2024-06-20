@@ -46,11 +46,11 @@
         <div class="cart-submenu">
             <div class="cart-wrapper-section">
                 <div class="d-flex gap-4 mb-4">
-                    <img src="{{ auth()->user()->getGravatarLink() }}" alt="{{ auth()->user()->fullname }}"
+                    <img src="{{ auth()->user()->getGravatarLink() }}" alt="{{ auth()->user()->name }}"
                         height="48px" class="rounded-circle" />
 
                     <div class="d-flex flex-column gap-1">
-                        <p class="fw-bold mb-0">{{ auth()->user()->fullname }}</p>
+                        <p class="fw-bold mb-0">{{ auth()->user()->name }}</p>
                         <p class="mb-0 opacity-75">{{ auth()->user()->email }}</p>
                     </div>
                 </div>

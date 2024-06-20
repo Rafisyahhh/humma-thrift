@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\NewUserStoreCreated;
 use App\Http\Requests\OpenStoreRequest;
+use App\Models\User;
 use App\Models\UserStore;
+use App\Notifications\NewStoreNotifyToAdmin;
+use App\Notifications\NotificationIfStoreIsVerified;
+use App\Notifications\SellerWelcomeNotification;
 use Carbon\Carbon;
-use Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Notification;
 
 class OpenShopController extends Controller
 {
@@ -37,11 +40,13 @@ class OpenShopController extends Controller
         $data->put('user_id', Auth::id());
         $data->put('active', false);
         $data->put('verification_code', Str::random(60));
+        $data->put('verified_at', null);
+        $data->put('active', false);
 
         $userStore = UserStore::create($data->toArray());
 
-        // Melempar event NewUserStoreCreated untuk mengirim notifikasi
-        Event::dispatch(new NewUserStoreCreated($userStore));
+        Notification::send(auth()->user(), new SellerWelcomeNotification($userStore));
+        Notification::send(User::role('admin')->get(), new NewStoreNotifyToAdmin($userStore));
 
         // Redirect atau tampilkan pesan sukses
         return redirect()->to('/')->with('success', 'Pendaftaran toko anda berhasil, silahkan buka email anda dan konfirmasikan tautan yang kami kirimkan dalam waktu 1 jam kedepan.');
@@ -56,14 +61,20 @@ class OpenShopController extends Controller
     public function verifyStore(UserStore $token)
     {
         // Memeriksa apakah token dan waktu kadaluarsa token valid
-        if ($token->updated_at->diffInHours(Carbon::now()) >= 3) {
+        if ($token->updated_at->diffInHours(Carbon::now()) >= 3 && auth()->id() !== $token->user_id) {
             abort(403, 'Token sudah kadaluarsa.');
+        }
+
+        if($token->verified_at) {
+            abort(403, 'Toko ini sudah terverifikasi.');
         }
 
         // Lakukan logika verifikasi di sini, misalnya mengubah status toko
         $token->verified_at = now();
-        $token->active = true;
         $token->save();
+
+        // Kirim notifikasi ke user yang bersangkutan
+        Notification::send($token->user, new NotificationIfStoreIsVerified($token));
 
         // Redirect atau tampilkan pesan sukses
         return redirect()->to('/')->with('success', 'Verifikasi toko berhasil.');

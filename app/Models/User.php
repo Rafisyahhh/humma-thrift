@@ -24,7 +24,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $password
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string|null $remember_token
- * @property string $fullname
+ * @property string $name
  * @property string|null $phone
  * @property string|null $avatar
  * @property string|null $pbirth
@@ -50,7 +50,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereDbirth($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereFullname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherename($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereNic($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereNicPhoto($value)
@@ -66,7 +66,7 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, VerifyEmailTrait, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, VerifyEmailTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -75,7 +75,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'username',
-        'fullname',
+        'name',
         'email',
         'password',
     ];

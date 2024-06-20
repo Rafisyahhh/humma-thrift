@@ -13,12 +13,12 @@
 
                         <div class=" account-inner-form">
                             <div class="review-form-name">
-                                <label for="fullname" class="form-label">Nama Lengkap</label>
-                                <input id="fullname" type="text"
-                                    class="form-control @error('fullname') is-invalid @enderror" name="fullname"
-                                    value="{{ old('fullname') }}" placeholder="Mis: Akbar Rafsyah" required
-                                    autocomplete="fullname" autofocus />
-                                @error('fullname')
+                                <label for="name" class="form-label">Nama Lengkap</label>
+                                <input id="name" type="text"
+                                    class="form-control @error('name') is-invalid @enderror" name="name"
+                                    value="{{ old('name') }}" placeholder="Mis: Akbar Rafsyah" required
+                                    autocomplete="name" autofocus />
+                                @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
