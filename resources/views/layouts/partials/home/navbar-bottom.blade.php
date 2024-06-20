@@ -363,9 +363,9 @@
                     @endif
                 @else
                     <a href="{{ url('login') }}" class="shop-btn">
-                        <span class="list-text shop-text">Masuk</span>
+                        <span class="list-text shop-text">Jualan Yuk</span>
                         <span class="icon">
-                            <i class="fas fa-user"></i>
+                            <i class="fas fa-store"></i>
                         </span>
                     </a>
                 @endif

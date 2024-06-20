@@ -58,6 +58,7 @@
 
     <link rel="stylesheet" href="{{ asset('template-assets/front/css/style.css') }}">
 
+
     <style>
       .header-right-dropdown>div {
         right: 0 !important;

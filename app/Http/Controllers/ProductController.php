@@ -35,7 +35,7 @@ class ProductController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(StoreProductRequest $request) {
-        dd($request->all());
+        // dd($request->all());
         try {
             $description = $request->description;
 
@@ -121,8 +121,8 @@ class ProductController extends Controller {
             //     'open_bid' => false,
             //     'price' => $request->price,
             //   ]);
-            // return redirect()->route('seller.produk.index')->with('success', 'Produk berhasil ditambahkan');
-            return response()->json(['redirect_url' => route('seller.produk.index')]);
+            return redirect()->route('seller.produk.index')->with('success', 'Produk berhasil ditambahkan');
+            // return response()->json(['redirect_url' => route('seller.produk.index')]);
 
         } catch (\Throwable $th) {
             dd($th);

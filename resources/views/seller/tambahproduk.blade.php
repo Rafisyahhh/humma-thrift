@@ -1,10 +1,14 @@
 @extends('layouts.panel')
 @section('tittle', 'Home')
-
 @section('style')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet" />
+<link href="summernote-bs5.css" rel="stylesheet">
+<script src="summernote-bs5.js"></script>
+
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
+  <link rel="stylesheet" href="{{ asset('template-assets/front/css/image-uploader.css') }}">
   <style>
     .card {
       cursor: pointer;
@@ -129,6 +133,8 @@
       border: 0;
       box-shadow: none;
     }
+
+
   </style>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" rel="stylesheet">
 @endsection
@@ -185,6 +191,17 @@
                 </select>
               </div>
             </div>
+            {{-- <div class="review-form-name">
+                <label for="kategori" class="form-label">Kategori</label>
+                <select class="js-example-basic-multiple" id="kategori" name="category_ids[]" multiple="multiple">
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}"
+                            {{ in_array($category->id, old('category_ids', [])) ? 'selected' : '' }}>
+                            {{ $category->title }}
+                        </option>
+                    @endforeach
+                </select>
+            </div> --}}
           </div>
         </div>
         <div class="account-inner-form">
@@ -197,7 +214,11 @@
               </div>
               <div class="review-form-name mt-4">
                 <label for="deskripsi" class="form-label">Deskripsi</label>
-                <textarea id="deskripsi" name="description" class="form-control" placeholder="Masukkan Deskripsi" rows="7"></textarea>
+                <textarea
+                class="custom-summernote @error('description') is-invalid @enderror"
+                id="custom-summernote" name="description" aria-label="With textarea"
+               >{{ old('description') }}</textarea>
+
               </div>
             </div>
             <div class="col-md-6 mb-3">
@@ -293,94 +314,61 @@
         </div>
         <div class="submit-btn">
           <button type="button" class="shop-btn cancel-btn">Batal</button>
-          <button type="submit" id="formSubmit" class="shop-btn update-btn">Tambah Produk</button>
+          <button type="submit"  class="shop-btn update-btn">Tambah Produk</button>
         </div>
       </div>
+    </form>
   </div>
+  <form action="url" enctype="multipart/form-data">
+    <div class="input-images"></div>
   </form>
-
-  </div>
 @endsection
 
 @section('script')
-  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+
+
+
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.custom-summernote').summernote({
+            placeholder: 'Isi deskripsi produk',
+            tabsize: 2,
+            height: 120,
+            toolbar: [
+                ['font', ['bold', 'underline', 'clear']],
+                ['insert', ['link', 'picture']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+            ],
+            callbacks: {
+                onInit: function() {
+                    // Set background color to white
+                    $('.custom-summernote .note-editor').css('background-color', 'white');
+                    // Set text color to white
+                    $('.custom-summernote .note-editable').css('color', 'white');
+                },
+                onChange: function(contents, $editable) {
+                    // Set text color to white
+                    $('.custom-summernote .note-editable').css('color', 'white');
+                }
+            }
+        });
+    });
+</script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+  <script src="{{ asset('template-assets/front/assets/js/image-uploader.js') }}"></script>
+
   <script>
-    // Dropzone.autoDiscover = false;
-
-    // /**
-    //  * Setup dropzone
-    //  */
-    // $('#previews').dropzone({
-    //   previewTemplate: $('#dzPreviewContainer').html(),
-    //   url: '/form-submit',
-    //   addRemoveLinks: true,
-    //   autoProcessQueue: false,
-    //   uploadMultiple: true,
-    //   parallelUploads: 1,
-    //   maxFiles: 4,
-    //   acceptedFiles: '.jpeg, .jpg, .png, .gif',
-    //   thumbnailWidth: 200,
-    //   thumbnailHeight: 200,
-    //   previewsContainer: "#previews",
-    //   timeout: 0,
-    //   init: function() {
-    //     var myDropzone = this;
-
-    //     // when file is dragged in
-    //     this.on('addedfile', function(file) {
-    //       $('.dropzone-drag-area').removeClass('is-invalid').next('.invalid-feedback').hide();
-    //       // Hide the dz-message if there are files
-    //       if (myDropzone.files.length > 0) {
-    //         $('.dz-message').hide();
-    //       }
-    //     });
-
-    //     // When a file is removed
-    //     this.on('removedfile', function(file) {
-    //       // Show the dz-message if there are no files
-    //       if (myDropzone.files.length === 0) {
-    //         $('.dz-message').show();
-    //       }
-    //     });
-    //   },
-    //   success: function(file, response) {
-    //     // hide form and show success message
-    //     $('#previews').fadeOut(600);
-    //     setTimeout(function() {
-    //       $('#successMessage').removeClass('d-none');
-    //     }, 600);
-    //   }
-    // });
-
-    // /**
-    //  * Form on submit
-    //  */
-    // $('#formSubmit').on('click', function(event) {
-    //   event.preventDefault();
-    //   var $this = $(this);
-
-    //   // show submit button spinner
-    //   $this.children('.spinner-border').removeClass('d-none');
-
-    //   // validate form & submit if valid
-    //   if ($('#previews')[0].checkValidity() === false) {
-    //     event.stopPropagation();
-
-    //     // show error messages & hide button spinner
-    //     $('#previews').addClass('was-validated');
-    //     $this.children('.spinner-border').addClass('d-none');
-
-    //     // if dropzone is empty show error message
-    //     if (!myDropzone.getQueuedFiles().length > 0) {
-    //       $('.dropzone-drag-area').addClass('is-invalid').next('.invalid-feedback').show();
-    //     }
-    //   } else {
-    //     // if everything is ok, submit the form
-    //     myDropzone.processQueue();
-    //   }
-    // });
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+    });
+    </script>
+    
+  <script>
     Dropzone.autoDiscover = false;
     $(document).ready(function() {
       const formDropzone = $("#formDropzone");
@@ -437,22 +425,24 @@
         },
       });
 
-      function selectCard(id) {
-        $('.card').removeClass('selected').find('input[type="radio"]').prop('checked', false);
-
-        const selectedCard = $('.' + id);
-        selectedCard.addClass('selected').find('input[type="radio"]').prop('checked', true);
-
-        $('#input-a, #input-b, #input-c').hide();
-
-        if (id === 'phone') {
-          $('#input-a').show();
-        } else if (id === 'email') {
-          $('#input-b, #input-c').show();
-        }
-      }
-
-      selectCard('phone');
     });
+
+    function selectCard(id) {
+      $('.card').removeClass('selected').find('input[type="radio"]').prop('checked', false);
+
+      const selectedCard = $('.' + id);
+      selectedCard.addClass('selected').find('input[type="radio"]').prop('checked', true);
+
+      $('#input-a, #input-b, #input-c').hide();
+
+      if (id === 'phone') {
+        $('#input-a').show();
+      } else if (id === 'email') {
+        $('#input-b, #input-c').show();
+      }
+    }
+
+    selectCard('phone');
   </script>
 @endsection
+
