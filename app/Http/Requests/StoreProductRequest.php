@@ -4,13 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProductRequest extends FormRequest
-{
+class StoreProductRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
-    {
+    public function authorize(): bool {
         return true;
     }
 
@@ -19,12 +17,11 @@ class StoreProductRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
-    {
+    public function rules(): array {
         return [
-            'description' => 'required|string',
             'title' => 'required|unique:products,title',
-            'cover_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'description' => 'required|string',
+            'cover_image.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'brand_id' => 'required',
             'size' => 'required',
             'price' => 'required_if:open_bid,0|nullable|numeric',
@@ -32,11 +29,10 @@ class StoreProductRequest extends FormRequest
             'bid_price_end' => 'required_if:open_bid,1|nullable|numeric',
             'category_ids' => 'required|array',
             'category_ids.*' => 'integer|exists:product_categories,id',
-            ];
+        ];
     }
 
-    public function messages(): array
-    {
+    public function messages(): array {
         return [
             'title.required' => 'Nama produk Wajib Diisi',
             'title.unique' => 'Nama produk sudah digunakan.',
