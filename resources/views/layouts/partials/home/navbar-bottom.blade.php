@@ -319,7 +319,7 @@
       <div class="header-nav-menu">
         <ul class="menu-list">
           <li>
-            <a href="/user/userhome">
+            <a href="/">
               <span class="list-text">Home</span>
             </a>
           </li>

@@ -174,6 +174,8 @@
 
         </div>
     </div>
+    <br>
+    {{ $brands->links() }}
     <!-- Bootstrap Table with Header - Light -->
 @endsection
 

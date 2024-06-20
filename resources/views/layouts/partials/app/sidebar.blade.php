@@ -40,17 +40,10 @@
                 <div>Toko</div>
             </a>
         </li>
-        <li class="menu-item {{ request()->routeIs('admin.about.*') ? 'active' : '' }}">
-            <a href="{{ url('/admin/about') }}" class="menu-link">
-                <i class="me-2"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="currentColor" d="M8 16h12v-3h-2.55q-.525.925-1.45 1.463T14 15q-1.05 0-1.975-.537T10.55 13H8zm6-3q.85 0 1.425-.587T16 11h4V4H8v7h4q0 .825.588 1.413T14 13m-8 5V2h16v16zm-4 4V6h2v14h14v2zm6-6h12z"/></svg>
-                </i><div> Tentang kami</div>
-            </a>
-        </li>
-
         <li class="menu-item {{ request()->routeIs('admin.brand.*') ? 'active' : '' }}">
             <a href="{{ route('admin.brand.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-flag"></i>
-                <div>Merk</div>
+                <div>Brand</div>
             </a>
         </li>
 
@@ -94,7 +87,12 @@
                 <div>Pengguna</div>
             </a>
         </li>
-
+        <li class="menu-item {{ request()->routeIs('admin.about.*') ? 'active' : '' }}">
+            <a href="{{ url('/admin/about') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-layout-list"></i>
+                <div>Tentang kami</div>
+            </a>
+        </li>
         <li class="menu-item">
             <a href="{{ route('admin.event.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-file"></i>
