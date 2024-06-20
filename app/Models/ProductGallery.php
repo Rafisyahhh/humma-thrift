@@ -8,5 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ProductGallery extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
+    protected $fillable = ['product_id', 'image'];
+
+
+    public function product()
+    {
+        return $this->belongsTo(product::class, 'product_id');
+    }
 }
