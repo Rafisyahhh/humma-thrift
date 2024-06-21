@@ -36,28 +36,83 @@ class ProductController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(StoreProductRequest $request) {
-        $data = collect($request->validated());
-        $data->put("thumbnail", $request->thumbnail->store("uploads/thumbnails"));
-        $data->put("user_id", auth()->id());
-        if ($request->open_bid) {
-            dd("ini lelang");
-        } else {
-            $productData = Product::create($data->only('user_id', 'brand_id', 'title', 'description', 'thumbnail', 'size', 'price')->toArray());
+        $data = $request->validated();
+        $data['thumbnail'] = $request->thumbnail->store('uploads/thumbnails');
+        $data['user_id'] = auth()->id();
+
+        $isAuction = $request->product_type === 'bid';
+
+        $model = $isAuction ? ProductAuction::class : Product::class;
+        $fields = [
+            'user_id', 'brand_id', 'title', 'description',
+            'thumbnail', 'size'
+        ];
+        $fields[] = $isAuction ? 'bid_price_start' : 'price';
+        if ($isAuction) {
+            $fields[] = 'bid_price_end';
         }
-        foreach ($request->cover_image as $cover_image) {
-            ProductGallery::create([
-                "product_id" => $productData->id,
-                "image" => $cover_image->store("uploads/galeries")
-            ]);
+
+        $productData = $model::create(array_intersect_key($data, array_flip($fields)));
+
+        $galleryData = [];
+        $categoryData = [];
+        foreach ($request->image_galery as $image) {
+            $galleryData[] = [
+                $isAuction ? 'product_auction_id' : 'product_id' => $productData->id,
+                'image' => $image->store('uploads/galeries')
+            ];
         }
-        foreach ($request->category_ids as $category_id) {
-            ProductCategoryPivot::create([
-                'product_category_id' => $category_id,
-                "product_id" => $productData->id,
-            ]);
+
+        foreach ($request->category_id as $categoryId) {
+            $categoryData[] = [
+                'product_category_id' => $categoryId,
+                $isAuction ? 'product_auction_id' : 'product_id' => $productData->id
+            ];
         }
-        return redirect()->back();
+
+        ProductGallery::insert($galleryData);
+        ProductCategoryPivot::insert($categoryData);
+
+        return redirect()->route('seller.product');
     }
+
+    // public function store(StoreProductRequest $request) {
+    //     $data = collect($request->validated());
+    //     $data->put("thumbnail", $request->thumbnail->store("uploads/thumbnails"));
+    //     $data->put("user_id", auth()->id());
+    //     if ($request->product_type == "bid") {
+    //         $productData = ProductAuction::create($data->only('user_id', 'brand_id', 'title', 'description', 'thumbnail', 'size', 'bid_price_start', 'bid_price_end')->toArray());
+    //     } else {
+    //         $productData = Product::create($data->only('user_id', 'brand_id', 'title', 'description', 'thumbnail', 'size', 'price')->toArray());
+    //     }
+    //     foreach ($request->image_galery as $image_galery) {
+    //         if ($request->product_type == "bid") {
+    //             ProductGallery::create([
+    //                 "product_auction_id" => $productData->id,
+    //                 "image" => $image_galery->store("uploads/galeries")
+    //             ]);
+    //         } else {
+    //             ProductGallery::create([
+    //                 "product_id" => $productData->id,
+    //                 "image" => $image_galery->store("uploads/galeries")
+    //             ]);
+    //         }
+    //     }
+    //     foreach ($request->category_id as $category_id) {
+    //         if ($request->product_type == "bid") {
+    //             ProductCategoryPivot::create([
+    //                 'product_category_id' => $category_id,
+    //                 'product_auction_id' => $productData->id,
+    //             ]);
+    //         } else {
+    //             ProductCategoryPivot::create([
+    //                 'product_category_id' => $category_id,
+    //                 'product_id' => $productData->id,
+    //             ]);
+    //         }
+    //     }
+    //     return redirect()->route("seller.product");
+    // }
 
     /**
      * Display the specified resource.
