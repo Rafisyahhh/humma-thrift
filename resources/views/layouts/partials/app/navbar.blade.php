@@ -36,7 +36,7 @@
                     <li class="dropdown-menu-header border-bottom">
                         <div class="dropdown-header d-flex align-items-center py-3">
                             <h5 class="text-body mb-0 me-auto">Notifikasi</h5>
-                            <a href="javascript:void(0)" class="dropdown-notifications-all text-body"
+                            <a href="{{ route('admin.notification.readAll') }}" class="dropdown-notifications-all text-body"
                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i
                                     class="ti ti-mail-opened fs-4"></i></a>
                         </div>
@@ -70,7 +70,7 @@
                     </li>
                     @if(!auth()->user()->unreadNotifications->isEmpty())
                     <li class="dropdown-menu-footer border-top">
-                        <a href="javascript:void(0);"
+                        <a href="{{ route('admin.notification.index') }}"
                             class="dropdown-item d-flex justify-content-center text-primary p-2 h-px-40 mb-1 align-items-center">
                             Lihat Semua
                         </a>
