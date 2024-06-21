@@ -155,7 +155,7 @@
 
                         <div class="profile-info-detail-wrapper">
                             <div class="profile-info-detail-content">
-                                <div class="profile-icon">
+                                <div class="profile-icon" style="color: #1c3879">
                                     <i class="fas fa-box"></i>
                                 </div>
                                 <div class="profile-title">50+</div>
@@ -163,7 +163,7 @@
                             </div>
                             <div class="profile-info-detail-content">
                                 <div class="profile-icon">
-                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star" style="color: #ffbb28"></i>
                                 </div>
                                 <div class="profile-title">4.87 / 5.0</div>
                                 <div class="profile-subtitle">Ulasan Toko</div>
