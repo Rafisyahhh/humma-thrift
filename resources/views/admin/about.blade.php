@@ -128,7 +128,8 @@
                                     <div class="mb-3">
                                         <label for="title" class="form-label">Title</label>
                                         <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                            id="title" name="title">
+                                            id="title" name="title"
+                                            value="{{ old('title', $about->title) }}">
 
                                         @error('title')
                                             <span class="invalid-feedback" role="alert">

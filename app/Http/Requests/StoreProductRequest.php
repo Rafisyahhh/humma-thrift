@@ -21,6 +21,7 @@ class StoreProductRequest extends FormRequest {
         return [
             'title' => 'required|unique:products,title',
             'description' => 'required|string',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'cover_image.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'brand_id' => 'required',
             'size' => 'required',

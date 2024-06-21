@@ -137,7 +137,7 @@ class AboutUsController extends Controller
             $oldPhotoPath = $about->image;
 
             $dataToUpdate = [
-                'title' => $request->input(),
+                'title' => $request->input('title'),
                 'description' => $request->input('description_update'),
             ];
 
