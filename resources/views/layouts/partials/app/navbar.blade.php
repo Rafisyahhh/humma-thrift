@@ -36,9 +36,12 @@
                     <li class="dropdown-menu-header border-bottom">
                         <div class="dropdown-header d-flex align-items-center py-3">
                             <h5 class="text-body mb-0 me-auto">Notifikasi</h5>
+
+                            @if(!auth()->user()->unreadNotifications->isEmpty())
                             <a href="{{ route('admin.notification.readAll') }}" class="dropdown-notifications-all text-body"
                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i
                                     class="ti ti-mail-opened fs-4"></i></a>
+                            @endif
                         </div>
                     </li>
                     <li class="dropdown-notifications-list scrollable-container">

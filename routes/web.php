@@ -43,23 +43,7 @@ Route::prefix('/debug')->group(function () {
     Route::view('home', 'debug.home');
     Route::view('modal', 'debug.modal');
 
-    // Route::get('store', function () {
-    //     $users = User::all(); // Assuming user with ID 1 exists
-
-    //     if (!$users) {
-    //         abort(404, 'User not found');
-    //     }
-
-    //     // Send welcome notification to the user
-    //     try {
-    //         Notification::send($users, new SellerWelcomeNotification([
-    //             'message' => 'You have a new notification',
-    //             'action' => url('/notifications'),
-    //         ]));
-    //     } catch (\Exception $e) {
-    //         return $e;
-    //     }
-    // });
+    // Route::get('/role', fn() => dd(Auth::user()->hasRole('user')));
 });
 
 # Public Routes
