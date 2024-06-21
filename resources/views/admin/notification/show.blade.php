@@ -19,11 +19,11 @@
                             @forelse ($notifications as $notification)
                                 <a class="list-group-item py-3 position-relative @if($notification->id === $notificationId) active @endif"
                                     href="{{ route('admin.notification.show', $notification->id) }}">
-                                    <h6 class="mb-1 fw-bold">{{ $notification->data['title'] }}</h6>
+                                    <h6 class="mb-1 fw-bold @if($notification->id === $notificationId) text-white @endif">{{ $notification->data['title'] }}</h6>
                                     <p class="mb-1 @if (!$notification->read_at) fw-bold @endif">
                                         {{ Str::limit($notification->data['message'], 100) }}</p>
                                     <small
-                                        class="text-muted @if (!$notification->read_at) fw-bold @endif">{{ $notification->created_at->locale('id')->diffForHumans() }}</small>
+                                        class="text-@if($notification->id === $notificationId) text-white opacity-75 @else text-muted @endif @if (!$notification->read_at) fw-bold @endif">{{ $notification->created_at->locale('id')->diffForHumans() }}</small>
 
                                     {{-- Penanda Kalau Udah Dibaca --}}
                                     @if (!$notification->read_at)
