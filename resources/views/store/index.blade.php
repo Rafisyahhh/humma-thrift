@@ -71,6 +71,26 @@
         .product-cart-items span i {
             font-size: 1.25em;
         }
+
+        .profile-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .location {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            color: gray;
+            font-size: 1.2em;
+        }
+
+        .location i {
+            margin-right: 5px;
+            color: gray;
+            font-size: 1.5em;
+        }
     </style>
 @endpush
 
@@ -78,30 +98,38 @@
     <section class="section-banner">
         <div class="container border-bottom">
             <div class="banner-wrapper">
-                <div class="banner-cover">
-                    <img src="{{ asset($store->store_cover ? "storage/{$store->store_cover}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
-                        alt="upload" class="responsive-img " id="responsive-img" />
-                </div>
-
+                <div class="banner-cover"> <img
+                        src="{{ asset($store->store_cover ? "storage/{$store->store_cover}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
+                        alt="upload" class="responsive-img" id="responsive-img" /> </div>
                 <div class="profile-wrapper">
-                    <div class="avatar-cover">
-                        <img
+                    <div class="avatar-cover"> <img
                             src="{{ asset($store->store_logo ? "storage/{$store->store_logo}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}" />
                     </div>
-
                     <div class="profile-content">
                         <div class="profile-name-wrapper">
                             <h5 class="profile-name mb-2">{{ $store->name }}</h5>
                             <p class="profile-description opacity-75 mb-0">{{ '@' . $store->username }}</p>
+                            <div class="location mt-2"> <i class="fas fa-map-marker-alt"></i> <span>Karangploso, Malang</span> </div>
+                            <div class="location mt-2"> <span class="location mt-2">Jumlah Produk : 1</span> </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="location mt-2"> &nbsp;&nbsp;<span class="location mt-2">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Reprehenderit nesciunt aut ea omnis molestias laudantium explicabo
+                            ipsum corporis voluptates, optio harum quasi officia similique iste labore at eius praesentium
+                            nemo nostrum sed saepe accusantium? Sapiente, vitae quod. Possimus modi repudiandae eum
+                            voluptate inventore eligendi doloribus molestiae, consectetur vero alias esse, reiciendis
+                            perferendis officia perspiciatis ratione.</span> </div>
+                </div>
+            </div> <br> <br>
 
-            @if(!$store->verified_at)
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <p style="font-size:1rem!important">Toko anda belum terverifikasi. Silahkan verifikasikan toko anda dari tautan yang sudah kami kirim ke surel anda.</p>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            @if (!$store->verified_at)
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size: 0.9rem;">
+                    <p>Toko anda belum terverifikasi. Silahkan verifikasikan toko anda dari tautan yang sudah kami kirim ke
+                        surel anda.</p> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
         </div>
