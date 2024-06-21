@@ -44,7 +44,7 @@
 
         .profile-content {
             margin-left: calc(200px + 5rem + 2rem);
-            margin-top: -8.5rem;
+            margin-top: -7.5rem;
             padding-bottom: 5rem;
             display: flex;
             align-items: center;
@@ -74,8 +74,7 @@
 
         .profile-content {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
         }
 
         .location {
@@ -84,12 +83,51 @@
             margin-top: 10px;
             color: gray;
             font-size: 1.2em;
+            gap: .325rem;
         }
 
         .location i {
             margin-right: 5px;
             color: gray;
             font-size: 1.5em;
+        }
+
+        .profile-info-detail-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: start;
+            margin-top: 20px;
+        }
+
+        .profile-info-detail-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 28px;
+            border-right: 1px solid #ddd;
+        }
+
+        .profile-info-detail-content:last-child {
+            border-right: none;
+        }
+
+        .profile-icon {
+            font-size: 24px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .profile-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .profile-subtitle {
+            font-size: 14px;
+            color: #777;
         }
     </style>
 @endpush
@@ -108,15 +146,27 @@
                     <div class="profile-content">
                         <div class="profile-name-wrapper">
                             <h5 class="profile-name mb-2">{{ $store->name }}</h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <p class="profile-description opacity-75 mb-0">{{ '@' . $store->username }}</p>
-                                <div class="location mt-2" style="margin-left: 500px; font-size: 14px; padding-right: 10px; border-right: 1px solid #e5e5e5;">
-                                    <span>Jumlah Produk : 1</span>
-                                </div>
-                            </div>
-                            <div class="location mt-2" style="font-size: 13px;">
+                            <p class="profile-description opacity-75 mb-0">{{ '@' . $store->username }}</p>
+                            <div class="location mt-3">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <span>Karangploso, Malang</span>
+                                <span style="font-size: 16px;">Karangploso, Malang</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-detail-wrapper">
+                            <div class="profile-info-detail-content">
+                                <div class="profile-icon">
+                                    <i class="fas fa-box"></i>
+                                </div>
+                                <div class="profile-title">50+</div>
+                                <div class="profile-subtitle">Produk</div>
+                            </div>
+                            <div class="profile-info-detail-content">
+                                <div class="profile-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="profile-title">4.87 / 5.0</div>
+                                <div class="profile-subtitle">Ulasan Toko</div>
                             </div>
                         </div>
                     </div>
@@ -136,7 +186,8 @@
             @if (!$store->verified_at)
                 <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size: 0.9rem;">
                     <p>Toko anda belum terverifikasi. Silahkan verifikasikan toko anda dari tautan yang sudah kami kirim ke
-                        surel anda.</p> <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        surel anda.</p> <button type="button" class="btn-close" data-bs-dismiss="alert"
+                        aria-label="Close"></button>
                 </div>
             @endif
         </div>
