@@ -1,6 +1,6 @@
 @extends('layouts.panel')
 
-@section('tittle', 'Home')
+@section('title', 'Home')
 
 @section('content')
     <div class="tab-content nav-content" id="v-pills-tabContent" style="flex: 1 0%;">

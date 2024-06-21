@@ -1,5 +1,5 @@
 @extends('layouts.home')
-@section('tittle', 'Shop')
+@section('title', 'Shop')
 @section('content')
 
     <section class="product product-sidebar footer-padding">

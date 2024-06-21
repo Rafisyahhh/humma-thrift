@@ -56,14 +56,13 @@ Route::prefix('seller')->middleware('auth')->name('seller.')->group(function () 
     Route::view('/income', 'seller.penghasilan')->name('income');
     Route::view('/product', 'seller.produk')->name('product');
     Route::view('/profil', 'seller.profil')->name('profil');
-    // Route::view('/tambahproduk', 'seller.tambahproduk')->name('tambahproduk');
     Route::resource('produk', ProductController::class);
     Route::resource('produkauction', ProductAuctionController::class);
 });
 
 # User Routes
 Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function () {
-    Route::get('/userhome', [DashboardUserController::class, 'dashboard'])->name('userhome');
+    Route::get('/', [DashboardUserController::class, 'dashboard'])->name('userhome');
     Route::view('/checkout', 'user.checkout')->name('checkout');
     Route::view('/about', 'user.tentang')->name('about');
     Route::view('/brand', 'user.merek')->name('brand');

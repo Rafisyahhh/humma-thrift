@@ -1,6 +1,6 @@
 @extends('layouts.panel')
 
-@section('tittle', 'Profil')
+@section('title', 'Profil')
 
 @section('content')
     <section class="seller-application ">

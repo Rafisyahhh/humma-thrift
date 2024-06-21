@@ -1,6 +1,6 @@
 @extends('layouts.panel')
 
-@section('tittle', 'Transaksi')
+@section('title', 'Transaksi')
 
 @section('css')
 

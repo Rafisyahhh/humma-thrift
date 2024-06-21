@@ -1,6 +1,6 @@
 @extends('layouts.home')
 
-@section('tittle', 'Detail Product')
+@section('title', 'Detail Product')
 
 @section('style')
     <style>
