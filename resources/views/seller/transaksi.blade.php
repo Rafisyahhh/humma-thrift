@@ -25,11 +25,11 @@
                     <div class="nav nav-tabs" id="nav-tab" style="border:none;" role="tablist">
                         <button class="nav-link active" id="nav-produk-tab" data-bs-toggle="tab" data-bs-target="#nav-produk"
                             type="button" role="tab" aria-controls="nav-produk" aria-selected="true">
-                            <p>Produk</p>
+                            Produk
                         </button>
                         <button class="nav-link" id="nav-lelang-tab" data-bs-toggle="tab" data-bs-target="#nav-lelang"
                             type="button" role="tab" aria-controls="nav-lelang" aria-selected="false">
-                            <p>Lelang</p>
+                            Lelang
                         </button>
                     </div>
                 </nav>
