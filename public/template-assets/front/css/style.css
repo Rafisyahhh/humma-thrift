@@ -797,17 +797,17 @@ button {
     gap: 0;
     width: 52px;
     height: 52px;
-    background: #1c3879;
+    background: #ffffff;
     border-radius: 50%;
 }
 .header-center .header-cart-items .header-search .modal-main {
-    height: 23.8rem;
+    margin-right: 81rem;
 }
 .header-center .header-cart-items .header-search .modal-main .wrapper-main {
-    width: 62rem;
-    height: 6rem;
+    width: 57rem;
+    height: 4rem;
     border-radius: 3rem;
-    border: 1px solid #1c3879;
+    border: 1px solid rgba(126, 163, 219, 0.4);
     overflow: hidden;
 }
 .header-center .header-cart-items .header-search .modal-main .search-section {
@@ -1640,7 +1640,7 @@ button {
     fill: #232532;
 }
 .hero {
-    height: 73.3rem;
+    height: 55rem;
 }
 @media (max-width: 767px) {
     .hero {
@@ -1683,7 +1683,7 @@ button {
 }
 .wrapper-section .wrapper-subtitle {
     font-size: 2.4rem;
-    margin-bottom: 1.4rem;
+    margin-bottom: 2rem;
 }
 .wrapper-section .wrapper-subtitle .wrapper-inner-title {
     font-size: 4rem;
