@@ -108,9 +108,16 @@
                     <div class="profile-content">
                         <div class="profile-name-wrapper">
                             <h5 class="profile-name mb-2">{{ $store->name }}</h5>
-                            <p class="profile-description opacity-75 mb-0">{{ '@' . $store->username }}</p>
-                            <div class="location mt-2"> <i class="fas fa-map-marker-alt"></i> <span>Karangploso, Malang</span> </div>
-                            <div class="location mt-2"> <span class="location mt-2">Jumlah Produk : 1</span> </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="profile-description opacity-75 mb-0">{{ '@' . $store->username }}</p>
+                                <div class="location mt-2" style="margin-left: 500px; font-size: 14px; padding-right: 10px; border-right: 1px solid #e5e5e5;">
+                                    <span>Jumlah Produk : 1</span>
+                                </div>
+                            </div>
+                            <div class="location mt-2" style="font-size: 13px;">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Karangploso, Malang</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -151,17 +158,17 @@
                                     <div class="product-cart-items">
                                         <a href="/user/wishlist" class="favourite cart-item">
                                             <span>
-                                                <i class="fas fa-eye"></i>
+                                                <i class="fas fa-heart"></i>
                                             </span>
                                         </a>
                                         <a href="/user/wishlist" class="favourite cart-item">
                                             <span>
-                                                <i class="fas fa-heart"></i>
+                                                <i class="fas fa-shopping-cart"></i>
                                             </span>
                                         </a>
                                         <a href="/user/keranjang" class="compaire cart-item">
                                             <span>
-                                                <i class="fas fa-shopping-cart"></i>
+                                                <i class="fas fa-share"></i>
                                             </span>
                                         </a>
                                     </div>

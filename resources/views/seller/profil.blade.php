@@ -2,38 +2,20 @@
 
 @section('title', 'Profil')
 
+@section('style')
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet" />
+    <link href="summernote-bs5.css" rel="stylesheet">
+    <script src="summernote-bs5.js"></script>
+@endsection
+
 @section('content')
+
     <section class="seller-application ">
         <div class="container">
             <div class="seller-application-section-profil">
                 <div class="row ">
                     <div class="col-lg-7">
                         <div class="row gy-5">
-                            <div class="col-lg-12">
-                                <div class="seller-information" data-aos="fade-right">
-                                    <h5 class="comment-title">Informasi Penjual</h5>
-                                    <div class="review-form">
-                                        <div class="review-inner-form ">
-                                            <div class="review-form-name">
-                                                <label for="name" class="form-label">Nama Lengkap</label>
-                                                <input type="text" id="name" class="form-control"
-                                                    placeholder="mis.Hilma Schaefer" value="Hilma Schaefer">
-                                            </div>
-                                            <div class="review-form-name">
-                                                <label for="name" class="form-label">Email</label>
-                                                <input type="text" id="name" class="form-control"
-                                                    placeholder="mis.hilmaschaefer@gmail.com"
-                                                    value="hilmaschaefer@gmail.com">
-                                            </div>
-                                            <div class="review-form-name">
-                                                <label for="phone" class="form-label">Telepon</label>
-                                                <input type="number" id="phone" class="form-control"
-                                                    placeholder="+88013**977957" value="08213888977957">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-lg-12">
                                 <div class="seller-information" data-aos="fade-right">
                                     <h5 class="comment-title">Informasi Toko</h5>
@@ -43,18 +25,43 @@
                                             <div class="review-form-name">
                                                 <label for="name" class="form-label">Nama
                                                     Toko</label>
-                                                <input type="text" id="name" class="form-control"
+                                                  <input type="text" id="name" name="name" class="form-control"
                                                     placeholder="mis.Hilma Store" value="Hilma Store">
                                             </div>
+
                                             <div class="review-form-name">
-                                                <label for="nic" class="form-label">Nic</label>
-                                                <input type="number" id="nic" class="form-control"
+                                                <label for="email" class="form-label">Email</label>
+                                                <input type="text" id="email" name="email" class="form-control"
+                                                    placeholder="mis.hilmaschaefer@gmail.com"
+                                                    value="hilmaschaefer@gmail.com">
+                                            </div>
+
+                                            <div class="review-form-name">
+                                                <label for="phone" class="form-label">Telepon</label>
+                                                <input type="number" id="phone" name="phone" class="form-control"
+                                                    placeholder="+88013**977957" value="082138977957">
+                                            </div>
+
+                                            <div class="review-form-name">
+                                                <label for="nic" class="form-label">NIK</label>
+                                                <input type="number" id="nic" name="nic" class="form-control"
                                                     placeholder="masukkan nic" value="002781623916">
                                             </div>
 
-                                            <div class="form-btn">
-                                                <a href="create-account.html" class="shop-btn">Simpan</a>
+                                            <div class="review-form-name">
+                                                <label for="address" class="form-label">Alamat</label>
+                                                <textarea id="address" name="address" class="form-control"
+                                                 placeholder="Masukkan Alamat Anda">Jln. Keramat, Perum. Permata Regency, Blk. 1o, No 11 B</textarea>
+                                            </div>
 
+                                            <div class="review-form-name mt-4">
+                                                <label for="address" class="form-label">Deskripsi</label>
+                                                <textarea id="custom-summernote" name="address" class="custom-summernote"
+                                                 placeholder="Tambahkan Deskripsi Toko Anda" rows="7">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi dicta repellat dolorem maxime ducimus commodi quae aut quam earum. Voluptas nam, sed et assumenda ipsum accusantium rem ad alias fugiat modi molestiae voluptate.</textarea>
+                                            </div>
+
+                                            <div class="form-btn">
+                                                <a href="create-account.html" class="shop-btn" style="width: 51rem">Simpan</a>
                                             </div>
                                         </div>
                                     </div>
@@ -67,8 +74,8 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="logo-wrapper">
-                                        <h5 class="comment-title">Perbarui Logo</h5>
-                                        <p class="paragraph">Profil minimal Ukuran300x300.</p>
+                                        <h5 class="comment-title" style="margin-left: 80px;">Perbarui Logo</h5>
+                                        <p class="paragraph" style="margin-left: 80px;">Profil minimal Ukuran 300x300.</p>
                                         <div class="logo-upload">
                                             <img src="{{ asset('template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
                                                 alt="upload" class="upload-img" id="upload-img">
@@ -86,20 +93,19 @@
                                                         </svg>
                                                     </span>
                                                 </label>
-                                                <input type="file" accept="image/jpeg, image/jpg, image/png, image/webp"
-                                                    id="input-file">
+                                                <input type="file" accept="image/jpeg, image/jpg, image/png, image/webp" id="input-file">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="logo-wrapper cover">
-                                        <h5 class="comment-title">Perbarui Sampul</h5>
-                                        <p class="paragraph">Sampul minimal Ukuran
+                                        <h5 class="comment-title" style="margin-left: 80px;">Perbarui Sampul</h5>
+                                        <p class="paragraph" style="margin-left: 80px;">Sampul minimal Ukuran
                                             1170x920.</p>
                                         <div class="cover-upload logo-upload">
                                             <img src="{{ asset('template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
-                                                alt="upload" class="cover-img" id="cover-img">
+                                                alt="upload" class="cover-img" id="cover-img" style="margin-left: 80px;">
                                             <div class="input-item cover-input">
                                                 <label for="cover-file">
                                                     <span>
@@ -114,8 +120,7 @@
                                                         </svg>
                                                     </span>
                                                 </label>
-                                                <input type="file"
-                                                    accept="image/jpeg, image/jpg, image/png, image/webp" id="cover-file">
+                                                <input type="file" accept="image/jpeg, image/jpg, image/png, image/webp" id="cover-file">
                                             </div>
                                         </div>
                                     </div>
@@ -127,4 +132,35 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('script')
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.custom-summernote').summernote({
+            placeholder: 'Tambahkan Deskripsi Toko Anda',
+            tabsize: 2,
+            height: 130,
+            toolbar: [
+                ['font', ['bold', 'underline', 'clear']],
+                ['insert', ['link', 'picture']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+            ],
+            callbacks: {
+                onInit: function() {
+                    // Set background color to white
+                    $('.custom-summernote .note-editor').css('background-color', 'white');
+                    // Set text color to white
+                    $('.custom-summernote .note-editable').css('color', 'white');
+                },
+                onChange: function(contents, $editable) {
+                    // Set text color to white
+                    $('.custom-summernote .note-editable').css('color', 'white');
+                }
+            }
+        });
+    });
+</script>
 @endsection
