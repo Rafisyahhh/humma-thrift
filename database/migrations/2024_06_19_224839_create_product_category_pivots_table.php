@@ -12,7 +12,8 @@ return new class extends Migration {
         Schema::create('product_category_pivots', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_category_id')->constrained();
-            $table->foreignId('product_id')->constrained();
+            $table->foreignId('product_id')->nullable()->constrained();
+            $table->foreignId('product_auction_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

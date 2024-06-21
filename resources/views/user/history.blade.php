@@ -1,5 +1,13 @@
 @extends('layouts.panel')
 
+@section('style')
+  <style>
+    .invalid-feedback {
+      font-size: 1.275em;
+    }
+  </style>
+@endsection
+
 @section('content')
   <div class="wishlist">
     <div class="cart-content">
