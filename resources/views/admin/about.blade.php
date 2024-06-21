@@ -1,13 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'About Us')
+@section('title', 'Data Tentang Kami')
 
 @section('style')
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet" />
-    <link href="summernote-bs5.css" rel="stylesheet">
-    <script src="summernote-bs5.js"></script>
-
+    <link href="{{ asset('additional-assets/summernote-0.8.20/summernote-lite.min.css') }}" rel="stylesheet" />
 @endsection
+
 @section('content')
     <!-- Bootstrap Table with Header - Light -->
     <div class="card">
@@ -183,9 +181,7 @@
 
 
 @section('js')
-
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+    <script src="{{ asset('additional-assets/summernote-0.8.20/summernote-lite.min.js') }}"></script>
 
     <script>
         $(document).ready(function() {

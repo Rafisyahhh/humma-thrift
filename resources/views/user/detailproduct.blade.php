@@ -1,7 +1,8 @@
 @extends('layouts.home')
+
 @section('tittle', 'Detail Product')
+
 @section('style')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <style>
         .share-container {
             display: flex;
@@ -27,6 +28,7 @@
         }
     </style>
 @endsection
+
 @section('content')
     <section class="product product-info">
         <div class="container">
@@ -395,8 +397,8 @@
             </div>
     </section>
 @endsection
+
 @section('script')
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="{{ asset('additional-assets/jquery-3.7.1/jquery.min.js') }}"></script>
     <script src="{{ asset('js/share.js') }}"></script>
 @endsection
