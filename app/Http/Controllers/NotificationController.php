@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notification;
-use App\Http\Requests\StoreNotificationRequest;
-use App\Http\Requests\UpdateNotificationRequest;
 use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
@@ -14,48 +12,42 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $notifications = Auth::user()->notifications()->paginate(10);
+        $notifications = Auth::user()->notifications()->paginate(20);
         return view('admin.notification.index', compact('notifications'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display the notification
      */
-    public function create()
+    public function show(string $notificationId)
     {
-        //
+        Auth::user()->notifications()->find($notificationId)->markAsRead();
+
+        $notifications = Auth::user()->notifications()->paginate(20);
+        return view('admin.notification.show', compact('notifications', 'notificationId'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Read All Notification
+     *
+     * @return void
      */
-    public function store(StoreNotificationRequest $request)
+    public function readAll()
     {
-        //
+        Auth::user()->getAttribute('unreadNotifications')->markAsRead();
+        return redirect()->route('admin.notification.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Notification $notification)
+    public function unread(string $notification)
     {
-        //
+        Auth::user()->notifications()->find($notification)->markAsUnread();
+        return redirect()->route('admin.notification.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Notification $notification)
+    public function read(string $notification)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateNotificationRequest $request, Notification $notification)
-    {
-        //
+        Auth::user()->notifications()->find($notification)->markAsRead();
+        return redirect()->route('admin.notification.index');
     }
 
     /**
@@ -63,6 +55,13 @@ class NotificationController extends Controller
      */
     public function destroy(Notification $notification)
     {
-        //
+        try {
+            $notification->delete();
+            return redirect()->route('admin.notification.index')->with('success', 'Berhasil menghapus notifikasi');
+        } catch (\Throwable $th) {
+            return redirect()->route('admin.notification.index')->with('error', 'Gagal menghapus notifikasi');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.notification.index')->with('error', 'Gagal menghapus notifikasi');
+        }
     }
 }

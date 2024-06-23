@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header border-bottom d-flex gap-3 align-items-center justify-content-between">
                     <h5 class="mb-0">Notifikasi</h5>
-                    <a href="javascript:void(0)" class="btn btn-sm btn-light d-flex gap-2 align-items-center">
+                    <a href="{{ route('admin.notification.readAll') }}" class="@if(auth()->user()->unreadNotifications->isEmpty()) disabled @endif btn btn-sm btn-light d-flex gap-2 align-items-center">
                         <i class="fas fa-bell"></i>
                         <span>Baca Semua</span>
                     </a>
@@ -19,13 +19,22 @@
                             @forelse ($notifications as $notification)
                                 <a class="list-group-item py-3 position-relative" href="{{ route('admin.notification.show', $notification->id) }}">
                                     <h6 class="mb-1 fw-bold">{{ $notification->data['title'] }}</h6>
-                                    <p class="mb-1">{{ Str::limit($notification->data['message'], 200) }}</p>
-                                    <small class="text-muted">{{ $notification->created_at->locale('id')->diffForHumans() }}</small>
+                                    <p class="mb-1 @if(!$notification->read_at) fw-bold @endif">{{ Str::limit($notification->data['message'], 200) }}</p>
+                                    <small class="text-muted @if(!$notification->read_at) fw-bold @endif">{{ $notification->created_at->locale('id')->diffForHumans() }}</small>
 
+                                    {{-- Penanda Kalau Udah Dibaca --}}
+                                    @if(!$notification->read_at)
                                     <span class="badge badge-dot bg-primary position-absolute top-0 m-3 end-0"></span>
+                                    @endif
+                                    {{-- Penanda Kalau Udah Dibaca --}}
                                 </a>
                             @empty
-                                <div class="list-group-item list-group-item-action">Tidak ada notifikasi</div>
+                                <div class="list-group-item py-3">
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <i class="fas fa-bell-slash"></i>
+                                        <span class="fs-5 text-muted">Tidak ada notifikasi</span>
+                                    </div>
+                                </div>
                             @endforelse
                         </div>
                     </div>

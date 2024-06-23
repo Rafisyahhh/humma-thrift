@@ -43,23 +43,7 @@ Route::prefix('/debug')->group(function () {
     Route::view('home', 'debug.home');
     Route::view('modal', 'debug.modal');
 
-    // Route::get('store', function () {
-    //     $users = User::all(); // Assuming user with ID 1 exists
-
-    //     if (!$users) {
-    //         abort(404, 'User not found');
-    //     }
-
-    //     // Send welcome notification to the user
-    //     try {
-    //         Notification::send($users, new SellerWelcomeNotification([
-    //             'message' => 'You have a new notification',
-    //             'action' => url('/notifications'),
-    //         ]));
-    //     } catch (\Exception $e) {
-    //         return $e;
-    //     }
-    // });
+    // Route::get('/role', fn() => dd(Auth::user()->hasRole('user')));
 });
 
 # Public Routes
@@ -72,14 +56,13 @@ Route::prefix('seller')->middleware('auth')->name('seller.')->group(function () 
     Route::view('/income', 'seller.penghasilan')->name('income');
     Route::view('/product', 'seller.produk')->name('product');
     Route::view('/profil', 'seller.profil')->name('profil');
-    // Route::view('/tambahproduk', 'seller.tambahproduk')->name('tambahproduk');
     Route::resource('produk', ProductController::class);
     Route::resource('produkauction', ProductAuctionController::class);
 });
 
 # User Routes
 Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function () {
-    Route::get('/userhome', [DashboardUserController::class, 'dashboard'])->name('userhome');
+    Route::get('/', [DashboardUserController::class, 'dashboard'])->name('userhome');
     Route::view('/checkout', 'user.checkout')->name('checkout');
     Route::view('/about', 'user.tentang')->name('about');
     Route::view('/brand', 'user.merek')->name('brand');
@@ -124,7 +107,15 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::resource('category', ProductCategoryController::class);
     Route::resource('user', UserController::class);
     Route::resource('event', EventController::class);
-    Route::resource('notification', NotificationController::class);
+
+    Route::prefix('/notification')->name('notification.')->group(function() {
+        Route::get('/', [NotificationController::class, 'index'])->name('index');
+        Route::get('/read-all', [NotificationController::class, 'readAll'])->name('readAll');
+        Route::get('/read/{id}', [NotificationController::class, 'read'])->name('read');
+        Route::get('/unread/{id}', [NotificationController::class, 'unread'])->name('unread');
+        Route::get('/{id}', [NotificationController::class, 'show'])->name('show');
+        Route::delete('/{id}', [NotificationController::class, 'destroy'])->name('destroy');
+    });
 });
 
 # Store Profile Routes

@@ -1,5 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Admin - Product Category')
+
+@section('title', 'Admin - Kategori Produk')
+
 @section('content')
 
     <!-- Tabel -->
@@ -166,8 +168,8 @@
     @endforeach
     {{-- end --}}
 @endsection
+
 @section('scripts')
-    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
     <script>
         function confirmDeletion(categoryId) {
             Swal.fire({

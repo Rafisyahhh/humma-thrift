@@ -1,6 +1,10 @@
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr/build/toastr.min.css">
+@push('link')
+    <link rel="stylesheet" href="{{ asset('additional-assets/toastr-2.1.4/toastr.min.css') }}" />
+@endpush
+
+@push('script')
+    <script src="{{ asset('additional-assets/toastr-2.1.4/toastr.min.js') }}"></script>
+@endpush
 
 @if ($errors->any())
     <script>

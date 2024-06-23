@@ -40,8 +40,8 @@
         href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&Inter:wght@100..900&family=Jost:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/1.35.0/iconfont/tabler-icons.min.css" integrity="sha512-tpsEzNMLQS7w9imFSjbEOHdZav3/aObSESAL1y5jyJDoICFF2YwEdAHOPdOr1t+h8hTzar0flphxR76pd0V1zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ asset('additional-assets/fontawesome-free-6.5.2/css/all.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('additional-assets/tabler-icons-3.4.0/tabler-icons.min.css') }}" />
 
     <link rel="stylesheet" href="{{ asset('template-assets/front/css/swiper10-bundle.min.css') }}">
 
@@ -53,7 +53,7 @@
 
     <link rel="stylesheet" href="{{ asset('template-assets/front/css/style.css') }}">
 
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet" />
+    <link href="{{ asset('additional-assets/summernote-0.8.20/summernote.min.css') }}" rel="stylesheet" />
 
     <style>
         .header-right-dropdown > div {
