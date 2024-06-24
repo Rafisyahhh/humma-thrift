@@ -1,13 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.home')
+
+@section('title', 'Reset Sandi')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+    <section class="login footer-padding">
+        <div class="container">
+            <div class="login-section">
+                <div class="review-form" style="height: 100%">
+                    <h5 class="comment-title mb-3 mt-0">Reset Sandi</h5>
+                    <p class="text-center mb-5 opacity-75">Silahkan gunakan fitur reset sandi dibawah ini untuk menyetel ulang kata sandi akun anda.</p>
 
-                <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -17,12 +19,11 @@
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
+                        <div class="review-inner-form">
+                            <div class="review-form-name">
+                                <label for="email" class="form-label">Surat Elektronik</label>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                    name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Mis: email@domain.com" />
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -31,17 +32,13 @@
                             </div>
                         </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
+                        <div class="login-btn text-center">
+                            <button type="submit" class="shop-btn text-white">Kirimkan Tautan</button>
+                            <span class="shop-account" style="gap: unset;">Masih ingat sandinya? <a href="{{ route('login') }}" class="m-0">Masuk disini</a>.</span>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 @endsection
