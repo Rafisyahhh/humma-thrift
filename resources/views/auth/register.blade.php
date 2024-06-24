@@ -1,5 +1,7 @@
 @extends('layouts.home')
 
+@section('title', 'Daftar')
+
 @section('content')
     <section class="login account footer-padding">
         <div class="container">

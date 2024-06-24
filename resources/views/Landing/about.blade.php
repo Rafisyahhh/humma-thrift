@@ -85,7 +85,7 @@
                                     mattis ac diam
                                 </span> a ultricies. Sed pretium.
                             </p>
-                            <div class="ratings">
+                            <div class="ratings d-flex gap-2 align-items-center">
                                 <span>
                                     <svg width="75" height="15" viewBox="0 0 75 15" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -106,6 +106,7 @@
                                             fill="#FFA800" />
                                     </svg>
                                 </span>
+                                <span>5.0 / 5.0</span>
                             </div>
                             <div class="divider"></div>
                             <div class="testimonial-info">
@@ -134,7 +135,7 @@
                             </div>
                             <p class="testimonial-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore reprehenderit eveniet id laboriosam ut dolore.
                             </p>
-                            <div class="ratings">
+                            <div class="ratings d-flex gap-2 align-items-center">
                                 <span>
                                     <svg width="75" height="15" viewBox="0 0 75 15" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -155,6 +156,7 @@
                                             fill="#FFA800" />
                                     </svg>
                                 </span>
+                                <span>5.0 / 5.0</span>
                             </div>
                             <div class="divider"></div>
                             <div class="testimonial-info">
@@ -183,7 +185,7 @@
                             </div>
                             <p class="testimonial-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore reprehenderit eveniet id laboriosam ut dolore.
                             </p>
-                            <div class="ratings">
+                            <div class="ratings d-flex gap-2 align-items-center">
                                 <span>
                                     <svg width="75" height="15" viewBox="0 0 75 15" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -204,6 +206,7 @@
                                             fill="#FFA800" />
                                     </svg>
                                 </span>
+                                <span>5.0 / 5.0</span>
                             </div>
                             <div class="divider"></div>
                             <div class="testimonial-info">
@@ -232,7 +235,7 @@
                             </div>
                             <p class="testimonial-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore reprehenderit eveniet id laboriosam ut dolore.
                             </p>
-                            <div class="ratings">
+                            <div class="ratings d-flex gap-2 align-items-center">
                                 <span>
                                     <svg width="75" height="15" viewBox="0 0 75 15" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -253,6 +256,7 @@
                                             fill="#FFA800" />
                                     </svg>
                                 </span>
+                                <span>5.0 / 5.0</span>
                             </div>
                             <div class="divider"></div>
                             <div class="testimonial-info">
@@ -282,7 +286,7 @@
                             </div>
                             <p class="testimonial-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore reprehenderit eveniet id laboriosam ut dolore.
                             </p>
-                            <div class="ratings">
+                            <div class="ratings d-flex gap-2 align-items-center">
                                 <span>
                                     <svg width="75" height="15" viewBox="0 0 75 15" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -303,6 +307,7 @@
                                             fill="#FFA800" />
                                     </svg>
                                 </span>
+                                <span>5.0 / 5.0</span>
                             </div>
                             <div class="divider"></div>
                             <div class="testimonial-info">
@@ -331,7 +336,7 @@
                             </div>
                             <p class="testimonial-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore reprehenderit eveniet id laboriosam ut dolore.
                             </p>
-                            <div class="ratings">
+                            <div class="ratings d-flex gap-2 align-items-center">
                                 <span>
                                     <svg width="75" height="15" viewBox="0 0 75 15" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -352,6 +357,7 @@
                                             fill="#FFA800" />
                                     </svg>
                                 </span>
+                                <span>5.0 / 5.0</span>
                             </div>
                             <div class="divider"></div>
                             <div class="testimonial-info">

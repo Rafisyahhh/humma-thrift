@@ -1,5 +1,5 @@
 @extends('layouts.home')
-@section('tittle','Store')
+@section('title','Store')
 @section('content')
 
     <section class="product top-selling">

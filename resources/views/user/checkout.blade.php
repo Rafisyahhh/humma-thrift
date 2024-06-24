@@ -47,7 +47,7 @@
 @endphp
 
 @extends('layouts.home')
-@section('tittle', 'Checkout')
+@section('title', 'Checkout')
 @section('content')
   <section class="blog about-blog">
     <div class="container">
