@@ -163,6 +163,19 @@
               </div>
             </div>
             <div class="col-md-6 mb-3">
+              <div class="review-form-name">
+                <label for="warna" class="form-label">Warna</label>
+                <input type="text" id="warna" name="color"
+                  class="form-control @error('color') is-invalid @enderror" placeholder="Masukkan Warna"
+                  value="{{ isset($is_edit) ? $product->color : old('color') }}">
+                @error('color')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
               <div class="form-group">
                 <label class="form-label" for="image-input">Galeri Produk</label>
                 <label class="d-flex flex-column align-items-center py-4" for="image-input">
