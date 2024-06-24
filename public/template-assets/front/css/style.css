@@ -4607,12 +4607,12 @@ table .ticket-row:hover {
 }
 .about-section .about-content .review-title {
     font-size: 45px;
-    font-family: 'Roboto', sans-serif;
-  }
+    font-family: "Roboto", sans-serif;
+}
 .about-section .about-content .about-info {
     padding: 2rem 0;
     font-size: 22px;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 .about-section .about-content .about-list p {
     color: #232532;
@@ -5697,4 +5697,3 @@ a.shop-btn:hover {
 .product-cart-items span i {
     font-size: 1.25em;
 }
-

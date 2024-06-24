@@ -114,7 +114,7 @@
                                 </div>
                             </div>
                             <div class="product-cart-btn">
-                                <a href="cart.html" class="product-btn">Beli Sekarang</a>
+                                <a href="/user/checkout" class="product-btn">Beli Sekarang</a>
                             </div>
                         </div>
                     </div>

@@ -20,7 +20,9 @@ class ProductController extends Controller {
      */
     public function index() {
         $products = Product::all();
-        return view('seller.produk', compact('products'));
+        $product_auctions = ProductAuction::all();
+        // dd($products);
+        return view('seller.produk', compact('products', 'product_auctions'));
     }
 
     /**
