@@ -29,9 +29,7 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <form action="{{ route('seller.product.edit', $item->id) }}" method="post">
-                      @csrf
-                      @method('PUT')
+                    <form action="{{ route('seller.product.edit', $item->id) }}" method="get">
                       <button class="dropdown-item" type="submit">Edit</button>
                     </form>
                   </li>
@@ -73,9 +71,8 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <form action="{{ route('seller.productauction.edit', $item->id) }}" method="post">
+                    <form action="{{ route('seller.productauction.edit', $item->id) }}" method="get">
                       @csrf
-                      @method('PUT')
                       <button class="dropdown-item" type="submit">Edit</button>
                     </form>
                   </li>
