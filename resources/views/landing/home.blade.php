@@ -2,45 +2,51 @@
 
 @section('title', 'Beranda')
 
+@push('style')
+    <style>
+        .custom-margin-bottom {
+            margin-bottom: 11rem;
+            margin-left: 5rem;
+            /* Sesuaikan nilai margin sesuai kebutuhan Anda */
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: #f0f0f0;
+        }
+    </style>
+@endpush
+
 @section('content')
-<style>
-    .custom-margin-bottom {
-  margin-bottom: 11rem;
-  margin-left: 5rem; /* Sesuaikan nilai margin sesuai kebutuhan Anda */
-}
-
-</style>
-
-  <section id="hero" class="hero">
-    <div class="swiper hero-swiper">
-      <div class="swiper-wrapper hero-wrapper">
-        @foreach ($event as $key => $even)
-          <div id="slide{{ $key }}" class="swiper-slide hero-slider-one "
-            style="background-image: url('{{ asset("storage/{$even->foto}") }}');">
-            <div class="hero-slider-one"
-              style="background-color: rgba(2, 17, 36, 0.39); position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
-            </div>
-            <div class="container custom-margin-bottom">
-                <div class="row custom-margin-bottom">
-                  <div class="col-lg-2">
-                    <div class="position-absolute" data-aos="fade-up">
-                      <div class="wrapper-section">
-                        <h5 class="wrapper-details" style="color:white;">
-                          {{ $even->subjudul }}
-                        </h5>
-                        <h1 class="wrapper-details" style="color:white;">{{ $even->judul }}</h1>
-                        <a href="product-sidebar.html" class="shop-btn mt-3">Belanja Sekarang</a>
-                      </div>
+    <section id="hero" class="hero">
+        <div class="swiper hero-swiper">
+            <div class="swiper-wrapper hero-wrapper">
+                @foreach ($event as $key => $even)
+                    <div id="slide{{ $key }}" class="swiper-slide hero-slider-one "
+                        style="background-image: url('{{ asset("storage/{$even->foto}") }}');">
+                        <div class="hero-slider-one"
+                            style="background-color: rgba(2, 17, 36, 0.39); position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+                        </div>
+                        <div class="container custom-margin-bottom">
+                            <div class="row custom-margin-bottom">
+                                <div class="col-lg-2">
+                                    <div class="position-absolute" data-aos="fade-up">
+                                        <div class="wrapper-section">
+                                            <h5 class="wrapper-details" style="color:white;">
+                                                {{ $even->subjudul }}
+                                            </h5>
+                                            <h1 class="wrapper-details" style="color:white;">{{ $even->judul }}</h1>
+                                            <a href="product-sidebar.html" class="shop-btn mt-3">Belanja Sekarang</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-          </div>
-        @endforeach
-      </div>
-      <div class="swiper-pagination"></div>
-    </div>
-  </section>
+                @endforeach
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
 
 
     <section class="product-category mt-5">
@@ -53,7 +59,8 @@
                 @foreach ($categories as $kategori)
                     <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
                         <div class="wrapper-img">
-                            <img src="{{ asset("storage/{$kategori->icon}") }}" style="width:125px;hieght:125px;border-radius:20px;">
+                            <img src="{{ asset("storage/{$kategori->icon}") }}"
+                                style="width:125px;hieght:125px;border-radius:20px;">
                         </div>
                         <div class="wrapper-info">
                             <a href="" class="wrapper-details">{{ $kategori->title }}</a>
