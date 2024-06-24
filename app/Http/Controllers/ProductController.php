@@ -38,7 +38,7 @@ class ProductController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(StoreProductRequest $request) {
-        dd($request->all());
+        // dd($request->all());
         $data = collect($request->validated());
         $data->put("thumbnail", $request->thumbnail->store("uploads/thumbnails", "public"));
         $data->put("user_id", auth()->id());
@@ -71,7 +71,7 @@ class ProductController extends Controller {
 
         ProductGallery::insert($galleryData);
         ProductCategoryPivot::insert($categoryData);
-        return redirect()->route("seller.product");
+        return redirect()->route("seller.product.index");
     }
 
     /**

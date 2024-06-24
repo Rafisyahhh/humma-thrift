@@ -67,7 +67,7 @@
               <div class="review-form-name">
                 <label for="title" class="form-label">Nama Produk</label>
                 <input type="text" id="title" name="title"
-                  class="form-control @error('title') is-invalid @enderror" placeholder="Nama Produk">
+                  class="form-control @error('title') is-invalid @enderror" placeholder="Nama Produk" value="{{ old('title') }}">
                 @error('title')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -102,7 +102,7 @@
               <div class="review-form-name">
                 <label for="Size" class="form-label">Size</label>
                 <input type="text" id="Size" name="size"
-                  class="form-control @error('size') is-invalid @enderror" placeholder="Masukkan Ukuran">
+                  class="form-control @error('size') is-invalid @enderror" placeholder="Masukkan Ukuran" value="{{ old('size') }}">
                 @error('size')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -147,7 +147,7 @@
               <div class="review-form-name mt-4">
                 <label for="deskripsi" class="form-label">Deskripsi</label>
                 <textarea id="deskripsi" name="description" class="form-control @error('description') is-invalid @enderror"
-                  placeholder="Masukkan Deskripsi" rows="7"></textarea>
+                  placeholder="Masukkan Deskripsi" rows="7" value>{{ old('description') }}</textarea>
                 @error('description')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

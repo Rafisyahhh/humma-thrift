@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->foreignId('product_auction_id')->nullable()->constrained();
             $table->string('image');
             $table->timestamps();
+            
         });
     }
     /**
