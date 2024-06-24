@@ -124,7 +124,7 @@
                         <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit Kategori</h6>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('admin.product-category.update', $category->id) }}" method="POST">
+                        <form action="{{ route('admin.product-category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">

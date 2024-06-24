@@ -20,9 +20,6 @@ use App\Http\Controllers\{
     SocialShareButtonsController,
     HistoryController
 };
-use App\Models\User;
-use App\Notifications\SellerWelcomeNotification;
-use Illuminate\Support\Facades\Notification;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,18 +36,22 @@ use Illuminate\Support\Facades\Notification;
 Auth::routes(['verify' => true]);
 
 # Debug Routes
-Route::prefix('/debug')->group(function () {
-    Route::view('home', 'debug.home');
-    Route::view('modal', 'debug.modal');
+Route::prefix('/debug')->middleware(\App\Http\Middleware\DevelopmentMiddleware::class)->group(function () {
+    // Route::view('home', 'debug.home');
+    // Route::view('modal', 'debug.modal');
 
-    // Route::get('/role', fn() => dd(Auth::user()->hasRole('user')));
+    Route::get('/test', function() {
+        $user = fn() => "hello world";
+
+        dd(gettype($user));
+    });
 });
 
 # Public Routes
 Route::get('/', [LandingpageController::class, 'index']);
 
 # Seller Routes
-Route::prefix('seller')->middleware('auth')->name('seller.')->group(function () {
+Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(function () {
     Route::view('/home', 'seller.index')->name('home');
     Route::view('/transaction', 'seller.transaksi')->name('transaction');
     Route::view('/income', 'seller.penghasilan')->name('income');

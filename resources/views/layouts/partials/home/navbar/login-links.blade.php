@@ -51,10 +51,14 @@
                 </div>
                 <div class="wrapper-line"></div>
                 <div class="cart-btn">
-                    @if(auth()->user()->store)
+                    @if(auth()->user()->store && !request()->routeIs('seller.home'))
                         <a href="{{ route('seller.home') }}" class="shop-btn view-btn"> Ke Dasbor Penjual</a>
+                    @elseif(auth()->user()->store && request()->routeIs('seller.home'))
+                        <a href="{{ route('store.profile', auth()->user()->store->username) }}" class="shop-btn view-btn">Ke Toko</a>
                     @endif
+                    @if(!auth()->user()->store)
                     <a href="{{ route('user.userhome') }}" class="shop-btn view-btn">Ke Dasbor</a>
+                    @endif
                     <a href="#" class="shop-btn checkout-btn" id="logout-link">Keluar</a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
