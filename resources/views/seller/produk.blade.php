@@ -54,7 +54,7 @@
               </div>
             </div>
             <div class="product-cart-btn">
-              <a role="button" class="product-btn" data-bs-toggle="modal" data-bs-target="#detailLelang">Lelang</a>
+              <a role="button" class="product-btn" data-bs-toggle="modal" data-bs-target="#detailModal">Detail</a>
             </div>
           </div>
         </div>
