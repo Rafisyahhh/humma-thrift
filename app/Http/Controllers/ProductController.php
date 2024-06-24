@@ -87,46 +87,53 @@ class ProductController extends Controller {
     public function update(UpdateProductRequest $request, $product) {
         $data = $request->validated();
         $isAuction = $request->product_type === 'product_auctions';
-        $model = $isAuction ? ProductAuction::class : Product::class;
-        $fields = $isAuction
-            ? ['user_id', 'brand_id', 'title', 'description', 'thumbnail', 'size', 'bid_price_start', 'bid_price_end']
-            : ['user_id', 'brand_id', 'title', 'description', 'thumbnail', 'size', 'price'];
+        $currentProduct = Product::find($product) ?: ProductAuction::find($product);
 
-        $productData = Product::find($product);
-        $productArray = $productData->toArray();
-        $productArray["bid_price_start"] = $data["bid_price_start"];
-        $productArray["bid_price_end"] = $data["bid_price_end"];
+        if (!$currentProduct) {
+            return redirect()->route('seller.product.index')->with('error', 'Produk tidak ditemukan');
+        }
+
+        $productArray = $currentProduct->toArray();
         if ($isAuction) {
-            ProductGallery::where('product_id', $productData->id)->delete();
-            ProductCategoryPivot::where('product_id', $productData->id)->delete();
-            $productData->delete();
-            $productData = ProductAuction::create($productArray);
+            $productArray["bid_price_start"] = $data["bid_price_start"];
+            $productArray["bid_price_end"] = $data["bid_price_end"];
+        } else {
+            unset($productArray["bid_price_start"], $productArray["bid_price_end"]);
+        }
+
+        if (($isAuction && $currentProduct instanceof Product) || (!$isAuction && $currentProduct instanceof ProductAuction)) {
+            ProductGallery::where($isAuction ? 'product_id' : 'product_auction_id', $currentProduct->id)->delete();
+            ProductCategoryPivot::where($isAuction ? 'product_id' : 'product_auction_id', $currentProduct->id)->delete();
+            $currentProduct->delete();
+            $currentProduct = $isAuction ? ProductAuction::create($productArray) : Product::create($productArray);
         }
 
         if ($request->hasFile('thumbnail')) {
-            Storage::disk('public')->delete($productData->thumbnail);
+            Storage::disk('public')->delete($currentProduct->thumbnail);
             $data['thumbnail'] = $request->thumbnail->store('uploads/thumbnails', 'public');
         }
 
-        $productData->update($data);
+        $currentProduct->update($data);
 
         $galleryData = array_map(fn($image) => [
-            $isAuction ? 'product_auction_id' : 'product_id' => $productData->id,
+            $isAuction ? 'product_auction_id' : 'product_id' => $currentProduct->id,
             'image' => $image->store('uploads/galeries', 'public')
         ], $request->image_galery);
 
         $categoryData = array_map(fn($categoryId) => [
-            $isAuction ? 'product_auction_id' : 'product_id' => $productData->id,
+            $isAuction ? 'product_auction_id' : 'product_id' => $currentProduct->id,
             'product_category_id' => $categoryId
         ], $request->category_id);
 
-        ProductGallery::where($isAuction ? 'product_auction_id' : 'product_id', $productData->id)->delete();
-        ProductCategoryPivot::where($isAuction ? 'product_auction_id' : 'product_id', $productData->id)->delete();
+        ProductGallery::where($isAuction ? 'product_auction_id' : 'product_id', $currentProduct->id)->delete();
+        ProductCategoryPivot::where($isAuction ? 'product_auction_id' : 'product_id', $currentProduct->id)->delete();
         ProductGallery::insert($galleryData);
         ProductCategoryPivot::insert($categoryData);
 
         return redirect()->route('seller.product.index')->with('success', 'Sukses mengupdate produk');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
