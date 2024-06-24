@@ -2,15 +2,18 @@
 
 @section('title', 'Produk')
 
-@section('css')
+@section('style')
   <style>
+    button {
+      font-size: 15px;
+    }
   </style>
 @endsection
 
 @section('content')
   <div class="wishlist">
     <h5>Data Produk</h5>
-    <a href="produk/create" class="shop-btn float-left mb-4" style="color: white;">Tambah Produk</a>
+    <a href="{{ route('seller.product.create') }}" class="shop-btn float-left mb-4" style="color: white;">Tambah Produk</a>
     <div class="cart-section wishlist-section row gy-5">
       @foreach ($products as $item)
         <div class="col-lg-4 col-sm-6">
@@ -25,8 +28,20 @@
                   </span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{{ route('seller.product.edit', $item->id) }}">Edit</a></li>
-                  <li><a class="dropdown-item" href="{{ route('seller.product.destroy', $item->id) }}">Hapus</a></li>
+                  <li>
+                    <form action="{{ route('seller.product.edit', $item->id) }}" method="post">
+                      @csrf
+                      @method('PUT')
+                      <button class="dropdown-item" type="submit">Edit</button>
+                    </form>
+                  </li>
+                  <li>
+                    <form action="{{ route('seller.product.destroy', $item->id) }}" method="post">
+                      @csrf
+                      @method('DELETE')
+                      <button class="dropdown-item" type="submit">Hapus</button>
+                    </form>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -34,7 +49,7 @@
               <div class="product-description">
                 <a role="button" class="product-details">{{ $item->title }}</a>
                 <div class="price">
-                  <span class="new-price">{{ $item->price }}</span>
+                  <span class="new-price text-nowrap">{{ $item->price }}</span>
                 </div>
               </div>
             </div>
@@ -57,8 +72,19 @@
                   </span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{{ route('seller.productauction.edit', $item->id) }}">Edit</a></li>
-                  <li><a class="dropdown-item" href="{{ route('seller.productauction.destroy', $item->id) }}">Hapus</a>
+                  <li>
+                    <form action="{{ route('seller.productauction.edit', $item->id) }}" method="post">
+                      @csrf
+                      @method('PUT')
+                      <button class="dropdown-item" type="submit">Edit</button>
+                    </form>
+                  </li>
+                  <li>
+                    <form action="{{ route('seller.productauction.destroy', $item->id) }}" method="post">
+                      @csrf
+                      @method('DELETE')
+                      <button class="dropdown-item" type="submit">Hapus</button>
+                    </form>
                   </li>
                 </ul>
               </div>
@@ -67,7 +93,7 @@
               <div class="product-description">
                 <a role="button" class="product-details">{{ $item->title }}</a>
                 <div class="price">
-                  <span class="new-price">{{ $item->bid_price_start }}-{{ $item->bid_price_end }}</span>
+                  <span class="new-price text-nowrap">{{ $item->bid_price_start }}-{{ $item->bid_price_end }}</span>
                 </div>
               </div>
             </div>

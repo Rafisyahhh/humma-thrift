@@ -58,7 +58,7 @@
     {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif --}}
   <div class="justify-content-center">
-    <form action="{{ route('seller.produk.store') }}" id="formDropzone" method="post" enctype="multipart/form-data">
+    <form action="{{ route('seller.product.store') }}" id="formDropzone" method="post" enctype="multipart/form-data">
       @csrf
       <div class="review-form">
         <div class="account-inner-form">
