@@ -58,8 +58,7 @@
     {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif --}}
   <div class="justify-content-center">
-    <form action="{{ isset($is_edit) ? route('seller.product.update', $product->id) : route('seller.product.store') }}"
-      id="formDropzone" method="post" enctype="multipart/form-data">
+    <form action="{{ route('seller.product.store') }}" id="formDropzone" method="post" enctype="multipart/form-data">
       @csrf
       <div class="review-form">
         <div class="account-inner-form">
@@ -263,7 +262,7 @@
           </div>
         </div>
         <div class="submit-btn">
-          <button type="button" class="shop-btn cancel-btn" id="backButton">Batal</button>
+          <button type="button" class="shop-btn cancel-btn">Batal</button>
           <button type="submit" id="formSubmit" class="shop-btn update-btn">Tambah
             Produk</button>
         </div>

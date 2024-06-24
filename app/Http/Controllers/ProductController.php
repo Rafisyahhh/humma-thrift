@@ -84,7 +84,10 @@ class ProductController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(Product $product) {
-        //
+        $is_edit = true;
+        $brands = Brand::all();
+        $categories = ProductCategory::all();
+        return view('seller.tambahproduk', compact('product', 'brands', 'categories', 'is_edit'));
     }
 
     /**
