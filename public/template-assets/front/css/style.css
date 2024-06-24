@@ -73,7 +73,7 @@ h5 {
 a {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #6e6d79;
+    color: #000000;
     text-decoration: none;
     font-family: inter, sans-serif;
 }
@@ -1679,7 +1679,7 @@ button {
     border-radius: 30px;
 }
 .swiper-pagination-bullet-active {
-    background-color: #1c3879;
+    background-color: #ffffff;
 }
 .wrapper-section .wrapper-subtitle {
     font-size: 2.4rem;
@@ -4605,8 +4605,14 @@ table .ticket-row:hover {
     z-index: 1;
     right: 10rem;
 }
+.about-section .about-content .review-title {
+    font-size: 45px;
+    font-family: 'Roboto', sans-serif;
+  }
 .about-section .about-content .about-info {
     padding: 2rem 0;
+    font-size: 22px;
+    font-family: 'Roboto', sans-serif;
 }
 .about-section .about-content .about-list p {
     color: #232532;
@@ -4620,7 +4626,7 @@ table .ticket-row:hover {
     gap: 1.5rem;
 }
 .about-service {
-    background: rgba(41, 72, 146, 0.2);
+    background: rgba(117, 154, 241, 0.2);
 }
 .about-service .about-service-section {
     display: flex;
