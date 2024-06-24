@@ -57,7 +57,7 @@ Route::prefix('seller')->middleware('auth')->name('seller.')->group(function () 
     // Route::view('/product', 'seller.produk')->name('product');
     Route::view('/profil', 'seller.profil')->name('profil');
     Route::resource('product', ProductController::class);
-    Route::resource('produkauction', ProductAuctionController::class);
+    Route::resource('productauction', ProductAuctionController::class);
 });
 
 # User Routes

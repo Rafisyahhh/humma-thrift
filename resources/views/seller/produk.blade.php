@@ -11,7 +11,7 @@
   <div class="wishlist">
     <h5>Data Produk</h5>
     <a href="produk/create" class="shop-btn float-left mb-4" style="color: white;">Tambah Produk</a>
-    <div class="cart-section wishlist-section row">
+    <div class="cart-section wishlist-section row gy-5">
       @foreach ($products as $item)
         <div class="col-lg-4 col-sm-6">
           <div class="product-wrapper" data-aos="fade-up">
@@ -57,8 +57,9 @@
                   </span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{{ route('seller.product.edit', $item->id) }}">Edit</a></li>
-                  <li><a class="dropdown-item" href="{{ route('seller.product.destroy', $item->id) }}">Hapus</a></li>
+                  <li><a class="dropdown-item" href="{{ route('seller.productauction.edit', $item->id) }}">Edit</a></li>
+                  <li><a class="dropdown-item" href="{{ route('seller.productauction.destroy', $item->id) }}">Hapus</a>
+                  </li>
                 </ul>
               </div>
             </div>
