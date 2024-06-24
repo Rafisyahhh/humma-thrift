@@ -3,7 +3,7 @@
 @section('title', 'Admin - Kategori Produk')
 
 @section('content')
-
+@include('components.show-errors')
     <!-- Tabel -->
     <div class="card">
         <h5 class="card-header">Kategori</h5>
@@ -31,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @foreach ($categories as $category)
+                    @foreach ($productCategories as $category)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $category->title }}</td>
@@ -42,7 +42,7 @@
                                     <i class="ti ti-pencil"></i>
                                 </button>
                                 <form id="delete-form-{{ $category->id }}"
-                                    action="{{ route('admin.category.destroy', ['category' => $category->id]) }}"
+                                    action="{{ route('admin.product-category.destroy', $category->id) }}"
                                     method="POST" style="display:inline">
                                     @csrf
                                     @method('DELETE')
@@ -76,7 +76,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admin.category.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.product-category.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama Kategori</label>
@@ -116,7 +116,7 @@
     {{-- end --}}
 
     {{-- Modal Edit --}}
-    @foreach ($categories as $key => $category)
+    @foreach ($productCategories as $key => $category)
         <div class="modal fade" tabindex="-1" id="editModal{{ $category->id }}">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -124,7 +124,7 @@
                         <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit Kategori</h6>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('admin.category.update', $category->id) }}" method="POST">
+                        <form action="{{ route('admin.product-category.update', $category->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
