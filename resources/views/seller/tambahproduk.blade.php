@@ -2,7 +2,6 @@
 
 @section('style')
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="{{ asset('template-assets/front/css/image-uploader.css') }}">
   <style>
     .card {
       cursor: pointer;
@@ -45,9 +44,7 @@
 @endsection
 
 @section('content')
-  @if ($errors->any())
-    {{ implode('', $errors->all('<div>:message</div>')) }}
-  @endif
+  <img src="" alt="" id="">
   <div class="justify-content-center">
     <form action="{{ route('seller.produk.store') }}" id="formDropzone" method="post" enctype="multipart/form-data">
       @csrf
@@ -58,7 +55,8 @@
               <div class="review-form-name">
                 <label for="title" class="form-label">Nama Produk</label>
                 <input type="text" id="title" name="title"
-                  class="form-control @error('title') is-invalid @enderror" placeholder="Nama Produk">
+                  class="form-control @error('title') is-invalid @enderror" placeholder="Nama Produk"
+                  value="{{ old('title') }}">
                 @error('title')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -91,7 +89,8 @@
             <div class="col-md-6 mb-3">
               <div class="review-form-name">
                 <label for="Size" class="form-label">Size</label>
-                <input type="text" id="Size" name="size" class="form-control" placeholder="Masukkan Ukuran">
+                <input type="text" id="Size" name="size" class="form-control" placeholder="Masukkan Ukuran"
+                  value="{{ old('size') }}">
                 @error('size')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -135,7 +134,8 @@
               </div>
               <div class="review-form-name mt-4">
                 <label for="deskripsi" class="form-label">Deskripsi</label>
-                <textarea id="deskripsi" name="description" class="form-control" placeholder="Masukkan Deskripsi" rows="7"></textarea>
+                <textarea id="deskripsi" name="description" class="form-control @error('description') is-invalid @enderror"
+                  placeholder="Masukkan Deskripsi" rows="7">{{ old('description') }}</textarea>
                 @error('description')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -145,8 +145,22 @@
             </div>
             <div class="col-md-6 mb-3">
               <div class="form-group">
-                <label class="form-label text-muted opacity-75 fw-medium" for="formImage">Galeri Produk</label>
-                <div class="input-images"></div>
+                <label class="form-label" for="image-input">Galeri Produk</label>
+                <label class="d-flex flex-column align-items-center py-4" for="image-input">
+                  <div class="row gy-4 pb-4 row-cols-1 row-cols-md-2 w-100"
+                    style="border: 1px solid #7ea3db66; border-radius: 0.5rem; min-height: 105px;" id="image-area">
+                    <div class="col w-100 h-100 text-center my-auto">
+                      <span class="text-center text-nowrap">Pilih gambar (max 4)</span>
+                    </div>
+                  </div>
+                </label>
+                <input type="file" accept=".jpeg, .png, .jpg" name="image_galery[]"
+                  class="d-none @error('image_galery') is-invalid @enderror" id="image-input" multiple hidden>
+                @error('image_galery')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
               </div>
             </div>
           </div>
@@ -160,22 +174,23 @@
                     <div class="contact-wrapper">
                       <div class="row gy-5">
                         <div class="col-sm-6">
-                          <div class="card phone" onclick="selectCard('phone')" style="height: 80px">
-                            <input type="radio" id="phone" name="product_type" class="radio-input"
-                              style="display: none" value="default">
+                          <label class="card phone" for="products" onclick="selectCard('phone')" style="height: 80px">
+                            <input type="radio" id="products" name="product_type" class="radio-input d-none"
+                              value="products">
                             <div class="wrapper-content">
                               <p>Harga tetap</p>
                             </div>
-                          </div>
+                          </label>
                         </div>
                         <div class="col-sm-6">
-                          <div class="card email" onclick="selectCard('email')" style="height: 80px">
-                            <input type="radio" id="email" name="product_type" class="radio-input"
-                              style="display: none" value="bid">
+                          <label class="card email" for="product_auctions" onclick="selectCard('email')"
+                            style="height: 80px">
+                            <input type="radio" id="product_auctions" name="product_type" class="radio-input d-none"
+                              value="product_auctions">
                             <div class="wrapper-content">
                               <p>Lelang</p>
                             </div>
-                          </div>
+                          </label>
                         </div>
                       </div>
                     </div>
@@ -186,8 +201,8 @@
                 <div class="input-section">
                   <div class="form-group">
                     <label for="inputA">Harga</label>
-                    <input type="number" id="inputA" class="form-control" name="price"
-                      placeholder="Masukkan harga">
+                    <input type="number" id="inputA" class="form-control @error('price') is-invalid @enderror"
+                      name="price" placeholder="Masukkan harga" value="{{ old('price') }}">
                     @error('price')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -202,8 +217,9 @@
                     <div class="input-section">
                       <div class="form-group">
                         <label for="inputB">Harga mulai dari</label>
-                        <input type="number" id="inputB" name="bid_price_start" class="form-control"
-                          placeholder="Harga awal">
+                        <input type="number" id="inputB" name="bid_price_start"
+                          class="form-control @error('bid_price_start') is-invalid @enderror" placeholder="Harga awal"
+                          value="{{ old('bid_price_start') }}">
                         @error('bid_price_start')
                           <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -216,8 +232,9 @@
                     <div class="input-section">
                       <div class="form-group">
                         <label for="inputC">Sampai dari</label>
-                        <input type="number" id="inputC" name="bid_price_end" class="form-control"
-                          placeholder="harga akhir">
+                        <input type="number" id="inputC" name="bid_price_end"
+                          class="form-control @error('bid_price_end') is-invalid @enderror" placeholder="harga akhir"
+                          value="{{ old('bid_price_end') }}">
                         @error('bid_price_end')
                           <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -241,32 +258,24 @@
 @endsection
 
 @section('script')
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
-  <script src="{{ asset('template-assets/front/assets/js/image-uploader.js') }}"></script>
+  <script src="{{ asset('js/imageUploader.js') }}"></script>
   <script>
     $(function() {
-      const inputImages = $('.input-images');
-      const kategori = $('#kategori');
-      inputImages.imageUploader({
-        extensions: ['.jpg', '.jpeg', '.png', '.gif', '.svg'],
-        maxFiles: 4,
-        imagesInputName: 'image_galery',
-        label: 'Drag file kesini untuk mengunggah (max 4)'
-      });
-      kategori.select2({
-        containerCssClass: "form-control",
+      $("#image-input").imageUploader({
+        imageArea: $("#image-area"),
+        maxImages: 4,
+        template: `<div class="col">
+          <img class="card-img w-100 d-block" src=":image:" loading="lazy"/>
+        </div>`
       });
     });
 
     function selectCard(id) {
-      $('.card').removeClass('selected').find('input[type="radio"]').prop('checked', false);
-
+      $('.card').removeClass('selected');
       const selectedCard = $('.' + id);
-      selectedCard.addClass('selected').find('input[type="radio"]').prop('checked', true);
-
+      selectedCard.addClass('selected');
       $('#input-a, #input-b, #input-c').hide();
-
       if (id === 'phone') {
         $('#input-a').show();
       } else if (id === 'email') {
@@ -274,6 +283,13 @@
       }
     }
 
+    // $("input[type=radio].radio-input").click(function(e) {
+    //   const value = $(this).val();
+    //   const card = $(this).closest("label");
+    //   const row = $(this).closest(".row");
+    //   card.toggleClass('selected');
+    //   console.log(row.html());
+    // });
     selectCard('phone');
   </script>
 @endsection

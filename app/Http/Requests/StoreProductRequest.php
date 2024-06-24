@@ -19,10 +19,11 @@ class StoreProductRequest extends FormRequest {
      */
     public function rules(): array {
         return [
-            'title' => ['required', $this->product_type == 'bid' ? 'unique:product_auctions,title' : 'unique:products,title'],
+            'title' => ['required', "unique:$this->product_type,title"],
             'description' => 'required|string',
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'image_galery.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'image_galery' => 'required|array|max:4',
+            'image_galery.*' => 'image|mimes:jpeg,png,jpg|max:2048',
             'brand_id' => 'required',
             'size' => 'required',
             'price' => 'required_if:open_bid,0|nullable|numeric',
@@ -38,14 +39,28 @@ class StoreProductRequest extends FormRequest {
         return [
             'title.required' => 'Nama produk Wajib Diisi',
             'title.unique' => 'Nama produk sudah digunakan.',
-            'image_galery.required' => 'cover Wajib Diisi',
-            'image_galery.image' => 'Masukan harus berupa cover',
-            'image_galery.mimes' => 'cover harus berupa file jpeg,png,jpg',
-            'image_galery.max' => 'Ukuran cover harus kurang 2MB',
+            'description.required' => 'Deskripsi produk Wajib Diisi',
+            'description.string' => 'Deskripsi harus berupa teks',
+            'thumbnail.required' => 'Thumbnail Wajib Diisi',
+            'thumbnail.image' => 'Masukan harus berupa thumbnail',
+            'thumbnail.mimes' => 'Thumbnail harus berupa file jpeg,png,jpg',
+            'thumbnail.max' => 'Ukuran thumbnail harus kurang 2MB',
+            'image_galery.required' => 'Gambar galeri Wajib Diisi',
+            'image_galery.max' => 'Gambar tidak boleh melebihi 4',
+            'image_galery.*.image' => 'Masukan harus berupa gambar galeri',
+            'image_galery.*.mimes' => 'Gambar galeri harus berupa file jpeg,png,jpg',
+            'image_galery.*.max' => 'Ukuran gambar galeri harus kurang 2MB',
             'brand_id.required' => 'Nama produk Wajib Diisi',
             'size.required' => 'Nama size Wajib Diisi',
-            'bid_price_start.max' => 'Harga awal tidak boleh lebh besar dari harga akhir',
-
+            'price.required_if' => 'Harga harus diisi jika produk bukan lelang',
+            'price.numeric' => 'Harga harus berupa angka',
+            'bid_price_start.max' => 'Harga awal tidak boleh lebih besar dari harga akhir',
+            'bid_price_end.required_if' => 'Harga akhir harus diisi jika produk lelang',
+            'bid_price_end.numeric' => 'Harga akhir harus berupa angka',
+            'category_id.required' => 'Kategori produk Wajib Diisi',
+            'category_id.array' => 'Kategori harus berupa array',
+            'category_id.*.integer' => 'ID kategori harus berupa angka',
+            'category_id.*.exists' => 'ID kategori tidak ditemukan',
         ];
     }
 }
