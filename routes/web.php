@@ -54,10 +54,10 @@ Route::prefix('seller')->middleware('auth')->name('seller.')->group(function () 
     Route::view('/home', 'seller.index')->name('home');
     Route::view('/transaction', 'seller.transaksi')->name('transaction');
     Route::view('/income', 'seller.penghasilan')->name('income');
-    Route::view('/product', 'seller.produk')->name('product');
+    // Route::view('/product', 'seller.produk')->name('product');
     Route::view('/profil', 'seller.profil')->name('profil');
-    Route::resource('produk', ProductController::class);
-    Route::resource('produkauction', ProductAuctionController::class);
+    Route::resource('product', ProductController::class);
+    Route::resource('productauction', ProductAuctionController::class);
 });
 
 # User Routes
@@ -108,7 +108,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::resource('user', UserController::class);
     Route::resource('event', EventController::class);
 
-    Route::prefix('/notification')->name('notification.')->group(function() {
+    Route::prefix('/notification')->name('notification.')->group(function () {
         Route::get('/', [NotificationController::class, 'index'])->name('index');
         Route::get('/read-all', [NotificationController::class, 'readAll'])->name('readAll');
         Route::get('/read/{id}', [NotificationController::class, 'read'])->name('read');

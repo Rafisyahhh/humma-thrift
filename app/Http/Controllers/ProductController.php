@@ -20,7 +20,8 @@ class ProductController extends Controller {
      */
     public function index() {
         $products = Product::all();
-        return view('seller.produk', compact('products'));
+        $product_auctions = ProductAuction::all();
+        return view('seller.produk', compact('products', 'product_auctions'));
     }
 
     /**
@@ -39,7 +40,7 @@ class ProductController extends Controller {
     public function store(StoreProductRequest $request) {
         dd($request->all());
         $data = collect($request->validated());
-        $data->put("thumbnail", $request->thumbnail->store("uploads/thumbnails"));
+        $data->put("thumbnail", $request->thumbnail->store("uploads/thumbnails", "public"));
         $data->put("user_id", auth()->id());
 
         $product_type = $request->product_type;
@@ -58,7 +59,7 @@ class ProductController extends Controller {
         foreach ($request->image_galery as $image) {
             $galleryData[] = [
                 $isAuction ? 'product_auction_id' : 'product_id' => $productData->id,
-                'image' => $image->store('uploads/galeries')
+                'image' => $image->store('uploads/galeries', "public")
             ];
         }
         foreach ($request->category_id as $categoryId) {
@@ -98,6 +99,8 @@ class ProductController extends Controller {
      * Remove the specified resource from storage.
      */
     public function destroy(Product $product) {
-        //
+        dd($product);
+        // $image_gallery = ProductGallery::where()->get();
+        // $product->delete();
     }
 }
