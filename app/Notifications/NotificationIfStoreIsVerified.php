@@ -60,6 +60,7 @@ class NotificationIfStoreIsVerified extends Notification
     public function toMail(User $notifiable): MailMessage
     {
         return (new MailMessage)
+            ->subject('Toko Anda Telah Terverifikasi')
             ->subject('Toko anda telah diverifikasi')
             ->greeting("Halo {$notifiable->name}")
             ->line("Toko anda yang bernama \"{$this->token->name}\" telah diverifikasi. Namun masih menunggu verifikasi dari admin untuk aktivasi toko anda.")
