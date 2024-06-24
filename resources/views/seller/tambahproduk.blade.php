@@ -182,6 +182,19 @@
                 @enderror
               </div>
             </div>
+            <div class="col-md-6 mb-3">
+              <div class="review-form-name">
+                <label for="Size" class="form-label">Size</label>
+                <input type="text" id="Size" name="size"
+                  class="form-control @error('size') is-invalid @enderror" placeholder="Masukkan Ukuran"
+                  value="{{ isset($is_edit) ? $product->size : old('size') }}">
+                @error('size')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
           </div>
         </div>
         <div class="account-inner-form">
