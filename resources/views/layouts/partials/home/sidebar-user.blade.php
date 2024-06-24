@@ -57,18 +57,7 @@
             'icon' => 'list',
             'role' => 'user',
         ],
-        [
-            'title' => 'Keranjang',
-            'route' => 'user.cart',
-            'icon' => 'shopping-cart',
-            'role' => 'user',
-        ],
-        [
-            'title' => 'Favorit',
-            'route' => 'user.wishlist',
-            'icon' => 'heart',
-            'role' => 'user',
-        ],
+       
         [
             'title' => 'Ganti Sandi',
             'route' => 'user.update-password.index',

@@ -23,7 +23,7 @@
 </div>
 
 <div class="header-favourite">
-    <a href="wishlist.html" class="cart-item">
+    <a href="{{ route('user.wishlist') }}" class="cart-item">
         <span>
             <i class="fas fa-heart"></i>
         </span>
