@@ -99,8 +99,18 @@ class ProductController extends Controller {
      * Remove the specified resource from storage.
      */
     public function destroy(Product $product) {
-        dd($product);
-        // $image_gallery = ProductGallery::where()->get();
-        // $product->delete();
+        $product_gallery = ProductGallery::where("product_id", $product->id)->get();
+        foreach ($product_gallery as $data) {
+            if (file_exists(storage_path($data->image))) {
+                unlink(storage_path($data->image));
+            }
+            $data->delete();
+        }
+
+        ProductCategoryPivot::where("product_id", $product->id)->delete();
+
+        $product->delete();
+
+        return redirect()->back()->with('success', "Sukses menghapus data");
     }
 }

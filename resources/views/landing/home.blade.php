@@ -2,6 +2,20 @@
 
 @section('title', 'Beranda')
 
+@push('style')
+    <style>
+        .custom-margin-bottom {
+            margin-bottom: 11rem;
+            margin-left: 5rem;
+            /* Sesuaikan nilai margin sesuai kebutuhan Anda */
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: #f0f0f0;
+        }
+    </style>
+@endpush
+
 @section('content')
     <style>
         .custom-margin-bottom {

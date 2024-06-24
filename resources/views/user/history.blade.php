@@ -157,11 +157,11 @@
                         </div>
                     </div>
                 </td>
-                
+
                 <form class="mt-5">
                     <hr>
                     <div class="row-rating">
-                        <label for="produk-rating" class="form-label mb-2" style="font-size: 20px;">Nilai Produk </label>
+                        <label for="produk-rating" class="form-label mb-2" style="font-size: 19px;">Nilai Produk </label>
                         <div class="rating" style="margin-left: 100px;">
                             <input type="radio" id="produk-star1" name="produk-rating" value="1" /><label for="produk-star1" title="Buruk">&#9733;</label>
                             <input type="radio" id="produk-star2" name="produk-rating" value="2" /><label for="produk-star2" title="Cukup">&#9733;</label>
@@ -170,10 +170,10 @@
                             <input type="radio" id="produk-star5" name="produk-rating" value="5" /><label for="produk-star5" title="Luar Biasa">&#9733;</label>
                         </div>
                     </div>
-                    
+
                     <div class="row-rating">
-                        <label for="toko-rating" class="form-label mb-2" style="font-size: 20px; ">Nilai Toko </label>
-                        <div class="rating" style="margin-left: 116px;">
+                        <label for="toko-rating" class="form-label mb-2" style="font-size: 19px; ">Nilai Toko </label>
+                        <div class="rating" style="margin-left: 121px;">
                             <input type="radio" id="toko-star1" name="toko-rating" value="1" /><label for="toko-star1" title="Buruk">&#9733;</label>
                             <input type="radio" id="toko-star2" name="toko-rating" value="2" /><label for="toko-star2" title="Cukup">&#9733;</label>
                             <input type="radio" id="toko-star3" name="toko-rating" value="3" /><label for="toko-star3" title="Baik">&#9733;</label>
@@ -182,12 +182,12 @@
                         </div>
                     </div>
                     <hr>
-                    <label for="ulasan" class="form-label" style="font-size: 20px;">Beri Ulasan :</label>
-                    <textarea id="deskripsi" name="ulasan" class="form-control" placeholder="Masukkan ulasan" rows="7" style="font-size: 15px;"></textarea>
+                    <label for="ulasan" class="form-label" style="font-size: 18px;">Beri Ulasan :</label> <br>
+                    <textarea id="deskripsi" name="ulasan" class="form-control" placeholder="Masukkan ulasan" rows="7" style="font-size: 17px;"></textarea>
 
-                    <button type="submit" class="shop-btn" style="margin-left: 24rem;">Kirim Nilai</button>
+                    <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim Ulasan</button>
                 </form>
-                
+
             </div>
         </div>
         @empty

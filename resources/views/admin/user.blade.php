@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Daftar Pengguna')
+
 @section('content')
     <!-- Bootstrap Table with Header - Light -->
     <div class="card">
