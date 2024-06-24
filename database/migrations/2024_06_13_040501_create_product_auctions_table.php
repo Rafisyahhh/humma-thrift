@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->text('description');
             $table->string('thumbnail');
             $table->string('size');
+            $table->string('color');
             $table->enum('status', ['pending', 'approved', 'rejected', 'sold'])->default('pending');
             // $table->boolean('open_bid')->default(true);
             $table->bigInteger('bid_price_start')->nullable();

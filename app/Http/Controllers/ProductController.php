@@ -41,8 +41,8 @@ class ProductController extends Controller {
         $isAuction = $request->product_type === 'product_auctions';
         $model = $isAuction ? ProductAuction::class : Product::class;
         $fields = $isAuction
-            ? ['user_id', 'brand_id', 'title', 'description', 'thumbnail', 'size', 'bid_price_start', 'bid_price_end']
-            : ['user_id', 'brand_id', 'title', 'description', 'thumbnail', 'size', 'price'];
+            ? ['user_id', 'brand_id', 'title', 'description', 'thumbnail', 'size', 'color', 'bid_price_start', 'bid_price_end']
+            : ['user_id', 'brand_id', 'title', 'description', 'thumbnail', 'size', 'color', 'price'];
 
         $product = $model::create($data);
 
