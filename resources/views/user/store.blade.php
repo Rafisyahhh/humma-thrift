@@ -1,5 +1,5 @@
 @extends('layouts.home')
-@section('tittle','Store')
+@section('title','Store')
 @section('content')
 
     <section class="product top-selling">
@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                             <div class="product-cart-btn">
-                                <a href="{{ route('store.profile', 'ssss') }}" class="product-btn">Detail</a>
+                                <a href="{{ route('store.profile', 'cinta90') }}" class="product-btn">Detail</a>
                             </div>
                         </div>
                     </div>

@@ -156,6 +156,8 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
+    <script src="{{ asset('additional-assets/sweetalert2-11.12.0/sweetalert2.all.js') }}"></script>
+
     @stack('scripts')
     @yield('scripts')
 

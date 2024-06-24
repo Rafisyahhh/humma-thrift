@@ -44,7 +44,7 @@
 
         .profile-content {
             margin-left: calc(200px + 5rem + 2rem);
-            margin-top: -8.5rem;
+            margin-top: -7.5rem;
             padding-bottom: 5rem;
             display: flex;
             align-items: center;
@@ -71,6 +71,64 @@
         .product-cart-items span i {
             font-size: 1.25em;
         }
+
+        .profile-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .location {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            color: gray;
+            font-size: 1.2em;
+            gap: .325rem;
+        }
+
+        .location i {
+            margin-right: 5px;
+            color: gray;
+            font-size: 1.5em;
+        }
+
+        .profile-info-detail-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: start;
+            margin-top: 20px;
+        }
+
+        .profile-info-detail-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 28px;
+            border-right: 1px solid #ddd;
+        }
+
+        .profile-info-detail-content:last-child {
+            border-right: none;
+        }
+
+        .profile-icon {
+            font-size: 24px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .profile-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .profile-subtitle {
+            font-size: 14px;
+            color: #777;
+        }
     </style>
 @endpush
 
@@ -78,30 +136,58 @@
     <section class="section-banner">
         <div class="container border-bottom">
             <div class="banner-wrapper">
-                <div class="banner-cover">
-                    <img src="{{ asset($store->store_cover ? "storage/{$store->store_cover}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
-                        alt="upload" class="responsive-img " id="responsive-img" />
-                </div>
-
+                <div class="banner-cover"> <img
+                        src="{{ asset($store->store_cover ? "storage/{$store->store_cover}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
+                        alt="upload" class="responsive-img" id="responsive-img" /> </div>
                 <div class="profile-wrapper">
-                    <div class="avatar-cover">
-                        <img
+                    <div class="avatar-cover"> <img
                             src="{{ asset($store->store_logo ? "storage/{$store->store_logo}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}" />
                     </div>
-
                     <div class="profile-content">
                         <div class="profile-name-wrapper">
                             <h5 class="profile-name mb-2">{{ $store->name }}</h5>
                             <p class="profile-description opacity-75 mb-0">{{ '@' . $store->username }}</p>
+                            <div class="location mt-3">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span style="font-size: 16px;">Karangploso, Malang</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-detail-wrapper">
+                            <div class="profile-info-detail-content">
+                                <div class="profile-icon" style="color: #1c3879">
+                                    <i class="fas fa-box"></i>
+                                </div>
+                                <div class="profile-title">50+</div>
+                                <div class="profile-subtitle">Produk</div>
+                            </div>
+                            <div class="profile-info-detail-content">
+                                <div class="profile-icon">
+                                    <i class="fas fa-star" style="color: #ffbb28"></i>
+                                </div>
+                                <div class="profile-title">4.87 / 5.0</div>
+                                <div class="profile-subtitle">Ulasan Toko</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="location mt-2"> &nbsp;&nbsp;<span class="location mt-2">Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Reprehenderit nesciunt aut ea omnis molestias laudantium explicabo
+                            ipsum corporis voluptates, optio harum quasi officia similique iste labore at eius praesentium
+                            nemo nostrum sed saepe accusantium? Sapiente, vitae quod. Possimus modi repudiandae eum
+                            voluptate inventore eligendi doloribus molestiae, consectetur vero alias esse, reiciendis
+                            perferendis officia perspiciatis ratione.</span> </div>
+                </div>
+            </div> <br> <br>
 
-            @if(!$store->verified_at)
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <p style="font-size:1rem!important">Toko anda belum terverifikasi. Silahkan verifikasikan toko anda dari tautan yang sudah kami kirim ke surel anda.</p>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            @if (!$store->verified_at)
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size: 0.9rem;">
+                    <p>Toko anda belum terverifikasi. Silahkan verifikasikan toko anda dari tautan yang sudah kami kirim ke
+                        surel anda.</p> <button type="button" class="btn-close" data-bs-dismiss="alert"
+                        aria-label="Close"></button>
                 </div>
             @endif
         </div>
@@ -123,17 +209,17 @@
                                     <div class="product-cart-items">
                                         <a href="/user/wishlist" class="favourite cart-item">
                                             <span>
-                                                <i class="fas fa-eye"></i>
+                                                <i class="fas fa-heart"></i>
                                             </span>
                                         </a>
                                         <a href="/user/wishlist" class="favourite cart-item">
                                             <span>
-                                                <i class="fas fa-heart"></i>
+                                                <i class="fas fa-shopping-cart"></i>
                                             </span>
                                         </a>
                                         <a href="/user/keranjang" class="compaire cart-item">
                                             <span>
-                                                <i class="fas fa-shopping-cart"></i>
+                                                <i class="fas fa-share"></i>
                                             </span>
                                         </a>
                                     </div>

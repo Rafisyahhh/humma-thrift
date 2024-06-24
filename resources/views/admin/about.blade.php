@@ -1,26 +1,22 @@
 @extends('layouts.app')
 
-@section('title', 'About Us')
+@section('title', 'Data Tentang Kami')
 
 @section('style')
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet" />
-<link href="summernote-bs5.css" rel="stylesheet">
-<script src="summernote-bs5.js"></script>
-
+    <link href="{{ asset('additional-assets/summernote-0.8.20/summernote-lite.min.css') }}" rel="stylesheet" />
 @endsection
+
 @section('content')
     <!-- Bootstrap Table with Header - Light -->
     <div class="card">
-        <h5 class="card-header">About Us</h5>
+        <h5 class="card-header">Data Tentang Kami</h5>
         <div class="card-header d-flex justify-content-between align-items-center">
             @if ($aboutUs->isEmpty())
-            <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
-            style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">
-            Tambahkan About Us
-        </a>
-        @endif
-
-
+                <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
+                    style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">
+                    Tambahkan Data Tentang Kami
+                </a>
+            @endif
         </div>
 
         <div class="table-responsive text-nowrap">
@@ -143,8 +139,8 @@
                                     <div class="mb-3">
                                         <label for="image" class="form-label">Gambar</label>
                                         <input type="file"
-                                            class="form-control @error('image_update') is-invalid @enderror" id="image"
-                                            name="image_update" />
+                                            class="form-control @error('image_update') is-invalid @enderror"
+                                            id="image" name="image_update" />
 
                                         @if ($about->image)
                                             <img src="{{ asset('storage/' . $about->image) }}"
@@ -191,35 +187,33 @@
 
 
 @section('js')
+    <script src="{{ asset('additional-assets/summernote-0.8.20/summernote-lite.min.js') }}"></script>
 
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('.custom-summernote').summernote({
-            placeholder: 'Isi deskripsi about us',
-            tabsize: 2,
-            height: 120,
-            toolbar: [
-                ['font', ['bold', 'underline', 'clear']],
-                ['insert', ['link', 'picture']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-            ],
-            callbacks: {
-                onInit: function() {
-                    // Set background color to white
-                    $('.custom-summernote .note-editor').css('background-color', 'white');
-                    // Set text color to white
-                    $('.custom-summernote .note-editable').css('color', 'white');
-                },
-                onChange: function(contents, $editable) {
-                    // Set text color to white
-                    $('.custom-summernote .note-editable').css('color', 'white');
+    <script>
+        $(document).ready(function() {
+            $('.custom-summernote').summernote({
+                placeholder: 'Isi deskripsi about us',
+                tabsize: 2,
+                height: 120,
+                toolbar: [
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['insert', ['link', 'picture']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                ],
+                callbacks: {
+                    onInit: function() {
+                        // Set background color to white
+                        $('.custom-summernote .note-editor').css('background-color', 'white');
+                        // Set text color to white
+                        $('.custom-summernote .note-editable').css('color', 'white');
+                    },
+                    onChange: function(contents, $editable) {
+                        // Set text color to white
+                        $('.custom-summernote .note-editable').css('color', 'white');
+                    }
                 }
-            }
+            });
         });
-    });
-</script>
+    </script>
 @endsection

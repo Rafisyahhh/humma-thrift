@@ -1,6 +1,6 @@
 @extends('layouts.panel')
 
-@section('tittle', 'Transaksi')
+@section('title', 'Transaksi')
 
 @section('css')
 
@@ -23,7 +23,7 @@
 
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" style="border:none;" role="tablist">
-                        <button class="nav-link active" id="nav-produk-tab" data-bs-toggle="tab" data-bs-target="#nav-produk"
+                        <button class="nav-link active me-2" id="nav-produk-tab" data-bs-toggle="tab" data-bs-target="#nav-produk"
                             type="button" role="tab" aria-controls="nav-produk" aria-selected="true">
                             Produk
                         </button>
