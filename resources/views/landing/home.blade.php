@@ -87,11 +87,12 @@
             </div>
             <div class="arrival-section">
                 <div class="row g-5">
+                    @foreach ($product as $item)
                     <div class="col-lg-3 col-sm-6">
                         <div class="product-wrapper" data-aos="fade-up">
                             <div class="product-img">
-                                <img src="template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp"
-                                    alt="product-img">
+                                <img src="{{ asset("storage/$item->thumbnail") }}"
+                                    alt="product-img" class="object-fit-cover">
                                 <div class="product-cart-items">
                                     <div class="product-cart-items">
                                         <a href="/user/wishlist" class="favourite cart-item">
@@ -114,10 +115,10 @@
                             </div>
                             <div class="product-info">
                                 <div class="product-description">
-                                    <a href="/user/detailproduct" class="product-details"> Nama Produk
+                                    <a href="/user/detailproduct" class="product-details"> {{ $item->title }}
                                     </a>
                                     <div class="price">
-                                        <span class="new-price">Harga</span>
+                                        <span class="new-price">Rp.{{ number_format($item->price, 2, ',', '.') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +127,7 @@
                             </div>
                         </div>
                     </div>
-
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -161,12 +162,13 @@
             </div>
             <div class="flash-sale-section" style="position: relative; z-index: 1;">
                 <div class="row g-5">
+                    @foreach ($product_auction as $item)
                     <div class="col-lg-3 col-md-6">
                         <div class="product-wrapper" style="z-index: 1;" data-aos="fade-right"
                             data-aos-duration="100">
                             <div class="product-img">
-                                <img src="template-assets/front/assets/images/homepage-one/product-img/product-img-5.webp"
-                                    alt="product-img">
+                                <img src="{{ asset("storage/$item->thumbnail") }}"
+                                    alt="product-img" class="object-fit-cover">
                                 <div class="product-cart-items">
                                     <div class="product-cart-items">
                                         <a href="/user/wishlist" class="favourite cart-item">
@@ -189,10 +191,10 @@
                             </div>
                             <div class="product-info">
                                 <div class="product-description">
-                                    <a href="/user/detailproduct" class="product-details">Nama Produk
+                                    <a href="/user/detailproduct" class="product-details">{{$item->title}}
                                     </a>
                                     <div class="price">
-                                        <span class="new-price">Harga</span>
+                                        <span class="new-price">Rp.{{ number_format($item->bid_price_start, 2, ',', '.') }} - Rp.{{ number_format($item->bid_price_end, 2, ',', '.') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -201,126 +203,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="product-wrapper" style="z-index: 1;" data-aos="fade-right"
-                            data-aos-duration="100">
-                            <div class="product-img">
-                                <img src="template-assets/front/assets/images/homepage-one/product-img/product-img-5.webp"
-                                    alt="product-img">
-                                <div class="product-cart-items">
-                                    <div class="product-cart-items">
-                                        <a href="/user/wishlist" class="favourite cart-item">
-                                            <span>
-                                                <i class="fas fa-heart"></i>
-                                            </span>
-                                        </a>
-                                        <a href="/user/checkout" class="favourite cart-item">
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="compaire cart-item">
-                                            <span>
-                                                <i class="fas fa-share"></i>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <div class="product-description">
-                                    <a href="/user/detailproduct" class="product-details">Nama Produk
-                                    </a>
-                                    <div class="price">
-                                        <span class="new-price">Harga</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-cart-btn">
-                                <a href="cart.html" class="product-btn">Ikuti Lelang</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="product-wrapper" style="z-index: 1;" data-aos="fade-right"
-                            data-aos-duration="100">
-                            <div class="product-img">
-                                <img src="template-assets/front/assets/images/homepage-one/product-img/product-img-5.webp"
-                                    alt="product-img">
-                                <div class="product-cart-items">
-                                    <div class="product-cart-items">
-                                        <a href="/user/wishlist" class="favourite cart-item">
-                                            <span>
-                                                <i class="fas fa-heart"></i>
-                                            </span>
-                                        </a>
-                                        <a href="/user/checkout" class="favourite cart-item">
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="compaire cart-item">
-                                            <span>
-                                                <i class="fas fa-share"></i>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <div class="product-description">
-                                    <a href="/user/detailproduct" class="product-details">Nama Produk
-                                    </a>
-                                    <div class="price">
-                                        <span class="new-price">Harga</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-cart-btn">
-                                <a href="cart.html" class="product-btn">Ikuti Lelang</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="product-wrapper" style="z-index: 1;" data-aos="fade-right"
-                            data-aos-duration="100">
-                            <div class="product-img">
-                                <img src="template-assets/front/assets/images/homepage-one/product-img/product-img-5.webp"
-                                    alt="product-img">
-                                <div class="product-cart-items">
-                                    <div class="product-cart-items">
-                                        <a href="/user/wishlist" class="favourite cart-item">
-                                            <span>
-                                                <i class="fas fa-heart"></i>
-                                            </span>
-                                        </a>
-                                        <a href="/user/checkout" class="favourite cart-item">
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="compaire cart-item">
-                                            <span>
-                                                <i class="fas fa-share"></i>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <div class="product-description">
-                                    <a href="/user/detailproduct" class="product-details">Nama Produk
-                                    </a>
-                                    <div class="price">
-                                        <span class="new-price">Harga</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-cart-btn">
-                                <a href="cart.html" class="product-btn">Ikuti Lelang</a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
