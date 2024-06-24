@@ -43,9 +43,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        return view('user.profil');
     }
 
     /**
@@ -61,7 +61,26 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        // Proses unggah file avatar jika ada
+        if ($request->hasFile('avatar')) {
+            // Hapus avatar lama jika ada
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+            // Simpan avatar baru
+            $avatarPath = $request->file('avatar')->store('avatars', 'public');
+            $user->avatar = $avatarPath;
+        }
+        $user->update([
+            'username' => $request->username,
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'avatar' => $avatarPath,
+            'pbirth' => $request->pbirth,
+            'dbirth' => $request->dbirth,
+        ]);
+        return redirect()->back()->with("success", "Berhasil Memperbarui Keahlian");
     }
 
     /**
