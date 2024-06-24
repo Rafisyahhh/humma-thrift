@@ -58,13 +58,8 @@
     {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif --}}
   <div class="justify-content-center">
-    <form action="{{ isset($is_edit) ? route('seller.product.update', $product->id) : route('seller.product.store') }}"
-      id="formDropzone" method="post" enctype="multipart/form-data">
+    <form action="{{ route('seller.product.store') }}" id="formDropzone" method="post" enctype="multipart/form-data">
       @csrf
-      @isset($is_edit)
-        @method('PUT')
-        {{ $product->gallery }}
-      @endisset
       <div class="review-form">
         <div class="account-inner-form">
           <div class="row">
@@ -73,7 +68,7 @@
                 <label for="title" class="form-label">Nama Produk</label>
                 <input type="text" id="title" name="title"
                   class="form-control @error('title') is-invalid @enderror" placeholder="Nama Produk"
-                  value="{{ isset($is_edit) ? $product->title : old('title') }}">
+                  value="{{ old('title') }}">
                 @error('title')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -88,8 +83,7 @@
                   data-placeholder="Pilih brand">
                   <option></option>
                   @foreach ($brands as $brand)
-                    <option value="{{ $brand->id }}"
-                      {{ (isset($is_edit) ? $product->brand_id : old('brand_id') == $brand->id) ? 'selected' : '' }}>
+                    <option value="{{ $brand->id }}" {{ old('brand_id') == $brand->id ? 'selected' : '' }}>
                       {{ $brand->title }}
                     </option>
                   @endforeach
@@ -110,7 +104,7 @@
                 <label for="Size" class="form-label">Size</label>
                 <input type="text" id="Size" name="size"
                   class="form-control @error('size') is-invalid @enderror" placeholder="Masukkan Ukuran"
-                  value="{{ isset($is_edit) ? $product->size : old('size') }}">
+                  value="{{ old('size') }}">
                 @error('size')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -155,7 +149,7 @@
               <div class="review-form-name mt-4">
                 <label for="deskripsi" class="form-label">Deskripsi</label>
                 <textarea id="deskripsi" name="description" class="form-control @error('description') is-invalid @enderror"
-                  placeholder="Masukkan Deskripsi" rows="7">{{ isset($is_edit) ? $product->description : old('description') }}</textarea>
+                  placeholder="Masukkan Deskripsi" rows="7">{{ old('description') }}</textarea>
                 @error('description')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -221,8 +215,7 @@
                   <div class="form-group">
                     <label for="inputA">Harga</label>
                     <input type="number" id="inputA" class="form-control @error('price') is-invalid @enderror"
-                      name="price" placeholder="Masukkan harga"
-                      value="{{ isset($is_edit) ? $product->price : old('price') }}">
+                      name="price" placeholder="Masukkan harga" value="{{ old('price') }}">
                     @error('price')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -239,7 +232,7 @@
                         <label for="inputB">Harga mulai dari</label>
                         <input type="number" id="inputB" name="bid_price_start"
                           class="form-control @error('bid_price_start') is-invalid @enderror" placeholder="Harga awal"
-                          value="{{ isset($is_edit) ? $product->bid_price_start : old('bid_price_start') }}">
+                          value="{{ old('bid_price_start') }}">
                         @error('bid_price_start')
                           <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -254,7 +247,7 @@
                         <label for="inputC">Sampai dari</label>
                         <input type="number" id="inputC" name="bid_price_end"
                           class="form-control @error('bid_price_end') is-invalid @enderror" placeholder="harga akhir"
-                          value="{{ isset($is_edit) ? $product->bid_price_end : old('bid_price_end') }}">
+                          value="{{ old('bid_price_end') }}">
                         @error('bid_price_end')
                           <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -269,7 +262,7 @@
           </div>
         </div>
         <div class="submit-btn">
-          <button type="button" class="shop-btn cancel-btn" id="backButton">Batal</button>
+          <button type="button" class="shop-btn cancel-btn">Batal</button>
           <button type="submit" id="formSubmit" class="shop-btn update-btn">Tambah
             Produk</button>
         </div>
@@ -292,13 +285,6 @@
     $("#kategori.select2").select2();
     $(function() {
       $("#image-input").imageUploader({
-        @isset($is_edit)
-          preloadedImages: [
-            @foreach ($product->gallery as $item)
-              '{{ asset("storage/$item->image") }}',
-            @endforeach
-          ],
-        @endisset
         imageArea: $("#image-area"),
         maxImages: 4,
         template: `<div class="col">

@@ -54,19 +54,17 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <form action="{{ route('seller.product.edit', $item->id) }}" method="post">
-                                            @csrf
-                                            @method('PUT')
-                                            <button class="dropdown-item" type="submit">Edit</button>
+                                        <form action="{{ route('seller.product.edit', $item->id) }}" method="get">
+                                          <button class="dropdown-item" type="submit">Edit</button>
                                         </form>
-                                    </li>
-                                    <li>
+                                      </li>
+                                      <li>
                                         <form action="{{ route('seller.product.destroy', $item->id) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="dropdown-item" type="submit">Hapus</button>
+                                          @csrf
+                                          @method('DELETE')
+                                          <button class="dropdown-item" type="submit">Hapus</button>
                                         </form>
-                                    </li>
+                                      </li>
                                 </ul>
                             </div>
                         </div>

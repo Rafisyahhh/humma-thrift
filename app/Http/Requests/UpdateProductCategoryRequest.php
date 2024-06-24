@@ -22,14 +22,13 @@ class UpdateProductCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $categoryId = $this->route('category');
+        $categoryId = $this->route('product-category');
         return [
-            'title' => 'required|unique:product_categories,title',
             'title' => [
                 'required',
                 Rule::unique('product_categories', 'title')->ignore($categoryId)
             ],
-            'icon' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+            'icon' => 'nullable|file|mimes:jpeg,png,jpg|max:2048'
         ];
     }
 
