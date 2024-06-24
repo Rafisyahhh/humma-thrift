@@ -325,7 +325,7 @@
             </div>
         </div>
     </section>
-    <section class="product brand" style="position: relative; z-index: 1;" data-aos="fade-up">
+    <section class="product brand" style="position: relative; z-index: 1;" data-aos="fade-up ">
         <div class="container" style="z-index: 1;">
             <div class="section-title pt-5" style="position: relative; z-index: 1;">
                 <h5>BRAND PRODUK</h5>
@@ -333,7 +333,7 @@
             </div>
             <div class="brand-section gap-3 pb-5" style="position: relative; z-index: 1;">
                 @foreach ($brands as $brand)
-                    <div class="product py-0">
+                    <div class="product py-0" style="box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;">
                         <div class="wrapper-img">
                             <a href="product-sidebar.html">
                                 <img src="{{ asset("storage/{$brand->logo}") }}" alt="img"
