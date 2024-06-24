@@ -30,8 +30,8 @@
                         <th>No.</th>
                         <th>Title</th>
                         <th>Gambar</th>
-                        <th>Deskripsi</th>
-                        <th>Aksi</th>
+                        <th style="width:35%">Deskripsi</th>
+                        <th style="width:10%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
@@ -40,8 +40,10 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $about->title }}</td>
                             <td><img src="{{ asset("storage/{$about->image}") }}" class="rounded-3" height="96px"></td>
-                            <td>{!! $about->description !!}</span></td>
-                            <td>
+                            <td class="text-wrap" style="display: block; max-width: 30rem;  break-word; overflow-wrap: break-word; white-space: normal;">
+                                {{ $about->description }}
+                            </td>
+                                <td>
                                 <button type="button" class="badge bg-label-warning me-1 border-0" style="background: none"
                                     data-bs-toggle="modal" data-bs-target="#editModal{{ $about->id }}">
                                     <i class="ti ti-pencil"></i>
@@ -89,8 +91,8 @@
 
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Deskripsi</label>
-                                    <textarea class="custom-summernote @error('description') is-invalid @enderror"
-                                    id="custom-summernote" name="description"
+                                    <textarea class="form-control @error('description') is-invalid @enderror"
+                                    name="description"
                                      aria-label="With textarea">{{ old('description') }}</textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
@@ -160,8 +162,8 @@
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Deskripsi</label>
                                         <textarea
-                                            class="custom-summernote @error('description_update') is-invalid @enderror"
-                                            id="custom-summernote" name="description_update" aria-label="With textarea"
+                                            class="form-control @error('description_update') is-invalid @enderror"
+                                             name="description_update" aria-label="With textarea"
                                            >{{ old('description_update', $about->description) }}</textarea>
                                         @error('description_update')
                                             <span class="invalid-feedback" role="alert">
