@@ -53,10 +53,10 @@ class NotificationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $notification)
+    public function destroy(Notification $notification)
     {
         try {
-            Auth::user()->notifications()->find($notification)->delete();
+            $notification->delete();
             return redirect()->route('admin.notification.index')->with('success', 'Berhasil menghapus notifikasi');
         } catch (\Throwable $th) {
             return redirect()->route('admin.notification.index')->with('error', 'Gagal menghapus notifikasi');

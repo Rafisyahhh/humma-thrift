@@ -30,7 +30,7 @@
             </a>
         </li>
 
-        <li class="menu-item {{ request()->routeIs('admin') ? 'active' : '' }}">
+        <li class="menu-item {{ request()->routeIs('/admin') ? 'active' : '' }}">
             <a href="{{ url('/admin') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-building"></i>
                 <div>Toko</div>
@@ -77,7 +77,7 @@
             </a>
         </li>
 
-        <li class="menu-item {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
+        <li class="menu-item">
             <a href="{{ route('admin.user.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-users"></i>
                 <div>Pengguna</div>
@@ -89,10 +89,10 @@
                 <div>Tentang kami</div>
             </a>
         </li>
-        <li class="menu-item {{ request()->routeIs('admin.event.*') ? 'active' : '' }}">
+        <li class="menu-item">
             <a href="{{ route('admin.event.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-indent-increase"></i>
-                <div>Hero Section</div>
+                <i class="menu-icon tf-icons ti ti-file"></i>
+                <div>Event</div>
             </a>
         </li>
     </ul>

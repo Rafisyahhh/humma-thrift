@@ -5,16 +5,16 @@
 @section('content')
     <!-- Bootstrap Table with Header - Light -->
     <div class="card">
-        <h5 class="card-header">Daftar Hero Section</h5>
+        <h5 class="card-header">Daftar Event</h5>
         <div class="card-header d-flex justify-content-between align-items-center">
 
             <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
                 style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">
-                Tambah Baru
+                Tambahkan Event
             </a>
             <form action="{{ route('admin.brand.index') }}" method="get">
                 <div class="input-group mb-3">
-                    <input type="search" name="search" class="form-control" placeholder="Cari sesuatu disini&hellip;"
+                    <input type="search" name="search" class="form-control" placeholder="Cari Brand&hellip;"
                         value="{{ old('search', request('search')) }}" />
                     <button type="submit" class="btn"
                         style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">Cari</button>
@@ -29,17 +29,18 @@
                     <tr>
                         <th>No.</th>
                         <th>Judul</th>
-                        <th>SubJudul</th>
+                        <th>Sub Judul</th>
+                        </th>
                         <th>Foto</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @forelse ($event as $even)
+                    @foreach ($event as $even)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $even->judul }}</span></td>
-                            <td>{{ Str::limit($even->subjudul, 100) }}</span></td>
+                            <td>{{ $even->subjudul }}</span></td>
                             <td><img src="{{ asset("storage/{$even->foto}") }}" class="rounded-3" height="96px"></td>
                             <td>
                                 <button type="button" class="badge bg-label-warning me-1 border-0" style="background: none"
@@ -70,11 +71,7 @@
                                 </form>
                             </td>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="5" class="text-center">Tidak ada data</td>
-                        </tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
             <div class="modal fade" tabindex="-1" id="tambahModal">
@@ -94,7 +91,7 @@
                                     <label for="judul" class="form-label">Judul</label>
                                     <input type="text" class="form-control @error('judul') is-invalid @enderror"
                                         id="judul" name="judul" value="{{ old('judul') }}"
-                                        placeholder="Masukkan judul hero section" />
+                                        placeholder="Masukkan nama kategori" />
                                     @error('judul')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
