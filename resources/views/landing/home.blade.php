@@ -131,6 +131,7 @@
             </div>
         </div>
     </section>
+
     <section class="product flash-sale mt-5">
         <div class="svg-container"
             style="position: absolute; top:202% ; left: -3%; width: 50%; height: 30%; z-index: 0; opacity:100%">
@@ -325,7 +326,8 @@
             </div>
         </div>
     </section>
-    <section class="product brand" style="position: relative; z-index: 1;" data-aos="fade-up ">
+    
+    <section class="product brand" style="position: relative; z-index: 1;" data-aos="fade-up">
         <div class="container" style="z-index: 1;">
             <div class="section-title pt-5" style="position: relative; z-index: 1;">
                 <h5>BRAND PRODUK</h5>
