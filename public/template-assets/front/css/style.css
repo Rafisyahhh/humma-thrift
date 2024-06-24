@@ -3739,6 +3739,7 @@ table .ticket-row:hover {
 }
 .table-row .table-wrapper {
     padding: 2rem 0;
+    vertical-align: middle;
 }
 .table-row .table-wrapper .wrapper {
     display: flex;

@@ -18,7 +18,7 @@ class UserController extends Controller
 
         $users = User::when($search, fn ($query) => $query->where('email', 'LIKE', "%$search%"))
             ->when($role === 'user', fn ($query) => $query->whereHas('roles', fn ($q) => $q->where('name', $role))->orderBy('created_at', 'asc'))
-            ->when($role === 'seller', fn ($query) => $query->whereHas('roles', fn ($q) => $q->where('name', $role))->orderBy('created_at', 'asc'))
+            ->when($role === 'seller', fn ($query) => $query->has('store'))
             ->paginate(10);
 
         return view('admin.user', compact('users'));
