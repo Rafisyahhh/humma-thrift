@@ -94,7 +94,44 @@ class ProductController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(UpdateProductRequest $request, Product $product) {
-        //
+        $data = collect($request->validated());
+        if (isset($request->thumbnail)) {
+            if (file_exists(storage_path($data->thumbnail))) {
+                unlink(storage_path($data->thumbnail));
+            }
+            $data->put("thumbnail", $request->thumbnail->store("uploads/thumbnails", "public"));
+        }
+        $data->put("user_id", auth()->id());
+
+        $product_type = $request->product_type;
+        $isAuction = $product_type === 'product_auctions';
+        $model = $isAuction ? ProductAuction::class : Product::class;
+
+        $fields = [
+            'products' => ['user_id', 'brand_id', 'title', 'description', 'thumbnail', 'size', 'price'],
+            'product_auctions' => ['user_id', 'brand_id', 'title', 'description', 'thumbnail', 'size', 'bid_price_start', 'bid_price_end']
+        ];
+
+        $productData = $model::update($data->only($fields[$product_type])->toArray());
+
+        $galleryData = [];
+        $categoryData = [];
+        foreach ($request->image_galery as $image) {
+            $galleryData[] = [
+                $isAuction ? 'product_auction_id' : 'product_id' => $productData->id,
+                'image' => $image->store('uploads/galeries', "public")
+            ];
+        }
+        foreach ($request->category_id as $categoryId) {
+            $categoryData[] = [
+                $isAuction ? 'product_auction_id' : 'product_id' => $productData->id,
+                'product_category_id' => $categoryId
+            ];
+        }
+
+        ProductGallery::insert($galleryData);
+        ProductCategoryPivot::insert($categoryData);
+        return redirect()->route("seller.product.index")->with("success", "Sukses menambah produk");
     }
 
     /**
