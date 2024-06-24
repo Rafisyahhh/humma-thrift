@@ -8,9 +8,9 @@
             flex-direction: row;
             gap: 1.75rem;
             align-items: center;
-            border-radius: 1.5rem;
+            border-radius: 1.25rem;
             padding: 1.25rem;
-            border-color: #f0f0f0;
+            border-color: #1c3879;
             transition: all .2s;
         }
 
