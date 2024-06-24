@@ -58,7 +58,7 @@
     {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif --}}
   <div class="justify-content-center">
-    <form action="{{ route('seller.produk.store') }}" id="formDropzone" method="post" enctype="multipart/form-data">
+    <form action="{{ route('seller.product.store') }}" id="formDropzone" method="post" enctype="multipart/form-data">
       @csrf
       <div class="review-form">
         <div class="account-inner-form">
@@ -67,7 +67,8 @@
               <div class="review-form-name">
                 <label for="title" class="form-label">Nama Produk</label>
                 <input type="text" id="title" name="title"
-                  class="form-control @error('title') is-invalid @enderror" placeholder="Nama Produk">
+                  class="form-control @error('title') is-invalid @enderror" placeholder="Nama Produk"
+                  value="{{ old('title') }}">
                 @error('title')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -102,7 +103,8 @@
               <div class="review-form-name">
                 <label for="Size" class="form-label">Size</label>
                 <input type="text" id="Size" name="size"
-                  class="form-control @error('size') is-invalid @enderror" placeholder="Masukkan Ukuran">
+                  class="form-control @error('size') is-invalid @enderror" placeholder="Masukkan Ukuran"
+                  value="{{ old('size') }}">
                 @error('size')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -147,7 +149,7 @@
               <div class="review-form-name mt-4">
                 <label for="deskripsi" class="form-label">Deskripsi</label>
                 <textarea id="deskripsi" name="description" class="form-control @error('description') is-invalid @enderror"
-                  placeholder="Masukkan Deskripsi" rows="7"></textarea>
+                  placeholder="Masukkan Deskripsi" rows="7">{{ old('description') }}</textarea>
                 @error('description')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -213,7 +215,7 @@
                   <div class="form-group">
                     <label for="inputA">Harga</label>
                     <input type="number" id="inputA" class="form-control @error('price') is-invalid @enderror"
-                      name="price" placeholder="Masukkan harga">
+                      name="price" placeholder="Masukkan harga" value="{{ old('price') }}">
                     @error('price')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -229,7 +231,8 @@
                       <div class="form-group">
                         <label for="inputB">Harga mulai dari</label>
                         <input type="number" id="inputB" name="bid_price_start"
-                          class="form-control @error('bid_price_start') is-invalid @enderror" placeholder="Harga awal">
+                          class="form-control @error('bid_price_start') is-invalid @enderror" placeholder="Harga awal"
+                          value="{{ old('bid_price_start') }}">
                         @error('bid_price_start')
                           <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -243,7 +246,8 @@
                       <div class="form-group">
                         <label for="inputC">Sampai dari</label>
                         <input type="number" id="inputC" name="bid_price_end"
-                          class="form-control @error('bid_price_end') is-invalid @enderror" placeholder="harga akhir">
+                          class="form-control @error('bid_price_end') is-invalid @enderror" placeholder="harga akhir"
+                          value="{{ old('bid_price_end') }}">
                         @error('bid_price_end')
                           <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

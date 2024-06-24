@@ -20,7 +20,8 @@ class ProductController extends Controller {
      */
     public function index() {
         $products = Product::all();
-        return view('seller.produk', compact('products'));
+        $product_auctions = ProductAuction::all();
+        return view('seller.produk', compact('products', 'product_auctions'));
     }
 
     /**
@@ -37,9 +38,8 @@ class ProductController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(StoreProductRequest $request) {
-        dd($request->all());
         $data = collect($request->validated());
-        $data->put("thumbnail", $request->thumbnail->store("uploads/thumbnails"));
+        $data->put("thumbnail", $request->thumbnail->store("uploads/thumbnails", "public"));
         $data->put("user_id", auth()->id());
 
         $product_type = $request->product_type;
@@ -58,7 +58,7 @@ class ProductController extends Controller {
         foreach ($request->image_galery as $image) {
             $galleryData[] = [
                 $isAuction ? 'product_auction_id' : 'product_id' => $productData->id,
-                'image' => $image->store('uploads/galeries')
+                'image' => $image->store('uploads/galeries', "public")
             ];
         }
         foreach ($request->category_id as $categoryId) {
@@ -70,7 +70,7 @@ class ProductController extends Controller {
 
         ProductGallery::insert($galleryData);
         ProductCategoryPivot::insert($categoryData);
-        return redirect()->route("seller.product");
+        return redirect()->route("seller.product.index")->with("success", "Sukses menambah produk");
     }
 
     /**
@@ -98,6 +98,18 @@ class ProductController extends Controller {
      * Remove the specified resource from storage.
      */
     public function destroy(Product $product) {
-        //
+        $product_gallery = ProductGallery::where("product_id", $product->id)->get();
+        foreach ($product_gallery as $data) {
+            if (file_exists(storage_path($data->image))) {
+                unlink(storage_path($data->image));
+            }
+            $data->delete();
+        }
+
+        ProductCategoryPivot::where("product_id", $product->id)->delete();
+
+        $product->delete();
+
+        return redirect()->back()->with('success', "Sukses menghapus data");
     }
 }

@@ -46,9 +46,26 @@
   $total_price = array_sum($prices);
 @endphp
 
+
 @extends('layouts.home')
 @section('title', 'Checkout')
 @section('content')
+
+<style>
+    .custom-button {
+        background-color: #007bff; /* Warna latar belakang biru */
+        color: white; /* Warna teks putih */
+        border: none; /* Menghilangkan border default */
+        padding: 10px 20px; /* Padding */
+        font-size: 16px; /* Ukuran font */
+        border-radius: 4px; /* Membuat sudut tombol melengkung */
+        transition: background-color 0.3s; /* Animasi transisi */
+    }
+
+    .custom-button:hover {
+        background-color: #0056b3; /* Warna latar belakang lebih gelap saat hover */
+    }
+</style>
   <section class="blog about-blog">
     <div class="container">
       <div class="blog-heading about-heading">
@@ -76,8 +93,7 @@
                     </h5>
                   </div>
                   <div>
-                    <button class="border btn btn" type="button" data-bs-toggle="modal" data-bs-target="#modal-1">Ganti
-                      alamat</button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#modal-1" class="shop-btn" style="width: 20%;">Ganti Alamat</button>
                     {{-- Modal --}}
                     <div id="modal-1" class="modal fade" role="dialog" tabindex="-1">
                       <div class="modal-dialog" role="document">
@@ -145,7 +161,7 @@
                     <h5 class="wrapper-heading">Total Belanja</h5>
                     <h5 class="wrapper-heading price">${{ $total_price }}</h5>
                   </div>
-                  <button type="button" class="shop-btn">Pesan sekarang</button>
+                  <button type="button" class="shop-btn">Beli sekarang</button>
                 </div>
               </div>
             </div>

@@ -26,21 +26,25 @@
             display: inline-block;
             /* Setiap ikon dijadikan inline-block agar berada dalam satu baris */
         }
+        .header-bottom{
+            z-index: 1;
+            position: relative;
+        }
     </style>
 @endsection
 
 @section('content')
-    <section class="product product-info">
+    <section class="product product-info py-0">
         <div class="container">
             <div class="product-info-section">
                 <div class="row ">
                     <div class="col-md-6">
                         <div class="product-info-img" data-aos="fade-right">
-                            <div class="swiper product-top">
+                            <div class="swiper product-top" style="z-index:2">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide slider-top-img">
-                                        <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-14.webp') }}"
-                                            alt="img">
+                                        <img src="{{ asset('storage/brand-logo/SdhtKk448wCIW2TJI94bmYWRBCFcO7ZIUem2LD9F.png') }}"
+                                            style="width: 100%" alt="img">
                                     </div>
                                     <div class="swiper-slide slider-top-img">
                                         <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-slider-img-1.webp') }}"
@@ -80,7 +84,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper product-bottom">
+                            <div class="swiper product-bottom" style="z-index:2">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide slider-bottom-img">
                                         <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-16.png') }}"
@@ -94,98 +98,103 @@
                                         <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-slider-img-2.webp') }}"
                                             alt="img">
                                     </div>
+                                    <div class="swiper-slide slider-bottom-img">
+                                        <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-slider-img-2.webp') }}"
+                                            alt="img">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <div class="svg-container"
+                            style="position: absolute; top: 5%; left: 70%; width: 70%; height: 70%; z-index: 0; opacity:70%">
+                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="#5ca3e6"
+                                    d="M28.2,-50.6C38.9,-42.7,51.4,-39.8,55.3,-32.2C59.1,-24.6,54.3,-12.3,52.7,-0.9C51.2,10.5,52.8,21,52.9,35.3C52.9,49.7,51.3,67.9,42.2,72.4C33.1,76.9,16.6,67.8,1.5,65.1C-13.5,62.5,-27,66.3,-34,60.6C-40.9,54.8,-41.4,39.5,-50.3,27.8C-59.2,16.1,-76.6,8,-81.6,-2.9C-86.6,-13.8,-79.2,-27.6,-71.4,-41.3C-63.6,-54.9,-55.4,-68.4,-43.5,-75.6C-31.5,-82.8,-15.8,-83.7,-3.5,-77.7C8.8,-71.6,17.5,-58.6,28.2,-50.6Z"
+                                    transform="translate(100 100)" />
+                            </svg>
+                        </div>
                         <div class="product-info-content" data-aos="fade-left">
-                            <h5>Jaket Vintage Adidas</h5>
+                            <h5 style="z-index:1;position: relative;">Jaket Vintage Adidas</h5>
                             <div class="price">
-                                <span class="new-price">Rp.100.000,00</span>
+                                <span class="new-price" style="z-index:1">Rp.100.000,00</span>
+                            </div>
+                            <hr>
+                            <div class="row product-details">
+                                <div class="col-3 py-2 my-2" style="z-index:1">
+                                    <p class="fs-2">Kategori</p>
+                                    <p class="fs-2">Brand</p>
+                                    <p class="fs-2">Ukuran</p>
+                                    <p class="fs-2">Warna</p>
+                                </div>
+                                <div class="col-9 py-2 my-2" style="z-index:1">
+                                    <p class="fs-2 inner-text">: Hoodie</p>
+                                    <p class="fs-2 inner-text">: Adidas</p>
+                                    <p class="fs-2 inner-text">: XL</p>
+                                    <p class="fs-2 inner-text">: Pink</p>
+                                </div>
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="product-quantity" style="display: flex; align-items: center; gap: 10px;">
+                                <div class="product-quantity mt-0"
+                                    style="display: flex; align-items: center; gap: 10px; z-index:1">
                                     <div class="share-icons">
                                         <a href="#" class="share-icon">
                                             <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                    viewBox="0 0 1024 1024">
-                                                    <path fill="currentColor"
-                                                        d="M287.984 114.16c31.376 0 88.094 15.008 180.094 105.616l45.616 44.912l44.928-45.632c63.872-64.896 131.84-105.2 177.376-105.2c61.408 0 109.809 21.008 157.009 68.096c44.464 44.368 68.992 103.36 68.992 166.112c.032 62.784-24.448 121.824-69.408 166.672c-3.664 3.712-196.992 212.304-358.96 387.104c-7.632 7.248-16.352 8.32-20.991 8.32c-4.576 0-13.2-1.024-20.8-8.096c-39.472-43.905-325.552-362-358.815-395.232C88.497 462.416 64 403.376 64 340.608c.015-62.752 24.511-121.728 69.04-166.144c43.295-43.264 93.984-60.304 154.944-60.304m-.002-64c-76.528 0-144 22.895-200.176 79.008c-117.072 116.768-117.072 306.128 0 422.96c33.424 33.44 357.855 394.337 357.855 394.337c18.48 18.496 42.753 27.68 66.96 27.68c24.225 0 48.4-9.184 66.912-27.68c0 0 354.88-383.024 358.656-386.85c117.04-116.88 117.04-306.24 0-423.007c-58.112-58-123.024-86.784-202.208-86.784c-75.648 0-160 60.32-223.008 124.32C447.981 110.159 366.237 50.16 287.981 50.16z" />
-                                                </svg>
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="share-icons">
-                                        <a href="#" class="share-icon">
-                                            <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                    viewBox="0 0 1024 1024">
-                                                    <path fill="currentColor"
-                                                        d="M1015.66 284a31.82 31.82 0 0 0-25.998-13.502H310.526l-51.408-177.28c-20.16-69.808-68.065-77.344-87.713-77.344H34.333c-17.569 0-31.777 14.224-31.777 31.776S16.78 79.425 34.332 79.425h137.056c4.336 0 17.568 0 26.593 31.184l176.848 649.936c3.84 13.712 16.336 23.183 30.591 23.183h431.968c13.409 0 25.376-8.4 29.905-21.024l152.256-449.68c3.504-9.744 2.048-20.592-3.888-29.024zM815.026 720.194H429.539L328.387 334.066h616.096zM752.003 848.13c-44.192 0-80 35.808-80 80s35.808 80 80 80s80-35.808 80-80s-35.808-80-80-80m-288 0c-44.192 0-80 35.808-80 80s35.808 80 80 80s80-35.808 80-80s-35.808-80-80-80" />
-                                                </svg>
+                                                <i class="fas fa-heart fa-xl" style="color: black"></i>
                                             </span>
                                         </a>
                                     </div>
                                     <a href="#" style="width :10px" class="shop-btn"
-                                        style="display: flex; align-items: center; gap: 5px;">
+                                        style="display: flex; align-items: center; gap: 10px; z-index:1">
                                         <span style="width: 37rem; align-items:center; justify-content:center;">
-                                            <svg class="me-4" width="14" height="14" viewBox="0 0 14 14"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M8.25357 3.32575C8.25357 4.00929 8.25193 4.69283 8.25467 5.37583C8.25576 5.68424 8.31536 5.74439 8.62431 5.74439C9.964 5.74603 11.3031 5.74275 12.6428 5.74603C13.2728 5.74767 13.7397 6.05663 13.9246 6.58104C14.2209 7.42098 13.614 8.24232 12.6762 8.25052C11.5919 8.25982 10.5075 8.25271 9.4232 8.25271C9.17714 8.25271 8.93107 8.25216 8.68501 8.25271C8.2913 8.2538 8.25412 8.29154 8.25412 8.69838C8.25357 10.0195 8.25686 11.3412 8.25248 12.6624C8.25029 13.2836 7.92603 13.7544 7.39891 13.9305C6.56448 14.2088 5.75848 13.6062 5.74863 12.6821C5.73824 11.7251 5.74645 10.7687 5.7459 9.81173C5.7459 9.41965 5.74754 9.02812 5.74535 8.63604C5.74371 8.30849 5.69012 8.2538 5.36204 8.25326C4.02235 8.25162 2.68321 8.25545 1.34352 8.25107C0.719613 8.24943 0.249902 7.93008 0.0710952 7.40348C-0.212153 6.57065 0.388245 5.75916 1.31017 5.74658C2.14843 5.73564 2.98669 5.74384 3.82495 5.74384C4.30779 5.74384 4.79062 5.74384 5.274 5.74384C5.72184 5.7433 5.7459 5.71869 5.7459 5.25716C5.7459 3.95406 5.74317 2.65096 5.74699 1.34786C5.74863 0.720643 6.0625 0.253102 6.58799 0.0704598C7.40875 -0.213893 8.21803 0.370671 8.25248 1.27349C8.25303 1.29154 8.25303 1.31013 8.25303 1.32817C8.25357 1.99531 8.25357 2.66026 8.25357 3.32575Z"
-                                                    fill="white" />
-                                            </svg>
+                                            <i class="fas fa-shopping-cart"></i>
+                                            Masukkan Keranjang
+                                        </span>
+                                    </a>
+                                    <a href="#" style="width :10px" class="shop-btn"
+                                        style="display: flex; align-items: center; gap: 5px; z-index:1">
+                                        <span style="width: 37rem; align-items:center; justify-content:center;">
+                                            <i class="fa-solid fa-plus"></i>
                                             Beli Sekarang</span>
                                     </a>
                                 </div>
                             </div>
-
                             <hr>
-                            <div class="product-details">
-                                <p class="fs-2">Kategori : <span class="inner-text">Baju</span></p>
-                                <p class="fs-2">Brand : <span class="inner-text">Adidas</span></p>
-                                <p class="fs-2">Ukuran : <span class="inner-text">XL</span></p>
-                                <p class="fs-2">Kondisi : <span class="inner-text">Bagus</span></p>
-                                <p class="fs-2">Warna : <span class="inner-text">Pink</span></p>
-                            </div>
-                            <hr>
-                            <p class="fs-2 d-flex">Bagikan ke:
-                                <span class="share-container share-buttons gap-3" style="margin-left: 7px">
+                            <p class="fs-2 d-flex py-2" style="z-index:1;position: relative;">Bagikan ke:
+                                <span class="share-container share-buttons gap-3" style="margin-left: 7px;z-index:1">
                                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($url) }}"
                                         target="_blank" class="social-buttons">
-                                        <i class="fab fa-facebook-f fa-lg"></i>
+                                        <i class="fa-brands fa-square-facebook fa-lg" style="color: black"></i>
                                     </a>
                                     <a href="https://twitter.com/intent/tweet?url={{ urlencode($url) }}&text={{ urlencode($text) }}"
                                         target="_blank" class="social-buttons">
-                                        <i class="fab fa-twitter fa-lg"></i>
+                                        <i class="fa-brands fa-square-x-twitter fa-lg" style="color: black"></i>
                                     </a>
                                     <a href="https://t.me/share/url?url={{ urlencode($url) }}&text={{ urlencode($text) }}"
                                         target="_blank" class="social-buttons">
-                                        <i class="fab fa-telegram-plane fa-lg"></i>
+                                        <i class="fa-brands fa-telegram fa-lg" style="color: black"></i>
                                     </a>
                                     <a href="https://api.whatsapp.com/send?text={{ urlencode($text . ' ' . $url) }}"
                                         target="_blank" class="social-buttons">
-                                        <i class="fab fa-whatsapp fa-lg"></i>
+                                        <i class="fa-brands fa-whatsapp fa-lg" style="color: black"></i>
                                     </a>
                                 </span>
                             </p>
                             <hr>
-                            <div class="product-seller-section" data-aos="fade-up">
-                                <h5 class="intro-heading" style="font-size: 25px ">Info Seller</h5>
-                                <br>
+                            <div class="product-seller-section py-2">
                                 <div class="review-wrapper">
                                     <div class="wrapper">
                                         <div class="wrapper-aurthor">
                                             <div class="wrapper-info">
-                                                <div class="author-details">
-                                                    <h5 class="d-flex align-items-center" style="font-size: 25px;"> <img
+                                                <div class="author-details d-flex">
+                                                    <h5 class="d-flex align-items-center"
+                                                        style="font-size: 25px; z-index:1"><img
                                                             style="height: 45px; margin-left: 10px;"
                                                             src="{{ asset('template-assets/front/assets/images/homepage-one/aurthor-img-1.webp') }}"
                                                             alt="aurthor-img" class="me-2">
-                                                        <div style="margin-left: 10px;"> Asoy Store <div
+                                                        <div style="margin-left: 10px; z-index:1"> Asoy Store <div
                                                                 class="text-secondary"
                                                                 style="font-size: 16px; margin-left: 4px;">Karangploso,
                                                                 Malang</div>
@@ -200,6 +209,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
     </section>
 
 

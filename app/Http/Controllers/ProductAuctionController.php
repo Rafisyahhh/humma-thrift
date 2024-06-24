@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\ProductAuction;
 use App\Http\Requests\StoreProductAuctionRequest;
 use App\Http\Requests\UpdateProductAuctionRequest;
+use App\Models\ProductCategoryPivot;
+use App\Models\ProductGallery;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class ProductAuctionController extends Controller
-{
+class ProductAuctionController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
+    public function index() {
         $productAuction = ProductAuction::all();
         return view('seller.produk', compact('productAuction'));
     }
@@ -22,8 +22,7 @@ class ProductAuctionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
+    public function create() {
         $productAuction = ProductAuction::all();
         return view('seller.tambahproduk', compact('productAuction'));
     }
@@ -31,8 +30,7 @@ class ProductAuctionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductAuctionRequest $request)
-    {
+    public function store(StoreProductAuctionRequest $request) {
         try {
             $description = $request->description;
 
@@ -86,32 +84,41 @@ class ProductAuctionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ProductAuction $productAuction)
-    {
+    public function show(ProductAuction $productAuction) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductAuction $productAuction)
-    {
+    public function edit(ProductAuction $productAuction) {
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductAuctionRequest $request, ProductAuction $productAuction)
-    {
+    public function update(UpdateProductAuctionRequest $request, ProductAuction $productAuction) {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductAuction $productAuction)
-    {
-        //
+    public function destroy($productAuction) {
+        $productAuction = ProductAuction::find($productAuction);
+        $product_gallery = ProductGallery::where("product_auction_id", $productAuction->id)->get();
+        foreach ($product_gallery as $data) {
+            if (file_exists(storage_path($data->image))) {
+                unlink(storage_path($data->image));
+            }
+            $data->delete();
+        }
+
+        ProductCategoryPivot::where("product_auction_id", $productAuction->id)->delete();
+
+        $productAuction->delete();
+
+        return redirect()->back()->with('success', "Sukses menghapus data");
     }
 }
