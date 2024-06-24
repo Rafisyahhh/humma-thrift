@@ -43,8 +43,8 @@
             </a>
         </li>
 
-        <li class="menu-item {{ request()->routeIs('admin.category.*') ? 'active' : '' }}">
-            <a href="{{ route('admin.category.index') }}" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('admin.product-category.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.product-category.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-list"></i>
                 <div>Kategori</div>
             </a>

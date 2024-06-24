@@ -6,22 +6,30 @@ use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use App\Http\Requests\StoreProductCategoryRequest;
 use App\Http\Requests\UpdateProductCategoryRequest;
 
 class ProductCategoryController extends Controller
 {
+    private ProductCategory $productCategories;
+    public function __construct()
+    {
+        $this->productCategories = new ProductCategory();
+    }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $categories = ProductCategory::when($request->has('search'), function ($query) use ($request) {
-            $a = $request->input('search');
-            return $query->where('title', 'LIKE', "%$a%");
-        })->paginate(5);
+        $search = $request->input('search');
+        $hasRequestSearch = $request->has('search');
 
-        return view('admin.productcategory', compact('categories'));
+        $productCategories = $this->productCategories->when($hasRequestSearch, fn ($query) => $query->where("title", 'LIKE', "%{$search}%"))
+            ->paginate(5);
+
+        return view('admin.productcategory', compact('productCategories'));
     }
 
     /**
@@ -39,15 +47,10 @@ class ProductCategoryController extends Controller
     public function store(StoreProductCategoryRequest $request)
     {
         try {
-            $gambar = $request->file('icon');
-        if ($gambar) {
-            $path_gambar = Storage::disk('public')->put('icon', $gambar);
-        }
+            $data = $request->validated();
+            $data['icon'] = $request->file('icon')->store('category-icon', 'public');
+            $this->productCategories->create($data);
 
-        ProductCategory::create([
-            'title' => $request->title,
-            'icon' => $path_gambar,
-        ]);
             return redirect()->back()->with('success', 'Kategori berhasil ditambahkan');
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
@@ -74,33 +77,30 @@ class ProductCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory,$id)
+    public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory)
     {
         try {
-            $category = ProductCategory::findOrFail($id);
-            $oldPhotoPath = $category->getAttribute('icon');
+            $oldPhotoPath = $productCategory->icon;
 
-        $dataToUpdate = [
-            'title' => $request->input('title'),
-        ];
+            $dataToUpdate = [
+                'title' => $request->input('title'),
+            ];
 
-        if ($request->hasFile('icon')) {
-            $foto = $request->file('icon');
-            $path = $foto->store('icon', 'public');
-            $dataToUpdate['icon'] = $path;
-        }
-
-        $category->update($dataToUpdate);
-
-        if ($category->wasChanged('icon') && $oldPhotoPath) {
-            Storage::disk('public')->delete($oldPhotoPath);
-            $localFilePath = public_path('storage/' . $oldPhotoPath);
-            if (File::exists($localFilePath)) {
-                File::delete($localFilePath);
+            if ($request->hasFile('icon')) {
+                $foto = $request->file('icon');
+                $path = $foto->store('icon', 'public');
+                $dataToUpdate['icon'] = $path;
             }
-        }
-            return redirect()->route('category.index')->with('success', 'Kategori berhasil diupdate');
+
+            $productCategory->update($dataToUpdate);
+
+            if ($productCategory->wasChanged('icon') && $oldPhotoPath) {
+                Storage::disk('public')->delete($oldPhotoPath);
+            }
+
+            return redirect()->back()->with('success', 'Kategori berhasil di ubah');
         } catch (\Throwable $th) {
+            Log::error($th->getMessage(), ['exception' => $th]);
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
         }
     }
@@ -108,15 +108,15 @@ class ProductCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductCategory $productCategory, $id)
+    public function destroy(ProductCategory $productCategory)
     {
         // Delete the category
         // If category is not used, delete the photo if it exists
-        if (Storage::disk('public')->exists($productCategory->getAttribute('icon'))) {
-            Storage::disk('public')->delete($productCategory->getAttribute('icon'));
+        if (Storage::disk('public')->exists($productCategory->icon)) {
+            Storage::disk('public')->delete($productCategory->icon);
         }
         // Delete the category
-        ProductCategory::findOrFail($id)->delete();
-        return redirect()->route('category.index')->with('success', 'Kategori berhasil di hapus');
+        $productCategory->delete();
+        return redirect()->back()->with('success', 'Kategori berhasil di hapus');
     }
 }

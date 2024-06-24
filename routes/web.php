@@ -104,7 +104,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::view('/', 'admin.index')->name('index');
     Route::resource('about', AboutUsController::class);
     Route::resource('brand', BrandController::class);
-    Route::resource('category', ProductCategoryController::class);
+    Route::resource('product-category', ProductCategoryController::class);
     Route::resource('user', UserController::class);
     Route::resource('event', EventController::class);
 
