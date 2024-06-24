@@ -64,7 +64,7 @@
             'role' => 'user',
         ],
         [
-            'title' => 'Daftar Keinginan',
+            'title' => 'Favorit',
             'route' => 'user.wishlist',
             'icon' => 'heart',
             'role' => 'user',

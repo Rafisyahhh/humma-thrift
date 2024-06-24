@@ -105,7 +105,7 @@
             align-items: center;
             text-align: center;
             padding: 0 28px;
-            border-right: 1px solid #ddd;
+            border-right: 1px solid rgba(126, 163, 219, 0.40);
         }
 
         .profile-info-detail-content:last-child {
