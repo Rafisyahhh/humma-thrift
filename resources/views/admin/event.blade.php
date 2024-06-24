@@ -152,10 +152,10 @@
                                     @method('PUT')
 
                                     <div class="mb-3">
-                                        <label for="judul" class="form-label">Judul</label>
-                                        <input type="text" class="form-control @error('judul') is-invalid @enderror"
-                                            id="judul" name="judul" value="{{ old('judul', $even->judul) }}">
-                                        @error('judul')
+                                        <label for="judul_update" class="form-label">Judul</label>
+                                        <input type="text" class="form-control @error('judul_update') is-invalid @enderror"
+                                            id="judul_update" name="judul_update" value="{{ old('judul_update', $even->judul) }}">
+                                        @error('judul_update')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -163,10 +163,10 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="subjudul" class="form-label">Sub Judul</label>
-                                        <textarea type="text" class="form-control @error('subjudul') is-invalid @enderror" id="subjudul"
-                                            name="subjudul">{{ old('subjudul', $even->subjudul) }}</textarea>
-                                        @error('subjudul')
+                                        <label for="subjudul_update" class="form-label">Sub Judul</label>
+                                        <textarea type="text" class="form-control @error('subjudul_update') is-invalid @enderror" id="subjudul_update"
+                                            name="subjudul_update">{{ old('subjudul_update', $even->subjudul) }}</textarea>
+                                        @error('subjudul_update')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -174,17 +174,17 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="foto" class="form-label">Foto Cover</label>
-                                        <input type="file" class="form-control @error('foto') is-invalid @enderror"
-                                            id="foto" name="foto" />
+                                        <label for="foto_update" class="form-label">Foto Cover</label>
+                                        <input type="file" class="form-control @error('foto_update') is-invalid @enderror"
+                                            id="foto_update" name="foto_update" />
 
-                                        @if ($even->logo)
+                                        @if ($even->foto)
                                             <img src="{{ asset('storage/' . $even->foto) }}" class="w-100 mt-3 rounded-3"
                                                 alt="{{ $even->judul }}" />
                                         @else
                                             No Image
-                                        @endif
-                                        @error('subjudul')
+                                        @endif  
+                                        @error('foto_update')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
