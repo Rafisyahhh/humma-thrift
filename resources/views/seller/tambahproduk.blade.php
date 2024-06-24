@@ -54,9 +54,9 @@
 @endpush
 
 @section('content')
-  @if ($errors->any())
+  {{-- @if ($errors->any())
     {{ implode('', $errors->all('<div>:message</div>')) }}
-  @endif
+  @endif --}}
   <div class="justify-content-center">
     <form action="{{ route('seller.produk.store') }}" id="formDropzone" method="post" enctype="multipart/form-data">
       @csrf
