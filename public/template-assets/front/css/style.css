@@ -4605,8 +4605,14 @@ table .ticket-row:hover {
     z-index: 1;
     right: 10rem;
 }
+.about-section .about-content .review-title {
+    font-size: 45px;
+    font-family: 'Roboto', sans-serif;
+  }
 .about-section .about-content .about-info {
     padding: 2rem 0;
+    font-size: 22px;
+    font-family: 'Roboto', sans-serif;
 }
 .about-section .about-content .about-list p {
     color: #232532;
