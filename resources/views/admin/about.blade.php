@@ -9,12 +9,12 @@
 @section('content')
     <!-- Bootstrap Table with Header - Light -->
     <div class="card">
-        <h5 class="card-header">Data Tentang Kami</h5>
         <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Data Tentang Kami</h5>
             @if ($aboutUs->isEmpty())
                 <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
                     style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">
-                    Tambahkan Data Tentang Kami
+                    Tambahkan Data
                 </a>
             @endif
         </div>
@@ -24,14 +24,14 @@
                 <thead class="table-light">
                     <tr>
                         <th>No.</th>
-                        <th>Title</th>
+                        <th>Judul</th>
                         <th>Gambar</th>
                         <th style="width:35%">Deskripsi</th>
                         <th style="width:10%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @foreach ($aboutUs as $about)
+                    @forelse ($aboutUs as $about)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $about->title }}</td>
@@ -46,7 +46,11 @@
                                 </button>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center">Tidak ada data</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
             <div class="modal fade" tabindex="-1" id="tambahModal">
@@ -62,7 +66,7 @@
                             <form action="{{ route('admin.about.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="title" class="form-label">Title</label>
+                                    <label for="title" class="form-label">Judul</label>
                                     <input type="text" class="form-control @error('title') is-invalid @enderror"
                                         id="title" name="title">
 
@@ -124,7 +128,7 @@
                                     @method('PUT')
 
                                     <div class="mb-3">
-                                        <label for="title" class="form-label">Title</label>
+                                        <label for="title" class="form-label">Judul</label>
                                         <input type="text" class="form-control @error('title') is-invalid @enderror"
                                             id="title" name="title"
                                             value="{{ old('title', $about->title) }}">
@@ -197,9 +201,8 @@
                 height: 120,
                 toolbar: [
                     ['font', ['bold', 'underline', 'clear']],
-                    ['insert', ['link', 'picture']],
+                    ['insert', ['link']],
                     ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
                 ],
                 callbacks: {
                     onInit: function() {

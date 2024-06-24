@@ -1,7 +1,7 @@
 <!doctype html>
 
 <html lang="id" class="layout-compact dark-style layout-menu-fixed layout-navbar-fixed" dir="ltr"
-    data-theme="theme-default" data-assets-path="{{ asset('template-assets/admin/assets/') }}"
+    data-theme="theme-default" data-assets-path="{{ asset('template-assets/admin/assets/') }}/"
     data-template="vertical-menu-template-no-customizer">
 
 <head>
@@ -63,7 +63,6 @@
     <link rel="stylesheet"
         href="{{ asset('template-assets/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('template-assets/admin/assets/vendor/libs/typeahead-js/typeahead.css') }}" />
-    <link rel="stylesheet" href="template-assets/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet" />
 

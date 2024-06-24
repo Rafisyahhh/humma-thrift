@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\ProductCategory;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,5 +24,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
+
+        if (Schema::hasTable('product_categories')) {
+            View::share('productCategories', ProductCategory::all());
+        }
     }
 }
