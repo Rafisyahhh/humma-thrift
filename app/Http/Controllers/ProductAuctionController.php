@@ -67,7 +67,6 @@ class ProductAuctionController extends Controller {
                 'cover_image' => $path_gambar,
                 'title' => $request->title,
                 'user_id' => $user->id,
-                'store_id' => $request->store_id,
                 'brand_id' => $request->brand_id,
                 'size' => $request->size,
                 'status' => 'pending',

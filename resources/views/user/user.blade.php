@@ -37,6 +37,27 @@
             background-color: #1c3879;
             color: white;
         }
+
+        .product-details table {
+            width: 100%;
+            border-collapse: collapse; /* Menghilangkan jarak antar sel */
+        }
+
+        .product-details th, .product-details td {
+            text-align: left;
+            padding: 10px;
+            color: rgba(0, 0, 0, 0.4); /* Warna teks abu-abu */
+        }
+
+        .product-details th {
+            font-weight: normal;
+            font-size: 19px;
+        }
+
+        .product-details .inner-text {
+            font-size: 18px;
+            color: rgba(0, 0, 0, 0.7); /* Warna teks sedikit lebih gelap untuk kontras */
+        }
     </style>
 @endpush
 
@@ -92,13 +113,14 @@
 
     <section id="my-orders">
         <h5 class="mb-4">Pesanan Saya</h5>
-
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table>
                 <tbody>
                     <tr class="table-row table-top-row">
                         <td class="table-wrapper wrapper-product">
-                            <h5 class="table-heading">PRODUK</h5>
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">PRODUK</h5>
+                            </div>
                         </td>
                         <td class="table-wrapper">
                             <div class="table-wrapper-center">
@@ -110,11 +132,13 @@
                                 <h5 class="table-heading">STATUS</h5>
                             </div>
                         </td>
-                        <td class="table-wrapper wrapper-total">
+
+                        <td class="table-wrapper">
                             <div class="table-wrapper-center">
                                 <h5 class="table-heading">TOTAL</h5>
                             </div>
                         </td>
+
                         <td class="table-wrapper">
                             <div class="table-wrapper-center">
                                 <h5 class="table-heading">DETAIL ORDER</h5>
@@ -122,14 +146,15 @@
                         </td>
                     </tr>
                     <tr class="table-row ticket-row">
-                        <td class="table-wrapper wrapper-product">
+                        <td class="table-wrapper wrapper-product" style="width: 35%; " >
                             <div class="wrapper">
                                 <div class="wrapper-img">
-                                    <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp"
+                                    <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                         alt="img">
                                 </div>
                                 <div class="wrapper-content">
-                                    <h5 class="heading">Classic Design Skirt</h5>
+                                    <h5 class="heading">Classic Design Skart</h5>
+                                    <p style="color: #636363">Dress</p>
                                 </div>
                             </div>
                         </td>
@@ -159,47 +184,76 @@
                             </div>
                         </td>
                     </tr>
-                    <!-- Tambahkan baris dummy lain sesuai kebutuhan -->
-                    <tr class="table-row ticket-row">
-                        <td class="table-wrapper wrapper-product">
-                            <div class="wrapper">
-                                <div class="wrapper-img">
-                                    <img src="https://humma-thrift.dev.id/template-assets/front/assets/images/homepage-one/product-img/product-img-2.webp"
-                                        alt="img">
-                                </div>
-                                <div class="wrapper-content">
-                                    <h5 class="heading">Modern Jacket</h5>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="table-wrapper">
-                            <div class="table-wrapper-center">
-                                <h5 class="heading">$50.00</h5>
-                            </div>
-                        </td>
-                        <td class="table-wrapper">
-                            <div class="table-wrapper-center">
-                                <h5 class="heading">Dikirim</h5>
-                            </div>
-                        </td>
-                        <td class="table-wrapper wrapper-total">
-                            <div class="table-wrapper-center">
-                                <h5 class="heading">$50.00</h5>
-                            </div>
-                        </td>
-                        <td class="table-wrapper">
-                            <div class="table-wrapper-center">
-                                <div class="wrapper-btn">
-                                    <button type="button" class="shop-btn" data-bs-toggle="modal"
-                                        data-bs-target="#detailModal">
-                                        Detail
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
+                 {{-- Detail --}}
+                <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="height: 99%;">
+                 <div class="modal-dialog" style="margin-left: auto;">
+                     <div class="login-section account-section p-0">
+                         <div class="review-form m-0" style="height: 80%; width: 95rem;">
+                             <div class="text-end mb-4">
+                                 <div class="close-btn">
+                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                         aria-label="Close"></button>
+                                 </div>
+                             </div>
+                             <section class="product product-info" style="width:85rem; height:60%;">
+                                 <div class="row ">
+                                     <div class="col-md-6">
+                                         <div class="product-info-img" data-aos="fade-right">
+                                             <div class="swiper product-top" style="height:50rem;">
+                                                 <div class="swiper-wrapper">
+                                                     <div class="swiper-slide slider-top-img">
+                                                         <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
+                                                             alt="img">
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <div class="product-info-content" data-aos="fade-left">
+                                             <h5>Classic Design Skart</h5>
+                                             <div class="price">
+                                                 <span class="new-price">Rp.100.000,00 - 200.000,00</span>
+                                             </div>
+                                             <hr>
+                                             <div class="product-details">
+                                                <table>
+                                                    <tr>
+                                                        <th>Kategori</th>
+                                                        <td><span class="inner-text">Dress</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Brand</th>
+                                                        <td><span class="inner-text">Adidas</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Ukuran</th>
+                                                        <td><span class="inner-text">XL</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Stok</th>
+                                                        <td><span class="inner-text">2</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th colspan="2"><span class="inner-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet cumque perferendis libero nesciunt minima odio autem ratione quia, eligendi temporibus!</span></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Status</th>
+                                                        <td><span class="inner-text">Diterima</span></td>
+                                                    </tr>
+                                                </table>
+                                             </div>
+                                             <hr>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </section>
+                         </div>
+                     </div>
+                 </div>
+             </div>
         </div>
     </section>
 @endsection
