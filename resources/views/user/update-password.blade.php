@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="submit-btn">
-                <button type="submit" class="shop-btn update-btn">Ganti Sandinya</button>
+                <button type="submit" class="shop-btn update-btn">Ganti Sandi</button>
             </div>
         </form>
     </div>
