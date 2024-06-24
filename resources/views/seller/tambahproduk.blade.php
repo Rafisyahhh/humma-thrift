@@ -63,7 +63,6 @@
       @csrf
       @isset($is_edit)
         @method('PUT')
-        {{ $product->gallery }}
       @endisset
       <div class="review-form">
         <div class="account-inner-form">
@@ -196,7 +195,7 @@
                         <div class="col-sm-6">
                           <label class="card phone" onclick="selectCard('phone')" style="height: 80px" for="phone">
                             <input type="radio" id="phone" name="product_type" class="radio-input"
-                              style="display: none" value="products" checked>
+                              style="display: none" value="products" {{ isset($product->price) ? 'checked' : '' }}>
                             <div class="wrapper-content">
                               <p>Harga tetap</p>
                             </div>
@@ -205,7 +204,8 @@
                         <div class="col-sm-6">
                           <label class="card email" onclick="selectCard('email')" style="height: 80px" for="email">
                             <input type="radio" id="email" name="product_type" class="radio-input"
-                              style="display: none" value="product_auctions">
+                              style="display: none" value="product_auctions"
+                              {{ isset($product->price) ? '' : 'checked' }}>
                             <div class="wrapper-content">
                               <p>Lelang</p>
                             </div>
@@ -319,6 +319,8 @@
       }
     }
 
+
+    selectCard("{{ isset($product->price) ? 'phone' : 'email' }}")
     // $("input[type=radio].radio-input").click(function(e) {
     //   const value = $(this).val();
     //   const card = $(this).closest("label");
@@ -326,6 +328,5 @@
     //   card.toggleClass('selected');
     //   console.log(row.html());
     // });
-    selectCard('phone');
   </script>
 @endsection

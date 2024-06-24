@@ -72,7 +72,6 @@
                 <ul class="dropdown-menu">
                   <li>
                     <form action="{{ route('seller.productauction.edit', $item->id) }}" method="get">
-                      @csrf
                       <button class="dropdown-item" type="submit">Edit</button>
                     </form>
                   </li>
