@@ -3707,7 +3707,7 @@ hr {
 }
 .cart-section .table-row .wrapper-product {
     width: 38rem;
-    padding: 2rem 0 2rem 4rem;
+    padding: 2rem 0 2rem 2rem;
 }
 .cart-section .table-row .wrapper-total {
     width: 20rem;

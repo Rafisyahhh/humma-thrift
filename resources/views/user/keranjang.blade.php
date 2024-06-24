@@ -2,61 +2,43 @@
 
 @section('content')
     <div class="cart-section">
-        <table>
-            <tbody>
-                <tr class="table-row table-top-row">
-                    <td class="table-wrapper wrapper-product">
-                        <h5 class="table-heading">PRODUK</h5>
-                    </td>
-                    <td class="table-wrapper">
-                        <div class="table-wrapper-center">
-                            <h5 class="table-heading">HARGA</h5>
-                        </div>
-                    </td>
-                    <td class="table-wrapper wrapper-total">
-                        <div class="table-wrapper-center">
-                            <h5 class="table-heading">TOTAL</h5>
-                        </div>
-                    </td>
-                    <td class="table-wrapper">
-                        <div class="table-wrapper-center">
-                            <h5 class="table-heading">DETAIL PRODUK
-                            </h5>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="table-row ticket-row">
-                    <td class="table-wrapper wrapper-product">
+        <div class="wishlist">
+            <div>
+              <h5 class="cart-heading mb-4">Keranjang</h5>
+            </div>
+            <div class="cart-section wishlist-section">
+              <table>
+                <tbody>
+                    <tr class="table-row ticket-row">
+                      <td class="table-wrapper wrapper-product">
                         <div class="wrapper">
-                            <div class="wrapper-img">
-                                <img src="{{asset ("template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp") }}"
-                                    alt="img">
-                            </div>
-                            <div class="wrapper-content">
-                                <h5 class="heading">Classic Design Skart</h5>
-                            </div>
+                          <div class="wrapper-img">
+                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}" alt="img">
+                          </div>
+                          <div class="wrapper-content">
+                            <h5 class="heading" style="font-size: 18px;">Classic Design Skart</h5>
+                            <p style="color: #8b8b8b">Dress</p>
+                            {{-- <p class="paragraph" style="color: #ff3232;">Rp. 120.000,00</p> --}}
+                          </div>
                         </div>
-                    </td>
-                    <td class="table-wrapper">
-                        <div class="table-wrapper-center">
-                            <h5 class="heading">$20.00</h5>
+                      </td>
+                      <td class="table-wrapper" style="align-items: center;">
+                        {{-- <p ><bx>Rp. 120.000,00</b></p> --}}
+                      </td>
+                      <td class="table-wrapper">
+                        <div class="wrapper-content me-5" style="fl oat: right; text-align: end;">
+
+                          <p class="paragraph opacity-75 pt-1">
+                            {{-- {{ Carbon\Carbon::parse($item['created_at'])->format('d F Y') }} --}}
+                          </p>
                         </div>
-                    </td>
-                    <td class="table-wrapper wrapper-total">
-                        <div class="table-wrapper-center">
-                            <h5 class="heading">$40.00</h5>
-                        </div>
-                    </td>
-                    <td class="table-wrapper">
-                        <div class="table-wrapper-center">
-                            <button type="button" class="shop-btn" data-bs-toggle="modal" data-bs-target="#detailModal">
-                                Detail
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                      </td>
+                    </tr>
+
+                </tbody>
+              </table>
+            </div>
+        </div>
         {{-- Detail --}}
         <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
             style="height: 99%;">
