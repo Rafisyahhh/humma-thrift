@@ -4,39 +4,44 @@
     <div class="cart-section">
         <div class="wishlist">
             <div>
-              <h5 class="cart-heading mb-4">Keranjang</h5>
+                <h5 class="cart-heading mb-4">Keranjang</h5>
             </div>
             <div class="cart-section wishlist-section">
-              <table>
-                <tbody>
-                    <tr class="table-row ticket-row">
-                      <td class="table-wrapper wrapper-product">
-                        <div class="wrapper">
-                          <div class="wrapper-img">
-                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}" alt="img">
-                          </div>
-                          <div class="wrapper-content">
-                            <h5 class="heading" style="font-size: 18px;">Classic Design Skart</h5>
-                            <p style="color: #8b8b8b">Dress</p>
-                            {{-- <p class="paragraph" style="color: #ff3232;">Rp. 120.000,00</p> --}}
-                          </div>
-                        </div>
-                      </td>
-                      <td class="table-wrapper" style="align-items: center;">
-                        {{-- <p ><bx>Rp. 120.000,00</b></p> --}}
-                      </td>
-                      <td class="table-wrapper">
-                        <div class="wrapper-content me-5" style="fl oat: right; text-align: end;">
+                <table>
+                    <tbody>
+                        <tr class="table-row ticket-row"  style="border: 1 solid #022346; background-color: #ffffff;">
+                            <td class="table-wrapper wrapper-product">
+                                <div class="form-check"> <input class="form-check-input" type="checkbox" value=""
+                                    id="flexCheckDefault" style="border-color: #022346;"> </div>
+                            </td>
+                        </tr>
+                        <tr class="table-row ticket-row" style="border-color: #f8f3f3;">
+                            <td class="table-wrapper wrapper-product">
+                                <div class="wrapper">
+                                    <div class="form-check"> <input class="form-check-input" type="checkbox" value=""
+                                            id="flexCheckDefault" style="border-color: #022346;"> </div>
+                                    <div class="wrapper-img">
+                                        <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
+                                            alt="img">
+                                    </div>
+                                    <div class="wrapper-content">
+                                        <h5 class="heading" style="font-size: 18px;">Classic Design Skart</h5>
+                                        <p style="color: #8b8b8b">Dress</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="table-wrapper" style="align-items: center;">
+                            </td>
+                            <td class="table-wrapper">
+                                <div class="wrapper-content me-5" style="fl oat: right; text-align: end;">
 
-                          <p class="paragraph opacity-75 pt-1">
-                            {{-- {{ Carbon\Carbon::parse($item['created_at'])->format('d F Y') }} --}}
-                          </p>
-                        </div>
-                      </td>
-                    </tr>
-
-                </tbody>
-              </table>
+                                    <p class="paragraph opacity-75 pt-1">
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         {{-- Detail --}}

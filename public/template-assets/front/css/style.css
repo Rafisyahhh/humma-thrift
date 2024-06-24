@@ -5698,3 +5698,13 @@ a.shop-btn:hover {
 .product-cart-items span i {
     font-size: 1.25em;
 }
+
+.inner-status {
+    background: rgba(110, 109, 121, 0.10);
+    color: rgba(0, 0, 0, .87);
+    font-size: 1.39em;
+    font-weight: 400;
+    margin: 0;
+    padding: .875rem;
+    text-transform: capitalize;
+}

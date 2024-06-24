@@ -1,5 +1,5 @@
 <div class="header-cart header-right-dropdown">
-    <a href="cart.html" class="cart-item">
+    <a href="{{ route('user.cart') }}" class="cart-item">
         <span>
             <i class="fas fa-shopping-cart" style="font-size: 1.5em"></i>
         </span>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ProductAuction;
 use App\Http\Requests\StoreProductAuctionRequest;
 use App\Http\Requests\UpdateProductAuctionRequest;
+use App\Models\Brand;
+use App\Models\ProductCategory;
 use App\Models\ProductCategoryPivot;
 use App\Models\ProductGallery;
 use Illuminate\Support\Facades\Auth;
@@ -65,7 +67,6 @@ class ProductAuctionController extends Controller {
                 'cover_image' => $path_gambar,
                 'title' => $request->title,
                 'user_id' => $user->id,
-                'store_id' => $request->store_id,
                 'brand_id' => $request->brand_id,
                 'size' => $request->size,
                 'status' => 'pending',
@@ -91,8 +92,14 @@ class ProductAuctionController extends Controller {
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductAuction $productAuction) {
-        //
+    public function edit($productAuction) {
+        $productAuction = ProductAuction::find($productAuction)->first();
+        return view('seller.tambahproduk', [
+            'product' => $productAuction,
+            'brands' => Brand::all(),
+            'categories' => ProductCategory::all(),
+            'is_edit' => true
+        ]);
     }
 
     /**
