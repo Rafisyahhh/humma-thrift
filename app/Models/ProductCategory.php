@@ -26,14 +26,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|ProductCategory whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class ProductCategory extends Model
-{
+class ProductCategory extends Model {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function products()
-    {
+    public function categoryPivot() {
         return $this->belongsToMany(Product::class, 'product_category_pivots');
     }
 }
