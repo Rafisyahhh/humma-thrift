@@ -61,6 +61,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
+        $event = Event::all();
         return view('admin.event', compact('event'));
     }
 
@@ -69,6 +70,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
+        $event = Event::all();
         return view('admin.event', compact('event'));
     }
 
@@ -76,36 +78,37 @@ class EventController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateEventRequest $request, Event $event)
-    {
-        try {
-            $oldPhotoPath = $event->foto;
+{
+    try {
+        $oldPhotoPath = $event->foto;
 
-            $dataToUpdate = [
-                'judul' => $request->input('judul_update'),
-                'subjudul' => $request->input('subjudul_update'),
-            ];
+        $dataToUpdate = [
+            'judul' => $request->input('judul_update'),
+            'subjudul' => $request->input('subjudul_update'),
+        ];
 
-            if ($request->hasFile('foto_update')) {
-                $foto = $request->file('foto_update');
-                $path = $foto->store('foto_update', 'public');
-                $dataToUpdate['foto'] = $path;
-            }
-
-            $event->update($dataToUpdate);
-
-            if (isset($dataToUpdate['foto']) && $oldPhotoPath) {
-                Storage::disk('public')->delete($oldPhotoPath);
-                $localFilePath = public_path('storage/' . $oldPhotoPath);
-                if (File::exists($localFilePath)) {
-                    File::delete($localFilePath);
-                }
-            }
-
-            return redirect()->back()->with('success', 'Event berhasil diperbarui');
-        } catch (\Throwable $th) {
-            return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
+        if ($request->hasFile('foto_update')) {
+            $foto = $request->file('foto_update');
+            $path = $foto->store('foto', 'public');
+            $dataToUpdate['foto'] = $path;  // Corrected the key to 'foto'
         }
+
+        $event->update($dataToUpdate);
+
+        // Only delete the old photo if a new photo has been uploaded
+        if (isset($dataToUpdate['foto']) && $oldPhotoPath) {
+            Storage::disk('public')->delete($oldPhotoPath);
+            $localFilePath = public_path('storage/' . $oldPhotoPath);
+            if (File::exists($localFilePath)) {
+                File::delete($localFilePath);
+            }
+        }
+
+        return redirect()->back()->with('success', 'Event berhasil diperbarui');
+    } catch (\Throwable $th) {
+        return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
     }
+}
 
     /**
      * Remove the specified resource from storage.
