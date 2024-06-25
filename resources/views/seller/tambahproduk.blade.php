@@ -50,6 +50,49 @@
     .test {
       background-color: #7ea3db66
     }
+
+    .select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: none;
+    border-radius: 4px;
+    height: 50px;
+
+  }
+  .select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: #999;
+    font-size: 12px;
+    margin-left: 1rem
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 50px;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 20px;
+}
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: #5897fb;
+    color: white;
+    height: 45px;
+    font-size: 13px;
+}
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #aaa;
+    height: 39px;
+}
+.select2-search--dropdown {
+    display: block;
+    padding: 4px;
+    height: 46px;
+}
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable .span {
+    height: 45px; 
+    margin-top: 20px;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 40px;
+}
   </style>
 @endpush
 
@@ -80,10 +123,11 @@
                 @enderror
               </div>
             </div>
+
             <div class="col-md-6 mb-3">
               <div class="review-form-name">
                 <label for="brand" class="form-label">Brand</label>
-                <select class="form-select select2 @error('brand_id') is-invalid @enderror" id="brand" name="brand_id"
+                <select class="form-select js-example-templating @error('brand_id') is-invalid @enderror" id="brand" name="brand_id"
                   data-placeholder="Pilih brand">
                   <option></option>
                   @foreach ($brands as $brand)
@@ -294,6 +338,26 @@
 @section('script')
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script src="{{ asset('js/imageUploader.js') }}"></script>
+  <script>
+    function formatState(state) {
+        if (!state.id) {
+            return state.text;
+        }
+        var baseUrl = "/user/pages/images/flags";
+        var $state = $(
+            '<span><img src="' + baseUrl + '/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
+        );
+        return $state;
+    };
+
+    $(document).ready(function() {
+        $(".js-example-templating").select2({
+            templateResult: formatState,
+            placeholder: $(this).data('placeholder')
+        });
+    });
+</script>
+
   <script>
     $('#brand.select2').select2({
       theme: "bootstrap-5",
