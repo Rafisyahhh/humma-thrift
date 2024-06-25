@@ -77,7 +77,7 @@
               </div>
             </div>
             <div class="product-cart-btn">
-              <a role="button" class="product-btn" data-bs-toggle="modal" data-bs-target="#detailModal">Detail</a>
+                <a role="button" class="product-btn" data-bs-toggle="modal" data-bs-target="#detailModal{{ $item->id }}">Detail</a>
             </div>
           </div>
         </div>
@@ -129,14 +129,17 @@
     </div>
   </div>
 
+
+@foreach ($products as $item)
   {{-- Detail --}}
-  <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  <div class="modal fade" id="detailModal{{ $item->id }}" tabindex="-1" aria-labelledby="detailModalLabel{{ $item->id }}" aria-hidden="true"
     style="height: 99%;">
     <div class="modal-dialog" style="margin-left: auto;">
       <div class="login-section account-section p-0">
         <div class="review-form m-0" style="height: 80%; width: 95rem;">
           <div class="text-end mb-4">
             <div class="close-btn">
+
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
           </div>
@@ -157,34 +160,37 @@
               </div>
               <div class="col-md-6">
                 <div class="product-info-content" data-aos="fade-left">
-                  <h5>Classic Design Skart</h5>
+                  <h5>{{ $item->title }}</h5>
                   <div class="price">
-                    <span class="new-price" style="font-size: 2rem; color: blue">Rp.100.000,00 -
-                      200.000,00</span>
-                  </div>
+                    <span class="new-price" style="font-size: 2rem; color: blue">Rp. {{ number_format($item->price, 2, ',', '.') }}</span>                  </div>
                   <hr>
                   <div class="product-details">
                     <table>
                       <tr>
                         <th>Kategori</th>
-                        <td><span class="inner-text">Dress</span></td>
+                        <td><span class="inner-text">
+                            @foreach ($item->categories as $category)
+                              {{ $category->title }}
+                              @if (!$loop->last)
+                                ,
+                              @endif
+                            @endforeach
+                        </span></td>
                       </tr>
                       <tr>
                         <th>Brand</th>
-                        <td><span class="inner-text">Adidas</span></td>
+                        <td><span class="inner-text">{{ $item->brand->title }}</span></td>
                       </tr>
                       <tr>
                         <th>Ukuran</th>
-                        <td><span class="inner-text">XL</span></td>
+                        <td><span class="inner-text">{{ $item->size }}</span></td>
                       </tr>
-                      <tr>
+                      {{-- <tr>
                         <th>Stok</th>
                         <td><span class="inner-text">2</span></td>
-                      </tr>
+                      </tr> --}}
                       <tr>
-                        <th colspan="2"><span class="inner-text">Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Eveniet cumque perferendis libero
-                            nesciunt minima odio autem ratione quia, eligendi temporibus!</span>
+                        <th colspan="2"><span class="inner-text">{{ $item->description }}</span>
                         </th>
                       </tr>
                       <tr>
@@ -202,6 +208,7 @@
       </div>
     </div>
   </div>
+@endforeach
 
 
   {{-- LELANG --}}
