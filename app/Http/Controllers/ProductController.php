@@ -37,7 +37,6 @@ class ProductController extends Controller {
         $data['thumbnail'] = $request->thumbnail->store('uploads/thumbnails', 'public');
         $data['user_id'] = Auth::id();
         $data['store_id'] = Auth::user()->store()->first()->id;
-        $data['slug'] = $this->slugify($data["title"]);
 
         $isAuction = $request->product_type === 'product_auctions';
         $model = $isAuction ? ProductAuction::class : Product::class;
@@ -84,7 +83,6 @@ class ProductController extends Controller {
      */
     public function update(UpdateProductRequest $request, $product) {
         $data = $request->validated();
-        $data['slug'] = $this->slugify($data["title"]);
         $data['store_id'] = Auth::user()->store()->first()->id;
         $isAuction = $request->product_type === 'product_auctions';
         $currentProduct = Product::find($product) ?: ProductAuction::find($product);
@@ -115,20 +113,22 @@ class ProductController extends Controller {
 
         $currentProduct->update($data);
 
-        $galleryData = array_map(fn($image) => [
-            $isAuction ? 'product_auction_id' : 'product_id' => $currentProduct->id,
-            'image' => $image->store('uploads/galeries', 'public')
-        ], $request->image_galery);
+        if (isset($request->image_galery)) {
+            $galleryData = array_map(fn($image) => [
+                $isAuction ? 'product_auction_id' : 'product_id' => $currentProduct->id,
+                'image' => $image->store('uploads/galeries', 'public')
+            ], $request->image_galery);
 
-        $categoryData = array_map(fn($categoryId) => [
-            $isAuction ? 'product_auction_id' : 'product_id' => $currentProduct->id,
-            'product_category_id' => $categoryId
-        ], $request->category_id);
+            $categoryData = array_map(fn($categoryId) => [
+                $isAuction ? 'product_auction_id' : 'product_id' => $currentProduct->id,
+                'product_category_id' => $categoryId
+            ], $request->category_id);
 
-        ProductGallery::where($isAuction ? 'product_auction_id' : 'product_id', $currentProduct->id)->delete();
-        ProductCategoryPivot::where($isAuction ? 'product_auction_id' : 'product_id', $currentProduct->id)->delete();
-        ProductGallery::insert($galleryData);
-        ProductCategoryPivot::insert($categoryData);
+            ProductGallery::where($isAuction ? 'product_auction_id' : 'product_id', $currentProduct->id)->delete();
+            ProductCategoryPivot::where($isAuction ? 'product_auction_id' : 'product_id', $currentProduct->id)->delete();
+            ProductGallery::insert($galleryData);
+            ProductCategoryPivot::insert($categoryData);
+        }
 
         return redirect()->route('seller.product.index')->with('success', 'Sukses mengupdate produk');
     }
