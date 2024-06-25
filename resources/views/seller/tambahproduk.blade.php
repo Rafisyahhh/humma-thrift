@@ -2,9 +2,6 @@
 
 @push('link')
   <link href="{{ asset('additional-assets/select2-4.1.0/css/select2.min.css') }}" rel="stylesheet" />
-  <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
-  <link rel="stylesheet" href="{{ asset('template-assets/front/css/image-uploader.css') }}">
 @endpush
 
 @push('style')
@@ -66,10 +63,10 @@
     }
 
     .select2-container--default .select2-selection--single .select2-selection__rendered {
+      border-color: #7ea3db66;
       margin: 0;
       position: absolute;
       top: 50%;
-      left: 15px;
       -ms-transform: translateY(-50%);
       transform: translateY(-50%);
     }
@@ -288,7 +285,7 @@
 @endsection
 
 @section('script')
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="{{ asset('additional-assets/select2-4.1.0/js/select2.min.css') }}"></script>
   <script src="{{ asset('js/imageUploader.js') }}"></script>
   <script>
     $(document).ready(function() {
