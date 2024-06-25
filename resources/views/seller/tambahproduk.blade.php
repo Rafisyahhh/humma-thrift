@@ -54,10 +54,15 @@
       line-height: 1.5;
     }
 
-    .select2-container--default .select2-selection--single {
+    .select2-container--default .select2-selection--single,
+    .select2-container--default .select2-selection--multiple {
       border-color: #7ea3db66;
       border-radius: 1rem;
       min-height: 50px;
+    }
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+      border-color: #7ea3db66;
     }
 
     .select2-container--default .select2-selection--single .select2-selection__rendered {

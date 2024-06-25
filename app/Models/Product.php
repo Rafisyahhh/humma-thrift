@@ -15,6 +15,9 @@ class Product extends Model {
         static::creating(function ($question) {
             $question->slug = Str::slug($question->title);
         });
+        static::updating(function ($question) {
+            $question->slug = Str::slug($question->title);
+        });
     }
 
     public function brand() {
