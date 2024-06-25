@@ -94,8 +94,7 @@
                 <h5 class="wrapper-title">$60</h5>
             </div>
             <div class="cart-btn">
-                <a href="cart.html" class="shop-btn view-btn">View Cart</a>
-                <a href="checkout.html" class="shop-btn checkout-btn">Checkout Now</a>
+                <a href="cart" class="shop-btn checkout-btn">Tampilkan Keranjang Belanja</a>
             </div>
         </div>
     </div>
