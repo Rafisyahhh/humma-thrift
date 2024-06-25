@@ -18,7 +18,7 @@
                                 <label for="name" class="form-label">Nama Lengkap</label>
                                 <input id="name" type="text"
                                     class="form-control @error('name') is-invalid @enderror" name="name"
-                                    value="{{ old('name') }}" placeholder="Mis: Akbar Rafsyah" required
+                                    value="{{ old('name') }}" placeholder="Mis: Akbar Rafsyah"
                                     autocomplete="name" autofocus />
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -33,7 +33,7 @@
                                 <label for="username" class="form-label">Nama Pengguna (Tanpa tanda "@")</label>
                                 <input id="username" type="text"
                                     class="form-control @error('username') is-invalid @enderror" name="username"
-                                    value="{{ old('username') }}" placeholder="Mis: akbarrafsyah" required
+                                    value="{{ old('username') }}" placeholder="Mis: akbarrafsyah"
                                     autocomplete="username" autofocus />
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
@@ -48,7 +48,7 @@
                                 <label for="email" class="form-label">Surel</label>
                                 <input id="email" type="email" placeholder="user@gmail.com"
                                     class="form-control @error('email') is-invalid @enderror" name="email"
-                                    value="{{ old('email') }}" required autocomplete="email">
+                                    value="{{ old('email') }}"  autocomplete="email">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -60,7 +60,7 @@
                             <div class="review-form-name">
                                 <label for="password" class="form-label">Kata Sandi</label>
                                 <input id="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password" required
+                                    class="form-control @error('password') is-invalid @enderror" name="password"
                                     autocomplete="new-password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -72,8 +72,13 @@
                         <div class=" account-inner-form">
                             <div class="review-form-name">
                                 <label for="password-confirm" class="form-label">Ketik Ulang Kata Sandi</label>
-                                <input id="password-confirm" type="password" class="form-control"
-                                    name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
+                                    name="password_confirmation"  autocomplete="new-password">
+                                @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="login-btn text-center">

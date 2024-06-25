@@ -326,6 +326,7 @@ blockquote {
 b,
 strong {
     font-weight: bolder;
+    font-size:12px;
 }
 .small,
 small {

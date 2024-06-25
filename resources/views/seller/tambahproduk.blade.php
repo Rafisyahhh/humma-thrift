@@ -163,6 +163,19 @@
               </div>
             </div>
             <div class="col-md-6 mb-3">
+              <div class="review-form-name">
+                <label for="warna" class="form-label">Warna</label>
+                <input type="text" id="warna" name="color"
+                  class="form-control @error('color') is-invalid @enderror" placeholder="Masukkan Warna"
+                  value="{{ isset($is_edit) ? $product->color : old('color') }}">
+                @error('color')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
               <div class="form-group">
                 <label class="form-label" for="image-input">Galeri Produk</label>
                 <label class="d-flex flex-column align-items-center py-4" for="image-input">
@@ -176,19 +189,6 @@
                 <input type="file" accept=".jpeg, .png, .jpg" name="image_galery[]"
                   class="d-none @error('image_galery') is-invalid @enderror" id="image-input" multiple hidden>
                 @error('image_galery')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                @enderror
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <div class="review-form-name">
-                <label for="Size" class="form-label">Size</label>
-                <input type="text" id="Size" name="size"
-                  class="form-control @error('size') is-invalid @enderror" placeholder="Masukkan Ukuran"
-                  value="{{ isset($is_edit) ? $product->size : old('size') }}">
-                @error('size')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>

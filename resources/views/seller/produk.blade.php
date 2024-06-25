@@ -44,7 +44,7 @@
         <div class="col-lg-4 col-sm-6">
           <div class="product-wrapper" data-aos="fade-up">
             <div class="product-img">
-              <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img">
+              <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover">
               <div class="product-cart-items dropstart"
                 style="top: 0;transform: translate(0, 0); bottom: unset; left: unset; right: 0; opacity: unset; visibility: unset; transition: unset;">
                 <a type="button" class="favourite cart-item" data-bs-toggle="dropdown">
@@ -72,7 +72,7 @@
               <div class="product-description">
                 <a role="button" class="product-details">{{ $item->title }}</a>
                 <div class="price">
-                  <p class="new-price text-nowrap" style="font-weight: bold;">{{ $item->price }}</p>
+                  <p class="new-price fs-4 fw-bold">Rp. {{ number_format($item->price, 2, ',', '.') }}</p>
                 </div>
               </div>
             </div>
@@ -86,7 +86,7 @@
         <div class="col-lg-4 col-sm-6">
           <div class="product-wrapper" data-aos="fade-up">
             <div class="product-img">
-              <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img">
+              <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover">
               <div class="product-cart-items dropstart"
                 style="top: 0;transform: translate(0, 0); bottom: unset; left: unset; right: 0; opacity: unset; visibility: unset; transition: unset;">
                 <a type="button" class="favourite cart-item" data-bs-toggle="dropdown">
@@ -114,7 +114,7 @@
               <div class="product-description">
                 <a role="button" class="product-details">{{ $item->title }}</a>
                 <div class="price">
-                  <span class="new-price text-nowrap">{{ $item->bid_price_start }}-{{ $item->bid_price_end }}</span>
+                  <p class="new-price fs-4 fw-bold">Rp. {{ number_format($item->bid_price_start, 2, ',', '.') }}-Rp. {{ number_format($item->bid_price_end, 2, ',', '.') }}</p>
                 </div>
               </div>
             </div>

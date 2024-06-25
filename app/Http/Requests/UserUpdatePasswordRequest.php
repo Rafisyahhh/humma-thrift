@@ -24,4 +24,21 @@ class UserUpdatePasswordRequest extends FormRequest {
             'password_confirmation' => 'required|string|min:8|same:password',
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'old-password.required' => 'Password lama harus diisi.',
+            'old-password.string' => 'Password lama harus berupa teks.',
+            'old-password.min' => 'Password lama minimal 8 karakter.',
+            'password.required' => 'Password baru harus diisi.',
+            'password.string' => 'Password baru harus berupa teks.',
+            'password.min' => 'Password baru minimal 8 karakter.',
+            'password.confirmed' => 'Konfirmasi password baru tidak cocok.',
+            'password_confirmation.required' => 'Konfirmasi password harus diisi.',
+            'password_confirmation.string' => 'Konfirmasi password harus berupa teks.',
+            'password_confirmation.min' => 'Konfirmasi password minimal 8 karakter.',
+            'password_confirmation.same' => 'Konfirmasi password tidak cocok dengan password baru.'
+        ];
+    }
 }
