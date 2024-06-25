@@ -21,6 +21,8 @@ return new class extends Migration {
             $table->timestamp('verified_at')->nullable()->useCurrent();
             $table->char('verification_code', 60)->nullable();
             $table->boolean('active')->nullable()->default(0);
+            $table->text('address')->nullable();
+            $table->text('description')->nullable();
         });
     }
 

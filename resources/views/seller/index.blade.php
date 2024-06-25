@@ -52,6 +52,7 @@
                                                 xlink:href="{{ asset('images/seller-home-sprites.svg') }}#hugeicons-coins-dollar">
                                             </use>
                                         </svg>
+                                        </span>
                                     </span>
                                 </div>
                                 <div class="wrapper-content">

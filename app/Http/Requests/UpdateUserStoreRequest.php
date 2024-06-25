@@ -11,7 +11,7 @@ class UpdateUserStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -19,10 +19,33 @@ class UpdateUserStoreRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'nic_owner' => 'required|string|max:255',
+            'address' => 'required|string',
+            'description' => 'required|string',
+            'store_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'store_cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Nama wajib diisi',
+            'phone.required' => 'Nomor telepon wajib diisi',
+            'nic_owner.required' => 'NIK wajib diisi',
+            'address.required' => 'Alamat wajib diisi',
+            'description.required' => 'Deskripsi wajib diisi',
+            'store_logo.image' => 'Logo harus berupa file gambar',
+            'store_logo.mimes' => 'Logo harus berupa file dengan tipe: jpeg, png, jpg, gif, svg',
+            'store_logo.max' => 'Ukuran Logo maksimal 2MB',
+            'store_cover.image' => 'Cover harus berupa file gambar',
+            'store_cover.mimes' => 'Cover harus berupa file dengan tipe: jpeg, png, jpg, gif, svg',
+            'store_cover.max' => 'Ukuran Cover maksimal 2MB',
         ];
     }
 }

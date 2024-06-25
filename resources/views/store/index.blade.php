@@ -149,7 +149,7 @@
                             <p class="profile-description opacity-75 mb-0">{{ '@' . $store->username }}</p>
                             <div class="location mt-3">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <span style="font-size: 16px;">Karangploso, Malang</span>
+                                <span style="font-size: 16px;">{{$store->address}}</span>
                             </div>
                         </div>
 
@@ -174,12 +174,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="location mt-2"> &nbsp;&nbsp;<span class="location mt-2">Lorem ipsum dolor sit amet,
-                            consectetur adipisicing elit. Reprehenderit nesciunt aut ea omnis molestias laudantium explicabo
-                            ipsum corporis voluptates, optio harum quasi officia similique iste labore at eius praesentium
-                            nemo nostrum sed saepe accusantium? Sapiente, vitae quod. Possimus modi repudiandae eum
-                            voluptate inventore eligendi doloribus molestiae, consectetur vero alias esse, reiciendis
-                            perferendis officia perspiciatis ratione.</span> </div>
+                    <div class="location mt-2"> &nbsp;&nbsp;<span class="location mt-2">{{$store->description}}</span> </div>
                 </div>
             </div> <br> <br>
 

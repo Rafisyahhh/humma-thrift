@@ -18,8 +18,13 @@ use App\Http\Controllers\{
     ProductController,
     RedirectUserController,
     DetailProductController,
-    HistoryController
+    HistoryController,
+    UserStoreController
 };
+use App\Models\User;
+use App\Models\UserStore;
+use App\Notifications\SellerWelcomeNotification;
+use Illuminate\Support\Facades\Notification;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +61,8 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
     Route::view('/transaction', 'seller.transaksi')->name('transaction');
     Route::view('/income', 'seller.penghasilan')->name('income');
     // Route::view('/product', 'seller.produk')->name('product');
-    Route::view('/profil', 'seller.profil')->name('profil');
+    Route::get('profil',  [UserStoreController::class, 'show'])->name('profile');
+    Route::post('/profile/{id}', [UserStoreController::class, 'update'])->name('profile.update');
     Route::resource('product', ProductController::class);
     Route::resource('productauction', ProductAuctionController::class);
 });

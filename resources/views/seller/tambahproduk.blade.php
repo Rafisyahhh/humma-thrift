@@ -285,7 +285,7 @@
 @endsection
 
 @section('script')
-  <script src="{{ asset('additional-assets/select2-4.1.0/js/select2.min.css') }}"></script>
+  <script src="{{ asset('additional-assets/select2-4.1.0/js/select2.min.js') }}"></script>
   <script src="{{ asset('js/imageUploader.js') }}"></script>
   <script>
     $(document).ready(function() {
