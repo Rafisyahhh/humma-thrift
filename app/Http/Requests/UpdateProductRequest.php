@@ -19,7 +19,7 @@ class UpdateProductRequest extends FormRequest {
      */
     public function rules(): array {
         return [
-            'title' => ['required', "unique:$this->product_type,title," . $this->product],
+            'title' => ['required', "unique:products,title,$this->product", "unique:product_auctions,title,$this->product"],
             'description' => 'required|string',
             'thumbnail' => 'image|mimes:jpeg,png,jpg|max:2048',
             'image_galery' => 'required|array|max:4',
