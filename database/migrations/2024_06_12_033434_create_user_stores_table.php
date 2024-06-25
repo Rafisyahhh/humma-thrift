@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('username')->nullable();
             $table->string('store_logo')->nullable();
             $table->string('store_cover')->nullable();
-            $table->integer('nic_owner')->nullable();
+            $table->char('nic_owner', 16)->nullable();
             $table->string('nic_photo')->nullable();
             $table->timestamp('verified_at')->nullable()->useCurrent();
             $table->char('verification_code', 60)->nullable();

@@ -15,7 +15,7 @@
                                 <label for="email" class="form-label">Surat Elektronik</label>
                                 <input type="email" id="email"
                                     class="form-control @error('email') is-invalid @enderror" placeholder="Surat elektronik"
-                                    value="{{ old('email') }}" name="email" required autocomplete="email" autofocus>
+                                    value="{{ old('email') }}" name="email"  autocomplete="email" autofocus>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -26,7 +26,7 @@
                                 <label for="password" class="form-label">Kata Sandi</label>
                                 <input type="password" name="password" id="password"
                                     class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan kata sandimu"
-                                    required autocomplete="current-password">
+                                     autocomplete="current-password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

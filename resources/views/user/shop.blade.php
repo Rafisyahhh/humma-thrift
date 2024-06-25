@@ -12,34 +12,12 @@
                                 <h5 class="wrapper-heading">Kategori Produk</h5>
                                 <div class="sidebar-item">
                                     <ul class="sidebar-list">
+                                        @foreach ($categories as $item)
                                         <li>
                                             <input type="checkbox" id="bags" name="bags">
-                                            <label for="bags">Tas</label>
+                                            <label for="bags">{{$item->title}}</label>
                                         </li>
-                                        <li>
-                                            <input type="checkbox" id="sweatshirt" name="sweatshirt">
-                                            <label for="sweatshirt">Sweatshirt</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="boots" name="boots">
-                                            <label for="boots">Sepatu Boot</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="accessories" name="accessories">
-                                            <label for="accessories">Aksesoris</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="sneakers" name="sneakers">
-                                            <label for="sneakers">Sneakers</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="cosmatics" name="cosmatics">
-                                            <label for="cosmatics">Kosmetik</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="watch" name="watch">
-                                            <label for="watch">Jam Tangan</label>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -62,51 +40,12 @@
                                 <h5 class="wrapper-heading">Brands</h5>
                                 <div class="sidebar-item">
                                     <ul class="sidebar-list">
+                                        @foreach ($brands as $item)
                                         <li>
-                                            <input type="checkbox" id="thread" name="thread">
-                                            <label for="thread">Refined Threads
-                                            </label>
+                                            <input type="checkbox" id="bags" name="bags">
+                                            <label for="bags">{{$item->title}}</label>
                                         </li>
-                                        <li>
-                                            <input type="checkbox" id="ethereal" name="ethereal">
-                                            <label for="ethereal">Ethereal Chic</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="yellow" name="yellow">
-                                            <label for="yellow">Yellow</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="esctasy" name="esctasy">
-                                            <label for="esctasy">Esctasy</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="urban" name="urban">
-                                            <label for="urban">Urban Hive</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="velvet" name="velvet">
-                                            <label for="velvet">Velvet Vista</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="boldly" name="boldly">
-                                            <label for="boldly">Boldly Blue</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="minted" name="minted">
-                                            <label for="minted">Minted Mode</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="ensemble" name="ensemble">
-                                            <label for="ensemble">Eclectic Ensemble</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="attire" name="attire">
-                                            <label for="attire">BraveAlchemy Attire</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="couture" name="couture">
-                                            <label for="couture">Cascade Couture</label>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -171,12 +110,12 @@
                                     </div>
                                 </div>
                             </div>
-
+                            @foreach ($product as $item)
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-wrapper" data-aos="fade-up">
                                     <div class="product-img">
-                                        <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
-                                            alt="product-img">
+                                        <img src="{{ asset("storage/$item->thumbnail") }}"
+                                    alt="product-img" class="object-fit-cover">
                                         <div class="product-cart-items">
                                             <a href="/user/wishlist" class="favourite cart-item">
                                                 <span>
@@ -197,10 +136,10 @@
                                     </div>
                                     <div class="product-info">
                                         <div class="product-description">
-                                            <a href="/user/detailproduct" class="product-details">Flower Design Skart
+                                            <a href="/user/detailproduct" class="product-details">{{$item->title}}
                                             </a>
                                             <div class="price">
-                                                <span class="new-price">$15.99</span>
+                                                <span class="new-price">Rp.{{ number_format($item->price, 2, ',', '.') }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -209,6 +148,46 @@
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
+                            @foreach ($product_auction as $item)
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="product-wrapper" data-aos="fade-up">
+                                    <div class="product-img">
+                                        <img src="{{ asset("storage/$item->thumbnail") }}"
+                                    alt="product-img" class="object-fit-cover">
+                                        <div class="product-cart-items">
+                                            <a href="/user/wishlist" class="favourite cart-item">
+                                                <span>
+                                                    <i class="fas fa-heart"></i>
+                                                </span>
+                                            </a>
+                                            <a href="/user/wishlist" class="favourite cart-item">
+                                                <span>
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                </span>
+                                            </a>
+                                            <a href="/user/keranjang" class="compaire cart-item">
+                                                <span>
+                                                    <i class="fas fa-share"></i>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="product-description">
+                                            <a href="/user/detailproduct" class="product-details">{{$item->title}}
+                                            </a>
+                                            <div class="price">
+                                                <span class="new-price">Rp.{{ number_format($item->bid_price_start, 2, ',', '.') }} - Rp.{{ number_format($item->bid_price_end, 2, ',', '.') }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-cart-btn">
+                                        <a href="/user/checkout" class="product-btn">Ikuti Lelang</a>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

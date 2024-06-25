@@ -17,7 +17,7 @@ use App\Http\Controllers\{
     ProductAuctionController,
     ProductController,
     RedirectUserController,
-    SocialShareButtonsController,
+    DetailProductController,
     HistoryController
 };
 use App\Models\User;
@@ -67,13 +67,14 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::view('/about', 'user.tentang')->name('about');
     Route::view('/brand', 'user.merek')->name('brand');
     Route::view('/detail', 'user.detail')->name('detail');
-    Route::view('/profile', 'user.profil')->name('profile');
+    Route::get('/profile', [UserController::class, 'show'])->name('profile');
+    Route::post('/profile/{id}', [UserController::class, 'update'])->name('profile.update');
     Route::view('/order', 'user.order')->name('order');
     Route::view('/cart', 'user.keranjang')->name('cart');
     Route::view('/wishlist', 'user.wishlist')->name('wishlist');
-    Route::view('/shop', 'user.shop')->name('shop');
+    Route::get('/shop', [DetailProductController::class, 'showProduct'])->name('shop');
     Route::view('/store', 'user.store')->name('store');
-    Route::get('/detailproduct', [SocialShareButtonsController::class, 'show']);
+    Route::get('/detailproduct{id}', [DetailProductController::class, 'showDetail']);
 
     Route::get('/open-shop', [OpenShopController::class, 'index'])->name('register-seller');
     Route::post('/open-shop', [OpenShopController::class, 'register'])->name('register-seller.submit');

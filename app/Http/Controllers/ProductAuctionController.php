@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ProductAuction;
 use App\Http\Requests\StoreProductAuctionRequest;
 use App\Http\Requests\UpdateProductAuctionRequest;
+use App\Models\Brand;
+use App\Models\ProductCategory;
 use App\Models\ProductCategoryPivot;
 use App\Models\ProductGallery;
 use Illuminate\Support\Facades\Auth;
@@ -90,8 +92,14 @@ class ProductAuctionController extends Controller {
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductAuction $productAuction) {
-        //
+    public function edit($productAuction) {
+        $productAuction = ProductAuction::find($productAuction)->first();
+        return view('seller.tambahproduk', [
+            'product' => $productAuction,
+            'brands' => Brand::all(),
+            'categories' => ProductCategory::all(),
+            'is_edit' => true
+        ]);
     }
 
     /**

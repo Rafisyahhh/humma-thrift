@@ -19,13 +19,14 @@ class UpdateProductRequest extends FormRequest {
      */
     public function rules(): array {
         return [
-            'title' => ['required', "unique:$this->product_type,title"],
+            'title' => ['required', "unique:products,title,$this->product", "unique:product_auctions,title,$this->product"],
             'description' => 'required|string',
             'thumbnail' => 'image|mimes:jpeg,png,jpg|max:2048',
-            'image_galery' => 'required|array|max:4',
+            'image_galery' => 'array|max:4',
             'image_galery.*' => 'image|mimes:jpeg,png,jpg|max:2048',
             'brand_id' => 'required|numeric',
             'size' => 'required',
+            'color' => 'required',
             'product_type' => 'required',
             'price' => 'required_if:product_type,products|nullable|numeric',
             'bid_price_start' => ['required_if:product_type,product_auctions', 'nullable', 'numeric', "max:$this->bid_price_end"],
@@ -53,6 +54,7 @@ class UpdateProductRequest extends FormRequest {
             'brand_id.required' => 'Nama produk Wajib Diisi',
             'brand_id.numeric' => 'ProdukId harus berupa angka',
             'size.required' => 'Nama size Wajib Diisi',
+            'color.required' => 'Input Warna harus diisi',
             'product_type.required' => 'Tipe product wajib diisi',
             'price.required_if' => 'Harga harus diisi jika produk bukan lelang',
             'price.numeric' => 'Harga harus berupa angka',

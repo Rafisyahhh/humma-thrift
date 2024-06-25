@@ -6,41 +6,47 @@
             <div class="col-lg-7">
                 <h5 class="comment-title">Perbarui Profil</h5>
                 <p class="paragraph">Silahkan isikan dengan data yang lengkap untuk melakukan transaksi.</p>
-
-                <div class="">
+                <form action="{{ route('user.profile.update', auth()->user()->id) }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
                     <div class="review-form">
                         <div class="account-inner-form">
                             <div class="review-form-name mb-4">
                                 <label for="username" class="form-label">Nama Pengguna</label>
-                                <input type="text" id="username" class="form-control" placeholder="akbar" value="akbar"/>
+                                <input type="text" name="username" id="username" class="form-control"
+                                    placeholder="akbar" value="{{ auth()->user()->username }}" />
                             </div>
                             <div class="review-form-name mb-4">
                                 <label for="name" class="form-label">Nama Lengkap</label>
-                                <input type="text" id="name" class="form-control" placeholder="Akbar Rafsyah" value="Akbar Rafsyah"/>
+                                <input type="text" name="name" id="name" class="form-control"
+                                    placeholder="Akbar Rafsyah" value="{{ auth()->user()->name }}" />
                             </div>
                         </div>
                         <div class="account-inner-form">
                             <div class="review-form-name mb-4">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" id="email" class="form-control" placeholder="email@kamu.tld" value="akbarfyh@gmail.com"/>
+                                <input type="email" name="email" id="email" class="form-control"
+                                    placeholder="email@kamu.tld" value="{{ auth()->user()->email }}" disabled/>
                             </div>
                             <div class="review-form-name mb-4">
-                                <label for="telephone" class="form-label">Nomor Telepon</label>
-                                <input type="number" id="telephone" class="form-control" placeholder="+6281234567890" value="081234567890"/>
+                                <label for="telephone" name="phone" class="form-label">Nomor Telepon</label>
+                                <input type="number" name="phone" id="telephone" class="form-control" placeholder="+6281234567890"
+                                    value="{{ auth()->user()->phone }}" />
                             </div>
                         </div>
                         <div class="account-inner-form">
                             <div class="review-form-name mb-4">
                                 <label for="birthplace" class="form-label">Tempat Lahir</label>
-                                <input type="text" id="birthplace" class="form-control" placeholder="Mis: Malang" value="Malang"/>
+                                <input type="text" name="pbirth" id="birthplace" class="form-control"
+                                    placeholder="Mis: Malang" value="{{ auth()->user()->pbirth }}" />
                             </div>
                             <div class="review-form-name mb-4">
                                 <label for="birthdate" class="form-label">Tanggal Lahir</label>
-                                <input type="date" id="birthdate" class="form-control" placeholder="Mis: 08-06-12" value="08/06/12"/>
+                                <input type="date" name="dbirth" id="birthdate" class="form-control"
+                                    placeholder="Mis: 08-06-12" value="{{ auth()->user()->dbirth }}" />
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
             <div class="col-lg-5">
                 <div class="img-upload-section">
@@ -48,8 +54,8 @@
                         <h5 class="comment-title">Perbarui Foto Profil</h5>
                         <p class="paragraph">Ukuran 300x300.</p>
                         <div class="logo-upload">
-                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/sallers-cover.png') }}" alt="upload"
-                                class="upload-img" id="upload-img">
+                            <img src="{{ asset('storage/'.auth()->user()->avatar) }}" alt="up" class="upload-img"
+                                id="upload-img">
                             <div class="upload-input">
                                 <label for="input-file">
                                     <span>
@@ -64,7 +70,7 @@
                                         </svg>
                                     </span>
                                 </label>
-                                <input type="file" accept="image/jpeg, image/jpg, image/png, image/webp" id="input-file">
+                                <input type="file" name="avatar" accept="image/jpeg, image/jpg, image/png, image/webp" id="input-file">
                             </div>
                         </div>
                     </div>
@@ -72,7 +78,8 @@
             </div>
             <div class="col-lg-12">
                 <div class="submit-btn">
-                    <a href="#" class="shop-btn update-btn">Perbarui Profil</a>
+                    <button type="submit" class="shop-btn update-btn">Perbarui Profil</button>
+                    </form>
                 </div>
             </div>
         </div>

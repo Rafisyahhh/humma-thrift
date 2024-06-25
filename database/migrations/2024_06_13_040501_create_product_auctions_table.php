@@ -12,15 +12,17 @@ return new class extends Migration {
         Schema::create('product_auctions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('store_id')->constrained("user_stores");
             $table->foreignId('brand_id')->constrained();
             $table->string('title')->unique();
             $table->text('description');
             $table->string('thumbnail');
             $table->string('size');
+            $table->string('color');
             $table->enum('status', ['pending', 'approved', 'rejected', 'sold'])->default('pending');
-            // $table->boolean('open_bid')->default(true);
             $table->bigInteger('bid_price_start')->nullable();
             $table->bigInteger('bid_price_end')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 /**
  * Product Category Model
@@ -26,14 +27,19 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|ProductCategory whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class ProductCategory extends Model
-{
+class ProductCategory extends Model {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function products()
-    {
+    protected static function boot() {
+        parent::boot();
+
+        static::creating(function ($question) {
+            $question->slug = Str::slug($question->title);
+        });
+    }
+    public function categoryPivot() {
         return $this->belongsToMany(Product::class, 'product_category_pivots');
     }
 }
