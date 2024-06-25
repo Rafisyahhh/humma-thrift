@@ -13,6 +13,12 @@
         .swiper-pagination-bullet-active {
             background-color: #f0f0f0;
         }
+
+        .flash-sale {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
     </style>
 @endpush
 
@@ -88,45 +94,45 @@
             <div class="arrival-section">
                 <div class="row g-5">
                     @foreach ($product as $item)
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="product-wrapper" data-aos="fade-up">
-                            <div class="product-img">
-                                <img src="{{ asset("storage/$item->thumbnail") }}"
-                                    alt="product-img" class="object-fit-cover">
-                                <div class="product-cart-items">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="product-wrapper" data-aos="fade-up">
+                                <div class="product-img">
+                                    <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img"
+                                        class="object-fit-cover">
                                     <div class="product-cart-items">
-                                        <a href="/user/wishlist" class="favourite cart-item">
-                                            <span>
-                                                <i class="fas fa-heart"></i>
-                                            </span>
-                                        </a>
-                                        <a href="/user/checkout" class="favourite cart-item">
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="compaire cart-item">
-                                            <span>
-                                                <i class="fas fa-share"></i>
-                                            </span>
-                                        </a>
+                                        <div class="product-cart-items">
+                                            <a href="/user/wishlist" class="favourite cart-item">
+                                                <span>
+                                                    <i class="fas fa-heart"></i>
+                                                </span>
+                                            </a>
+                                            <a href="/user/checkout" class="favourite cart-item">
+                                                <span>
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                </span>
+                                            </a>
+                                            <a href="#" class="compaire cart-item">
+                                                <span>
+                                                    <i class="fas fa-share"></i>
+                                                </span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="product-info">
-                                <div class="product-description">
-                                    <a href="/user/detailproduct" class="product-details"> {{ $item->title }}
-                                    </a>
-                                    <div class="price">
-                                        <span class="new-price">Rp.{{ number_format($item->price, 2, ',', '.') }}</span>
+                                <div class="product-info">
+                                    <div class="product-description">
+                                        <a href="/user/detailproduct" class="product-details"> {{ $item->title }}
+                                        </a>
+                                        <div class="price">
+                                            <span class="new-price">Rp.{{ number_format($item->price, 2, ',', '.') }}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="product-cart-btn">
-                                <a href="/user/checkout" class="product-btn">Beli Sekarang</a>
+                                <div class="product-cart-btn">
+                                    <a href="/user/checkout" class="product-btn">Beli Sekarang</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
             </div>
@@ -145,8 +151,10 @@
         <div class="svg-container"
             style="position: absolute; top:217% ; left: 55%; width: 25%; height: 30%; z-index: 0; opacity:100%">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#BAE6FF" d="M30.5,-59.3C37,-49,38.2,-35.9,46.2,-25.5C54.1,-15.2,68.9,-7.6,75.3,3.7C81.7,15,79.8,30,70.2,37.5C60.6,45,43.3,45,30.3,48.4C17.3,51.9,8.7,58.8,-1.2,60.9C-11.1,63.1,-22.3,60.5,-35.3,57C-48.3,53.6,-63.2,49.3,-67.6,39.7C-72,30,-65.9,15,-59.8,3.5C-53.6,-8,-47.5,-15.9,-43.6,-26.4C-39.7,-36.9,-38,-49.9,-31.1,-60.1C-24.2,-70.2,-12.1,-77.5,-0.1,-77.4C11.9,-77.3,23.9,-69.7,30.5,-59.3Z" transform="translate(100 100)" />
-              </svg>
+                <path fill="#BAE6FF"
+                    d="M30.5,-59.3C37,-49,38.2,-35.9,46.2,-25.5C54.1,-15.2,68.9,-7.6,75.3,3.7C81.7,15,79.8,30,70.2,37.5C60.6,45,43.3,45,30.3,48.4C17.3,51.9,8.7,58.8,-1.2,60.9C-11.1,63.1,-22.3,60.5,-35.3,57C-48.3,53.6,-63.2,49.3,-67.6,39.7C-72,30,-65.9,15,-59.8,3.5C-53.6,-8,-47.5,-15.9,-43.6,-26.4C-39.7,-36.9,-38,-49.9,-31.1,-60.1C-24.2,-70.2,-12.1,-77.5,-0.1,-77.4C11.9,-77.3,23.9,-69.7,30.5,-59.3Z"
+                    transform="translate(100 100)" />
+            </svg>
         </div>
         <div class="svg-container"
             style="position: absolute; top:255% ; left: 67%; width: 37%; height: 30%; z-index: 0; opacity:100%">
@@ -164,46 +172,48 @@
             <div class="flash-sale-section" style="position: relative; z-index: 1;">
                 <div class="row g-5">
                     @foreach ($product_auction as $item)
-                    <div class="col-lg-3 col-md-6">
-                        <div class="product-wrapper" style="z-index: 1;" data-aos="fade-right"
-                            data-aos-duration="100">
-                            <div class="product-img">
-                                <img src="{{ asset("storage/$item->thumbnail") }}"
-                                    alt="product-img" class="object-fit-cover">
-                                <div class="product-cart-items">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product-wrapper" style="z-index: 1;" data-aos="fade-right"
+                                data-aos-duration="100">
+                                <div class="product-img">
+                                    <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img"
+                                        class="object-fit-cover">
                                     <div class="product-cart-items">
-                                        <a href="/user/wishlist" class="favourite cart-item">
-                                            <span>
-                                                <i class="fas fa-heart"></i>
-                                            </span>
-                                        </a>
-                                        <a href="/user/checkout" class="favourite cart-item">
-                                            <span>
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="compaire cart-item">
-                                            <span>
-                                                <i class="fas fa-share"></i>
-                                            </span>
-                                        </a>
+                                        <div class="product-cart-items">
+                                            <a href="/user/wishlist" class="favourite cart-item">
+                                                <span>
+                                                    <i class="fas fa-heart"></i>
+                                                </span>
+                                            </a>
+                                            <a href="/user/checkout" class="favourite cart-item">
+                                                <span>
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                </span>
+                                            </a>
+                                            <a href="#" class="compaire cart-item">
+                                                <span>
+                                                    <i class="fas fa-share"></i>
+                                                </span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="product-info">
-                                <div class="product-description">
-                                    <a href="/user/detailproduct" class="product-details">{{$item->title}}
-                                    </a>
-                                    <div class="price">
-                                        <span class="new-price">Rp.{{ number_format($item->bid_price_start, 2, ',', '.') }} - Rp.{{ number_format($item->bid_price_end, 2, ',', '.') }}</span>
+                                <div class="product-info">
+                                    <div class="product-description">
+                                        <a href="/user/detailproduct" class="product-details">{{ $item->title }}
+                                        </a>
+                                        <div class="price">
+                                            <span
+                                                class="new-price">Rp.{{ number_format($item->bid_price_start, 2, ',', '.') }}
+                                                - Rp.{{ number_format($item->bid_price_end, 2, ',', '.') }}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="product-cart-btn">
-                                <a href="cart.html" class="product-btn">Ikuti Lelang</a>
+                                <div class="product-cart-btn">
+                                    <a href="cart.html" class="product-btn">Ikuti Lelang</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
             </div>
