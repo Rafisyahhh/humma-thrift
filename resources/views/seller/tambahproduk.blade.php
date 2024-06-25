@@ -2,7 +2,6 @@
 
 @push('link')
   <link href="{{ asset('additional-assets/select2-4.1.0/css/select2.min.css') }}" rel="stylesheet" />
-  <link rel="stylesheet" <link rel="stylesheet" href="{{ asset('template-assets/front/css/image-uploader.css') }}">
 @endpush
 
 @push('style')
@@ -286,7 +285,7 @@
 @endsection
 
 @section('script')
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="{{ asset('additional-assets/select2-4.1.0/js/select2.min.css') }}"></script>
   <script src="{{ asset('js/imageUploader.js') }}"></script>
   <script>
     $(document).ready(function() {
