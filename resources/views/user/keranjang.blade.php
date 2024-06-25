@@ -30,8 +30,9 @@
                                     <div class="form-check" style="display: flex; align-items: center;">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
                                             style="border-color: #215791; margin-right: 1rem;">
-                                        <p style="margin-right: 30rem; margin-left:18rem;">Produk</p>
-                                        <p style="margin-right: 27rem;">Harga</p>
+                                        <p style="margin-right: 44.5rem; margin-left:3rem;">Produk</p>
+                                        <p style="margin-right: 25rem;">Kategori</p>
+                                        <p style="margin-right: 26rem;">Harga</p>
                                         <p>Aksi</p>
                                     </div>
                                 </td>
@@ -46,14 +47,14 @@
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
                                             style="border-color: #215791; margin-right: 2rem;">
                                         <i class="fa-solid fa-store"
-                                            style="margin-right: 1rem; color: #215791; font-size: 2rem;"></i>
+                                            style="margin-right: 1rem; color: #215791; font-size: 2rem; margin-left:2rem;"></i>
                                         <p style="font-weight: bold">hummatrhift malang</p>
                                     </div>
                                 </td>
                             </tr>
                             <tr class="table-row ticket-row" style="border: 1px solid #e6d5d593; width:100rem;">
                                 <td class="table-wrapper wrapper-product">
-                                    <div class="wrapper" style="display: flex; align-items: center;">
+                                    <div class="wrapper" style="display: flex; align-items: center; width:120rem;">
                                         <div class="form-check" style="margin-right: 1rem;">
                                             <input class="form-check-input" type="checkbox" value=""
                                                 id="flexCheckDefault" style="border-color: #215791;">
@@ -64,8 +65,11 @@
                                         </div>
                                         <div class="wrapper-content"
                                             style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1;">
-                                            <h5 class="heading" style="font-size: 18px; margin-right: 1rem;">Classic Design
+                                            <h5 class="heading" style="font-size: 18px; ">Classic Design
                                                 Skart</h5>
+                                            <div style="display: flex; align-items: center; margin-right: 1rem; ">
+                                                <p>abc , def</p>
+                                            </div>
                                             <div style="display: flex; align-items: center; margin-right: 1rem;">
                                                 <p>Rp</p>
                                                 <p style="margin-left: 0.5rem;">100.000</p>
@@ -83,7 +87,7 @@
                                 <td style="display: flex; justify-content: flex-end; align-items: center;">
                                     <div class="wrapper-content me-5"
                                         style="display: flex; justify-content: flex-end; align-items: center;">
-                                        <p style="margin-right: 1rem;">Total produk :</p>
+                                        <p style="margin-right: 1rem;">Total (0) produk : Rp. 0</p>
                                         <button class="shop-btn openModal" style="margin-left: 1rem;">Checkout</button>
                                     </div>
                                 </td>
