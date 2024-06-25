@@ -19,7 +19,7 @@ class StoreProductRequest extends FormRequest {
      */
     public function rules(): array {
         return [
-            'title' => ['required', "unique:$this->product_type,title"],
+            'title' => ['required', "unique:products,title", "unique:product_auctions,title"],
             'description' => 'required|string',
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'image_galery' => 'required|array|max:4',

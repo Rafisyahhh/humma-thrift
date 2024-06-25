@@ -1,34 +1,72 @@
 @extends('layouts.panel')
 
+@section('style')
+<style>
+.table-row .table-wrapper .wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+    width: 90rem;
+}
+</style>
+@endsection
 @section('content')
     <div class="cart-section">
         <div class="wishlist">
             <div>
-                <h5 class="cart-heading mb-4">Keranjang</h5>
+                {{-- <h5 class="cart-heading mb-4">Keranjang</h5> --}}
             </div>
             <div class="cart-section wishlist-section">
-                <table>
+                <table style="border-spacing: 10px;">
                     <tbody>
-                        <tr class="table-row ticket-row"  style="border: 1 solid #022346; background-color: #ffffff;">
-                            <td class="table-wrapper wrapper-product">
-                                <div class="form-check"> <input class="form-check-input" type="checkbox" value=""
-                                    id="flexCheckDefault" style="border-color: #022346;"> </div>
+                        <tr class="table-row ticket-row" style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100rem;">
+                            <td class="table-wrapper wrapper-product" style="display: flex; align-items: center;">
+                                <div class="form-check" style="display: flex; align-items: center;">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                                        style="border-color: #215791; margin-right: 1rem;">
+                                    <p style="margin-right: 30rem; margin-left:18rem;">Produk</p>
+                                    <p style="margin-right: 27rem;">Harga</p>
+                                    <p>Aksi</p>
+                                </div>
                             </td>
                         </tr>
-                        <tr class="table-row ticket-row" style="border-color: #f8f3f3;">
+                        <tr class="table-row ticket-row" style="border:none; background-color: #ffffff;">
+                            <td style="height:10px;">
+
+                            </td>
+                        </tr>
+                        <tr class="table-row ticket-row" style="border-color: #e6d5d593;">
                             <td class="table-wrapper wrapper-product">
                                 <div class="wrapper">
                                     <div class="form-check"> <input class="form-check-input" type="checkbox" value=""
-                                            id="flexCheckDefault" style="border-color: #022346;"> </div>
+                                            id="flexCheckDefault" style="border-color: #215791;">
+                                    </div>
                                     <div class="wrapper-img">
                                         <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                             alt="img">
                                     </div>
-                                    <div class="wrapper-content">
-                                        <h5 class="heading" style="font-size: 18px;">Classic Design Skart</h5>
-                                        <p style="color: #8b8b8b">Dress</p>
+                                    <div class="wrapper-content"
+                                        style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1;">
+                                        <h5 class="heading" style="font-size: 18px; margin-right: 1rem;">Classic Design
+                                            Skart</h5>
+                                        <div style="display: flex; align-items: center; margin-right: 1rem;">
+                                            <p>Rp</p>
+                                            <p style="margin-left: 0.5rem;">100.000</p>
+                                        </div>
+
+                                        <p>Hapus</p>
                                     </div>
                                 </div>
+                            </td>
+                            <td class="table-wrapper" style="align-items: center;">
+                            </td>
+                            <td class="table-wrapper" style="display: flex; justify-content: flex-end;">
+                                <div class="wrapper-content me-5" style="text-align: end;">
+                                    <p class="paragraph opacity-75 pt-1">
+                                    </p>
+                                    </div>
                             </td>
                             <td class="table-wrapper" style="align-items: center;">
                             </td>
@@ -39,6 +77,21 @@
                                     </p>
                                 </div>
                             </td>
+
+                        <tr class="table-row ticket-row" style="border:none; background-color: #ffffff;">
+                            <td style="height:45px;">
+
+                            </td>
+                        </tr>
+                        <tr class="table-row ticket-row" style="border: 1px solid #e6d5d593; background-color: #ffffff;">
+                            <td style="display: flex; justify-content: flex-end; align-items: center; width:100rem;">
+                                <div class="wrapper-content me-5"
+                                    style="display: flex; justify-content: flex-end; align-items: center;">
+                                    <p style="margin-right: 1rem;">Total produk :</p>
+                                    <button class="shop-btn openModal" style="margin-left: 1rem;">Checkout</button>
+                                </div>
+                            </td>
+                        </tr>
                         </tr>
                     </tbody>
                 </table>
