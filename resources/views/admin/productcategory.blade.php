@@ -33,7 +33,7 @@
                 <tbody class="table-border-bottom-0">
                     @foreach ($productCategories as $category)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $loop->iteration }}</td>`
                             <td>{{ $category->title }}</td>
                             <td><img src="{{ asset("storage/{$category->icon}") }}" class="rounded-3" height="96px"></td>
                             <td>
