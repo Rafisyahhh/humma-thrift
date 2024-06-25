@@ -34,7 +34,7 @@ class UpdateUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'username.required' => 'Username wajib diisi',
+            'username.required' => 'Nama Pengguna wajib diisi',
             'name.required' => 'Nama wajib diisi',
             'phone.required' => 'Nomor telepon wajib diisi',
             'avatar.image' => 'Avatar harus berupa file gambar',

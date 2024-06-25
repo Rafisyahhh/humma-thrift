@@ -37,7 +37,7 @@
                                                 <label for="email" class="form-label">Email</label>
                                                 <input type="text" id="email" name="email" class="form-control"
                                                     placeholder="mis.hilmaschaefer@gmail.com"
-                                                    value="{{ $store->user->email }}">
+                                                    value="{{ $store->user->email }}" disabled>
                                             </div>
 
                                             <div class="review-form-name">

@@ -1,6 +1,7 @@
 @extends('layouts.panel')
 
 @section('content')
+    @include('components.show-errors')
     <div class="seller-application-section">
         <div class="row">
             <div class="col-lg-7">
