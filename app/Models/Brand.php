@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 /**
  * Brand Model Database
@@ -31,6 +32,13 @@ class Brand extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
+    protected static function boot() {
+        parent::boot();
+
+        static::creating(function ($question) {
+            $question->slug = Str::slug($question->title);
+        });
+    }
     public function product()
     {
         return $this->hasMany(product::class, 'brand_id');

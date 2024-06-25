@@ -44,6 +44,8 @@ class OpenShopController extends Controller
         $data->put('verified_at', null);
         $data->put('active', false);
 
+        // dd($data->toArray());
+
         // Create User Store
         $userStore = UserStore::create($data->toArray());
 

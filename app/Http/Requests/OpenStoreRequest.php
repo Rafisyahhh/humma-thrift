@@ -26,7 +26,7 @@ class OpenStoreRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'store_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'nic_owner' => 'required|string|max:20',
+            'nic_owner' => 'required|string|max:16',
             'nic_photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }

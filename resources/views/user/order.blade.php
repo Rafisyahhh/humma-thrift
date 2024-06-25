@@ -185,7 +185,7 @@
                             aria-hidden="true" style="height: 99%;">
                             <div class="modal-dialog" style="margin-left: auto;">
                                 <div class="login-section account-section p-0">
-                                    <div class="review-form m-0" style="height: 75%; width: 85rem;">
+                                    <div class="review-form m-0" style="height: 75%; width: 105rem;">
                                         <div class="text-end mb-4">
                                             <div class="close-btn">
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -193,12 +193,12 @@
                                             </div>
                                         </div>
 
-                                            <section class="product product-info" style="width:75rem; height:60%;">
+                                            <section class="product product-info" style="width:95rem; height:60%;">
                                                 <div class="row ">
                                                     <div class="col-md-4">
                                                         <div class="product-info-img" data-aos="fade-right">
                                                             <div class="swiper product-top"
-                                                                style="height:18rem; width:18rem;">
+                                                                style="height:35rem; width:35rem;">
                                                                 <div class="swiper-wrapper"
                                                                     style="object-fit:cover; width:100%; height:100%;">
                                                                     <div class="swiper-slide slider-top-img">
@@ -209,11 +209,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-1"></div>
+                                                    <div class="col-md-7">
                                                         <div class="product-info-content" data-aos="fade-left">
                                                             <h5>Classic Design Skart</h5>
                                                             <div class="product-details mt-2">
-                                                                <table style="width: 20%; font-size: 16px;">
+                                                                <table style="font-size: 16px;">
                                                                     <tr>
                                                                         <td>
                                                                             Kategori
@@ -233,6 +234,37 @@
                                                                         <td>
                                                                             Adidas
                                                                         </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Nama Toko</td>
+                                                                        <td style="padding: 8px 12px;">: </td>
+                                                                        <td>humma_store</td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td>Tanggal Pemesanan</td>
+                                                                        <td style="padding: 8px 12px;">: </td>
+                                                                        <td>24 Juni 2024</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Alamat Pengiriman</td>
+                                                                        <td style="padding: 8px 12px;">: </td>
+                                                                        <td>Jl. Merdeka No. 123, Jakarta</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Status Pesanan</td>
+                                                                        <td style="padding: 8px 12px;">: </td>
+                                                                        <td>Diproses</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Jenis Pembayaran</td>
+                                                                        <td style="padding: 8px 12px;">: </td>
+                                                                        <td>Kartu Kredit</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Status Pembayaran</td>
+                                                                        <td style="padding: 8px 12px;">: </td>
+                                                                        <td>Sudah Dibayar</td>
                                                                     </tr>
                                                                 </table>
                                                                 {{-- <p>Kategori : <span class="inner-text">Dress</span></p> --}}
@@ -257,11 +289,11 @@
                                                 </div>
                                                 <hr>
 
-                                                <div class="row mt-4">
+                                                {{-- <div class="row mt-4">
                                                     <div class="col-md-1"></div>
-                                                <div class="col-md-11 ">
-                                                    <table style="font-size: 16px; justify-content: center; align-items:center;">
-                                                        <tr>
+                                                <div class="col-md-11 "> --}}
+                                                    {{-- <table style="font-size: 16px; justify-content: center; align-items:center;"> --}}
+                                                        {{-- <tr>
                                                             <td>Nama Toko</td>
                                                             <td style="padding: 8px 12px;">: </td>
                                                             <td>humma_store</td>
@@ -294,7 +326,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                                     {{-- <div class="row mt-4">
                                                                 <div class="col-md-6" style="align-items: center; justify-content:center;">
                                                                     <table style="font-size: 16px;">
