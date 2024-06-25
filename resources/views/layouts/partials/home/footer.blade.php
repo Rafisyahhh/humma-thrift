@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="details">
                                     <h4 class="footer-heading">No telepon:</h4>
-                                    <p>+880171889547</p>
+                                    <p>+62 8519216603</p>
                                 </div>
                             </div>
                         </div>
