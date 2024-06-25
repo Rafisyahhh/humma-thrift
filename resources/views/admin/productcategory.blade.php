@@ -3,7 +3,7 @@
 @section('title', 'Kategori Produk')
 
 @section('content')
-@include('components.show-errors')
+    @include('components.show-errors')
     <!-- Tabel -->
     <div class="card">
         <h5 class="card-header">Kategori</h5>
@@ -19,7 +19,6 @@
                         <button type="submit" class="btn btn-secondary">Cari</button>
                     </div>
                 </form>
-
             </div>
             <table class="table">
                 <thead class="table-light">
@@ -33,7 +32,7 @@
                 <tbody class="table-border-bottom-0">
                     @foreach ($productCategories as $category)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>`
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $category->title }}</td>
                             <td><img src="{{ asset("storage/{$category->icon}") }}" class="rounded-3" height="96px"></td>
                             <td>
@@ -42,8 +41,8 @@
                                     <i class="ti ti-pencil"></i>
                                 </button>
                                 <form id="delete-form-{{ $category->id }}"
-                                    action="{{ route('admin.product-category.destroy', $category->id) }}"
-                                    method="POST" style="display:inline">
+                                    action="{{ route('admin.product-category.destroy', $category->id) }}" method="POST"
+                                    style="display:inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" style="background: none"
@@ -91,13 +90,13 @@
 
                         <div class="mb-3">
                             <label for="icon" class="form-label">Icon</label>
-                            <input type="file" class="form-control @error('icon') is-invalid @enderror"
-                                id="icon" name="icon">
+                            <input type="file" class="form-control @error('icon') is-invalid @enderror" id="icon"
+                                name="icon">
                             @if (old('icon'))
                                 <img id="preview" src="{{ asset('storage/' . old('icon')) }}" alt="Old gambar"
                                     style="max-width: 100px; max-height: 100px;">
                             @endif
-                            @error('logo')
+                            @error('icon')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -122,9 +121,11 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit Kategori</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('admin.product-category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.product-category.update', $category->id) }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
@@ -139,13 +140,11 @@
                             </div>
                             <div class="mb-3">
                                 <label for="icon" class="form-label">Icon</label>
-                                <input type="file"
-                                    class="form-control @error('icon') is-invalid @enderror"
+                                <input type="file" class="form-control @error('icon') is-invalid @enderror"
                                     id="icon" name="icon" />
-
                                 @if ($category->icon)
-                                    <img src="{{ asset('storage/' . $category->icon) }}"
-                                        class="w-100 mt-3 rounded-3" alt="{{ $category->title }}" />
+                                    <img src="{{ asset('storage/' . $category->icon) }}" class="w-100 mt-3 rounded-3"
+                                        alt="{{ $category->title }}" />
                                 @else
                                     No Image
                                 @endif

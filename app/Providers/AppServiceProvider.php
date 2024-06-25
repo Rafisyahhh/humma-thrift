@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
-    public function register(): void
+    public function register()
     {
         //
     }
@@ -21,10 +21,15 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot()
     {
+        // Set the default string length for migrations
+        Schema::defaultStringLength(191);
+
+        // Enable pagination with bootstrap 5
         Paginator::useBootstrapFive();
 
+        // Share data to all views
         if (Schema::hasTable('product_categories')) {
             View::share('productCategories', ProductCategory::all());
         }

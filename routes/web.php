@@ -75,7 +75,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::view('/wishlist', 'user.wishlist')->name('wishlist');
     Route::get('/shop', [DetailProductController::class, 'showProduct'])->name('shop');
     Route::view('/store', 'user.store')->name('store');
-    Route::get('/detailproduct{id}', [DetailProductController::class, 'showDetail']);
+    Route::get('/detailproduct', [DetailProductController::class, 'showDetail']);
 
     Route::get('/open-shop', [OpenShopController::class, 'index'])->name('register-seller');
     Route::post('/open-shop', [OpenShopController::class, 'register'])->name('register-seller.submit');

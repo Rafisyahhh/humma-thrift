@@ -51,7 +51,7 @@ class LoginController extends Controller
     {
         if ($user->hasRole('admin')) {
             return redirect()->intended('/admin');
-        } elseif ($user->hasRole('user') && $user->has('store')) {
+        } elseif ($user->hasRole('user') && $user->store) {
             return redirect()->intended('/seller/home');
         } elseif ($user->hasRole('user')) {
             return redirect()->intended('/user');
