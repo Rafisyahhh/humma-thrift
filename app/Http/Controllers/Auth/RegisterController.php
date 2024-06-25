@@ -79,7 +79,6 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'password_confirmation' => ['required', 'string', 'min:8', 'confirmed'],
         ],[
             'name.required' => 'Nama wajib diisi.',
             'name.string' => 'Nama harus berupa teks.',
@@ -96,10 +95,6 @@ class RegisterController extends Controller
             'password.string' => 'Kata sandi harus berupa teks.',
             'password.min' => 'Kata sandi minimal 8 karakter.',
             'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
-            'password_confirmation.required' => 'Konfirmasi kata sandi wajib diisi.',
-            'password_confirmation.string' => 'Konfirmasi kata sandi harus berupa teks.',
-            'password_confirmation.min' => 'Konfirmasi kata sandi minimal 8 karakter.',
-            'password_confirmation.confirmed' => 'Konfirmasi kata sandi tidak cocok.'
         ]);
     }
 
