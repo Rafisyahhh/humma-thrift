@@ -87,7 +87,10 @@
                                 <td style="display: flex; justify-content: flex-end; align-items: center;">
                                     <div class="wrapper-content me-5"
                                         style="display: flex; justify-content: flex-end; align-items: center;">
-                                        <p style="margin-right: 1rem;">Total (0) produk : Rp. 0</p>
+                                        <p style="margin-right: 1rem;">Total (0) produk :</p>
+                                        <p>
+                                            <span style="font-size: 18px; font-weight: bold;  color: red;">Rp 0 </span>
+                                        </p>
                                         <button class="shop-btn openModal" style="margin-left: 1rem;">Checkout</button>
                                     </div>
                                 </td>
