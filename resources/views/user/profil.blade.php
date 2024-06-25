@@ -54,7 +54,7 @@
                         <h5 class="comment-title">Perbarui Foto Profil</h5>
                         <p class="paragraph">Ukuran 300x300.</p>
                         <div class="logo-upload">
-                            <img src="{{ asset('storage/'.auth()->user()->avatar) }}" alt="upload" class="upload-img"
+                            <img src="{{ asset('storage/'.auth()->user()->avatar) }}" alt="up" class="upload-img"
                                 id="upload-img">
                             <div class="upload-input">
                                 <label for="input-file">
