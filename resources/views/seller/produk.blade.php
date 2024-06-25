@@ -72,7 +72,7 @@
               <div class="product-description">
                 <a role="button" class="product-details">{{ $item->title }}</a>
                 <div class="price">
-                  <span class="new-price text-nowrap">{{ $item->price }}</span>
+                  <p class="new-price text-nowrap" style="font-weight: bold;">{{ $item->price }}</p>
                 </div>
               </div>
             </div>
