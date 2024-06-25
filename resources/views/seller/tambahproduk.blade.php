@@ -86,7 +86,7 @@
     height: 46px;
 }
 .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable .span {
-    height: 45px; 
+    height: 45px;
     margin-top: 20px;
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {

@@ -14,8 +14,8 @@ class ProductController extends Controller {
      */
     public function index() {
         return view('seller.produk', [
-            'products' => Product::all(),
-            'product_auctions' => ProductAuction::all()
+            'products' => Product::where("store_id", Auth::user()->store()->first()->id)->get(),
+            'product_auctions' => ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get()
         ]);
     }
 
@@ -24,7 +24,6 @@ class ProductController extends Controller {
      */
     public function create() {
         return view('seller.tambahproduk', [
-            'products' => Product::all(),
             'brands' => Brand::all(),
             'categories' => ProductCategory::all()
         ]);
@@ -37,12 +36,10 @@ class ProductController extends Controller {
         $data = $request->validated();
         $data['thumbnail'] = $request->thumbnail->store('uploads/thumbnails', 'public');
         $data['user_id'] = Auth::id();
+        $data['store_id'] = Auth::user()->store()->first()->id;
 
         $isAuction = $request->product_type === 'product_auctions';
         $model = $isAuction ? ProductAuction::class : Product::class;
-        $fields = $isAuction
-            ? ['user_id', 'brand_id', 'title', 'description', 'thumbnail', 'size', 'color', 'bid_price_start', 'bid_price_end']
-            : ['user_id', 'brand_id', 'title', 'description', 'thumbnail', 'size', 'color', 'price'];
 
         $product = $model::create($data);
 
@@ -86,6 +83,7 @@ class ProductController extends Controller {
      */
     public function update(UpdateProductRequest $request, $product) {
         $data = $request->validated();
+        $data['store_id'] = Auth::user()->store()->first()->id;
         $isAuction = $request->product_type === 'product_auctions';
         $currentProduct = Product::find($product) ?: ProductAuction::find($product);
 
@@ -115,20 +113,22 @@ class ProductController extends Controller {
 
         $currentProduct->update($data);
 
-        $galleryData = array_map(fn($image) => [
-            $isAuction ? 'product_auction_id' : 'product_id' => $currentProduct->id,
-            'image' => $image->store('uploads/galeries', 'public')
-        ], $request->image_galery);
+        if (isset($request->image_galery)) {
+            $galleryData = array_map(fn($image) => [
+                $isAuction ? 'product_auction_id' : 'product_id' => $currentProduct->id,
+                'image' => $image->store('uploads/galeries', 'public')
+            ], $request->image_galery);
 
-        $categoryData = array_map(fn($categoryId) => [
-            $isAuction ? 'product_auction_id' : 'product_id' => $currentProduct->id,
-            'product_category_id' => $categoryId
-        ], $request->category_id);
+            $categoryData = array_map(fn($categoryId) => [
+                $isAuction ? 'product_auction_id' : 'product_id' => $currentProduct->id,
+                'product_category_id' => $categoryId
+            ], $request->category_id);
 
-        ProductGallery::where($isAuction ? 'product_auction_id' : 'product_id', $currentProduct->id)->delete();
-        ProductCategoryPivot::where($isAuction ? 'product_auction_id' : 'product_id', $currentProduct->id)->delete();
-        ProductGallery::insert($galleryData);
-        ProductCategoryPivot::insert($categoryData);
+            ProductGallery::where($isAuction ? 'product_auction_id' : 'product_id', $currentProduct->id)->delete();
+            ProductCategoryPivot::where($isAuction ? 'product_auction_id' : 'product_id', $currentProduct->id)->delete();
+            ProductGallery::insert($galleryData);
+            ProductCategoryPivot::insert($categoryData);
+        }
 
         return redirect()->route('seller.product.index')->with('success', 'Sukses mengupdate produk');
     }
@@ -149,5 +149,12 @@ class ProductController extends Controller {
         $product->delete();
 
         return redirect()->back()->with('success', 'Sukses menghapus produk');
+    }
+
+    function slugify($text) {
+        $text = strtolower($text);
+        $text = preg_replace('/[^a-z0-9]+/', '-', $text);
+        $text = trim($text, '-');
+        return $text;
     }
 }

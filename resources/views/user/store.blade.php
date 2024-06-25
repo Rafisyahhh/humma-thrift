@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                             <div class="product-cart-btn">
-                                <a href="{{ route('store.profile', 'cinta90') }}" class="product-btn">Detail</a>
+                                <a href="{{ route('store.profile', 'cinta50') }}" class="product-btn">Detail</a>
                             </div>
                         </div>
                     </div>

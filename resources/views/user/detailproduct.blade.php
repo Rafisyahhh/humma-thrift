@@ -11,9 +11,7 @@
 
         .share-buttons {
             display: flex;
-            /* Menyusun ikon berbagi dalam satu baris */
             list-style-type: none;
-            /* Menghilangkan default styling dari <ul> */
             padding: 0;
             margin: 0;
         }
@@ -24,7 +22,6 @@
 
         .social-buttons {
             display: inline-block;
-            /* Setiap ikon dijadikan inline-block agar berada dalam satu baris */
         }
         .header-bottom{
             z-index: 1;
@@ -60,7 +57,7 @@
                                     </div>
                                     <div class="swiper-slide slider-top-img">
                                         <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-slider-img-1.webp') }}"
-                                            alt="img">
+                                             alt="img">
                                     </div>
                                     <div class="swiper-slide slider-top-img">
                                         <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-slider-img-2.webp') }}"
