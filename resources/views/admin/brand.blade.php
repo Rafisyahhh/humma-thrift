@@ -5,7 +5,7 @@
 @section('content')
     <!-- Bootstrap Table with Header - Light -->
     <div class="card">
-        <h5 class="card-header">Daftar Brands</h5>
+        <h5 class="card-header">Daftar Brand</h5>
         <div class="card-header d-flex justify-content-between align-items-center">
 
             <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
@@ -34,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @foreach ($brands as $brand)
+                    @forelse ($brands as $brand)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $brand->title }}</span></td>
@@ -61,7 +61,11 @@
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center">Tidak ada data</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
             <div class="modal fade" tabindex="-1" id="tambahModal">

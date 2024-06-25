@@ -22,12 +22,8 @@ class UpdateProductCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $categoryId = $this->route('product-category');
         return [
-            'title' => [
-                'required',
-                Rule::unique('product_categories', 'title')->ignore($categoryId)
-            ],
+            'title' => 'required',
             'icon' => 'nullable|file|mimes:jpeg,png,jpg|max:2048'
         ];
     }
@@ -40,6 +36,6 @@ class UpdateProductCategoryRequest extends FormRequest
             'icon.image' => 'Masukan harus berupa Logo',
             'icon.mimes' => 'Logo harus berupa file jpeg,png,jpg',
             'icon.max' => 'Ukuran Logo harus kurang 2MB',
-          ];
+        ];
     }
 }

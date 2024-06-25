@@ -53,7 +53,11 @@ class ProductCategoryController extends Controller
 
             return redirect()->back()->with('success', 'Kategori berhasil ditambahkan');
         } catch (\Throwable $th) {
+            Log::error($th->getMessage(), ['exception' => $th]);
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage(), ['exception' => $e]);
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
@@ -80,28 +84,30 @@ class ProductCategoryController extends Controller
     public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory)
     {
         try {
-            $oldPhotoPath = $productCategory->icon;
+            // Put the validated data
+            $data = collect($request->validated());
 
-            $dataToUpdate = [
-                'title' => $request->input('title'),
-            ];
-
+            // Substitute the last icon with new icon
             if ($request->hasFile('icon')) {
-                $foto = $request->file('icon');
-                $path = $foto->store('icon', 'public');
-                $dataToUpdate['icon'] = $path;
+                if (Storage::disk('public')->exists($productCategory->getAttribute('icon'))) {
+                    Storage::disk('public')->delete($productCategory->getAttribute('icon'));
+                }
+
+                // Store the new icon
+                $data->put('icon', $request->file('icon')->store('category-icon', 'public'));
             }
 
-            $productCategory->update($dataToUpdate);
+            // Update the category
+            $productCategory->update($data->toArray());
 
-            if ($productCategory->wasChanged('icon') && $oldPhotoPath) {
-                Storage::disk('public')->delete($oldPhotoPath);
-            }
-
+            // Redirect back
             return redirect()->back()->with('success', 'Kategori berhasil di ubah');
         } catch (\Throwable $th) {
             Log::error($th->getMessage(), ['exception' => $th]);
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage(), ['exception' => $e]);
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
@@ -110,13 +116,23 @@ class ProductCategoryController extends Controller
      */
     public function destroy(ProductCategory $productCategory)
     {
-        // Delete the category
-        // If category is not used, delete the photo if it exists
-        if (Storage::disk('public')->exists($productCategory->icon)) {
-            Storage::disk('public')->delete($productCategory->icon);
+        try {
+            // Delete icon
+            if (Storage::disk('public')->exists($productCategory->getAttribute('icon'))) {
+                Storage::disk('public')->delete($productCategory->getAttribute('icon'));
+            }
+
+            // Delete the category
+            $productCategory->delete();
+
+            // Redirect back
+            return redirect()->back()->with('success', 'Kategori berhasil di hapus');
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage(), ['exception' => $th]);
+            return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage(), ['exception' => $e]);
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
-        // Delete the category
-        $productCategory->delete();
-        return redirect()->back()->with('success', 'Kategori berhasil di hapus');
     }
 }
