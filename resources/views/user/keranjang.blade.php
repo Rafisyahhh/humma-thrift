@@ -1,5 +1,17 @@
 @extends('layouts.panel')
 
+@section('style')
+<style>
+.table-row .table-wrapper .wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+    width: 90rem;
+}
+</style>
+@endsection
 @section('content')
     <div class="cart-section">
         <div class="wishlist">
@@ -9,14 +21,13 @@
             <div class="cart-section wishlist-section">
                 <table style="border-spacing: 10px;">
                     <tbody>
-                        <tr class="table-row ticket-row" style="border: 1px solid #e6d5d593; background-color: #ffffff;">
+                        <tr class="table-row ticket-row" style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100rem;">
                             <td class="table-wrapper wrapper-product" style="display: flex; align-items: center;">
                                 <div class="form-check" style="display: flex; align-items: center;">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
                                         style="border-color: #215791; margin-right: 1rem;">
-                                    <p style="margin-right: 30rem;">Produk</p>
-                                    <p style="margin-right: 30rem;">Harga</p>
-                                    <p style="margin-right: 30rem;">Total</p>
+                                    <p style="margin-right: 30rem; margin-left:18rem;">Produk</p>
+                                    <p style="margin-right: 27rem;">Harga</p>
                                     <p>Aksi</p>
                                 </div>
                             </td>
@@ -44,10 +55,7 @@
                                             <p>Rp</p>
                                             <p style="margin-left: 0.5rem;">100.000</p>
                                         </div>
-                                        <div style="display: flex; align-items: center; margin-right: 1rem;">
-                                            <p>Rp</p>
-                                            <p style="margin-left: 0.5rem;">100.000</p>
-                                        </div>
+
                                         <p>Hapus</p>
                                     </div>
                                 </div>
@@ -76,7 +84,7 @@
                             </td>
                         </tr>
                         <tr class="table-row ticket-row" style="border: 1px solid #e6d5d593; background-color: #ffffff;">
-                            <td style="display: flex; justify-content: flex-end; align-items: center; width:110rem;">
+                            <td style="display: flex; justify-content: flex-end; align-items: center; width:100rem;">
                                 <div class="wrapper-content me-5"
                                     style="display: flex; justify-content: flex-end; align-items: center;">
                                     <p style="margin-right: 1rem;">Total produk :</p>
