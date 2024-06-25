@@ -1,4 +1,3 @@
-
 @if (request()->routeIs(['register', 'login']))
     <div class="header-user">
         <a href="{{ url('/') }}" class="d-flex gap-2 align-items-center lh-1">
@@ -14,35 +13,34 @@
         </a>
     </div>
 @elseif(auth()->check())
-<div class="header-favourite">
-    <a href="wishlist.html" class="cart-item">
-        <span>
-            <i class="fas fa-bell"></i>
-        </span>
-    </a>
-</div>
+    <div class="header-favourite">
+        <a href="wishlist.html" class="cart-item">
+            <span>
+                <i class="fas fa-bell"></i>
+            </span>
+        </a>
+    </div>
 
-<div class="header-favourite">
-    <a href="{{ route('user.wishlist') }}" class="cart-item">
-        <span>
-            <i class="fas fa-heart"></i>
-        </span>
-    </a>
-</div>
+    <div class="header-favourite">
+        <a href="{{ route('user.wishlist') }}" class="cart-item">
+            <span>
+                <i class="fas fa-heart"></i>
+            </span>
+        </a>
+    </div>
 
-{{-- ICON PROFILE --}}
-<div class="header-cart header-right-dropdown">
-    <a href="/user/profile" class="cart-item">
-        <span>
-            <i class="fas fa-user"></i>
-        </span>
-    </a>
+    {{-- ICON PROFILE --}}
+    <div class="header-cart header-right-dropdown">
+        <a href="/user/profile" class="cart-item">
+            <span>
+                <i class="fas fa-user"></i>
+            </span>
+        </a>
 
         <div class="cart-submenu">
             <div class="cart-wrapper-section">
                 <div class="d-flex gap-4 mb-4">
-                    <img src="{{ auth()->user()->getGravatarLink() }}" alt="{{ auth()->user()->name }}"
-                        height="48px" class="rounded-circle" />
+                    <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="{{ auth()->user()->name }}" height="48px" class="rounded-circle"/>
 
                     <div class="d-flex flex-column gap-1">
                         <p class="fw-bold mb-0">{{ auth()->user()->name }}</p>
@@ -83,10 +81,10 @@
 @endif
 
 @push('js')
-<script>
-    document.getElementById('logout-link')?.addEventListener('click', function(event) {
-        event.preventDefault();
-        document.getElementById('logout-form').submit();
-    });
-</script>
+    <script>
+        document.getElementById('logout-link')?.addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('logout-form').submit();
+        });
+    </script>
 @endpush

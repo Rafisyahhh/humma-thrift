@@ -27,7 +27,7 @@
       ],
       [
           'title' => 'Profil Lapak',
-          'route' => 'seller.profil',
+          'route' => 'seller.profile',
           'icon' => 'user',
           'role' => 'seller',
       ],

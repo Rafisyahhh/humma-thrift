@@ -24,10 +24,13 @@ $data = [
                 <div class="profile-section">
                     <div class="row g-5">
                         <div class="col-lg-3 col-sm-4">
-                            <div class="product-wrapper" style="height: 230px;padding: 11.5px;align-items:center;text-align:center;">
+                            <div class="product-wrapper"
+                                style="height: 230px;padding: 11.5px;align-items:center;text-align:center;">
                                 <div class="wrapper-img">
                                     <span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 62 62">
+                                        <span>
+                                            <svg width="62" height="62" viewBox="0 0 62 62" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
                                             <rect width="62" height="62" rx="4" />
                                             <path
                                                 d="M45.4473 20.0309C45.482 20.3788 45.5 20.7314 45.5 21.0883C45.5 26.919 40.7564 31.6625 34.9258 31.6625C29.0951 31.6625 24.3516 26.919 24.3516 21.0883C24.3516 20.7314 24.3695 20.3788 24.4042 20.0309H21.9805L21.0554 12.6289H13.7773V14.7438H19.1884L21.5676 33.7774H47.1868L48.8039 20.0309H45.4473Z" />
@@ -36,6 +39,7 @@ $data = [
                                             <path
                                                 d="M34.9262 29.5477C39.5907 29.5477 43.3856 25.7528 43.3856 21.0883C43.3856 16.4238 39.5907 12.6289 34.9262 12.6289C30.2616 12.6289 26.4668 16.4238 26.4668 21.0883C26.4668 25.7528 30.2617 29.5477 34.9262 29.5477ZM33.8688 17.916H35.9836V20.6503L37.7886 22.4554L36.2932 23.9508L33.8687 21.5262V17.916H33.8688Z" />
                                         </svg>
+                                        </span>
                                     </span>
                                 </div>
                                 <div class="wrapper-content">
@@ -45,7 +49,8 @@ $data = [
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-4">
-                            <div class="product-wrapper" style="height: 230px;padding: 11.5px;align-items:center;text-align:center;">
+                            <div class="product-wrapper"
+                                style="height: 230px;padding: 11.5px;align-items:center;text-align:center;">
                                 <div class="wrapper-img">
                                     <span>
                                         <svg width="62" height="62" viewBox="0 0 62 62" fill="none"
@@ -67,7 +72,8 @@ $data = [
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-4">
-                            <div class="product-wrapper" style="height: 230px;padding: 11.5px;align-items:center;text-align:center;">
+                            <div class="product-wrapper"
+                                style="height: 230px;padding: 11.5px;align-items:center;text-align:center;">
                                 <div class="wrapper-img">
                                     <span>
                                         <svg width="62" height="62" viewBox="0 0 62 62" fill="none"
@@ -86,7 +92,8 @@ $data = [
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-4">
-                            <div class="product-wrapper" style="height: 230px;padding: 11.5px;align-items:center;text-align:center;">
+                            <div class="product-wrapper"
+                                style="height: 230px;padding: 11.5px;align-items:center;text-align:center;">
                                 <div class="wrapper-img">
                                     <svg width="62" height="62" viewBox="0 0 62 62" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">

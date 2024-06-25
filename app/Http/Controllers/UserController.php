@@ -62,6 +62,7 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $user = User::findOrFail($id);
+        $avatarPath = auth()->user()->avatar;
         // Proses unggah file avatar jika ada
         if ($request->hasFile('avatar')) {
             // Hapus avatar lama jika ada
@@ -80,7 +81,7 @@ class UserController extends Controller
             'pbirth' => $request->pbirth,
             'dbirth' => $request->dbirth,
         ]);
-        return redirect()->back()->with("success", "Berhasil Memperbarui Keahlian");
+        return redirect()->back()->with("success", "Berhasil Memperbarui Profil");
     }
 
     /**

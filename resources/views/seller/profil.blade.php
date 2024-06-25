@@ -9,59 +9,59 @@
 @endsection
 
 @section('content')
-
+    @include('components.show-errors')
     <section class="seller-application ">
         <div class="container">
             <div class="seller-application-section-profil">
                 <div class="row ">
+                    @if ($store)
                     <div class="col-lg-7">
                         <div class="row gy-5">
                             <div class="col-lg-12">
                                 <div class="seller-information" data-aos="fade-right">
                                     <h5 class="comment-title">Informasi Toko</h5>
                                     <p class="paragraph">Isi formulir untuk melengkapi profil Toko Anda!</p>
+                                    <form action="{{ route('seller.profile.update', $store->id) }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
                                     <div class="review-form">
                                         <div class="review-inner-form ">
                                             <div class="review-form-name">
                                                 <label for="name" class="form-label">Nama
                                                     Toko</label>
                                                   <input type="text" id="name" name="name" class="form-control"
-                                                    placeholder="mis.Hilma Store" value="Hilma Store">
+                                                    placeholder="mis.Hilma Store" value="{{ $store->name }}">
                                             </div>
 
                                             <div class="review-form-name">
                                                 <label for="email" class="form-label">Email</label>
                                                 <input type="text" id="email" name="email" class="form-control"
                                                     placeholder="mis.hilmaschaefer@gmail.com"
-                                                    value="hilmaschaefer@gmail.com">
+                                                    value="{{ $store->user->email }}">
                                             </div>
 
                                             <div class="review-form-name">
                                                 <label for="phone" class="form-label">Telepon</label>
                                                 <input type="number" id="phone" name="phone" class="form-control"
-                                                    placeholder="+88013**977957" value="082138977957">
+                                                    placeholder="+88013**977957" value="{{ $store->user->phone }}">
                                             </div>
 
                                             <div class="review-form-name">
                                                 <label for="nic" class="form-label">NIK</label>
-                                                <input type="number" id="nic" name="nic" class="form-control"
-                                                    placeholder="masukkan nic" value="002781623916">
+                                                <input type="number" id="nic" name="nic_owner" class="form-control"
+                                                    placeholder="masukkan nic" value="{{ $store->nic_owner }}">
                                             </div>
 
                                             <div class="review-form-name">
                                                 <label for="address" class="form-label">Alamat</label>
                                                 <textarea id="address" name="address" class="form-control"
-                                                 placeholder="Masukkan Alamat Anda">Jln. Keramat, Perum. Permata Regency, Blk. 1o, No 11 B</textarea>
+                                                 placeholder="Masukkan Alamat Anda">{{ $store->address }}</textarea>
                                             </div>
 
                                             <div class="review-form-name mt-4">
                                                 <label for="address" class="form-label">Deskripsi</label>
-                                                <textarea id="custom-summernote" name="address" class="custom-summernote"
-                                                 placeholder="Tambahkan Deskripsi Toko Anda" rows="7">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi dicta repellat dolorem maxime ducimus commodi quae aut quam earum. Voluptas nam, sed et assumenda ipsum accusantium rem ad alias fugiat modi molestiae voluptate.</textarea>
-                                            </div>
-
-                                            <div class="form-btn">
-                                                <a href="create-account.html" class="shop-btn" style="width: 51rem">Simpan</a>
+                                                <textarea id="custom-summernote" name="description" class="custom-summernote"
+                                                 placeholder="Tambahkan Deskripsi Toko Anda" rows="7">{{ $store->description }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +77,7 @@
                                         <h5 class="comment-title" style="margin-left: 80px;">Perbarui Logo</h5>
                                         <p class="paragraph" style="margin-left: 80px;">Profil minimal Ukuran 300x300.</p>
                                         <div class="logo-upload">
-                                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
+                                            <img src="{{ asset($store->store_logo ? 'storage/'.$store->store_logo : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
                                                 alt="upload" class="upload-img" id="upload-img">
                                             <div class="input-item upload-input">
                                                 <label for="input-file">
@@ -93,7 +93,7 @@
                                                         </svg>
                                                     </span>
                                                 </label>
-                                                <input type="file" accept="image/jpeg, image/jpg, image/png, image/webp" id="input-file">
+                                                <input type="file" name="store_logo" accept="image/jpeg, image/jpg, image/png, image/webp" id="input-file">
                                             </div>
                                         </div>
                                     </div>
@@ -104,7 +104,7 @@
                                         <p class="paragraph" style="margin-left: 80px;">Sampul minimal Ukuran
                                             1170x920.</p>
                                         <div class="cover-upload logo-upload">
-                                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
+                                            <img src="{{ asset($store->store_cover ? "storage/{$store->store_cover}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
                                                 alt="upload" class="cover-img" id="cover-img" style="margin-left: 80px;">
                                             <div class="input-item cover-input">
                                                 <label for="cover-file">
@@ -120,7 +120,7 @@
                                                         </svg>
                                                     </span>
                                                 </label>
-                                                <input type="file" accept="image/jpeg, image/jpg, image/png, image/webp" id="cover-file">
+                                                <input type="file" name="store_cover" accept="image/jpeg, image/jpg, image/png, image/webp" id="cover-file">
                                             </div>
                                         </div>
                                     </div>
@@ -128,6 +128,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-12">
+                        <div class="submit-btn">
+                            <button type="submit" class="shop-btn update-btn">Perbarui Profil</button>
+                            </form>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
