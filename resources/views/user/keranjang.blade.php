@@ -1,5 +1,6 @@
 @extends('layouts.panel')
 
+
 @section('content')
     <div class="cart-section">
         <div class="wishlist">
