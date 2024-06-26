@@ -299,7 +299,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
             </div>
-            <h3 style="text-align: center">SESI LELANG HOODIE</h3>
+            <h3 style="text-align: center">{{ $item->title }}</h3>
             <hr>
             <table style="width:120rem;">
               <tbody>
@@ -382,7 +382,6 @@
 @endsection
 
 @section('scripts')
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     function modalAction(modalClass) {
       $(modalClass).toggleClass('active');
