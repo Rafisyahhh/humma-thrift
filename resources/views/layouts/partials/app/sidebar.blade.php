@@ -50,26 +50,12 @@
       </a>
     </li>
 
-    <li class="menu-item">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons ti ti-box"></i>
-        <div>Produk</div>
-      </a>
-
-      <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="javascript:void(0)" class="menu-link">
-            <div>Persetujuan Produk</div>
-          </a>
-        </li>
-        <li class="menu-item {{ request()->routeIs('admin.product-category.*') ? 'active' : '' }}">
-          <a href="{{ route('admin.product.index') }}" class="menu-link">
-            <div>Daftar Produk</div>
-          </a>
-        </li>
-      </ul>
+    <li class="menu-item {{ request()->routeIs('admin.produk.*') ? 'active' : '' }}">
+        <a href="{{ route('admin.produk.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-box"></i>
+            <div>Produk</div>
+        </a>
     </li>
-
     <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link">
         <i class="menu-icon tf-icons ti ti-wallet"></i>

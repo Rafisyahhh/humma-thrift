@@ -21,6 +21,7 @@ use App\Http\Controllers\{
     RedirectUserController,
     DetailProductController,
     HistoryController,
+    ProductAdminController,
     UserStoreController
 };
 use App\Models\User;
@@ -116,7 +117,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::resource('product-category', ProductCategoryController::class);
     Route::resource('user', UserController::class);
     Route::resource('event', EventController::class);
-    Route::resource('product', ProductAdminController::class);
+    Route::resource('produk', ProductAdminController::class);
 
     Route::prefix('/notification')->name('notification.')->group(function () {
         Route::get('/', [NotificationController::class, 'index'])->name('index');
