@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiControllers\UserApiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
@@ -45,7 +46,7 @@ Route::prefix('/debug')->middleware(\App\Http\Middleware\DevelopmentMiddleware::
     // Route::view('home', 'debug.home');
     // Route::view('modal', 'debug.modal');
 
-    Route::get('/test', function() {
+    Route::get('/test', function () {
         $user = fn() => "hello world";
 
         dd(gettype($user));
@@ -61,7 +62,7 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
     Route::view('/transaction', 'seller.transaksi')->name('transaction');
     Route::view('/income', 'seller.penghasilan')->name('income');
     // Route::view('/product', 'seller.produk')->name('product');
-    Route::get('profil',  [UserStoreController::class, 'show'])->name('profile');
+    Route::get('profil', [UserStoreController::class, 'show'])->name('profile');
     Route::post('/profile/{id}', [UserStoreController::class, 'update'])->name('profile.update');
     Route::resource('product', ProductController::class);
     Route::resource('productauction', ProductAuctionController::class);
@@ -129,4 +130,14 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
 Route::prefix('@{store:username}')->group(function () {
     Route::get('/', [StoreProfileController::class, 'index'])->name('store.profile');
     Route::get('/products', [StoreProfileController::class, 'products'])->name('store.products');
+});
+
+
+//api
+Route::prefix('api')->middleware('auth')->name('api.')->group(function () {
+    Route::middleware('role:user')->group(function () {
+        Route::get('/user', [UserApiController::class, 'getUser'])->name('getUser');
+        Route::post('/user', [UserApiController::class, 'storeUser'])->name('storeUser');
+        Route::put('/user/{user}', [UserApiController::class, 'updateUser'])->name('updateUser');
+    });
 });
