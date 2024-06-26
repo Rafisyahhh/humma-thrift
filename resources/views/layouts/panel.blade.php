@@ -56,7 +56,7 @@
 
     <link rel="stylesheet" href="{{ asset('template-assets/front/css/style.css') }}" />
 
-    <link rel="stylesheet" href="{{ asset('css/loading.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('css/loading.css') }}" /> --}}
 
 
     <style>
@@ -74,7 +74,7 @@
   </head>
 
   <body>
-    @include('layouts.partials.app.loading')
+    {{-- @include('layouts.partials.app.loading') --}}
     @include('layouts.partials.home.header')
 
     <section class="user-profile footer-padding">
@@ -122,11 +122,11 @@
         location.href = "{{ url()->previous() }}";
       });
 
-      $(async () => {
-        $(".preloader").fadeOut(750, function() {
-          $(this).remove();
-        });
-      });
+      //   $(async () => {
+      //     $(".preloader").fadeOut(750, function() {
+      //       $(this).remove();
+      //     });
+      //   });
     </script>
 
     @yield('script')
