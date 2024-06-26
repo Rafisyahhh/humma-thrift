@@ -124,7 +124,7 @@
 
       $(async () => {
         $(".preloader").fadeOut(750, function() {
-          $(this).hide();
+          $(this).remove();
         });
       });
     </script>
