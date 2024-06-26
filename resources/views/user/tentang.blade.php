@@ -12,7 +12,9 @@
                     <div class="col-lg-6">
                         <div class="about-img" data-aos="fade-right">
                             {{-- <img src="{{asset('template-assets/front/assets/images/homepage-one/about/about-img-1.webp')}}" alt="img"> --}}
-                            <img src="{{ asset("storage/{$about->image}") }}" alt="img">
+                            <div class="ratio ratio-1x1">
+                                <img src="{{ asset("storage/{$about->image}") }}" alt="img" class="object-fit-cover">
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
