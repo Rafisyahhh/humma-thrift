@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('thumbnail');
             $table->string('size');
             $table->string('color');
-            $table->enum('status', ['pending', 'approved', 'rejected', 'sold'])->default('pending');
+            $table->enum('status', ['active', 'inactive', 'sold'])->default('active');
             $table->bigInteger('bid_price_start')->nullable();
             $table->bigInteger('bid_price_end')->nullable();
             $table->string('slug')->nullable();
