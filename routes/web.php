@@ -72,7 +72,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::get('/', [DashboardUserController::class, 'dashboard'])->name('userhome');
     Route::view('/checkout', 'user.checkout')->name('checkout');
     Route::view('/about', 'user.tentang')->name('about');
-    Route::view('/brand', 'user.merek')->name('brand');
+    Route::get('/brand', [LandingpageController::class, 'brand'])->name('brand');
     Route::view('/detail', 'user.detail')->name('detail');
     Route::get('/profile', [UserController::class, 'show'])->name('profile');
     Route::post('/profile/{id}', [UserController::class, 'update'])->name('profile.update');
@@ -97,7 +97,7 @@ Route::prefix('dev')->group(function () {
 
 # Landing Pages
 Route::view('/product', 'landing.produk');
-Route::view('/brandindex', 'landing.brand');
+Route::get('/brandindex', [LandingpageController::class, 'brand']);
 Route::view('/store', 'landing.toko');
 Route::view('/detail', 'landing.detail');
 Route::get('/about-us', [AboutUsController::class, 'landingpage']);
