@@ -37,12 +37,13 @@
         }
 
         .flash-sale .svg-container:nth-child(1) {
-            margin-top: -20%;
-            margin-left: -20%;
+            margin-top: -4%;
+            margin-left: -12%;
         }
+
         .flash-sale .svg-container:nth-child(1) svg {
-            height: 100rem;
-            width: 100rem;
+            height: 75rem;
+            width: 75rem;
         }
 
         .flash-sale .svg-container:nth-child(2) {
@@ -51,6 +52,7 @@
             bottom: unset;
             left: unset;
         }
+
         .flash-sale .svg-container:nth-child(2) svg {
             height: 50rem;
             width: 50rem;
@@ -61,13 +63,14 @@
             align-items: center;
             justify-content: center;
             top: unset;
-            margin-bottom: -20rem
+            margin-bottom: -10rem;
         }
+
         .flash-sale .svg-container:nth-child(3) svg {
             margin-right: auto;
             margin-left: auto;
-            height: 75rem;
-            width: 75rem;
+            height: 60rem;
+            width: 60rem;
         }
 
         .flash-sale .container {
@@ -116,7 +119,6 @@
             <div class="swiper-pagination"></div>
         </div>
     </section>
-
 
     <section class="product-category mt-5">
         <div class="container">
@@ -228,8 +230,7 @@
                 <div class="row g-5">
                     @foreach ($product_auction as $item)
                         <div class="col-lg-3 col-md-6">
-                            <div class="product-wrapper" style="z-index: 1;" data-aos="fade-right"
-                                data-aos-duration="100">
+                            <div class="product-wrapper" style="z-index: 1;" data-aos="fade-right" data-aos-duration="100">
                                 <div class="product-img">
                                     <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img"
                                         class="object-fit-cover">

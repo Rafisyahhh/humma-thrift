@@ -12,17 +12,25 @@ use App\Models\ProductCategory;
 
 class LandingpageController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $event =  Event::all();
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $product = Product::all();
         $product_auction = ProductAuction::all();
-        return view('landing.home', compact('event',
-        'brands','categories','product','product_auction'));
+
+        return view('landing.home', compact(
+            'event',
+            'brands',
+            'categories',
+            'product',
+            'product_auction'
+        ));
     }
 
-    public function brand(){
+    public function brand()
+    {
         $brands = Brand::all();
         return view('landing.brand', compact('brands'));
     }
@@ -34,5 +42,4 @@ class LandingpageController extends Controller
         $product_auction = ProductAuction::all();
         return view('landing.produk', compact('products','brands','categories','product_auction'));
     }
-
 }

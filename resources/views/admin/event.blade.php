@@ -3,6 +3,10 @@
 @section('title', 'Event')
 
 @section('content')
+    <div>
+        @include('components.show-errors')
+    </div>
+
     <!-- Bootstrap Table with Header - Light -->
     <div class="card">
         <h5 class="card-header">Daftar Event</h5>
@@ -20,7 +24,6 @@
                         style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">Cari</button>
                 </div>
             </form>
-
         </div>
 
         <div class="table-responsive text-nowrap">
@@ -153,8 +156,10 @@
 
                                     <div class="mb-3">
                                         <label for="judul_update" class="form-label">Judul</label>
-                                        <input type="text" class="form-control @error('judul_update') is-invalid @enderror"
-                                            id="judul_update" name="judul_update" value="{{ old('judul_update', $even->judul) }}">
+                                        <input type="text"
+                                            class="form-control @error('judul_update') is-invalid @enderror"
+                                            id="judul_update" name="judul_update"
+                                            value="{{ old('judul_update', $even->judul) }}">
                                         @error('judul_update')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -175,7 +180,8 @@
 
                                     <div class="mb-3">
                                         <label for="foto_update" class="form-label">Foto Cover</label>
-                                        <input type="file" class="form-control @error('foto_update') is-invalid @enderror"
+                                        <input type="file"
+                                            class="form-control @error('foto_update') is-invalid @enderror"
                                             id="foto_update" name="foto_update" />
 
                                         @if ($even->foto)
@@ -183,7 +189,7 @@
                                                 alt="{{ $even->judul }}" />
                                         @else
                                             No Image
-                                        @endif  
+                                        @endif
                                         @error('foto_update')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

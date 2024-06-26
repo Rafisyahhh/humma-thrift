@@ -174,11 +174,11 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="location mt-2"> &nbsp;&nbsp;<span class="location mt-2">{{$store->description}}</span> </div>
+                    <div class="location mt-2"> &nbsp;&nbsp;<span class="location mt-2">{!! $store->description !!}</span> </div>
                 </div>
             </div> <br> <br>
 
-            @if (!$store->verified_at)
+            @if (!$store->verified_at && auth()->check() && user()->id() === $store->user_id)
                 <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size: 0.9rem;">
                     <p>Toko anda belum terverifikasi. Silahkan verifikasikan toko anda dari tautan yang sudah kami kirim ke
                         surel anda.</p> <button type="button" class="btn-close" data-bs-dismiss="alert"

@@ -99,8 +99,8 @@ Route::prefix('dev')->group(function () {
 });
 
 # Landing Pages
-Route::get('/product', [LandingpageController::class, 'product']);
-Route::get('/brandindex', [LandingpageController::class, 'brand']);
+Route::view('/product', 'landing.produk');
+Route::get('/brand', [LandingpageController::class, 'brand']);
 Route::view('/store', 'landing.toko');
 Route::view('/detail', 'landing.detail');
 Route::get('/about-us', [AboutUsController::class, 'landingpage']);
