@@ -135,9 +135,7 @@ Route::prefix('@{store:username}')->group(function () {
 
 //api
 Route::prefix('api')->middleware('auth')->name('api.')->group(function () {
-    Route::middleware('role:user')->group(function () {
-        Route::get('/user', [UserApiController::class, 'getUser'])->name('getUser');
-        Route::post('/user', [UserApiController::class, 'storeUser'])->name('storeUser');
-        Route::put('/user/{user}', [UserApiController::class, 'updateUser'])->name('updateUser');
-    });
+    Route::get('/user', [UserApiController::class, 'getUser'])->name('getUser');
+    Route::post('/user', [UserApiController::class, 'storeUser'])->name('storeUser');
+    Route::put('/user/{user}', [UserApiController::class, 'updateUser'])->name('updateUser');
 });

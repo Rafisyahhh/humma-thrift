@@ -65,18 +65,17 @@
     </div>
 
     <div class="table-responsive text-nowrap">
-      <table class="table table-striped yajra-datatable w-100 nowrap">
+      <table class="table table-striped yajra-datatable w-100">
         <thead class="table-light">
           <tr>
-            <th>No</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>created_at</th>
-            <th>updated_at</th>
-            <th>Action</th>
+            <th>Nama Akun</th>
+            <th>Tanggal</th>
+            <th>Peran</th>
+            <th>Status</th>
+            <th>Aksi</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody class="table-border-bottom-0"></tbody>
       </table>
       <table class="table">
         <thead class="table-light">
@@ -171,7 +170,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
       let firstLoad = true;
-      const table = $('.yajra-datatable').AjaxDataTable({
+      const table = $('.yajra-datatable').DataTable({
         options: {
           fixedHeader: true,
           layout: {
@@ -180,11 +179,8 @@
             }
           }
         },
-        ajax: "{{ route('user.list') }}",
+        ajax: "{{ route('api.getUser') }}",
         columns: [{
-            data: 'DT_RowIndex',
-          },
-          {
             data: 'name',
           },
           {
@@ -197,38 +193,12 @@
             data: 'updated_at',
           },
           {
-            data: 'action',
+            data: 'id',
             className: 'sticky-right',
             orderable: false,
             searchable: false,
           }
-        ],
-        onCreate: {
-          createModal: $("#createModal"),
-          success: (r) => {
-            flasher.success(r);
-          }
-        },
-        onDelete: {
-          url: "{{ route('delete', 'id') }}",
-          token: "{{ csrf_token() }}",
-          success: (r) => {
-            flasher.success(r);
-          }
-        },
-        onEdit: {
-          editModal: $("#editModal"),
-          method: "PUT",
-          url: "{{ route('update', 'id') }}",
-          error: ({
-            responseJSON
-          }) => {
-            flasher.error(responseJSON.message);
-          },
-          success: (r) => {
-            flasher.success(r);
-          }
-        }
+        ]
       });
     });
   </script>
