@@ -19,13 +19,20 @@ class LandingpageController extends Controller
         $product = Product::all();
         $product_auction = ProductAuction::all();
         return view('landing.home', compact('event',
-        'brands',
-        'categories','product','product_auction'));
+        'brands','categories','product','product_auction'));
     }
 
     public function brand(){
         $brands = Brand::all();
-        return view('user.merek', compact('brands'));
+        return view('landing.brand', compact('brands'));
+    }
+
+    public function product(){
+        $products = Product::all();
+        $brands = Brand::all();
+        $categories = ProductCategory::all();
+        $product_auction = ProductAuction::all();
+        return view('landing.produk', compact('products','brands','categories','product_auction'));
     }
 
 }
