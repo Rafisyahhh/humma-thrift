@@ -117,7 +117,6 @@
         </div>
     </section>
 
-
     <section class="product-category mt-5">
         <div class="container">
             <div class="section-title">
