@@ -74,15 +74,21 @@
                                 <input type="file" name="avatar" accept="image/jpeg, image/jpg, image/png, image/webp" id="input-file">
                             </div>
                         </div>
+                        <div class="col-lg-12">
+                            <div class="submit-btn d-flex justify-content-center w-100 mt-5">
+                                <button type="submit" class="shop-btn update-btn">Perbarui Profil</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12">
+            {{-- <div class="col-lg-12">
                 <div class="submit-btn">
                     <button type="submit" class="shop-btn update-btn">Perbarui Profil</button>
                     </form>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection
