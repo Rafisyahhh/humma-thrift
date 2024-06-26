@@ -55,6 +55,7 @@
             </div>
             <div class="header-nav-menu">
                 <ul class="menu-list">
+                @if (auth()->check() && auth()->user()->hasRole('user'))
                     <li>
                         <a href="/">
                             <span class="list-text">Home</span>
@@ -80,6 +81,33 @@
                             <span class="list-text">Tentang Kami</span>
                         </a>
                     </li>
+                @else
+                    <li>
+                        <a href="/">
+                            <span class="list-text">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/product">
+                            <span class="list-text">Produk</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/brandindex">
+                            <span class="list-text">Brand</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/store">
+                            <span class="list-text">Toko</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/about-us">
+                            <span class="list-text">Tentang Kami</span>
+                        </a>
+                    </li>
+                @endif
                 </ul>
             </div>
             <div class="header-vendor-btn">
