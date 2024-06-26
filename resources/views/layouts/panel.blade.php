@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="keywords"
-        content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template" />
+      content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ asset('apple-touch-icon-57x57.png') }}" />
@@ -29,20 +29,20 @@
     <meta name="msapplication-square310x310logo" content="{{ asset('mstile-310x310.png') }}" />
 
     @hasSection('title')
-        <title>{{ $__env->yieldContent('title') }} &bullet; {{ config('app.name') }}</title>
+      <title>{{ $__env->yieldContent('title') }} &bullet; {{ config('app.name') }}</title>
     @else
-        <title>
-            {{ config('app.name') }}
-            @session('message')
-                | {{ session('message') }}
-            @endsession</title>
+      <title>
+        {{ config('app.name') }}
+        @session('message')
+          | {{ session('message') }}
+        @endsession</title>
     @endif
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Jost:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet" />
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Jost:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet" />
 
     <link rel="stylesheet" href="{{ asset('additional-assets/fontawesome-free-6.5.2/css/all.min.css') }}" />
 
@@ -56,12 +56,14 @@
 
     <link rel="stylesheet" href="{{ asset('template-assets/front/css/style.css') }}" />
 
+    <link rel="stylesheet" href="{{ asset('css/loading.css') }}" />
+
 
     <style>
-        .header-right-dropdown>div {
-            right: 0 !important;
-            left: unset !important;
-        }
+      .header-right-dropdown>div {
+        right: 0 !important;
+        left: unset !important;
+      }
     </style>
 
     @stack('link')
@@ -69,26 +71,27 @@
 
     @stack('style')
     @yield('style')
-</head>
+  </head>
 
-<body>
+  <body>
+    @include('layouts.partials.app.loading')
     @include('layouts.partials.home.header')
 
     <section class="user-profile footer-padding">
-        <div class="container">
-            <div class="user-profile-section">
-                <div class="user-dashboard w-100">
-                    <div class="row gx-0 gy-0 gy-md-5 gx-md-5 w-100 align-items-stretch">
-                        <div class="col-md-3 h-100">
-                            @include('layouts.partials.home.sidebar-user')
-                        </div>
-                        <div class="col-md-9">
-                            @yield('content')
-                        </div>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="user-profile-section">
+          <div class="user-dashboard w-100">
+            <div class="row gx-0 gy-0 gy-md-5 gx-md-5 w-100 align-items-stretch">
+              <div class="col-md-3 h-100">
+                @include('layouts.partials.home.sidebar-user')
+              </div>
+              <div class="col-md-9">
+                @yield('content')
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </section>
 
 
@@ -114,14 +117,20 @@
     <script src="{{ asset('template-assets/front/assets/js/shopus.js') }}"></script>
 
     <script>
-        $("#backButton").click(function(e) {
-            e.preventDefault();
-            location.href = "{{ url()->previous() }}";
+      $("#backButton").click(function(e) {
+        e.preventDefault();
+        location.href = "{{ url()->previous() }}";
+      });
+
+      $(async () => {
+        $(".preloader").fadeOut(750, function() {
+          $(this).hide();
         });
+      });
     </script>
 
     @yield('script')
     @stack('script')
-</body>
+  </body>
 
 </html>
