@@ -66,6 +66,12 @@ class ProductController extends Controller {
      */
     public function show(Product $product) {
         //
+        $product_category_pivots = ProductCategoryPivot::all();
+        return view('seller.produk', [
+            'product_category_pivots',
+            'products' => Product::where("store_id", Auth::user()->store()->first()->id)->get(),
+            'product_auctions' => ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get()
+        ]);
     }
 
     /**

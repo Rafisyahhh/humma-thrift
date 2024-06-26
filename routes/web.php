@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminControllers\ProductAdminController;
 use App\Http\Controllers\ApiControllers\UserApiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -115,6 +116,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::resource('product-category', ProductCategoryController::class);
     Route::resource('user', UserController::class);
     Route::resource('event', EventController::class);
+    Route::resource('product', ProductAdminController::class);
 
     Route::prefix('/notification')->name('notification.')->group(function () {
         Route::get('/', [NotificationController::class, 'index'])->name('index');
@@ -135,9 +137,7 @@ Route::prefix('@{store:username}')->group(function () {
 
 //api
 Route::prefix('api')->middleware('auth')->name('api.')->group(function () {
-    Route::middleware('role:user')->group(function () {
-        Route::get('/user', [UserApiController::class, 'getUser'])->name('getUser');
-        Route::post('/user', [UserApiController::class, 'storeUser'])->name('storeUser');
-        Route::put('/user/{user}', [UserApiController::class, 'updateUser'])->name('updateUser');
-    });
+    Route::get('/user', [UserApiController::class, 'getUser'])->name('getUser');
+    Route::post('/user', [UserApiController::class, 'storeUser'])->name('storeUser');
+    Route::put('/user/{user}', [UserApiController::class, 'updateUser'])->name('updateUser');
 });
