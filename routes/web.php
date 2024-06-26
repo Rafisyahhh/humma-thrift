@@ -82,9 +82,8 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::view('/cart', 'user.keranjang')->name('cart');
     Route::view('/wishlist', 'user.wishlist')->name('wishlist');
     Route::get('/shop', [DetailProductController::class, 'showProduct'])->name('shop');
-    Route::view('/store', 'user.store')->name('store');
+    Route::get('/store', [StoreProfileController::class, 'showStore'])->name('store');
     Route::get('/detailproduct', [DetailProductController::class, 'showDetail']);
-
     Route::get('/open-shop', [OpenShopController::class, 'index'])->name('register-seller');
     Route::post('/open-shop', [OpenShopController::class, 'register'])->name('register-seller.submit');
     Route::get('/verify-store/{token:verification_code}', [OpenShopController::class, 'verifyStore'])->name('verify.store');
@@ -129,9 +128,10 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
 });
 
 # Store Profile Routes
-Route::prefix('@{store:username}')->group(function () {
-    Route::get('/', [StoreProfileController::class, 'index'])->name('store.profile');
-    Route::get('/products', [StoreProfileController::class, 'products'])->name('store.products');
+Route::prefix('@{store:username}')->controller(StoreProfileController::class)->group(function () {
+    Route::get('/', 'index')->name('store.profile');
+    Route::get('products', 'products')->name('store.products');
+    Route::get('product/{product:slug}', 'productDetail')->name('store.product.detail');
 });
 
 

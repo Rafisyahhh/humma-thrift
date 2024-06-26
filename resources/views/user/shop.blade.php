@@ -137,7 +137,7 @@
                                         </div>
                                         <div class="product-info">
                                             <div class="product-description">
-                                                <a href="/user/detailproduct" class="product-details">{{ $item->title }}
+                                                <a href="{{route('store.product.detail',['store' => $item->userStore->username,'product'=> $item->slug])}}" class="product-details">{{ $item->title }}
                                                 </a>
                                                 <div class="price">
                                                     <span
@@ -183,7 +183,7 @@
                                         </div>
                                         <div class="product-info">
                                             <div class="product-description">
-                                                <a href="/user/detailproduct" class="product-details">{{ $item->title }}
+                                                <a href="{{route('store.product.detail',['store' => $item->userStore->username,'product'=> $item->slug])}}" class="product-details">{{ $item->title }}
                                                 </a>
                                                 <div class="price">
                                                     <span

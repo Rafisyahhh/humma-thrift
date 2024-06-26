@@ -178,7 +178,7 @@
                 </div>
             </div> <br> <br>
 
-            @if (!$store->verified_at && auth()->check() && user()->id() === $store->user_id)
+            @if (!$store->verified_at && auth()->check() && auth()->id() === $store->user_id)
                 <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size: 0.9rem;">
                     <p>Toko anda belum terverifikasi. Silahkan verifikasikan toko anda dari tautan yang sudah kami kirim ke
                         surel anda.</p> <button type="button" class="btn-close" data-bs-dismiss="alert"
@@ -195,12 +195,12 @@
             </div>
             <div class="arrival-section">
                 <div class="row g-5">
-                    @for ($i = 0; $i < 10; $i++)
+                    @forelse ($isProduct as $item)
                         <div class="col-lg-3 col-sm-6">
                             <div class="product-wrapper" data-aos="fade-up">
                                 <div class="product-img">
-                                    <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
-                                        alt="product-img">
+                                    <img src="{{ asset('storage/' . $item->thumbnail) }}"
+                                        alt="product-img" class="object-fit-cover">
                                     <div class="product-cart-items">
                                         <a href="/user/wishlist" class="favourite cart-item">
                                             <span>
@@ -221,20 +221,71 @@
                                 </div>
                                 <div class="product-info">
                                     <div class="product-description">
-                                        <a href="/user/detailproduct" class="product-details">
-                                            Nama Produk
+                                        <a href="{{route('store.product.detail',['store' => $item->userStore->username,'product'=> $item->slug])}}" class="product-details">
+                                            {{ $item->title }}
                                         </a>
                                         <div class="price">
-                                            <span class="new-price">Harga</span>
+                                            <span class="new-price">Rp.{{ number_format($item->price, 2, ',', '.') }}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="product-cart-btn">
-                                    <a href="/user/keranjang" class="product-btn">Masukkan keranjang</a>
+                                    <a href="/user/keranjang" class="product-btn">Beli Sekarang</a>
                                 </div>
                             </div>
                         </div>
-                    @endfor
+                    @empty
+                    <div class="col-lg-12">
+                        <h3 class="text-center">Produk Masih Kosong</h3>
+                        <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
+                    </div>
+                    @endforelse
+                    @forelse ($isProductAuction as $item)
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="product-wrapper" data-aos="fade-up">
+                                <div class="product-img">
+                                    <img src="{{ asset('storage/' . $item->thumbnail) }}"
+                                        alt="product-img" class="object-fit-cover">
+                                    <div class="product-cart-items">
+                                        <a href="/user/wishlist" class="favourite cart-item">
+                                            <span>
+                                                <i class="fas fa-heart"></i>
+                                            </span>
+                                        </a>
+                                        <a href="/user/wishlist" class="favourite cart-item">
+                                            <span>
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </span>
+                                        </a>
+                                        <a href="/user/keranjang" class="compaire cart-item">
+                                            <span>
+                                                <i class="fas fa-share"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-description">
+                                        <a href="{{route('store.product.detail',['store' => $item->userStore->username,'product'=> $item->slug])}}" class="product-details">
+                                            {{ $item->title }}
+                                        </a>
+                                        <div class="price">
+                                            <span class="new-price">Rp.{{ number_format($item->bid_price_start, 2, ',', '.') }}
+                                                - Rp.{{ number_format($item->bid_price_end, 2, ',', '.') }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-cart-btn">
+                                    <a href="/user/keranjang" class="product-btn">Ikuti Lelang</a>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                    <div class="col-lg-12">
+                        <h3 class="text-center">Produk Lelang Masih Kosong</h3>
+                        <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
+                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>

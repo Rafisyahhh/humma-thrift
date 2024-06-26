@@ -3,40 +3,43 @@
 @section('title', 'Tentang Kami')
 
 @section('style')
-<head>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
-  </head>
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+    </head>
 @endsection
 
 @section('content')
-
-
-<section class="about">
-    <div class="container">
-        <div class="about-section">
-            @foreach ($aboutUs as $about)
-            <div class="row align-items-center gy-5" style="padding: 0 3rem;">
-                <div class="col-lg-5">
-                    <div class="about-img" data-aos="fade-right">
-                        <img src="{{ asset("storage/{$about->image}") }}" alt="img" style="max-width: 100%; height: auto;">
+    <section class="about">
+        <div class="container">
+            <div class="about-section">
+                @foreach ($aboutUs as $about)
+                    <div class="row align-items-center gy-5" style="padding: 0 3rem;">
+                        <div class="col-lg-5">
+                            <div class="about-img" data-aos="fade-right">
+                                <div class="ratio ratio-1x1">
+                                    <img src="{{ asset("storage/{$about->image}") }}" alt="img"
+                                    style="max-width: 100%; height: auto;" class="object-fit-cover" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="about-content" data-aos="fade-up">
+                                <h3 class="review-title"
+                                    style="font-family: 'Helvetica', sans-serif; font-size: 60px !important;">
+                                    {{ $about->title }}
+                                </h3>
+                                <p class="about-info"
+                                    style="font-family: 'Roboto', serif; font-size: 20px !important; word-wrap: break-word; width: 150%; max-width: 70rem;  text-align: justify;">
+                                    {{ $about->description }}
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-7">
-                    <div class="about-content" data-aos="fade-up">
-                        <h3 class="review-title" style="font-family: 'Helvetica', sans-serif; font-size: 60px !important;">
-                            {{$about->title}}
-                        </h3>
-                        <p class="about-info" style="font-family: 'Roboto', serif; font-size: 20px !important; word-wrap: break-word; width: 150%; max-width: 70rem;  text-align: justify;">
-                            {{ $about->description }}
-                        </p>
-
-                    </div>
-                </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
-    </div>
-</section>
+    </section>
 
 
     <section class="about-feedback product">
@@ -90,7 +93,8 @@
                             <div class="divider"></div>
                             <div class="testimonial-info">
                                 <div class="testimonial-img">
-                                    <img src="template-assets/front/assets/images/homepage-one/about/testimonial-img-1.webp" alt="img">
+                                    <img src="template-assets/front/assets/images/homepage-one/about/testimonial-img-1.webp"
+                                        alt="img">
                                 </div>
                                 <div class="testimonial-info-details">
                                     <h5 class="testimonial-name">Md Abdur Rahman</h5>
@@ -112,7 +116,8 @@
                                     </svg>
                                 </span>
                             </div>
-                            <p class="testimonial-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore reprehenderit eveniet id laboriosam ut dolore.
+                            <p class="testimonial-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
+                                reprehenderit eveniet id laboriosam ut dolore.
                             </p>
                             <div class="ratings d-flex gap-2 align-items-center">
                                 <span>
@@ -140,7 +145,8 @@
                             <div class="divider"></div>
                             <div class="testimonial-info">
                                 <div class="testimonial-img">
-                                    <img src="template-assets/front/assets/images/homepage-one/about/testimonial-img-2.webp" alt="img">
+                                    <img src="template-assets/front/assets/images/homepage-one/about/testimonial-img-2.webp"
+                                        alt="img">
                                 </div>
                                 <div class="testimonial-info-details">
                                     <h5 class="testimonial-name">Mohammad Sajjad Hossain</h5>
@@ -162,7 +168,8 @@
                                     </svg>
                                 </span>
                             </div>
-                            <p class="testimonial-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore reprehenderit eveniet id laboriosam ut dolore.
+                            <p class="testimonial-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
+                                reprehenderit eveniet id laboriosam ut dolore.
                             </p>
                             <div class="ratings d-flex gap-2 align-items-center">
                                 <span>
@@ -190,7 +197,8 @@
                             <div class="divider"></div>
                             <div class="testimonial-info">
                                 <div class="testimonial-img">
-                                    <img src="template-assets/front/assets/images/homepage-one/about/testimonial-img-3.webp" alt="img">
+                                    <img src="template-assets/front/assets/images/homepage-one/about/testimonial-img-3.webp"
+                                        alt="img">
                                 </div>
                                 <div class="testimonial-info-details">
                                     <h5 class="testimonial-name">Stefhen Hoking</h5>
@@ -212,7 +220,8 @@
                                     </svg>
                                 </span>
                             </div>
-                            <p class="testimonial-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore reprehenderit eveniet id laboriosam ut dolore.
+                            <p class="testimonial-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
+                                reprehenderit eveniet id laboriosam ut dolore.
                             </p>
                             <div class="ratings d-flex gap-2 align-items-center">
                                 <span>
@@ -240,7 +249,8 @@
                             <div class="divider"></div>
                             <div class="testimonial-info">
                                 <div class="testimonial-img">
-                                    <img src="template-assets/front/assets/images/homepage-one/about/testimonial-img-1.webp" alt="img">
+                                    <img src="template-assets/front/assets/images/homepage-one/about/testimonial-img-1.webp"
+                                        alt="img">
                                 </div>
                                 <div class="testimonial-info-details">
                                     <h5 class="testimonial-name">Abdullah Al Mamun</h5>
@@ -263,7 +273,8 @@
                                     </svg>
                                 </span>
                             </div>
-                            <p class="testimonial-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore reprehenderit eveniet id laboriosam ut dolore.
+                            <p class="testimonial-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
+                                reprehenderit eveniet id laboriosam ut dolore.
                             </p>
                             <div class="ratings d-flex gap-2 align-items-center">
                                 <span>
@@ -291,7 +302,8 @@
                             <div class="divider"></div>
                             <div class="testimonial-info">
                                 <div class="testimonial-img">
-                                    <img src="template-assets/front/assets/images/homepage-one/about/testimonial-img-1.webp" alt="img">
+                                    <img src="template-assets/front/assets/images/homepage-one/about/testimonial-img-1.webp"
+                                        alt="img">
                                 </div>
                                 <div class="testimonial-info-details">
                                     <h5 class="testimonial-name">Mohammad Rashed Khan</h5>
@@ -313,7 +325,8 @@
                                     </svg>
                                 </span>
                             </div>
-                            <p class="testimonial-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore reprehenderit eveniet id laboriosam ut dolore.
+                            <p class="testimonial-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
+                                reprehenderit eveniet id laboriosam ut dolore.
                             </p>
                             <div class="ratings d-flex gap-2 align-items-center">
                                 <span>
@@ -341,7 +354,8 @@
                             <div class="divider"></div>
                             <div class="testimonial-info">
                                 <div class="testimonial-img">
-                                    <img src="template-assets/front/assets/images/homepage-one/about/testimonial-img-1.webp" alt="img">
+                                    <img src="template-assets/front/assets/images/homepage-one/about/testimonial-img-1.webp"
+                                        alt="img">
                                 </div>
                                 <div class="testimonial-info-details">
                                     <h5 class="testimonial-name">Shuvo Raihan</h5>

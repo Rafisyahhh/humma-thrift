@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserStore;
+use App\Models\Product;
+use App\Models\ProductAuction;
 use Illuminate\Http\Request;
+use Jorenvh\Share\ShareFacade as Share;
 
 class StoreProfileController extends Controller
 {
@@ -12,7 +15,9 @@ class StoreProfileController extends Controller
      */
     public function index(UserStore $store)
     {
-        return view('store.index', compact('store'));
+        $isProduct = Product::where('store_id', $store->id)->get();
+        $isProductAuction = ProductAuction::where('store_id', $store->id)->get();
+        return view('store.index', compact('store','isProduct','isProductAuction'));
     }
 
     /**
@@ -21,5 +26,22 @@ class StoreProfileController extends Controller
     public function products(UserStore $store)
     {
         dd('products');
+    }
+
+    public function productDetail(UserStore $store, string $slug)
+    {
+        $url = 'https://www.positronx.io/create-autocomplete-search-in-laravel-with-typeahead-js/';
+        $text = 'Your share text comes here';
+
+        $isProduct = Product::where('slug', $slug)->first();
+        $isProductAuction = ProductAuction::where('slug', $slug)->first();
+
+        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction','url','text'));
+    }
+
+    public function showStore()
+    {
+        $store = UserStore::all();
+        return view('user.store', compact('store'));
     }
 }

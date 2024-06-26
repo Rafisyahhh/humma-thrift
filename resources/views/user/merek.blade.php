@@ -26,10 +26,10 @@ html:not(.no-js) [data-aos^="fade"][data-aos^="fade"].aos-animate {
             <div class="top-selling-section">
                 <div class="row g-5 mt-4">
                     <div class="col-lg-3 col-md-6">
-                        <div class="product-wrapper" data-aos="fade-right" style="display: flex; flex-direction: column; align-items: center;">
+                        <div class="product-wrapper p-0" data-aos="fade-right" style="display: flex; flex-direction: column; align-items: center;">
                             <div class="product-img" style="display: flex; justify-content: center; width: 100%;">
                                 <img src="{{ asset("storage/$item->logo") }}"
-                                    alt="product-img" style="height: 25.7rem; width: 25.7rem; background: rgba(126, 163, 219, 0.4);">
+                                    alt="product-img" style="background: rgba(126, 163, 219, 0.4);" class="object-fit-cover">
                             </div>
                             <p class="product-details" style="text-align: center; margin-top: 10px;">{{ $item->title }}</p>
                         </div>
