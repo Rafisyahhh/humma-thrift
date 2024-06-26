@@ -27,6 +27,14 @@
             z-index: 1;
             position: relative;
         }
+        .text-gray {
+            color: gray;
+        }
+
+        .row product-details {
+            font-size: 10rem;
+        }
+
     </style>
 @endsection
 
@@ -119,11 +127,11 @@
                             </div>
                             <hr>
                             <div class="row product-details">
-                                <div class="col-3 py-2 my-2" style="z-index:1">
-                                    <p class="fs-2">Kategori</p>
-                                    <p class="fs-2">Brand</p>
-                                    <p class="fs-2">Ukuran</p>
-                                    <p class="fs-2">Warna</p>
+                                <div class="col-3 py-2 my-2 " style="z-index:1">
+                                    <p class="fs-2 text-gray">Kategori</p>
+                                    <p class="fs-2 text-gray">Brand</p>
+                                    <p class="fs-2 text-gray">Ukuran</p>
+                                    <p class="fs-2 text-gray">Warna</p>
                                 </div>
                                 <div class="col-9 py-2 my-2" style="z-index:1">
                                     <p class="fs-2 inner-text">: Hoodie</p>

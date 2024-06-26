@@ -23,4 +23,9 @@ class LandingpageController extends Controller
         'categories','product','product_auction'));
     }
 
+    public function brand(){
+        $brands = Brand::all();
+        return view('user.merek', compact('brands'));
+    }
+
 }
