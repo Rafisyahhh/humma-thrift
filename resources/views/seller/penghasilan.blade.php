@@ -22,7 +22,7 @@ $data = [
             <div class="profile-section">
                 <canvas id="penjualan-harian" width="400" height="200"></canvas>
             </div>
-            <br><br><br>
+            <br><br>
             <div>
                 <h5 class="heading">Data Penjualan/Bulan</h5>
             </div>
