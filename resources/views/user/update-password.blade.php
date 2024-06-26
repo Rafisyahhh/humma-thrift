@@ -10,7 +10,7 @@
             <div class="review-form">
                 <div class="account-inner-form">
                     @foreach ([
-                        'old-password' => 'Sandi Lama*',
+                        'old-password' => 'Sandi Lama*', 
                         'password' => 'Sandi Baru*',
                         'password_confirmation' => 'Ulangi Sandi*',
                     ] as $field => $label)

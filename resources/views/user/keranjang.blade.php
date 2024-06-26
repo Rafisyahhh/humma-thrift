@@ -74,7 +74,7 @@
                                                 <p>Rp</p>
                                                 <p style="margin-left: 0.5rem;">100.000</p>
                                             </div>
-                                            <p>Hapus</p>
+                                            <p style="color: red;">Hapus</p>
                                         </div>
                                     </div>
                                 </td>
@@ -89,7 +89,7 @@
                                         style="display: flex; justify-content: flex-end; align-items: center;">
                                         <p style="margin-right: 1rem;">Total (0) produk :</p>
                                         <p>
-                                            <span style="font-size: 18px; font-weight: bold;  color: red;">Rp 0 </span>
+                                            <h6 style="font-size: 18px; font-weight: bold;  color: red;">Rp 0 </h6>
                                         </p>
                                         <button class="shop-btn openModal" style="margin-left: 1rem;">Checkout</button>
                                     </div>
