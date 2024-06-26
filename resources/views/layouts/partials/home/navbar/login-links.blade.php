@@ -40,8 +40,9 @@
         <div class="cart-submenu">
             <div class="cart-wrapper-section">
                 <div class="d-flex gap-4 mb-4">
-                    <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="{{ auth()->user()->name }}" height="48px" class="rounded-circle"/>
-
+                    <div class="ratio ratio-1x1" style="width: 48px; height: 48px">
+                        <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="{{ auth()->user()->name }}" class="rounded-circle"/>
+                    </div>
                     <div class="d-flex flex-column gap-1">
                         <p class="fw-bold mb-0">{{ auth()->user()->name }}</p>
                         <p class="mb-0 opacity-75">{{ auth()->user()->email }}</p>
