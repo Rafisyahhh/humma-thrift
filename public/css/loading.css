@@ -156,6 +156,30 @@
     }
 }
 
+@media (min-width: 576px) and (max-width: 800px) {
+    .th-preloader .animation-preloader .txt-loading {
+        font-size: 52px;
+        line-height: 52px;
+    }
+}
+
+@-webkit-keyframes characters {
+    0%,
+    75%,
+    100% {
+        opacity: 0;
+        -webkit-transform: rotateY(-90deg);
+        transform: rotateY(-90deg);
+    }
+
+    25%,
+    50% {
+        opacity: 1;
+        -webkit-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+    }
+}
+
 @keyframes characters {
     0%,
     75%,
