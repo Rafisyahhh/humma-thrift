@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PasswordVerify;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserUpdatePasswordRequest extends FormRequest {
@@ -19,14 +20,13 @@ class UserUpdatePasswordRequest extends FormRequest {
      */
     public function rules(): array {
         return [
-            'old-password' => 'required|string|min:8',
-            'password' => 'required|string|min:8|confirmed',
+            'old_password' => ["required", "string", "min:8", new PasswordVerify($this->old_password, $this->user()->password)],
+            'password' => ["required", "string", "min:8", "confirmed", "different:old_password"],
             'password_confirmation' => 'required|string|min:8|same:password',
         ];
     }
 
-    public function messages(): array
-    {
+    public function messages(): array {
         return [
             'old-password.required' => 'Password lama harus diisi.',
             'old-password.string' => 'Password lama harus berupa teks.',
@@ -35,6 +35,7 @@ class UserUpdatePasswordRequest extends FormRequest {
             'password.string' => 'Password baru harus berupa teks.',
             'password.min' => 'Password baru minimal 8 karakter.',
             'password.confirmed' => 'Konfirmasi password baru tidak cocok.',
+            'password.different' => 'Password baru tidak boleh sama dengan password lama.',
             'password_confirmation.required' => 'Konfirmasi password harus diisi.',
             'password_confirmation.string' => 'Konfirmasi password harus berupa teks.',
             'password_confirmation.min' => 'Konfirmasi password minimal 8 karakter.',

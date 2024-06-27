@@ -1,34 +1,36 @@
 @push('link')
-    <link rel="stylesheet" href="{{ asset('additional-assets/toastr-2.1.4/toastr.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('additional-assets/toastr-2.1.4/toastr.min.css') }}" />
 @endpush
 
 @push('script')
-    <script src="{{ asset('additional-assets/toastr-2.1.4/toastr.min.js') }}"></script>
+  <script src="{{ asset('additional-assets/toastr-2.1.4/toastr.min.js') }}"></script>
 @endpush
 
-@if ($errors->any())
+@push('script')
+  @if ($errors->any())
     <script>
-        toastr.error(`{!! implode('\n', $errors->all()) !!}`);
+      toastr.error(`{!! implode('\n', $errors->all()) !!}`);
     </script>
-@endif
+  @endif
 
-@if (session('warning'))
+  @if (session('warning'))
     <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: "{{ session('warning') }}"
-        });
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "{{ session('warning') }}"
+      });
     </script>
-@endif
+  @endif
 
 
-@if (session('success'))
+  @if (session('success'))
     <script>
-        Swal.fire({
-            // title: "Good job!",
-            text: "{{ session('success') }}",
-            icon: "success"
-        });
+      Swal.fire({
+        // title: "Good job!",
+        text: "{{ session('success') }}",
+        icon: "success"
+      });
     </script>
-@endif
+  @endif
+@endpush

@@ -36,6 +36,7 @@
 @endsection
 
 @section('content')
+  @include('components.sweetalert')
   <div class="wishlist">
     <h5>Data Produk</h5>
     <a href="{{ route('seller.product.create') }}" class="shop-btn float-left mb-4" style="color: white;">Tambah Produk</a>
