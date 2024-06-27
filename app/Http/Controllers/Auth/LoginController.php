@@ -57,7 +57,7 @@ class LoginController extends Controller
             if ($user->store) {
                 return redirect()->intended('/seller/home');
             }
-            return redirect()->intended('/user');
+            return redirect()->intended('/');
         }
 
         return redirect()->intended('/');

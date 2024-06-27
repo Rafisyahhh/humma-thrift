@@ -76,8 +76,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => ['required', 'string', 'max:255', 'unique:users,username'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ], $this->messages());
     }
@@ -96,6 +96,7 @@ class RegisterController extends Controller
             'username.required' => 'Username wajib diisi.',
             'username.string' => 'Username harus berupa teks.',
             'username.max' => 'Username maksimal 255 karakter.',
+            'username.unique' => 'Username sudah terdaftar.',
             'email.required' => 'Email wajib diisi.',
             'email.string' => 'Email harus berupa teks.',
             'email.email' => 'Format email tidak valid.',
