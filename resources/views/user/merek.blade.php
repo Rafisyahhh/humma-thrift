@@ -22,9 +22,9 @@ html:not(.no-js) [data-aos^="fade"][data-aos^="fade"].aos-animate {
             <div class="section-title">
                 <h5>Brand Produk</h5>
             </div>
-            @foreach ( $brands as $item )
             <div class="top-selling-section">
                 <div class="row g-5 mt-4">
+                    @foreach ( $brands as $item )
                     <div class="col-lg-3 col-md-6">
                         <div class="product-wrapper p-0" data-aos="fade-right" style="display: flex; flex-direction: column; align-items: center;">
                             <div class="product-img" style="display: flex; justify-content: center; width: 100%;">
@@ -34,8 +34,8 @@ html:not(.no-js) [data-aos^="fade"][data-aos^="fade"].aos-animate {
                             <p class="product-details" style="text-align: center; margin-top: 10px;">{{ $item->title }}</p>
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
-            @endforeach
     </section>
 @endsection

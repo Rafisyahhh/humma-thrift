@@ -146,7 +146,7 @@
         <div class="container">
             <div class="section-title">
                 <h5>TERBARU!! </h5>
-                <a href="product-sidebar.html" class="view">Lihat Semua</a>
+                <a href="/product" class="view">Lihat Semua</a>
             </div>
             <div class="arrival-section">
                 <div class="row g-5">
@@ -224,7 +224,7 @@
         <div class="container">
             <div class="section-title" style="position: relative; z-index: 1;">
                 <h5>SESI LELANG</h5>
-                <a href="flash-sale.html" class="view">Lihat Semua</a>
+                <a href="/product" class="view">Lihat Semua</a>
             </div>
             <div class="flash-sale-section" style="position: relative; z-index: 1;">
                 <div class="row g-5">
@@ -280,7 +280,7 @@
         <div class="container" style="z-index: 1;">
             <div class="section-title pt-5" style="position: relative; z-index: 1;">
                 <h5>BRAND PRODUK</h5>
-                <a href="product-sidebar.html" class="view">Lihat Semua</a>
+                <a href="/brand" class="view">Lihat Semua</a>
             </div>
             <div class="brand-section gap-3 pb-5" style="position: relative; z-index: 1;">
                 @foreach ($brands as $brand)
