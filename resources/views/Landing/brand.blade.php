@@ -1,20 +1,21 @@
 @extends('layouts.home')
-@section('title','Brand')
+@section('title', 'Brand')
 @section('style')
-<style>
-.top-selling-section .product-wrapper .product-img {
-    height: 25.7rem;
-    width: 25.7rem;
-    background: rgba(126, 163, 219, 0.4);
-}
-html:not(.no-js) [data-aos^="fade"][data-aos^="fade"].aos-animate {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-    width:28rem;
-    height:35rem;
-}
-</style>
+    <style>
+        .top-selling-section .product-wrapper .product-img {
+            height: 25.7rem;
+            width: 25.7rem;
+            background: rgba(126, 163, 219, 0.4);
+        }
+
+        html:not(.no-js) [data-aos^="fade"][data-aos^="fade"].aos-animate {
+            opacity: 1;
+            -webkit-transform: none;
+            transform: none;
+            width: 28rem;
+            height: 35rem;
+        }
+    </style>
 @endsection
 @section('content')
     <section class="product top-selling">
@@ -22,19 +23,24 @@ html:not(.no-js) [data-aos^="fade"][data-aos^="fade"].aos-animate {
             <div class="section-title">
                 <h5>Brand Produk</h5>
             </div>
-            @foreach ( $brands as $item )
             <div class="top-selling-section">
                 <div class="row g-5 mt-4">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="product-wrapper p-0" data-aos="fade-right" style="display: flex; flex-direction: column; align-items: center;">
-                            <div class="product-img" style="display: flex; justify-content: center; width: 100%;">
-                                <img src="{{ asset("storage/$item->logo") }}"
-                                    alt="product-img" class="object-fit-cover" style=" background: rgba(126, 163, 219, 0.4);">
+                    @foreach ($brands as $item)
+                        <div class="col-lg-2 col-md-6">
+                            <div class="product py-0"
+                                style="box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;border-radius: 20px;">
+                                <div class="wrapper-img">
+                                    <a href="product-sidebar.html">
+                                        <div class="ratio ratio-1x1">
+                                            <img src="{{ asset("storage/{$item->logo}") }}" alt="img"
+                                                style="border-radius: 20px;" class="object-fit-cover">
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
-            @endforeach
     </section>
 @endsection
