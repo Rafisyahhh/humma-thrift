@@ -99,7 +99,7 @@ Route::prefix('dev')->group(function () {
 # Landing Pages
 Route::view('/product', 'landing.produk');
 Route::get('/brand', [LandingpageController::class, 'brand']);
-Route::view('/store', 'landing.toko');
+Route::get('/stores', [StoreProfileController::class, 'showStore'])->name('store');
 Route::view('/detail', 'landing.detail');
 Route::get('/about-us', [AboutUsController::class, 'landingpage']);
 Route::view('/news', 'landing.detailNews');
@@ -133,7 +133,6 @@ Route::prefix('@{store:username}')->controller(StoreProfileController::class)->g
     Route::get('products', 'products')->name('store.products');
     Route::get('product/{product:slug}', 'productDetail')->name('store.product.detail');
 });
-
 
 //api
 Route::prefix('api')->middleware('auth')->name('api.')->group(function () {
