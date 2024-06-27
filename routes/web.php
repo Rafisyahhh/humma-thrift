@@ -97,7 +97,7 @@ Route::prefix('dev')->group(function () {
 });
 
 # Landing Pages
-Route::view('/product', 'landing.produk');
+Route::get('/product', [LandingpageController::class, 'product']);
 Route::get('/brand', [LandingpageController::class, 'brand']);
 Route::view('/store', 'landing.toko');
 Route::view('/detail', 'landing.detail');
