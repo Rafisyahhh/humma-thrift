@@ -62,25 +62,24 @@
         <div>Transaksi</div>
       </a>
     </li>
-
-    <li class="menu-item">
-      <a href="{{ route('admin.user.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-users"></i>
-        <div>Pengguna</div>
-      </a>
-    </li>
+    <li class="menu-item {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
+        <a href="{{ route('admin.user.index') }}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-layout-list"></i>
+          <div>Pengguna</div>
+        </a>
+      </li>
     <li class="menu-item {{ request()->routeIs('admin.about.*') ? 'active' : '' }}">
       <a href="{{ url('/admin/about') }}" class="menu-link">
         <i class="menu-icon tf-icons ti ti-layout-list"></i>
         <div>Tentang kami</div>
       </a>
     </li>
-    <li class="menu-item">
-      <a href="{{ route('admin.event.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-file"></i>
-        <div>Event</div>
-      </a>
-    </li>
+    <li class="menu-item {{ request()->routeIs('admin.event.*') ? 'active' : '' }}">
+        <a href="{{ url('/admin/event') }}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-layout-list"></i>
+          <div>Event</div>
+        </a>
+      </li>
   </ul>
 </aside>
 <!-- / Menu -->
