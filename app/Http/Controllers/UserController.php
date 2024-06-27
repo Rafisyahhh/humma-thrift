@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -42,9 +44,11 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Method show
+     *
+     * @return View
      */
-    public function show()
+    public function show(): View
     {
         return view('user.profil');
     }
@@ -58,18 +62,22 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * update user
+     *
+     * @param UpdateUserRequest $request [explicite description]
+     * @param string $id [explicite description]
+     *
+     * @return RedirectResponse
      */
-    public function update(UpdateUserRequest $request, string $id)
+    public function update(UpdateUserRequest $request, string $id): RedirectResponse
     {
         $user = User::findOrFail($id);
         $avatarPath = auth()->user()->avatar;
         // Proses unggah file avatar jika ada
         if ($request->hasFile('avatar')) {
             // Hapus avatar lama jika ada
-            if ($user->avatar) {
-                Storage::disk('public')->delete($user->avatar);
-            }
+            if ($user->avatar) Storage::disk('public')->delete($user->avatar);
+
             // Simpan avatar baru
             $avatarPath = $request->file('avatar')->store('avatars', 'public');
             $user->avatar = $avatarPath;
@@ -86,15 +94,16 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Method Hapus
+     *
+     * @param User $user [explicite description]
+     *
+     * @return RedirectResponse
      */
-    public function destroy(User $user)
+    public function destroy(User $user):RedirectResponse
     {
 
-        if (Storage::disk('public')->exists($user->nic_photo)) {
-            Storage::disk('public')->delete($user->nic_photo);
-        }
-
+        if (Storage::disk('public')->exists($user->nic_photo)) Storage::disk('public')->delete($user->nic_photo);
         $user->delete();
 
         return redirect()->route('user.index')->with('success', 'Pengguna berhasil di hapus');

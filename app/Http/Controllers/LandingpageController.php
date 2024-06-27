@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\event;
 use App\Models\Product;
 use App\Models\ProductAuction;
+use App\Models\UserStore;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 
@@ -41,5 +42,9 @@ class LandingpageController extends Controller
         $categories = ProductCategory::all();
         $product_auction = ProductAuction::all();
         return view('landing.produk', compact('products','brands','categories','product_auction'));
+    }
+    public function store(){
+        $store = UserStore::all();
+        return view('landing.toko', compact('store'));
     }
 }
