@@ -52,8 +52,8 @@ class RegisterController extends Controller
         }
 
         return $request->wantsJson()
-                    ? new JsonResponse([], 201)
-                    : redirect($this->redirectPath());
+            ? new JsonResponse([], 201)
+            : redirect($this->redirectPath());
     }
 
     /**
@@ -79,7 +79,17 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ],[
+        ], $this->messages());
+    }
+
+    /**
+     * Get the validation messages.
+     *
+     * @return array
+     */
+    protected function messages()
+    {
+        return [
             'name.required' => 'Nama wajib diisi.',
             'name.string' => 'Nama harus berupa teks.',
             'name.max' => 'Nama maksimal 255 karakter.',
@@ -95,7 +105,7 @@ class RegisterController extends Controller
             'password.string' => 'Kata sandi harus berupa teks.',
             'password.min' => 'Kata sandi minimal 8 karakter.',
             'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
-        ]);
+        ];
     }
 
     /**
