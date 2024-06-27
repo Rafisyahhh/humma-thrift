@@ -178,7 +178,7 @@
                                 </div>
                                 <div class="product-info">
                                     <div class="product-description">
-                                        <a href="/user/detailproduct" class="product-details"> {{ $item->title }}
+                                        <a href="{{route('store.product.detail',['store' => $item->userStore->username,'product'=> $item->slug])}}" class="product-details"> {{ $item->title }}
                                         </a>
                                         <div class="price">
                                             <span class="new-price">Rp.{{ number_format($item->price, 2, ',', '.') }}</span>
@@ -256,7 +256,7 @@
                                 </div>
                                 <div class="product-info">
                                     <div class="product-description">
-                                        <a href="/user/detailproduct" class="product-details">{{ $item->title }}
+                                        <a href="{{route('store.product.detail',['store' => $item->userStore->username,'product'=> $item->slug])}}" class="product-details">{{ $item->title }}
                                         </a>
                                         <div class="price">
                                             <span

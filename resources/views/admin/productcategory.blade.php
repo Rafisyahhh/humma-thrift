@@ -3,7 +3,7 @@
 @section('title', 'Kategori Produk')
 
 @section('content')
-    @include('components.show-errors')
+    {{-- @include('components.show-errors') --}}
     <!-- Tabel -->
     <div class="card">
         <h5 class="card-header">Kategori</h5>
@@ -13,7 +13,7 @@
                     style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">
                     Tambahkan Kategori
                 </a>
-                <form method="get">
+                <form method="get">7
                     <div class="input-group mb-3">
                         <input type="search" name="search" class="form-control" placeholder="Cari Kategori&hellip;" />
                         <button type="submit" class="btn btn-secondary">Cari</button>

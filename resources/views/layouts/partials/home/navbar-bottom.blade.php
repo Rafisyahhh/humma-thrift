@@ -93,7 +93,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/brandindex">
+                        <a href="/brand">
                             <span class="list-text">Brand</span>
                         </a>
                     </li>
