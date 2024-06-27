@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductAuction;
 use App\Models\ProductCategoryPivot;
+use App\Models\UserStore;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -16,9 +17,10 @@ class ProductAdminController extends Controller
     public function index()
     {
         $product_category_pivots = ProductCategoryPivot::all();
+        $store = UserStore::all();
         $products = Product::all();
         $product_auctions = ProductAuction::all();
-        return view('admin.produk', compact('products','product_auctions','product_category_pivots'));
+        return view('admin.produk', compact('products','product_auctions','product_category_pivots','store'));
     }
 
     /**
@@ -72,28 +74,33 @@ class ProductAdminController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        $product = Product::find($id);
+{
+    $request->validate([
+        'status' => 'required|in:active,inactive,sold',
+    ], [
+        'status.required' => 'Kolom STATUS wajib diisi.',
+    ]);
+
+    $product = Product::find($id);
+
+    if (!$product) {
         $product_auction = ProductAuction::find($id);
-
-        $request->validate([
-            'status' => 'required|in:active,inactive,sold',
-        ], [
-            'status.required' => 'Kolom STATUS wajib diisi.',
-        ]);
-
-        if ($product) {
-            $product->status = $request->status;
-            $product->save();
-            return redirect()->back()->with('success', 'Status produk berhasil diperbarui.');
-        } elseif ($product_auction) {
-            $product_auction->status = $request->status;
-            $product_auction->save();
-            return redirect()->back()->with('success', 'Status turnamen berhasil diperbarui.');
-        } else {
-            return redirect()->route('admin.produk.index')->with('error', 'Produk atau Lelang Produk tidak ditemukan');
-        }
     }
+
+    if ($product) {
+        $product->status = $request->status;
+        $product->save();
+        return redirect()->back()->with('success', 'Status produk berhasil diperbarui.');
+    } elseif ($product_auction) {
+        $product_auction->status = $request->status;
+        $product_auction->save();
+        return redirect()->back()->with('success', 'Status turnamen berhasil diperbarui.');
+    } else {
+        return redirect()->route('admin.produk.index')->with('error', 'Produk atau Lelang Produk tidak ditemukan');
+    }
+    
+}
+
 
     /**
      * Remove the specified resource from storage.
