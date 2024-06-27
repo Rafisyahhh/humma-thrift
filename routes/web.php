@@ -83,7 +83,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::view('/wishlist', 'user.wishlist')->name('wishlist');
     Route::get('/shop', [DetailProductController::class, 'showProduct'])->name('shop');
     Route::get('/store', [StoreProfileController::class, 'showStore'])->name('store');
-    Route::get('/detailproduct', [DetailProductController::class, 'showDetail']);
+    // Route::get('/detailproduct', [DetailProductController::class, 'showDetail']);
     Route::get('/open-shop', [OpenShopController::class, 'index'])->name('register-seller');
     Route::post('/open-shop', [OpenShopController::class, 'register'])->name('register-seller.submit');
     Route::get('/verify-store/{token:verification_code}', [OpenShopController::class, 'verifyStore'])->name('verify.store');
@@ -97,9 +97,9 @@ Route::prefix('dev')->group(function () {
 });
 
 # Landing Pages
-Route::view('/product', 'landing.produk');
+Route::get('/product', [LandingpageController::class, 'product']);
 Route::get('/brand', [LandingpageController::class, 'brand']);
-Route::view('/store', 'landing.toko');
+Route::get('/stores', [StoreProfileController::class, 'showStore'])->name('store');
 Route::view('/detail', 'landing.detail');
 Route::get('/about-us', [AboutUsController::class, 'landingpage']);
 Route::view('/news', 'landing.detailNews');
@@ -133,7 +133,6 @@ Route::prefix('@{store:username}')->controller(StoreProfileController::class)->g
     Route::get('products', 'products')->name('store.products');
     Route::get('product/{product:slug}', 'productDetail')->name('store.product.detail');
 });
-
 
 //api
 Route::prefix('api')->middleware('auth')->name('api.')->group(function () {

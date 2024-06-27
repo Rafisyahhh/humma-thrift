@@ -39,13 +39,15 @@
 
         <div class="cart-submenu">
             <div class="cart-wrapper-section">
-                <div class="d-flex gap-4 mb-4">
-                    <div class="ratio ratio-1x1" style="width: 48px; height: 48px">
-                        <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="{{ auth()->user()->name }}" class="rounded-circle"/>
+                <div class="mb-4 row">
+                    <div class="col-3">
+                        <div class="ratio ratio-1x1 flex-shrink-0 w-100">
+                            <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="{{ auth()->user()->name }}" class="object-fit-cover rounded-circle" />
+                        </div>
                     </div>
-                    <div class="d-flex flex-column gap-1">
-                        <p class="fw-bold mb-0">{{ auth()->user()->name }}</p>
-                        <p class="mb-0 opacity-75">{{ auth()->user()->email }}</p>
+                    <div class="col-9 d-flex flex-column gap-1">
+                        <p class="fw-bold mb-0 text-truncate">{{ auth()->user()->name }}</p>
+                        <p class="mb-0 opacity-75 text-truncate">{{ auth()->user()->email }}</p>
                     </div>
                 </div>
                 <div class="wrapper-line"></div>

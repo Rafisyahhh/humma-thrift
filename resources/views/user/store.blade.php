@@ -1,14 +1,15 @@
 @extends('layouts.home')
-@section('title','Store')
-@section('content')
 
+@section('title', 'Daftar Toko')
+
+@section('content')
     <section class="product top-selling">
         <div class="container">
             <div class="section-title">
                 <h5>Daftar Toko</h5>
             </div>
             <div class="top-selling-section">
-                <div class="row g-5">
+                <div class="row g-5 pb-5 mb-3">
                     @foreach ($store as $item)
                     <div class="col-lg-4 col-md-6">
                         <div class="product-wrapper" data-aos="fade-right">
@@ -24,8 +25,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="product-cart-btn">
-                                <a href="{{ route('store.profile', ['store' => $item->username]) }}" class="product-btn">Detail</a>
+                            <div class="product-cart-btn" style="bottom: 0;">
+                                <a href="{{ route('store.profile', ['store' => $item->username]) }}" class="product-btn d-flex bottom-0 gap-3 align-items-center">
+                                    Lihat
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -34,7 +38,4 @@
             </div>
         </div>
     </section>
-    <br>
-    <br>
-
 @endsection

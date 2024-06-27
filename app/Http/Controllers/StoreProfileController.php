@@ -15,7 +15,9 @@ class StoreProfileController extends Controller
      */
     public function index(UserStore $store)
     {
-        $isProduct = Product::where('store_id', $store->id)->get();
+        $isProduct = Product::query()
+            ->where('store_id', $store->id)
+            ->get();
         $isProductAuction = ProductAuction::where('store_id', $store->id)->get();
         return view('store.index', compact('store','isProduct','isProductAuction'));
     }

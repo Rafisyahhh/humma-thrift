@@ -93,7 +93,7 @@ class ProductAuctionController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit($productAuction) {
-        $productAuction = ProductAuction::find($productAuction)->first();
+        $productAuction = ProductAuction::where("id", $productAuction)->first();
         return view('seller.tambahproduk', [
             'product' => $productAuction,
             'brands' => Brand::all(),

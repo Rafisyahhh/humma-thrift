@@ -64,7 +64,7 @@
         href="{{ asset('template-assets/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('template-assets/admin/assets/vendor/libs/typeahead-js/typeahead.css') }}" />
 
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet" />
+    <link href="{{ asset('additional-assets/summernote-0.8.20/summernote-lite.css') }}" rel="stylesheet" />
 
     <style>
         .menu-item.active {

@@ -14,7 +14,7 @@
 
 @push('style')
     <style>
-        .summary-icons .wrapper-img > span {
+        .summary-icons .wrapper-img>span {
             background: white;
             border-radius: 1rem;
             padding: 1rem;
@@ -26,7 +26,7 @@
             color: #1c3879;
         }
 
-        .summary-icons .wrapper-img > span svg {
+        .summary-icons .wrapper-img>span svg {
             fill: currentColor;
             stroke: currentColor;
         }
@@ -48,7 +48,9 @@
                                 <div class="wrapper-img">
                                     <span>
                                         <svg width="48" height="48">
-                                            <use xlink:href="{{ asset('images/seller-home-sprites.svg') }}#hugeicons-coins-dollar"></use>
+                                            <use
+                                                xlink:href="{{ asset('images/seller-home-sprites.svg') }}#hugeicons-coins-dollar">
+                                            </use>
                                         </svg>
                                     </span>
                                 </div>
@@ -64,7 +66,9 @@
                                 <div class="wrapper-img">
                                     <span>
                                         <svg width="48" height="48">
-                                            <use xlink:href="{{ asset('images/seller-home-sprites.svg') }}#hugeicons-shopping-basket-check-in-02"></use>
+                                            <use
+                                                xlink:href="{{ asset('images/seller-home-sprites.svg') }}#hugeicons-shopping-basket-check-in-02">
+                                            </use>
                                         </svg>
                                     </span>
                                 </div>
@@ -80,7 +84,9 @@
                                 <div class="wrapper-img">
                                     <span>
                                         <svg width="48" height="48">
-                                            <use xlink:href="{{ asset('images/seller-home-sprites.svg') }}#hugeicons-shopping-basket-done-03"></use>
+                                            <use
+                                                xlink:href="{{ asset('images/seller-home-sprites.svg') }}#hugeicons-shopping-basket-done-03">
+                                            </use>
                                         </svg>
                                     </span>
                                 </div>
@@ -96,7 +102,9 @@
                                 <div class="wrapper-img">
                                     <span>
                                         <svg width="48" height="48">
-                                            <use xlink:href="{{ asset('images/seller-home-sprites.svg') }}#hugeicons-delivery-box-01"></use>
+                                            <use
+                                                xlink:href="{{ asset('images/seller-home-sprites.svg') }}#hugeicons-delivery-box-01">
+                                            </use>
                                         </svg>
                                     </span>
                                 </div>
@@ -121,7 +129,9 @@
                                         </div>
                                         <div class="info-details">
                                             <p>Sajjad</p>
-                                            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="492d2c24262c24282025092e24282025672a2624">[email&#160;protected]</a></p>
+                                            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                                    data-cfemail="492d2c24262c24282025092e24282025672a2624">[email&#160;protected]</a>
+                                            </p>
                                             <p>023 434 54354</p>
                                             <p>Haydarabad, Rord 34</p>
                                             <p>3454</p>
@@ -141,7 +151,9 @@
                                         </div>
                                         <div class="info-details">
                                             <p>ShopUs Super-Shop</p>
-                                            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="afcbcac2c0cac2cec6c3efc8c2cec6c381ccc0c2">[email&#160;protected]</a></p>
+                                            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                                    data-cfemail="afcbcac2c0cac2cec6c3efc8c2cec6c381ccc0c2">[email&#160;protected]</a>
+                                            </p>
                                             <p>023 434 54354</p>
                                             <p>Haydarabad, Rord 34</p>
                                             <p>3454</p>
@@ -181,25 +193,27 @@
 @endsection
 
 @section('script')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="{{ asset('additional-assets/chart.js-4.4.3/chart.umd.js') }}"></script>
+
     <script>
         $(document).ready(function() {
             const dataHarian = {
                 labels: @json($data['hari']),
                 datasets: [{
-                    label: 'Penghasilan Kotor per Hari',
-                    data: @json($data['penghasilan_kotor']),
-                    backgroundColor: 'rgba(126, 163, 219, 0.40)',
-                    borderColor: 'rgba(28, 56, 121, 1)',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Penghasilan Bersih per Hari',
-                    data: @json($data['penghasilan_bersih']),
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
+                        label: 'Penghasilan Kotor per Hari',
+                        data: @json($data['penghasilan_kotor']),
+                        backgroundColor: 'rgba(126, 163, 219, 0.40)',
+                        borderColor: 'rgba(28, 56, 121, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Penghasilan Bersih per Hari',
+                        data: @json($data['penghasilan_bersih']),
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }
+                ]
             };
 
             const dataBulanan = {
