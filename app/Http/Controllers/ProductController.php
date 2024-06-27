@@ -93,8 +93,7 @@ class ProductController extends Controller {
         $data = $request->validated();
         $data['store_id'] = Auth::user()->store()->first()->id;
         $isAuction = $request->product_type === 'product_auctions';
-        $currentProduct = Product::find($product) ?: ProductAuction::find($product);
-
+        $currentProduct = ProductAuction::find($product) ?: Product::find($product);
         if (!$currentProduct) {
             return redirect()->route('seller.product.index')->with('error', 'Produk tidak ditemukan');
         }
