@@ -54,7 +54,7 @@
                             </tr>
                             <tr class="table-row ticket-row" style="border: 1px solid #e6d5d593; width:100rem;">
                                 <td class="table-wrapper wrapper-product">
-                                    <div class="wrapper" style="display: flex; align-items: center; width:120rem;">
+                                    <div class="wrapper" style="display: flex; align-items: center; width:122rem;">
                                         <div class="form-check" style="margin-right: 1rem;">
                                             <input class="form-check-input" type="checkbox" value=""
                                                 id="flexCheckDefault" style="border-color: #215791;">
@@ -67,14 +67,16 @@
                                             style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1;">
                                             <h5 class="heading" style="font-size: 18px; ">Classic Design
                                                 Skart</h5>
-                                            <div style="display: flex; align-items: center; margin-right: 1rem; ">
+                                            <div style="display: flex; align-items: center; margin-left: 0.5px; ">
                                                 <p>abc , def</p>
                                             </div>
-                                            <div style="display: flex; align-items: center; margin-right: 1rem;">
+                                            <div style="display: flex; align-items: center; margin-left: 10px;">
                                                 <p>Rp</p>
-                                                <p style="margin-left: 0.5rem;">100.000</p>
+                                                <p>100.000</p>
                                             </div>
-                                            <p style="color: red;">Hapus</p>
+                                            <button
+                                                style="color: red; font-weight: bold; font-size: 13px; background-color: #dbc2c2; padding: 5px 20px; border-radius: 20px; margin-right: 0.1rem;">
+                                                Hapus</button>
                                         </div>
                                     </div>
                                 </td>
@@ -89,7 +91,7 @@
                                         style="display: flex; justify-content: flex-end; align-items: center;">
                                         <p style="margin-right: 1rem;">Total (0) produk :</p>
                                         <p>
-                                            <h6 style="font-size: 18px; font-weight: bold;  color: red;">Rp 0 </h6>
+                                        <h6 style="font-size: 18px; font-weight: bold;  color: red;">Rp 0 </h6>
                                         </p>
                                         <button class="shop-btn openModal" style="margin-left: 1rem;">Checkout</button>
                                     </div>
