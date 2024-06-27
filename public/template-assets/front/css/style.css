@@ -5708,3 +5708,19 @@ a.shop-btn:hover {
     padding: .875rem;
     text-transform: capitalize;
 }
+
+.css-71s6qs {
+    cursor: pointer;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    border-radius: 8px;
+    height: 4.3rem;
+    min-width: 20rem;
+    max-width: 20rem;
+    margin-right: 8px;
+    border: 1px solid var(--NN500, #1c3879);
+    overflow: hidden;
+}
