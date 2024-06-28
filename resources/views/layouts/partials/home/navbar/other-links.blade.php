@@ -1,7 +1,7 @@
 
 <div class="header-search">
     <div onclick="modalAction('.search')" class="anywhere-away"></div>
-    <div class="modal-main">
+    <div class="modal-main" style="border-radius: 50%;">
         <div class="wrapper-close-btn" onclick="modalAction('.search')">
         </div>
         <div class="wrapper-main">

@@ -124,12 +124,14 @@
                                 <div class="swiper-wrapper">
                                     @if ($isProduct)
                                         @foreach ($isProduct->gallery as $item)
-                                            <div class="swiper-slide slider-top-img">
-                                                <div class="ratio ratio-1x1">
-                                                    <img src="{{ asset('storage/' . $item->image) }}"
-                                                        class="object-fit-cover" alt="img">
-                                                </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="position-absolute top-0 end-0 m-3">
+                                            <path fill="currentColor" d="M3 21v-6h2v2.6l3.1-3.1l1.4 1.4L6.4 19H9v2zM15.9 9.5l-1.4-1.4L17.6 5H15V3h6v6h-2V6.4z"/>
+                                        </svg>
+                                        <div class="swiper-slide slider-top-img">
+                                            <div class="ratio ratio-1x1 position-relative">
+                                                <img src="{{ asset('storage/' . $item->image) }}" class="object-fit-cover" alt="img">
                                             </div>
+                                        </div>
                                         @endforeach
                                     @elseif($isProductAuction)
                                         @foreach ($isProductAuction->gallery as $item)
