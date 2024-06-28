@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     AboutUsController,
+    AuctionsController,
     UserController,
     BrandController,
     DashboardUserController,
@@ -89,6 +90,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::get('/verify-store/{token:verification_code}', [OpenShopController::class, 'verifyStore'])->name('verify.store');
     Route::resource('history', HistoryController::class);
     Route::resource('update-password', UserUpdatePasswordController::class);
+    Route::resource('auctions', AuctionsController::class);
 });
 
 # Dev Routes
