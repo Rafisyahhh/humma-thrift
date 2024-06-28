@@ -131,7 +131,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
 Route::prefix('@{store:username}')->controller(StoreProfileController::class)->group(function () {
     Route::get('/', 'index')->name('store.profile');
     Route::get('products', 'products')->name('store.products');
-    Route::get('product/{product:slug}', 'productDetail')->name('store.product.detail');
+    Route::get('{product:slug}', 'productDetail')->name('store.product.detail');
 });
 
 //api
