@@ -80,7 +80,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::post('/profile/{id}', [UserController::class, 'update'])->name('profile.update');
     Route::view('/order', 'user.order')->name('order');
     Route::view('/cart', 'user.keranjang')->name('cart');
-    Route::view('/wishlist', 'user.wishlist')->name('wishlist');
+    Route::get('/wishlist', [LandingpageController::class, 'wishlist'])->name('wishlist');
     Route::get('/shop', [DetailProductController::class, 'showProduct'])->name('shop');
     Route::get('/store', [StoreProfileController::class, 'showStore'])->name('store');
     // Route::get('/detailproduct', [DetailProductController::class, 'showDetail']);
