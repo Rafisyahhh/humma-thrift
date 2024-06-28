@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ApiControllers\UserApiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
@@ -132,11 +131,4 @@ Route::prefix('@{store:username}')->controller(StoreProfileController::class)->g
     Route::get('/', 'index')->name('store.profile');
     Route::get('products', 'products')->name('store.products');
     Route::get('product/{product:slug}', 'productDetail')->name('store.product.detail');
-});
-
-//api
-Route::prefix('api')->middleware('auth')->name('api.')->group(function () {
-    Route::get('/user', [UserApiController::class, 'getUser'])->name('getUser');
-    Route::post('/user', [UserApiController::class, 'storeUser'])->name('storeUser');
-    Route::put('/user/{user}', [UserApiController::class, 'updateUser'])->name('updateUser');
 });
