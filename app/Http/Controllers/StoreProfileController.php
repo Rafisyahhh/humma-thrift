@@ -33,15 +33,10 @@ class StoreProfileController extends Controller
 
     public function productDetail(UserStore $store, string $slug)
     {
-        dd($slug, $store);
-
-        $url = 'https://www.positronx.io/create-autocomplete-search-in-laravel-with-typeahead-js/';
-        $text = 'Your share text comes here';
-
         $isProduct = Product::where('slug', $slug)->first();
         $isProductAuction = ProductAuction::where('slug', $slug)->first();
 
-        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction','url','text'));
+        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction'));
     }
 
     public function showStore()
