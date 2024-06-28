@@ -36,12 +36,12 @@
                                 <h5 class="wrapper-heading">Kategori Produk</h5>
                                 <div class="sidebar-item">
                                     <ul class="sidebar-list">
-                                        {{-- @foreach ($categories as $item) --}}
+                                        @foreach ($categories as $item)
                                             <li>
                                                 <input type="checkbox" id="bags" name="bags">
-                                                <label for="bags">hhhhh</label>
+                                                <label for="bags">{{ $item->title }}</label>
                                             </li>
-                                        {{-- @endforeach --}}
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -50,12 +50,12 @@
                                 <h5 class="wrapper-heading">Brands</h5>
                                 <div class="sidebar-item">
                                     <ul class="sidebar-list">
-                                        {{-- @foreach ($brands as $item) --}}
+                                        @foreach ($brands as $item)
                                             <li>
                                                 <input type="checkbox" id="bags" name="bags">
-                                                <label for="bags">Brand</label>
+                                                <label for="bags">{{ $item->title }}</label>
                                             </li>
-                                        {{-- @endforeach --}}
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -64,18 +64,13 @@
                                 <h5 class="wrapper-heading">Warna</h5>
                                 <div class="sidebar-item">
                                     <ul class="sidebar-list">
+                                        @foreach ($product as $item)
                                         <li>
                                             <input type="checkbox" id="red" name="red">
-                                            <label for="red">Merah</label>
+                                            <label for="red">{{ $item->color }}</label>
                                         </li>
-                                        <li>
-                                            <input type="checkbox" id="blue" name="blue">
-                                            <label for="blue">Biru</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="navy" name="navy">
-                                            <label for="navy">Navy</label>
-                                        </li>
+                                        @endforeach
+                                    </ul>
                                     </ul>
                                 </div>
                             </div>
@@ -84,26 +79,12 @@
                                 <h5 class="wrapper-heading">Ukuran</h5>
                                 <div class="sidebar-item">
                                     <ul class="sidebar-list">
+                                        @foreach ($product as $item)
                                         <li>
                                             <input type="checkbox" id="small" name="small">
-                                            <label for="small">Kecil</label>
+                                            <label for="small">{{ $item->size }}</label>
                                         </li>
-                                        <li>
-                                            <input type="checkbox" id="medium" name="medium">
-                                            <label for="medium">Sedang</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="large" name="large">
-                                            <label for="large">Besar</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="xl" name="xl">
-                                            <label for="xl">XL</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="2xl" name="2xl">
-                                            <label for="2xl">2XL</label>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
