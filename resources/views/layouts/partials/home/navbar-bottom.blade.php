@@ -54,7 +54,8 @@
             <div class="header-nav-menu">
                 <ul class="menu-list">
                     <li><a href="{{ url('/') }}"><span class="list-text">Home</span></a></li>
-                    <li><a href="{{ url('/product') }}"><span class="list-text">Produk</span></a></li>
+                    <li><a href="{{ url('/product/auction') }}"><span class="list-text">Lelang</span></a></li>
+                    <li><a href="{{ url('/product/regular') }}"><span class="list-text">Produk</span></a></li>
                     <li><a href="{{ url('/brand') }}"><span class="list-text">Brand</span></a></li>
                     <li><a href="{{ url('/stores') }}"><span class="list-text">Toko</span></a></li>
                     <li><a href="{{ url('/about-us') }}"><span class="list-text">Tentang Kami</span></a></li>

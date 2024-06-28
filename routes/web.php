@@ -97,7 +97,10 @@ Route::prefix('dev')->group(function () {
 });
 
 # Landing Pages
-Route::get('/product', [LandingpageController::class, 'product']);
+Route::prefix('product')->group(function () {
+    Route::get('/auction', [LandingpageController::class, 'productAuction']);
+    Route::get('/regular', [LandingpageController::class, 'productRegular']);
+});
 Route::get('/brand', [LandingpageController::class, 'brand']);
 Route::get('/stores', [StoreProfileController::class, 'showStore'])->name('store');
 Route::view('/detail', 'landing.detail');
@@ -131,12 +134,5 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
 Route::prefix('@{store:username}')->controller(StoreProfileController::class)->group(function () {
     Route::get('/', 'index')->name('store.profile');
     Route::get('products', 'products')->name('store.products');
-    Route::get('product/{product:slug}', 'productDetail')->name('store.product.detail');
-});
-
-//api
-Route::prefix('api')->middleware('auth')->name('api.')->group(function () {
-    Route::get('/user', [UserApiController::class, 'getUser'])->name('getUser');
-    Route::post('/user', [UserApiController::class, 'storeUser'])->name('storeUser');
-    Route::put('/user/{user}', [UserApiController::class, 'updateUser'])->name('updateUser');
+    Route::get('{product:slug}', 'productDetail')->name('store.product.detail');
 });
