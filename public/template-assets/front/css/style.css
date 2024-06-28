@@ -2237,12 +2237,6 @@ button {
         gap: 5rem;
     }
 }
-.arrival {
-    background: rgba(136, 178, 240, 0.4);
-}
-.flash-sale {
-    background: rgb(255, 255, 255);
-}
 .countdown-section {
     display: flex;
     flex-direction: row;

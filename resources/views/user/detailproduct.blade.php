@@ -109,27 +109,180 @@
   </script>
 @endsection
 @section('content')
-  <section class="product product-info py-0">
-    <div class="container">
-      <div class="product-info-section">
-        <div class="row ">
-          <div class="col-md-6">
-            <div class="product-info-img" data-aos="fade-right">
-              <div class="swiper product-top" style="z-index:1">
-                <div class="swiper-wrapper">
-                  @if ($isProduct)
-                    @foreach ($isProduct->gallery as $item)
-                      <div class="swiper-slide slider-top-img">
-                        <div class="ratio ratio-1x1">
-                          <img src="{{ asset('storage/' . $item->image) }}" class="object-fit-cover" alt="img">
+    <section class="product product-info py-0">
+        <div class="container">
+            <div class="product-info-section">
+                <div class="row ">
+                    <div class="col-md-6">
+                        <div class="product-info-img" data-aos="fade-right">
+                            <div class="swiper product-top" style="z-index:1">
+                                <div class="swiper-wrapper">
+                                    @if ($isProduct)
+                                        @foreach ($isProduct->gallery as $item)
+                                            <div class="swiper-slide slider-top-img">
+                                                <div class="ratio ratio-1x1">
+                                                    <img src="{{ asset('storage/' . $item->image) }}"
+                                                        class="object-fit-cover" alt="img">
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @elseif($isProductAuction)
+                                        @foreach ($isProductAuction->gallery as $item)
+                                            <div class="swiper-slide slider-top-img">
+                                                <div class="ratio ratio-1x1">
+                                                    <img src="{{ asset('storage/' . $item->image) }}"
+                                                        class="object-fit-cover" alt="img">
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="swiper product-bottom" style="z-index:1">
+                                <div class="swiper-wrapper">
+                                    @if ($isProduct)
+                                        @foreach ($isProduct->gallery as $item)
+                                            <div class="swiper-slide slider-bottom-img p-0">
+                                                <div class="ratio ratio-1x1">
+                                                    <img src="{{ asset('storage/' . $item->image) }}" alt="img"
+                                                        class="object-fit-cover" width="100%" style="border-radius: 10%">
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @elseif ($isProductAuction)
+                                        @foreach ($isProductAuction->gallery as $item)
+                                            <div class="swiper-slide slider-bottom-img">
+                                                <div class="ratio ratio-1x1">
+                                                    <img src="{{ asset('storage/' . $item->image) }}" alt="img"
+                                                        style="border-radius: 10%" class="object-fit-cover">
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                    @endforeach
-                  @elseif($isProductAuction)
-                    @foreach ($isProductAuction->gallery as $item)
-                      <div class="swiper-slide slider-top-img">
-                        <div class="ratio ratio-1x1">
-                          <img src="{{ asset('storage/' . $item->image) }}" class="object-fit-cover" alt="img">
+                    </div>
+                    @if ($isProduct)
+                        <div class="col-md-6">
+                            <div class="svg-container"
+                                style="position: absolute; top: 5%; left: 30%; width: 70%; height: 70%; z-index: 0;overflow:hidden">
+                                <svg width="100%" height="100%" id="svg" viewBox="0 0 1440 490"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="transition duration-300 ease-in-out delay-150">
+                                    <path
+                                        d="M 0,500 L 0,93 C 49.552835051546396,71.62196244477173 99.10567010309279,50.24392488954345 169,63 C 238.8943298969072,75.75607511045655 329.1301546391752,122.64626288659792 389,162 C 448.8698453608248,201.35373711340208 478.3737113402062,233.1710235640648 538,254 C 597.6262886597938,274.8289764359352 687.375,284.66964285714283 742,298 C 796.625,311.33035714285717 816.1262886597938,328.15040500736376 870,362 C 923.8737113402062,395.84959499263624 1012.1198453608249,446.7287371134021 1082,482 C 1151.880154639175,517.2712628865979 1203.394329896907,536.934646539028 1260,557 C 1316.605670103093,577.065353460972 1378.3028350515465,597.532676730486 1440,618 L 1440,500 L 0,500 Z"
+                                        stroke="none" stroke-width="0" fill="#bacaff" fill-opacity="0.4"
+                                        class="transition-all duration-300 ease-in-out delay-150 path-0"
+                                        transform="rotate(-180 720 250)"></path>
+                                    <path
+                                        d="M 0,500 L 0,218 C 66.15740058910163,220.707382179676 132.31480117820325,223.41476435935198 191,233 C 249.68519882179675,242.58523564064802 300.89819587628864,259.04832474226805 361,281 C 421.10180412371136,302.95167525773195 490.09241531664225,330.39193667157593 553,346 C 615.9075846833578,361.60806332842407 672.7321428571428,365.38392857142856 725,403 C 777.2678571428572,440.61607142857144 824.9790132547867,512.0723490427098 891,558 C 957.0209867452133,603.9276509572902 1041.3518041237112,624.326675257732 1104,636 C 1166.6481958762888,647.673324742268 1207.6137702503684,650.6209499263624 1260,667 C 1312.3862297496316,683.3790500736376 1376.1931148748158,713.1895250368188 1440,743 L 1440,500 L 0,500 Z"
+                                        stroke="none" stroke-width="0" fill="#bacaff" fill-opacity="0.53"
+                                        class="transition-all duration-300 ease-in-out delay-150 path-1"
+                                        transform="rotate(-180 720 250)"></path>
+                                    <path
+                                        d="M 0,500 L 0,343 C 75.1494845360825,316.22303019145807 150.298969072165,289.4460603829161 211,304 C 271.701030927835,318.5539396170839 317.9536082474226,374.43878865979383 371,425 C 424.0463917525774,475.56121134020617 483.8865979381443,520.7987849779087 541,533 C 598.1134020618557,545.2012150220913 652.5,524.3660714285716 718,535 C 783.5,545.6339285714284 860.1134020618555,587.7369293078056 920,636 C 979.8865979381445,684.2630706921944 1023.0463917525774,738.6862113402061 1079,759 C 1134.9536082474226,779.3137886597939 1203.701030927835,765.5182253313698 1266,778 C 1328.298969072165,790.4817746686302 1384.1494845360826,829.2408873343152 1440,868 L 1440,500 L 0,500 Z"
+                                        stroke="none" stroke-width="0" fill="#bacaff" fill-opacity="1"
+                                        class="transition-all duration-300 ease-in-out delay-150 path-2"
+                                        transform="rotate(-180 720 250)"></path>
+                                </svg>
+                            </div>
+                            <div class="product-info-content" data-aos="fade-left">
+                                <h5 style="z-index:1;position: relative;">{{ $isProduct->title }}</h5>
+                                <div class="price">
+                                    <span class="new-price fs-1"
+                                        style="z-index:1">Rp.{{ number_format($isProduct->price, 2, ',', '.') }}</span>
+                                </div>
+                                <hr>
+                                <div class="row product-details">
+                                    <div class="col-3 py-2 my-2" style="z-index:1">
+                                        <p class="fs-2 text-grey">Kategori</p>
+                                        <p class="fs-2 text-grey">Brand</p>
+                                        <p class="fs-2 text-grey">Ukuran</p>
+                                        <p class="fs-2 text-grey">Warna</p>
+                                    </div>
+                                    <div class="col-9 py-2 my-2" style="z-index:1">
+                                        <p class="fs-2 inner-text">:
+                                            {{ implode(', ', $isProduct->categories->pluck('title')->toArray()) }}</p>
+                                        <p class="fs-2 inner-text">: {{ $isProduct->brand->title }}</p>
+                                        <p class="fs-2 inner-text">: {{ $isProduct->size }}</p>
+                                        <p class="fs-2 inner-text">: {{ $isProduct->color }}</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="product-quantity mt-0"
+                                        style="display: flex; align-items: center; gap: 10px; z-index:1">
+                                        <div class="share-icons">
+                                            <a href="#" class="share-icon">
+                                                <span>
+                                                    <i class="fas fa-heart fa-xl" style="color: black"></i>
+                                                </span>
+                                            </a>
+                                        </div>
+                                        <a href="#" style="width :10px" class="shop-btn"
+                                            style="display: flex; align-items: center; gap: 10px; z-index:1">
+                                            <span style="width: 37rem; align-items:center; justify-content:center;">
+                                                <i class="fas fa-shopping-cart"></i>
+                                                Masukkan Keranjang
+                                            </span>
+                                        </a>
+                                        <a href="#" style="width :10px" class="shop-btn"
+                                            style="display: flex; align-items: center; gap: 5px; z-index:1">
+                                            <span style="width: 37rem; align-items:center; justify-content:center;">
+                                                <i class="fa-solid fa-plus"></i>
+                                                Beli Sekarang</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <hr>
+                                <p class="fs-2 d-flex py-2" style="z-index:1;position: relative;">Bagikan ke:
+                                    <span class="share-container share-buttons gap-3" style="margin-left: 7px;z-index:1">
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($url) }}"
+                                            target="_blank" class="social-buttons">
+                                            <i class="fa-brands fa-square-facebook fa-lg" style="color: black"></i>
+                                        </a>
+                                        <a href="https://twitter.com/intent/tweet?url={{ urlencode($url) }}&text={{ urlencode($text) }}"
+                                            target="_blank" class="social-buttons">
+                                            <i class="fa-brands fa-square-x-twitter fa-lg" style="color: black"></i>
+                                        </a>
+                                        <a href="https://t.me/share/url?url={{ urlencode($url) }}&text={{ urlencode($text) }}"
+                                            target="_blank" class="social-buttons">
+                                            <i class="fa-brands fa-telegram fa-lg" style="color: black"></i>
+                                        </a>
+                                        <a href="https://api.whatsapp.com/send?text={{ urlencode($text . ' ' . $url) }}"
+                                            target="_blank" class="social-buttons">
+                                            <i class="fa-brands fa-whatsapp fa-lg" style="color: black"></i>
+                                        </a>
+                                    </span>
+                                </p>
+                                <hr>
+                                <div class="product-seller-section py-2">
+                                    <div class="review-wrapper">
+                                        <div class="wrapper">
+                                            <div class="wrapper-aurthor">
+                                                <div class="wrapper-info">
+                                                    <div class="author-details d-flex">
+                                                        <h5 class="d-flex align-items-center"
+                                                            style="font-size: 25px; z-index:1"><img
+                                                                style="height: 45px; margin-left: 10px;"
+                                                                src="{{ asset('storage/' . $isProduct->userStore->store_logo) }}"
+                                                                alt="aurthor-img" class="me-2">
+                                                            <div style="margin-left: 10px; z-index:1">
+                                                                {{ $isProduct->userStore->name }} <div
+                                                                    class="text-secondary"
+                                                                    style="font-size: 16px; margin-left: 4px;">
+                                                                    {{ $isProduct->userStore->address }}</div>
+                                                            </div>
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                       </div>
                     @endforeach
