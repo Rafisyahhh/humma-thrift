@@ -107,11 +107,15 @@
                             <div class="col-lg-12">
                                 <div class="product-sorting-section">
                                     <div class="result">
-                                        <p>Menampilkan {{ $products->firstItem() }}–{{ $products->lastItem() }} dari {{ $products->total() }} hasil</p>
+                                        <p>Menampilkan
+                                            {{ $product_auction->firstItem() ?? 0 }}–{{ $product_auction->lastItem() ?? 0 }}
+                                            dari {{ $product_auction->total() ?? 0 }} hasil</p>
                                     </div>
                                 </div>
                             </div>
-                            @forelse ($products as $item)
+
+
+                            @forelse ($product_auction as $item)
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="product-wrapper" data-aos="fade-up">
                                         <div class="product-img">
@@ -123,33 +127,63 @@
                                                         <i class="fas fa-heart"></i>
                                                     </span>
                                                 </a>
-                                                <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}" class="compaire cart-item">
+                                                <a href="/user/wishlist" class="favourite cart-item">
                                                     <span>
-                                                        <i class="fas fa-eye"></i>
+                                                        <i class="fas fa-shopping-cart"></i>
+                                                    </span>
+                                                </a>
+                                                <a href="/user/keranjang" class="compaire cart-item">
+                                                    <span>
+                                                        <i class="fas fa-share"></i>
                                                     </span>
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="product-info">
                                             <div class="product-description">
-                                                <a href="{{route('store.product.detail',['store' => $item->userStore->username,'product'=> $item->slug])}}" class="product-details">{{ $item->title }}
+                                                <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
+                                                    class="product-details">{{ $item->title }}
                                                 </a>
                                                 <div class="price">
                                                     <span
-                                                        class="new-price">Rp.{{ number_format($item->price, 2, ',', '.') }}</span>
+                                                        class="new-price">Rp{{ number_format($item->bid_price_start, null, null, '.') }}
+                                                        -
+                                                        Rp{{ number_format($item->bid_price_end, null, null, '.') }}</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="product-cart-btn">
-                                            <a href="/user/checkout" class="product-btn">Beli sekarang</a>
+                                            <a data-id="{{ $item->id }}" class="product-btn openModal">Ikuti
+                                                Lelang</a>
+                                        </div>
+
+                                        <div id="reviewModal" class="modal">
+                                            <div class="modal-content">
+                                                <button class="close"
+                                                    style="float: right; text-align: end;">&times;</button>
+                                                <h4 style="text-align: center;">Bid Lelang</h4>
+                                                <form action="{{ route('user.auctions.store', ['id' => $item->id]) }}"
+                                                    method="post" class="mt-5">
+                                                    @csrf
+                                                    <label for="auction_price" class="form-label"
+                                                        style="font-size: 18px;">Bid Lelang :</label> <br>
+                                                    <input type="number" name="auction_price" class="form-control"
+                                                        placeholder="Masukkan Bid Lelang anda" style="font-size: 17px;"
+                                                        required>
+                                                    <button type="submit" class="shop-btn"
+                                                        style="margin-left: 22rem;">Kirim Bid Anda</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             @empty
-                            <div class="col-lg-12">
-                                <h3 class="text-center">Produk Masih Kosong</h3>
-                                <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
-                            </div>
+                                <div class="col-lg-12">
+                                    <h3 class="text-center">Produk Lelang Masih Kosong</h3>
+                                    <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam
+                                        waktu dekat kami
+                                        akan menambahkan beberapa produk untukmu, stay tune.</p>
+                                </div>
                             @endforelse
                         </div>
                     </div>

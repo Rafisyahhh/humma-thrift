@@ -13,6 +13,7 @@
         </a>
     </div>
 @elseif(auth()->check())
+    @if(!auth()->user()->store)
     <div class="header-favourite">
         <a href="wishlist.html" class="cart-item">
             <span>
@@ -20,6 +21,7 @@
             </span>
         </a>
     </div>
+    @endif
 
     <div class="header-favourite">
         <a href="{{ route('user.wishlist') }}" class="cart-item">

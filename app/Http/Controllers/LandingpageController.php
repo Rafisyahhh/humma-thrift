@@ -47,11 +47,11 @@ class LandingpageController extends Controller
     // Tambahkan metode auction
     public function productAuction()
     {
-        $product_auction = ProductAuction::all();
+        $product_auction = ProductAuction::paginate(24);
         $brands = Brand::all();
         $categories = ProductCategory::all();
 
-        return view('landing.produk-lelang', compact('product_auction', 'brands', 'categories'));
+        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories'));
     }
 
     // Tambahkan metode regular
