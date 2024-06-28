@@ -47,13 +47,6 @@
                                                     </div>
 
                                                     <div class="review-form-name">
-                                                        <label for="nic" class="form-label">NIK</label>
-                                                        <input type="number" id="nic" name="nic_owner"
-                                                            class="form-control" placeholder="masukkan nic"
-                                                            value="{{ $store->nic_owner }}">
-                                                    </div>
-
-                                                    <div class="review-form-name">
                                                         <label for="address" class="form-label">Alamat</label>
                                                         <textarea id="address" name="address" class="form-control" placeholder="Masukkan Alamat Anda">{{ $store->address }}</textarea>
                                                     </div>
@@ -157,7 +150,7 @@
                 height: 130,
                 toolbar: [
                     ['font', ['bold', 'underline', 'clear']],
-                    ['insert', ['link', 'picture']],
+                    ['insert', ['link']],
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['table', ['table']],
                 ],

@@ -52,20 +52,16 @@ class ProductAdminController extends Controller
      */
     public function edit(string $id)
     {
-
-    $product = Product::find($id); // Mencoba mencari produk berdasarkan ID
-    $product_auction = ProductAuction::find($id); // Mencoba mencari lelang produk berdasarkan ID
+        $product = Product::find($id);
+        $product_auction = ProductAuction::find($id);
 
         if ($product) {
-            // Jika produk ditemukan, kirim produk ke view bersama dengan semua lelang produk
             $product_auctions = ProductAuction::all();
             return view('admin.produk', compact('product', 'product_auctions'));
         } elseif ($product_auction) {
-            // Jika lelang produk ditemukan, kirim lelang produk ke view bersama dengan semua produk
             $products = Product::all();
             return view('admin.produk', compact('product_auction', 'products'));
         } else {
-            // Jika tidak ditemukan baik produk maupun lelang produk, kembalikan dengan pesan kesalahan
             return redirect()->route('admin.produk.index')->with('error', 'Produk atau Lelang Produk tidak ditemukan');
         }
     }
@@ -74,32 +70,33 @@ class ProductAdminController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-{
-    $request->validate([
-        'status' => 'required|in:active,inactive,sold',
-    ], [
-        'status.required' => 'Kolom STATUS wajib diisi.',
-    ]);
+    {
+        $request->validate([
+            'status' => 'required|in:active,inactive,sold',
+        ], [
+            'status.required' => 'Kolom STATUS wajib diisi.',
+        ]);
 
-    $product = Product::find($id);
+        $product = Product::find($id);
+        $product_auction = null;
 
-    if (!$product) {
-        $product_auction = ProductAuction::find($id);
+        if (!$product) {
+            $product_auction = ProductAuction::find($id);
+        }
+
+        if ($product) {
+            $product->status = $request->status;
+            $product->save();
+            return redirect()->back()->with('success', 'Status produk berhasil diperbarui.');
+        } elseif ($product_auction) {
+            $product_auction->status = $request->status;
+            $product_auction->save();
+            return redirect()->back()->with('success', 'Status lelang produk berhasil diperbarui.');
+        } else {
+            return redirect()->route('admin.produk.index')->with('error', 'Produk atau Lelang Produk tidak ditemukan');
+        }
     }
 
-    if ($product) {
-        $product->status = $request->status;
-        $product->save();
-        return redirect()->back()->with('success', 'Status produk berhasil diperbarui.');
-    } elseif ($product_auction) {
-        $product_auction->status = $request->status;
-        $product_auction->save();
-        return redirect()->back()->with('success', 'Status turnamen berhasil diperbarui.');
-    } else {
-        return redirect()->route('admin.produk.index')->with('error', 'Produk atau Lelang Produk tidak ditemukan');
-    }
-    
-}
 
 
     /**

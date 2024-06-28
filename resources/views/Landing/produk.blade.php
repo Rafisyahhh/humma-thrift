@@ -1,7 +1,50 @@
 @extends('layouts.home')
 
 @section('title', 'Product')
+@section('style')
+<style>
+     .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+        }
 
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 100%;
+            max-width: 60rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+@endsection
 @section('content')
   <section class="product product-sidebar footer-padding">
     <div class="container">
@@ -192,8 +235,22 @@
                       </div>
                     </div>
                     <div class="product-cart-btn">
-                      <a href="/user/checkout" class="product-btn">Ikuti Lelang</a>
+                        <a data-id="{{ $item->id }}" class="product-btn openModal">Ikuti Lelang</a>
                     </div>
+
+                <div id="reviewModal" class="modal">
+                    <div class="modal-content">
+                        <button class="close"
+                            style="float: right; text-align: end;">&times;</button>
+                        <h4 style="text-align: center;">Bid Lelang</h4>
+                        <form action="{{ route('user.auctions.store', ['id' => $item->id]) }}" method="post" class="mt-5">
+                            @csrf
+                            <label for="auction_price" class="form-label" style="font-size: 18px;">Bid Lelang :</label> <br>
+                            <input type="number" name="auction_price" class="form-control" placeholder="Masukkan Bid Lelang anda" style="font-size: 17px;" required>
+                            <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim Bid Anda</button>
+                        </form>
+                    </div>
+                </div>
                   </div>
                 </div>
               @empty
@@ -209,4 +266,33 @@
       </div>
     </div>
   </section>
+@endsection
+@section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var modals = document.querySelectorAll('.modal');
+            var btns = document.querySelectorAll('.openModal');
+            var spans = document.querySelectorAll('.close');
+
+            btns.forEach(function(btn, index) {
+                btn.onclick = function() {
+                    modals[index].style.display = 'flex';
+                }
+            });
+
+            spans.forEach(function(span, index) {
+                span.onclick = function() {
+                    modals[index].style.display = 'none';
+                }
+            });
+
+            window.onclick = function(event) {
+                modals.forEach(function(modal) {
+                    if (event.target == modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
 @endsection

@@ -2,21 +2,17 @@
     <div class="container">
         <div class="footer-section">
             <div class="row gy-5">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="footer-order">
-                        <div class="logo mb-3">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="footer-order" style="margin-right:5rem;">
+                        <div class="logo mb-5">
                             <img src="{{ asset('images/brands/png/logo-whitexxxhdpi.png') }}" height="36px" alt="logo">
                         </div>
                         <div class="footer-link order-link">
-                            <p style="font-size: 14px">Hummathrift adalah sebuah platform daring yang fokus pada penjualan barang-barang thrift
-                                atau barang bekas berkualitas. Platform ini menyediakan berbagai macam produk fashion,
-                                mulai dari pakaian, sepatu, aksesori, hingga barang-barang vintage yang unik dan sulit
-                                ditemukan. Hummathrift bertujuan untuk mendukung gaya hidup berkelanjutan dengan
-                                mempromosikan penggunaan kembali barang-barang dan mengurangi limbah fashion.</p>
+                            <p style="font-size: 1.5rem">HUMMATHRIFT sebuah platform yang menyediakan berbagai macam produk fashion, mulai dari pakaian, sepatu, aksesori, hingga barang-barang vintage yang unik dan sulit ditemukan.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-2 col-sm-6">
                     <div class="about-us">
                         <h4 class="footer-heading footer-title">
                             Menu Website
@@ -32,7 +28,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-2 col-sm-6">
                     <div class="links">
                         <h4 class="footer-heading footer-title">
                             Menu Lainnya
@@ -47,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-4 col-sm-6">
                     <div class="contact-info">
                         <h4 class="footer-heading footer-title">
                             Info Kontak
