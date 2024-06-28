@@ -32,6 +32,24 @@
       color: rgba(0, 0, 0, 0.7);
       /* Warna teks sedikit lebih gelap untuk kontras */
     }
+
+    .ribbon-status {
+      z-index: 5;
+      position: absolute;
+      width: 25rem;
+      top: 2.5rem;
+      left: -8rem;
+      padding: .25rem;
+      transform: rotate(-45deg);
+      font-size: 1.875rem;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .ribbon-status.danger {
+      background: red;
+      color: white;
+    }
   </style>
 @endsection
 
@@ -45,7 +63,13 @@
         <div class="col-lg-4 col-sm-6">
           <div class="product-wrapper" data-aos="fade-up">
             <div class="product-img">
-              <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover">
+              <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover"
+                @style(['opacity: 0.25;' => $item->status != 'approved'])>
+              @if ($item->status != 'approved')
+                <div class="ribbon-status danger">
+                  {{ $item->status }}
+                </div>
+              @endif
               <div class="product-cart-items dropstart"
                 style="top: 0;transform: translate(0, 0); bottom: unset; left: unset; right: 0; opacity: unset; visibility: unset; transition: unset;">
                 <a type="button" class="favourite cart-item" data-bs-toggle="dropdown">
@@ -88,7 +112,13 @@
         <div class="col-lg-4 col-sm-6">
           <div class="product-wrapper" data-aos="fade-up">
             <div class="product-img">
-              <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover">
+              <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover"
+                @style(['opacity: 0.25;' => $item->status != 'approved'])>
+              @if ($item->status != 'approved')
+                <div class="ribbon-status danger">
+                  {{ $item->status }}
+                </div>
+              @endif
               <div class="product-cart-items dropstart"
                 style="top: 0;transform: translate(0, 0); bottom: unset; left: unset; right: 0; opacity: unset; visibility: unset; transition: unset;">
                 <a type="button" class="favourite cart-item" data-bs-toggle="dropdown">
