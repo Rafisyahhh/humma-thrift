@@ -4,29 +4,30 @@
             <div class="row gy-5">
                 <div class="col-lg-3 col-sm-6">
                     <div class="footer-order">
-                        <div class="logo">
+                        <div class="logo mb-3">
                             <img src="{{ asset('images/brands/png/logo-whitexxxhdpi.png') }}" height="36px" alt="logo">
                         </div>
                         <div class="footer-link order-link">
-                            <ul>
-                                <li><a href="order.html">Lacak Pesanan</a></li>
-                                <li><a href="cart.html">Pengiriman & Pengembalian</a></li>
-                                <li><a href="#">Jaminan</a></li>
-                            </ul>
+                            <p style="font-size: 14px">Hummathrift adalah sebuah platform daring yang fokus pada penjualan barang-barang thrift
+                                atau barang bekas berkualitas. Platform ini menyediakan berbagai macam produk fashion,
+                                mulai dari pakaian, sepatu, aksesori, hingga barang-barang vintage yang unik dan sulit
+                                ditemukan. Hummathrift bertujuan untuk mendukung gaya hidup berkelanjutan dengan
+                                mempromosikan penggunaan kembali barang-barang dan mengurangi limbah fashion.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="about-us">
                         <h4 class="footer-heading footer-title">
-                            Tentang Kami
+                            Menu Website
                         </h4>
                         <div class="footer-link about-link">
                             <ul>
-                                <li><a href="about.html">Kisah Rave</a></li>
-                                <li><a href="#">Bekerja dengan kami</a></li>
-                                <li><a href="about.html">Berita perusahaan</a></li>
-                                <li><a href="#">Investor</a></li>
+                                <li><a href="about.html">Home</a></li>
+                                <li><a href="#">Produk</a></li>
+                                <li><a href="about.html">Brand</a></li>
+                                <li><a href="#">Toko</a></li>
+                                <li><a href="#">Tentang Kami</a></li>
                             </ul>
                         </div>
                     </div>
@@ -34,14 +35,14 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="links">
                         <h4 class="footer-heading footer-title">
-                            Tautan Pengguna
+                            Menu Lainnya
                         </h4>
                         <div class="footer-link useful-link">
                             <ul>
-                                <li><a href="about.html">Pembayaran yang aman</a></li>
-                                <li><a href="privacy.html">Kebijakan pribadi</a></li>
-                                <li><a href="terms.html">Syarat Penggunaan</a></li>
-                                <li><a href="product-sidebar.html">Produk yang Diarsipkan</a></li>
+                                <li><a href="about.html">Profil</a></li>
+                                <li><a href="privacy.html">Keranjang</a></li>
+                                <li><a href="terms.html">Favorite</a></li>
+                                <li><a href="product-sidebar.html">Pesanan</a></li>
                             </ul>
                         </div>
                     </div>

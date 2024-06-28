@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiControllers\UserApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/user', [UserApiController::class, 'getUser']);
+    Route::post('/user', [UserApiController::class, 'storeUser']);
+    Route::put('/user/{user}', [UserApiController::class, 'updateUser']);
 });
