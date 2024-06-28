@@ -72,7 +72,7 @@
             class="transition duration-300 ease-in-out delay-150">
             <path
                 d="M 0,500 L 0,187 C 138.42857142857142,144.375 276.85714285714283,101.75 394,121 C 511.14285714285717,140.25 606.9999999999999,221.375 713,285 C 819.0000000000001,348.625 935.1428571428573,394.75 1058,413 C 1180.8571428571427,431.25 1310.4285714285713,421.625 1440,412 L 1440,500 L 0,500 Z"
-                stroke="none" stroke-width="0" fill="#ff0080" fill-opacity="1"
+                stroke="none" stroke-width="0" fill="#798ED4" fill-opacity="1"
                 class="transition-all duration-300 ease-in-out delay-150 path-0" transform="rotate(-180 720 250)"></path>
         </svg>
     </div>
@@ -81,7 +81,7 @@
             class="transition duration-300 ease-in-out delay-150">
             <path
                 d="M 0,400 L 0,225 C 107.28571428571428,266.9821428571429 214.57142857142856,308.9642857142857 323,280 C 431.42857142857144,251.03571428571428 540.9999999999999,151.125 669,124 C 797.0000000000001,96.87499999999999 943.4285714285713,142.53571428571428 1075,134 C 1206.5714285714287,125.46428571428572 1323.2857142857142,62.73214285714286 1440,0 L 1440,400 L 0,400 Z"
-                stroke="none" stroke-width="0" fill="#ff0080" fill-opacity="1"
+                stroke="none" stroke-width="0" fill="#798ED4" fill-opacity="1"
                 class="transition-all duration-300 ease-in-out delay-150 path-0"></path>
         </svg>
     </div>
