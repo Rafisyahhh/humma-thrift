@@ -402,20 +402,20 @@
         <h5>BRAND PRODUK</h5>
         <a href="/brand" class="view">Lihat Semua</a>
       </div>
-      <div class="brand-section gap-3 pb-5" style="position: relative; z-index: 1;">
-        <swiper-container slides-per-view="4" loop="true" navigation="true" space-between="30"
-          autoplay-delay="10000" autoplay-disable-on-interaction="false">
-          @foreach ($brands as $brand)
-            <div class="product py-0" style="box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;border-radius: 20px;">
-              <div class="wrapper-img">
-                <a href="product-sidebar.html">
-                  <img src="{{ asset("storage/{$brand->logo}") }}" alt="img" style="border-radius: 20px;">
-                </a>
-              </div>
+      {{-- <div class="brand-section gap-3 pb-5" style="position: relative; z-index: 1;"> --}}
+      <swiper-container slides-per-view="6" loop="true" navigation="false" space-between="30"
+        autoplay-delay="1000" autoplay-disable-on-interaction="false">
+        @foreach ($brands as $brand)
+          <swiper-slide class="product py-0" style="box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;border-radius: 20px;">
+            <div class="wrapper-img">
+              <a href="product-sidebar.html">
+                <img src="{{ asset("storage/{$brand->logo}") }}" alt="img" style="border-radius: 20px;">
+              </a>
             </div>
-          @endforeach
-        </swiper-container>
-      </div>
+          </swiper-slide>
+        @endforeach
+      </swiper-container>
+      {{-- </div> --}}
     </div>
   </section>
 @endsection
