@@ -17,7 +17,9 @@ class AuctionsController extends Controller
     public function index()
     {
         $auctions = auctions::all();
-        return view('Landing.produk', compact('auctions'));
+        $user = Auth::user();
+
+        return view('Landing.produk-auction', compact('auctions','user'));
     }
 
     /**
@@ -29,7 +31,7 @@ class AuctionsController extends Controller
         $auctions = auctions::all();
         $user = Auth::user();
 
-        return view('Landing.produk', compact('auctions','user'));
+        return view('Landing.produk-auction', compact('auctions','user'));
     }
 
     /**
@@ -61,7 +63,9 @@ class AuctionsController extends Controller
     public function showSeller(auctions $auctions)
     {
         $auctions = auctions::all();
-        return view('seller.produk', compact('auctions'));
+        $user = Auth::user();
+
+        return view('seller.produk', compact('auctions','user'));
     }
 
     /**
@@ -69,7 +73,10 @@ class AuctionsController extends Controller
      */
     public function edit(auctions $auctions)
     {
-        //
+        $auctions = auctions::all();
+        $user = Auth::user();
+
+        return view('seller.produk', compact('auctions','user'));
     }
 
     /**
@@ -77,7 +84,13 @@ class AuctionsController extends Controller
      */
     public function update(UpdateauctionsRequest $request, auctions $auctions)
     {
-        //
+        $dataToUpdate = [
+            'status' => $request->input('status'),
+        ];
+
+        $auctions->update($dataToUpdate);
+
+        return redirect()->back()->with('success', 'lelang berhasil di pilih');
     }
 
     /**

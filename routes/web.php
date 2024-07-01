@@ -68,7 +68,13 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
     Route::post('/profile/{id}', [UserStoreController::class, 'update'])->name('profile.update');
     Route::resource('product', ProductController::class);
     Route::resource('productauction', ProductAuctionController::class);
-    Route::get('productauction/{id}', [AuctionsController::class, 'showSeller'])->name('productauction.showSeller');
+
+    // Show seller product auction
+    Route::get('productauction/{id}', [AuctionsController::class, 'showSeller'])->name('auction.showSeller');
+
+    // Edit and Update routes for auctions
+    Route::get('productauction/{id}/edit', [AuctionsController::class, 'edit'])->name('auction.edit');
+    Route::put('productauction/{id}', [AuctionsController::class, 'update'])->name('auction.update');
 });
 
 # User Routes
