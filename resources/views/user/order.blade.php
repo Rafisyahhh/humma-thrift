@@ -80,6 +80,11 @@
                 color: rgba(0, 0, 0, 0.7);
                 /* Warna teks sedikit lebih gelap untuk kontras */
             }
+
+            .table-wrapper-center .table-heading {
+            color: white; /* Sets text color to white */
+            }
+
         </style>
     </head>
 @endsection
@@ -120,7 +125,7 @@
                         <div class="cart-section">
                             <table>
                                 <tbody>
-                                    <tr class="table-row table-top-row">
+                                    <tr class="table-row table-top-row custom-table-header" style="text-color:#fff;">
                                         <td class="table-wrapper wrapper-product">
                                             <div class="table-wrapper-center">
                                                 <h5 class="table-heading">PRODUK</h5>
@@ -338,8 +343,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-lelang" role="tabpanel" aria-labelledby="nav-lelang-tab"
@@ -555,7 +558,7 @@
                                         </td>
                                         <td class="table-wrapper">
                                             <div class="table-wrapper-center">
-                                                <h5 class="heading">Dibayar</h5>
+                                                <h5 class="heading" style="color: red;">Dibayar</h5>
                                             </div>
                                         </td>
                                     </tr>
@@ -593,7 +596,7 @@
                                             </div>
                                         </td>
                                         <td class="table-wrapper">
-                                            <div class="table-wrapper-center">
+                                            <div class="table-wrapper-center" style="color: red;">
                                                 <h5 class="heading">Dibayar</h5>
                                             </div>
                                         </td>

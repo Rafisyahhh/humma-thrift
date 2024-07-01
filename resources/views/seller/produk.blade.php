@@ -32,24 +32,6 @@
       color: rgba(0, 0, 0, 0.7);
       /* Warna teks sedikit lebih gelap untuk kontras */
     }
-
-    .ribbon-status {
-      z-index: 5;
-      position: absolute;
-      width: 25rem;
-      top: 2.5rem;
-      left: -8rem;
-      padding: .25rem;
-      transform: rotate(-45deg);
-      font-size: 1.875rem;
-      text-align: center;
-      text-transform: uppercase;
-    }
-
-    .ribbon-status.danger {
-      background: red;
-      color: white;
-    }
   </style>
 @endsection
 
@@ -366,43 +348,45 @@
                     </div>
                   </td>
                 </tr>
-                <tr class="table-row ticket-row">
-                  <td class="table-wrapper">
-                    <div class="table-wrapper-center">
-                      <h5 class="heading">1.</h5>
-                    </div>
-                  </td>
-                  <td class="table-wrapper">
-                    <div class="table-wrapper-center">
-                      <h5 class="heading">Hilma</h5>
-                    </div>
-                  </td>
-                  <td class="table-wrapper">
-                    <div class="table-wrapper-center">
-                      <h5 class="heading">085707062531</h5>
-                    </div>
-                  </td>
-                  <td class="table-wrapper">
-                    <div class="table-wrapper-center">
-                      <h5 class="heading">hilma@gmail.com</h5>
-                    </div>
-                  </td>
-                  <td class="table-wrapper">
-                    <div class="table-wrapper-center">
-                      <h5 class="heading">Rp.120.000,00</h5>
-                    </div>
-                  </td>
-                  <td class="table-wrapper">
-                    <div class="table-wrapper-center">
-                      <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                          <path fill="currentColor"
-                            d="m9.55 17.308l-4.97-4.97l.714-.713l4.256 4.256l9.156-9.156l.713.714z" />
-                        </svg>
-                      </a>
-                    </div>
-                  </td>
-                </tr>
+                @foreach ($auctions as $item)
+                  <tr class="table-row ticket-row">
+                    <td class="table-wrapper">
+                      <div class="table-wrapper-center">
+                        <h5 class="heading">{{ $loop->iteration }}</h5>
+                      </div>
+                    </td>
+                    <td class="table-wrapper">
+                      <div class="table-wrapper-center">
+                        <h5 class="heading">{{ $item->user_id }}</h5>
+                      </div>
+                    </td>
+                    <td class="table-wrapper">
+                      <div class="table-wrapper-center">
+                        <h5 class="heading">085707062531</h5>
+                      </div>
+                    </td>
+                    <td class="table-wrapper">
+                      <div class="table-wrapper-center">
+                        <h5 class="heading">hilma@gmail.com</h5>
+                      </div>
+                    </td>
+                    <td class="table-wrapper">
+                      <div class="table-wrapper-center">
+                        <h5 class="heading">{{ $item->auction_price }}</h5>
+                      </div>
+                    </td>
+                    <td class="table-wrapper">
+                      <div class="table-wrapper-center">
+                        <a href="#">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                              d="m9.55 17.308l-4.97-4.97l.714-.713l4.256 4.256l9.156-9.156l.713.714z" />
+                          </svg>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                @endforeach
               </tbody>
             </table>
           </div>

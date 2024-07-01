@@ -4,9 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
-use App\Events\NewUserStoreCreated;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserStore extends Model
@@ -24,9 +22,7 @@ class UserStore extends Model
     {
         parent::boot();
 
-        // Hook into the creating event
         self::creating(function ($model) {
-            // Generate a unique username
             $model->setAttribute('username', self::generateUniqueUsername($model->name));
         });
     }
@@ -52,11 +48,20 @@ class UserStore extends Model
         $baseUsername = Str::slug($name, '');
         $username = $baseUsername . rand(10, 99);
 
-        // Ensure the username is unique
         while (self::where('username', $username)->exists()) {
             $username = $baseUsername . rand(10, 99);
         }
 
         return $username;
+    }
+
+    /**
+     * Getting Store Profile photo
+     *
+     * @return string
+     */
+    public function avatar()
+    {
+        return $this->getAttribute('avatar');
     }
 }
