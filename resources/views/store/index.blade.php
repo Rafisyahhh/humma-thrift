@@ -416,7 +416,3 @@
     var stars = new StarRating('.star-rating');
   </script>
 @endpush
-
-<div class="blobinator" data-total="{{ random_int(2, 7) }}"
-  data-color="#1C3879 #1E3B7A #1B356E #1B356E #162D69 #1F417D" data-animation-duration="9999">
-</div>

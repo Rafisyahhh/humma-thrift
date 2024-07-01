@@ -31,7 +31,6 @@ use Spatie\Permission\Models\Role as ModelsRole;
  * @method static \Illuminate\Database\Eloquent\Builder|Role withoutPermission($permissions)
  * @mixin \Eloquent
  */
-class Role extends ModelsRole
-{
+class Role extends ModelsRole {
     use HasFactory;
 }

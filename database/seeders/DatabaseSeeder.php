@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder {
             ProductCategorySeeder::class,
             BrandSeeder::class,
             ProductSeeder::class,
+            EventSeeder::class,
         ]);
     }
 }
