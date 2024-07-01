@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Enums\UserLevelEnum;
 use App\Helpers\UrlHelper;
+use App\Models\UserAddress;
+use App\Enums\UserLevelEnum;
 use App\Traits\VerifyEmailTrait;
-use Creativeorange\Gravatar\Facades\Gravatar;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
+use Creativeorange\Gravatar\Facades\Gravatar;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * User Model Data
@@ -162,5 +163,9 @@ class User extends Authenticatable implements MustVerifyEmail
         $avatar = $this->getAttribute('avatar');
         $isUrlOnAvatar = UrlHelper::isUrl($avatar);
         return $avatar ? ($isUrlOnAvatar ? $avatar : asset("storage/{$avatar}")) : Gravatar::get($this->getAttribute('email'));
+    }
+
+    public function UserAddress() {
+        return $this->hasMany( UserAddress::class);
     }
 }

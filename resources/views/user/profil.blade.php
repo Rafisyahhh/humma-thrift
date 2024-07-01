@@ -74,6 +74,15 @@
                                 <input type="file" name="avatar" accept="image/jpeg, image/jpg, image/png, image/webp" id="input-file">
                             </div>
                         </div>
+                        <div class="review-form">
+                            <div class="account-inner-form">
+                                <div class="review-form-name mb-4">
+                                    <label for="address" class="form-label" style="background-color: white">Alamat</label>
+                                    <textarea type="text" name="address" id="address" class="form-control"
+                                    placeholder="Tambahkan Alamat" rows="7" >{{ implode(", ",auth()->user()->UserAddress->pluck("address")->toArray()) }}</textarea>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-lg-12">
                             <div class="submit-btn d-flex justify-content-center w-100 mt-5">
                                 <button type="submit" class="shop-btn update-btn">Perbarui Profil</button>
@@ -83,12 +92,6 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-lg-12">
-                <div class="submit-btn">
-                    <button type="submit" class="shop-btn update-btn">Perbarui Profil</button>
-                    </form>
-                </div>
-            </div> --}}
         </div>
     </div>
 @endsection

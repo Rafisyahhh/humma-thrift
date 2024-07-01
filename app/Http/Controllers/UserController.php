@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Http\Requests\UpdateUserRequest;
+use App\Models\UserAddress;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -90,6 +91,11 @@ class UserController extends Controller
             'pbirth' => $request->pbirth,
             'dbirth' => $request->dbirth,
         ]);
+
+        $address = UserAddress::updateOrCreate(
+            ['user_id' => $user->id],
+            ['address' => $request -> address,'status'=> 1],
+        );
         return redirect()->back()->with("success", "Berhasil Memperbarui Profil");
     }
 

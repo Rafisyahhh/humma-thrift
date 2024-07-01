@@ -65,6 +65,13 @@
     </style>
 @endpush
 
+@php
+    $data = [
+        'bulan' => ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+        'pengeluaran' => [20000, 35000, 40000, 30000, 45000, 60000, 50000, 70000, 20000, 20000, 30000, 40000],
+    ];
+@endphp
+
 @section('content')
     <section id="quick-links" class=" pb-4 mb-4 border-bottom">
         <h5 class="mb-4">Dasbor</h5>
@@ -233,7 +240,7 @@
                                                         <td><span class="inner-text">Adidas</span></td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Ukuran</th>
+                                                    <th>Ukuran</th>
                                                         <td><span class="inner-text">XL</span></td>
                                                     </tr>
                                                     <tr>
@@ -262,4 +269,64 @@
              </div>
         </div>
     </section>
+    <section style="margin-top: 50px;"                                                      >
+        <div class="container">
+            <div>
+                <div>
+                    <h5 class="heading">Data Pengeluaran/Bulan</h5>
+                </div>
+                <div class="profile-section">
+                    <canvas id="pengeluaran" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+     </section>
+@endsection
+
+@section('script')
+    <script src="{{ asset('additional-assets/chart.js-4.4.3/chart.umd.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            const dataBulanan = {
+                labels: @json($data['bulan']),
+                datasets: [{
+                    label: 'Penjualan per Bulan',
+                    data: @json($data['pengeluaran']),
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+            const options = {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                },
+                interaction: {
+                    mode: 'nearest',
+                    axis: 'x',
+                    intersect: false
+                }
+            };
+
+            new Chart($('#pengeluaran'), {
+                type: 'bar',
+                data: dataBulanan,
+                options: options
+            });
+        });
+    </script>
 @endsection
