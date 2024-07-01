@@ -19,8 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/user', [UserApiController::class, 'getUser']);
 Route::middleware('auth')->group(function () {
-    Route::get('/user', [UserApiController::class, 'getUser']);
     Route::post('/user', [UserApiController::class, 'storeUser']);
     Route::put('/user/{user}', [UserApiController::class, 'updateUser']);
 });
