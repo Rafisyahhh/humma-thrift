@@ -64,8 +64,8 @@
           <div class="product-wrapper" data-aos="fade-up">
             <div class="product-img">
               <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover"
-                @style(['opacity: 0.25;' => $item->status != 'approved'])>
-              @if ($item->status != 'approved')
+                @style(['opacity: 0.25;' => $item->status != 'active'])>
+              @if ($item->status != 'active')
                 <div class="ribbon-status danger">
                   {{ $item->status }}
                 </div>
@@ -113,8 +113,8 @@
           <div class="product-wrapper" data-aos="fade-up">
             <div class="product-img">
               <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover"
-                @style(['opacity: 0.25;' => $item->status != 'approved'])>
-              @if ($item->status != 'approved')
+                @style(['opacity: 0.25;' => $item->status != 'active'])>
+              @if ($item->status != 'active')
                 <div class="ribbon-status danger">
                   {{ $item->status }}
                 </div>
