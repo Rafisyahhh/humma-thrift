@@ -139,6 +139,7 @@
       position: relative;
       justify-content: center;
       margin-bottom: 10px;
+      pointer-events: none !important;
     }
 
     .rating input {
@@ -240,7 +241,6 @@
       @endif
     </div>
   </section>
-
   <section class="product mt-5 pt-0 mb-5">
     <div class="container">
       <ul class="nav nav-underline mb-3">
@@ -369,7 +369,7 @@
         </div>
         <div class="tab-pane fade" id="ulasan-tab-pane" role="tabpanel" aria-labelledby="ulasan-tab" tabindex="0">
           <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex mt-5" style="height: 20rem">
+            <li class="list-group-item d-flex mt-5 list-group-item-secondary rounded pt-3" style="height: 20rem">
               <div style="width: 30rem;">
                 <img src="https://placehold.co/400" class="img-fluid rounded mb-2" style="width: 7.5rem" />
                 <h5>Tinta original</h5>
@@ -378,7 +378,7 @@
               <div class="w-100">
                 <div class="d-flex position-relative mb-4">
                   <img src="https://placehold.co/400" class="img-fluid" style="width: 6rem; border-radius: 50%" />
-                  <div class="ms-4 w-100">
+                  <div class="ms-3 w-100">
                     <div class="d-flex position-relative">
                       <h5>Akbar</h5>
                       <p class="position-absolute opacity-75" style="right: 0;">2 hari yang lalu</p>
@@ -397,71 +397,10 @@
                     </div>
                   </div>
                 </div>
-                <p style="min-height: 5rem">Aku lupa aku siapa</p>
+                <p class="border-top pt-2" style="min-height: 5rem">Aku lupa aku siapa</p>
               </div>
             </li>
-            <li class="list-group-item d-flex mt-5" style="height: 20rem">
-              <div style="width: 30rem;">
-                <img src="https://placehold.co/400" class="img-fluid rounded" style="width: 7.5rem" />
-                <h5>Tinta original</h5>
-                <p>Warna: pink</p>
-              </div>
-              <div class="w-100">
-                <div class="d-flex position-relative mb-4">
-                  <img src="https://placehold.co/400" class="img-fluid" style="width: 6rem; border-radius: 50%" />
-                  <div class="ms-4 w-100">
-                    <div class="d-flex position-relative">
-                      <h5>Akbar</h5>
-                      <p class="position-absolute opacity-75" style="right: 0;">2 hari yang lalu</p>
-                    </div>
-                    <div class="row-rating">
-                      <div class="rating">
-                        <select class="star-rating" name="product_rating"
-                          data-options="{&quot;clearable&quot;:false, &quot;tooltip&quot;:false}">
-                          <option value="1">Buruk</option>
-                          <option value="2">Cukup</option>
-                          <option value="3">Baik</option>
-                          <option value="4" selected>Sangat Baik</option>
-                          <option value="5">Luar Biasa</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <p style="min-height: 5rem">Aku lupa aku siapa</p>
-              </div>
-            </li>
-            <li class="list-group-item d-flex mt-5" style="height: 20rem">
-              <div style="width: 30rem;">
-                <img src="https://placehold.co/400" class="img-fluid rounded" style="width: 7.5rem" />
-                <h5>Tinta original</h5>
-                <p>Warna: pink</p>
-              </div>
-              <div class="w-100">
-                <div class="d-flex position-relative mb-4">
-                  <img src="https://placehold.co/400" class="img-fluid" style="width: 6rem; border-radius: 50%" />
-                  <div class="ms-4 w-100">
-                    <div class="d-flex position-relative">
-                      <h5>Akbar</h5>
-                      <p class="position-absolute opacity-75" style="right: 0;">2 hari yang lalu</p>
-                    </div>
-                    <div class="row-rating">
-                      <div class="rating">
-                        <select class="star-rating" name="product_rating"
-                          data-options="{&quot;clearable&quot;:false, &quot;tooltip&quot;:false}">
-                          <option value="1">Buruk</option>
-                          <option value="2">Cukup</option>
-                          <option value="3">Baik</option>
-                          <option value="4" selected>Sangat Baik</option>
-                          <option value="5">Luar Biasa</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <p style="min-height: 5rem">Aku lupa aku siapa</p>
-              </div>
-            </li>
+
           </ul>
         </div>
       </div>
@@ -471,6 +410,7 @@
 
 @push('script')
   <script src="{{ asset('additional-assets/star-rating/dist/star-rating.min.js') }}"></script>
+  <script src="{{ asset('additional-assets/blobinator-latest/blobinator.js') }}"></script>
 
   <script>
     var stars = new StarRating('.star-rating');
