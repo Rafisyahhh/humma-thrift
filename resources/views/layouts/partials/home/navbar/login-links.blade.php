@@ -33,7 +33,7 @@
 
     {{-- ICON PROFILE --}}
     <div class="header-cart header-right-dropdown">
-        <a href="/user/profile" class="cart-item">
+        <a href="javascript:void(0)" class="cart-item">
             <span>
                 <i class="fas fa-user"></i>
             </span>
