@@ -14,10 +14,11 @@ class ProductController extends Controller {
      */
     public function index() {
         $product_category_pivots = ProductCategoryPivot::all();
+        $auctions = auctions::all();
         $products = Product::where("store_id", Auth::user()->store()->first()->id)->get();
         $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get();
 
-        return view('seller.produk', compact('product_category_pivots', 'products', 'product_auctions'));
+        return view('seller.produk', compact('auctions','product_category_pivots', 'products', 'product_auctions'));
     }
 
     /**
