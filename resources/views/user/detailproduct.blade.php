@@ -286,13 +286,6 @@
                                 <div class="row">
                                     <div class="product-quantity mt-0"
                                         style="display: flex; align-items: center; gap: 10px; z-index:1">
-                                        <div class="share-icons">
-                                            <a href="#" class="share-icon">
-                                                <span>
-                                                    <i class="fas fa-heart fa-xl" style="color: black"></i>
-                                                </span>
-                                            </a>
-                                        </div>
                                         <a href="#" style="width :10px" class="shop-btn"
                                             style="display: flex; align-items: center; gap: 10px; z-index:1">
                                             <span style="width: 37rem; align-items:center; justify-content:center;">
@@ -325,32 +318,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <hr>
-                                {{-- <p class="fs-2 d-flex align-items-center justify-content-end py-2" style="position: relative;">
-                                    Bagikan ke:
-                                    <span class="share-container share-buttons gap-3 ml-auto" style="display: flex; margin-left: auto;">
-                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($url) }}" target="_blank" class="social-buttons">
-                                            <i class="fa-brands fa-square-facebook fa-lg" style="color: black"></i>
-                                        </a>
-                                        <a href="https://twitter.com/intent/tweet?url={{ urlencode($url) }}&text={{ urlencode($text) }}" target="_blank" class="social-buttons">
-                                            <i class="fa-brands fa-square-x-twitter fa-lg" style="color: black"></i>
-                                        </a>
-                                        <a href="https://t.me/share/url?url={{ urlencode($url) }}&text={{ urlencode($text) }}" target="_blank" class="social-buttons">
-                                            <i class="fa-brands fa-telegram fa-lg" style="color: black"></i>
-                                        </a>
-                                        <a href="https://api.whatsapp.com/send?text={{ urlencode($text . ' ' . $url) }}" target="_blank" class="social-buttons">
-                                            <i class="fa-brands fa-whatsapp fa-lg" style="color: black"></i>
-                                        </a>
-                                    </span>
-                                </p> --}}
-
-                                {{-- <div class="share-icons">
-                                    <a href="#" class="share-icon">
-                                        <span>
-                                            <i class="fas fa-heart fa-xl" style="color: black"></i>
-                                        </span>
-                                    </a>
-                                </div> --}}
                                 <hr>
                                 <div class="product-seller-section py-2">
                                     <div class="review-wrapper">
@@ -406,13 +373,6 @@
                 </a>
             </span>
             </p>
-            {{-- <div class="share-icons ms-auto" style="z-index:1;">
-                <a href="#" class="share-icon">
-                    <span>
-                        <i class="fas fa-heart fa-xl" style="color: #1c3879"></i>
-                    </span>
-                </a>
-            </div> --}}
             <div class="share-icons" style="z-index:1; margin-left:70px;">
                 <a href="#" class="share-icon">
                     <span>
@@ -422,6 +382,8 @@
                         </svg>
                     </span>
                 </a>
+                <span style="margin-left:0.5px; font-size: 15px">Favorit</span>
+                <span style="margin-left:0.5px; font-size: 15px">(3,8RB)</span>
             </div>
         </div>
     </div>
