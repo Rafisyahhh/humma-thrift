@@ -201,7 +201,7 @@
                 transform="translate(100 100)" />
         </svg>
     </div>
-    <section id="hero" class="hero" style="z-index: 100;position: relative;">
+    <section id="hero" class="hero" style="z-index: 1;position: relative;">
         <div class="swiper hero-swiper">
             <div class="swiper-wrapper hero-wrapper">
                 @foreach ($event as $key => $even)
