@@ -18,7 +18,7 @@
             position: relative;
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
         .svg-container {
@@ -29,16 +29,81 @@
             /* Pastikan SVG tidak keluar dari container */
         }
 
+        .svg-container.first {
+            top: 0;
+            left: -35%;
+            width: 200%;
+            height: 100%;
+        }
+
+        .svg-container.second {
+            top: 13%;
+            left: 0;
+            width: 20%;
+            height: 50%;
+        }
+        .svg-container.scnd {
+            top: 17%;
+            left: 60%;
+            width: 30%;
+            height: 50%;
+        }
+        .svg-container.sc {
+            top: 14%;
+            left: 75%;
+            width: 10%;
+            height: 50%;
+        }
+        .svg-container.s {
+            top: 34%;
+            left: -2%;
+            width: 20%;
+            height: 50%;
+        }
+        .svg-container.c {
+            top: 55%;
+            left: 70%;
+            width: 25%;
+            height: 50%;
+        }
+        .svg-container.n {
+            top: 54%;
+            left: 67%;
+            width: 12%;
+            height: 50%;
+        }
+        .svg-container.d {
+            top: 70%;
+            left: -38%;
+            width: 100%;
+            height: 50%;
+        }
+        .svg-container.dd {
+            top: 71%;
+            left: 20%;
+            width: 20%;
+            height: 50%;
+        }
+
+        .svg-container.third {
+            top: 40%;
+            left: -35%;
+            width: 200%;
+            height: 100%;
+        }
+
+        .svg-container.fourth {
+            top: 20%;
+            left: -35%;
+            width: 150%;
+            height: 100%;
+        }
+
         .svg-container svg {
             width: 100%;
             height: 50%;
             display: block;
             /* Mengatur masing-masing SVG menempati setengah layar */
-        }
-
-        .svg-container.second svg {
-            transform: translateY(100%);
-            /* Memindahkan SVG kedua ke bagian bawah */
         }
     </style>
 
@@ -51,38 +116,89 @@
     </style>
 @endpush
 @section('content')
-    <div class="svg-container first" style="top: 0;left: -35%;width: 200%;height: 100%;">
+    <div class="svg-container first">
         <svg width="100%" height="100%" id="svg" viewBox="0 0 1440 490" xmlns="http://www.w3.org/2000/svg"
             class="transition duration-300 ease-in-out delay-150">
             <path
                 d="M 0,500 L 0,187 C 118.1531100478469,175.94736842105263 236.3062200956938,164.89473684210526 333,184 C 429.6937799043062,203.10526315789474 504.92822966507185,252.3684210526316 592,227 C 679.0717703349281,201.6315789473684 777.980861244019,101.63157894736841 862,107 C 946.019138755981,112.36842105263159 1015.1483253588517,223.10526315789474 1109,254 C 1202.8516746411483,284.89473684210526 1321.4258373205741,235.94736842105263 1440,187 L 1440,500 L 0,500 Z"
-                stroke="none" stroke-width="0" fill="#798ED4" fill-opacity="1"
-                class="transition-all duration-300 ease-in-out delay-150 path-0" transform="rotate(-180 720 250)"></path>
+                stroke="none" stroke-width="0" fill="#BACAFF" fill-opacity="1"
+                class="transition-all duration-300 ease-in-out delay-150 path-0" transform="rotate(-180 720 250)">
+            </path>
         </svg>
     </div>
-    <div class="svg-container second" style="top: -13%;left: 0;width: 20%;height: 50%;">
+    <div class="svg-container second">
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#FF0066"
+            <path fill="#798ED4"
                 d="M26.3,3.3C26.3,26.1,13.2,52.1,-7.9,52.1C-29,52.1,-58,26.1,-58,3.3C-58,-19.4,-29,-38.7,-7.9,-38.7C13.2,-38.7,26.3,-19.4,26.3,3.3Z"
                 transform="translate(100 100)" />
         </svg>
     </div>
-    <div class="svg-container third" style="top: 40%;left: -35%;width: 200%;height: 100%;">
+    <div class="svg-container scnd">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#798ED4"
+                d="M26.3,3.3C26.3,26.1,13.2,52.1,-7.9,52.1C-29,52.1,-58,26.1,-58,3.3C-58,-19.4,-29,-38.7,-7.9,-38.7C13.2,-38.7,26.3,-19.4,26.3,3.3Z"
+                transform="translate(100 100)" />
+        </svg>
+    </div>
+    <div class="svg-container sc">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#798ED4"
+                d="M26.3,3.3C26.3,26.1,13.2,52.1,-7.9,52.1C-29,52.1,-58,26.1,-58,3.3C-58,-19.4,-29,-38.7,-7.9,-38.7C13.2,-38.7,26.3,-19.4,26.3,3.3Z"
+                transform="translate(100 100)" />
+        </svg>
+    </div>
+    <div class="svg-container third">
         <svg width="100%" height="100%" id="svg" viewBox="0 0 1440 490" xmlns="http://www.w3.org/2000/svg"
             class="transition duration-300 ease-in-out delay-150">
             <path
                 d="M 0,500 L 0,187 C 138.42857142857142,144.375 276.85714285714283,101.75 394,121 C 511.14285714285717,140.25 606.9999999999999,221.375 713,285 C 819.0000000000001,348.625 935.1428571428573,394.75 1058,413 C 1180.8571428571427,431.25 1310.4285714285713,421.625 1440,412 L 1440,500 L 0,500 Z"
-                stroke="none" stroke-width="0" fill="#798ED4" fill-opacity="1"
-                class="transition-all duration-300 ease-in-out delay-150 path-0" transform="rotate(-180 720 250)"></path>
+                stroke="none" stroke-width="0" fill="#BACAFF" fill-opacity="1"
+                class="transition-all duration-300 ease-in-out delay-150 path-0" transform="rotate(-180 720 250)">
+            </path>
         </svg>
     </div>
-    <div class="svg-container fourth" style="top: 20%;left: -35%;width: 150%;height: 100%;">
+    <div class="svg-container fourth">
         <svg width="100%" height="100%" id="svg" viewBox="0 0 1440 390" xmlns="http://www.w3.org/2000/svg"
             class="transition duration-300 ease-in-out delay-150">
             <path
                 d="M 0,400 L 0,225 C 107.28571428571428,266.9821428571429 214.57142857142856,308.9642857142857 323,280 C 431.42857142857144,251.03571428571428 540.9999999999999,151.125 669,124 C 797.0000000000001,96.87499999999999 943.4285714285713,142.53571428571428 1075,134 C 1206.5714285714287,125.46428571428572 1323.2857142857142,62.73214285714286 1440,0 L 1440,400 L 0,400 Z"
-                stroke="none" stroke-width="0" fill="#798ED4" fill-opacity="1"
+                stroke="none" stroke-width="0" fill="#BACAFF" fill-opacity="1"
                 class="transition-all duration-300 ease-in-out delay-150 path-0"></path>
+        </svg>
+    </div>
+    <div class="svg-container s">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#798ED4"
+                d="M26.3,3.3C26.3,26.1,13.2,52.1,-7.9,52.1C-29,52.1,-58,26.1,-58,3.3C-58,-19.4,-29,-38.7,-7.9,-38.7C13.2,-38.7,26.3,-19.4,26.3,3.3Z"
+                transform="translate(100 100)" />
+        </svg>
+    </div>
+    <div class="svg-container c">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#798ED4"
+                d="M26.3,3.3C26.3,26.1,13.2,52.1,-7.9,52.1C-29,52.1,-58,26.1,-58,3.3C-58,-19.4,-29,-38.7,-7.9,-38.7C13.2,-38.7,26.3,-19.4,26.3,3.3Z"
+                transform="translate(100 100)" />
+        </svg>
+    </div>
+    <div class="svg-container n">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#798ED4"
+                d="M26.3,3.3C26.3,26.1,13.2,52.1,-7.9,52.1C-29,52.1,-58,26.1,-58,3.3C-58,-19.4,-29,-38.7,-7.9,-38.7C13.2,-38.7,26.3,-19.4,26.3,3.3Z"
+                transform="translate(100 100)" />
+        </svg>
+    </div>
+    <div class="svg-container d">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#798ED4"
+                d="M26.3,3.3C26.3,26.1,13.2,52.1,-7.9,52.1C-29,52.1,-58,26.1,-58,3.3C-58,-19.4,-29,-38.7,-7.9,-38.7C13.2,-38.7,26.3,-19.4,26.3,3.3Z"
+                transform="translate(100 100)" />
+        </svg>
+    </div>
+    <div class="svg-container dd">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#798ED4"
+                d="M26.3,3.3C26.3,26.1,13.2,52.1,-7.9,52.1C-29,52.1,-58,26.1,-58,3.3C-58,-19.4,-29,-38.7,-7.9,-38.7C13.2,-38.7,26.3,-19.4,26.3,3.3Z"
+                transform="translate(100 100)" />
         </svg>
     </div>
     <section id="hero" class="hero" style="z-index: 100;position: relative;">
@@ -92,7 +208,7 @@
                     <div id="slide{{ $key }}" class="swiper-slide hero-slider-one "
                         style="background-image: url('{{ asset("storage/{$even->foto}") }}');">
                         <div class="hero-slider-one"
-                            style="background-color: rgba(2, 17, 36, 0.39); position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+                            style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
                         </div>
                         <div class="container custom-margin-bottom">
                             <div class="row custom-margin-bottom">
