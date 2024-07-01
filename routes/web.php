@@ -49,7 +49,7 @@ Route::prefix('/debug')->middleware(\App\Http\Middleware\DevelopmentMiddleware::
     // Route::view('modal', 'debug.modal');
 
     Route::get('/test', function () {
-        $user = fn() => "hello world";
+        $user = fn () => "hello world";
 
         dd(gettype($user));
     });
@@ -73,27 +73,30 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
 
 # User Routes
 Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function () {
-    Route::get('/', [DashboardUserController::class, 'dashboard'])->name('userhome');
-    Route::view('checkout', 'user.checkout')->name('checkout');
-    Route::view('about', 'user.tentang')->name('about');
-    Route::get('brand', [LandingpageController::class, 'brand'])->name('brand');
-    Route::view('detail', 'user.detail')->name('detail');
-    Route::get('profile', [UserController::class, 'show'])->name('profile');
-    Route::post('profile/{id}', [UserController::class, 'update'])->name('profile.update');
-    Route::view('order', 'user.order')->name('order');
-    Route::view('cart', 'user.keranjang')->name('cart');
-    Route::get('wishlist', [LandingpageController::class, 'wishlist'])->name('wishlist');
-    Route::get('shop', [DetailProductController::class, 'showProduct'])->name('shop');
-    Route::get('store', [StoreProfileController::class, 'showStore'])->name('store');
-    // Route::get('detailproduct', [DetailProductController::class, 'showDetail']);
+    Route::middleware(\App\Http\Middleware\NotSellerMiddleware::class)->group(function () {
+        Route::get('/', [DashboardUserController::class, 'dashboard'])->name('userhome');
+        Route::view('checkout', 'user.checkout')->name('checkout');
+        Route::view('about', 'user.tentang')->name('about');
+        Route::get('brand', [LandingpageController::class, 'brand'])->name('brand');
+        Route::view('detail', 'user.detail')->name('detail');
+        Route::get('profile', [UserController::class, 'show'])->name('profile');
+        Route::post('profile/{id}', [UserController::class, 'update'])->name('profile.update');
+        Route::view('order', 'user.order')->name('order');
+        Route::view('cart', 'user.keranjang')->name('cart');
+        Route::get('wishlist', [LandingpageController::class, 'wishlist'])->name('wishlist');
+        Route::get('shop', [DetailProductController::class, 'showProduct'])->name('shop');
+        Route::get('store', [StoreProfileController::class, 'showStore'])->name('store');
+        // Route::get('detailproduct', [DetailProductController::class, 'showDetail']);
+        Route::resource('history', HistoryController::class);
+        Route::resource('update-password', UserUpdatePasswordController::class);
+        Route::resource('auctions', AuctionsController::class);
+        // Route::get('/product/{id}', [AuctionsController::class, 'create'])->name('product.create');
+        // Route::post('/product/{id}/auction', [AuctionsController::class, 'store'])->name('product.auction.store');
+    });
+
     Route::get('open-shop', [OpenShopController::class, 'index'])->name('register-seller');
     Route::post('open-shop', [OpenShopController::class, 'register'])->name('register-seller.submit');
     Route::get('verify-store/{token:verification_code}', [OpenShopController::class, 'verifyStore'])->name('verify.store');
-    Route::resource('history', HistoryController::class);
-    Route::resource('update-password', UserUpdatePasswordController::class);
-    Route::resource('auctions', AuctionsController::class);
-    // Route::get('/product/{id}', [AuctionsController::class, 'create'])->name('product.create');
-    // Route::post('/product/{id}/auction', [AuctionsController::class, 'store'])->name('product.auction.store');
 });
 
 # Dev Routes

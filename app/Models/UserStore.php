@@ -25,6 +25,9 @@ class UserStore extends Model
         self::creating(function ($model) {
             $model->setAttribute('username', self::generateUniqueUsername($model->name));
         });
+        self::updating(function ($model) {
+            $model->setAttribute('username', self::generateUniqueUsername($model->name));
+        });
     }
 
     /**
@@ -62,6 +65,16 @@ class UserStore extends Model
      */
     public function avatar()
     {
-        return $this->getAttribute('avatar');
+        return asset("storage/{$this->getAttribute('store_logo')}");
+    }
+
+    /**
+     * Getting Store Profile photo
+     *
+     * @return string
+     */
+    public function cover()
+    {
+        return asset("storage/{$this->getAttribute('store_logo')}");
     }
 }
