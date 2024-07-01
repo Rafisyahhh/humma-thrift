@@ -1,3 +1,8 @@
+@php
+    $url = url()->current();
+    $text = $isProductAuction ? $isProductAuction->title : ($isProduct ? $isProduct->title : 'Undefined');
+@endphp
+
 @extends('layouts.home')
 
 @section('title', 'Detail Product')
@@ -125,6 +130,7 @@
                                                         class="object-fit-cover" alt="img">
                                                 </div>
                                             </div>
+                                        </div>
                                         @endforeach
                                     @elseif($isProductAuction)
                                         @foreach ($isProductAuction->gallery as $item)
@@ -199,18 +205,22 @@
                                 <div class="row">
                                     <div class="product-quantity mt-0"
                                         style="display: flex; align-items: center; gap: 10px; z-index:1">
-                                        <a href="#" style="width :10px" class="shop-btn"
-                                            style="display: flex; align-items: center; gap: 10px; z-index:1">
-                                            <span style="width: 37rem; align-items:center; justify-content:center;">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                Masukkan Keranjang
-                                            </span>
+                                        <div class="share-icons">
+                                            <a href="#" class="share-icon">
+                                                <span>
+                                                    <i class="fas fa-heart fa-xl" style="color: black"></i>
+                                                </span>
+                                            </a>
+                                        </div>
+                                        <a href="#"
+                                            class="shop-btn d-flex gap-3 align-items-center justify-content-center">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            Masukkan Keranjang
                                         </a>
-                                        <a href="#" style="width :10px" class="shop-btn"
-                                            style="display: flex; align-items: center; gap: 5px; z-index:1">
-                                            <span style="width: 37rem; align-items:center; justify-content:center;">
-                                                <i class="fa-solid fa-plus"></i>
-                                                Beli Sekarang</span>
+                                        <a href="#"
+                                            class="shop-btn d-flex gap-3 align-items-center justify-content-center">
+                                            <i class="fas fa-arrow-right"></i>
+                                            Beli Sekarang
                                         </a>
                                     </div>
                                 </div>

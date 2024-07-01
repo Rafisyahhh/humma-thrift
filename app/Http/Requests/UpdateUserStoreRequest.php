@@ -24,7 +24,6 @@ class UpdateUserStoreRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:15',
-            'nic_owner' => 'required|string|max:255',
             'address' => 'required|string',
             'description' => 'required|string',
             'store_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -37,7 +36,6 @@ class UpdateUserStoreRequest extends FormRequest
         return [
             'name.required' => 'Nama wajib diisi',
             'phone.required' => 'Nomor telepon wajib diisi',
-            'nic_owner.required' => 'NIK wajib diisi',
             'address.required' => 'Alamat wajib diisi',
             'description.required' => 'Deskripsi wajib diisi',
             'store_logo.image' => 'Logo harus berupa file gambar',

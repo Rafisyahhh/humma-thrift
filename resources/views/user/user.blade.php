@@ -58,6 +58,10 @@
             font-size: 18px;
             color: rgba(0, 0, 0, 0.7); /* Warna teks sedikit lebih gelap untuk kontras */
         }
+
+        .table-wrapper-center .table-heading {
+        color: white; /* Sets text color to white */
+        }
     </style>
 @endpush
 
@@ -116,7 +120,7 @@
         <div class="table-responsive">
             <table>
                 <tbody>
-                    <tr class="table-row table-top-row">
+                    <tr class="table-row table-top-row custom-table-header" style="text-color:#fff;">
                         <td class="table-wrapper wrapper-product">
                             <div class="table-wrapper-center">
                                 <h5 class="table-heading">PRODUK</h5>
@@ -132,19 +136,19 @@
                                 <h5 class="table-heading">STATUS</h5>
                             </div>
                         </td>
-
                         <td class="table-wrapper">
                             <div class="table-wrapper-center">
                                 <h5 class="table-heading">TOTAL</h5>
                             </div>
                         </td>
-
                         <td class="table-wrapper">
                             <div class="table-wrapper-center">
                                 <h5 class="table-heading">DETAIL ORDER</h5>
                             </div>
                         </td>
                     </tr>
+
+
                     <tr class="table-row ticket-row">
                         <td class="table-wrapper wrapper-product" style="width: 35%; " >
                             <div class="wrapper">
@@ -240,8 +244,10 @@
                                                         <th colspan="2"><span class="inner-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet cumque perferendis libero nesciunt minima odio autem ratione quia, eligendi temporibus!</span></th>
                                                     </tr>
                                                     <tr>
-                                                        <th>Status</th>
-                                                        <td><span class="inner-text">Diterima</span></td>
+                                                        <td style="font-size: 2rem">Status</td>
+                                                        <td style="justify-content:right; align-items:right;"><span class="inner-status">
+                                                            Diterima</span></td>
+                                                        </td>
                                                     </tr>
                                                 </table>
                                              </div>

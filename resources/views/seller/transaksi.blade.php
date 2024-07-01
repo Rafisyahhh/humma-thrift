@@ -10,7 +10,11 @@
                 background: rgba(167, 146, 119, 0.40) !important;
             }
 
-
+            .table-row .table-wrapper .table-heading {
+                font-size: 1.5rem;
+                font-weight: 500;
+                color: #fff;
+            }
         </style>
     </head>
 @endsection
@@ -74,7 +78,7 @@
                             <div class="cart-section wishlist-section">
                                 <table style="width: 100rem;">
                                     <tbody>
-                                        <tr class="table-row table-top-row">
+                                        <tr class="table-row table-top-row custom-table-header" style="color:#fff;">
                                             <td class="table-wrapper wrapper-product" style="width: 15%;">
                                                 <h5 class="table-heading">TANGGAL</h5>
                                             </td>
@@ -85,7 +89,7 @@
                                                 <h5 class="table-heading">EMAIL</h5>
                                             </td>
                                             <td class="table-wrapper">
-                                                <div class="table-wrapper-center">
+
                                                     <h5 class="table-heading">PRODUK</h5>
                                                 </div>
                                             </td>
@@ -135,7 +139,7 @@
                                             </td>
                                             <td class="table-wrapper">
                                                 <div class="table-wrapper-center">
-                                                    <h5 class="heading">Dibayar</h5>
+                                                    <h5 class="heading" style="color: red;">Dibayar</h5>
                                                 </div>
                                             </td>
                                         </tr>
@@ -228,8 +232,8 @@
                                             </div>
                                         </td>
                                         <td class="table-wrapper">
-                                            <div class="table-wrapper-center">
-                                               <h5 class="heading">Dibayar</h5>
+                                            <div class="table-wrapper-center" >
+                                               <h5 class="heading" style="color: red;">Dibayar</h5>
                                             </div>
                                         </td>
                                     </tr>
@@ -268,7 +272,7 @@
                                         </td>
                                         <td class="table-wrapper">
                                             <div class="table-wrapper-center">
-                                               <h5 class="heading">Dibayar</h5>
+                                               <h5 class="heading" style="color: red;">Dibayar</h5>
                                             </div>
                                         </td>
                                     </tr>
@@ -290,7 +294,7 @@
 
                                         <td class="table-wrapper">
                                             <div class="table-wrapper-center">
-                                                <h5 class="heading">Rp.220.000,00</h5>
+                                                <h5 class="heading" style="color: red;">Rp.220.000,00</h5>
                                             </div>
                                         </td>
                                         <td class="table-wrapper">
