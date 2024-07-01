@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\auctions;
 use App\Http\Requests\StoreauctionsRequest;
 use App\Http\Requests\UpdateauctionsRequest;
+use App\Models\ProductAuction;
+use App\Models\ProductCategory;
 use Auth;
 
 class AuctionsController extends Controller
@@ -15,7 +17,7 @@ class AuctionsController extends Controller
     public function index()
     {
         $auctions = auctions::all();
-        return view('auctions.index', compact('auctions'));
+        return view('Landing.produk', compact('auctions'));
     }
 
     /**
@@ -23,37 +25,43 @@ class AuctionsController extends Controller
      */
     public function create()
     {
+        // $product = ProductAuction::findOrFail($id);
         $auctions = auctions::all();
-        return view('user.detailproduct', compact('auctions'));
+        $user = Auth::user();
+
+        return view('Landing.produk', compact('auctions','user'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreauctionsRequest $request)
-    {
-        try {
-            $user = Auth::user();
+{
+    try {
+        $product = ProductAuction::findOrFail($request->product_id);
+        $user = Auth::user();
 
-            auctions::create([
-                'user_id' => $user->id,
-                'product_auction_id' => $productId,
-                'auction_price' => $request->auction_price,
-                'status' => false,
-                'delivery_status' => 'selesaikan pesanan',
-            ]);
+        auctions::create([
+            'user_id' => $user->id,
+            'product_auction_id' => $product->id,
+            'auction_price' => $request->auction_price,
+            'status' => false,
+            'delivery_status' => 'selesaikan pesanan',
+        ]);
 
-            return redirect()->back()->with('success', 'Lelang berhasil ditambahkan');
-        } catch (\Throwable $th) {
-            return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
-        }
+        return redirect()->back()->with('success', 'Lelang berhasil ditambahkan');
+    } catch (\Throwable $th) {
+        return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
     }
+}
+
     /**
      * Display the specified resource.
      */
-    public function show(auctions $auctions)
+    public function showSeller(auctions $auctions)
     {
-        //
+        $auctions = auctions::all();
+        return view('seller.produk', compact('auctions'));
     }
 
     /**

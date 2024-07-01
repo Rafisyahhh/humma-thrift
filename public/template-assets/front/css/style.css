@@ -3726,7 +3726,7 @@ table .ticket-row {
     transition: all 0.3s;
 }
 table .ticket-row:hover {
-    background-color: rgba(126, 163, 219, 0.4);
+    background-color: rgba(126, 163, 219, 0.1);
 }
 @media (max-width: 1023px) {
     table .table-wrapper {
@@ -3734,7 +3734,7 @@ table .ticket-row:hover {
     }
 }
 .table-row {
-    background: rgba(28, 56, 121, 0.3);
+    background: #1c3879;
     border: 1px solid #e9e7e7;
 }
 .table-row .table-wrapper {
@@ -3770,6 +3770,7 @@ table .ticket-row:hover {
 .table-row .table-wrapper .table-heading {
     font-size: 1.5rem;
     font-weight: 500;
+    color: #fff;
 }
 .table-row .table-wrapper p {
     font-weight: 500;
@@ -5628,7 +5629,7 @@ table .ticket-row:hover {
 
 .produk span:hover,
 .share-icons .share-icon:hover {
-    background-color: #7c99c4;
+    background-color: rgba(126, 163, 219, 0.3);
     color: #000000;
 }
 a.shop-btn {
