@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Product, Brand, ProductAuction, ProductCategory, ProductCategoryPivot, ProductGallery};
+use App\Models\{auctions, Product, Brand, ProductAuction, ProductCategory, ProductCategoryPivot, ProductGallery};
 use App\Http\Requests\{StoreProductRequest, UpdateProductRequest};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
