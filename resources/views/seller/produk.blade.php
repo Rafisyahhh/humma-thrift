@@ -361,17 +361,17 @@
                                     </td>
                                     <td class="table-wrapper">
                                         <div class="table-wrapper-center">
-                                            <h5 class="heading">{{ $item->user_id }}</h5>
+                                            <h5 class="heading">{{ $item->user->username }}</h5>
                                         </div>
                                     </td>
                                     <td class="table-wrapper">
                                         <div class="table-wrapper-center">
-                                            <h5 class="heading">085707062531</h5>
+                                            <h5 class="heading">{{ $item->user->phone }}</h5>
                                         </div>
                                     </td>
                                     <td class="table-wrapper">
                                         <div class="table-wrapper-center">
-                                            <h5 class="heading">hilma@gmail.com</h5>
+                                            <h5 class="heading">{{ $item->user->email }}</h5>
                                         </div>
                                     </td>
                                     <td class="table-wrapper">
@@ -381,13 +381,26 @@
                                     </td>
                                     <td class="table-wrapper">
                                         <div class="table-wrapper-center">
-                                            <a href="#">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                            <form action="{{ route('seller.auction.update', $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+
+                                                <input type="radio" onchange="submitForm(this)" class="btn-check"
+                                                name="status" id="status" {{ $item->status == true ? 'checked' : '' }} autocomplete="off" /> 
+                                                <label for="status">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                                        viewBox="0 0 24 24">
+                                                    <path fill="currentColor"
+                                                        d="m9.55 17.308l-4.97-4.97l.714-.713l4.256 4.256l9.156-9.156l.713.714z" />
+                                                    </svg>
+                                                </label>
+
+                                                {{-- <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                                     viewBox="0 0 24 24">
                                                     <path fill="currentColor"
                                                         d="m9.55 17.308l-4.97-4.97l.714-.713l4.256 4.256l9.156-9.156l.713.714z" />
-                                                </svg>
-                                            </a>
+                                                </svg> --}}
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>

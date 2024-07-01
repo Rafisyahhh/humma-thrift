@@ -11,7 +11,7 @@ class UpdateauctionsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class UpdateauctionsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'status' => 'required',
+        ];
+
+    }
+    
+    public function messages(): array
+    {
+        return [
+            'status.required' => 'Status Wajib Diisi',
         ];
     }
 }

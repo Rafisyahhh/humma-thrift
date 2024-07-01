@@ -1,7 +1,50 @@
 @extends('layouts.home')
 
 @section('title', 'Product')
+@section('style')
+<style>
+     .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+        }
 
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 100%;
+            max-width: 60rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+@endsection
 @section('content')
     <section class="product product-sidebar footer-padding">
         <div class="container">
@@ -153,26 +196,27 @@
                                             </div>
                                         </div>
                                         <div class="product-cart-btn">
-                                            <a data-id="{{ $item->id }}" class="product-btn openModal">Ikuti
-                                                Lelang</a>
+                                            <a data-id="{{ $item->id }}" class="product-btn openModal">Ikuti Lelang</a>
                                         </div>
 
-                                        <div id="reviewModal" class="modal">
+                                        <div id="reviewModal" class="modal" style="display: none;">
                                             <div class="modal-content">
-                                                <button class="close"
-                                                    style="float: right; text-align: end;">&times;</button>
+                                                {{-- @if ($auctions->contains('id', $user->id)) --}}
+                                                <button class="close" style="float: right; text-align: end;">&times;</button>
                                                 <h4 style="text-align: center;">Bid Lelang</h4>
-                                                <form action="{{ route('user.auctions.store', ['id' => $item->id]) }}"
-                                                    method="post" class="mt-5">
+                                                <form id="auctionForm" method="post" action="{{ route('user.auctions.store') }}" class="mt-5">
                                                     @csrf
-                                                    <label for="auction_price" class="form-label"
-                                                        style="font-size: 18px;">Bid Lelang :</label> <br>
-                                                    <input type="number" name="auction_price" class="form-control"
-                                                        placeholder="Masukkan Bid Lelang anda" style="font-size: 17px;"
-                                                        required>
-                                                    <button type="submit" class="shop-btn"
-                                                        style="margin-left: 22rem;">Kirim Bid Anda</button>
+                                                    <input type="hidden" name="product_id" id="product_id">
+                                                    <label for="auction_price" class="form-label" style="font-size: 18px;">Bid Lelang :</label> <br>
+                                                    <input type="number" name="auction_price" class="form-control @error('auction_price') is-invalid @enderror" placeholder="Masukkan Bid Lelang anda" style="font-size: 17px;">
+                                                    @error('auction_price')
+                                                        <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                    <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim Bid Anda</button>
                                                 </form>
+                                                {{-- @endif --}}
                                             </div>
                                         </div>
                                     </div>
@@ -191,4 +235,38 @@
             </div>
         </div>
     </section>
+@endsection
+@section('script')
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modals = document.querySelectorAll('.modal');
+        var btns = document.querySelectorAll('.openModal');
+        var spans = document.querySelectorAll('.close');
+
+
+        btns.forEach(function(btn, index) {
+            btn.onclick = function() {
+                var productId = btn.getAttribute('data-id');
+                document.getElementById('product_id').value = productId;
+                modals[index].style.display = 'flex';
+            }
+        });
+
+
+        spans.forEach(function(span, index) {
+            span.onclick = function() {
+                modals[index].style.display = 'none';
+            }
+        });
+
+        window.onclick = function(event) {
+            modals.forEach(function(modal) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+    });
+</script>
 @endsection
