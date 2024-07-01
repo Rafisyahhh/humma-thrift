@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class RedirectUserController extends Controller {
@@ -16,7 +15,7 @@ class RedirectUserController extends Controller {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request) {
+    public function __invoke() {
         if (Auth::user()->getUserRoleInstance()->value === 'admin') {
             return redirect()->route('admin.index');
         }

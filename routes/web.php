@@ -73,21 +73,21 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
 # User Routes
 Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function () {
     Route::get('/', [DashboardUserController::class, 'dashboard'])->name('userhome');
-    Route::view('/checkout', 'user.checkout')->name('checkout');
-    Route::view('/about', 'user.tentang')->name('about');
-    Route::get('/brand', [LandingpageController::class, 'brand'])->name('brand');
-    Route::view('/detail', 'user.detail')->name('detail');
-    Route::get('/profile', [UserController::class, 'show'])->name('profile');
-    Route::post('/profile/{id}', [UserController::class, 'update'])->name('profile.update');
-    Route::view('/order', 'user.order')->name('order');
-    Route::view('/cart', 'user.keranjang')->name('cart');
-    Route::get('/wishlist', [LandingpageController::class, 'wishlist'])->name('wishlist');
-    Route::get('/shop', [DetailProductController::class, 'showProduct'])->name('shop');
-    Route::get('/store', [StoreProfileController::class, 'showStore'])->name('store');
-    // Route::get('/detailproduct', [DetailProductController::class, 'showDetail']);
-    Route::get('/open-shop', [OpenShopController::class, 'index'])->name('register-seller');
-    Route::post('/open-shop', [OpenShopController::class, 'register'])->name('register-seller.submit');
-    Route::get('/verify-store/{token:verification_code}', [OpenShopController::class, 'verifyStore'])->name('verify.store');
+    Route::view('checkout', 'user.checkout')->name('checkout');
+    Route::view('about', 'user.tentang')->name('about');
+    Route::get('brand', [LandingpageController::class, 'brand'])->name('brand');
+    Route::view('detail', 'user.detail')->name('detail');
+    Route::get('profile', [UserController::class, 'show'])->name('profile');
+    Route::post('profile/{id}', [UserController::class, 'update'])->name('profile.update');
+    Route::view('order', 'user.order')->name('order');
+    Route::view('cart', 'user.keranjang')->name('cart');
+    Route::get('wishlist', [LandingpageController::class, 'wishlist'])->name('wishlist');
+    Route::get('shop', [DetailProductController::class, 'showProduct'])->name('shop');
+    Route::get('store', [StoreProfileController::class, 'showStore'])->name('store');
+    // Route::get('detailproduct', [DetailProductController::class, 'showDetail']);
+    Route::get('open-shop', [OpenShopController::class, 'index'])->name('register-seller');
+    Route::post('open-shop', [OpenShopController::class, 'register'])->name('register-seller.submit');
+    Route::get('verify-store/{token:verification_code}', [OpenShopController::class, 'verifyStore'])->name('verify.store');
     Route::resource('history', HistoryController::class);
     Route::resource('update-password', UserUpdatePasswordController::class);
     Route::resource('auctions', AuctionsController::class);
@@ -95,19 +95,19 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
 
 # Dev Routes
 Route::prefix('dev')->group(function () {
-    Route::view('/admin-view', 'admin.index');
+    Route::view('admin-view', 'admin.index');
 });
 
 # Landing Pages
 Route::prefix('product')->group(function () {
-    Route::get('/auction', [LandingpageController::class, 'productAuction']);
-    Route::get('/regular', [LandingpageController::class, 'productRegular']);
+    Route::get('auction', [LandingpageController::class, 'productAuction']);
+    Route::get('regular', [LandingpageController::class, 'productRegular']);
 });
-Route::get('/brand', [LandingpageController::class, 'brand']);
-Route::get('/stores', [StoreProfileController::class, 'showStore'])->name('store');
-Route::view('/detail', 'landing.detail');
-Route::get('/about-us', [AboutUsController::class, 'landingpage']);
-Route::view('/news', 'landing.detailNews');
+Route::get('brand', [LandingpageController::class, 'brand']);
+Route::get('stores', [StoreProfileController::class, 'showStore'])->name('store');
+Route::view('detail', 'landing.detail');
+Route::get('about-us', [AboutUsController::class, 'landingpage']);
+Route::view('news', 'landing.detailNews');
 
 # Home Redirect
 Route::get('/home', RedirectUserController::class)->name('home');
@@ -124,11 +124,11 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
 
     Route::prefix('/notification')->name('notification.')->group(function () {
         Route::get('/', [NotificationController::class, 'index'])->name('index');
-        Route::get('/read-all', [NotificationController::class, 'readAll'])->name('readAll');
-        Route::get('/read/{id}', [NotificationController::class, 'read'])->name('read');
-        Route::get('/unread/{id}', [NotificationController::class, 'unread'])->name('unread');
-        Route::get('/{id}', [NotificationController::class, 'show'])->name('show');
-        Route::delete('/{id}', [NotificationController::class, 'destroy'])->name('destroy');
+        Route::get('read-all', [NotificationController::class, 'readAll'])->name('readAll');
+        Route::get('read/{id}', [NotificationController::class, 'read'])->name('read');
+        Route::get('unread/{id}', [NotificationController::class, 'unread'])->name('unread');
+        Route::get('{id}', [NotificationController::class, 'show'])->name('show');
+        Route::delete('{id}', [NotificationController::class, 'destroy'])->name('destroy');
     });
 });
 
