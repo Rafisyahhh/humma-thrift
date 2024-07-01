@@ -238,26 +238,32 @@
                         <a data-id="{{ $item->id }}" class="product-btn openModal">Ikuti Lelang</a>
                     </div>
 
-                <div id="reviewModal" class="modal">
-                    <div class="modal-content">
-                        <button class="close"
-                            style="float: right; text-align: end;">&times;</button>
-                        <h4 style="text-align: center;">Bid Lelang</h4>
-                        <form action="{{ route('user.auctions.store', ['id' => $item->id]) }}" method="post" class="mt-5">
-                            @csrf
-                            <label for="auction_price" class="form-label" style="font-size: 18px;">Bid Lelang :</label> <br>
-                            <input type="number" name="auction_price" class="form-control" placeholder="Masukkan Bid Lelang anda" style="font-size: 17px;" required>
-                            <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim Bid Anda</button>
-                        </form>
+                    <div id="reviewModal" class="modal" style="display: none;">
+                        <div class="modal-content">
+                            {{-- @if ($auctions->contains('id', $user->id)) --}}
+                            <button class="close" style="float: right; text-align: end;">&times;</button>
+                            <h4 style="text-align: center;">Bid Lelang</h4>
+                            <form id="auctionForm" method="post" action="{{ route('user.auctions.store') }}" class="mt-5">
+                                @csrf
+                                <input type="hidden" name="product_id" id="product_id">
+                                <label for="auction_price" class="form-label" style="font-size: 18px;">Bid Lelang :</label> <br>
+                                <input type="number" name="auction_price" class="form-control @error('auction_price') is-invalid @enderror" placeholder="Masukkan Bid Lelang anda" style="font-size: 17px;">
+                                @error('auction_price')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim Bid Anda</button>
+                            </form>
+                            {{-- @endif --}}
+                        </div>
                     </div>
-                </div>
                   </div>
                 </div>
               @empty
                 <div class="col-lg-12">
                   <h3 class="text-center">Produk Lelang Masih Kosong</h3>
-                  <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam waktu dekat kami
-                    akan menambahkan beberapa produk untukmu, stay tune.</p>
+                  <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
                 </div>
               @endforelse
             </div>
@@ -268,31 +274,62 @@
   </section>
 @endsection
 @section('script')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var modals = document.querySelectorAll('.modal');
-            var btns = document.querySelectorAll('.openModal');
-            var spans = document.querySelectorAll('.close');
 
-            btns.forEach(function(btn, index) {
-                btn.onclick = function() {
-                    modals[index].style.display = 'flex';
-                }
-            });
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modals = document.querySelectorAll('.modal');
+        var btns = document.querySelectorAll('.openModal');
+        var spans = document.querySelectorAll('.close');
 
-            spans.forEach(function(span, index) {
-                span.onclick = function() {
-                    modals[index].style.display = 'none';
-                }
-            });
 
-            window.onclick = function(event) {
-                modals.forEach(function(modal) {
-                    if (event.target == modal) {
-                        modal.style.display = 'none';
-                    }
-                });
+        btns.forEach(function(btn, index) {
+            btn.onclick = function() {
+                var productId = btn.getAttribute('data-id');
+                document.getElementById('product_id').value = productId;
+                modals[index].style.display = 'flex';
             }
         });
-    </script>
+
+
+        spans.forEach(function(span, index) {
+            span.onclick = function() {
+                modals[index].style.display = 'none';
+            }
+        });
+
+        window.onclick = function(event) {
+            modals.forEach(function(modal) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+    });
+</script>
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modal = document.getElementById('reviewModal');
+        var closeModalBtn = modal.querySelector('.close');
+        var auctionForm = document.getElementById('auctionForm');
+
+        document.querySelectorAll('.openModal').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var productId = button.getAttribute('data-id');
+                var actionUrl = "{{ route('user.auctions.store') }}";
+                auctionForm.setAttribute('action', actionUrl);
+                modal.style.display = 'block';
+            });
+        });
+
+        closeModalBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+</script> --}}
 @endsection

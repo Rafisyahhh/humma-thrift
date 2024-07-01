@@ -366,6 +366,8 @@
                     </div>
                   </td>
                 </tr>
+                @foreach ($auctions as $item)
+
                 <tr class="table-row ticket-row">
                   <td class="table-wrapper">
                     <div class="table-wrapper-center">
@@ -403,6 +405,8 @@
                     </div>
                   </td>
                 </tr>
+                @endforeach
+
               </tbody>
             </table>
           </div>
