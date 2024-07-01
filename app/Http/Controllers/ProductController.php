@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Product, Brand, ProductAuction, ProductCategory, ProductCategoryPivot, ProductGallery};
+use App\Models\{auctions, Product, Brand, ProductAuction, ProductCategory, ProductCategoryPivot, ProductGallery};
 use App\Http\Requests\{StoreProductRequest, UpdateProductRequest};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,11 +14,10 @@ class ProductController extends Controller {
      */
     public function index() {
         $product_category_pivots = ProductCategoryPivot::all();
-        return view('seller.produk', [
-            'product_category_pivots',
-            'products' => Product::where("store_id", Auth::user()->store()->first()->id)->get(),
-            'product_auctions' => ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get()
-        ]);
+        $products = Product::where("store_id", Auth::user()->store()->first()->id)->get();
+        $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get();
+
+        return view('seller.produk', compact('product_category_pivots', 'products', 'product_auctions'));
     }
 
     /**
@@ -65,25 +64,22 @@ class ProductController extends Controller {
      * Display the specified resource.
      */
     public function show(Product $product) {
-        //
         $product_category_pivots = ProductCategoryPivot::all();
-        return view('seller.produk', [
-            'product_category_pivots',
-            'products' => Product::where("store_id", Auth::user()->store()->first()->id)->get(),
-            'product_auctions' => ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get()
-        ]);
+        $products = Product::where("store_id", Auth::user()->store()->first()->id)->get();
+        $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get();
+
+        return view('seller.produk', compact('product_category_pivots', 'products', 'product_auctions'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Product $product) {
-        return view('seller.tambahproduk', [
-            'product' => $product,
-            'brands' => Brand::all(),
-            'categories' => ProductCategory::all(),
-            'is_edit' => true
-        ]);
+        $brands = Brand::all();
+        $categories = ProductCategory::all();
+        $is_edit = true;
+
+        return view('seller.tambahproduk', compact('product', 'brands', 'categories', 'is_edit'));
     }
 
     /**

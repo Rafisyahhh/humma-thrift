@@ -3,36 +3,36 @@
 @section('title', 'Produk')
 
 @section('style')
-    <style>
-        button {
-            font-size: 15px;
-        }
+<style>
+    button {
+        font-size: 15px;
+    }
 
-        .product-details table {
-            width: 100%;
-            border-collapse: collapse;
-            /* Menghilangkan jarak antar sel */
-        }
+    .product-details table {
+        width: 100%;
+        border-collapse: collapse;
+        /* Menghilangkan jarak antar sel */
+    }
 
-        .product-details th,
-        .product-details td {
-            text-align: left;
-            padding: 10px;
-            color: rgba(0, 0, 0, 0.4);
-            /* Warna teks abu-abu */
-        }
+    .product-details th,
+    .product-details td {
+        text-align: left;
+        padding: 10px;
+        color: rgba(0, 0, 0, 0.4);
+        /* Warna teks abu-abu */
+    }
 
-        .product-details th {
-            font-weight: normal;
-            font-size: 17px;
-        }
+    .product-details th {
+        font-weight: normal;
+        font-size: 17px;
+    }
 
-        .product-details .inner-text {
-            font-size: 17px;
-            color: rgba(0, 0, 0, 0.7);
-            /* Warna teks sedikit lebih gelap untuk kontras */
-        }
-    </style>
+    .product-details .inner-text {
+        font-size: 17px;
+        color: rgba(0, 0, 0, 0.7);
+        /* Warna teks sedikit lebih gelap untuk kontras */
+    }
+</style>
 @endsection
 
 @section('content')
@@ -351,15 +351,17 @@
                                         </div>
                                     </td>
                                 </tr>
+                                @foreach ($auctions as $item)
+
                                 <tr class="table-row ticket-row">
                                     <td class="table-wrapper">
                                         <div class="table-wrapper-center">
-                                            <h5 class="heading">1.</h5>
+                                            <h5 class="heading">{{ $loop->iteration }}</h5>
                                         </div>
                                     </td>
                                     <td class="table-wrapper">
                                         <div class="table-wrapper-center">
-                                            <h5 class="heading">Hilma</h5>
+                                            <h5 class="heading">{{ $item->user_id }}</h5>
                                         </div>
                                     </td>
                                     <td class="table-wrapper">
@@ -374,7 +376,7 @@
                                     </td>
                                     <td class="table-wrapper">
                                         <div class="table-wrapper-center">
-                                            <h5 class="heading">Rp.120.000,00</h5>
+                                            <h5 class="heading">{{ $item->auction_price }}</h5>
                                         </div>
                                     </td>
                                     <td class="table-wrapper">
@@ -389,6 +391,8 @@
                                         </div>
                                     </td>
                                 </tr>
+
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

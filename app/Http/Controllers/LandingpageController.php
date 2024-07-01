@@ -9,7 +9,7 @@ use App\Models\ProductAuction;
 use App\Models\UserStore;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
-use Database\Factories\ProductFactory;
+
 
 class LandingpageController extends Controller
 {
@@ -67,12 +67,5 @@ class LandingpageController extends Controller
     public function store(){
         $store = UserStore::all();
         return view('landing.toko', compact('store'));
-    }
-
-    public function wishlist(){
-        $categories = ProductCategory::all();
-        $brands = Brand::all();
-        $product = Product::all();
-        return view('user.wishlist', compact('categories','brands','product'));
     }
 }
