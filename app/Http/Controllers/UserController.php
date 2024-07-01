@@ -93,8 +93,8 @@ class UserController extends Controller
         ]);
 
         $address = UserAddress::updateOrCreate(
-            ['user_id' => $user->id],
-            ['address' => $request -> address,'status'=> 1],
+                ['user_id' => $user->id],
+                ['address' => $request -> address,'status'=> 1],
         );
         return redirect()->back()->with("success", "Berhasil Memperbarui Profil");
     }

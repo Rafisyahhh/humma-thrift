@@ -41,11 +41,15 @@
             }
 
             .modal-content {
+                top: 14rem;
+                margin:auto;
                 background-color: #fefefe;
-                margin: 5% auto;
-                padding: 20px;
                 border: 1px solid #888;
-                width: 80%;
+                width: 50%;
+                /* Atur lebar modal */
+                height: 50%;
+                /* Atur tinggi modal */
+                padding: 20px;
             }
 
             .close-modal {
@@ -82,7 +86,8 @@
             }
 
             .custom-radio {
-                transform: scale(1.5); /* Ubah skala tombol radio */
+                transform: scale(1.5);
+                /* Ubah skala tombol radio */
                 margin-top: 3.8rem;
                 /* Mengatur posisi radio button agar sejajar dengan teks */
                 margin-right: 30px;
@@ -90,7 +95,8 @@
             }
 
             .radio-label {
-                font-size: 16px; /* Ukuran teks label */
+                font-size: 16px;
+                /* Ukuran teks label */
             }
 
             /* Style the checked state */
@@ -195,28 +201,17 @@
             <button class="close-modal">&times;</button>
             <h5 class="mb-5" style="text-align: center">Alamat</h5>
             <div class="mx-5">
+                @foreach ( $addresses as $address)
                 <div class="radio-container">
                     <input type="radio" id="option1" name="option" value="option1" class="custom-radio">
                     <label for="option1" class="radio-label">
-                        <p class="mb-1" style="font-size: 18px;">Nasya | +62 85707062531</p>
-                        <p style="font-size: 15px; margin-bottom: 5px;">PT Sukses Makmur Sejahtera<br>
-                            Jl. Sudirman No. 123, Gedung Sudirman Tower Lt. 15, Setiabudi, Karet,<br>
-                            Jakarta Selatan, 12910, DKI Jakarta, Indonesia
+                        <p class="mb-1" style="font-size: 18px;">{{$users->username}} | +{{$users->phone}}</p>
+                        <p style="font-size: 15px; margin-bottom: 5px;">
+                            {{$address->address}}
                         </p>
                     </label>
                 </div>
-
-                <div class="radio-container">
-                    <input type="radio" id="option2" name="option" value="option2" class="custom-radio">
-                    <label for="option2" class="radio-label">
-                        <p class="mb-1" style="font-size: 18px;">Another Person | +62 8123456789</p>
-                        <p style="font-size: 15px; margin-bottom: 5px;">Company ABC<br>
-                            Jl. Ahmad Yani No. 456, Blok C2, Menteng, Central Jakarta, 12345, Indonesia
-                        </p>
-                    </label>
-                </div>
-
-                <hr>
+                @endforeach
             </div>
         </div>
     </div>
@@ -227,16 +222,20 @@
             <button class="close-modal">&times;</button>
             <h5 class="mb-5" style="text-align: center">Tambahkan Alamat</h5>
             <div class="mx-5">
-                <div class="account-inner-form">
-                    <div class="review-form-name mb-4">
-                        <label for="address" class="form-label"
-                            style="background-color: white; font-size: 18px">Alamat</label>
-                        <textarea type="text" name="address" id="address" class="form-control" placeholder="Tambahkan Alamat"
-                            rows="5" style=" font-size: 15px"></textarea>
+                <form action="{{route('user.address.store', auth()->user()->id)}}" method="POST">
+                    @csrf
+                    <div class="account-inner-form">
+                        <div class="review-form-name mb-2">
+                            <label for="address" class="form-label"
+                                style="background-color: white; font-size: 18px">Alamat</label>
+                            <textarea type="text" name="address" id="address" class="form-control" placeholder="Tambahkan Alamat"
+                                rows="5" style=" font-size: 15px"></textarea>
+                        </div>
                     </div>
-                </div>
-                <button class="shop-btn" type="button" style="width: 20rem; margin-left:45rem;">Simpan Alamat
-                    Baru</button>
+                    <button class="shop-btn " type="submit" style="width: 20rem; float: right; text-align: end;">Simpan Alamat
+                        Baru</button>
+                </form>
+
             </div>
         </div>
     </div>

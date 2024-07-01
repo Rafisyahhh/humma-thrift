@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
@@ -11,7 +13,9 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        
+        $users = Auth::user();
+        $addresses = UserAddress::where('user_id', $users->id)->get();
+        return view('user.checkout', compact('users','addresses'));
     }
 
     /**
