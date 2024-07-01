@@ -5258,7 +5258,7 @@ table .ticket-row:hover {
     gap: 2rem;
     height: auto;
     padding: 2.6rem;
-    background-color: rgba(41, 72, 146, 0.2);
+    background-color: rgba(41, 72, 146, 0.1);
     border: none;
     box-shadow: none;
 }
@@ -5291,7 +5291,7 @@ table .ticket-row:hover {
     justify-content: space-between;
     gap: 0;
     padding: 4rem;
-    background: rgba(41, 72, 146, 0.2);
+    background: rgba(41, 72, 146, 0.1);
     border-radius: 0.5rem;
 }
 .user-dashboard .nav-content .profile-section .info-section .heading {
