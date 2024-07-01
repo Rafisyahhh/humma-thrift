@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Product, Brand, ProductAuction, ProductCategory, ProductCategoryPivot, ProductGallery};
+use App\Models\{auctions, Product, Brand, ProductAuction, ProductCategory, ProductCategoryPivot, ProductGallery};
 use App\Http\Requests\{StoreProductRequest, UpdateProductRequest};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,9 +13,9 @@ class ProductController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $product_category_pivots = ProductCategoryPivot::all();
+
         return view('seller.produk', [
-            'product_category_pivots',
+            'auctions' => auctions::all(),
             'products' => Product::where("store_id", Auth::user()->store()->first()->id)->get(),
             'product_auctions' => ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get()
         ]);

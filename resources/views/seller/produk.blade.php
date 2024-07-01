@@ -351,15 +351,17 @@
                                         </div>
                                     </td>
                                 </tr>
+                                @foreach ($auctions as $item)
+
                                 <tr class="table-row ticket-row">
                                     <td class="table-wrapper">
                                         <div class="table-wrapper-center">
-                                            <h5 class="heading">1.</h5>
+                                            <h5 class="heading">{{ $loop->iteration }}</h5>
                                         </div>
                                     </td>
                                     <td class="table-wrapper">
                                         <div class="table-wrapper-center">
-                                            <h5 class="heading">Hilma</h5>
+                                            <h5 class="heading">{{ $item->user_id }}</h5>
                                         </div>
                                     </td>
                                     <td class="table-wrapper">
@@ -374,7 +376,7 @@
                                     </td>
                                     <td class="table-wrapper">
                                         <div class="table-wrapper-center">
-                                            <h5 class="heading">Rp.120.000,00</h5>
+                                            <h5 class="heading">{{ $item->auction_price }}</h5>
                                         </div>
                                     </td>
                                     <td class="table-wrapper">
@@ -389,6 +391,8 @@
                                         </div>
                                     </td>
                                 </tr>
+
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
