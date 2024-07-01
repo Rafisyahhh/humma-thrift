@@ -1,173 +1,306 @@
-@php
-  $user = [
-      'name' => 'SyauqiAli',
-      'address' => [
-          [
-              'id' => 2,
-              'title' => 'Rumah',
-              'address' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, quisquam?',
-          ],
-          [
-              'id' => 6,
-              'title' => 'Home',
-              'address' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, quisquam?',
-          ],
-      ],
-  ];
-  $products = [
-      [
-          'cover_image' => 'https://placehold.co/400',
-          'title' => 'Apple Watch X1',
-          'description' => '64GB, Black, 44mm, Chain Belt',
-          'price' => 10,
-      ],
-      [
-          'cover_image' => 'https://placehold.co/400',
-          'title' => 'Apple Watch X1',
-          'description' => '64GB, Black, 44mm, Chain Belt',
-          'price' => 10,
-      ],
-      [
-          'cover_image' => 'https://placehold.co/400',
-          'title' => 'Apple Watch X1',
-          'description' => '64GB, Black, 44mm, Chain Belt',
-          'price' => 10,
-      ],
-      [
-          'cover_image' => 'https://placehold.co/400',
-          'title' => 'Apple Watch X1',
-          'description' => '64GB, Black, 44mm, Chain Belt',
-          'price' => 10,
-      ],
-  ];
-  $prices = array_column($products, 'price');
-
-  // Menghitung total harga
-  $total_price = array_sum($prices);
-@endphp
-
-
 @extends('layouts.home')
 @section('title', 'Checkout')
 @section('content')
 
-<style>
-    .custom-button {
-        background-color: #007bff; /* Warna latar belakang biru */
-        color: white; /* Warna teks putih */
-        border: none; /* Menghilangkan border default */
-        padding: 10px 20px; /* Padding */
-        font-size: 16px; /* Ukuran font */
-        border-radius: 4px; /* Membuat sudut tombol melengkung */
-        transition: background-color 0.3s; /* Animasi transisi */
-    }
+    @push('style')
+        <style>
+            .custom-button {
+                background-color: #007bff;
+                /* Warna latar belakang biru */
+                color: white;
+                /* Warna teks putih */
+                border: none;
+                /* Menghilangkan border default */
+                padding: 10px 20px;
+                /* Padding */
+                font-size: 16px;
+                /* Ukuran font */
+                border-radius: 4px;
+                /* Membuat sudut tombol melengkung */
+                transition: background-color 0.3s;
+                /* Animasi transisi */
+            }
 
-    .custom-button:hover {
-        background-color: #0056b3; /* Warna latar belakang lebih gelap saat hover */
-    }
-</style>
-  <section class="blog about-blog">
-    <div class="container">
-      <div class="blog-heading about-heading">
-        <h1 class="heading">Checkout</h1>
-      </div>
-    </div>
-  </section>
-  <section class="checkout product footer-padding">
-    <div class="container">
-      <div class="checkout-section">
-        <form class="row gy-5">
-          <div class="col-lg-8">
-            <div class="checkout-wrapper">
-              <div class="account-section billing-section">
-                <h5 class="wrapper-heading">Alamat Pengiriman</h5>
-                <div class="order-summery">
-                  <div class="subtotal product-total">
-                    <h5 class="wrapper-heading">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" xml:space="preserve" width="15"
-                        height="15">
-                        <path
-                          d="M7.5 0a5.69 5.69 0 0 0-5.686 5.686c0 2.391 1.192 4.656 2.691 6.518 1.31 1.626 2.606 2.639 2.661 2.682A.54.54 0 0 0 7.5 15a.55.55 0 0 0 .334-.114c.055-.043 1.351-1.056 2.661-2.682 1.501-1.862 2.691-4.127 2.691-6.518A5.69 5.69 0 0 0 7.5 0m0 8.236a2.723 2.723 0 0 1-2.72-2.72c0-1.5 1.22-2.722 2.72-2.722s2.72 1.22 2.72 2.72S9 8.234 7.5 8.234" />
-                      </svg>
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    </h5>
-                  </div>
-                  <div>
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#modal-1" class="shop-btn" style="width: 20%;">Ganti Alamat</button>
-                    {{-- Modal --}}
-                    <div id="modal-1" class="modal fade" role="dialog" tabindex="-1">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content" action method="post">
-                          <div class="modal-header border-0">
-                            <h4 class="modal-title ms-auto">Daftar Alamat</h4>
-                            <button class="btn-close" aria-label="Close" data-bs-dismiss="modal" type="button"></button>
-                          </div>
-                          <div class="modal-body d-flex flex-column gap-2">
-                            <input class="form-control" type="search" placeholder="Cari alamat" />
-                            @foreach ($user['address'] as $item)
-                              <label class="card" for="alamat{{ $item['id'] }}" role="button">
-                                <div class="card-body">
-                                  <h4 class="card-title">{{ $item['title'] }}</h4>
-                                  <p class="card-text">{{ $item['address'] }}</p>
+            .custom-button:hover {
+                background-color: #0056b3;
+                /* Warna latar belakang lebih gelap saat hover */
+            }
+
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgb(0, 0, 0);
+                background-color: rgba(0, 0, 0, 0.4);
+                padding-top: 60px;
+            }
+
+            .modal-content {
+                background-color: #fefefe;
+                margin: 5% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
+
+            .close-modal {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                text-align: end;
+            }
+
+            .close-modal:hover,
+            .close-modal:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            .d-flex {
+                display: flex;
+                align-items: center;
+            }
+
+            .m-0 {
+                margin: 0;
+            }
+
+            /* Style the custom radio button */
+            .radio-container {
+                display: flex;
+                align-items: flex-start;
+                /* Mengatur agar radio button dan teks sejajar di bagian atas */
+                margin-bottom: 10px;
+                /* Jarak antara setiap radio button */
+            }
+
+            .custom-radio {
+                transform: scale(1.5); /* Ubah skala tombol radio */
+                margin-top: 3.8rem;
+                /* Mengatur posisi radio button agar sejajar dengan teks */
+                margin-right: 30px;
+                /* Jarak antara radio button dan teks */
+            }
+
+            .radio-label {
+                font-size: 16px; /* Ukuran teks label */
+            }
+
+            /* Style the checked state */
+            input[type="radio"]:checked+label .custom-radio {
+                background-color: #1c3879;
+                /* Change color to indicate selection */
+            }
+
+            /* Hide the default label text */
+            input[type="radio"]+label {
+                cursor: pointer;
+            }
+        </style>
+    @endpush
+
+    <section class="blog about-blog">
+        <div class="container">
+            <div class="blog-heading about-heading">
+                <h1 class="heading">Checkout</h1>
+            </div>
+        </div>
+    </section>
+    <section class="checkout product footer-padding">
+        <div class="container">
+            <div class="checkout-section">
+                <form class="row gy-5">
+                    <div class="col-lg-8">
+                        <div class="checkout-wrapper">
+                            <div class="account-section billing-section">
+                                <h5 class="wrapper-heading">Alamat Pengiriman</h5>
+                                <div class="order-summery">
+                                    <div class="subtotal product-total">
+                                        <h5 class="wrapper-heading">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" xml:space="preserve"
+                                                width="15" height="15">
+                                                <path
+                                                    d="M7.5 0a5.69 5.69 0 0 0-5.686 5.686c0 2.391 1.192 4.656 2.691 6.518 1.31 1.626 2.606 2.639 2.661 2.682A.54.54 0 0 0 7.5 15a.55.55 0 0 0 .334-.114c.055-.043 1.351-1.056 2.661-2.682 1.501-1.862 2.691-4.127 2.691-6.518A5.69 5.69 0 0 0 7.5 0m0 8.236a2.723 2.723 0 0 1-2.72-2.72c0-1.5 1.22-2.722 2.72-2.722s2.72 1.22 2.72 2.72S9 8.234 7.5 8.234" />
+                                            </svg>
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                        </h5>
+                                    </div>
+                                    <div>
+                                        <button class="shop-btn openModal" type="button"
+                                            style="width: 20rem">Alamat</button>
+                                        <button class="shop-btn openModalAddress" type="button" style="width: 20rem">Tambah
+                                            Alamat Baru</button>
+                                    </div>
                                 </div>
-                                <input type="radio" id="alamat{{ $item['id'] }}" name="alamat" class="d-none">
-                              </label>
-                            @endforeach
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="checkout-wrapper">
-              <div class="account-section billing-section" style="margin-top: 2.5rem;">
-                <h5 class="wrapper-heading">Daftar Order</h5>
-                <div class="order-summery">
-                  <hr>
-                  <div class="subtotal product-total">
-                    <ul class="product-list">
-                      @foreach ($products as $item)
-                        <li>
-                          <div class="d-flex gap-3">
-                            <img src="{{ $item['cover_image'] }}" width="40" />
-                            <div class="mt-1">
-                              <h5 class="wrapper-heading">{{ $item['title'] }}</h5>
-                              <p class="paragraph">{{ $item['description'] }}</p>
                             </div>
-                          </div>
-                          <div class="price mt-3">
-                            <h5 class="wrapper-heading">${{ $item['price'] }}</h5>
-                          </div>
-                        </li>
-                      @endforeach
-                    </ul>
-                  </div>
-                </div>
-              </div>
+                        </div>
+                        <div class="checkout-wrapper">
+                            <div class="account-section billing-section" style="margin-top: 2.5rem;">
+                                <h5 class="wrapper-heading">Daftar Order</h5>
+                                <div class="order-summery">
+                                    <hr>
+                                    <div class="subtotal product-total">
+                                        <ul class="product-list">
+                                            <li>
+                                                <div class="d-flex gap-3">
+                                                    <img src="" width="40" />
+                                                    <div class="mt-1">
+                                                        <h5 class="wrapper-heading"></h5>
+                                                        <p class="paragraph"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="price mt-3">
+                                                    <h5 class="wrapper-heading"></h5>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="checkout-wrapper">
+                            <div class="account-section billing-section">
+                                <h5 class="wrapper-heading">Ringkasan Belanja</h5>
+                                <div class="order-summery">
+                                    <div class="subtotal product-total">
+                                        <h5 class="wrapper-heading">Total Harga</h5>
+                                        <h5 class="wrapper-heading"></h5>
+                                    </div>
+                                    <div class="subtotal total">
+                                        <h5 class="wrapper-heading">Total Belanja</h5>
+                                        <h5 class="wrapper-heading price"></h5>
+                                    </div>
+                                    <button type="button" class="shop-btn">Beli sekarang</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="checkout-wrapper">
-              <div class="account-section billing-section">
-                <h5 class="wrapper-heading">Ringkasan Belanja</h5>
-                <div class="order-summery">
-                  <div class="subtotal product-total">
-                    <h5 class="wrapper-heading">Total Harga</h5>
-                    <h5 class="wrapper-heading">${{ $total_price }}</h5>
-                  </div>
-                  <div class="subtotal total">
-                    <h5 class="wrapper-heading">Total Belanja</h5>
-                    <h5 class="wrapper-heading price">${{ $total_price }}</h5>
-                  </div>
-                  <button type="button" class="shop-btn">Beli sekarang</button>
+        </div>
+    </section>
+
+    {{-- Review Modal --}}
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h5 class="mb-5" style="text-align: center">Alamat</h5>
+            <div class="mx-5">
+                <div class="radio-container">
+                    <input type="radio" id="option1" name="option" value="option1" class="custom-radio">
+                    <label for="option1" class="radio-label">
+                        <p class="mb-1" style="font-size: 18px;">Nasya | +62 85707062531</p>
+                        <p style="font-size: 15px; margin-bottom: 5px;">PT Sukses Makmur Sejahtera<br>
+                            Jl. Sudirman No. 123, Gedung Sudirman Tower Lt. 15, Setiabudi, Karet,<br>
+                            Jakarta Selatan, 12910, DKI Jakarta, Indonesia
+                        </p>
+                    </label>
                 </div>
-              </div>
+
+                <div class="radio-container">
+                    <input type="radio" id="option2" name="option" value="option2" class="custom-radio">
+                    <label for="option2" class="radio-label">
+                        <p class="mb-1" style="font-size: 18px;">Another Person | +62 8123456789</p>
+                        <p style="font-size: 15px; margin-bottom: 5px;">Company ABC<br>
+                            Jl. Ahmad Yani No. 456, Blok C2, Menteng, Central Jakarta, 12345, Indonesia
+                        </p>
+                    </label>
+                </div>
+
+                <hr>
             </div>
-          </div>
-        </form>
-      </div>
+        </div>
     </div>
-  </section>
+
+    {{-- Address Modal --}}
+    <div id="addressModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h5 class="mb-5" style="text-align: center">Tambahkan Alamat</h5>
+            <div class="mx-5">
+                <div class="account-inner-form">
+                    <div class="review-form-name mb-4">
+                        <label for="address" class="form-label"
+                            style="background-color: white; font-size: 18px">Alamat</label>
+                        <textarea type="text" name="address" id="address" class="form-control" placeholder="Tambahkan Alamat"
+                            rows="5" style=" font-size: 15px"></textarea>
+                    </div>
+                </div>
+                <button class="shop-btn" type="button" style="width: 20rem; margin-left:45rem;">Simpan Alamat
+                    Baru</button>
+            </div>
+        </div>
+    </div>
+
+
 @endsection
+
+@push('script')
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the modal element
+            var reviewModal = document.getElementById("reviewModal");
+
+            // Get the button that opens the modal
+            var openReviewModalBtn = document.querySelector(".openModal");
+
+            // Get the close button for review modal
+            var reviewCloseBtn = reviewModal.querySelector(".close-modal");
+
+            // When the user clicks the button, open the review modal
+            openReviewModalBtn.onclick = function() {
+                reviewModal.style.display = "block";
+            }
+
+            // When the user clicks on close button in review modal, close the review modal
+            reviewCloseBtn.onclick = function() {
+                reviewModal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close the review modal
+            window.onclick = function(event) {
+                if (event.target == reviewModal) {
+                    reviewModal.style.display = "none";
+                }
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the modal element
+            var addressModal = document.getElementById("addressModal");
+
+            // Get the button that opens the modal
+            var openAddressModalBtn = document.querySelector(".openModalAddress");
+
+            // Get the close button for address modal
+            var addressCloseBtn = addressModal.querySelector(".close-modal");
+
+            // When the user clicks the button, open the address modal
+            openAddressModalBtn.onclick = function() {
+                addressModal.style.display = "block";
+            }
+
+            // When the user clicks on close button in address modal, close the address modal
+            addressCloseBtn.onclick = function() {
+                addressModal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close the address modal
+            window.onclick = function(event) {
+                if (event.target == addressModal) {
+                    addressModal.style.display = "none";
+                }
+            }
+        });
+    </script>
+@endpush

@@ -248,33 +248,6 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="row-rating">
-                                <label for="toko-rating" class="form-label mb-2" style="font-size: 19px; ">Penilaian Toko
-                                </label>
-                                <div class="rating" style="margin-left: 121px;">
-                                    {{-- <input type="radio" id="toko-star1" name="toko-rating" value="1" /><label
-                                        for="toko-star1" title="Buruk">&#9733;</label>
-                                    <input type="radio" id="toko-star2" name="toko-rating" value="2" /><label
-                                        for="toko-star2" title="Cukup">&#9733;</label>
-                                    <input type="radio" id="toko-star3" name="toko-rating" value="3" /><label
-                                        for="toko-star3" title="Baik">&#9733;</label>
-                                    <input type="radio" id="toko-star4" name="toko-rating" value="4" /><label
-                                        for="toko-star4" title="Sangat Baik">&#9733;</label>
-                                    <input type="radio" id="toko-star5" name="toko-rating" value="5" /><label
-                                        for="toko-star5" title="Luar Biasa">&#9733;</label> --}}
-
-                                    <select class="star-rating" name="store_rating" data-options="{&quot;clearable&quot;:false, &quot;tooltip&quot;:false}">
-                                        <option value="">Pilih penilaian</option>
-                                        <option value="5">Luar Biasa</option>
-                                        <option value="4">Sangat Baik</option>
-                                        <option value="3">Baik</option>
-                                        <option value="2">Cukup</option>
-                                        <option value="1">Buruk</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <hr>
                             <label for="ulasan" class="form-label" style="font-size: 18px;">Beri Ulasan :</label> <br>
                             <textarea id="deskripsi" name="ulasan" class="form-control" placeholder="Masukkan ulasan" rows="7"
                                 style="font-size: 17px;"></textarea>
