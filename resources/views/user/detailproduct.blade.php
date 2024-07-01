@@ -124,14 +124,12 @@
                                 <div class="swiper-wrapper">
                                     @if ($isProduct)
                                         @foreach ($isProduct->gallery as $item)
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="position-absolute top-0 end-0 m-3">
-                                            <path fill="currentColor" d="M3 21v-6h2v2.6l3.1-3.1l1.4 1.4L6.4 19H9v2zM15.9 9.5l-1.4-1.4L17.6 5H15V3h6v6h-2V6.4z"/>
-                                        </svg>
-                                        <div class="swiper-slide slider-top-img">
-                                            <div class="ratio ratio-1x1 position-relative">
-                                                <img src="{{ asset('storage/' . $item->image) }}" class="object-fit-cover" alt="img">
+                                            <div class="swiper-slide slider-top-img">
+                                                <div class="ratio ratio-1x1 position-relative">
+                                                    <img src="{{ asset('storage/' . $item->image) }}"
+                                                        class="object-fit-cover" alt="img">
+                                                </div>
                                             </div>
-                                        </div>
                                         @endforeach
                                     @elseif($isProductAuction)
                                         @foreach ($isProductAuction->gallery as $item)
@@ -226,26 +224,7 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <p class="fs-2 d-flex py-2" style="z-index:1;position: relative;">Bagikan ke:
-                                    <span class="share-container share-buttons gap-3" style="margin-left: 7px;z-index:1">
-                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($url) }}"
-                                            target="_blank" class="social-buttons">
-                                            <i class="fa-brands fa-square-facebook fa-lg" style="color: black"></i>
-                                        </a>
-                                        <a href="https://twitter.com/intent/tweet?url={{ urlencode($url) }}&text={{ urlencode($text) }}"
-                                            target="_blank" class="social-buttons">
-                                            <i class="fa-brands fa-square-x-twitter fa-lg" style="color: black"></i>
-                                        </a>
-                                        <a href="https://t.me/share/url?url={{ urlencode($url) }}&text={{ urlencode($text) }}"
-                                            target="_blank" class="social-buttons">
-                                            <i class="fa-brands fa-telegram fa-lg" style="color: black"></i>
-                                        </a>
-                                        <a href="https://api.whatsapp.com/send?text={{ urlencode($text . ' ' . $url) }}"
-                                            target="_blank" class="social-buttons">
-                                            <i class="fa-brands fa-whatsapp fa-lg" style="color: black"></i>
-                                        </a>
-                                    </span>
-                                </p>
+
                                 <hr>
                                 <div class="product-seller-section py-2">
                                     <div class="review-wrapper">
@@ -352,26 +331,31 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <p class="fs-2 d-flex py-2" style="position: relative;">Bagikan ke:
-                                    <span class="share-container share-buttons gap-3" style="margin-left: 7px;">
-                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($url) }}"
-                                            target="_blank" class="social-buttons">
+                                {{-- <p class="fs-2 d-flex align-items-center justify-content-end py-2" style="position: relative;">
+                                    Bagikan ke:
+                                    <span class="share-container share-buttons gap-3 ml-auto" style="display: flex; margin-left: auto;">
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($url) }}" target="_blank" class="social-buttons">
                                             <i class="fa-brands fa-square-facebook fa-lg" style="color: black"></i>
                                         </a>
-                                        <a href="https://twitter.com/intent/tweet?url={{ urlencode($url) }}&text={{ urlencode($text) }}"
-                                            target="_blank" class="social-buttons">
+                                        <a href="https://twitter.com/intent/tweet?url={{ urlencode($url) }}&text={{ urlencode($text) }}" target="_blank" class="social-buttons">
                                             <i class="fa-brands fa-square-x-twitter fa-lg" style="color: black"></i>
                                         </a>
-                                        <a href="https://t.me/share/url?url={{ urlencode($url) }}&text={{ urlencode($text) }}"
-                                            target="_blank" class="social-buttons">
+                                        <a href="https://t.me/share/url?url={{ urlencode($url) }}&text={{ urlencode($text) }}" target="_blank" class="social-buttons">
                                             <i class="fa-brands fa-telegram fa-lg" style="color: black"></i>
                                         </a>
-                                        <a href="https://api.whatsapp.com/send?text={{ urlencode($text . ' ' . $url) }}"
-                                            target="_blank" class="social-buttons">
+                                        <a href="https://api.whatsapp.com/send?text={{ urlencode($text . ' ' . $url) }}" target="_blank" class="social-buttons">
                                             <i class="fa-brands fa-whatsapp fa-lg" style="color: black"></i>
                                         </a>
                                     </span>
-                                </p>
+                                </p> --}}
+
+                                {{-- <div class="share-icons">
+                                    <a href="#" class="share-icon">
+                                        <span>
+                                            <i class="fas fa-heart fa-xl" style="color: black"></i>
+                                        </span>
+                                    </a>
+                                </div> --}}
                                 <hr>
                                 <div class="product-seller-section py-2">
                                     <div class="review-wrapper">
@@ -404,7 +388,48 @@
             </div>
         </div>
     </section>
-
+    <br>
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-star py-3" style="position: relative;">
+            <p class="fs-2 mb-0">Bagikan ke:</p>
+            <span class="share-container share-buttons d-flex gap-3 ms-2" style="z-index:1;">
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($url) }}" target="_blank"
+                    class="social-buttons">
+                    <i class="fa-brands fa-square-facebook fa-lg" style="color: #1c3879"></i>
+                </a>
+                <a href="https://twitter.com/intent/tweet?url={{ urlencode($url) }}&text={{ urlencode($text) }}"
+                    target="_blank" class="social-buttons">
+                    <i class="fa-brands fa-square-x-twitter fa-lg" style="color: #1c3879"></i>
+                </a>
+                <a href="https://t.me/share/url?url={{ urlencode($url) }}&text={{ urlencode($text) }}" target="_blank"
+                    class="social-buttons">
+                    <i class="fa-brands fa-telegram fa-lg" style="color: #1c3879"></i>
+                </a>
+                <a href="https://api.whatsapp.com/send?text={{ urlencode($text . ' ' . $url) }}" target="_blank"
+                    class="social-buttons">
+                    <i class="fa-brands fa-whatsapp fa-lg" style="color: #1c3879"></i>
+                </a>
+            </span>
+            </p>
+            {{-- <div class="share-icons ms-auto" style="z-index:1;">
+                <a href="#" class="share-icon">
+                    <span>
+                        <i class="fas fa-heart fa-xl" style="color: #1c3879"></i>
+                    </span>
+                </a>
+            </div> --}}
+            <div class="share-icons ms-auto" style="z-index:1;">
+                <a href="#" class="share-icon">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                            <path fill="#1c3879"
+                                d="m12 21l-1.45-1.3q-2.525-2.275-4.175-3.925T3.75 12.812T2.388 10.4T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.3 0 2.475.55T12 4.75q.85-1 2.025-1.55t2.475-.55q2.35 0 3.925 1.575T22 8.15q0 1.15-.387 2.25t-1.363 2.412t-2.625 2.963T13.45 19.7zm0-2.7q2.4-2.15 3.95-3.687t2.45-2.675t1.25-2.026T20 8.15q0-1.5-1-2.5t-2.5-1q-1.175 0-2.175.662T12.95 7h-1.9q-.375-1.025-1.375-1.687T7.5 4.65q-1.5 0-2.5 1t-1 2.5q0 .875.35 1.763t1.25 2.025t2.45 2.675T12 18.3m0-6.825" />
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <section class="product product-description">
         <div class="container">
@@ -543,7 +568,8 @@
                                                     </span>
                                                 </div>
                                                 <div class="product-description">
-                                                    <a href="/user/detailproduct" class="product-details">White Checked
+                                                    <a href="/user/detailproduct" class="product-details">White
+                                                        Checked
                                                         Shirt
                                                     </a>
                                                     <div class="price">
