@@ -36,13 +36,34 @@ class LandingpageController extends Controller
         return view('landing.brand', compact('brands'));
     }
 
-    public function product(){
-        $products = Product::all();
+    // public function product(){
+    //     $products = Product::all();
+    //     $brands = Brand::all();
+    //     $categories = ProductCategory::all();
+    //     $product_auction = ProductAuction::all();
+    //     return view('landing.produk', compact('products','brands','categories','product_auction'));
+    // }
+
+    // Tambahkan metode auction
+    public function productAuction()
+    {
+        $product_auction = ProductAuction::paginate(24);
         $brands = Brand::all();
         $categories = ProductCategory::all();
-        $product_auction = ProductAuction::all();
-        return view('landing.produk', compact('products','brands','categories','product_auction'));
+
+        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories'));
     }
+
+    // Tambahkan metode regular
+    public function productRegular()
+    {
+        $products = Product::paginate(24);
+        $brands = Brand::all();
+        $categories = ProductCategory::all();
+
+        return view('landing.produk-regular', compact('products', 'brands', 'categories'));
+    }
+
     public function store(){
         $store = UserStore::all();
         return view('landing.toko', compact('store'));

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserLevelEnum;
+use App\Helpers\UrlHelper;
 use App\Traits\VerifyEmailTrait;
 use Creativeorange\Gravatar\Facades\Gravatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -121,11 +122,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getUserRoleInstance()
     {
         $roles = $this->getRoleNames();
-
-        // Ensure $roles is an array and has at least one element before accessing $roles[0]
         $roleName = !empty($roles) && isset($roles[0]) ? $roles[0] : null;
-
-        // Return the corresponding UserLevelEnum or default to UserLevelEnum::USER
         return $roleName ? UserLevelEnum::from($roleName) : UserLevelEnum::USER;
     }
 
@@ -153,5 +150,17 @@ class User extends Authenticatable implements MustVerifyEmail
     public function store()
     {
         return $this->hasOne(UserStore::class);
+    }
+
+    /**
+     * Getting the user avatar
+     *
+     * @return string
+     */
+    public function getAvatar()
+    {
+        $avatar = $this->getAttribute('avatar');
+        $isUrlOnAvatar = UrlHelper::isUrl($avatar);
+        return $avatar ? ($isUrlOnAvatar ? $avatar : asset("storage/{$avatar}")) : Gravatar::get($this->getAttribute('email'));
     }
 }
