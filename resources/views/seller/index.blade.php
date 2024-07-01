@@ -176,7 +176,7 @@
                         <h5 class="heading">Data Penjualan/Hari</h5>
                     </div>
                     <div class="profile-section">
-                        <canvas id="penjualan-harian" width="400" height="200"></canvas>
+                        <canvas id="penjualan-harian" height="200"></canvas>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -184,7 +184,7 @@
                         <h5 class="heading">Data Penjualan/Bulan</h5>
                     </div>
                     <div class="profile-section">
-                        <canvas id="penjualan-bulanan" width="400" height="200"></canvas>
+                        <canvas id="penjualan-bulanan" height="200"></canvas>
                     </div>
                 </div>
             </div>
@@ -228,6 +228,7 @@
             };
 
             const options = {
+                maintainAspectRatio: false,
                 scales: {
                     y: {
                         beginAtZero: true
