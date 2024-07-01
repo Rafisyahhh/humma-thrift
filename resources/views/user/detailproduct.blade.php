@@ -418,7 +418,7 @@
                     </span>
                 </a>
             </div> --}}
-            <div class="share-icons ms-auto" style="z-index:1;">
+            <div class="share-icons" style="z-index:1; margin-left:70px;">
                 <a href="#" class="share-icon">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">

@@ -3,36 +3,36 @@
 @section('title', 'Produk')
 
 @section('style')
-    <style>
-        button {
-            font-size: 15px;
-        }
+<style>
+    button {
+        font-size: 15px;
+    }
 
-        .product-details table {
-            width: 100%;
-            border-collapse: collapse;
-            /* Menghilangkan jarak antar sel */
-        }
+    .product-details table {
+        width: 100%;
+        border-collapse: collapse;
+        /* Menghilangkan jarak antar sel */
+    }
 
-        .product-details th,
-        .product-details td {
-            text-align: left;
-            padding: 10px;
-            color: rgba(0, 0, 0, 0.4);
-            /* Warna teks abu-abu */
-        }
+    .product-details th,
+    .product-details td {
+        text-align: left;
+        padding: 10px;
+        color: rgba(0, 0, 0, 0.4);
+        /* Warna teks abu-abu */
+    }
 
-        .product-details th {
-            font-weight: normal;
-            font-size: 17px;
-        }
+    .product-details th {
+        font-weight: normal;
+        font-size: 17px;
+    }
 
-        .product-details .inner-text {
-            font-size: 17px;
-            color: rgba(0, 0, 0, 0.7);
-            /* Warna teks sedikit lebih gelap untuk kontras */
-        }
-    </style>
+    .product-details .inner-text {
+        font-size: 17px;
+        color: rgba(0, 0, 0, 0.7);
+        /* Warna teks sedikit lebih gelap untuk kontras */
+    }
+</style>
 @endsection
 
 @section('content')
