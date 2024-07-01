@@ -71,7 +71,6 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
     Route::get('productauction/{id}', [AuctionsController::class, 'showSeller'])->name('productauction.showSeller');
 });
 
-
 # User Routes
 Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function () {
     Route::get('/', [DashboardUserController::class, 'dashboard'])->name('userhome');
