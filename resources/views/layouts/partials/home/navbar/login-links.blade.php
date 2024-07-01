@@ -21,7 +21,6 @@
             </span>
         </a>
     </div>
-    @endif
 
     <div class="header-favourite">
         <a href="{{ route('user.wishlist') }}" class="cart-item">
@@ -30,6 +29,7 @@
             </span>
         </a>
     </div>
+    @endif
 
     {{-- ICON PROFILE --}}
     <div class="header-cart header-right-dropdown">
@@ -52,7 +52,22 @@
                         <p class="mb-0 opacity-75 text-truncate">{{ auth()->user()->email }}</p>
                     </div>
                 </div>
+
+                @if(auth()->user()->store)
                 <div class="wrapper-line"></div>
+                <div class="mb-4 row">
+                    <div class="col-3">
+                        <div class="ratio ratio-1x1 flex-shrink-0 w-100">
+                            <img src="{{ auth()->user()->getAvatar() }}" alt="{{ auth()->user()->store->name }}" class="object-fit-cover rounded-circle" />
+                        </div>
+                    </div>
+                    <div class="col-9 d-flex flex-column gap-1">
+                        <p class="fw-bold mb-0 text-truncate">{{ auth()->user()->store->name }}</p>
+                        <p class="mb-0 opacity-75 text-truncate">{{ "@" . auth()->user()->store->username }}</p>
+                    </div>
+                </div>
+                @endif
+
                 <div class="cart-btn">
                     @if(auth()->user()->store && !request()->routeIs('seller.home'))
                         <a href="{{ route('seller.home') }}" class="shop-btn view-btn"> Ke Dasbor Penjual</a>
