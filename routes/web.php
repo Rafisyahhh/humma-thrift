@@ -103,15 +103,13 @@ Route::prefix('dev')->group(function () {
 });
 
 # Landing Pages
-Route::prefix('product')->group(function () {
-    Route::get('auction', [LandingpageController::class, 'productAuction']);
-    Route::get('regular', [LandingpageController::class, 'productRegular']);
-});
-Route::get('brand', [LandingpageController::class, 'brand']);
-Route::get('stores', [StoreProfileController::class, 'showStore'])->name('store');
-Route::view('detail', 'landing.detail');
-Route::get('about-us', [AboutUsController::class, 'landingpage']);
-Route::view('news', 'landing.detailNews');
+Route::get('/product', [LandingpageController::class, 'product']);
+Route::get('/brand', [LandingpageController::class, 'brand']);
+Route::get('/stores', [StoreProfileController::class, 'showStore'])->name('store');
+Route::view('/detail', 'landing.detail');
+Route::get('/about-us', [AboutUsController::class, 'landingpage']);
+Route::view('/news', 'landing.detailNews');
+Route::view('/regstrasi','afterregister');
 
 # Home Redirect
 Route::get('/home', RedirectUserController::class)->name('home');
