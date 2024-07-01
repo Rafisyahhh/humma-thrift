@@ -20,7 +20,7 @@ class StoreProfileController extends Controller
             ->get();
         $isProductAuction = ProductAuction::where('store_id', $store->id)->get();
 
-        return view('store.index', compact('store','isProduct','isProductAuction'));
+        return view('store.index', compact('store', 'isProduct', 'isProductAuction'));
     }
 
     /**
