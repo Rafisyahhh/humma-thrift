@@ -44,7 +44,7 @@
                 <div class="mb-4 row">
                     <div class="col-3">
                         <div class="ratio ratio-1x1 flex-shrink-0 w-100">
-                            <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="{{ auth()->user()->name }}" class="object-fit-cover rounded-circle" />
+                            <img src="{{ auth()->user()->getAvatar() }}" alt="{{ auth()->user()->name }}" class="object-fit-cover rounded-circle" />
                         </div>
                     </div>
                     <div class="col-9 d-flex flex-column gap-1">
