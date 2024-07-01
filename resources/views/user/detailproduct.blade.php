@@ -204,17 +204,12 @@
                                 <div class="row">
                                     <div class="product-quantity mt-0"
                                         style="display: flex; align-items: center; gap: 10px; z-index:1">
-                                        <div class="share-icons">
-                                            <a href="#" class="share-icon">
-                                                <span>
-                                                    <i class="fas fa-heart fa-xl" style="color: black"></i>
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <a href="#"
-                                            class="shop-btn d-flex gap-3 align-items-center justify-content-center">
-                                            <i class="fas fa-shopping-cart"></i>
-                                            Masukkan Keranjang
+                                        <a href="#" style="width :10px" class="shop-btn"
+                                            style="display: flex; align-items: center; gap: 10px; z-index:1">
+                                            <span style="width: 37rem; align-items:center; justify-content:center;">
+                                                <i class="fas fa-shopping-cart"></i>
+                                                Masukkan Keranjang
+                                            </span>
                                         </a>
                                         <a href="#"
                                             class="shop-btn d-flex gap-3 align-items-center justify-content-center">
@@ -418,7 +413,7 @@
                     </span>
                 </a>
             </div> --}}
-            <div class="share-icons ms-auto" style="z-index:1;">
+            <div class="share-icons" style="z-index:1; margin-left:70px;">
                 <a href="#" class="share-icon">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
