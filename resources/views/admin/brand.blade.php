@@ -46,7 +46,7 @@
                 </button>
                 <form id="delete-form-{{ $brand->id }}"
                   action="{{ route('admin.brand.destroy', ['brand' => $brand->id]) }}" method="POST"
-                  style="display:inline">
+                  style="display:inline"> 
                   @csrf
                   @method('DELETE')
                   <button type="button" style="background: none" class="badge bg-label-danger me-1 border-0"

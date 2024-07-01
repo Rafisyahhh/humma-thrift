@@ -67,7 +67,9 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
     Route::post('/profile/{id}', [UserStoreController::class, 'update'])->name('profile.update');
     Route::resource('product', ProductController::class);
     Route::resource('productauction', ProductAuctionController::class);
+    Route::get('product', [AuctionsController::class, 'showSeller'])->name('show');
 });
+
 
 # User Routes
 Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function () {
@@ -90,6 +92,8 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::resource('history', HistoryController::class);
     Route::resource('update-password', UserUpdatePasswordController::class);
     Route::resource('auctions', AuctionsController::class);
+    // Route::get('/product/{id}', [AuctionsController::class, 'create'])->name('product.create');
+    // Route::post('/product/{id}/auction', [AuctionsController::class, 'store'])->name('product.auction.store');
 });
 
 # Dev Routes

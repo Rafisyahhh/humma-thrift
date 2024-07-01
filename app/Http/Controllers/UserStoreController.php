@@ -81,7 +81,6 @@ class UserStoreController extends Controller
         }
         $store->update([
             'name' => $request->name,
-            'nic_owner' => $request->nic_owner,
             'address' => $request->address,
             'description' => $request->description,
             'store_logo' => $logoPath,
