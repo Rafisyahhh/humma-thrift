@@ -68,7 +68,7 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
     Route::post('/profile/{id}', [UserStoreController::class, 'update'])->name('profile.update');
     Route::resource('product', ProductController::class);
     Route::resource('productauction', ProductAuctionController::class);
-    Route::get('product', [AuctionsController::class, 'showSeller'])->name('show');
+    // Route::get('product', [AuctionsController::class, 'showSeller'])->name('show');
 });
 
 
