@@ -129,20 +129,24 @@
                                 <h5 class="wrapper-heading">Alamat Pengiriman</h5>
                                 <div class="order-summery">
                                     <div class="subtotal product-total">
-                                        <h5 class="wrapper-heading">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" xml:space="preserve"
-                                                width="15" height="15">
-                                                <path
-                                                    d="M7.5 0a5.69 5.69 0 0 0-5.686 5.686c0 2.391 1.192 4.656 2.691 6.518 1.31 1.626 2.606 2.639 2.661 2.682A.54.54 0 0 0 7.5 15a.55.55 0 0 0 .334-.114c.055-.043 1.351-1.056 2.661-2.682 1.501-1.862 2.691-4.127 2.691-6.518A5.69 5.69 0 0 0 7.5 0m0 8.236a2.723 2.723 0 0 1-2.72-2.72c0-1.5 1.22-2.722 2.72-2.722s2.72 1.22 2.72 2.72S9 8.234 7.5 8.234" />
-                                            </svg>
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                        </h5>
+                                        <div class="mx-5">
+                                            @foreach ( $addresses as $address)
+                                            <div class="radio-container">
+                                                <input type="radio" id="option1" name="option" value="option1" class="custom-radio">
+                                                <label for="option1" class="radio-label">
+                                                    <p class="mb-1" style="font-size: 18px;">{{$users->username}} | +{{$users->phone}}</p>
+                                                    <p style="font-size: 15px; margin-bottom: 5px;">
+                                                        {{$address->address}}
+                                                    </p>
+                                                </label>
+                                            </div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                     <div>
-                                        <button class="shop-btn openModal" type="button"
-                                            style="width: 20rem">Alamat</button>
-                                        <button class="shop-btn openModalAddress" type="button" style="width: 20rem">Tambah
-                                            Alamat Baru</button>
+                                        <button class="shop-btn openModalAddress" type="button" style="width: 25rem">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z"/></svg>
+                                            Tambah Alamat Baru</button>
                                     </div>
                                 </div>
                             </div>
@@ -195,27 +199,6 @@
         </div>
     </section>
 
-    {{-- Review Modal --}}
-    <div id="reviewModal" class="modal">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <h5 class="mb-5" style="text-align: center">Alamat</h5>
-            <div class="mx-5">
-                @foreach ( $addresses as $address)
-                <div class="radio-container">
-                    <input type="radio" id="option1" name="option" value="option1" class="custom-radio">
-                    <label for="option1" class="radio-label">
-                        <p class="mb-1" style="font-size: 18px;">{{$users->username}} | +{{$users->phone}}</p>
-                        <p style="font-size: 15px; margin-bottom: 5px;">
-                            {{$address->address}}
-                        </p>
-                    </label>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-
     {{-- Address Modal --}}
     <div id="addressModal" class="modal">
         <div class="modal-content">
@@ -244,35 +227,6 @@
 @endsection
 
 @push('script')
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Get the modal element
-            var reviewModal = document.getElementById("reviewModal");
-
-            // Get the button that opens the modal
-            var openReviewModalBtn = document.querySelector(".openModal");
-
-            // Get the close button for review modal
-            var reviewCloseBtn = reviewModal.querySelector(".close-modal");
-
-            // When the user clicks the button, open the review modal
-            openReviewModalBtn.onclick = function() {
-                reviewModal.style.display = "block";
-            }
-
-            // When the user clicks on close button in review modal, close the review modal
-            reviewCloseBtn.onclick = function() {
-                reviewModal.style.display = "none";
-            }
-
-            // When the user clicks anywhere outside of the modal, close the review modal
-            window.onclick = function(event) {
-                if (event.target == reviewModal) {
-                    reviewModal.style.display = "none";
-                }
-            }
-        });
-    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Get the modal element
