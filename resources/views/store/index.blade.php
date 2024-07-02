@@ -227,12 +227,15 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="location mt-2"> &nbsp;&nbsp;<span class="location mt-2">{!! $store->description !!}</span>
-                    </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="location mt-2" style="max-height: 65px;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;padding-left: 45px;max-width: 107em;">
+                          &nbsp;&nbsp;<span class="location mt-2">{!! $store->description !!}</span>
+                        </div>
+                      </div>
                 </div>
-            </div> <br> <br>
+            <br>
+            <br>
 
             @if (!$store->verified_at && auth()->id() === $store->user_id)
                 <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size: 0.9rem;">
@@ -245,7 +248,7 @@
     </section>
     <section class="product mt-5 pt-0 mb-5">
         <div class="container">
-            <ul class="nav nav-underline mb-3">
+            <ul class="nav nav-underline mb-3" style="display:flex; justify-content: left; margin-bottom: 5rem; margin-left:4rem;">
                 <li class="nav-item">
                     <a class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
                         type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Produk</a>
@@ -259,7 +262,8 @@
                         type="button" role="tab" aria-controls="ulasan-tab-pane" aria-selected="false">Ulasan</a>
                 </li>
             </ul>
-            <div class="tab-content" id="myTabContent">
+
+            <div class="tab-content" id="myTabContent" style="margin-left:4rem;">
                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
                     tabindex="0">
                     <div class="arrival-section">

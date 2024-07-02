@@ -199,10 +199,18 @@
                                             <a data-id="{{ $item->id }}" class="product-btn openModal">Ikuti Lelang</a>
                                         </div>
 
+                                        @php
+                                            $existingAuction = App\Models\auctions::where('user_id', Auth::id())
+                                                ->where('product_auction_id', $item->id)
+                                                ->first();
+                                        @endphp
+
                                         <div id="reviewModal" class="modal" style="display: none;">
                                             <div class="modal-content">
-                                                {{-- @if ($auctions->contains('id', $user->id)) --}}
                                                 <button class="close" style="float: right; text-align: end;">&times;</button>
+                                                {{-- @if ($existingAuction)
+                                                sudah mengikuti lelang
+                                                @else --}}
                                                 <h4 style="text-align: center;">Bid Lelang</h4>
                                                 <form id="auctionForm" method="post" action="{{ route('user.auctions.store') }}" class="mt-5">
                                                     @csrf

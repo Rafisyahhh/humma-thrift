@@ -72,11 +72,13 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
     Route::resource('productauction', ProductAuctionController::class);
 
     // Show seller product auction
-    Route::get('productauction/{id}', [AuctionsController::class, 'showSeller'])->name('auction.showSeller');
 
-    // Edit and Update routes for auctions
-    Route::get('productauction/{id}/edit', [AuctionsController::class, 'edit'])->name('auction.edit');
-    Route::put('productauction/{id}', [AuctionsController::class, 'update'])->name('auction.update');
+// Show seller product auction
+Route::get('auction/seller/{id}', [AuctionsController::class, 'showSeller'])->name('auction.showSeller');
+
+// Edit and Update routes for auctions
+Route::get('auction/{auctions}/edit', [AuctionsController::class, 'editlelang'])->name('auction.editlelang');
+Route::put('auction/{auctions}', [AuctionsController::class, 'updatelelang'])->name('auction.updatelelang');
 });
 
 # User Routes
@@ -114,12 +116,15 @@ Route::prefix('dev')->group(function () {
 });
 
 # Landing Pages
-Route::get('/product', [LandingpageController::class, 'product']);
-Route::get('/brand', [LandingpageController::class, 'brand']);
-Route::get('/stores', [StoreProfileController::class, 'showStore'])->name('store');
-Route::view('/detail', 'landing.detail');
-Route::get('/about-us', [AboutUsController::class, 'landingpage']);
-Route::view('/news', 'landing.detailNews');
+Route::prefix('product')->group(function () {
+    Route::get('auction', [LandingpageController::class, 'productAuction']);
+    Route::get('regular', [LandingpageController::class, 'productRegular']);
+});
+Route::get('brand', [LandingpageController::class, 'brand']);
+Route::get('stores', [StoreProfileController::class, 'showStore'])->name('store');
+Route::view('detail', 'landing.detail');
+Route::get('about-us', [AboutUsController::class, 'landingpage']);
+Route::view('news', 'landing.detailNews');
 Route::view('/regstrasi','afterregister');
 
 # Home Redirect

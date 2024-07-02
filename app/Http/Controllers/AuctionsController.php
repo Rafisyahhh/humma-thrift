@@ -62,7 +62,7 @@ class AuctionsController extends Controller
      */
     public function showSeller(auctions $auctions)
     {
-        $auctions = auctions::all();
+        $auctions = Auctions::orderBy('created_at', 'asc')->orderBy('auction_price', 'desc')->get();
         $user = Auth::user();
 
         return view('seller.produk', compact('auctions','user'));
@@ -71,9 +71,9 @@ class AuctionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(auctions $auctions)
+    public function editlelang(auctions $auctions)
     {
-        $auctions = auctions::all();
+        $auctions = Auctions::orderBy('created_at', 'asc')->orderBy('auction_price', 'desc')->get();
         $user = Auth::user();
 
         return view('seller.produk', compact('auctions','user'));
@@ -82,15 +82,20 @@ class AuctionsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateauctionsRequest $request, auctions $auctions)
+    public function updatelelang(UpdateauctionsRequest $request, auctions $auctions)
     {
+        try {
+
         $dataToUpdate = [
-            'status' => $request->input('status'),
+            'status' => $request->input('status') == 1,
         ];
 
         $auctions->update($dataToUpdate);
 
-        return redirect()->back()->with('success', 'lelang berhasil di pilih');
+            return redirect()->route('seller.product.index')->with('success', 'lelang berhasil di pilih');
+        } catch (\Throwable $th) {
+            return redirect()->route('seller.product.index')->withInput()->withErrors(['error' => $th->getMessage()]);
+        }
     }
 
     /**

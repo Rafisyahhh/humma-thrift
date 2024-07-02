@@ -36,12 +36,12 @@
                                 <h5 class="wrapper-heading">Kategori Produk</h5>
                                 <div class="sidebar-item">
                                     <ul class="sidebar-list">
-                                        {{-- @foreach ($categories as $item) --}}
+                                        @foreach ($categories as $item)
                                             <li>
                                                 <input type="checkbox" id="bags" name="bags">
-                                                <label for="bags">hhhhh</label>
+                                                <label for="bags">{{ $item->title }}</label>
                                             </li>
-                                        {{-- @endforeach --}}
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -50,12 +50,12 @@
                                 <h5 class="wrapper-heading">Brands</h5>
                                 <div class="sidebar-item">
                                     <ul class="sidebar-list">
-                                        {{-- @foreach ($brands as $item) --}}
+                                        @foreach ($brands as $item)
                                             <li>
                                                 <input type="checkbox" id="bags" name="bags">
-                                                <label for="bags">Brand</label>
+                                                <label for="bags">{{ $item->title }}</label>
                                             </li>
-                                        {{-- @endforeach --}}
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -64,18 +64,12 @@
                                 <h5 class="wrapper-heading">Warna</h5>
                                 <div class="sidebar-item">
                                     <ul class="sidebar-list">
-                                        <li>
-                                            <input type="checkbox" id="red" name="red">
-                                            <label for="red">Merah</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="blue" name="blue">
-                                            <label for="blue">Biru</label>
-                                        </li>
+                                        @foreach ($product as $item)
                                         <li>
                                             <input type="checkbox" id="navy" name="navy">
-                                            <label for="navy">Navy</label>
+                                            <label for="navy">{{ $item->color }}</label>
                                         </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -84,26 +78,12 @@
                                 <h5 class="wrapper-heading">Ukuran</h5>
                                 <div class="sidebar-item">
                                     <ul class="sidebar-list">
-                                        <li>
-                                            <input type="checkbox" id="small" name="small">
-                                            <label for="small">Kecil</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="medium" name="medium">
-                                            <label for="medium">Sedang</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="large" name="large">
-                                            <label for="large">Besar</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="xl" name="xl">
-                                            <label for="xl">XL</label>
-                                        </li>
+                                        @foreach ($product as $item)
                                         <li>
                                             <input type="checkbox" id="2xl" name="2xl">
-                                            <label for="2xl">2XL</label>
+                                            <label for="2xl">{{ $item->size }}</label>
                                         </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -138,26 +118,24 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- @forelse ($product as $item) --}}
 
                                 <div class="result mb-6">
                                     <p><strong style="font-size: 1.5rem">1</strong> <span>Barang</span></p>
                                 </div>
+                                @forelse ($product as $item)
 
                                 <div class="col-lg-4 col-sm-6">
-
                                     <div class="product-wrapper" data-aos="fade-up">
                                         <div class="product-img">
-                                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-5.webp') }}" alt="product-img"
+                                            <img src="{{ asset("storage/{$item->thumbnail}") }}" alt="product-img"
                                                 class="object-fit-cover">
                                         </div>
                                         <div class="product-info">
                                             <div class="product-description">
-                                                <a href="" class="product-details">title
+                                                <a href="" class="product-details">{{ $item->title }}
                                                 </a>
                                                 <div class="price">
-                                                    <span
-                                                        class="new-price">Rp.9999</span>
+                                                    <span class="new-price">Rp {{ number_format($item->price, 0, ',', '.') }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -180,14 +158,15 @@
 
                                     </div>
                                 </div>
-                            {{-- @empty
+                            @empty
                             <div class="col-lg-12">
                                 <h3 class="text-center">Produk Masih Kosong</h3>
                                 <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
                             </div>
-                            @endforelse --}}
+                            @endforelse
 
                             {{-- @forelse ($product_auction as $item) --}}
+                            <h4>Lelang</h4>
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="product-wrapper" data-aos="fade-up">
                                         <div class="product-img">
