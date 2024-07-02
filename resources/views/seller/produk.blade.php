@@ -4,6 +4,47 @@
 
 @section('style')
 <style>
+     .modal-lelang {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 100%;
+            max-width: 125rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
     button {
         font-size: 15px;
     }
@@ -128,8 +169,10 @@
                             </div>
                         </div>
                         <div class="product-cart-btn">
-                            <a role="button" class="product-btn" data-bs-toggle="modal"
-                                data-bs-target="#detailLelang{{ $item->id }}">Lelang</a>
+                            {{-- <a role="button" class="product-btn" data-bs-toggle="modal"
+                                data-bs-target="#detailLelang{{ $item->id }}">Lelang</a> --}}
+                                <a data-id="{{ $item->id }}" class="product-btn openModal">Ikuti Lelang</a>
+
                             <a role="button" class="product-btn" data-bs-toggle="modal"
                                 data-bs-target="#detailLelangModal{{ $item->id }}"
                                 style="border-top-left-radius: 0; margin-left:-4px;">Detail</a>
@@ -302,8 +345,113 @@
         </div>
     @endforeach
 
-    {{-- LELANG --}}
+
     @foreach ($product_auctions as $item)
+    <div id="reviewModal{{ $item->id }}" class="modal-lelang" style="display: none;">
+        <div class="modal-content">
+            <button class="close" style="float: right; text-align: end;">&times;</button>
+            <h3 style="text-align: center">{{ $item->title }}</h3>
+            <hr>
+            <table style="width:120rem;">
+                <tbody>
+                    <tr class="table-row table-top-row">
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">NO</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">USER NAME</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">NO HP</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">EMAIL</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">HARGA</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="table-heading">AKSI</h5>
+                            </div>
+                        </td>
+                    </tr>
+                    @foreach ($auctions as $item)
+                    @php
+                    $anyTrueStatus = App\Models\auctions::where('product_auction_id', $item->product_auction_id)
+                        ->where('status', 1)
+                        ->exists();
+                    $statusTrue = $item->status === 1;
+                    @endphp
+                    <tr class="table-row ticket-row" style="{{ $statusTrue ? 'background-color: #edeaea;' : '' }}">
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="heading">{{ $loop->iteration }}</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="heading">{{ $item->user->username }}</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="heading">{{ $item->user->phone }}</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="heading">{{ $item->user->email }}</h5>
+                            </div>
+                        </td>
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <h5 class="heading">{{ $item->auction_price }}</h5>
+                            </div>
+                        </td>
+
+                        <td class="table-wrapper">
+                            <div class="table-wrapper-center">
+                                <form action="{{ route('seller.auction.updatelelang', $item->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <input type="hidden" name="product_auction_id" value="{{ $item->product_auction_id }}">
+                                    <input type="radio" onchange="submitForm(this)" class="btn-check"
+                                    name="status" id="status-{{ $item->id }}" value="1" {{ $statusTrue ? 'checked' : '' }} autocomplete="off"
+                                    {{ $anyTrueStatus ? 'disabled' : '' }} />
+                                <label for="status-{{ $item->id }}" style="{{ $anyTrueStatus ? 'pointer-events: none; opacity: 0.5;' : '' }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="m9.55 17.308l-4.97-4.97l.714-.713l4.256 4.256l9.156-9.156l.713.714z" />
+                                    </svg>
+                                </label>
+
+                                </form>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @endforeach
+
+
+    {{-- LELANG --}}
+    {{-- @foreach ($product_auctions as $item)
         <div class="modal fade" id="detailLelang{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true" style="height: 99%; margin-top:1px;">
             <div class="modal-dialog" style="margin-left: auto; height: 100%">
@@ -395,11 +543,6 @@
                                                     </svg>
                                                 </label>
 
-                                                {{-- <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                                    viewBox="0 0 24 24">
-                                                    <path fill="currentColor"
-                                                        d="m9.55 17.308l-4.97-4.97l.714-.713l4.256 4.256l9.156-9.156l.713.714z" />
-                                                </svg> --}}
                                             </form>
                                         </div>
                                     </td>
@@ -412,13 +555,55 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @endforeach --}}
+
 @endsection
 
-@section('scripts')
+@section('script')
     <script>
         function modalAction(modalClass) {
             $(modalClass).toggleClass('active');
         }
+    </script>
+    <script>
+
+    function submitForm(radio) {
+        if (!radio.disabled) {
+            const form = radio.closest('form');
+            form.submit();
+        }
+    }
+</script>
+
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+    var btns = document.querySelectorAll('.openModal');
+    var spans = document.querySelectorAll('.close');
+
+    btns.forEach(function(btn) {
+        btn.onclick = function() {
+            var productId = btn.getAttribute('data-id');
+            var modal = document.getElementById('reviewModal' + productId);
+            modal.style.display = 'flex';
+        }
+    });
+
+    spans.forEach(function(span) {
+        span.onclick = function() {
+            var modal = span.closest('.modal-lelang');
+            modal.style.display = 'none';
+        }
+    });
+
+    window.onclick = function(event) {
+        var modals = document.querySelectorAll('.modal-lelang');
+        modals.forEach(function(modal) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
+});
+
     </script>
 @endsection
