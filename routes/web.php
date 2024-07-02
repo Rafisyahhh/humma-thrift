@@ -132,13 +132,13 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::resource('event', EventController::class);
     Route::resource('produk', ProductAdminController::class);
 
-    Route::prefix('/notification')->name('notification.')->group(function () {
-        Route::get('/', [NotificationController::class, 'index'])->name('index');
-        Route::get('read-all', [NotificationController::class, 'readAll'])->name('readAll');
-        Route::get('read/{id}', [NotificationController::class, 'read'])->name('read');
-        Route::get('unread/{id}', [NotificationController::class, 'unread'])->name('unread');
-        Route::get('{id}', [NotificationController::class, 'show'])->name('show');
-        Route::delete('{id}', [NotificationController::class, 'destroy'])->name('destroy');
+    Route::prefix('/notification')->controller(NotificationController::class)->name('notification.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('read-all', 'readAll')->name('readAll');
+        Route::get('read/{id}', 'read')->name('read');
+        Route::get('unread/{id}', 'unread')->name('unread');
+        Route::get('{id}', 'show')->name('show');
+        Route::delete('{id}', 'destroy')->name('destroy');
     });
 });
 
