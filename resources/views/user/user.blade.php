@@ -293,8 +293,8 @@
                 datasets: [{
                     label: 'Penjualan per Bulan',
                     data: @json($data['pengeluaran']),
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(66, 91, 176, 0.4)',
+                    borderColor: 'rgba(28, 56, 151, 1)',
                     borderWidth: 1
                 }]
             };
