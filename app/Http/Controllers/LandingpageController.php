@@ -7,9 +7,7 @@ use App\Models\event;
 use App\Models\Product;
 use App\Models\ProductAuction;
 use App\Models\UserStore;
-use Illuminate\Http\Request;
 use App\Models\ProductCategory;
-
 
 class LandingpageController extends Controller
 {

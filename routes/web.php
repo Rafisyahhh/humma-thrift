@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ApiControllers\UserApiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
@@ -26,10 +25,6 @@ use App\Http\Controllers\{
     UserAddressController,
     UserStoreController
 };
-use App\Models\User;
-use App\Models\UserStore;
-use App\Notifications\SellerWelcomeNotification;
-use Illuminate\Support\Facades\Notification;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,14 +42,7 @@ Auth::routes(['verify' => true]);
 
 # Debug Routes
 Route::prefix('/debug')->middleware(\App\Http\Middleware\DevelopmentMiddleware::class)->group(function () {
-    // Route::view('home', 'debug.home');
-    // Route::view('modal', 'debug.modal');
-
-    Route::get('/test', function () {
-        $user = fn () => "hello world";
-
-        dd(gettype($user));
-    });
+    //
 });
 
 # Public Routes
