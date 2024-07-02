@@ -8,6 +8,7 @@ use App\Http\Controllers\{
     AuctionsController,
     UserController,
     BrandController,
+    CheckoutController,
     DashboardUserController,
     EventController,
     LandingpageController,
@@ -22,6 +23,7 @@ use App\Http\Controllers\{
     DetailProductController,
     HistoryController,
     ProductAdminController,
+    UserAddressController,
     UserStoreController
 };
 use App\Models\User;
@@ -81,7 +83,8 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
 Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function () {
     Route::middleware(\App\Http\Middleware\NotSellerMiddleware::class)->group(function () {
         Route::get('/', [DashboardUserController::class, 'dashboard'])->name('userhome');
-        Route::view('checkout', 'user.checkout')->name('checkout');
+        Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
+        Route::post('address/{id}', [UserAddressController::class, 'store'])->name('address.store');
         Route::view('about', 'user.tentang')->name('about');
         Route::get('brand', [LandingpageController::class, 'brand'])->name('brand');
         Route::view('detail', 'user.detail')->name('detail');

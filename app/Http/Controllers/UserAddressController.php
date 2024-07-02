@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 
@@ -26,9 +27,19 @@ class UserAddressController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request , $id)
     {
-        //
+        $user = User::findOrFail($id);
+        try {
+            UserAddress::create([
+                'user_id' =>$user->id,
+                'address'=>$request->address,
+                'status'=> 0
+            ]);
+        return redirect()->back()->with("success", "Alamat berhasil ditambahkan");
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**

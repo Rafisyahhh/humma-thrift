@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder {
             UserStoreSeeder::class,
             ProductCategorySeeder::class,
             BrandSeeder::class,
-            ProductSeeder::class,
+            // ProductSeeder::class,
             EventSeeder::class,
         ]);
     }

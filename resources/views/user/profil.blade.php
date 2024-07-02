@@ -79,7 +79,7 @@
                                 <div class="review-form-name mb-4">
                                     <label for="address" class="form-label" style="background-color: white">Alamat</label>
                                     <textarea type="text" name="address" id="address" class="form-control"
-                                    placeholder="Tambahkan Alamat" rows="7" >{{ implode(", ",auth()->user()->UserAddress->pluck("address")->toArray()) }}</textarea>
+                                    placeholder="Tambahkan Alamat" rows="7" >{{ implode(", ", auth()->user()->UserAddress->where('status', true)->pluck('address')->toArray()) }}</textarea>
                                 </div>
                             </div>
                         </div>
