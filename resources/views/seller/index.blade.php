@@ -202,15 +202,15 @@
                 datasets: [{
                         label: 'Penghasilan Kotor per Hari',
                         data: @json($data['penghasilan_kotor']),
-                        backgroundColor: 'rgba(126, 163, 219, 0.40)',
-                        borderColor: 'rgba(28, 56, 121, 1)',
+                        backgroundColor: 'rgba(255, 0, 0, 0.2)',
+                        borderColor: 'rgba(255, 0, 0, 1)',
                         borderWidth: 1
                     },
                     {
                         label: 'Penghasilan Bersih per Hari',
                         data: @json($data['penghasilan_bersih']),
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(126, 163, 219, 0.40)',
+                        borderColor: 'rgba(28, 56, 121, 1)',
                         borderWidth: 1
                     }
                 ]
@@ -221,8 +221,8 @@
                 datasets: [{
                     label: 'Penjualan per Bulan',
                     data: @json($data['penjualan_bulan']),
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(66, 91, 176, 0.4)',
+                    borderColor: 'rgba(28, 56, 151, 1)',
                     borderWidth: 1
                 }]
             };
