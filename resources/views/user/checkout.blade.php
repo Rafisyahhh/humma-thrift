@@ -126,27 +126,37 @@
                     <div class="col-lg-8">
                         <div class="checkout-wrapper">
                             <div class="account-section billing-section">
-                                <h5 class="wrapper-heading">Alamat Pengiriman</h5>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h5 class="wrapper-heading">Alamat Saya</h5>
+                                    <button class="shop-btn openModalAddress" type="button" style="width: 25rem;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z"/>
+                                        </svg>
+                                        Tambah Alamat Baru
+                                    </button>
+                                </div> <hr>
+                                <p style="font-size: 1.9rem">Alamat</p>
                                 <div class="order-summery">
                                     <div class="subtotal product-total">
-                                        <div class="mx-5">
-                                            @foreach ( $addresses as $address)
-                                            <div class="radio-container">
+                                        <div class="mx-5" style="width: 77.5rem;">
+                                            @foreach ($addresses as $address)
+                                            <div class="radio-container" style="margin-bottom: 10px; width: 77.5rem;">
                                                 <input type="radio" id="option1" name="option" value="option1" class="custom-radio">
-                                                <label for="option1" class="radio-label">
-                                                    <p class="mb-1" style="font-size: 18px;">{{$users->username}} | +{{$users->phone}}</p>
-                                                    <p style="font-size: 15px; margin-bottom: 5px;">
+                                                <label for="option1" class="radio-label" style="display: flex; flex-direction: column; width: 77.5rem;">
+                                                    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                                        <p class="mb-1" style="font-size: 17px; margin: 0;">
+                                                            <b style="font-size: 17px;">{{$users->username}}</b> | +{{$users->phone}}
+                                                        </p>
+                                                        <button style="color: blue; background: none; border: none; padding: 0; cursor: pointer; margin-left: 10px;">Ubah</button>
+                                                    </div>
+                                                    <p style="font-size: 15px; margin: 5px 0;">
                                                         {{$address->address}}
                                                     </p>
                                                 </label>
                                             </div>
+                                            <hr>
                                             @endforeach
                                         </div>
-                                    </div>
-                                    <div>
-                                        <button class="shop-btn openModalAddress" type="button" style="width: 25rem">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z"/></svg>
-                                            Tambah Alamat Baru</button>
                                     </div>
                                 </div>
                             </div>
@@ -215,10 +225,35 @@
                                 rows="5" style=" font-size: 15px"></textarea>
                         </div>
                     </div>
-                    <button class="shop-btn " type="submit" style="width: 20rem; float: right; text-align: end;">Simpan Alamat
-                        Baru</button>
+                    <div style="display: flex; justify-content: flex-end;">
+                        <button class="shop-btn" type="submit" style="width: 20rem;">Simpan Alamat</button>
+                    </div>
                 </form>
+            </div>
+        </div>
+    </div>
 
+
+    {{-- update Modal --}}
+    <div id="updateModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h5 class="mb-5" style="text-align: center">Ubah Alamat</h5>
+            <div class="mx-5">
+                <form action="{{route('user.address.store', auth()->user()->id)}}" method="POST">
+                    @csrf
+                    <div class="account-inner-form">
+                        <div class="review-form-name mb-2">
+                            <label for="address" class="form-label"
+                                style="background-color: white; font-size: 18px">Alamat</label>
+                            <textarea type="text" name="address" id="address" class="form-control" placeholder="Tambahkan Alamat"
+                                rows="5" style=" font-size: 15px"></textarea>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end;">
+                        <button class="shop-btn" type="submit" style="width: 20rem;">Simpan Alamat</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

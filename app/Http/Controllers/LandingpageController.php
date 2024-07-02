@@ -68,4 +68,11 @@ class LandingpageController extends Controller
         $store = UserStore::all();
         return view('landing.toko', compact('store'));
     }
+
+    public function wishlist(){
+        $categories = ProductCategory::all();
+        $brands = Brand::all();
+        $product = Product::all();
+        return view('user.wishlist', compact('categories','brands','product'));
+    }
 }
