@@ -127,7 +127,7 @@
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="product-wrapper" data-aos="fade-up">
                                         <div class="product-img">
-                                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-5.webp') }}" alt="product-img"
+                                            <img src="{{ asset("storage/{$item->thumbnail}") }}" alt="product-img"
                                                 class="object-fit-cover">
                                         </div>
                                         <div class="product-info">
@@ -135,9 +135,7 @@
                                                 <a href="" class="product-details">{{ $item->title }}
                                                 </a>
                                                 <div class="price">
-                                                    <span
-                                                        class="new-price">Rp.9999
-                                                    </span>
+                                                    <span class="new-price">Rp {{ number_format($item->price, 0, ',', '.') }}</span>
                                                 </div>
                                             </div>
                                         </div>

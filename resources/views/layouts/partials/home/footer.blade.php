@@ -19,11 +19,11 @@
                         </h4>
                         <div class="footer-link about-link">
                             <ul>
-                                <li><a href="about.html">Home</a></li>
-                                <li><a href="#">Produk</a></li>
-                                <li><a href="about.html">Brand</a></li>
-                                <li><a href="#">Toko</a></li>
-                                <li><a href="#">Tentang Kami</a></li>
+                                <li><a href="/">Home</a></li>
+                                <li><a href="">Produk</a></li>
+                                <li><a href="/brand">Brand</a></li>
+                                <li><a href="/stores">Toko</a></li>
+                                <li><a href="/about-us">Tentang Kami</a></li>
                             </ul>
                         </div>
                     </div>
