@@ -151,11 +151,6 @@
                                                     <p style="font-size: 15px; margin: 5px 0;">
                                                         {{$address->address}}
                                                     </p>
-                                                    <div class="btn-group mt-2" style="display: flex; justify-content: flex-end; width: 74rem; margin-top: 10px;">
-                                                        <button class="konten d-flex align-items-center gap-2" style="width: 75rem; margin-left: auto;">
-                                                            <span>Atur sebagai utama</span>
-                                                        </button>
-                                                    </div>
                                                 </label>
                                             </div>
                                             <hr>
