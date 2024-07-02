@@ -1,18 +1,18 @@
 <!doctype html>
 
 <html lang="id" class="layout-compact dark-style layout-menu-fixed layout-navbar-fixed" dir="ltr"
-    data-theme="theme-default" data-assets-path="{{ asset('template-assets/admin/assets/') }}/"
-    data-template="vertical-menu-template-no-customizer">
+  data-theme="theme-default" data-assets-path="{{ asset('template-assets/admin/assets/') }}/"
+  data-template="vertical-menu-template-no-customizer">
 
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     @hasSection('title')
-        <title>{{ $__env->yieldContent('title') }} &bullet; {{ config('app.name') }}</title>
+      <title>{{ $__env->yieldContent('title') }} &bullet; {{ config('app.name') }}</title>
     @else
-        <title>{{ config('app.name') }}</title>
+      <title>{{ config('app.name') }}</title>
     @endif
 
     <meta name="description" content="" />
@@ -43,8 +43,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap"
-        rel="stylesheet" />
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap"
+      rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="{{ asset('additional-assets/datatables/datatables.min.css') }}">
 
     <!-- Icons -->
     <link rel="stylesheet" href="{{ asset('template-assets/admin/assets/vendor/fonts/fontawesome.css') }}" />
@@ -53,23 +56,23 @@
 
     <!-- Core CSS -->
     <link rel="stylesheet" id="stylesheet-core"
-        href="{{ asset('template-assets/admin/assets/vendor/css/rtl/core.css') }}" />
+      href="{{ asset('template-assets/admin/assets/vendor/css/rtl/core.css') }}" />
     <link rel="stylesheet" id="stylesheet-theme"
-        href="{{ asset('template-assets/admin/assets/vendor/css/rtl/theme-bordered.css') }}" />
+      href="{{ asset('template-assets/admin/assets/vendor/css/rtl/theme-bordered.css') }}" />
     <link rel="stylesheet" href="{{ asset('template-assets/admin/assets/css/demo.css') }}" />
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('template-assets/admin/assets/vendor/libs/node-waves/node-waves.css') }}" />
     <link rel="stylesheet"
-        href="{{ asset('template-assets/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+      href="{{ asset('template-assets/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('template-assets/admin/assets/vendor/libs/typeahead-js/typeahead.css') }}" />
 
     <link href="{{ asset('additional-assets/summernote-0.8.20/summernote-lite.css') }}" rel="stylesheet" />
 
     <style>
-        .menu-item.active {
-            background-color: #0000;
-        }
+      .menu-item.active {
+        background-color: #0000;
+      }
     </style>
 
     <!-- Page CSS -->
@@ -84,58 +87,58 @@
 
     @stack('style')
     @yield('style')
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
-        <div class="layout-container">
-            @include('layouts.partials.app.sidebar')
+      <div class="layout-container">
+        @include('layouts.partials.app.sidebar')
 
-            <!-- Layout container -->
-            <div class="layout-page">
-                @include('layouts.partials.app.navbar')
+        <!-- Layout container -->
+        <div class="layout-page">
+          @include('layouts.partials.app.navbar')
 
-                <!-- Content wrapper -->
-                <div class="content-wrapper">
-                    <!-- Content -->
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
 
-                    <div class="container-fluid flex-grow-1 container-p-y">
-                        @yield('content')
-                    </div>
-                    <!-- / Content -->
-
-                    <!-- Footer -->
-                    <footer class="content-footer footer bg-footer-theme">
-                        <div class="container-fluid">
-                            <div
-                                class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column">
-                                <div>
-                                    ©
-                                    <script>
-                                        document.write(new Date().getFullYear());
-                                    </script>
-                                    made with ❤️ by
-                                    <a href="{{ url('/') }}" target="_blank"
-                                        class="footer-link text-primary fw-medium">Humma Appreticenship Team</a>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
-                    <!-- / Footer -->
-
-                    <div class="content-backdrop fade"></div>
-                </div>
-                <!-- Content wrapper -->
+            <div class="container-fluid flex-grow-1 container-p-y">
+              @yield('content')
             </div>
-            <!-- / Layout page -->
+            <!-- / Content -->
+
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+              <div class="container-fluid">
+                <div
+                  class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column">
+                  <div>
+                    ©
+                    <script>
+                      document.write(new Date().getFullYear());
+                    </script>
+                    made with ❤️ by
+                    <a href="{{ url('/') }}" target="_blank" class="footer-link text-primary fw-medium">Humma
+                      Appreticenship Team</a>
+                  </div>
+                </div>
+              </div>
+            </footer>
+            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
         </div>
+        <!-- / Layout page -->
+      </div>
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
 
-        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
-        <div class="drag-target"></div>
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
     </div>
     <!-- / Layout wrapper -->
 
@@ -173,6 +176,6 @@
 
     @yield('js')
     @stack('js')
-</body>
+  </body>
 
 </html>

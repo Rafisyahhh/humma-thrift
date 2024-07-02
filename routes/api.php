@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiControllers\BrandApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiControllers\UserApiController;
@@ -19,8 +20,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/user', [UserApiController::class, 'getUser']);
-Route::middleware('auth')->group(function () {
-    Route::post('/user', [UserApiController::class, 'storeUser']);
-    Route::put('/user/{user}', [UserApiController::class, 'updateUser']);
+Route::middleware('auth')->name("api.")->group(function () {
+    Route::get('/user', [UserApiController::class, 'getUser']);
+    Route::post('/brand', [BrandApiController::class, 'storeBrand'])->name("storeBrand");
+    Route::put('/brand/{brand}', [BrandApiController::class, 'updateBrand'])->name("updateBrand");
+    Route::delete('/brand/{brand}', [BrandApiController::class, 'deleteBrand'])->name("deleteBrand");
+});
+Route::prefix('yajra')->name('yajra.')->group(function () {
+    Route::get('/user', [UserApiController::class, 'getUser']);
+    Route::get('/brand', [BrandApiController::class, 'yajraGetBrand'])->name("getBrand");
 });
