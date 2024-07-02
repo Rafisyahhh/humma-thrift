@@ -5719,3 +5719,20 @@ a.shop-btn:hover {
     border: 1px solid var(--NN500, #1c3879);
     overflow: hidden;
 }
+
+.konten {
+    cursor: pointer;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    border-radius: 8px;
+    height: 4.3rem;
+    min-width: 17rem;
+    max-width: 17rem;
+    margin-right: 8px;
+    font-size: 1.3rem;
+    border: 1px solid var(--NN500, #8e8a8a);
+    overflow: hidden;
+}
