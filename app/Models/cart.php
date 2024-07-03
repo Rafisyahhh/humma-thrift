@@ -9,7 +9,7 @@ class cart extends Model
 {
     use HasFactory;
 
-    protected$table = "cart";
+    protected $table = "carts";
 
     protected $guarded =[
         'id',

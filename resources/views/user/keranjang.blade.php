@@ -63,6 +63,11 @@
                                             <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
                                                 alt="img">
                                         </div>
+                                        @forelse ($cart as $item )
+
+                                        @empty
+
+                                        @endforelse
                                         <div class="wrapper-content"
                                             style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1;">
                                             <h5 class="heading" style="font-size: 18px; ">Classic Design

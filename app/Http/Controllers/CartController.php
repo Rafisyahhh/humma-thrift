@@ -39,7 +39,7 @@ class CartController extends Controller
 
        cart::create($dataproduct);
 
-       return redirect()->route('user.keranjang')->with('success','Produk berhasil ditambahkan ke keranjang');
+       return redirect()->back()->with('success', 'Keranjang created successfully.');
 
     }
 
