@@ -55,7 +55,15 @@ class UserAddressController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UpdateUserAddressRequest $request, $userId, $addressId)
+    public function edit()
+    {
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateUserAddressRequest $request, $userId, $addressId)
     {
         try {
             // Ensure the user is authorized to update the address
@@ -63,30 +71,22 @@ class UserAddressController extends Controller
                 return redirect()->back()->with('error', 'Unauthorized action.');
             }
 
-            // Find the address by ID regardless of its status
-            $userAddress = UserAddress::withTrashed()->findOrFail($addressId);
+            $validatedData = $request->validate([
+                'address_update' => 'required',
+            ]);
 
+            // Find the address by ID regardless of its status
+            $userAddress = UserAddress::findOrFail($addressId);
+            // dd( $userAddress);
             // Update the address
             $userAddress->update([
-                'address' => $request->input('address_update'),
+                'address' => $validatedData['address_update'],
             ]);
 
             return redirect()->back()->with('success', 'Alamat berhasil diperbarui.');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui alamat.');
         }
-    }
-
-
-
-
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, UserAddress $userAddress)
-    {
-        //
     }
 
     /**

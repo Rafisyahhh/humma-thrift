@@ -222,8 +222,13 @@
                         <div class="review-form-name mb-2">
                             <label for="address" class="form-label"
                                 style="background-color: white; font-size: 18px">Alamat</label>
-                            <textarea type="text" name="address" id="address" class="form-control" placeholder="Tambahkan Alamat"
+                            <textarea type="text" name="address" id="address" class="form-control @error('address') is-invalid @enderror" placeholder="Tambahkan Alamat"
                                 rows="5" style=" font-size: 15px"></textarea>
+                                @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div>
                     </div>
                     <div style="display: flex; justify-content: flex-end;">
@@ -247,7 +252,12 @@
                 <div class="account-inner-form">
                     <div class="review-form-name mb-2">
                         <label for="address_update" class="form-label" style="background-color: white; font-size: 18px">Alamat</label>
-                        <textarea name="address_update" id="address_update" class="form-control" placeholder="Tambahkan Alamat" rows="5" style="font-size: 15px">{{ $address->address }}</textarea>
+                        <textarea name="address_update" id="address_update" class="form-control @error('address_update') is-invalid @enderror" placeholder="Tambahkan Alamat" rows="5" style="font-size: 15px">{{ $address->address }}</textarea>
+                        @error('address_update')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-end;">
