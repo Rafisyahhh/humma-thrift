@@ -255,7 +255,7 @@
           },
           topEnd: $(`<form action="#" method="get" id="search" class="me-4">
             <div class="input-group mb-3">
-              <input type="search" name="search" class="form-control" placeholder="Cari Brand&hellip;"
+              <input type="search" name="search" class="form-control" placeholder="Cari Kategori&hellip;"
                 value="{{ old('search', request('search')) }}" />
               <button type="submit" class="btn"
                 style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">Cari</button>
