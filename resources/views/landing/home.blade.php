@@ -72,6 +72,7 @@
             width: 100%;
             z-index: 2;
         }
+
         .shape-decoration-wrapper .svg-container:nth-child(5) {
             top: 90rem;
             right: 0;
@@ -81,6 +82,50 @@
             height: unset;
             width: 100%;
             z-index: 2;
+        }
+
+        .shape-decoration-wrapper .svg-container:nth-child(4) {
+            bottom: -105rem;
+            left: -40rem;
+            z-index: 2;
+            top: unset;
+            height: 125rem;
+            width: 125rem;
+        }
+
+        .shape-decoration-wrapper .svg-container:nth-child(3) {
+            bottom: -105rem;
+            left: -40rem;
+            z-index: 2;
+            top: unset;
+            height: 125rem;
+            width: 125rem;
+        }
+
+        .shape-decoration-wrapper .svg-container:nth-child(2) {
+            bottom: -105rem;
+            left: -40rem;
+            z-index: 2;
+            top: unset;
+            height: 125rem;
+            width: 125rem;
+        }
+
+        .shape-decoration-wrapper .svg-container:nth-child(10) {
+            bottom: -105rem;
+            left: -40rem;
+            z-index: 2;
+            top: unset;
+            height: 125rem;
+            width: 125rem;
+        }
+        .shape-decoration-wrapper .svg-container:nth-child(11) {
+            bottom: -105rem;
+            left: -40rem;
+            z-index: 2;
+            top: unset;
+            height: 125rem;
+            width: 125rem;
         }
     </style>
 @endpush
