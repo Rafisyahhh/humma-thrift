@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
 class Product extends Model {
@@ -34,5 +36,15 @@ class Product extends Model {
 
     public function gallery() {
         return $this->hasMany(ProductGallery::class);
+    }
+
+    /**
+     * Get the favorite associated with the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function favorite(): HasMany
+    {
+        return $this->hasMany(Favorite::class);
     }
 }

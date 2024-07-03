@@ -122,20 +122,19 @@
                                 <div class="result mb-6">
                                     <p><strong style="font-size: 1.5rem">1</strong> <span>Barang</span></p>
                                 </div>
-                                @forelse ($product as $item)
-
+                                @forelse ($favorite as $item)
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="product-wrapper" data-aos="fade-up">
                                         <div class="product-img">
-                                            <img src="{{ asset("storage/{$item->thumbnail}") }}" alt="product-img"
+                                            <img src="{{ asset("storage/".$item->product->thumbnail) }}" alt="product-img"
                                                 class="object-fit-cover">
                                         </div>
                                         <div class="product-info">
                                             <div class="product-description">
-                                                <a href="" class="product-details">{{ $item->title }}
+                                                <a href="" class="product-details">{{ $item->product->title }}
                                                 </a>
                                                 <div class="price">
-                                                    <span class="new-price">Rp {{ number_format($item->price, 0, ',', '.') }}</span>
+                                                    <span class="new-price">Rp {{ number_format($item->product->price, 0, ',', '.') }}</span>
                                                 </div>
                                             </div>
                                         </div>
