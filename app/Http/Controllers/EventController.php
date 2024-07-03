@@ -50,7 +50,11 @@ class EventController extends Controller
                 'foto' => $path_gambar,
             ]);
 
-            return redirect()->back()->with('success', 'Event berhasil ditambahkan');
+            if ($request->ajax()) {
+                return response("Sukses menambah data");
+            } else {
+                return redirect()->back()->with('success', 'Event berhasil ditambahkan');
+            }
         } catch (\Throwable $th) {
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
         }
@@ -83,8 +87,8 @@ class EventController extends Controller
         $oldPhotoPath = $event->foto;
 
         $dataToUpdate = [
-            'judul' => $request->input('judul_update'),
-            'subjudul' => $request->input('subjudul_update'),
+            'judul' => $request->input('judul'),
+            'subjudul' => $request->input('subjudul'),
         ];
 
         if ($request->hasFile('foto_update')) {
@@ -104,7 +108,11 @@ class EventController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Event berhasil diperbarui');
+        if ($request->ajax()) {
+            return response("Sukses mengubah data");
+        } else {
+            return redirect()->back()->with('success', 'Event berhasil diperbarui');
+        }
     } catch (\Throwable $th) {
         return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
     }
@@ -113,7 +121,7 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event $event)
+    public function destroy(Request $request, Event $event)
     {
         try {
             if (Storage::disk('public')->exists($event->foto)) {
@@ -122,7 +130,11 @@ class EventController extends Controller
 
             $event->delete();
 
+        if ($request->ajax()) {
+            return response("Sukses menghapus data");
+        } else {
             return redirect()->route('event.index')->with('success', 'Event berhasil dihapus');
+        }
         } catch (\Throwable $th) {
             return redirect()->back()->withErrors(['error' => $th->getMessage()]);
         }

@@ -48,7 +48,7 @@
         </thead>
         <tbody class="table-border-bottom-0"></tbody>
       </table>
-            <table class="table">
+          {{--  <table class="table">
                 <thead class="table-light">
                     <tr>
                         <th>No.</th>
@@ -97,7 +97,7 @@
                         </tr>
                     @endforeach
                 </tbody>
-            </table>
+            </table> --}}
             <div class="modal fade" tabindex="-1" id="tambahModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -160,7 +160,7 @@
                 </div>
             </div>
 
-            @foreach ($event as $key => $even)
+          {{--  @foreach ($event as $key => $even)
                 <div class="modal fade" tabindex="-1" id="editModal{{ $even->id }}">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -227,10 +227,71 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @endforeach --}}
 
         </div>
     </div>
+                <div class="modal fade" tabindex="-1" id="editModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit Kategori</h6>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('admin.event.update', ':id:') }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <div class="mb-3">
+                                        <label for="judul_update" class="form-label">Judul</label>
+                                        <input type="text"
+                                            class="form-control @error('judul_update') is-invalid @enderror"
+                                            id="judul_update" name="judul"
+                                            value="">
+                                        @error('judul_update')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="subjudul_update" class="form-label">Sub Judul</label>
+                                        <textarea type="text" class="form-control @error('subjudul_update') is-invalid @enderror" id="subjudul_update"
+                                            name="subjudul"></textarea>
+                                        @error('subjudul_update')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="foto_update" class="form-label">Foto Cover</label>
+                                        <input type="file"
+                                            class="form-control @error('foto_update') is-invalid @enderror"
+                                            id="foto_update" name="foto_update" />
+
+                                            <img src="#" class="w-100 mt-3 rounded-3" id="logo_image" alt="" />
+                                        @error('foto_update')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn"
+                                    style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">Simpan</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
     <!-- Bootstrap Table with Header - Light -->
 @endsection
 
