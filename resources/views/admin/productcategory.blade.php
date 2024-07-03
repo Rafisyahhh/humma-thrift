@@ -215,29 +215,15 @@
     </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
   <script src="{{ asset('additional-assets/datatables/datatables.min.js') }}"></script>
   <script src="{{ asset('additional-assets/datatables/datatables-button.min.js') }}"></script>
   <script src="{{ asset('additional-assets/datatables/datatables-responsive.min.js') }}"></script>
   <script src="{{ asset('additional-assets/datatables/datatables-stateRestore.min.js') }}"></script>
   <script src="{{ asset('js/AjaxDataTable.js') }}"></script>
-  <script>
-    function confirmDeletion(callback) {
-      Swal.fire({
-        title: "Apa kamu yakin?",
-        text: "Anda tidak akan dapat mengembalikan ini!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Ya, Hapus"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          callback();
-        }
-      });
-    }
-  </script>
+@endpush
+
+@push("js")
   <script type="text/javascript">
     const {
       table
@@ -322,4 +308,4 @@
       table.search($(this).find("input[name='search']").val()).draw();
     });
   </script>
-@endsection
+@endpush

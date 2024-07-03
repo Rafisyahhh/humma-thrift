@@ -104,7 +104,7 @@ class ProductCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductCategory $productCategory)
+    public function destroy(Request $request, ProductCategory $productCategory)
     {
         if (Storage::disk('public')->exists($productCategory->getAttribute('icon'))) {
             Storage::disk('public')->delete($productCategory->getAttribute('icon'));

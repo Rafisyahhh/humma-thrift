@@ -169,9 +169,6 @@
     <!-- Vendors JS -->
     <script src="{{ asset('additional-assets/sweetalert2-11.12.0/sweetalert2.all.js') }}"></script>
 
-    @stack('scripts')
-    @yield('scripts')
-
     <!-- Main JS -->
     <script src="{{ asset('template-assets/admin/assets/js/main.js') }}"></script>
 
@@ -179,19 +176,36 @@
     <script src="{{ asset('template-assets/admin/assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
     <script src="{{ asset('template-assets/admin/assets/js/app-ecommerce-dashboard.js') }}"></script>
 
+    @stack('scripts')
+    @yield('scripts')
 
     <!-- Vendors JS -->
     @include('components.sweetalert')
 
-    @yield('js')
-    @stack('js')
     <script>
+      function confirmDeletion(callback) {
+        Swal.fire({
+          title: "Apa kamu yakin?",
+          text: "Anda tidak akan dapat mengembalikan ini!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ya, Hapus"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            callback();
+          }
+        });
+      }
       $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': '{{ csrf_token() }}'
         }
       });
     </script>
+    @yield('js')
+    @stack('js')
   </body>
 
 </html>
