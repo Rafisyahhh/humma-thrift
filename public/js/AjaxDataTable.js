@@ -25,6 +25,7 @@ $.fn.AjaxDataTable = function (config) {
     onSuccess: deleteSuccess
   } = onDelete || {};
   let firstLoad = true;
+  var editUrl = editModal?.find("form").attr("action")
 
   $.fn.dataTable.ext.buttons.create = {
     text: createText,
@@ -100,13 +101,10 @@ $.fn.AjaxDataTable = function (config) {
   table.on("click", "button.edit", function () {
     const data = table.row($(this).closest("tr")).data();
     const { id } = data;
-    console.log(id)
     editModal.find("form [name]").not('[type="file"]').not('[name^="_"]').each(function () {
       $(this).val(data[$(this).attr("name")]);
     });
-    const editUrl = editModal.find("form").attr("action");
     editModal.find("form").attr("action", editUrl?.replace(":id:", id));
-    console.log(editModal.find("form").attr("action"))
     editOnClick?.(editModal.find("form"), data);
     editModal.modal("toggle");
   });

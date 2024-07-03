@@ -27,7 +27,7 @@
         </thead>
         <tbody class="table-border-bottom-0"></tbody>
       </table>
-            <table class="table">
+            {{-- <table class="table">
                 <thead class="table-light">
                     <tr>
                         <th>No</th>
@@ -66,7 +66,7 @@
                         </tr>
                     @endforeach
                 </tbody>
-            </table>
+            </table> --}}
         </div>
     </div>
     <!-- Tabel -->
@@ -244,7 +244,7 @@
     } = $('.yajra-datatable').AjaxDataTable({
       onCreate: {
         modal: $('#tambahModal'),
-        text: 'Tambahkan Brand',
+        text: 'Tambahkan Kategori',
         className: 'btn ms-4'
       },
       onEdit: {
