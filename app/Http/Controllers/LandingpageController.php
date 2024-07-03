@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\auctions;
 use App\Models\Brand;
 use App\Models\event;
 use App\Models\Product;
@@ -48,8 +49,9 @@ class LandingpageController extends Controller
         $product_auction = ProductAuction::paginate(24);
         $brands = Brand::all();
         $categories = ProductCategory::all();
+        $auctions = auctions::all();
 
-        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories'));
+        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories','auctions'));
     }
 
     // Tambahkan metode regular
@@ -65,5 +67,12 @@ class LandingpageController extends Controller
     public function store(){
         $store = UserStore::all();
         return view('landing.toko', compact('store'));
+    }
+
+    public function wishlist(){
+        $categories = ProductCategory::all();
+        $brands = Brand::all();
+        $product = Product::all();
+        return view('user.wishlist', compact('categories','brands','product'));
     }
 }

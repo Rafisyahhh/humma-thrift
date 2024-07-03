@@ -2,69 +2,42 @@
 
 @section('title', 'Merk')
 
+@push('style')
+  {{-- <link rel="stylesheet" href="{{ asset('additional-assets/datatables/datatables.min.css') }}"> --}}
+  <style>
+    .btn {
+      background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%);
+      color: #fff;
+    }
+
+    .dt-info {
+      margin-left: 10%;
+    }
+
+    div.dt-container div.dt-paging {
+      margin: 0;
+      margin-right: 10%;
+      margin-left: -10%;
+    }
+  </style>
+@endpush
+
 @section('content')
   <!-- Bootstrap Table with Header - Light -->
   <div class="card">
     <h5 class="card-header">Daftar Brand</h5>
-    <div class="card-header d-flex justify-content-between align-items-center">
-
-      <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
-        style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">
-        Tambahkan Brand
-      </a>
-      <form action="{{ route('admin.brand.index') }}" method="get">
-        <div class="input-group mb-3">
-          <input type="search" name="search" class="form-control" placeholder="Cari Brand&hellip;"
-            value="{{ old('search', request('search')) }}" />
-          <button type="submit" class="btn"
-            style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">Cari</button>
-        </div>
-      </form>
-
-    </div>
 
     <div class="table-responsive text-nowrap">
-      <table class="table">
+      <table class="table yajra-datatable w-100">
         <thead class="table-light">
           <tr>
-            <th>No.</th>
-            <th>Nama Brand</th>
-            <th>Logo</th>
-            <th>Actions</th>
+            <th class="text-start">NO.</th>
+            <th class="text-start">NAMA BRAND</th>
+            <th class="text-start">LOGO</th>
+            <th class="text-center">AKSI</th>
           </tr>
         </thead>
-        <tbody class="table-border-bottom-0">
-          @forelse ($brands as $brand)
-            <tr>
-              <td>{{ $loop->iteration }}</td>
-              <td>{{ $brand->title }}</span></td>
-              <td><img src="{{ asset("storage/{$brand->logo}") }}" class="rounded-3" height="96px"></td>
-              <td>
-                <button type="button" class="badge bg-label-warning me-1 border-0" style="background: none"
-                  data-bs-toggle="modal" data-bs-target="#editModal{{ $brand->id }}">
-                  <i class="ti ti-pencil"></i>
-                </button>
-                <form id="delete-form-{{ $brand->id }}"
-                  action="{{ route('admin.brand.destroy', ['brand' => $brand->id]) }}" method="POST"
-                  style="display:inline"> 
-                  @csrf
-                  @method('DELETE')
-                  <button type="button" style="background: none" class="badge bg-label-danger me-1 border-0"
-                    onclick="confirmDeletion({{ $brand->id }});">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
-                      <path fill="#FA7070"
-                        d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
-                    </svg>
-                  </button>
-                </form>
-              </td>
-            </tr>
-          @empty
-            <tr>
-              <td colspan="5" class="text-center">Tidak ada data</td>
-            </tr>
-          @endforelse
-        </tbody>
+        <tbody class="table-border-bottom-0"></tbody>
       </table>
       <div class="modal fade" tabindex="-1" id="tambahModal">
         <div class="modal-dialog">
@@ -116,7 +89,7 @@
         </div>
       </div>
 
-      @foreach ($brands as $key => $brand)
+      {{-- @foreach ($brands as $key => $brand)
         <div class="modal fade" tabindex="-1" id="editModal{{ $brand->id }}">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -125,15 +98,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form action="{{ route('admin.brand.update', $brand->id) }}" method="POST"
-                  enctype="multipart/form-data">
+                <form action="{{ route('admin.brand.update', $brand->id) }}" method="POST" enctype="multipart/form-data">
                   @csrf
                   @method('PUT')
 
                   <div class="mb-3">
                     <label for="title" class="form-label">Nama Brand</label>
-                    <input type="text" class="form-control @error('title_update') is-invalid @enderror"
-                      id="title" name="title_update" value="{{ old('title_update', $brand->title) }}">
+                    <input type="text" class="form-control @error('title_update') is-invalid @enderror" id="title"
+                      name="title_update" value="{{ old('title_update', $brand->title) }}">
                     @error('title_update')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -142,8 +114,8 @@
                   </div>
                   <div class="mb-3">
                     <label for="logo" class="form-label">Foto Cover</label>
-                    <input type="file" class="form-control @error('logo_update') is-invalid @enderror"
-                      id="logo" name="logo_update" />
+                    <input type="file" class="form-control @error('logo_update') is-invalid @enderror" id="logo"
+                      name="logo_update" />
 
                     @if ($brand->logo)
                       <img src="{{ asset('storage/' . $brand->logo) }}" class="w-100 mt-3 rounded-3"
@@ -167,18 +139,63 @@
             </div>
           </div>
         </div>
-      @endforeach
-
+      @endforeach --}}
+      <div class="modal fade" tabindex="-1" id="editModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit Kategori</h6>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="{{ route('admin.brand.update', ':id:') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="mb-3">
+                  <label for="title" class="form-label">Nama Brand</label>
+                  <input type="text" class="form-control @error('title') is-invalid @enderror" id="title_edit"
+                    name="title" value="test">
+                  @error('title')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+                <div class="mb-3">
+                  <label for="logo" class="form-label">Foto Cover</label>
+                  <input type="file" class="form-control @error('logo') is-invalid @enderror" id="logo_edit"
+                    name="logo" value="" />
+                  <img src="" class="w-100 mt-3 rounded-3" alt="" id="logo_image" />
+                  @error('logo')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+                <div class="pt-2 d-flex gap-3 justify-content-end">
+                  <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                  <button type="submit" class="btn btn"
+                    style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">Simpan</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <br>
-  {{ $brands->links() }}
-  <!-- Bootstrap Table with Header - Light -->
 @endsection
 
 @section('scripts')
+  <script src="{{ asset('additional-assets/datatables/datatables.min.js') }}"></script>
+  <script src="{{ asset('additional-assets/datatables/datatables-button.min.js') }}"></script>
+  <script src="{{ asset('additional-assets/datatables/datatables-responsive.min.js') }}"></script>
+  <script src="{{ asset('additional-assets/datatables/datatables-stateRestore.min.js') }}"></script>
+  <script src="{{ asset('js/jquery.form.min.js') }}"></script>
+  <script src="{{ asset('js/formSubmit.js') }}"></script>
+  <script src="{{ asset('js/ajaxDataTable.js') }}"></script>
   <script>
-    function confirmDeletion(brandId) {
+    function confirmDeletion(callback) {
       Swal.fire({
         title: "Apa kamu yakin?",
         text: "Anda tidak akan dapat mengembalikan ini!",
@@ -189,9 +206,98 @@
         confirmButtonText: "Ya, Hapus"
       }).then((result) => {
         if (result.isConfirmed) {
-          document.getElementById('delete-form-' + brandId).submit();
+          callback();
         }
       });
     }
+  </script>
+  <script type="text/javascript">
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+      }
+    });
+    const {
+      table
+    } = $('.yajra-datatable').ajaxDataTable({
+      onCreate: {
+        modal: $('#tambahModal'),
+        text: 'Tambahkan Brand',
+        className: 'btn ms-4'
+      },
+      onEdit: {
+        modal: $('#editModal'),
+        onClick: (form, data) => {
+          form.find('img#logo_image').attr('src', `{{ asset('storage/') }}/${data.logo}`)
+        }
+      },
+      onDelete: {
+        modal: $('#editModal'),
+        url: '{{ route('admin.brand.destroy', ':id:') }}',
+        onClick: ($delete) => {
+          confirmDeletion(() => {
+            $delete()
+          });
+        }
+      },
+      options: {
+        layout: {
+          topStart: {
+            buttons: ["create"]
+          },
+          topEnd: $(`<form action="#" method="get" id="search" class="me-4">
+            <div class="input-group mb-3">
+              <input type="search" name="search" class="form-control" placeholder="Cari Brand&hellip;"
+                value="{{ old('search', request('search')) }}" />
+              <button type="submit" class="btn"
+                style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">Cari</button>
+            </div>
+          </form>`),
+          bottomStart: {
+            info: {
+              text: 'Menampilkan _START_ dari _END_ hasil'
+            }
+          },
+        }
+      },
+      ajax: "{{ route('yajra.getBrand') }}",
+      columns: [{
+          data: 'DT_RowIndex',
+          orderable: false,
+          searchable: false,
+        },
+        {
+          data: 'title',
+        },
+        {
+          data: 'logo',
+          orderable: false,
+          searchable: false,
+          render: (data, type) => `<img src="{{ asset('storage/') }}/${data}" class="rounded-3" height="96px">`
+        },
+        {
+          data: 'id',
+          className: 'text-center',
+          orderable: false,
+          searchable: false,
+          render: (data, type) => {
+            const editButton = `<button type="button" class="badge bg-label-warning me-1 border-0 edit" style="background: none">
+              <i class="ti ti-pencil"></i>
+            </button>`;
+            const deleteButton = `<button type="button" class="badge bg-label-danger me-1 border-0 delete" style="background: none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
+                <path fill="#FA7070" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
+              </svg>
+            </button>`;
+            return editButton + deleteButton;
+          }
+        }
+      ]
+    });
+
+    $("#search").submit(function(e) {
+      e.preventDefault();
+      table.search($(this).find("input[name='search']").val()).draw();
+    });
   </script>
 @endsection

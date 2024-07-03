@@ -14,7 +14,8 @@ class ProductController extends Controller {
      */
     public function index() {
         $product_category_pivots = ProductCategoryPivot::all();
-        $auctions = auctions::all();
+        $auctions = Auctions::orderBy('auction_price', 'desc')->orderBy('created_at', 'asc')->get();
+
         $products = Product::where("store_id", Auth::user()->store()->first()->id)->get();
         $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get();
 
@@ -68,8 +69,9 @@ class ProductController extends Controller {
         $product_category_pivots = ProductCategoryPivot::all();
         $products = Product::where("store_id", Auth::user()->store()->first()->id)->get();
         $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get();
+        $auctions = Auctions::orderBy('created_at', 'asc')->orderBy('auction_price', 'desc')->get();
 
-        return view('seller.produk', compact('product_category_pivots', 'products', 'product_auctions'));
+        return view('seller.produk', compact('auctions','product_category_pivots', 'products', 'product_auctions'));
     }
 
     /**
