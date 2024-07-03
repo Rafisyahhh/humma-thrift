@@ -284,6 +284,14 @@
                                 </span>
                             </button>
                         </form>
+                        <form action="{{ route('storecart', $item ->id) }}" method="POST">
+                            @csrf
+                            <button class="favourite cart-item">
+                                <span>
+                                    <i class="fas fa-shopping-cart"></i>
+                                </span>
+                            </button>
+                        </form>
                       <a href="/user/checkout" class="favourite cart-item">
                         <span>
                           <i class="fas fa-shopping-cart"></i>

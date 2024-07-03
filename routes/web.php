@@ -8,6 +8,7 @@ use App\Http\Controllers\{
     AuctionsController,
     UserController,
     BrandController,
+    CartController,
     CheckoutController,
     DashboardUserController,
     EventController,
@@ -129,6 +130,7 @@ Route::get('about-us', [AboutUsController::class, 'landingpage']);
 Route::view('news', 'landing.detailNews');
 Route::view('/regstrasi','afterregister');
 Route::post('/product/storesproduct/{product}', [FavoriteController::class, 'storesproduct'])->name('storesproduct');
+Route::post('/product/storecart/{product}',[CartController::class, 'storecart'])->name('storecart');
 
 
 # Home Redirect
