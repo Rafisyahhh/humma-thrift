@@ -27,7 +27,7 @@ Route::middleware('auth')->name("api.")->group(function () {
     Route::delete('/brand/{brand}', [BrandApiController::class, 'deleteBrand'])->name("deleteBrand");
 });
 Route::prefix('yajra')->name('yajra.')->group(function () {
-    Route::get('/user', [YajraController::class, 'getUser']);
+    Route::get('/user', [YajraController::class, 'users'])->name("users");
     Route::get('/brand', [YajraController::class, 'brands'])->name("brands");
     Route::get('/category', [YajraController::class, 'categories'])->name("categories");
 });

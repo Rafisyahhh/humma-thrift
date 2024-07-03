@@ -17,15 +17,15 @@ class UserController extends Controller
      */
     public function index(Request $request, User $user)
     {
-        $search = $request->input('search');
+        /*$search = $request->input('search');
         $role = $request->input('role');
 
         $users = User::when($search, fn ($query) => $query->where('email', 'LIKE', "%$search%"))
             ->when($role === 'user', fn ($query) => $query->whereHas('roles', fn ($q) => $q->where('name', $role))->orderBy('created_at', 'asc'))
             ->when($role === 'seller', fn ($query) => $query->has('store'))
             ->paginate(10);
-
-        return view('admin.user', compact('users'));
+*/
+        return view('admin.user'/*, compact('users')*/);
     }
 
     /**
@@ -106,12 +106,17 @@ class UserController extends Controller
      *
      * @return RedirectResponse
      */
-    public function destroy(User $user):RedirectResponse
+    public function destroy(Request $request, User $user)
     {
-
-        if (Storage::disk('public')->exists($user->nic_photo)) Storage::disk('public')->delete($user->nic_photo);
+        if (isset($user->nic_photo)) {
+            if (Storage::disk('public')->exists($user->nic_photo)) Storage::disk('public')->delete($user->nic_photo);
+        }
         $user->delete();
 
-        return redirect()->route('user.index')->with('success', 'Pengguna berhasil di hapus');
+        if ($request->ajax()) {
+            return response("Sukses menghapus data");
+        } else {
+            return redirect()->back()->with('success', 'Pengguna berhasil di hapus');
+        }
     }
 }
