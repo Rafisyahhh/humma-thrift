@@ -3,21 +3,10 @@
 @section('title', 'Merk')
 
 @push('style')
-  {{-- <link rel="stylesheet" href="{{ asset('additional-assets/datatables/datatables.min.css') }}"> --}}
   <style>
     .btn {
       background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%);
       color: #fff;
-    }
-
-    .dt-info {
-      margin-left: 10%;
-    }
-
-    div.dt-container div.dt-paging {
-      margin: 0;
-      margin-right: 10%;
-      margin-left: -10%;
     }
   </style>
 @endpush
@@ -186,40 +175,19 @@
   </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
   <script src="{{ asset('additional-assets/datatables/datatables.min.js') }}"></script>
   <script src="{{ asset('additional-assets/datatables/datatables-button.min.js') }}"></script>
   <script src="{{ asset('additional-assets/datatables/datatables-responsive.min.js') }}"></script>
   <script src="{{ asset('additional-assets/datatables/datatables-stateRestore.min.js') }}"></script>
-  <script src="{{ asset('js/jquery.form.min.js') }}"></script>
-  <script src="{{ asset('js/formSubmit.js') }}"></script>
-  <script src="{{ asset('js/ajaxDataTable.js') }}"></script>
-  <script>
-    function confirmDeletion(callback) {
-      Swal.fire({
-        title: "Apa kamu yakin?",
-        text: "Anda tidak akan dapat mengembalikan ini!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Ya, Hapus"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          callback();
-        }
-      });
-    }
-  </script>
+  <script src="{{ asset('js/AjaxDataTable.js') }}"></script>
+@endpush
+
+@push("js")
   <script type="text/javascript">
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-      }
-    });
     const {
       table
-    } = $('.yajra-datatable').ajaxDataTable({
+    } = $('.yajra-datatable').AjaxDataTable({
       onCreate: {
         modal: $('#tambahModal'),
         text: 'Tambahkan Brand',
@@ -260,7 +228,7 @@
           },
         }
       },
-      ajax: "{{ route('yajra.getBrand') }}",
+      ajax: "{{ route('yajra.brands') }}",
       columns: [{
           data: 'DT_RowIndex',
           orderable: false,
@@ -300,4 +268,4 @@
       table.search($(this).find("input[name='search']").val()).draw();
     });
   </script>
-@endsection
+@endpush

@@ -146,7 +146,9 @@
                                                         <p class="mb-1" style="font-size: 17px; margin: 0;">
                                                             <b style="font-size: 17px;">{{$users->username}}</b> | +{{$users->phone}}
                                                         </p>
-                                                        <button type="button" class="openModalUpdate" style="color: blue; background: none; border: none; padding: 0; cursor: pointer; margin-left: 10px;">Ubah</button>
+                                                        <button type="button" class="openModalUpdate" data-modal-id="updateModal{{$address->id}}" style="color: blue; background: none; border: none; padding: 0; cursor: pointer; margin-left: 10px;">
+                                                            Ubah
+                                                        </button>
                                                     </div>
                                                     <p style="font-size: 15px; margin: 5px 0;">
                                                         {{$address->address}}
@@ -220,8 +222,13 @@
                         <div class="review-form-name mb-2">
                             <label for="address" class="form-label"
                                 style="background-color: white; font-size: 18px">Alamat</label>
-                            <textarea type="text" name="address" id="address" class="form-control" placeholder="Tambahkan Alamat"
+                            <textarea type="text" name="address" id="address" class="form-control @error('address') is-invalid @enderror" placeholder="Tambahkan Alamat"
                                 rows="5" style=" font-size: 15px"></textarea>
+                                @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div>
                     </div>
                     <div style="display: flex; justify-content: flex-end;">
@@ -232,35 +239,44 @@
         </div>
     </div>
 
-
-    {{-- update Modal --}}
-    <div id="updateModal" class="modal">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <h5 class="mb-5" style="text-align: center">Ubah Alamat</h5>
-            <div class="mx-5">
-                <form action="{{route('user.address.store', auth()->user()->id)}}" method="POST">
-                    @csrf
-                    <div class="account-inner-form">
-                        <div class="review-form-name mb-2">
-                            <label for="address" class="form-label"
-                                style="background-color: white; font-size: 18px">Alamat</label>
-                            <textarea type="text" name="address" id="address" class="form-control" placeholder="Tambahkan Alamat"
-                                rows="5" style=" font-size: 15px"></textarea>
-                        </div>
+    {{-- update address Modal --}}
+@foreach ($addresses as $key => $address)
+<div id="updateModal{{$address->id}}" class="modal">
+    <div class="modal-content">
+        <button class="close-modal">&times;</button>
+        <h5 class="mb-5" style="text-align: center">Ubah Alamat</h5>
+        <div class="mx-5">
+            <form action="{{route('user.address.edit', ['user' => auth()->user()->id, 'address' => $address->id])}}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="account-inner-form">
+                    <div class="review-form-name mb-2">
+                        <label for="address_update" class="form-label" style="background-color: white; font-size: 18px">Alamat</label>
+                        <textarea name="address_update" id="address_update" class="form-control @error('address_update') is-invalid @enderror" placeholder="Tambahkan Alamat" rows="5" style="font-size: 15px">{{ $address->address }}</textarea>
+                        @error('address_update')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    <div style="display: flex; justify-content: flex-end;">
-                        <button class="shop-btn" type="submit" style="width: 20rem;">Ubah Alamat</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div style="display: flex; justify-content: flex-end;">
+                    <button class="shop-btn" type="submit" style="width: 20rem;">Ubah Alamat</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
+@endforeach
+
 
 
 @endsection
 
 @push('script')
+
+        {{-- script modal tambah address --}}
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Get the modal element
@@ -290,36 +306,43 @@
             }
         });
 
-//update modal
-        document.addEventListener("DOMContentLoaded", function() {
-        // Get the modal element
-        var updateModal = document.getElementById("updateModal");
-
-        // Get all buttons that open the modal
-        var openUpdateModalBtns = document.querySelectorAll(".openModalUpdate");
-
-        // Get the close button for the modal
-        var updateCloseBtn = updateModal.querySelector(".close-modal");
-
-        // When the user clicks any button, open the modal
-        openUpdateModalBtns.forEach(function(btn) {
-            btn.onclick = function() {
-                updateModal.style.display = "block";
-            }
-        });
-
-        // When the user clicks on close button in the modal, close the modal
-        updateCloseBtn.onclick = function() {
-            updateModal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close the modal
-        window.onclick = function(event) {
-            if (event.target == updateModal) {
-                updateModal.style.display = "none";
-            }
-        }
-    });
-
     </script>
+
+
+    {{-- script modal edit address --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get all buttons that open the modal
+            var openUpdateModalBtns = document.querySelectorAll(".openModalUpdate");
+
+            // Loop through each button and attach event listeners
+            openUpdateModalBtns.forEach(function(btn) {
+                btn.addEventListener("click", function() {
+                    // Get the modal ID from data attribute
+                    var modalId = btn.getAttribute("data-modal-id");
+                    // Get the modal element
+                    var updateModal = document.getElementById(modalId);
+
+                    // Show the modal
+                    updateModal.style.display = "block";
+
+                    // Get the close button for the modal
+                    var updateCloseBtn = updateModal.querySelector(".close-modal");
+
+                    // When the user clicks on close button in the modal, close the modal
+                    updateCloseBtn.addEventListener("click", function() {
+                        updateModal.style.display = "none";
+                    });
+
+                    // When the user clicks anywhere outside of the modal, close the modal
+                    window.addEventListener("click", function(event) {
+                        if (event.target == updateModal) {
+                            updateModal.style.display = "none";
+                        }
+                    });
+                });
+            });
+        });
+        </script>
+
 @endpush

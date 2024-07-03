@@ -3,7 +3,7 @@
 use App\Http\Controllers\ApiControllers\BrandApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ApiControllers\UserApiController;
+use App\Http\Controllers\ApiControllers\YajraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +27,7 @@ Route::middleware('auth')->name("api.")->group(function () {
     Route::delete('/brand/{brand}', [BrandApiController::class, 'deleteBrand'])->name("deleteBrand");
 });
 Route::prefix('yajra')->name('yajra.')->group(function () {
-    Route::get('/user', [UserApiController::class, 'getUser']);
-    Route::get('/brand', [BrandApiController::class, 'yajraGetBrand'])->name("getBrand");
+    Route::get('/user', [YajraController::class, 'getUser']);
+    Route::get('/brand', [YajraController::class, 'brands'])->name("brands");
+    Route::get('/category', [YajraController::class, 'categories'])->name("categories");
 });
