@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
+use App\Models\event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +16,7 @@ class EventController extends Controller
      */
     public function index(Request $request)
     {
-        $event = Event::when($request->has('search'), function ($query) use ($request) {
+        $event = event::when($request->has('search'), function ($query) use ($request) {
             $searchTerm = $request->input('search');
             return $query->where('title', 'LIKE', "%$searchTerm%");
         })->paginate(5);

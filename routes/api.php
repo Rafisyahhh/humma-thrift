@@ -30,4 +30,6 @@ Route::prefix('yajra')->name('yajra.')->group(function () {
     Route::get('/user', [YajraController::class, 'users'])->name("users");
     Route::get('/brand', [YajraController::class, 'brands'])->name("brands");
     Route::get('/category', [YajraController::class, 'categories'])->name("categories");
+    Route::get('/event', [YajraController::class, 'events'])->name("events");
+    Route::get('/product', [YajraController::class, 'products'])->name("products");
 });
