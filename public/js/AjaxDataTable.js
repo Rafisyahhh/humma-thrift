@@ -1,4 +1,4 @@
-$.fn.ajaxDataTable = function (config) {
+$.fn.AjaxDataTable = function (config) {
   const {
     options,
     onCreate,

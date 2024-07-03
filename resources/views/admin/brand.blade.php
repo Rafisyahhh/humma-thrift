@@ -3,21 +3,10 @@
 @section('title', 'Merk')
 
 @push('style')
-  {{-- <link rel="stylesheet" href="{{ asset('additional-assets/datatables/datatables.min.css') }}"> --}}
   <style>
     .btn {
       background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%);
       color: #fff;
-    }
-
-    .dt-info {
-      margin-left: 10%;
-    }
-
-    div.dt-container div.dt-paging {
-      margin: 0;
-      margin-right: 10%;
-      margin-left: -10%;
     }
   </style>
 @endpush
@@ -193,7 +182,7 @@
   <script src="{{ asset('additional-assets/datatables/datatables-stateRestore.min.js') }}"></script>
   <script src="{{ asset('js/jquery.form.min.js') }}"></script>
   <script src="{{ asset('js/formSubmit.js') }}"></script>
-  <script src="{{ asset('js/ajaxDataTable.js') }}"></script>
+  <script src="{{ asset('js/AjaxDataTable.js') }}"></script>
   <script>
     function confirmDeletion(callback) {
       Swal.fire({
@@ -212,14 +201,9 @@
     }
   </script>
   <script type="text/javascript">
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-      }
-    });
     const {
       table
-    } = $('.yajra-datatable').ajaxDataTable({
+    } = $('.yajra-datatable').AjaxDataTable({
       onCreate: {
         modal: $('#tambahModal'),
         text: 'Tambahkan Brand',

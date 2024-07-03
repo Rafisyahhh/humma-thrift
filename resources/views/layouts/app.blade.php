@@ -73,6 +73,15 @@
       .menu-item.active {
         background-color: #0000;
       }
+      .dt-info {
+        margin-left: 10%;
+      }
+
+      div.dt-container div.dt-paging {
+        margin: 0;
+        margin-right: 10%;
+        margin-left: -10%;
+      }
     </style>
 
     <!-- Page CSS -->
@@ -176,6 +185,13 @@
 
     @yield('js')
     @stack('js')
+    <script>
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+      });
+    </script>
   </body>
 
 </html>
