@@ -87,6 +87,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
         Route::get('/', [DashboardUserController::class, 'dashboard'])->name('userhome');
         Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
         Route::post('address/{id}', [UserAddressController::class, 'store'])->name('address.store');
+        Route::put('edit/address/{user}/{address}', [UserAddressController::class, 'edit'])->name('address.edit');
         Route::view('about', 'user.tentang')->name('about');
         Route::get('brand', [LandingpageController::class, 'brand'])->name('brand');
         Route::view('detail', 'user.detail')->name('detail');
