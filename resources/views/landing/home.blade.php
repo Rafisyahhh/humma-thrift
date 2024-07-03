@@ -276,11 +276,14 @@
                   <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover">
                   <div class="product-cart-items">
                     <div class="product-cart-items">
-                      <a href="/user/wishlist" class="favourite cart-item">
-                        <span>
-                          <i class="fas fa-heart"></i>
-                        </span>
-                      </a>
+                        <form action="{{ route('storesproduct', $item->id) }}" method="POST">
+                            @csrf
+                            <button class="favourite cart-item">
+                                <span>
+                                    <i class="fas fa-heart"></i>
+                                </span>
+                            </button>
+                        </form>
                       <a href="/user/checkout" class="favourite cart-item">
                         <span>
                           <i class="fas fa-shopping-cart"></i>

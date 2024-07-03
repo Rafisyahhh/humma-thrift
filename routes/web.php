@@ -21,6 +21,7 @@ use App\Http\Controllers\{
     ProductController,
     RedirectUserController,
     DetailProductController,
+    FavoriteController,
     HistoryController,
     ProductAdminController,
     UserAddressController,
@@ -127,6 +128,8 @@ Route::view('detail', 'landing.detail');
 Route::get('about-us', [AboutUsController::class, 'landingpage']);
 Route::view('news', 'landing.detailNews');
 Route::view('/regstrasi','afterregister');
+Route::post('/product/storesproduct/{product}', [FavoriteController::class, 'storesproduct'])->name('storesproduct');
+
 
 # Home Redirect
 Route::get('/home', RedirectUserController::class)->name('home');
