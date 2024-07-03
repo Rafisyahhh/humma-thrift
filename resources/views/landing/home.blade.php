@@ -8,6 +8,11 @@
             z-index: 10;
         }
 
+        .content-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
         .shape-decoration-wrapper {
             position: absolute;
             z-index: -1;
@@ -15,7 +20,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            margin-top: 70rem;
         }
 
         .shape-decoration-wrapper .svg-container {
@@ -89,34 +93,35 @@
         }
 
         .shape-decoration-wrapper .svg-container:nth-child(4) {
-            bottom: -105rem;
-            left: -40rem;
-            z-index: 2;
+            bottom: 0;
+            left: -5rem;
             top: unset;
-            height: 125rem;
-            width: 125rem;
+            height: 50rem;
+            z-index: 3;
+            width: 50rem;
         }
 
         .shape-decoration-wrapper .svg-container:nth-child(3) {
-            bottom: -105rem;
-            left: -40rem;
+            bottom: -125rem;
+            left: 36rem;
             z-index: 2;
             top: unset;
-            height: 125rem;
-            width: 125rem;
+            height: 50rem;
+            width: 50rem;
         }
 
         .shape-decoration-wrapper .svg-container:nth-child(2) {
-            bottom: -105rem;
-            left: -40rem;
-            z-index: 2;
+            bottom: -50rem;
+            right: 69rem;
             top: unset;
-            height: 125rem;
-            width: 125rem;
+            height: 25rem;
+            width: 25rem;
+            z-index: 3;
+            left: unset;
         }
 
         .shape-decoration-wrapper .svg-container:nth-child(10) {
-            bottom: -105rem;
+            bottom: -150rem;
             left: -40rem;
             z-index: 2;
             top: unset;
@@ -125,12 +130,13 @@
         }
 
         .shape-decoration-wrapper .svg-container:nth-child(11) {
-            bottom: -105rem;
-            left: -40rem;
+            bottom: -65rem;
+            right: 36rem;
             z-index: 2;
             top: unset;
-            height: 125rem;
-            width: 125rem;
+            height: 50rem;
+            width: 50rem;
+            left: unset;
         }
 
         .product-category {
