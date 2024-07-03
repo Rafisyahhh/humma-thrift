@@ -180,8 +180,6 @@
   <script src="{{ asset('additional-assets/datatables/datatables-button.min.js') }}"></script>
   <script src="{{ asset('additional-assets/datatables/datatables-responsive.min.js') }}"></script>
   <script src="{{ asset('additional-assets/datatables/datatables-stateRestore.min.js') }}"></script>
-  <script src="{{ asset('js/jquery.form.min.js') }}"></script>
-  <script src="{{ asset('js/formSubmit.js') }}"></script>
   <script src="{{ asset('js/AjaxDataTable.js') }}"></script>
   <script>
     function confirmDeletion(callback) {
@@ -244,7 +242,7 @@
           },
         }
       },
-      ajax: "{{ route('yajra.getBrand') }}",
+      ajax: "{{ route('yajra.brands') }}",
       columns: [{
           data: 'DT_RowIndex',
           orderable: false,

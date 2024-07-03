@@ -46,18 +46,14 @@ class ProductCategoryController extends Controller
      */
     public function store(StoreProductCategoryRequest $request)
     {
-        try {
-            $data = $request->validated();
-            $data['icon'] = $request->file('icon')->store('category-icon', 'public');
-            $this->productCategories->create($data);
+        $data = $request->validated();
+        $data['icon'] = $request->file('icon')->store('category-icon', 'public');
+        $this->productCategories->create($data);
 
+        if ($request->ajax()) {
+            return response("Sukses menambah data");
+        } else {
             return redirect()->back()->with('success', 'Kategori berhasil ditambahkan');
-        } catch (\Throwable $th) {
-            Log::error($th->getMessage(), ['exception' => $th]);
-            return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
-        } catch (\Exception $e) {
-            Log::error($e->getMessage(), ['exception' => $e]);
-            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
@@ -83,31 +79,25 @@ class ProductCategoryController extends Controller
      */
     public function update(UpdateProductCategoryRequest $request, ProductCategory $productCategory)
     {
-        try {
-            // Put the validated data
-            $data = collect($request->validated());
+        $data = collect($request->validated());
 
-            // Substitute the last icon with new icon
-            if ($request->hasFile('icon')) {
-                if (Storage::disk('public')->exists($productCategory->getAttribute('icon'))) {
-                    Storage::disk('public')->delete($productCategory->getAttribute('icon'));
-                }
-
-                // Store the new icon
-                $data->put('icon', $request->file('icon')->store('category-icon', 'public'));
+        // Substitute the last icon with new icon
+        if ($request->hasFile('icon')) {
+            if (Storage::disk('public')->exists($productCategory->getAttribute('icon'))) {
+                Storage::disk('public')->delete($productCategory->getAttribute('icon'));
             }
 
-            // Update the category
-            $productCategory->update($data->toArray());
+                // Store the new icon
+            $data->put('icon', $request->file('icon')->store('category-icon', 'public'));
+        }
 
-            // Redirect back
+            // Update the category
+        $productCategory->update($data->toArray());
+
+        if ($request->ajax()) {
+            return response("Sukses mengubah data");
+        } else {
             return redirect()->back()->with('success', 'Kategori berhasil di ubah');
-        } catch (\Throwable $th) {
-            Log::error($th->getMessage(), ['exception' => $th]);
-            return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
-        } catch (\Exception $e) {
-            Log::error($e->getMessage(), ['exception' => $e]);
-            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
@@ -116,23 +106,17 @@ class ProductCategoryController extends Controller
      */
     public function destroy(ProductCategory $productCategory)
     {
-        try {
-            // Delete icon
-            if (Storage::disk('public')->exists($productCategory->getAttribute('icon'))) {
-                Storage::disk('public')->delete($productCategory->getAttribute('icon'));
-            }
+        if (Storage::disk('public')->exists($productCategory->getAttribute('icon'))) {
+            Storage::disk('public')->delete($productCategory->getAttribute('icon'));
+        }
 
-            // Delete the category
-            $productCategory->delete();
+        // Delete the category
+        $productCategory->delete();
 
-            // Redirect back
+        if ($request->ajax()) {
+            return response("Sukses menghapus data");
+        } else {
             return redirect()->back()->with('success', 'Kategori berhasil di hapus');
-        } catch (\Throwable $th) {
-            Log::error($th->getMessage(), ['exception' => $th]);
-            return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
-        } catch (\Exception $e) {
-            Log::error($e->getMessage(), ['exception' => $e]);
-            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
     }
 }
