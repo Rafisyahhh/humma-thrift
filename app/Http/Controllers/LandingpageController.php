@@ -54,11 +54,11 @@ class LandingpageController extends Controller
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $user = Auth::user();
-        $auctions = auctions::where('user_id', $user->id)->first();
+        // $auctions = auctions::where('user_id', $user->id)->first();
         // $notifications = auth()->user()->notifications;
 
 
-        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories','user','auctions'));
+        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories','user'));
     }
 
     // Tambahkan metode regular
