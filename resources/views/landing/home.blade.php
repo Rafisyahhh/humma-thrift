@@ -302,10 +302,10 @@
                 </div>
                 <div class="category-section">
                     @foreach ($categories as $kategori)
-                        <div class="product-wrapper" data-aos="fade-right" data-aos-duration="100">
-                            <div class="wrapper-img">
+                        <div class="product-wrapper p-0" data-aos="fade-right" data-aos-duration="100">
+                            <div class="wrapper-img p-0">
                                 <img src="{{ asset("storage/{$kategori->icon}") }}"
-                                    style="width:125px;hieght:125px;border-radius:20px;">
+                                    style="width:125px;hieght:125px;border-radius:20px;" class="h-100">
                             </div>
                             <div class="wrapper-info">
                                 <a href="" class="wrapper-details">{{ $kategori->title }}</a>
@@ -447,21 +447,21 @@
         </section>
 
         <section class="product brand" style="position: relative; z-index: 100;" data-aos="fade-up">
-            <div class="container" style="z-index: 1;">
-                <div class="section-title pt-5" style="position: relative; z-index: 1;">
+            <div class="container" style="z-index: 101;">
+                <div class="section-title pt-5" style="position: relative; z-index: 102;">
                     <h5>BRAND PRODUK</h5>
                     <a href="/brand" class="view">Lihat Semua</a>
                 </div>
                 <swiper-container slides-per-view="6" loop="true" navigation="false" space-between="30"
                     autoplay-delay="1000" autoplay-disable-on-interaction="false">
                     @foreach ($brands as $brand)
-                        <swiper-slide class="product py-0"
+                        <swiper-slide class="product p-0"
                             style="box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;border-radius: 20px;">
-                            <div class="wrapper-img">
-                                <a href="product-sidebar.html">
-                                    <img src="{{ asset("storage/{$brand->logo}") }}" alt="img"
+                            <div class="wrapper-img p-0">
+                                {{-- <a href="product-sidebar.html"> --}}
+                                    <img src="{{ asset("storage/{$brand->logo}") }}" alt="img" class="w-100 h-100"
                                         style="border-radius: 20px;">
-                                </a>
+                                {{-- </a> --}}
                             </div>
                         </swiper-slide>
                     @endforeach
