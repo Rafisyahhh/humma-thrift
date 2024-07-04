@@ -245,7 +245,7 @@
     }
 
     setupOrderButton($("#order-all"), "");
-    setupOrderButton($("#order-user"), ":Pengguna:");
-    setupOrderButton($("#order-seller"), ":Seller:");
+    setupOrderButton($("#order-user"), "Pengguna");
+    setupOrderButton($("#order-seller"), "Seller");
   </script>
 @endpush
