@@ -334,27 +334,45 @@
                                             class="object-fit-cover">
                                         <div class="product-cart-items">
                                             <div class="product-cart-items">
-                                                <form action="{{ route('storesproduct', $item->id) }}" method="POST">
-                                                    @csrf
-                                                    <button class="favourite cart-item">
+                                                @auth
+                                                    <form action="{{ route('storesproduct', $item->id) }}" method="POST">
+                                                        @csrf
+                                                        <button class="favourite cart-item">
+                                                            <span>
+                                                                <i class="fas fa-heart"></i>
+                                                            </span>
+                                                        </button>
+                                                    </form>
+                                                    <form action="{{ route('storecart', $item->id) }}" method="POST">
+                                                        @csrf
+                                                        <button class="favourite cart-item">
+                                                            <span>
+                                                                <i class="fas fa-shopping-cart"></i>
+                                                            </span>
+                                                        </button>
+                                                    </form>
+                                                    <a href="#" class="compaire cart-item">
+                                                        <span>
+                                                            <i class="fas fa-share"></i>
+                                                        </span>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('login') }}" class="favourite cart-item">
                                                         <span>
                                                             <i class="fas fa-heart"></i>
                                                         </span>
-                                                    </button>
-                                                </form>
-                                                <form action="{{ route('storecart', $item ->id) }}" method="POST">
-                                                    @csrf
-                                                    <button class="favourite cart-item">
+                                                    </a>
+                                                    <a href="{{ route('login') }}" class="favourite cart-item">
                                                         <span>
                                                             <i class="fas fa-shopping-cart"></i>
                                                         </span>
-                                                    </button>
-                                                </form>
-                                                <a href="#" class="compaire cart-item">
-                                                    <span>
-                                                        <i class="fas fa-share"></i>
-                                                    </span>
-                                                </a>
+                                                    </a>
+                                                    <a href="{{ route('login') }}" class="compaire cart-item">
+                                                        <span>
+                                                            <i class="fas fa-share"></i>
+                                                        </span>
+                                                    </a>
+                                                @endauth
                                             </div>
                                         </div>
                                     </div>
@@ -399,27 +417,45 @@
                                             class="object-fit-cover">
                                         <div class="product-cart-items">
                                             <div class="product-cart-items">
-                                                <form action="{{ route('storesproduct', $item->id) }}" method="POST">
-                                                    @csrf
-                                                    <button class="favourite cart-item">
+                                                @auth
+                                                    <form action="{{ route('storesproduct', $item->id) }}" method="POST">
+                                                        @csrf
+                                                        <button class="favourite cart-item">
+                                                            <span>
+                                                                <i class="fas fa-heart"></i>
+                                                            </span>
+                                                        </button>
+                                                    </form>
+                                                    <form action="{{ route('storecart', $item->id) }}" method="POST">
+                                                        @csrf
+                                                        <button class="favourite cart-item">
+                                                            <span>
+                                                                <i class="fas fa-shopping-cart"></i>
+                                                            </span>
+                                                        </button>
+                                                    </form>
+                                                    <a href="#" class="compaire cart-item">
+                                                        <span>
+                                                            <i class="fas fa-share"></i>
+                                                        </span>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('login') }}" class="favourite cart-item">
                                                         <span>
                                                             <i class="fas fa-heart"></i>
                                                         </span>
-                                                    </button>
-                                                </form>
-                                                <form action="{{ route('storecart', $item ->id) }}" method="POST">
-                                                    @csrf
-                                                    <button class="favourite cart-item">
+                                                    </a>
+                                                    <a href="{{ route('login') }}" class="favourite cart-item">
                                                         <span>
                                                             <i class="fas fa-shopping-cart"></i>
                                                         </span>
-                                                    </button>
-                                                </form>
-                                                <a href="#" class="compaire cart-item">
-                                                    <span>
-                                                        <i class="fas fa-share"></i>
-                                                    </span>
-                                                </a>
+                                                    </a>
+                                                    <a href="{{ route('login') }}" class="compaire cart-item">
+                                                        <span>
+                                                            <i class="fas fa-share"></i>
+                                                        </span>
+                                                    </a>
+                                                @endauth
                                             </div>
                                         </div>
                                     </div>

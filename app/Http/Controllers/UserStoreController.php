@@ -7,6 +7,7 @@ use App\Models\UserStore;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreUserStoreRequest;
 use App\Http\Requests\UpdateUserStoreRequest;
@@ -17,10 +18,14 @@ class UserStoreController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $store = UserStore::all();
-        $address = UserAddress::all();
-        $user = User::all();
+    {   
+        if (Auth::check()) {
+            $store = UserStore::all();
+            $address = UserAddress::all();
+            $user = User::all();
+        } else {
+            return redirect()->route('login')->with('error', 'Anda harus masuk untuk melihat informasi toko.');
+        }
         return view('seller.index', compact('store', 'address', 'user'));
     }
 
