@@ -64,14 +64,9 @@
                                                 alt="img">
                                         </div>
                                         @forelse ($cart as $item )
-
-                                        @empty
-
-                                        @endforelse
                                         <div class="wrapper-content"
                                             style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1;">
-                                            <h5 class="heading" style="font-size: 18px; ">Classic Design
-                                                Skart</h5>
+                                            <h5 class="heading" style="font-size: 18px; ">{{}}</h5>
                                             <div style="display: flex; align-items: center; margin-left: 0.5px; ">
                                                 <p>abc , def</p>
                                             </div>
