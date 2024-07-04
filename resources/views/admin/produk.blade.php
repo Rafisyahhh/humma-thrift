@@ -636,13 +636,12 @@
     function setupOrderButton(button, searchValue) {
       button.click(function(e) {
         e.preventDefault();
-        $("ul").find("li a").removeClass("active"); // Hapus kelas "active" dari semua tombol
-        $(this).addClass("active"); // Tambahkan kelas "active" ke tombol yang diklik
-        table.search(searchValue).draw(); // Lakukan pencarian berdasarkan nilai yang ditetapkan
+        $("ul").find("li a").removeClass("active");
+        $(this).addClass("active");
+        table.search(searchValue).draw();
       });
     }
 
-    // Setup klik untuk masing-masing tombol dengan nilai pencarian yang berbeda
     setupOrderButton($("#order-all"), "");
     setupOrderButton($("#order-user"), ":Product:");
     setupOrderButton($("#order-seller"), ":ProductAuction:");
