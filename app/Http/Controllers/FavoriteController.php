@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Favorite;
 use App\Models\Product;
+use App\Models\ProductAuction;
 use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
@@ -13,12 +14,23 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        $product = Product::where('user_id', auth()->id())
-                            ->whereNotNull('product_id')
-                            ->orderB('created_at')
-                            ->get();
+        $favorites = Favorite::where('user_id', auth()->id())
+                    ->whereNotNull('product_id')
+                    ->orderB('created_at')
+                    ->get();
 
-        return view('Landing.home', compact('product'));
+        // dd($favorites);
+        // $product = Product::where('user_id', auth()->id())
+        //                     ->whereNotNull('product_id')
+        //                     ->orderB('created_at')
+        //                     ->get();
+
+        // $productAuction = ProductAuction::where('user_id', auth()->id())
+        //                     ->whereNotNull('productAuction_id')
+        //                     ->orderB('created_at')
+        //                     ->get();
+
+        return view('Landing.home', compact('favorites'));
     }
 
     /**
@@ -35,6 +47,17 @@ class FavoriteController extends Controller
         $dataproduct['user_id'] = auth()->id();
 
         Favorite::create($dataproduct);
+
+        return redirect()->back()->with('success', 'Favorite created successfully.');
+    }
+
+    public function storesproductAuction(ProductAuction $productAuction)
+    {
+        $dataproduct_auction['product_auction_id'] = $productAuction->id;
+        $dataproduct_auction['user_id'] = auth()->id();
+
+        // dd($dataproduct_auction);
+        Favorite::create($dataproduct_auction);
 
         return redirect()->back()->with('success', 'Favorite created successfully.');
     }

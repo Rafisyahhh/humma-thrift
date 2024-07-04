@@ -75,11 +75,14 @@ class LandingpageController extends Controller
 
     public function wishlist(){
         $categories = ProductCategory::all();
-        $product_auction = Favorite::all();
         $brands = Brand::all();
         $product = Product::all();
         $favorite = Favorite::all();
-        return view('user.wishlist', compact('categories','brands','product', 'favorite', 'product_auction'));
+        // dd($favorite);
+        $product_auction = Favorite::whereNotNull('product_auction_id')->get();
+        $product_favorite = Favorite::whereNotNull('product_id')->get();
+        // dd($product_auction);
+        return view('user.wishlist', compact('categories','brands','product','favorite','product_auction', 'product_favorite'));
     }
 
     public function cart(){

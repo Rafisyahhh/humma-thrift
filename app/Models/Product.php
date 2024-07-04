@@ -41,7 +41,7 @@ class Product extends Model {
     /**
      * Get the favorite associated with the Product
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function favorite(): HasMany
     {
