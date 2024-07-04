@@ -10,7 +10,6 @@ use App\Models\Favorite;
 use App\Models\Product;
 use App\Models\ProductAuction;
 use App\Models\UserStore;
-use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 use Auth;
 

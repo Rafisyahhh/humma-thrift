@@ -21,6 +21,7 @@
                 <div>
                     <h5 class="cart-heading mt-4 pt-4 mb-4">Keranjang</h5>
                 </div>
+                @forelse ($carts as $item )
                 <div class="cart-section wishlist-section">
                     <table style="border-spacing: 10px; width: 100%;">
                         <tbody>
@@ -48,7 +49,7 @@
                                             style="border-color: #215791; margin-right: 2rem;">
                                         <i class="fa-solid fa-store"
                                             style="margin-right: 1rem; color: #215791; font-size: 2rem; margin-left:2rem;"></i>
-                                        <p style="font-weight: bold">hummatrhift malang</p>
+                                        <p style="font-weight: bold">{{$item->product->store->name}}</p>
                                     </div>
                                 </td>
                             </tr>
@@ -60,24 +61,18 @@
                                                 id="flexCheckDefault" style="border-color: #215791;">
                                         </div>
                                         <div class="wrapper-img" style="margin-right: 1rem;">
-                                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
+                                            <img src="{{ asset("storage/".$item->product->thumbnail) }}"
                                                 alt="img">
-                                          </div>
-                                        {{-- @forelse ($cart as $item )
-
-                                        @empty
-
-                                        @endforelse --}}
+                                        </div>
                                         <div class="wrapper-content"
                                             style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1;">
-                                            <h5 class="heading" style="font-size: 18px; ">Classic Design
-                                                Skart</h5>
+                                            <h5 class="heading" style="font-size: 18px; ">{{ $item->product->title }}</h5>
                                             <div style="display: flex; align-items: center; margin-left: 0.5px; ">
-                                                <p>abc , def</p>
+                                                <p></p>
                                             </div>
                                             <div style="display: flex; align-items: center; margin-left: 10px;">
                                                 <p>Rp</p>
-                                                <p>100.000</p>
+                                                <p>{{ number_format($item->product->price, 0, ',', '.') }}</p>
                                             </div>
                                             <button
                                                 style="color: red; font-weight: bold; font-size: 13px; background-color: #dbc2c2; padding: 5px 20px; border-radius: 20px; margin-right: 0.1rem;">
@@ -105,6 +100,14 @@
                         </tbody>
                     </table>
                 </div>
+                @empty
+                <div class="cart-section wishlist-section" style=" padding:20rem;">
+                    <div class="wrapper-content"
+                    style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1; margin-left:27rem;">
+                        <h5 class="heading" style="font-size: 18px;" >Maaf Anda belum memasukkan produk apapun</h5>
+                    </div>
+                </div>
+                @endforelse
 
             </div>
             {{-- Detail --}}

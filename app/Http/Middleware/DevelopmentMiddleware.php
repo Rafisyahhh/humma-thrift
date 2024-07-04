@@ -17,7 +17,6 @@ class DevelopmentMiddleware
     {
         // Check if the application is in development mode
         if (app()->environment('local')) {
-            // If in development mode, continue with the request
             return $next($request);
         }
 

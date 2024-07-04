@@ -184,6 +184,13 @@
         .row-rating .gl-star-rating--stars[class*=" s"]>span {
             background-size: unset;
         }
+
+        .badge {
+            font-size: 12px; /* Ubah ukuran teks */
+            padding: 0.5em 1em; /* Ubah padding */
+        }
+
+        .profile-header { display: flex; align-items: center; }
     </style>
 @endpush
 
@@ -197,15 +204,21 @@
                 <div class="profile-wrapper">
                     <div class="avatar-cover"> <img
                             src="{{ asset($store->store_logo ? "storage/{$store->store_logo}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}" />
+
                     </div>
+                    <span class="badge text-bg-success me-4" style="margin-left: 12rem">Aktif</span>
                     <div class="profile-content">
                         <div class="profile-name-wrapper">
-                            <h5 class="profile-name mb-2">{{ $store->name }}</h5>
+                            <div class="profile-header">
+                                <h5 class="profile-name mb-2">{{ $store->name }}</h5>
+                                <span class="badge text-bg-success me-4 ms-3" >Buka</span>
+                            </div>
                             <p class="profile-description opacity-75 mb-0">{{ '@' . $store->username }}</p>
                             <div class="location mt-3">
                                 <i class="fas fa-map-marker-alt"></i>
                                 <span style="font-size: 16px;">{{ $store->address }}</span>
                             </div>
+                            <p class="profile-description opacity-75 mt-3 mb-0">Open: 07.00 - 20.00 </p>
                         </div>
 
                         <div class="profile-info-detail-wrapper">

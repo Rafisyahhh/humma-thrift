@@ -252,7 +252,8 @@
                 <div class="account-inner-form">
                     <div class="review-form-name mb-2">
                         <label for="address_update" class="form-label" style="background-color: white; font-size: 18px">Alamat</label>
-                        <textarea name="address_update" id="address_update" class="form-control @error('address_update') is-invalid @enderror" placeholder="Tambahkan Alamat" rows="5" style="font-size: 15px">{{ $address->address }}</textarea>
+                        <textarea name="address_update" id="address_update" class="form-control @error('address_update') is-invalid @enderror"
+                        placeholder="Tambahkan Alamat" rows="5" style="font-size: 15px">{{ $address->address }}</textarea>
                         @error('address_update')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
