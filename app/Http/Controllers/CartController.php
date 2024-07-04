@@ -16,15 +16,14 @@ class CartController extends Controller
      */
     public function index()
     {
-        $carts = cart::where('user_id',auth()->id())
-                    ->whereNotNull('product_id')
-                    ->orderBy('created_at')
-                    ->get();
+        $carts = cart::where('user_id', auth()->id())
+            ->whereNotNull('product_id')
+            ->orderBy('created_at')
+            ->get();
         $store = UserStore::all();
         $product_category_pivots = ProductCategoryPivot::all();
 
-        return view('user.keranjang',compact('carts','store','product_category_pivots'));
-
+        return view('user.keranjang', compact('carts', 'store', 'product_category_pivots'));
     }
 
     /**
@@ -40,13 +39,18 @@ class CartController extends Controller
     public function storecart(Product $Product)
     {
         // dd($Product);
-       $dataproduct['product_id'] = $Product->id;
-       $dataproduct['user_id'] = auth()->id();
+        $dataproduct['product_id'] = $Product->id;
+        $dataproduct['user_id'] = auth()->id();
 
-       cart::create($dataproduct);
+        $keranjang = cart::where('product_id', $Product->id);
 
-       return redirect()->back()->with('success', 'Keranjang created successfully.');
+        if($keranjang->exists()) {
+            return redirect()->back()->with('error', "Produknya udah ada di keranjang nih...");
+        }
 
+        cart::create($dataproduct);
+
+        return redirect()->back()->with('success', 'Keranjang created successfully.');
     }
 
     public function cart($id)
@@ -56,7 +60,6 @@ class CartController extends Controller
         $keranjang->save();
 
         return redirect()->route('cart.index')->with('succes', 'Keranjang berhasil');
-
     }
 
     /**
