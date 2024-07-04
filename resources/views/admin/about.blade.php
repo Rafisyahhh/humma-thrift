@@ -25,7 +25,46 @@
 
 @section('content')
   <!-- Bootstrap Table with Header - Light -->
-  <div class="card">
+  <section class="about card" id="basics" style="display: none;">
+    <div class="container">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
+          style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">
+          Tambahkan About
+        </a>
+        <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#editModal2"
+          style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">
+          Edit About
+        </a>
+      </div>
+      <div class="about-section mt-5">
+        @foreach ($aboutUs as $about)
+          <div class="row align-items-center gy-5" style="padding: 0 3rem;">
+            <div class="col-lg-5">
+              <div class="about-img" data-aos="fade-right">
+                <div class="ratio ratio-1x1">
+                  <img src="{{ asset("storage/{$about->image}") }}" alt="img" style="max-width: 100%; height: auto;"
+                    class="object-fit-cover" />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-7">
+              <div class="about-content" data-aos="fade-up">
+                <h3 class="review-title" style="font-family: 'Helvetica', sans-serif; font-size: 60px !important;">
+                  {{ $about->title }}
+                </h3>
+                <p class="about-info"
+                  style="font-family: 'Roboto', serif; font-size: 20px !important; word-wrap: break-word; width: 150%; max-width: 70rem;  text-align: justify;">
+                  {{ $about->description }}
+                </p>
+              </div>
+            </div>
+          </div>
+        @endforeach
+      </div>
+    </div>
+  </section>
+  <div class="card" id="notbasics">
     <div class="table-responsive text-nowrap">
       <table class="table yajra-datatable w-100">
         <thead class="table-light">
@@ -153,6 +192,65 @@
       </div>
     </div>
   </div>
+  @foreach ($aboutUs as $about)
+    <div class="modal fade" tabindex="-1" id="editModal2">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit About Us</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="{{ route('admin.about.update', $about->id) }}" method="POST" enctype="multipart/form-data">
+              @csrf
+              @method('PUT')
+
+              <div class="mb-3">
+                <label for="title" class="form-label">Judul</label>
+                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
+                  name="title" value="{{ $about->title }}">
+
+                @error('title')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+
+              <div class="mb-3">
+                <label for="image" class="form-label">Gambar</label>
+                <input type="file" class="form-control @error('image_update') is-invalid @enderror" id="image"
+                  name="image_update" />
+                <img src="{{ asset("storage/$about->image") }}" class="w-100 mt-3 rounded-3" alt="image"
+                  id="image_placeholder" />
+                @error('image_update')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+
+              <div class="mb-3">
+                <label for="description" class="form-label">Deskripsi</label>
+                <textarea class="form-control @error('description') is-invalid @enderror" name="description"
+                  aria-label="With textarea">{{ $about->description }}</textarea>
+                @error('description')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+              <div class="pt-2 d-flex gap-3 justify-content-end">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn"
+                  style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">Simpan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  @endforeach
   <!-- Bootstrap Table with Header - Light -->
 @endsection
 
@@ -265,6 +363,19 @@
     $("#search").submit(function(e) {
       e.preventDefault();
       table.search($(this).find("input[name='search']").val()).draw();
+    });
+
+
+    $(document).ready(function() {
+      $(document).keydown(function(event) {
+        if (event.key === 'Home') {
+          $("#basics").show();
+          $("#notbasics").hide();
+        } else if (event.key === 'PageUp') {
+          $("#basics").hide();
+          $("#notbasics").show();
+        }
+      });
     });
   </script>
 @endpush
