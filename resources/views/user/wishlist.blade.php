@@ -30,7 +30,7 @@
             <div class="row g-5">
                 <div class="col-lg-3">
                     <div class="sidebar" data-aos="fade-right">
-                        <h4 class="wrapper-heading">Semua Wishlist</h4> <br><br>
+                        <h4 class="wrapper-heading">Semua Favorit</h4> <br><br>
                         <div class="sidebar-section">
                             <div class="sidebar-wrapper">
                                 <h5 class="wrapper-heading">Kategori Produk</h5>
@@ -160,12 +160,12 @@
                             @empty
                             <div class="col-lg-12">
                                 <h3 class="text-center">Produk Masih Kosong</h3>
-                                <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
+                                <p class="text-center">Maaf, anda masih belum menambahkan daftar favorit.</p>
                             </div>
                             @endforelse
 
 
-                            <h4>Lelang</h4>
+                            <hr><h4>Lelang</h4>
                             @forelse ($product_auction as $item)
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="product-wrapper" data-aos="fade-up">
@@ -205,7 +205,7 @@
                             @empty
                             <div class="col-lg-12">
                                 <h3 class="text-center">Produk Lelang Masih Kosong</h3>
-                                <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
+                                <p class="text-center">Maaf, anda masih belum menambahkan daftar favorit.</p>
                             </div>
                             @endforelse
                         </div>
