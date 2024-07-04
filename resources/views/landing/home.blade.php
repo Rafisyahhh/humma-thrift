@@ -171,6 +171,47 @@
         .product-category {
             margin-top: 5rem;
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 100%;
+            max-width: 60rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 @endpush
 
@@ -471,9 +512,37 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    @php
+                                    $user = Auth::user();
+                                    if ($user) {
+                                        $existingAuction = App\Models\auctions::where('user_id', Auth::id())
+                                        ->where('product_auction_id', $item->id)
+                                        ->first();
+                                        $auctions = App\Models\Auctions::where('user_id', $user->id)->where('product_auction_id', $item->id)->first();
+                                    }
+                                        @endphp
+
+
+                                    @if ($user)
+                                        @if ($existingAuction && $auctions->status === 1)
+                                        <form action="{{ route('user.checkout') }}" method="post">
+                                            @csrf
+                                            <div class="product-cart-btn" style="bottom:0;">
+                                                <input type="hidden" value="{{ $item->id }}" name="product_id">
+                                                <button type="submit" class="product-btn">Beli sekarang</button>
+                                            </div>
+                                        </form>
+                                        @else
+                                        <div class="product-cart-btn">
+                                            <a data-id="{{ $item->id }}" class="product-btn openModal">Ikuti Lelang</a>
+                                        </div>
+                                        @endif
+                                    @else
                                     <div class="product-cart-btn">
-                                        <a href="cart.html" class="product-btn">Ikuti Lelang</a>
+                                        <a href="{{ url('login') }}" class="product-btn">Ikuti Lelang</a>
                                     </div>
+                                    @endif
                                 </div>
                             </swiper-slide>
                         @endforeach
@@ -481,6 +550,45 @@
                 </div>
             </div>
         </section>
+
+        <div id="reviewModal-{{ $item->id }}" class="modal" style="display: none;">
+            <div class="modal-content">
+                <button class="close"
+                    style="float: right; text-align: end;">&times;</button>
+                @if ($user)
+                @if ($existingAuction)
+                    <p style="text-align: center; font-size :20px; font-weight:bold;">Anda sudah mengikuti lelang</p>
+                    <p style="text-align: center;">bid lelang anda : {{ $auctions->auction_price }}</p>
+                @else
+                    <h4 style="text-align: center;">Bid Lelang</h4>
+                    <form id="auctionForm-{{ $item->id }}" method="post"
+                        action="{{ route('user.auctions.store') }}" class="mt-5">
+                        @csrf
+                        <input type="hidden" name="product_id"
+                            value="{{ $item->id }}">
+                        <label for="auction_price" class="form-label"
+                            style="font-size: 18px;">Bid Lelang :</label> <br>
+                        <input type="number" name="auction_price"
+                            class="form-control @error('auction_price') is-invalid @enderror"
+                            placeholder="Masukkan Bid Lelang anda"
+                            style="font-size: 17px;">
+                        <p style="margin-top: 5px;margin-left:6px;font-size:12px;color: #7c7c7c;">
+                            Bid : Rp{{ number_format($item->bid_price_start, null, null, '.') }}
+                            -
+                            Rp{{ number_format($item->bid_price_end, null, null, '.') }}</p>
+                        @error('auction_price')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <button type="submit" class="shop-btn"
+                            style="margin-left: 22rem;">Kirim Bid Anda</button>
+                    </form>
+                @endif
+                @endif
+
+            </div>
+        </div>
 
         <section class="product brand" style="position: relative; z-index: 100;" data-aos="fade-up">
             <div class="container" style="z-index: 101;">
@@ -512,6 +620,43 @@
 @endpush
 
 @push('js')
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var modals = document.querySelectorAll('.modal');
+        var btns = document.querySelectorAll('.openModal');
+        var spans = document.querySelectorAll('.close');
+
+        btns.forEach(function(btn, index) {
+            btn.onclick = function() {
+                var productId = btn.getAttribute('data-id');
+                var modal = document.getElementById('reviewModal-' + productId);
+                var auctionForm = document.getElementById('auctionForm-' + productId);
+
+                if (auctionForm) {
+                    auctionForm.querySelector('input[name="product_id"]').value = productId;
+                }
+
+                modal.style.display = 'flex';
+            }
+        });
+
+        spans.forEach(function(span, index) {
+            span.onclick = function() {
+                var modal = span.closest('.modal');
+                modal.style.display = 'none';
+            }
+        });
+
+        window.onclick = function(event) {
+            modals.forEach(function(modal) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+    });
+</script>
     <script>
         $("[data-route]").click(function({
             target: {

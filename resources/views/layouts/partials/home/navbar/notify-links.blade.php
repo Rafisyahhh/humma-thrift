@@ -55,6 +55,17 @@
     font-weight: 600;
 }
 
+.list-group {
+    position: relative;
+    height: 100px;
+}
+
+.list-group-item {
+    position: absolute;
+    top: 50%;
+    text-align:center;
+    transform: translateY(-50%);
+}
 </style>
 <div class="header-cart header-right-dropdown">
     <a href="{{ route('user.cart') }}" class="cart-item">
@@ -83,6 +94,7 @@
                 <h5 class="mb-0">Notifikasi</h5>
             </div>
             @forelse(auth()->user()->unreadNotifications as $notification)
+            <a href="#">
             <div class="wrapper" style="padding:2px;">
                 <div class="wrapper-item">
 
@@ -107,8 +119,9 @@
                             class="ti ti-x"></span></a>
                 </div>
             </div>
+            </a>
             @empty
-            <li class="list-group-item list-group-item-action">Tidak ada notifikasi yang belum dibaca</li>
+            <li class="list-group-item list-group-item-action" >Tidak ada notifikasi yang belum dibaca</li>
             @endforelse
         </div>
         <div class="cart-wrapper-section">

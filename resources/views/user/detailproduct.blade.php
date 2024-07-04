@@ -409,8 +409,7 @@
                                         </a>
 
                                         @php
-                                                                                    $user = Auth::user();
-
+                                            $user = Auth::user();
                                             if ($user) {
                                                 $existingAuction = App\Models\auctions::where('user_id', Auth::id())
                                                 ->where('product_auction_id', $isProductAuction->id)
@@ -419,13 +418,24 @@
                                             }
                                         @endphp
                                         @if ($user)
-                                        <button style="width :10px" class="shop-btn openModal"
-                                            data-id="{{ $isProductAuction->id }}"
-                                            style="display: flex; align-items: center; gap: 5px; z-index:1">
-                                            <span style="width: 37rem; align-items:center; justify-content:center;">
-                                                <i class="fa-solid fa-plus"></i>
-                                                Ikuti Lelang</span>
-                                        </button>
+                                            @if ($existingAuction && $auctions->status === 1)
+                                             <form action="{{ route('user.checkout') }}" method="post">
+                                                @csrf
+                                                <div style="bottom:0;">
+                                                    <input type="hidden" value="{{ $item->id }}" name="product_id">
+                                                    <button type="submit"  class="shop-btn">Beli sekarang</button>
+                                                </div>
+                                            </form>
+                                            @else
+                                            <button style="width :10px" class="shop-btn openModal"
+                                                data-id="{{ $isProductAuction->id }}"
+                                                style="display: flex; align-items: center; gap: 5px; z-index:1">
+                                                <span style="width: 37rem; align-items:center; justify-content:center;">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                    Ikuti Lelang</span>
+                                            </button>
+                                            @endif
+
                                         @else
                                         <a href="{{ url('login') }}" style="width :10px" class="shop-btn openModal"
                                         style="display: flex; align-items: center; gap: 5px; z-index:1">
