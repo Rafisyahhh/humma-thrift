@@ -179,7 +179,7 @@
               <a class="nav-link" type="button" id="order-user">Pengguna</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" type="button" id="order-seller"">Penjual</a>
+              <a class="nav-link" type="button" id="order-seller"">Admin</a>
             </li>
           </ul>`),
           topEnd: $(`<form action="#" method="get" id="search" class="me-4">
