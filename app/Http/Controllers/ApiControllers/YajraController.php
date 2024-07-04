@@ -10,7 +10,8 @@ use App\Models\{
     Brand,
     ProductCategory,
     event,
-    Product
+    Product,
+    ProductAuction
 };
 
 use Carbon\Carbon;
@@ -56,12 +57,32 @@ class YajraController extends Controller {
             return DataTables::of($data)->addIndexColumn()->make(true);
         }
     }
+    // public function products(Request $request) {
+    //     if ($request->ajax()) {
+    //         $product = Product::with(['categories', 'userstore'])->get();
+    //         $productAuction = ProductAuction::with(['categories', 'userstore'])->get();
+    //         return DataTables::of($product)->addIndexColumn()->make(true);
+    //     }
+    // }
     public function products(Request $request) {
         if ($request->ajax()) {
-            $data = Product::with(['categories', 'userstore'])->get();
-            return DataTables::of($data)->addIndexColumn()->make(true);
+            $products = Product::with(['categories', 'userstore'])->get();
+            $productAuctions = ProductAuction::with(['categories', 'userstore'])->get();
+
+            $mergedData = $products->concat($productAuctions);
+
+            return DataTables::of($mergedData)
+                ->addColumn('type', function ($row) {
+                    return $row instanceof Product ? ':Product:' : ':ProductAuction:';
+                })
+                ->editColumn('price', function ($row) {
+                    return $row instanceof Product ? $row->price : number_format($row->bid_price_start, 0) . "-" . number_format($row->bid_price_end, 0, null, ".");
+                })
+                ->addIndexColumn()
+                ->make(true);
         }
     }
+
     public function abouts(Request $request) {
         if ($request->ajax()) {
             $data = AboutUs::all();

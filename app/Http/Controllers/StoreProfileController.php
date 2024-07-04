@@ -38,8 +38,8 @@ class StoreProfileController extends Controller
         $isProduct = Product::where('slug', $slug)->first();
         $isProductAuction = ProductAuction::where('slug', $slug)->first();
         $user = Auth::user();
-        $auctions = auctions::where('user_id', $user->id)->first();
-        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction','user','auctions'));
+        // $auctions = auctions::where('user_id', $user->id)->first();
+        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction','user'));
     }
 
     public function showStore()

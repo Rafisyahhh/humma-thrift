@@ -5421,7 +5421,7 @@ fieldset:disabled .btn {
 }
 .modal {
     --bs-modal-zindex: 1055;
-    --bs-modal-width: 500px;
+    --bs-modal-width: 100rem;
     --bs-modal-padding: 1rem;
     --bs-modal-margin: 0.5rem;
     --bs-modal-color: ;
@@ -5572,7 +5572,7 @@ fieldset:disabled .btn {
     .modal-dialog {
         max-width: var(--bs-modal-width);
         margin-right: auto;
-        margin-left: 15rem;
+        margin-left: auto;
     }
     .modal-sm {
         --bs-modal-width: 300px;
