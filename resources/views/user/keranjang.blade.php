@@ -21,7 +21,7 @@
                 <div>
                     <h5 class="cart-heading mt-4 pt-4 mb-4">Keranjang</h5>
                 </div>
-                @forelse ($carts as $item )
+               
                 <div class="cart-section wishlist-section">
                     <table style="border-spacing: 10px; width: 100%;">
                         <tbody>
@@ -41,6 +41,7 @@
                             <tr class="table-row ticket-row" style="border:none; background-color: #ffffff;">
                                 <td style="height:10px;"></td>
                             </tr>
+                            @forelse ($carts as $item )
                             <tr class="table-row ticket-row"
                                 style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100rem;">
                                 <td class="table-wrapper wrapper-product" style="display: flex; align-items: center;">
@@ -49,10 +50,11 @@
                                             style="border-color: #215791; margin-right: 2rem;">
                                         <i class="fa-solid fa-store"
                                             style="margin-right: 1rem; color: #215791; font-size: 2rem; margin-left:2rem;"></i>
-                                        <p style="font-weight: bold">{{$item->product->store->name}}</p>
+                                        <p style="font-weight: bold">{{$item->product->userStore->name}}</p>
                                     </div>
                                 </td>
                             </tr>
+                           
                             <tr class="table-row ticket-row" style="border: 1px solid #e6d5d593; width:100rem;">
                                 <td class="table-wrapper wrapper-product">
                                     <div class="wrapper" style="display: flex; align-items: center; width:122rem;">
@@ -67,10 +69,11 @@
                                         <div class="wrapper-content"
                                             style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1;">
                                             <h5 class="heading" style="font-size: 18px; ">{{ $item->product->title }}</h5>
-                                            <div style="display: flex; align-items: center; margin-left: 0.5px; ">
-                                                <p></p>
+                                            <div style="display: flex; align-items: center; margin-left: 55px; ">
+                                                <p class="inner-text">{{ implode(', ', array_column($item->product->categories->toArray(), 'title')) }}
+                                                </p>
                                             </div>
-                                            <div style="display: flex; align-items: center; margin-left: 10px;">
+                                            <div style="display: flex; align-items: center; margin-left: 0px;">
                                                 <p>Rp</p>
                                                 <p>{{ number_format($item->product->price, 0, ',', '.') }}</p>
                                             </div>
@@ -81,6 +84,14 @@
                                     </div>
                                 </td>
                             </tr>
+                            @empty
+                            <div class="cart-section wishlist-section" style=" padding:20rem;">
+                                <div class="wrapper-content"
+                                style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1; margin-left:27rem;">
+                                    <h5 class="heading" style="font-size: 18px;" >Maaf Anda belum memasukkan produk apapun</h5>
+                                </div>
+                            </div>
+                            @endforelse
                             <tr class="table-row ticket-row" style="border:none; background-color: #ffffff;">
                                 <td style="height:45px;"></td>
                             </tr>
@@ -100,14 +111,6 @@
                         </tbody>
                     </table>
                 </div>
-                @empty
-                <div class="cart-section wishlist-section" style=" padding:20rem;">
-                    <div class="wrapper-content"
-                    style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1; margin-left:27rem;">
-                        <h5 class="heading" style="font-size: 18px;" >Maaf Anda belum memasukkan produk apapun</h5>
-                    </div>
-                </div>
-                @endforelse
 
             </div>
             {{-- Detail --}}

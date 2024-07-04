@@ -94,6 +94,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
         Route::resource('auctions', AuctionsController::class);
         // Route::get('/product/{id}', [AuctionsController::class, 'create'])->name('product.create');
         // Route::post('/product/{id}/auction', [AuctionsController::class, 'store'])->name('product.auction.store');
+        Route::get('notify', [AuctionsController::class, 'notify'])->name('notify');
     });
 
     Route::get('open-shop', [OpenShopController::class, 'index'])->name('register-seller');
@@ -118,6 +119,7 @@ Route::get('about-us', [AboutUsController::class, 'landingpage']);
 Route::view('news', 'landing.detailNews');
 Route::view('/regstrasi','afterregister');
 Route::post('/product/storesproduct/{product}', [FavoriteController::class, 'storesproduct'])->name('storesproduct');
+Route::post('/productAuction/storesproductAuction/{productAuction}', [FavoriteController::class, 'storesproductAuction'])->name('storesproductAuction');
 Route::post('/product/storecart/{product}',[CartController::class, 'storecart'])->name('storecart');
 
 

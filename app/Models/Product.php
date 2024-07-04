@@ -22,7 +22,7 @@ class Product extends Model {
         });
     }
 
-    public function userStore() {
+    public function userstore() {
         return $this->belongsTo(UserStore::class, 'store_id');
     }
 
@@ -41,10 +41,9 @@ class Product extends Model {
     /**
      * Get the favorite associated with the Product
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function favorite(): HasMany
-    {
+    public function favorite(): HasMany {
         return $this->hasMany(Favorite::class);
     }
 }

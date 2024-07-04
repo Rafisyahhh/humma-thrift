@@ -122,7 +122,7 @@
                                 <div class="result mb-6">
                                     <p><strong style="font-size: 1.5rem">1</strong> <span>Barang</span></p>
                                 </div>
-                                @forelse ($favorite as $item)
+                                @forelse ($product_favorite as $item)
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="product-wrapper" data-aos="fade-up">
                                         <div class="product-img">
@@ -134,7 +134,7 @@
                                                 <a href="" class="product-details">{{ $item->product->title }}
                                                 </a>
                                                 <div class="price">
-                                                    <span class="new-price">Rp  </span>
+                                                    <span class="new-price">Rp {{ number_format($item->product->price, null, null, '.') }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -164,22 +164,23 @@
                             </div>
                             @endforelse
 
-                            {{-- @forelse ($product_auction as $item) --}}
+
                             <h4>Lelang</h4>
+                            @forelse ($product_auction as $item)
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="product-wrapper" data-aos="fade-up">
                                         <div class="product-img">
-                                            <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-5.webp') }}" alt="product-img"
+                                            <img src="{{ asset("storage/".$item->productAuction->thumbnail) }}" alt="product-img"
                                                 class="object-fit-cover">
                                         </div>
                                         <div class="product-info">
                                             <div class="product-description">
-                                                <a href="" class="product-details">uuuuuu
+                                                <a href="" class="product-details">{{ $item->productAuction->title }}
                                                 </a>
                                                 <div class="price">
                                                     <span
-                                                        class="new-price">Rp.0000
-                                                        - Rp.9999</span>
+                                                        class="new-price">Rp {{ number_format($item->productAuction->bid_price_start, null, null, '.') }}
+                                                        - Rp {{ number_format($item->productAuction->bid_price_end, null, null, '.') }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -201,12 +202,12 @@
                                         </div>
                                     </div>
                                 </div>
-                            {{-- @empty
+                            @empty
                             <div class="col-lg-12">
                                 <h3 class="text-center">Produk Lelang Masih Kosong</h3>
                                 <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
                             </div>
-                            @endforelse --}}
+                            @endforelse
                         </div>
                     </div>
                 </div>

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreauctionsRequest;
 use App\Http\Requests\UpdateauctionsRequest;
 use App\Models\ProductAuction;
 use App\Models\ProductCategory;
+use App\Notifications\Lelang;
 use Auth;
 
 class AuctionsController extends Controller
@@ -18,8 +19,19 @@ class AuctionsController extends Controller
     {
         $auctions = auctions::all();
         $user = Auth::user();
+        $notifications = auth()->user()->notifications;
 
-        return view('Landing.produk-auction', compact('auctions','user'));
+
+        return view('Landing.produk-auction', compact('auctions','user','notifications'));
+    }
+    public function notify()
+    {
+        $auctions = auctions::all();
+        $user = Auth::user();
+        $notifications = auth()->user()->notifications;
+
+
+        return view('user.notification', compact('auctions','user','notifications'));
     }
 
     /**
@@ -92,6 +104,10 @@ class AuctionsController extends Controller
 
         $auctions->update($dataToUpdate);
 
+        // Kirim notifikasi jika status berhasil diperbarui
+        if ($auctions->status) {
+            $auctions->user->notify(new Lelang($auctions));
+        }
             return redirect()->route('seller.product.index')->with('success', 'lelang berhasil di pilih');
         } catch (\Throwable $th) {
             return redirect()->route('seller.product.index')->withInput()->withErrors(['error' => $th->getMessage()]);
