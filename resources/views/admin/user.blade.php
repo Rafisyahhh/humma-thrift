@@ -246,6 +246,6 @@
 
     setupOrderButton($("#order-all"), "");
     setupOrderButton($("#order-user"), "Pengguna");
-    setupOrderButton($("#order-seller"), "Seller");
+    setupOrderButton($("#order-seller"), "Admin");
   </script>
 @endpush
