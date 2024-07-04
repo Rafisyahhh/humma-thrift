@@ -507,7 +507,17 @@
       },
       options: {
         layout: {
-          topStart: null,
+          topStart: $(`<ul class="ms-4 nav nav-pills d-none d-md-flex">
+            <li class="nav-item">
+              <a class="nav-link active" type="button" id="order-all">Semua Tipe</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" type="button" id="order-user">Produk</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" type="button" id="order-seller"">Lelang</a>
+            </li>
+          </ul>`),
           topEnd: $(`<form action="#" method="get" id="search" class="me-4">
             <div class="input-group mb-3">
               <input type="search" name="search" class="form-control" placeholder="Cari Produk&hellip;"
@@ -532,7 +542,7 @@
         {
           data: 'title',
           render: (data, __, row) => {
-            return data + `<span style="display: none;">${row.type}</span>`;
+            return data + `<span class="opacity-0 position-absolute">${row.type}</span>`;
           }
         },
         {
@@ -540,6 +550,11 @@
           orderable: false,
           searchable: false,
           render: (data, type) => `<img src="{{ asset('storage/') }}/${data}" class="rounded-3" height="96px">`
+        },
+        {
+          data: 'type',
+          searchable: true,
+          visible: false
         },
         {
           data: 'userstore.username',
@@ -616,6 +631,30 @@
     $("#search").submit(function(e) {
       e.preventDefault();
       table.search($(this).find("input[name='search']").val()).draw();
+    });
+    $("#order-all").click(function(e) {
+      e.preventDefault();
+      $(this).closest("ul").find("li").find("a").each(function(e) {
+        $(this).removeClass("active");
+      });
+      $(this).addClass("active");
+      table.search("").draw();
+    });
+    $("#order-user").click(function(e) {
+      e.preventDefault();
+      $(this).closest("ul").find("li").find("a").each(function(e) {
+        $(this).removeClass("active");
+      });
+      $(this).addClass("active")
+      table.search(":Product:").draw();
+    });
+    $("#order-seller").click(function(e) {
+      e.preventDefault();
+      $(this).closest("ul").find("li").find("a").each(function(e) {
+        $(this).removeClass("active");
+      });
+      $(this).addClass("active")
+      table.search(":ProductAuction:").draw();
     });
 
     table.on("click", "button#detail", function() {
