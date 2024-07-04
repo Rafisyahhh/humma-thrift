@@ -19,7 +19,7 @@ class BrandSeeder extends Seeder {
                 "thumbnail" => "adidas.jpg",
             ],
             [
-                "title" => "Champ",
+                "title" => "Champions",
                 "thumbnail" => "champ.jpg",
             ],
             [
@@ -39,19 +39,15 @@ class BrandSeeder extends Seeder {
                 "thumbnail" => "fila.jpg",
             ],
             [
-                "title" => "Hoodie",
-                "thumbnail" => "hoodie.jpeg",
-            ],
-            [
                 "title" => "Kappa",
                 "thumbnail" => "kappa.png",
             ],
             [
-                "title" => "Levis",
+                "title" => "Levi's",
                 "thumbnail" => "levis.png",
             ],
             [
-                "title" => "N&B",
+                "title" => "New Balance",
                 "thumbnail" => "nb.jpg",
             ],
             [
@@ -63,7 +59,7 @@ class BrandSeeder extends Seeder {
                 "thumbnail" => "puma.jpg",
             ],
             [
-                "title" => "Tnf",
+                "title" => "The North Face",
                 "thumbnail" => "tnf.png",
             ],
         ];

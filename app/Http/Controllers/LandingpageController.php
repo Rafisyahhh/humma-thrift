@@ -57,7 +57,6 @@ class LandingpageController extends Controller
         // $auctions = auctions::where('user_id', $user->id)->first();
         // $notifications = auth()->user()->notifications;
 
-
         return view('landing.produk-auction', compact('product_auction', 'brands', 'categories','user'));
     }
 
