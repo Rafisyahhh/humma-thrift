@@ -649,18 +649,21 @@
     table.on("click", "button#detail", function() {
       const modal = $('#detailModal');
       const data = table.row($(this).closest("tr")).data();
-      let editedData = data;
-      editedData['userstore'] = (typeof data['userstore'] == "object") ? data['userstore']['username'] : data[
-        'userstore'];
-      editedData['categories'] = (typeof data['categories'] == "object") ? data['categories'].map(data => data.title)
-        .join(', ') : data['categories'];
-      editedData['brand'] = (typeof data['brand'] == "object") ? data['brand']['title'] : data['brand'];
-      modal.find("#detail_image").each(function() {
-        $(this).attr("src", "{{ asset('storage/') }}/" + editedData.thumbnail);
-      })
+
+      const editedData = {
+        ...data,
+        userstore: typeof data.userstore === "object" ? data.userstore.username : data.userstore,
+        categories: typeof data.categories === "object" ? data.categories.map(cat => cat.title).join(', ') : data
+          .categories,
+        brand: typeof data.brand === "object" ? data.brand.title : data.brand
+      };
+
+      modal.find("#detail_image").attr("src", "{{ asset('storage/') }}/" + editedData.thumbnail);
+
       modal.find("[data-row]").each(function() {
         $(this).text(editedData[$(this).data("row")]);
       });
+
       modal.modal("show");
     });
   </script>
