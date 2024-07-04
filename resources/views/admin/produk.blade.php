@@ -418,7 +418,7 @@
                 <div class="product-info-content" data-aos="fade-left">
                   <h5 style="margin-bottom:0;" data-row="title">Judul</h5>
                   <div class="price" style="display: flex; justify-content: space-between; align-items: center;">
-                    <span class="new-price" data-row="price">Rp. </span>
+                    <span class="new-price">Rp. <span data-row="price"></span></span>
                     <span style="display: flex; justify-content:center; align-items:center;">
                       <i class="fa-solid fa-store"
                         style="margin-right: 0.5rem; color: #215791; font-size: 1.2rem; margin-left:2rem;"></i>
