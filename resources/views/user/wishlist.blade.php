@@ -164,8 +164,9 @@
                             </div>
                             @endforelse
 
-                            @forelse ($product_auction as $item)
+
                             <h4>Lelang</h4>
+                            @forelse ($product_auction as $item)
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="product-wrapper" data-aos="fade-up">
                                         <div class="product-img">
