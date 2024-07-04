@@ -620,18 +620,20 @@
 
     table.on("click", "button#detail", function() {
       const modal = $('#detailModal');
-      let data = table.row($(this).closest("tr")).data();
-      data['userstore'] = data['userstore']['username'];
-      data['categories'] = data['categories'].map(data => data.title).join(', ');
-      data['brand'] = data['brand']['title'];
+      const data = table.row($(this).closest("tr")).data();
+      let editedData = data;
+      editedData['userstore'] = (typeof data['userstore'] == "object") ? data['userstore']['username'] : data[
+        'userstore'];
+      editedData['categories'] = (typeof data['categories'] == "object") ? data['categories'].map(data => data.title)
+        .join(', ') : data['categories'];
+      editedData['brand'] = (typeof data['brand'] == "object") ? data['brand']['title'] : data['brand'];
       modal.find("#detail_image").each(function() {
-        $(this).attr("src", "{{ asset('storage/') }}/" + data.thumbnail);
+        $(this).attr("src", "{{ asset('storage/') }}/" + editedData.thumbnail);
       })
       modal.find("[data-row]").each(function() {
-        console.log(data[$(this).data("row")]);
-        $(this).text(data[$(this).data("row")]);
+        $(this).text(editedData[$(this).data("row")]);
       });
-      modal.modal("toggle");
+      modal.modal("show");
     });
   </script>
 @endpush
