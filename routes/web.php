@@ -52,7 +52,7 @@ Route::get('/', [LandingpageController::class, 'index']);
 
 # Seller Routes
 Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(function () {
-    Route::view('/home', 'seller.index')->name('home');
+    Route::get('/home', [UserStoreController::class,'index'])->name('home');
     Route::view('/transaction', 'seller.transaksi')->name('transaction');
     Route::view('/income', 'seller.penghasilan')->name('income');
     // Route::view('/product', 'seller.produk')->name('product');
