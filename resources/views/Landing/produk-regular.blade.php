@@ -107,13 +107,14 @@
                             <div class="col-lg-12">
                                 <div class="product-sorting-section">
                                     <div class="result">
-                                        <p>Menampilkan {{ $products->firstItem() }}–{{ $products->lastItem() }} dari {{ $products->total() }} hasil</p>
+                                        <p>Menampilkan {{ $products->firstItem() }}–{{ $products->lastItem() }} dari
+                                            {{ $products->total() }} hasil</p>
                                     </div>
                                 </div>
                             </div>
                             @forelse ($products as $item)
                                 <div class="col-lg-4 col-sm-6">
-                                    <div class="product-wrapper" data-aos="fade-up">
+                                    <div class="product-wrapper p-0" data-aos="fade-up">
                                         <div class="product-img">
                                             <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img"
                                                 class="object-fit-cover">
@@ -123,16 +124,22 @@
                                                         <i class="fas fa-heart"></i>
                                                     </span>
                                                 </a>
-                                                <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}" class="compaire cart-item">
+                                                <a href="/user/checkout" class="favourite cart-item">
                                                     <span>
-                                                        <i class="fas fa-eye"></i>
+                                                        <i class="fas fa-shopping-cart"></i>
+                                                    </span>
+                                                </a>
+                                                <a href="#" class="compaire cart-item">
+                                                    <span>
+                                                        <i class="fas fa-share"></i>
                                                     </span>
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="product-info">
                                             <div class="product-description">
-                                                <a href="{{route('store.product.detail',['store' => $item->userStore->username,'product'=> $item->slug])}}" class="product-details">{{ $item->title }}
+                                                <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
+                                                    class="product-details">{{ $item->title }}
                                                 </a>
                                                 <div class="price">
                                                     <span
@@ -140,16 +147,21 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="product-cart-btn">
-                                            <a href="/user/checkout" class="product-btn">Beli sekarang</a>
-                                        </div>
+                                        <form action="{{ route('user.checkout') }}" method="post">
+                                            @csrf
+                                            <div class="product-cart-btn" style="bottom:0;">
+                                                <input type="hidden" value="{{ $item->id }}" name="product_id">
+                                                <button type="submit" class="product-btn">Beli sekarang</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             @empty
-                            <div class="col-lg-12">
-                                <h3 class="text-center">Produk Masih Kosong</h3>
-                                <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
-                            </div>
+                                <div class="col-lg-12">
+                                    <h3 class="text-center">Produk Masih Kosong</h3>
+                                    <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam
+                                        waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
+                                </div>
                             @endforelse
                         </div>
                     </div>

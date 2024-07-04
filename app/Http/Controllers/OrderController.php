@@ -2,29 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Checkout;
 use App\Http\Controllers\Payment\TripayController;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StoreCheckoutRequest;
-use App\Http\Requests\UpdateCheckoutRequest;
+use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\UpdateOrderRequest;
 
-class CheckoutController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $tripay = new TripayController();
-        $channels = $tripay->getPaymentChannels();
-        $users = Auth::user();
-        $addresses = UserAddress::where('user_id', $users->id)->get();
-        $product = Product::where('id',$request->product_id)->first();
-        return view('user.checkout', compact('users','addresses','product','channels'));
+        //
     }
 
     /**
@@ -38,15 +32,15 @@ class CheckoutController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCheckoutRequest $request)
+    public function store(StoreOrderRequest $request)
     {
-        //
+       //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Checkout $checkout)
+    public function show(Order $order)
     {
         //
     }
@@ -54,7 +48,7 @@ class CheckoutController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Checkout $checkout)
+    public function edit(Order $order)
     {
         //
     }
@@ -62,7 +56,7 @@ class CheckoutController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCheckoutRequest $request, Checkout $checkout)
+    public function update(UpdateOrderRequest $request, Order $order)
     {
         //
     }
@@ -70,7 +64,7 @@ class CheckoutController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Checkout $checkout)
+    public function destroy(Order $order)
     {
         //
     }

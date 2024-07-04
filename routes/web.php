@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ApiControllers\UserApiController;
+use App\Http\Controllers\Payment\TransactionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
@@ -25,7 +27,8 @@ use App\Http\Controllers\{
     HistoryController,
     ProductAdminController,
     UserAddressController,
-    UserStoreController
+    UserStoreController,
+    OrderController,
 };
 
 /*
@@ -52,7 +55,7 @@ Route::get('/', [LandingpageController::class, 'index']);
 
 # Seller Routes
 Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(function () {
-    Route::view('/home', 'seller.index')->name('home');
+    Route::get('/home', [UserStoreController::class,'index'])->name('home');
     Route::view('/transaction', 'seller.transaksi')->name('transaction');
     Route::view('/income', 'seller.penghasilan')->name('income');
     // Route::view('/product', 'seller.produk')->name('product');
@@ -75,7 +78,7 @@ Route::put('auction/{auctions}', [AuctionsController::class, 'updatelelang'])->n
 Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function () {
     Route::middleware(\App\Http\Middleware\NotSellerMiddleware::class)->group(function () {
         Route::get('/', [DashboardUserController::class, 'dashboard'])->name('userhome');
-        Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
+        Route::post('checkout', [CheckoutController::class, 'index'])->name('checkout');
         Route::post('address/{id}', [UserAddressController::class, 'store'])->name('address.store');
         Route::put('edit/address/{user}/{address}', [UserAddressController::class, 'update'])->name('address.edit');
         Route::view('about', 'user.tentang')->name('about');
@@ -122,7 +125,6 @@ Route::post('/product/storesproduct/{product}', [FavoriteController::class, 'sto
 Route::post('/productAuction/storesproductAuction/{productAuction}', [FavoriteController::class, 'storesproductAuction'])->name('storesproductAuction');
 Route::post('/product/storecart/{product}',[CartController::class, 'storecart'])->name('storecart');
 
-
 # Home Redirect
 Route::get('/home', RedirectUserController::class)->name('home');
 
@@ -151,4 +153,10 @@ Route::prefix('@{store:username}')->controller(StoreProfileController::class)->g
     Route::get('/', 'index')->name('store.profile');
     Route::get('products', 'products')->name('store.products');
     Route::get('{product:slug}', 'productDetail')->name('store.product.detail');
+});
+
+# Payment Routes
+Route::prefix('payment')->group(function () {
+    Route::post('transaction/store',[TransactionController::class,'store'])->name('transaction.store');
+    Route::post('transaction',[TransactionController::class,'show'])->name('transaction.show');
 });

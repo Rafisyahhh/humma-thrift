@@ -54,11 +54,10 @@ class LandingpageController extends Controller
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $user = Auth::user();
-        $auctions = auctions::where('user_id', $user->id)->first();
+        // $auctions = auctions::where('user_id', $user->id)->first();
         // $notifications = auth()->user()->notifications;
 
-
-        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories','user','auctions'));
+        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories','user'));
     }
 
     // Tambahkan metode regular
@@ -82,8 +81,8 @@ class LandingpageController extends Controller
         $product = Product::all();
         $favorite = Favorite::all();
         // dd($favorite);
-        $product_auction = Favorite::whereNotNull('product_auction_id')->get();
-        $product_favorite = Favorite::whereNotNull('product_id')->get();
+        $product_auction = Favorite::whereNotNull('product_auction_id')->where('user_id', auth()->id())->get();
+        $product_favorite = Favorite::whereNotNull('product_id')->where('user_id', auth()->id())->get();
         // dd($product_auction);
         return view('user.wishlist', compact('categories','brands','product','favorite','product_auction', 'product_favorite'));
     }
