@@ -408,7 +408,7 @@
                   <div class="swiper product-top">
                     <div class="swiper-wrapper">
                       <div class="swiper-slide slider-top-img">
-                        <img src="#" alt="img" class="object-fit-cover">
+                        <img src="#" alt="img" class="object-fit-cover" id="detail_image">
                       </div>
                     </div>
                   </div>
@@ -423,7 +423,7 @@
                       <i class="fa-solid fa-store"
                         style="margin-right: 0.5rem; color: #215791; font-size: 1.2rem; margin-left:2rem;"></i>
                       <p style="font-weight: bold; margin-top:1rem; display: flex; justify-content:center; align-items:center;"
-                        data-row="userstore.username"></p>
+                        data-row="userstore"></p>
                     </span>
                   </div>
                   <hr>
@@ -436,7 +436,7 @@
                       </tr>
                       <tr>
                         <th>Brand</th>
-                        <td><span class="inner-text" data-row="brand.title"></span></td>
+                        <td><span class="inner-text" data-row="brand"></span></td>
                       </tr>
                       <tr>
                         <th>Ukuran</th>
@@ -621,7 +621,12 @@
     table.on("click", "button#detail", function() {
       const modal = $('#detailModal');
       let data = table.row($(this).closest("tr")).data();
-      data[]
+      data['userstore'] = data['userstore']['username'];
+      data['categories'] = data['categories'].map(data => data.title).join(', ');
+      data['brand'] = data['brand']['title'];
+      modal.find("#detail_image").each(function() {
+        $(this).attr("src", "{{ asset('storage/') }}/" + data.thumbnail);
+      })
       modal.find("[data-row]").each(function() {
         console.log(data[$(this).data("row")]);
         $(this).text(data[$(this).data("row")]);

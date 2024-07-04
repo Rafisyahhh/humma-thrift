@@ -66,8 +66,8 @@ class YajraController extends Controller {
     // }
     public function products(Request $request) {
         if ($request->ajax()) {
-            $products = Product::with(['categories', 'userstore'])->get();
-            $productAuctions = ProductAuction::with(['categories', 'userstore'])->get();
+            $products = Product::with(['categories', 'userstore', 'brand'])->get();
+            $productAuctions = ProductAuction::with(['categories', 'userstore', 'brand'])->get();
 
             $mergedData = $products->concat($productAuctions);
 
