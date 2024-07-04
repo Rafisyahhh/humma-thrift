@@ -156,7 +156,7 @@
   <script src="{{ asset('js/AjaxDataTable.js') }}"></script>
 @endpush
 
-@push("js")
+@push('js')
   <script type="text/javascript">
     const {
       table
@@ -196,7 +196,9 @@
             }
           },
         },
-        order: [[2, 'desc']]
+        order: [
+          [2, 'desc']
+        ]
       },
       ajax: "{{ route('yajra.users') }}",
       columns: [{
@@ -232,29 +234,18 @@
       e.preventDefault();
       table.search($(this).find("input[name='search']").val()).draw();
     });
-    $("#order-all").click(function(e) {
-      e.preventDefault();
-      $(this).closest("ul").find("li").find("a").each(function(e) {
-        $(this).removeClass("active");
+
+    function setupOrderButton(button, searchValue) {
+      button.click(function(e) {
+        e.preventDefault();
+        $("ul").find("li a").removeClass("active");
+        $(this).addClass("active");
+        table.search(searchValue).draw();
       });
-      $(this).addClass("active");
-      table.search("").draw();
-    });
-    $("#order-user").click(function(e) {
-      e.preventDefault();
-      $(this).closest("ul").find("li").find("a").each(function(e) {
-        $(this).removeClass("active");
-      });
-      $(this).addClass("active")
-      table.search("Pengguna").draw();
-    });
-    $("#order-seller").click(function(e) {
-      e.preventDefault();
-      $(this).closest("ul").find("li").find("a").each(function(e) {
-        $(this).removeClass("active");
-      });
-      $(this).addClass("active")
-      table.search("Seller").draw();
-    });
+    }
+
+    setupOrderButton($("#order-all"), "");
+    setupOrderButton($("#order-user"), ":Pengguna:");
+    setupOrderButton($("#order-seller"), ":Seller:");
   </script>
 @endpush
