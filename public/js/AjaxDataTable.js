@@ -11,7 +11,8 @@ $.fn.AjaxDataTable = function (config) {
   const {
     modal: createModal,
     text: createText,
-    className: createClassName
+    className: createClassName,
+    onSuccess: createSuccess
   } = onCreate || {};
   const {
     modal: editModal,
@@ -25,11 +26,11 @@ $.fn.AjaxDataTable = function (config) {
     onSuccess: deleteSuccess
   } = onDelete || {};
   let firstLoad = true;
-  var editUrl = editModal?.find("form").attr("action")
+  var editUrl = editModal?.find("form").attr("action");
 
   $.fn.dataTable.ext.buttons.create = {
     text: createText,
-    className: createClassName,
+    className: `${createClassName} createButton`,
     action: () => createModal?.modal("show"),
   };
 
@@ -110,6 +111,7 @@ $.fn.AjaxDataTable = function (config) {
   });
 
   handleFormSubmit(createModal, null, (data) => {
+    createSuccess?.();
     table.draw(false);
   });
 

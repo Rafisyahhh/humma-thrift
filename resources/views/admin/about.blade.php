@@ -302,7 +302,10 @@
       onCreate: {
         modal: $('#tambahModal'),
         text: 'Tambahkan Data',
-        className: 'btn me-4 mt-4'
+        className: 'btn me-4 mt-4',
+        onSuccess: () => {
+          $('.createButton').remove();
+        }
       },
       onEdit: {
         modal: $('#editModal'),
