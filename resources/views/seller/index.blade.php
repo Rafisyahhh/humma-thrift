@@ -121,21 +121,15 @@
                                     <h5 class="heading">Informasi pribadi</h5>
                                     <div class="info-list">
                                         <div class="info-title">
-                                            <p>Nama:</p>
-                                            <p>Email:</p>
-                                            <p>No Telepon:</p>
-                                            <p>Kota/Kabupaten:</p>
-                                            <p>Zip:</p>
+                                            <p>Nama: {{auth()->user()->name}}</p>
+                                            <p>Email: {{auth()->user()->email}}</p>
+                                            <p>No Telepon: +{{auth()->user()->phone}}</p>
+                                            @foreach ($address as $stores ) 
+                                            <p>Alamat: {{ $stores->address }}</p>
+                                            @endforeach
+                                            
                                         </div>
-                                        <div class="info-details">
-                                            <p>Sajjad</p>
-                                            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                                    data-cfemail="492d2c24262c24282025092e24282025672a2624">[email&#160;protected]</a>
-                                            </p>
-                                            <p>023 434 54354</p>
-                                            <p>Haydarabad, Rord 34</p>
-                                            <p>3454</p>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="devider"></div>
@@ -143,20 +137,14 @@
                                     <h5 class="heading">Informasi Toko</h5>
                                     <div class="info-list">
                                         <div class="info-title">
-                                            <p>Nama:</p>
-                                            <p>Email:</p>
-                                            <p>No Telepon:</p>
-                                            <p>Kota/Kabupaten:</p>
-                                            <p>Zip:</p>
-                                        </div>
-                                        <div class="info-details">
-                                            <p>ShopUs Super-Shop</p>
-                                            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                                    data-cfemail="afcbcac2c0cac2cec6c3efc8c2cec6c381ccc0c2">[email&#160;protected]</a>
-                                            </p>
-                                            <p>023 434 54354</p>
-                                            <p>Haydarabad, Rord 34</p>
-                                            <p>3454</p>
+                                            @foreach ($store as $store)
+                                            @if ($store->user_id == auth()->id())
+                                            <p>Nama: {{$store->name}}</p>
+                                            <p>Email: {{$store->user->email}}</p>
+                                            <p>No Telepon: {{$store->user->phone}}</p>
+                                            <p>Alamat: {{$store->address}}</p>
+                                            @endif
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
