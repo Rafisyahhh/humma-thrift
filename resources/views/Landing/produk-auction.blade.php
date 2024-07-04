@@ -200,21 +200,34 @@
                                             </div>
                                         </div>
                                         @php
-                                            $existingAuction = App\Models\auctions::where('user_id', Auth::id())
+                                            $user = Auth::user();
+                                            if ($user) {
+                                                $existingAuction = App\Models\auctions::where('user_id', Auth::id())
                                                 ->where('product_auction_id', $item->id)
                                                 ->first();
-                                        @endphp
+                                                $auctions = App\Models\Auctions::where('user_id', $user->id)->where('product_auction_id', $item->id)->first();
+                                            }
+                                                @endphp
 
-
-                                        <div class="product-cart-btn">
-                                            <a data-id="{{ $item->id }}" class="product-btn openModal">Ikuti
-                                                Lelang</a>
-                                        </div>
+@if ($user)
+<div class="product-cart-btn">
+    <a data-id="{{ $item->id }}" class="product-btn openModal">Ikuti
+        Lelang</a>
+</div>
+@else
+<div class="product-cart-btn">
+    <a href="{{ url('login') }}" class="product-btn openModal">Ikuti
+        Lelang</a>
+</div>
+@endif
 
                                         <div id="reviewModal-{{ $item->id }}" class="modal" style="display: none;">
                                             <div class="modal-content">
                                                 <button class="close"
                                                     style="float: right; text-align: end;">&times;</button>
+                                                    @if ($user)
+
+
                                                 @if ($existingAuction)
                                                     <p style="text-align: center; font-size :20px; font-weight:bold;">Anda sudah mengikuti lelang</p>
                                                     <p style="text-align: center;">bid lelang anda : {{ $auctions->auction_price }}</p>
@@ -244,6 +257,8 @@
                                                             style="margin-left: 22rem;">Kirim Bid Anda</button>
                                                     </form>
                                                 @endif
+                                                @endif
+
                                             </div>
                                         </div>
                                     </div>
