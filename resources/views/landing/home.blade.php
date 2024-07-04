@@ -8,11 +8,6 @@
             z-index: 10;
         }
 
-        .content-wrapper {
-            position: relative;
-            overflow: hidden;
-        }
-
         .shape-decoration-wrapper {
             position: absolute;
             z-index: -1;
@@ -20,6 +15,7 @@
             left: 0;
             width: 100%;
             height: 100%;
+            margin-top: 70rem;
         }
 
         .shape-decoration-wrapper .svg-container {
@@ -92,6 +88,12 @@
             z-index: 2;
         }
 
+        @media screen and (max-width: 1600px) and (min-width: 1200px) {
+            .shape-decoration-wrapper .svg-container:nth-child(5) {
+                top: 75rem;
+            }
+        }
+
         .shape-decoration-wrapper .svg-container:nth-child(4) {
             bottom: 0;
             left: -5rem;
@@ -116,7 +118,7 @@
             top: unset;
             height: 25rem;
             width: 25rem;
-            z-index: 3;
+            z-index: 7;
             left: unset;
         }
 
@@ -137,6 +139,33 @@
             height: 50rem;
             width: 50rem;
             left: unset;
+        }
+
+        @media screen and (max-width: 1600px) and (min-width: 1200px) {
+            .shape-decoration-wrapper .svg-container:nth-child(7) {
+                margin-top: -5rem;
+                margin-left: -7.5rem;
+            }
+
+            .shape-decoration-wrapper .svg-container:nth-child(8) {
+                margin-right: 20rem;
+            }
+
+            .shape-decoration-wrapper .svg-container:nth-child(9) {
+                margin-top: 10rem;
+                margin-right: 24rem;
+                height: 40rem;
+            }
+        }
+
+        @media screen and (max-width: 1600px) and (min-width: 1200px) {
+            .shape-decoration-wrapper .svg-container:nth-child(11) {
+                bottom: -50rem;
+            }
+
+            .shape-decoration-wrapper .svg-container:nth-child(2) {
+                bottom: -30rem;
+            }
         }
 
         .product-category {
@@ -265,7 +294,7 @@
             </div>
         </div>
 
-        <section class="product-category" style="z-index: 100;position: relative;">
+        <section class="product-category mt-5" style="z-index: 100;position: relative;">
             <div class="container">
                 <div class="section-title">
                     <h5>KATEGORI PAKAIAN</h5>
