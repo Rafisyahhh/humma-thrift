@@ -134,7 +134,7 @@
                                                 <a href="" class="product-details">{{ $item->product->title }}
                                                 </a>
                                                 <div class="price">
-                                                    <span class="new-price">Rp  </span>
+                                                    <span class="new-price">Rp {{ number_format($item->product->price, null, null, '.') }}</span>
                                                 </div>
                                             </div>
                                         </div>
