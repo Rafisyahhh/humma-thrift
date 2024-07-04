@@ -14,4 +14,13 @@ class auctions extends Model
     {
         return $this->belongsTo(User::class);
     }
+        public function store()
+    {
+        return $this->belongsTo(UserStore::class);
+    }
+
+    public function productAuction()
+    {
+        return $this->belongsTo(ProductAuction::class, 'product_auction_id');
+    }
 }

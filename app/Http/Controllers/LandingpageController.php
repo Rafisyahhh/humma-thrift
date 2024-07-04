@@ -12,7 +12,7 @@ use App\Models\ProductAuction;
 use App\Models\UserStore;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
-
+use Auth;
 
 class LandingpageController extends Controller
 {
@@ -53,9 +53,12 @@ class LandingpageController extends Controller
         $product_auction = ProductAuction::paginate(24);
         $brands = Brand::all();
         $categories = ProductCategory::all();
-        $auctions = auctions::all();
+        $user = Auth::user();
+        $auctions = auctions::where('user_id', $user->id)->first();
+        // $notifications = auth()->user()->notifications;
 
-        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories','auctions'));
+
+        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories','user','auctions'));
     }
 
     // Tambahkan metode regular

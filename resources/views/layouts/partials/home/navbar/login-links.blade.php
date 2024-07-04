@@ -14,13 +14,13 @@
     </div>
 @elseif(auth()->check())
     @if(!auth()->user()->store)
-    <div class="header-favourite">
+    {{-- <div class="header-favourite">
         <a href="wishlist.html" class="cart-item">
             <span>
                 <i class="fas fa-bell"></i>
             </span>
         </a>
-    </div>
+    </div> --}}
 
     <div class="header-favourite">
         <a href="{{ route('user.wishlist') }}" class="cart-item">

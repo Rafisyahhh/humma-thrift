@@ -15,7 +15,6 @@ class ProductController extends Controller {
     public function index() {
         $product_category_pivots = ProductCategoryPivot::all();
         $auctions = Auctions::orderBy('auction_price', 'desc')->orderBy('created_at', 'asc')->get();
-
         $products = Product::where("store_id", Auth::user()->store()->first()->id)->get();
         $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get();
 

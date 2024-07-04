@@ -106,6 +106,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
         Route::resource('auctions', AuctionsController::class);
         // Route::get('/product/{id}', [AuctionsController::class, 'create'])->name('product.create');
         // Route::post('/product/{id}/auction', [AuctionsController::class, 'store'])->name('product.auction.store');
+        Route::get('notify', [AuctionsController::class, 'notify'])->name('notify');
     });
 
     Route::get('open-shop', [OpenShopController::class, 'index'])->name('register-seller');
@@ -153,6 +154,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
         Route::get('unread/{id}', [NotificationController::class, 'unread'])->name('unread');
         Route::get('{id}', [NotificationController::class, 'show'])->name('show');
         Route::delete('{id}', [NotificationController::class, 'destroy'])->name('destroy');
+
     });
 });
 
