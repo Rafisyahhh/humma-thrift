@@ -139,8 +139,6 @@ class ProductController extends Controller {
         return redirect()->route('seller.product.index')->with('success', 'Sukses mengupdate produk');
     }
 
-
-
     /**
      * Remove the specified resource from storage.
      */
