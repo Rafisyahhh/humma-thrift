@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\ProductAuction;
 use App\Models\UserStore;
 use App\Models\ProductCategory;
+use App\Models\ProductCategoryPivot;
 use Auth;
 
 class LandingpageController extends Controller
@@ -86,6 +87,8 @@ class LandingpageController extends Controller
 
     public function cart(){
         $cart = cart::all();
-        return view('user.keranjang', compact('cart'));
+        $product_category_pivots = ProductCategoryPivot::all();
+
+        return view('user.keranjang', compact('cart','product_category_pivots'));
     }
 }

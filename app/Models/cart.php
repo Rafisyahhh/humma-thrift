@@ -9,8 +9,6 @@ class cart extends Model
 {
     use HasFactory;
 
-    protected $table = "carts";
-
     protected $guarded = ['id'];
 
     public function product()
@@ -22,4 +20,8 @@ class cart extends Model
     {
         return $this->belongsTo(UserStore::class);
     }
+    public function categories() {
+        return $this->belongsToMany(ProductCategory::class, 'product_category_pivots');
+    }
+
 }

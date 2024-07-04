@@ -49,7 +49,7 @@
                                             style="border-color: #215791; margin-right: 2rem;">
                                         <i class="fa-solid fa-store"
                                             style="margin-right: 1rem; color: #215791; font-size: 2rem; margin-left:2rem;"></i>
-                                        <p style="font-weight: bold">{{$item->product->store->name}}</p>
+                                        <p style="font-weight: bold">{{$item->product->userStore->name}}</p>
                                     </div>
                                 </td>
                             </tr>
@@ -68,7 +68,8 @@
                                             style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1;">
                                             <h5 class="heading" style="font-size: 18px; ">{{ $item->product->title }}</h5>
                                             <div style="display: flex; align-items: center; margin-left: 0.5px; ">
-                                                <p></p>
+                                                <p class="inner-text">{{ implode(', ', array_column($item->product->categories->toArray(), 'title')) }}
+                                                </p>
                                             </div>
                                             <div style="display: flex; align-items: center; margin-left: 10px;">
                                                 <p>Rp</p>
