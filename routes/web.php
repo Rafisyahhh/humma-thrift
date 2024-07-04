@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ApiControllers\UserApiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
@@ -28,10 +27,6 @@ use App\Http\Controllers\{
     UserAddressController,
     UserStoreController
 };
-use App\Models\User;
-use App\Models\UserStore;
-use App\Notifications\SellerWelcomeNotification;
-use Illuminate\Support\Facades\Notification;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,14 +44,7 @@ Auth::routes(['verify' => true]);
 
 # Debug Routes
 Route::prefix('/debug')->middleware(\App\Http\Middleware\DevelopmentMiddleware::class)->group(function () {
-    // Route::view('home', 'debug.home');
-    // Route::view('modal', 'debug.modal');
-
-    Route::get('/test', function () {
-        $user = fn () => "hello world";
-
-        dd(gettype($user));
-    });
+    //
 });
 
 # Public Routes
@@ -96,7 +84,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
         Route::get('profile', [UserController::class, 'show'])->name('profile');
         Route::post('profile/{id}', [UserController::class, 'update'])->name('profile.update');
         Route::view('order', 'user.order')->name('order');
-        Route::view('cart', 'user.keranjang')->name('cart');
+        Route::get('cart', [CartController::class,'index'])->name('cart');
         Route::get('wishlist', [LandingpageController::class, 'wishlist'])->name('wishlist');
         Route::get('shop', [DetailProductController::class, 'showProduct'])->name('shop');
         Route::get('store', [StoreProfileController::class, 'showStore'])->name('store');
@@ -106,6 +94,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
         Route::resource('auctions', AuctionsController::class);
         // Route::get('/product/{id}', [AuctionsController::class, 'create'])->name('product.create');
         // Route::post('/product/{id}/auction', [AuctionsController::class, 'store'])->name('product.auction.store');
+        Route::get('notify', [AuctionsController::class, 'notify'])->name('notify');
     });
 
     Route::get('open-shop', [OpenShopController::class, 'index'])->name('register-seller');
@@ -146,13 +135,13 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::resource('event', EventController::class);
     Route::resource('produk', ProductAdminController::class);
 
-    Route::prefix('/notification')->name('notification.')->group(function () {
-        Route::get('/', [NotificationController::class, 'index'])->name('index');
-        Route::get('read-all', [NotificationController::class, 'readAll'])->name('readAll');
-        Route::get('read/{id}', [NotificationController::class, 'read'])->name('read');
-        Route::get('unread/{id}', [NotificationController::class, 'unread'])->name('unread');
-        Route::get('{id}', [NotificationController::class, 'show'])->name('show');
-        Route::delete('{id}', [NotificationController::class, 'destroy'])->name('destroy');
+    Route::prefix('/notification')->controller(NotificationController::class)->name('notification.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('read-all', 'readAll')->name('readAll');
+        Route::get('read/{id}', 'read')->name('read');
+        Route::get('unread/{id}', 'unread')->name('unread');
+        Route::get('{id}', 'show')->name('show');
+        Route::delete('{id}', 'destroy')->name('destroy');
     });
 });
 

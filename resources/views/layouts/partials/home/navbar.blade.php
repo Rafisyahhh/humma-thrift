@@ -9,6 +9,7 @@
             <div class="header-cart-items">
                 @includeWhen(!request()->routeIs(['register', 'login']), 'layouts.partials.home.navbar.other-links')
                 @includeWhen(auth()->check() && auth()->user()->getUserRoleInstance()->value !== 'admin' && !auth()->user()->store && !request()->routeIs(['register', 'login']), 'layouts.partials.home.navbar.cart-links')
+                @includeWhen(auth()->check() && auth()->user()->getUserRoleInstance()->value !== 'admin' && !auth()->user()->store && !request()->routeIs(['register', 'login']), 'layouts.partials.home.navbar.notify-links')
                 @include('layouts.partials.home.navbar.login-links')
             </div>
         </div>

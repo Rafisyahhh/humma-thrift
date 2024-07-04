@@ -2,8 +2,8 @@
 
 @section('title', 'Product')
 @section('style')
-<style>
-     .modal {
+    <style>
+        .modal {
             display: none;
             position: fixed;
             z-index: 100;
@@ -43,9 +43,13 @@
             text-decoration: none;
             cursor: pointer;
         }
-</style>
+    </style>
 @endsection
 @section('content')
+
+    {{-- <p>Anda telah menjadi pemenang lelang untuk produk {{ $auctions->productauctions->title }} yang dibuat oleh {{ $auction->user->name }}.</p>
+<p>Silakan <a href="{{ url('/product/auction' . $auctions->product_auction->id) }}">klik di sini</a> untuk melihat detail produk.</p>
+<p>Terima kasih telah berpartisipasi dalam lelang kami.</p> --}}
     <section class="product product-sidebar footer-padding">
         <div class="container">
             <div class="row g-5">
@@ -195,36 +199,51 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="product-cart-btn">
-                                            <a data-id="{{ $item->id }}" class="product-btn openModal">Ikuti Lelang</a>
-                                        </div>
-
                                         @php
                                             $existingAuction = App\Models\auctions::where('user_id', Auth::id())
                                                 ->where('product_auction_id', $item->id)
                                                 ->first();
                                         @endphp
 
-                                        <div id="reviewModal" class="modal" style="display: none;">
+
+                                        <div class="product-cart-btn">
+                                            <a data-id="{{ $item->id }}" class="product-btn openModal">Ikuti
+                                                Lelang</a>
+                                        </div>
+
+                                        <div id="reviewModal-{{ $item->id }}" class="modal" style="display: none;">
                                             <div class="modal-content">
-                                                <button class="close" style="float: right; text-align: end;">&times;</button>
-                                                {{-- @if ($existingAuction)
-                                                sudah mengikuti lelang
-                                                @else --}}
-                                                <h4 style="text-align: center;">Bid Lelang</h4>
-                                                <form id="auctionForm" method="post" action="{{ route('user.auctions.store') }}" class="mt-5">
-                                                    @csrf
-                                                    <input type="hidden" name="product_id" id="product_id">
-                                                    <label for="auction_price" class="form-label" style="font-size: 18px;">Bid Lelang :</label> <br>
-                                                    <input type="number" name="auction_price" class="form-control @error('auction_price') is-invalid @enderror" placeholder="Masukkan Bid Lelang anda" style="font-size: 17px;">
-                                                    @error('auction_price')
-                                                        <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                    <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim Bid Anda</button>
-                                                </form>
-                                                {{-- @endif --}}
+                                                <button class="close"
+                                                    style="float: right; text-align: end;">&times;</button>
+                                                @if ($existingAuction)
+                                                    <p style="text-align: center; font-size :20px; font-weight:bold;">Anda sudah mengikuti lelang</p>
+                                                    <p style="text-align: center;">bid lelang anda : {{ $auctions->auction_price }}</p>
+                                                @else
+                                                    <h4 style="text-align: center;">Bid Lelang</h4>
+                                                    <form id="auctionForm-{{ $item->id }}" method="post"
+                                                        action="{{ route('user.auctions.store') }}" class="mt-5">
+                                                        @csrf
+                                                        <input type="hidden" name="product_id"
+                                                            value="{{ $item->id }}">
+                                                        <label for="auction_price" class="form-label"
+                                                            style="font-size: 18px;">Bid Lelang :</label> <br>
+                                                        <input type="number" name="auction_price"
+                                                            class="form-control @error('auction_price') is-invalid @enderror"
+                                                            placeholder="Masukkan Bid Lelang anda"
+                                                            style="font-size: 17px;">
+                                                        <p style="margin-top: 5px;margin-left:6px;font-size:12px;color: #7c7c7c;">
+                                                            Bid : Rp{{ number_format($item->bid_price_start, null, null, '.') }}
+                                                            -
+                                                            Rp{{ number_format($item->bid_price_end, null, null, '.') }}</p>
+                                                        @error('auction_price')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                        <button type="submit" class="shop-btn"
+                                                            style="margin-left: 22rem;">Kirim Bid Anda</button>
+                                                    </form>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -246,35 +265,52 @@
 @endsection
 @section('script')
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var modals = document.querySelectorAll('.modal');
-        var btns = document.querySelectorAll('.openModal');
-        var spans = document.querySelectorAll('.close');
+    <script>
 
+        document.addEventListener('DOMContentLoaded', function() {
+            var modals = document.querySelectorAll('.modal');
+            var btns = document.querySelectorAll('.openModal');
+            var spans = document.querySelectorAll('.close');
 
-        btns.forEach(function(btn, index) {
-            btn.onclick = function() {
-                var productId = btn.getAttribute('data-id');
-                document.getElementById('product_id').value = productId;
-                modals[index].style.display = 'flex';
-            }
-        });
+            btns.forEach(function(btn, index) {
+                btn.onclick = function() {
+                    var productId = btn.getAttribute('data-id');
+                    var modal = document.getElementById('reviewModal-' + productId);
+                    var auctionForm = document.getElementById('auctionForm-' + productId);
 
+                    if (auctionForm) {
+                        auctionForm.querySelector('input[name="product_id"]').value = productId;
+                    }
 
-        spans.forEach(function(span, index) {
-            span.onclick = function() {
-                modals[index].style.display = 'none';
-            }
-        });
+                    modal.style.display = 'flex';
+                }
+            });
 
-        window.onclick = function(event) {
-            modals.forEach(function(modal) {
-                if (event.target == modal) {
+            spans.forEach(function(span, index) {
+                span.onclick = function() {
+                    var modal = span.closest('.modal');
                     modal.style.display = 'none';
                 }
             });
-        }
-    });
-</script>
+
+            window.onclick = function(event) {
+                modals.forEach(function(modal) {
+                    if (event.target == modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 @endsection
