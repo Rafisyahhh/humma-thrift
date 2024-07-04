@@ -210,10 +210,20 @@
                                                 @endphp
 
 @if ($user)
+@if ($existingAuction && $auctions->status === 1)
+    <form action="{{ route('user.checkout') }}" method="post">
+        @csrf
+        <div class="product-cart-btn" style="bottom:0;">
+            <input type="hidden" value="{{ $item->id }}" name="product_id">
+            <button type="submit" class="product-btn">Beli sekarang</button>
+        </div>
+    </form>
+@else
 <div class="product-cart-btn">
     <a data-id="{{ $item->id }}" class="product-btn openModal">Ikuti
         Lelang</a>
 </div>
+@endif
 @else
 <div class="product-cart-btn">
     <a href="{{ url('login') }}" class="product-btn openModal">Ikuti
