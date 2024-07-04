@@ -82,8 +82,8 @@ class LandingpageController extends Controller
         $product = Product::all();
         $favorite = Favorite::all();
         // dd($favorite);
-        $product_auction = Favorite::whereNotNull('product_auction_id')->get();
-        $product_favorite = Favorite::whereNotNull('product_id')->get();
+        $product_auction = Favorite::whereNotNull('product_auction_id')->where('user_id', auth()->id())->get();
+        $product_favorite = Favorite::whereNotNull('product_id')->where('user_id', auth()->id())->get();
         // dd($product_auction);
         return view('user.wishlist', compact('categories','brands','product','favorite','product_auction', 'product_favorite'));
     }
