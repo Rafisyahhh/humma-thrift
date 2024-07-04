@@ -73,7 +73,7 @@
                                     </span>
                                 </div>
                                 <div class="details">
-                                    <h4 class="footer-heading">Alamat:</h4>
+                                    <h4 class="footer-heading">Alamat :</h4>
                                     <p>PT.HUMMA THRIFT MALANG JAWA TIMUR</p>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@
                                     </span>
                                 </div>
                                 <div class="details">
-                                    <h4 class="footer-heading">No telepon:</h4>
+                                    <h4 class="footer-heading">No telepon   :</h4>
                                     <p>+62 8519216603</p>
                                 </div>
                             </div>
