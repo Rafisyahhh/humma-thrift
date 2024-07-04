@@ -73,6 +73,7 @@
       .menu-item.active {
         background-color: #0000;
       }
+
       .dt-info {
         margin-left: 10%;
       }
@@ -202,6 +203,11 @@
         headers: {
           'X-CSRF-TOKEN': '{{ csrf_token() }}'
         }
+      });
+      $("nav .dropdown").each(function(index, el) {
+        $(el).on("click", function() {
+          $(el).find(".dropdown-toggle").dropdown('toggle');
+        });
       });
     </script>
     @yield('js')
