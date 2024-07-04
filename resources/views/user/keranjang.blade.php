@@ -67,11 +67,11 @@
                                         <div class="wrapper-content"
                                             style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1;">
                                             <h5 class="heading" style="font-size: 18px; ">{{ $item->product->title }}</h5>
-                                            <div style="display: flex; align-items: center; margin-left: 0.5px; ">
+                                            <div style="display: flex; align-items: center; margin-left: 55px; ">
                                                 <p class="inner-text">{{ implode(', ', array_column($item->product->categories->toArray(), 'title')) }}
                                                 </p>
                                             </div>
-                                            <div style="display: flex; align-items: center; margin-left: 10px;">
+                                            <div style="display: flex; align-items: center; margin-left: 0px;">
                                                 <p>Rp</p>
                                                 <p>{{ number_format($item->product->price, 0, ',', '.') }}</p>
                                             </div>
