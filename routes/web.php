@@ -84,7 +84,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
         Route::get('profile', [UserController::class, 'show'])->name('profile');
         Route::post('profile/{id}', [UserController::class, 'update'])->name('profile.update');
         Route::view('order', 'user.order')->name('order');
-        Route::view('cart', 'user.keranjang')->name('cart');
+        Route::get('cart', [CartController::class,'index'])->name('cart');
         Route::get('wishlist', [LandingpageController::class, 'wishlist'])->name('wishlist');
         Route::get('shop', [DetailProductController::class, 'showProduct'])->name('shop');
         Route::get('store', [StoreProfileController::class, 'showStore'])->name('store');

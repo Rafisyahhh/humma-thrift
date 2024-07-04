@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\{
     User,
     Brand,
-    ProductCategory
+    ProductCategory,
+    event,
+    Product
 };
 
 use Carbon\Carbon;
@@ -45,6 +47,18 @@ class YajraController extends Controller
     public function categories(Request $request) {
         if ($request->ajax()) {
             $data = ProductCategory::all();
+            return DataTables::of($data)->addIndexColumn()->make(true);
+        }
+    }
+    public function events(Request $request) {
+        if ($request->ajax()) {
+            $data = event::all();
+            return DataTables::of($data)->addIndexColumn()->make(true);
+        }
+    }
+    public function products(Request $request) {
+        if ($request->ajax()) {
+            $data = Product::all();
             return DataTables::of($data)->addIndexColumn()->make(true);
         }
     }

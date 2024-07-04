@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth')->name("api.")->group(function () {
-    Route::get('/user', [UserApiController::class, 'getUser']);
+    // Route::get('/user', [UserApiController::class, 'getUser']);
     Route::post('/brand', [BrandApiController::class, 'storeBrand'])->name("storeBrand");
     Route::put('/brand/{brand}', [BrandApiController::class, 'updateBrand'])->name("updateBrand");
     Route::delete('/brand/{brand}', [BrandApiController::class, 'deleteBrand'])->name("deleteBrand");
@@ -30,4 +30,6 @@ Route::prefix('yajra')->name('yajra.')->group(function () {
     Route::get('/user', [YajraController::class, 'users'])->name("users");
     Route::get('/brand', [YajraController::class, 'brands'])->name("brands");
     Route::get('/category', [YajraController::class, 'categories'])->name("categories");
+    Route::get('/event', [YajraController::class, 'events'])->name("events");
+    Route::get('/product', [YajraController::class, 'products'])->name("products");
 });

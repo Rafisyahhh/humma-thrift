@@ -22,8 +22,8 @@ class UpdateEventRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'judul_update' => 'required',
-            'subjudul_update' => 'required',
+            'judul' => 'required',
+            'subjudul' => 'required',
             'foto_update' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ];
     }

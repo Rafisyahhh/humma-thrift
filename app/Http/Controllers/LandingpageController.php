@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\auctions;
 use App\Models\Brand;
+use App\Models\cart;
 use App\Models\event;
 use App\Models\Favorite;
 use App\Models\Product;
@@ -77,5 +78,10 @@ class LandingpageController extends Controller
         $product = Product::all();
         $favorite = Favorite::all();
         return view('user.wishlist', compact('categories','brands','product', 'favorite', 'product_auction'));
+    }
+
+    public function cart(){
+        $cart = cart::all();
+        return view('user.keranjang', compact('cart'));
     }
 }

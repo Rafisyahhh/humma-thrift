@@ -36,7 +36,7 @@ class FavoriteController extends Controller
 
         Favorite::create($dataproduct);
 
-        return redirect()->route('user.wishlist')->with('success', 'Favorite created successfully.');
+        return redirect()->back()->with('success', 'Favorite created successfully.');
     }
     /**
      * Store a newly created resource in storage.
