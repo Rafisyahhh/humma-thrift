@@ -632,30 +632,20 @@
       e.preventDefault();
       table.search($(this).find("input[name='search']").val()).draw();
     });
-    $("#order-all").click(function(e) {
-      e.preventDefault();
-      $(this).closest("ul").find("li").find("a").each(function(e) {
-        $(this).removeClass("active");
+
+    function setupOrderButton(button, searchValue) {
+      button.click(function(e) {
+        e.preventDefault();
+        $("ul").find("li a").removeClass("active"); // Hapus kelas "active" dari semua tombol
+        $(this).addClass("active"); // Tambahkan kelas "active" ke tombol yang diklik
+        table.search(searchValue).draw(); // Lakukan pencarian berdasarkan nilai yang ditetapkan
       });
-      $(this).addClass("active");
-      table.search("").draw();
-    });
-    $("#order-user").click(function(e) {
-      e.preventDefault();
-      $(this).closest("ul").find("li").find("a").each(function(e) {
-        $(this).removeClass("active");
-      });
-      $(this).addClass("active")
-      table.search(":Product:").draw();
-    });
-    $("#order-seller").click(function(e) {
-      e.preventDefault();
-      $(this).closest("ul").find("li").find("a").each(function(e) {
-        $(this).removeClass("active");
-      });
-      $(this).addClass("active")
-      table.search(":ProductAuction:").draw();
-    });
+    }
+
+    // Setup klik untuk masing-masing tombol dengan nilai pencarian yang berbeda
+    setupOrderButton($("#order-all"), "");
+    setupOrderButton($("#order-user"), ":Product:");
+    setupOrderButton($("#order-seller"), ":ProductAuction:");
 
     table.on("click", "button#detail", function() {
       const modal = $('#detailModal');
