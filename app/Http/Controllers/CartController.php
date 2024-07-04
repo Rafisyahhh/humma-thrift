@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\cart;
 use App\Models\Product;
+use App\Models\ProductCategory;
+use App\Models\ProductCategoryPivot;
+use App\Models\UserStore;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -13,11 +16,14 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = cart::where('user_id',auth()->id())
+        $carts = cart::where('user_id',auth()->id())
                     ->whereNotNull('product_id')
                     ->orderBy('created_at')
                     ->get();
-        return view('user.keranjang',compact('cart'));
+        $store = UserStore::all();
+        $product_category_pivots = ProductCategoryPivot::all();
+
+        return view('user.keranjang',compact('carts','store','product_category_pivots'));
 
     }
 

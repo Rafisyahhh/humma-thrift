@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\auctions;
 use App\Models\UserStore;
 use App\Models\Product;
 use App\Models\ProductAuction;
+use Auth;
 use Illuminate\Http\Request;
 use Jorenvh\Share\ShareFacade as Share;
 
@@ -35,8 +37,9 @@ class StoreProfileController extends Controller
     {
         $isProduct = Product::where('slug', $slug)->first();
         $isProductAuction = ProductAuction::where('slug', $slug)->first();
-
-        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction'));
+        $user = Auth::user();
+        $auctions = auctions::where('user_id', $user->id)->first();
+        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction','user','auctions'));
     }
 
     public function showStore()

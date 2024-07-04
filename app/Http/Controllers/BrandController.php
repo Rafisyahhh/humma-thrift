@@ -20,13 +20,13 @@ class BrandController extends Controller {
      * Display a listing of the resource.
      */
     public function index(Request $request) {
-        $search = $request->input('search');
-        $hasRequestSearch = $request->has('search');
+        // $search = $request->input('search');
+        // $hasRequestSearch = $request->has('search');
 
-        $brands = $this->brands->when($hasRequestSearch, fn($query) => $query->where("title", 'LIKE', "%{$search}%"))
-            ->paginate(5);
+        // $brands = $this->brands->when($hasRequestSearch, fn($query) => $query->where("title", 'LIKE', "%{$search}%"))
+        //     ->paginate(5);
 
-        return view('admin.brand', compact('brands'));
+        return view('admin.brand'/* compact('brands')*/);
     }
 
     /**

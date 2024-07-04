@@ -22,7 +22,7 @@ class Product extends Model {
         });
     }
 
-    public function userStore() {
+    public function userstore() {
         return $this->belongsTo(UserStore::class, 'store_id');
     }
 
@@ -43,8 +43,7 @@ class Product extends Model {
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function favorite(): HasMany
-    {
+    public function favorite(): HasMany {
         return $this->hasMany(Favorite::class);
     }
 }

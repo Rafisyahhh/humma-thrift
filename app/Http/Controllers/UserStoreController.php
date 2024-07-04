@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\UserStore;
+use App\Models\UserAddress;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreUserStoreRequest;
 use App\Http\Requests\UpdateUserStoreRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class UserStoreController extends Controller
 {
@@ -15,7 +18,10 @@ class UserStoreController extends Controller
      */
     public function index()
     {
-        //
+        $store = UserStore::all();
+        $address = UserAddress::all();
+        $user = User::all();
+        return view('seller.index', compact('store', 'address', 'user'));
     }
 
     /**

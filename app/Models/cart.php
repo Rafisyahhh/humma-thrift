@@ -9,17 +9,19 @@ class cart extends Model
 {
     use HasFactory;
 
-    protected $table = "carts";
-
-    protected $guarded =[
-        'id',
-        'created_at',
-        'updated_at'
-
-    ];
+    protected $guarded = ['id'];
 
     public function product()
     {
         return $this->belongsTo(product::class);
     }
+
+    public function store()
+    {
+        return $this->belongsTo(UserStore::class);
+    }
+    public function categories() {
+        return $this->belongsToMany(ProductCategory::class, 'product_category_pivots');
+    }
+
 }
