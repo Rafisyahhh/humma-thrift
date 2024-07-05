@@ -521,6 +521,8 @@
                                         ->first();
                                         $auctions = App\Models\Auctions::where('user_id', $user->id)->where('product_auction_id', $item->id)->first();
                                     }
+                                    $auctionproduct = App\Models\Auctions::where('product_auction_id', $item->id)->where('status', 1)->first();
+
                                         @endphp
 
 
@@ -533,6 +535,10 @@
                                                 <button type="submit" class="product-btn">Beli sekarang</button>
                                             </div>
                                         </form>
+                                        @elseif ($auctionproduct)
+                                        <div class="product-cart-btn">
+                                            <a data-id="{{ $item->id }}" class="product-btn openModal">Lelang Berakhir</a>
+                                        </div>
                                         @else
                                         <div class="product-cart-btn">
                                             <a data-id="{{ $item->id }}" class="product-btn openModal">Ikuti Lelang</a>
@@ -559,6 +565,8 @@
                 @if ($existingAuction)
                     <p style="text-align: center; font-size :20px; font-weight:bold;">Anda sudah mengikuti lelang</p>
                     <p style="text-align: center;">bid lelang anda : {{ $auctions->auction_price }}</p>
+                @elseif ($auctionproduct)
+                    <p style="text-align: center; font-size :20px; font-weight:bold; margin-top: 2rem; margin-bottom:2rem;">lelang sudah berakhir</p>
                 @else
                     <h4 style="text-align: center;">Bid Lelang</h4>
                     <form id="auctionForm-{{ $item->id }}" method="post"

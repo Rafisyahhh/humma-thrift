@@ -416,6 +416,8 @@
                                                 ->first();
                                                 $auctions = App\Models\Auctions::where('user_id', $user->id)->where('product_auction_id', $isProductAuction->id)->first();
                                             }
+                                            $auctionproduct = App\Models\Auctions::where('product_auction_id', $isProductAuction->id)->where('status', 1)->first();
+
                                         @endphp
                                         @if ($user)
                                             @if ($existingAuction && $auctions->status === 1)
@@ -426,6 +428,13 @@
                                                     <button type="submit"  class="shop-btn">Beli sekarang</button>
                                                 </div>
                                             </form>
+                                            @elseif ($auctionproduct)
+                                            <button style="width :10px" class="shop-btn openModal"
+                                                data-id="{{ $isProductAuction->id }}"
+                                                style="display: flex; align-items: center; gap: 5px; z-index:1">
+                                                <span style="width: 37rem; align-items:center; justify-content:center;">
+                                                    Lelang Berakhir</span>
+                                            </button>
                                             @else
                                             <button style="width :10px" class="shop-btn openModal"
                                                 data-id="{{ $isProductAuction->id }}"
@@ -453,7 +462,9 @@
                                                     @if ($existingAuction)
                                                     <p style="text-align: center; font-size :20px; font-weight:bold;">Anda sudah mengikuti lelang</p>
                                                     <p style="text-align: center;">bid lelang anda : {{ $auctions->auction_price }}</p>
-                                                @else
+                                                    @elseif ($auctionproduct)
+                                                    <p style="text-align: center; font-size :20px; font-weight:bold; margin-top: 2rem; margin-bottom:2rem;">lelang sudah berakhir</p>
+                                                    @else
                                                     <h4 style="text-align: center;">Bid Lelang</h4>
                                                     <form id="auctionForm-{{ $isProductAuction->id }}" method="post"
                                                         action="{{ route('user.auctions.store') }}" class="mt-5">

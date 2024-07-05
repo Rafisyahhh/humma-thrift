@@ -94,10 +94,15 @@
                 <h5 class="mb-0">Notifikasi</h5>
             </div>
             @forelse(auth()->user()->unreadNotifications as $notification)
-            <a href="#">
+            {{-- @php
+                $store = $notification->product_auction_id; // Sesuaikan dengan nama atribut yang benar
+                $product = $notification->slug; // Sesuaikan dengan nama atribut yang benar
+                $routeParameters = compact('store', 'product');
+                $route = route('store.product.detail', $routeParameters);
+            @endphp --}}
+    {{-- <a href="{{ $route }}"> --}}
             <div class="wrapper" style="padding:2px;">
                 <div class="wrapper-item">
-
                     <div class="wrapper-content">
                         <h5 class="wrapper-title ms-4" style="font-size:1.5rem;">{{ $notification->data['title'] }}</h5>
                         <div class="price mx-4">
@@ -119,7 +124,7 @@
                             class="ti ti-x"></span></a>
                 </div>
             </div>
-            </a>
+            {{-- </a> --}}
             @empty
             <li class="list-group-item list-group-item-action" >Tidak ada notifikasi yang belum dibaca</li>
             @endforelse
