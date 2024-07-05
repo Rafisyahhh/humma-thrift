@@ -18,7 +18,7 @@ class UserStoreController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
+    {
         if (Auth::check()) {
             $store = UserStore::all();
             $address = UserAddress::all();
@@ -65,43 +65,39 @@ class UserStoreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserStoreRequest $request, $id)
+    public function update(UpdateUserStoreRequest $request, UserStore $id)
     {
-        $store = UserStore::findOrFail($id);
-        // Inisialisasi variabel logoPath dan coverPath dengan nilai default null
-        $logoPath = $store->store_logo;
-        $coverPath = $store->store_cover;
+        $data = collect($request->validated());
+
         // Proses unggah file avatar jika ada
         if ($request->hasFile('store_logo')) {
             // Hapus avatar lama jika ada
-            if ($store->store_logo) {
-                Storage::disk('public')->delete($store->store_logo);
+            if (Storage::disk('public')->exists($id->store_logo)) {
+                Storage::disk('public')->delete($id->store_logo);
             }
+
             // Simpan avatar baru
-            $logoPath = $request->file('store_logo')->store('store_logo', 'public');
-            $store->store_logo = $logoPath;
+            $data['store_logo'] = $request->file('store_logo')->store('store_logo', 'public');
         }
+
         if ($request->hasFile('store_cover')) {
             // Hapus avatar lama jika ada
-            if ($store->store_cover) {
-                Storage::disk('public')->delete($store->store_cover);
+            if (Storage::disk('public')->exists($id->store_cover)) {
+                Storage::disk('public')->delete($id->store_cover);
             }
-            // Simpan avatar baru
-            $coverPath = $request->file('store_cover')->store('store_cover', 'public');
-            $store->store_cover = $coverPath;
+
+            // Simpan cover baru
+            $data['store_cover'] = $request->file('store_cover')->store('store_cover', 'public');
         }
-        $store->update([
-            'name' => $request->name,
-            'address' => $request->address,
-            'description' => $request->description,
-            'store_logo' => $logoPath,
-            'store_cover' => $coverPath,
-        ]);
-        $user = $store->user;
-        $user->update([
-            'phone' => $request->phone,
-        ]);
-        return redirect()->route('seller.profile')->with("success", "Berhasil Memperbarui Profil Lapak");
+
+        $id->update($data->except('phone')->toArray());
+
+        # Update data user phone
+        $user = $id->user;
+        $user->update($data->only('phone')->toArray());
+
+        // Redirect ke halaman profil
+        return redirect()->route('seller.profile')->with("success", "Berhasil memperbaharui identitas dan profil lapak");
     }
 
     /**

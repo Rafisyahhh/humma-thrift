@@ -60,7 +60,7 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
     Route::view('/income', 'seller.penghasilan')->name('income');
     // Route::view('/product', 'seller.produk')->name('product');
     Route::get('profil', [UserStoreController::class, 'show'])->name('profile');
-    Route::post('/profile/{id}', [UserStoreController::class, 'update'])->name('profile.update');
+    Route::put('/profile/{id}', [UserStoreController::class, 'update'])->name('profile.update');
     Route::resource('product', ProductController::class);
     Route::resource('productauction', ProductAuctionController::class);
 

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUserStoreRequest extends FormRequest
 {
@@ -23,6 +24,13 @@ class UpdateUserStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
+            'username' => [
+                'required',
+                'string',
+                'max:255',
+                'alpha_dash',
+                Rule::unique('user_stores', 'username')->ignore($this->route('id')),
+            ],
             'phone' => 'required|string|max:15',
             'address' => 'required|string',
             'description' => 'required|string',
@@ -38,6 +46,10 @@ class UpdateUserStoreRequest extends FormRequest
             'phone.required' => 'Nomor telepon wajib diisi',
             'address.required' => 'Alamat wajib diisi',
             'description.required' => 'Deskripsi wajib diisi',
+            'username.required' => 'Username wajib diisi',
+            'username.unique' => 'Username sudah terdaftar',
+            'username.max' => 'Username maksimal 255 karakter',
+            'username.alpha_dash' => 'Username hanya boleh berisi huruf, angka, strip, dan garis bawah',
             'store_logo.image' => 'Logo harus berupa file gambar',
             'store_logo.mimes' => 'Logo harus berupa file dengan tipe: jpeg, png, jpg, gif, svg',
             'store_logo.max' => 'Ukuran Logo maksimal 2MB',
