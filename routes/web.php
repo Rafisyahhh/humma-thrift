@@ -64,7 +64,6 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
     Route::resource('product', ProductController::class);
     Route::resource('productauction', ProductAuctionController::class);
 
-    // Show seller product auction
 
 // Show seller product auction
 Route::get('auction/seller/{id}', [AuctionsController::class, 'showSeller'])->name('auction.showSeller');
@@ -153,6 +152,7 @@ Route::prefix('@{store:username}')->controller(StoreProfileController::class)->g
     Route::get('/', 'index')->name('store.profile');
     Route::get('products', 'products')->name('store.products');
     Route::get('{product:slug}', 'productDetail')->name('store.product.detail');
+
 });
 
 # Payment Routes
