@@ -76,7 +76,7 @@ class YajraController extends Controller {
                     return $row instanceof Product ? ':Product:' : ':ProductAuction:';
                 })
                 ->editColumn('price', function ($row) {
-                    return $row instanceof Product ? $row->price : number_format($row->bid_price_start, 0) . "-" . number_format($row->bid_price_end, 0, null, ".");
+                    return $row instanceof Product ? number_format($row->price, 0, null, ".") : number_format($row->bid_price_start, 0, null, ".") . "-" . number_format($row->bid_price_end, 0, null, ".");
                 })
                 ->addIndexColumn()
                 ->make(true);

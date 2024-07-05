@@ -418,7 +418,7 @@
                 <div class="product-info-content" data-aos="fade-left">
                   <h5 style="margin-bottom:0;" data-row="title">Judul</h5>
                   <div class="price" style="display: flex; justify-content: space-between; align-items: center;">
-                    <span class="new-price" data-row="price">Rp. </span>
+                    <span class="new-price">Rp. <span data-row="price"></span></span>
                     <span style="display: flex; justify-content:center; align-items:center;">
                       <i class="fa-solid fa-store"
                         style="margin-right: 0.5rem; color: #215791; font-size: 1.2rem; margin-left:2rem;"></i>
@@ -507,7 +507,17 @@
       },
       options: {
         layout: {
-          topStart: null,
+          topStart: $(`<ul class="ms-4 nav nav-pills d-none d-md-flex">
+            <li class="nav-item">
+              <a class="nav-link active" type="button" id="order-all">Semua Tipe</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" type="button" id="order-user">Produk</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" type="button" id="order-seller"">Lelang</a>
+            </li>
+          </ul>`),
           topEnd: $(`<form action="#" method="get" id="search" class="me-4">
             <div class="input-group mb-3">
               <input type="search" name="search" class="form-control" placeholder="Cari Produk&hellip;"
@@ -532,7 +542,7 @@
         {
           data: 'title',
           render: (data, __, row) => {
-            return data + `<span style="display: none;">${row.type}</span>`;
+            return data + `<span class="opacity-0 position-absolute">${row.type}</span>`;
           }
         },
         {
@@ -540,6 +550,11 @@
           orderable: false,
           searchable: false,
           render: (data, type) => `<img src="{{ asset('storage/') }}/${data}" class="rounded-3" height="96px">`
+        },
+        {
+          data: 'type',
+          searchable: true,
+          visible: false
         },
         {
           data: 'userstore.username',
@@ -618,20 +633,38 @@
       table.search($(this).find("input[name='search']").val()).draw();
     });
 
+    function setupOrderButton(button, searchValue) {
+      button.click(function(e) {
+        e.preventDefault();
+        $("ul").find("li a").removeClass("active");
+        $(this).addClass("active");
+        table.search(searchValue).draw();
+      });
+    }
+
+    setupOrderButton($("#order-all"), "");
+    setupOrderButton($("#order-user"), ":Product:");
+    setupOrderButton($("#order-seller"), ":ProductAuction:");
+
     table.on("click", "button#detail", function() {
       const modal = $('#detailModal');
-      let data = table.row($(this).closest("tr")).data();
-      data['userstore'] = data['userstore']['username'];
-      data['categories'] = data['categories'].map(data => data.title).join(', ');
-      data['brand'] = data['brand']['title'];
-      modal.find("#detail_image").each(function() {
-        $(this).attr("src", "{{ asset('storage/') }}/" + data.thumbnail);
-      })
+      const data = table.row($(this).closest("tr")).data();
+
+      const editedData = {
+        ...data,
+        userstore: typeof data.userstore === "object" ? data.userstore.username : data.userstore,
+        categories: typeof data.categories === "object" ? data.categories.map(cat => cat.title).join(', ') : data
+          .categories,
+        brand: typeof data.brand === "object" ? data.brand.title : data.brand
+      };
+
+      modal.find("#detail_image").attr("src", "{{ asset('storage/') }}/" + editedData.thumbnail);
+
       modal.find("[data-row]").each(function() {
-        console.log(data[$(this).data("row")]);
-        $(this).text(data[$(this).data("row")]);
+        $(this).text(editedData[$(this).data("row")]);
       });
-      modal.modal("toggle");
+
+      modal.modal("show");
     });
   </script>
 @endpush
