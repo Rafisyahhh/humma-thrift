@@ -22,11 +22,16 @@ class UserStore extends Model
     {
         parent::boot();
 
+        # Auto Creating Username
         self::creating(function ($model) {
             $model->setAttribute('username', self::generateUniqueUsername($model->name));
         });
+
+        # Auto Creating Username When Update if There Hasn't Have A Username
         self::updating(function ($model) {
-            $model->setAttribute('username', self::generateUniqueUsername($model->name));
+            if(!$model->username) {
+                $model->setAttribute('username', self::generateUniqueUsername($model->name));
+            }
         });
     }
 

@@ -8,6 +8,7 @@
 
 @section('content')
     @include('components.show-errors')
+
     <section class="seller-application ">
         <div class="container">
             <div class="seller-application-section-profil">
@@ -22,6 +23,8 @@
                                         <form action="{{ route('seller.profile.update', $store->id) }}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
+                                            @method('PUT')
+
                                             <div class="review-form">
                                                 <div class="review-inner-form ">
                                                     <div class="review-form-name">
@@ -29,32 +32,42 @@
                                                             Toko</label>
                                                         <input type="text" id="name" name="name"
                                                             class="form-control" placeholder="mis.Hilma Store"
-                                                            value="{{ $store->name }}">
+                                                            value="{{ old('name', $store->name) }}">
                                                     </div>
 
                                                     <div class="review-form-name">
-                                                        <label for="email" class="form-label">Email</label>
+                                                        <label for="email" class="form-label">Surel</label>
                                                         <input type="text" id="email" name="email"
                                                             class="form-control" placeholder="mis.hilmaschaefer@gmail.com"
                                                             value="{{ $store->user->email }}" disabled>
                                                     </div>
 
                                                     <div class="review-form-name">
+                                                        <label for="username" class="form-label">Username Toko</label>
+                                                        <input type="text" id="username" name="username"
+                                                            class="form-control" placeholder="mis: hummathrift"
+                                                            value="{{ old('username', $store->username) }}" />
+                                                        <span class="opacity-75 mt-2">
+                                                            Isikan tanpa tanda "@"
+                                                        </span>
+                                                    </div>
+
+                                                    <div class="review-form-name">
                                                         <label for="phone" class="form-label">Telepon</label>
                                                         <input type="number" id="phone" name="phone"
                                                             class="form-control" placeholder="+88013**977957"
-                                                            value="{{ $store->user->phone }}">
+                                                            value="{{ old('phone', $store->user->phone) }}">
                                                     </div>
 
                                                     <div class="review-form-name">
                                                         <label for="address" class="form-label">Alamat</label>
-                                                        <textarea id="address" name="address" class="form-control" placeholder="Masukkan Alamat Anda">{{ $store->address }}</textarea>
+                                                        <textarea id="address" name="address" class="form-control" placeholder="Masukkan Alamat Anda">{{ old('address', $store->address) }}</textarea>
                                                     </div>
 
                                                     <div class="review-form-name mt-4">
                                                         <label for="address" class="form-label">Deskripsi</label>
                                                         <textarea id="custom-summernote" name="description" class="custom-summernote"
-                                                            placeholder="Tambahkan Deskripsi Toko Anda" rows="7">{{ $store->description }}</textarea>
+                                                            placeholder="Tambahkan Deskripsi Toko Anda" rows="7">{!! old('description', $store->description) !!}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
