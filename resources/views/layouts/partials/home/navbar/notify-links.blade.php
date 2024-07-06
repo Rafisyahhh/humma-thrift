@@ -100,7 +100,8 @@
                 $routeParameters = compact('store', 'product');
                 $route = route('store.product.detail', $routeParameters);
             @endphp --}}
-    {{-- <a href="{{ $route }}"> --}}
+        <a href="{{ $notification->data['url'] }}">
+
             <div class="wrapper" style="padding:2px;">
                 <div class="wrapper-item">
                     <div class="wrapper-content">
@@ -108,6 +109,7 @@
                         <div class="price mx-4">
                             <p class="new-price">{{ Str::limit($notification->data['data'], 200) }}</p>
                         </div>
+
                     </div>
                 </div>
                 {{-- <span class="close-btn">
@@ -124,7 +126,7 @@
                             class="ti ti-x"></span></a>
                 </div>
             </div>
-            {{-- </a> --}}
+            </a>
             @empty
             <li class="list-group-item list-group-item-action" >Tidak ada notifikasi yang belum dibaca</li>
             @endforelse

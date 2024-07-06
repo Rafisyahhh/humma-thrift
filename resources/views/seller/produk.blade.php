@@ -91,6 +91,23 @@
       background: red;
       color: white;
     }
+
+/* Ensure the dropdown is hidden by default */
+.product-cart-items .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 100%;
+  margin-top: 3px;
+  margin-right: 3px;
+}
+
+/* Show the dropdown menu when the icon is hovered */
+.product-cart-items:hover .dropdown-menu,
+.product-cart-items .dropdown-menu:hover {
+  display: block;
+}
+
   </style>
 @endsection
 
@@ -114,28 +131,31 @@
                   {{ $item->status }}
                 </div>
               @endif
-              <div class="product-cart-items dropstart"
-                style="top: 0;transform: translate(0, 0); bottom: unset; left: unset; right: 0; opacity: unset; visibility: unset; transition: unset;">
-                <a type="button" class="favourite cart-item" data-bs-toggle="dropdown">
-                  <span>
-                    <i class="fas fa-solid fa-bars"></i>
-                  </span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <form action="{{ route('seller.product.edit', $item->id) }}" method="get">
-                      <button class="dropdown-item" type="submit">Edit</button>
-                    </form>
-                  </li>
-                  <li>
-                    <form action="{{ route('seller.product.destroy', $item->id) }}" method="post">
-                      @csrf
-                      @method('DELETE')
-                      <button class="dropdown-item" type="submit">Hapus</button>
-                    </form>
-                  </li>
-                </ul>
-              </div>
+
+              <div class="product-cart-items dropstart dropdown-hover"
+              style="top: 0; transform: translate(0, 0); bottom: unset; left: unset; right: 0; opacity: unset; visibility: unset; transition: unset;">
+             <a type="button" class="favourite cart-item">
+               <span>
+                 <i class="fas fa-solid fa-bars"></i>
+               </span>
+             </a>
+             <ul class="dropdown-menu">
+               <li>
+                 <form action="{{ route('seller.product.edit', $item->id) }}" method="get">
+                   <button class="dropdown-item" type="submit">Edit</button>
+                 </form>
+               </li>
+               <li>
+                 <form action="{{ route('seller.product.destroy', $item->id) }}" method="post">
+                   @csrf
+                   @method('DELETE')
+                   <button class="dropdown-item" type="submit">Hapus</button>
+                 </form>
+               </li>
+             </ul>
+         </div>
+
+
             </div>
             <div class="product-info">
               <div class="product-description">

@@ -16,7 +16,7 @@ class FavoriteController extends Controller
     {
         $favorites = Favorite::where('user_id', auth()->id())
                     ->whereNotNull('product_id')
-                    ->orderB('created_at')
+                    ->orderBy('created_at')
                     ->get();
 
         // dd($favorites);

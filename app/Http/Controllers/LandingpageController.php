@@ -22,6 +22,10 @@ class LandingpageController extends Controller
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $product = Product::all();
+        $favorites = Favorite::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
         $product_auction = ProductAuction::all();
 
         return view('landing.home', compact(
@@ -29,6 +33,7 @@ class LandingpageController extends Controller
             'brands',
             'categories',
             'product',
+            'favorites',
             'product_auction'
         ));
     }
