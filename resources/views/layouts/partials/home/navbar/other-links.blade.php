@@ -22,7 +22,8 @@
     </div>
     <div class="wrapper-main">
       <form class="search-section" action="{{ route('searchProduct') }}">
-        <input type="search" placeholder="Telusuri produk..." name="search" value="{{ $search }}">
+        <input type="search" placeholder="Telusuri produk..." name="search"
+          value="{{ isset($search) ? $search : '' }}">
         <div class="divider"></div>
         <a role="button" class="shop-btn" onclick="$(this).closest('form').submit()"><i class="fas fa-search"></i></a>
       </form>
