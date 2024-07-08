@@ -220,7 +220,18 @@
                                 <i class="fas fa-map-marker-alt"></i>
                                 <span style="font-size: 16px;">{{ $store->address }}</span>
                             </div>
-                            <p class="profile-description opacity-75 mt-3 mb-0"> <span class="badge text-bg-success me-2" >Buka</span>07.00 - 20.00 </p>
+                            @php
+                                $open = \Carbon\Carbon::parse($store->open)->format('H:i');
+                                $close = \Carbon\Carbon::parse($store->close)->format('H:i');
+                                $now = \Carbon\Carbon::now();
+                            @endphp
+                            <p class="profile-description opacity-75 mt-3 mb-0">
+                            @if ($now > $open && $now <= $close)
+                            <span class="badge text-bg-success me-2" >Buka</span>
+                            @else
+                            <span class="badge text-bg-danger me-2" >Tutup</span>
+                            @endif
+                            {{$open}} - {{$close}} </p>
                         </div>
 
                         <div class="profile-info-detail-wrapper">

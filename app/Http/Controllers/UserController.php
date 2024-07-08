@@ -9,6 +9,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\cart;
+use App\Models\Favorite;
 
 class UserController extends Controller
 {
@@ -51,7 +53,24 @@ class UserController extends Controller
      */
     public function show(): View
     {
-        return view('user.profil');
+
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+        $countcart = cart::where('user_id', auth()->id())->count();
+        $favorites = Favorite::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+        return view('user.profil',compact(
+            'countcart',
+            'carts',
+            'favorites',
+            'countFavorite'
+        ));
     }
 
     /**
