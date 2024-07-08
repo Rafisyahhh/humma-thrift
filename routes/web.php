@@ -120,8 +120,12 @@ Route::view('detail', 'landing.detail');
 Route::get('about-us', [AboutUsController::class, 'landingpage']);
 Route::view('news', 'landing.detailNews');
 Route::view('/regstrasi','afterregister');
+# Product
 Route::post('/product/storesproduct/{product}', [FavoriteController::class, 'storesproduct'])->name('storesproduct');
+Route::delete('/destroyProduct/{destroy}', [FavoriteController::class, 'destroyProduct'])->name('destroyProduct.destroy');
+#product Auction
 Route::post('/productAuction/storesproductAuction/{productAuction}', [FavoriteController::class, 'storesproductAuction'])->name('storesproductAuction');
+Route::delete('/destroyAuction/{destroyAuction}', [FavoriteController::class, 'destroyAuction'])->name('destroyAuction.destroy');
 Route::post('/product/storecart/{product}',[CartController::class, 'storecart'])->name('storecart');
 
 # Home Redirect
