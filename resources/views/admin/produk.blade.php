@@ -104,8 +104,8 @@
             <th class="text-start">TOKO</th>
             <th class="text-start">KATEGORI</th>
             <th class="text-start">HARGA</th>
-            <th class="text-start">STATUS</th>
-            <th class="text-start">DETAIL</th>
+            <th class="text-center">STATUS</th>
+            <th class="text-center">DETAIL</th>
           </tr>
         </thead>
         <tbody class="table-border-bottom-0"></tbody>

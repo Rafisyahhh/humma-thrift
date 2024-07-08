@@ -38,13 +38,11 @@
     <div class="table-responsive text-nowrap">
       <table class="table yajra-datatable w-100">
         <thead class="table-light">
-          <tr>
-            <th class="text-start">NO.</th>
-            <th class="text-start">JUDUL</th>
-            <th class="text-start">SUB JUDUL</th>
-            <th class="text-start">FOTO</th>
-            <th class="text-center">AKSI</th>
-          </tr>
+          <th>NO.</th>
+          <th>JUDUL</th>
+          <th>SUB JUDUL</th>
+          <th>FOTO</th>
+          <th>AKSI</th>
         </thead>
         <tbody class="table-border-bottom-0"></tbody>
       </table>
