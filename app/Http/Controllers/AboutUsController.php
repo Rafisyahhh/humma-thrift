@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAboutRequest;
 use App\Http\Requests\UpdateAboutRequest;
 use App\Models\AboutUs;
+use App\Models\Favorite;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,17 +16,22 @@ class AboutUsController extends Controller {
      */
     public function index() {
         $aboutUs = AboutUs::all();
+
         return view('admin.about', compact('aboutUs'));
     }
 
     public function user() {
         $aboutUs = AboutUs::all();
-        return view('user.tentang', compact('aboutUs'));
+       $countFavorite = Favorite::where('user_id', auth()->id())->count();
+
+        return view('user.tentang', compact('aboutUs', 'countFavorite'));
     }
 
     public function landingpage() {
         $aboutUs = AboutUs::all();
-        return view('landing.about', compact('aboutUs'));
+       $countFavorite = Favorite::where('user_id', auth()->id())->count();
+
+        return view('landing.about', compact('aboutUs', 'countFavorite'));
     }
 
     /**
@@ -33,6 +39,7 @@ class AboutUsController extends Controller {
      */
     public function create() {
         $aboutUs = AboutUs::all();
+
         return view('admin.about', compact('aboutUs'));
     }
 
@@ -94,6 +101,7 @@ class AboutUsController extends Controller {
      */
     public function edit(AboutUs $aboutUs) {
         $aboutUs = AboutUs::all();
+
         return view('admin.about', compact('aboutUs'));
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserUpdatePasswordRequest;
+use App\Models\Favorite;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -13,8 +14,9 @@ class UserUpdatePasswordController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        //
-        return view('user.update-password');
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+
+        return view('user.update-password', 'countFavorite');
     }
 
     /**

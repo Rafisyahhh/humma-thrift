@@ -26,6 +26,7 @@ class LandingpageController extends Controller
         ->whereNotNull('product_id')
         ->orderBy('created_at')
         ->get();
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $product_auction = ProductAuction::all();
 
         return view('landing.home', compact(
@@ -34,14 +35,16 @@ class LandingpageController extends Controller
             'categories',
             'product',
             'favorites',
-            'product_auction'
+            'product_auction',
+            'countFavorite'
         ));
     }
 
     public function brand()
     {
         $brands = Brand::all();
-        return view('landing.brand', compact('brands'));
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+        return view('landing.brand', compact('brands', 'countFavorite'));
     }
 
     // public function product(){
@@ -59,10 +62,11 @@ class LandingpageController extends Controller
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $user = Auth::user();
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
         // $auctions = auctions::where('user_id', $user->id)->first();
         // $notifications = auth()->user()->notifications;
 
-        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories','user'));
+        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories','user', 'countFavorite'));
     }
 
     // Tambahkan metode regular
@@ -71,13 +75,16 @@ class LandingpageController extends Controller
         $products = Product::paginate(24);
         $brands = Brand::all();
         $categories = ProductCategory::all();
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
 
-        return view('landing.produk-regular', compact('products', 'brands', 'categories'));
+        return view('landing.produk-regular', compact('products', 'brands', 'categories', 'countFavorite'));
     }
 
     public function store(){
         $store = UserStore::all();
-        return view('landing.toko', compact('store'));
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+
+        return view('landing.toko', compact('store', 'countFavorite'));
     }
 
     public function wishlist(){
@@ -85,17 +92,18 @@ class LandingpageController extends Controller
         $brands = Brand::all();
         $product = Product::all();
         $favorite = Favorite::all();
-        // dd($favorite);
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $product_auction = Favorite::whereNotNull('product_auction_id')->where('user_id', auth()->id())->get();
         $product_favorite = Favorite::whereNotNull('product_id')->where('user_id', auth()->id())->get();
-        // dd($product_auction);
-        return view('user.wishlist', compact('categories','brands','product','favorite','product_auction', 'product_favorite'));
+
+        return view('user.wishlist', compact('categories','brands','product','favorite','product_auction', 'product_favorite', 'countFavorite'));
     }
 
     public function cart(){
         $cart = cart::all();
         $product_category_pivots = ProductCategoryPivot::all();
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
 
-        return view('user.keranjang', compact('cart','product_category_pivots'));
+        return view('user.keranjang', compact('cart','product_category_pivots', 'countFavorite'));
     }
 }
