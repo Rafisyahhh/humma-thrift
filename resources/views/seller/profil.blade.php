@@ -69,6 +69,24 @@
                                                         <textarea id="custom-summernote" name="description" class="custom-summernote"
                                                             placeholder="Tambahkan Deskripsi Toko Anda" rows="7">{!! old('description', $store->description) !!}</textarea>
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="review-form-time">
+                                                            <table>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label for="open" class="form-label">Jam Buka</label>
+                                                                        <input type="time" id="open" name="open" class="form-control" value="{{ old('open', $store->open)}}">
+                                                                    </td>
+                                                                    <td class="ps-3">
+                                                                        <label for="close" class="form-label">Jam Tutup</label>
+                                                                        <input type="time" id="close" name="close" class="form-control" value="{{ old('close', $store->close)}}">
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+
                                                 </div>
                                             </div>
                                     </div>

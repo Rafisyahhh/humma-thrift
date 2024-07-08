@@ -19,6 +19,7 @@ class StoreProfileController extends Controller
      */
     public function index(UserStore $store)
     {
+        $time = \Carbon\Carbon::now()->format('H:i');
         $isProduct = Product::query()
             ->where('store_id', $store->id)
             ->get();
@@ -31,7 +32,7 @@ class StoreProfileController extends Controller
         ->get();
         $countcart = cart::where('user_id',auth()->id())->count();
 
-        return view('store.index', compact('store', 'isProduct', 'isProductAuction','carts','countcart', 'countFavorite'));
+        return view('store.index', compact('store', 'isProduct', 'isProductAuction','carts','countcart', 'countFavorite','time'));
     }
 
     /**
