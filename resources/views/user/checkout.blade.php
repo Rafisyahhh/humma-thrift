@@ -222,6 +222,7 @@
                                         Tambah Alamat Baru
                                     </button>
                                 </div>
+                                <p class="fs-5">*pilih alamat yang sesuai dengan alamat anda</p>
                                 <hr>
                                 <p style="font-size: 1.9rem">Alamat</p>
                                 <div class="order-summery">
@@ -284,6 +285,33 @@
                                     </div>
                                 </div>
                             </div>
+                        {{-- @elseif ($product_auction)
+                            <div class="checkout-wrapper">
+                                <div class="account-section billing-section" style="margin-top: 2.5rem;">
+                                    <h5 class="wrapper-heading">Daftar Order</h5>
+                                    <div class="order-summery">
+                                        <hr>
+                                        <div class="subtotal product-total">
+                                            <ul class="product-list">
+                                                <li>
+                                                    <div class="d-flex gap-3">
+                                                        <img src="{{ asset("storage/".$product_auction->productAuction->thumbnail)}}"
+                                                            width="40" />
+                                                        <div class="mt-1">
+                                                            <h5 class="wrapper-heading">{{ $product_auction->productAuction->title }}</h5>
+                                                            <p class="paragraph">{{ $product_auction->productAuction->brand->title }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="price mt-3">
+                                                        <h5 class="wrapper-heading">
+                                                            Rp{{ number_format($product_auction->auction_price, null, null, '.') }}</h5>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> --}}
                         @endif
                     </div>
 
@@ -305,7 +333,12 @@
                                     </div>
                                     <div class="subtotal product-total">
                                         <h5 class="wrapper-heading">Total Harga</h5>
-                                        <h5 class="wrapper-heading">Rp{{ number_format($product->price, null, null, '.') }}
+                                        <h5 class="wrapper-heading">
+                                            {{-- @if ($product) --}}
+                                                {{ number_format($product->price, null, null, '.') }}
+                                            {{-- @elseif ($product_auction)
+                                                {{ number_format($product_auction->auction_price, null, null, '.') }}
+                                            @endif --}}
                                         </h5>
                                     </div>
                                     <div class="subtotal product-total">
