@@ -41,22 +41,34 @@ class FavoriteController extends Controller
         //
     }
 
+
     public function storesproduct(Product $product)
     {
         $dataproduct['product_id'] = $product->id;
         $dataproduct['user_id'] = auth()->id();
 
+        $favorite = Favorite::where('product_id', $product->id)->where('user_id', auth()->id());
+
+        if($favorite->exists()) {
+            return redirect()->back()->with('error', "Produknya udah ada di favorit nih...");
+        }
         Favorite::create($dataproduct);
 
         return redirect()->back()->with('success', 'Favorite created successfully.');
     }
 
+
+// LELANG
     public function storesproductAuction(ProductAuction $productAuction)
     {
         $dataproduct_auction['product_auction_id'] = $productAuction->id;
         $dataproduct_auction['user_id'] = auth()->id();
 
-        // dd($dataproduct_auction);
+        $favoriteAuction = Favorite::where('product_auction_id', $productAuction->id)->where('user_id', auth()->id());
+
+        if($favoriteAuction->exists()) {
+            return redirect()->back()->with('error', "Produknya udah ada di favorit nih...");
+        }
         Favorite::create($dataproduct_auction);
 
         return redirect()->back()->with('success', 'Favorite created successfully.');

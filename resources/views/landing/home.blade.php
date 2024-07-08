@@ -227,7 +227,7 @@
                         <div class="container custom-margin-bottom">
                             <div class="row custom-margin-bottom">
                                 <div class="col-lg-2">
-                                    <div class="position-absolute" data-aos="fade-up">
+                                    <div class="position-absolute" data-aos="fade-up" style="top: 60%; transform: translate(0, -50%);">
                                         <div class="wrapper-section">
                                             <h5 class="wrapper-details" style="color:white;">
                                                 {{ $even->subjudul }}
@@ -459,7 +459,7 @@
                                         <div class="product-cart-items">
                                             <div class="product-cart-items">
                                                 @auth
-                                                    <form action="{{ route('storesproduct', $item->id) }}" method="POST">
+                                                    <form action="{{ route('storesproductAuction', $item->id) }}" method="POST">
                                                         @csrf
                                                         <button class="favourite cart-item">
                                                             <span>
@@ -474,14 +474,14 @@
                                                                 <i class="fas fa-shopping-cart"></i>
                                                             </span>
                                                         </button>
-                                                    </form>
+                                                    </form> 
                                                     <a href="#" class="compaire cart-item">
                                                         <span>
                                                             <i class="fas fa-share"></i>
                                                         </span>
                                                     </a>
                                                 @else
-                                                    <a href="{{ route('login') }}" class="favourite cart-item">
+                                                    {{-- <a href="{{ route('login') }}" class="favourite cart-item">
                                                         <span>
                                                             <i class="fas fa-heart"></i>
                                                         </span>
@@ -490,7 +490,7 @@
                                                         <span>
                                                             <i class="fas fa-shopping-cart"></i>
                                                         </span>
-                                                    </a>
+                                                    </a> --}}
                                                     <a href="{{ route('login') }}" class="compaire cart-item">
                                                         <span>
                                                             <i class="fas fa-share"></i>
@@ -531,7 +531,7 @@
                                         <form action="{{ route('user.checkout') }}" method="post">
                                             @csrf
                                             <div class="product-cart-btn" style="bottom:0;">
-                                                <input type="hidden" value="{{ $item->id }}" name="product_id">
+                                                <input type="hidden" value="{{ $item->id }}" name="productauction_id">
                                                 <button type="submit" class="product-btn">Beli sekarang</button>
                                             </div>
                                         </form>

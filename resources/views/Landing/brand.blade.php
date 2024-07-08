@@ -27,13 +27,13 @@
                 <div class="row g-5 mt-4">
                     @foreach ($brands as $item)
                         <div class="col-lg-2 col-md-6">
-                            <div class="product py-0"
+                            <div class="product p-0"
                                 style="box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;border-radius: 20px;">
-                                <div class="wrapper-img">
+                                <div class="wrapper-img p-0">
                                     <a href="product-sidebar.html">
                                         <div class="ratio ratio-1x1">
                                             <img src="{{ asset("storage/{$item->logo}") }}" alt="img"
-                                                style="border-radius: 20px;" class="object-fit-cover">
+                                                style="border-radius: 20px;" class="object-fit-cover w-100 h-100">
                                         </div>
                                     </a>
                                 </div>
