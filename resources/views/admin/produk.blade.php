@@ -328,9 +328,11 @@
           data: 'DT_RowIndex',
           orderable: false,
           searchable: false,
+          width: "5%"
         },
         {
           data: 'title',
+          width: "10%",
           render: (data, __, row) => {
             return data + `<span class="opacity-0 position-absolute">${row.type}</span>`;
           }
@@ -339,13 +341,9 @@
           data: 'thumbnail',
           orderable: false,
           searchable: false,
+          width: "10%",
           render: (data, type) =>
             `<img src="{{ asset('storage/') }}/${data}" class="rounded-3" height="96px" loading="lazy">`
-        },
-        {
-          data: 'type',
-          searchable: true,
-          visible: false
         },
         {
           data: 'userstore.username',
@@ -415,7 +413,12 @@
             </svg>
           </button>`
           }
-        }
+        },
+        {
+          data: 'type',
+          searchable: true,
+          visible: false
+        },
       ]
     });
 

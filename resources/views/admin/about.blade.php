@@ -76,7 +76,7 @@
             <th>NO.</th>
             <th>JUDUL</th>
             <th>GAMBAR</th>
-            <th>DESKRIPSI</th>
+            <th class="text-center">DESKRIPSI</th>
             <th>AKSI</th>
           </tr>
         </thead>
@@ -316,6 +316,7 @@
           }
         },
         options: {
+          responsive: true,
           layout: {
             topStart: $(`<div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="ms-3 mb-0">Data Tentang Kami</h5>
@@ -349,17 +350,16 @@
           },
           {
             data: 'description',
-            className: 'text-wrap description',
+            className: 'text-wrap',
           },
           {
             data: 'id',
-            className: 'text-center',
             orderable: false,
             searchable: false,
             render: (data, type) => {
               const editButton = `<button type="button" class="badge bg-label-warning me-1 border-0 edit" style="background: none">
-              <i class="ti ti-pencil"></i>
-            </button>`;
+                <i class="ti ti-pencil"></i>
+              </button>`;
               return editButton;
             }
           }
