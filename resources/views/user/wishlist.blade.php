@@ -95,7 +95,7 @@
                         <div class="row g-5">
                             <div class="col-lg-12">
                                 <div class="product-sorting-section p-0">
-                                    <h4 class="wrapper-heading" style="">Semua Favorit</h4> <br><br>
+                                    <h4 class="wrapper-heading">Semua Favorit</h4> <br><br>
                                     <div class="result ms-auto me-4">
                                         <h6 style="font-size: 1.5rem;">Urutkan</h6>
                                     </div>
@@ -148,7 +148,7 @@
                                                         <form action="{{ route('destroyProduct.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Apakah anda yakin ingin menghapus produk ini dari daftar favorit?');">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <a role="button" type="submit" class="dropdown-item" onclick="$(this).closest('form').submit()">Hapus Favorit</a>
+                                                            <a role="button" type="submit" class="dropdown-item" onclick="$(this).closest('form').submit()" style="color: red;">Hapus Favorit</a>
                                                         </form>
                                                     </li>
                                                     <hr>
@@ -163,11 +163,10 @@
                                 </div>
                             @empty
                             <div class="col-lg-12">
-                                <h3 class="text-center">Produk Masih Kosong</h3>
-                                <p class="text-center">Maaf, anda masih belum menambahkan daftar favorit.</p>
+                                <h5 class="text-center" style="color: #a5a3ae">Produk Masih Kosong</h5>
+                                <p class="text-center" style="color: #a5a3ae">Maaf, anda masih belum menambahkan daftar favorit.</p>
                             </div>
                             @endforelse
-
 
                             <hr><h4>Lelang</h4>
                             @forelse ($product_auction as $item)
@@ -199,7 +198,7 @@
                                                         <form action="{{ route('destroyAuction.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Apakah anda yakin ingin menghapus produk lelang ini dari daftar favorit?');">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <a role="button" type="submit" class="dropdown-item" onclick="$(this).closest('form').submit()">Hapus Favorit</a>
+                                                            <a role="button" type="submit" class="dropdown-item" onclick="$(this).closest('form').submit()" style="color: red;">Hapus Favorit</a>
                                                         </form>
                                                     </li>
                                                     <hr>
@@ -214,8 +213,8 @@
                                 </div>
                             @empty
                             <div class="col-lg-12">
-                                <h3 class="text-center">Produk Lelang Masih Kosong</h3>
-                                <p class="text-center">Maaf, anda masih belum menambahkan daftar favorit.</p>
+                                <h5 class="text-center" style="color: #a5a3ae">Produk Lelang Masih Kosong</h5>
+                                <p class="text-center" style="color: #a5a3ae">Maaf, anda masih belum menambahkan daftar favorit.</p>
                             </div>
                             @endforelse
                         </div>
