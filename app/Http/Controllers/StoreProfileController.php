@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\auctions;
 use App\Models\Favorite;
+use App\Models\cart;
 use App\Models\UserStore;
 use App\Models\Product;
 use App\Models\ProductAuction;
@@ -23,8 +24,14 @@ class StoreProfileController extends Controller
             ->get();
         $isProductAuction = ProductAuction::where('store_id', $store->id)->get();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        
-        return view('store.index', compact('store', 'isProduct', 'isProductAuction', 'countFavorite'));
+
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+        $countcart = cart::where('user_id',auth()->id())->count();
+
+        return view('store.index', compact('store', 'isProduct', 'isProductAuction','carts','countcart', 'countFavorite'));
     }
 
     /**
@@ -39,16 +46,22 @@ class StoreProfileController extends Controller
     {
         $isProduct = Product::where('slug', $slug)->first();
         $isProductAuction = ProductAuction::where('slug', $slug)->first();
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+        $countcart = cart::where('user_id',auth()->id())->count();
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $user = Auth::user();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();        // $auctions = auctions::where('user_id', $user->id)->first();
 
-        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction','user', 'countFavorite'));
+        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction','user','carts','countcart', 'countFavorite'));
     }
 
     public function showStore()
     {
         $store = UserStore::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
+        
         return view('user.store', compact('store','countFavorite'));
     }
 }
