@@ -214,9 +214,9 @@
         <div class="container border-bottom">
             <div class="banner-wrapper">
                 <div class="banner-cover">
-                    <img
-                        src="{{ asset($store->store_cover ? "storage/{$store->store_cover}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
-                        alt="upload" class="responsive-img" id="responsive-img" /> </div>
+                    <img src="{{ asset($store->store_cover ? "storage/{$store->store_cover}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
+                        alt="upload" class="responsive-img" id="responsive-img" />
+                </div>
                 <div class="profile-wrapper">
                     <div class="avatar">
                         <div class="avatar-cover">
@@ -246,7 +246,7 @@
                                 $now = \Carbon\Carbon::now();
                             @endphp
                             <p class="profile-description opacity-75 mt-3 mb-0">
-                                @if ($now->between($openInstance, $closeInstance))
+                                @if ($now->between($openInstance, $closeInstance) && $store->getStatusEnum()->value === 'online')
                                     <span class="badge text-bg-success me-2">Buka</span>
                                 @else
                                     <span class="badge text-bg-danger me-2">Tutup</span>
@@ -276,6 +276,15 @@
                     </div>
                 </div>
             </div>
+
+            @if ($store->getStatusEnum()->value === 'holiday')
+                <div class="alert alert-warning mt-3 alert-dismissible fade show" role="alert" style="font-size: 0.9rem;">
+                    <p>Toko kami saat ini sedang libur. Kami mohon maaf atas ketidaknyamanan ini. Toko akan buka kembali
+                        sesuai dengan jadwal yang telah ditentukan. Terima kasih atas pengertian Anda. Silakan cek kembali
+                        nanti untuk informasi lebih lanjut.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
 
             @if (!$store->verified_at && auth()->id() === $store->user_id)
                 <div class="alert alert-warning mt-3 alert-dismissible fade show" role="alert" style="font-size: 0.9rem;">
