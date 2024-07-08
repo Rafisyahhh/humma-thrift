@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreCheckoutRequest;
 use App\Http\Requests\UpdateCheckoutRequest;
+use App\Models\Favorite;
 
 class CheckoutController extends Controller
 {
@@ -24,7 +25,9 @@ class CheckoutController extends Controller
         $users = Auth::user();
         $addresses = UserAddress::where('user_id', $users->id)->get();
         $product = Product::where('id',$request->product_id)->first();
-        return view('user.checkout', compact('users','addresses','product','channels'));
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+
+        return view('user.checkout', compact('users','addresses','product','channels', 'countFavorite'));
     }
 
     /**

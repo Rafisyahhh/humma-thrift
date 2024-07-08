@@ -313,11 +313,9 @@
               <a class="nav-link" type="button" id="order-seller"">Lelang</a>
             </li>
           </ul>`),
-          topEnd: $(`<form action="#" method="get" id="search" class="me-4">
-            <div class="input-group mb-3">
-              <input type="search" name="search" class="form-control" placeholder="Cari Produk&hellip;" id="searchInput" />
-            </div>
-          </form>`),
+          topEnd: $(`<div class="input-group">
+              <input class="form-control me-4" placeholder="Cari Produk&hellip;" id="searchInput" />
+            </div>`),
           bottomStart: {
             info: {
               text: 'Menampilkan _START_ dari _END_ hasil'
@@ -432,6 +430,7 @@
         $("ul").find("li a").removeClass("active");
         $(this).addClass("active");
         table.search(searchValue).draw();
+        $('#searchInput').val("");
       });
     }
 
@@ -459,16 +458,16 @@
 
       modal.modal("show");
     });
-    const searchInput = document.getElementById('searchInput');
+
     let searchTimeout;
-    searchInput.addEventListener('input', () => {
+
+    $('#searchInput').on('input', function() {
       clearTimeout(searchTimeout);
 
-      searchTimeout = setTimeout(() => {
-        const searchTerm = searchInput.value.trim();
-        const searchResults = document.getElementById('searchResults');
-        table.search(searchResults).draw();
-      }, 500);
+      searchTimeout = setTimeout(function() {
+        const searchTerm = $('#searchInput').val().trim();
+        table.search(searchTerm).draw();
+      }, 750);
     });
   </script>
 @endpush

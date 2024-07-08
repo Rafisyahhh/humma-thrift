@@ -28,7 +28,7 @@
     <section class="product product-sidebar footer-padding">
         <div class="container">
             <div class="row g-5">
-                <div class="col-lg-3">
+                {{-- <div class="col-lg-3">
                     <div class="sidebar" data-aos="fade-right">
                         <h4 class="wrapper-heading">Semua Favorit</h4> <br><br>
                         <div class="sidebar-section">
@@ -89,16 +89,17 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-9">
+                </div> --}}
+                <div class="col">
                     <div class="product-sidebar-section" data-aos="fade-up">
                         <div class="row g-5">
                             <div class="col-lg-12">
-                                <div class="product-sorting-section">
+                                <div class="product-sorting-section p-0">
+                                    <h4 class="wrapper-heading" style="">Semua Favorit</h4> <br><br>
                                     <div class="result ms-auto me-4">
                                         <h6 style="font-size: 1.5rem;">Urutkan</h6>
                                     </div>
-                                    <div class="btn-group mt-2">
+                                    <div class= "btn-group mt-2">
                                         <div class="dropdown">
                                             <a class="css-71s6qs d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <span>Terbaru Disimpan</span>
@@ -113,17 +114,16 @@
                                                     </ul>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                                 <div class="result mb-6">
-                                    <p><strong style="font-size: 1.5rem">1</strong> <span>Barang</span></p>
+                                    <p><strong style="font-size: 1.5rem">{{ $countFavorite }}</strong><span> Barang</span></p>
                                 </div>
                                 @forelse ($product_favorite as $item)
-                                <div class="col-lg-4 col-sm-6">
+                                <div class="col-lg-3 col-sm-6">
                                     <div class="product-wrapper" data-aos="fade-up">
                                         <div class="product-img">
                                             <img src="{{ asset("storage/".$item->product->thumbnail) }}" alt="product-img"
@@ -167,7 +167,7 @@
 
                             <hr><h4>Lelang</h4>
                             @forelse ($product_auction as $item)
-                                <div class="col-lg-4 col-sm-6">
+                                <div class="col-lg-3 col-sm-6">
                                     <div class="product-wrapper" data-aos="fade-up">
                                         <div class="product-img">
                                             <img src="{{ asset("storage/".$item->productAuction->thumbnail) }}" alt="product-img"

@@ -1,3 +1,20 @@
+<style>
+    .header-favourite .wishlist-count {
+        position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #dc3545;
+            color: white;
+            border-radius: 50%;
+            padding:1px 6px;
+            font-size: 0.75em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+    </style>
+
 @if (request()->routeIs(['register', 'login']))
     <div class="header-user">
         <a href="{{ url('/') }}" class="d-flex gap-2 align-items-center lh-1">
@@ -24,11 +41,15 @@
 
     <div class="header-favourite">
         <a href="{{ route('user.wishlist') }}" class="cart-item">
-            <span>
+            <span style="position: relative;">
                 <i class="fas fa-heart"></i>
+                @if($countFavorite)
+                <span class="wishlist-count">{{ $countFavorite }}</span>
+            @endif
             </span>
         </a>
     </div>
+
     @endif
 
     {{-- ICON PROFILE --}}
@@ -107,3 +128,4 @@
         });
     </script>
 @endpush
+
