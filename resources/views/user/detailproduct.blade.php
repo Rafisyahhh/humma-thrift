@@ -139,32 +139,6 @@
 @endsection
 @section('script')
     <script>
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     var modals = document.querySelectorAll('.modal');
-        //     var btns = document.querySelectorAll('.openModal');
-        //     var spans = document.querySelectorAll('.close');
-
-        //     btns.forEach(function(btn, index) {
-        //         btn.onclick = function() {
-        //             modals[index].style.display = 'flex';
-        //         }
-        //     });
-
-        //     spans.forEach(function(span, index) {
-        //         span.onclick = function() {
-        //             modals[index].style.display = 'none';
-        //         }
-        //     });
-
-        //     window.onclick = function(event) {
-        //         modals.forEach(function(modal) {
-        //             if (event.target == modal) {
-        //                 modal.style.display = 'none';
-        //             }
-        //         });
-        //     }
-        // });
-
         document.addEventListener('DOMContentLoaded', function() {
             var modals = document.querySelectorAll('.modal');
             var btns = document.querySelectorAll('.openModal');
@@ -260,6 +234,9 @@
                         <div class="col-md-6">
                             <div class="product-info-content" data-aos="fade-left">
                                 <h5 style="z-index:1;position: relative;">{{ $isProduct->title }}</h5>
+                                {{-- <a href="{{ route('product.detail', $isProduct->id) }}" style="z-index: 1; position: relative;">
+                                    <h5>{{ $isProduct->title }}</h5>
+                                </a> --}}
                                 <div class="price">
                                     <span class="new-price fs-1"
                                         style="z-index:1">Rp.{{ number_format($isProduct->price, null, null, '.') }}</span>
@@ -282,20 +259,27 @@
                                 </div>
                                 <hr>
                                 <div class="row">
-                                    <div class="product-quantity mt-0"
-                                        style="display: flex; align-items: center; gap: 10px; z-index:1">
-                                        <a href="#" style="width :10px" class="shop-btn"
-                                            style="display: flex; align-items: center; gap: 10px; z-index:1">
-                                            <span style="width: 37rem; align-items:center; justify-content:center;">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                Masukkan Keranjang
-                                            </span>
-                                        </a>
-                                        <a href="#"
-                                            class="shop-btn d-flex gap-3 align-items-center justify-content-center">
-                                            <i class="fas fa-arrow-right"></i>
-                                            Beli Sekarang
-                                        </a>
+                                    <div class="product-quantity mt-0 col">
+                                        <form action="{{ route('storecart', $isProduct->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="shop-btn" style="display: flex; align-items: center; gap: 10px; z-index:1">
+                                                <span style="width: 20rem; align-items: center; justify-content: center;">
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                    Masukkan Keranjang
+                                                </span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="col" style="--bs-gutter-y: 0">
+                                        <form action="" method="POST">
+                                            @csrf
+                                            <button type="submit" class="shop-btn" style="display: flex; align-items: center; gap: 10px; z-index:1">
+                                                <span style="width: 20rem; align-items: center; justify-content: center;">
+                                                    <i class="fas fa-arrow-right"></i>
+                                                    Beli Sekarang
+                                                </span>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                                 <hr>
@@ -358,7 +342,7 @@
                                 <div class="row">
                                     <div class="product-quantity mt-0"
                                         style="display: flex; align-items: center; gap: 10px; z-index:1">
-                                        {{-- <a href="#" style="width :10px" class="shop-btn"
+                                        <a href="#" style="width :10px" class="shop-btn"
                                             style="display: flex; align-items: center; gap: 10px; z-index:1">
                                             <span style="width: 37rem; align-items:center; justify-content:center;">
                                                 <i class="fas fa-shopping-cart"></i>
@@ -370,85 +354,101 @@
                                             $user = Auth::user();
                                             if ($user) {
                                                 $existingAuction = App\Models\auctions::where('user_id', Auth::id())
-                                                ->where('product_auction_id', $isProductAuction->id)
-                                                ->first();
-                                                $auctions = App\Models\Auctions::where('user_id', $user->id)->where('product_auction_id', $isProductAuction->id)->first();
+                                                    ->where('product_auction_id', $isProductAuction->id)
+                                                    ->first();
+                                                $auctions = App\Models\Auctions::where('user_id', $user->id)
+                                                    ->where('product_auction_id', $isProductAuction->id)
+                                                    ->first();
                                             }
-                                            $auctionproduct = App\Models\Auctions::where('product_auction_id', $isProductAuction->id)->where('status', 1)->first();
+                                            $auctionproduct = App\Models\Auctions::where(
+                                                'product_auction_id',
+                                                $isProductAuction->id,
+                                            )
+                                                ->where('status', 1)
+                                                ->first();
 
                                         @endphp
                                         @if ($user)
                                             @if ($existingAuction && $auctions->status === 1)
-                                             <form action="{{ route('user.checkout') }}" method="post">
-                                                @csrf
-                                                <div style="bottom:0;">
-                                                    <input type="hidden" value="{{ $item->id }}" name="product_id">
-                                                    <button type="submit"  class="shop-btn">Beli sekarang</button>
-                                                </div>
-                                            </form>
+                                                <form action="{{ route('user.checkout') }}" method="post">
+                                                    @csrf
+                                                    <div style="bottom:0;">
+                                                        <input type="hidden" value="{{ $item->id }}"
+                                                            name="product_id">
+                                                        <button type="submit" class="shop-btn">Beli sekarang</button>
+                                                    </div>
+                                                </form>
                                             @elseif ($auctionproduct)
-                                            <button style="width :10px" class="shop-btn openModal"
-                                                data-id="{{ $isProductAuction->id }}"
-                                                style="display: flex; align-items: center; gap: 5px; z-index:1">
-                                                <span style="width: 37rem; align-items:center; justify-content:center;">
-                                                    Lelang Berakhir</span>
-                                            </button>
+                                                <button style="width :10px" class="shop-btn openModal"
+                                                    data-id="{{ $isProductAuction->id }}"
+                                                    style="display: flex; align-items: center; gap: 5px; z-index:1">
+                                                    <span
+                                                        style="width: 37rem; align-items:center; justify-content:center;">
+                                                        Lelang Berakhir</span>
+                                                </button>
                                             @else
-                                            <button style="width :10px" class="shop-btn openModal"
-                                                data-id="{{ $isProductAuction->id }}"
+                                                <button style="width :10px" class="shop-btn openModal"
+                                                    data-id="{{ $isProductAuction->id }}"
+                                                    style="display: flex; align-items: center; gap: 5px; z-index:1">
+                                                    <span
+                                                        style="width: 37rem; align-items:center; justify-content:center;">
+                                                        <i class="fa-solid fa-plus"></i>
+                                                        Ikuti Lelang</span>
+                                                </button>
+                                            @endif
+                                        @else
+                                            <a href="{{ url('login') }}" style="width :10px" class="shop-btn openModal"
                                                 style="display: flex; align-items: center; gap: 5px; z-index:1">
                                                 <span style="width: 37rem; align-items:center; justify-content:center;">
                                                     <i class="fa-solid fa-plus"></i>
                                                     Ikuti Lelang</span>
-                                            </button>
-                                            @endif
-
-                                        @else
-                                        <a href="{{ url('login') }}" style="width :10px" class="shop-btn openModal"
-                                        style="display: flex; align-items: center; gap: 5px; z-index:1">
-                                        <span style="width: 37rem; align-items:center; justify-content:center;">
-                                            <i class="fa-solid fa-plus"></i>
-                                            Ikuti Lelang</span>
-                                    </a>
+                                            </a>
                                         @endif
-                                        <div id="reviewModal-{{ $isProductAuction->id }}" class="modal" style="display: none;">
+                                        <div id="reviewModal-{{ $isProductAuction->id }}" class="modal"
+                                            style="display: none;">
                                             <div class="modal-content">
                                                 <button class="close"
                                                     style="float: right; text-align: end;">&times;</button>
-                                                    @if ($user)
+                                                @if ($user)
 
                                                     @if ($existingAuction)
-                                                    <p style="text-align: center; font-size :20px; font-weight:bold;">Anda sudah mengikuti lelang</p>
-                                                    <p style="text-align: center;">bid lelang anda : {{ $auctions->auction_price }}</p>
+                                                        <p style="text-align: center; font-size :20px; font-weight:bold;">
+                                                            Anda sudah mengikuti lelang</p>
+                                                        <p style="text-align: center;">bid lelang anda :
+                                                            {{ $auctions->auction_price }}</p>
                                                     @elseif ($auctionproduct)
-                                                    <p style="text-align: center; font-size :20px; font-weight:bold; margin-top: 2rem; margin-bottom:2rem;">lelang sudah berakhir</p>
+                                                        <p
+                                                            style="text-align: center; font-size :20px; font-weight:bold; margin-top: 2rem; margin-bottom:2rem;">
+                                                            lelang sudah berakhir</p>
                                                     @else
-                                                    <h4 style="text-align: center;">Bid Lelang</h4>
-                                                    <form id="auctionForm-{{ $isProductAuction->id }}" method="post"
-                                                        action="{{ route('user.auctions.store') }}" class="mt-5">
-                                                        @csrf
-                                                        <input type="hidden" name="product_id"
-                                                            value="{{ $isProductAuction->id }}">
-                                                        <label for="auction_price" class="form-label"
-                                                            style="font-size: 18px;">Bid Lelang :</label> <br>
-                                                        <input type="number" name="auction_price"
-                                                            class="form-control @error('auction_price') is-invalid @enderror"
-                                                            placeholder="Masukkan Bid Lelang anda"
-                                                            style="font-size: 17px;">
-                                                            <p style="margin-top: 5px;margin-left:6px;font-size:12px;color: #7c7c7c;">
-                                                            Bid : Rp{{ number_format($isProductAuction->bid_price_start, null, null, '.') }}
-                                                            -
-                                                            Rp{{ number_format($isProductAuction->bid_price_end, null, null, '.') }}
+                                                        <h4 style="text-align: center;">Bid Lelang</h4>
+                                                        <form id="auctionForm-{{ $isProductAuction->id }}" method="post"
+                                                            action="{{ route('user.auctions.store') }}" class="mt-5">
+                                                            @csrf
+                                                            <input type="hidden" name="product_id"
+                                                                value="{{ $isProductAuction->id }}">
+                                                            <label for="auction_price" class="form-label"
+                                                                style="font-size: 18px;">Bid Lelang :</label> <br>
+                                                            <input type="number" name="auction_price"
+                                                                class="form-control @error('auction_price') is-invalid @enderror"
+                                                                placeholder="Masukkan Bid Lelang anda"
+                                                                style="font-size: 17px;">
+                                                            <p
+                                                                style="margin-top: 5px;margin-left:6px;font-size:12px;color: #7c7c7c;">
+                                                                Bid :
+                                                                Rp{{ number_format($isProductAuction->bid_price_start, null, null, '.') }}
+                                                                -
+                                                                Rp{{ number_format($isProductAuction->bid_price_end, null, null, '.') }}
                                                             </p>
-                                                        @error('auction_price')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                        <button type="submit" class="shop-btn"
-                                                            style="margin-left: 22rem;">Kirim Bid Anda</button>
-                                                    </form>
-                                                @endif
+                                                            @error('auction_price')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                            <button type="submit" class="shop-btn"
+                                                                style="margin-left: 22rem;">Kirim Bid Anda</button>
+                                                        </form>
+                                                    @endif
                                                 @endif
                                             </div>
                                         </div>
@@ -508,13 +508,13 @@
                     <i class="fa-brands fa-whatsapp fa-lg" style="color: #1c3879"></i>
                 </a>
             </span>
-            </p>
             <div class="line" style="border-left: 1px solid #dcdcdd; height: 30px; margin-left: 10px;"></div>
             <div class="share-icons" style="z-index:1; margin-left:40px;">
                 <a href="#" class="share-icon">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
-                            <path fill="#1c3879" d="m12 21l-1.45-1.3q-2.525-2.275-4.175-3.925T3.75 12.812T2.388 10.4T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.3 0 2.475.55T12 4.75q.85-1 2.025-1.55t2.475-.55q2.35 0 3.925 1.575T22 8.15q0 1.15-.387 2.25t-1.363 2.412t-2.625 2.963T13.45 19.7zm0-2.7q2.4-2.15 3.95-3.687t2.45-2.675t1.25-2.026T20 8.15q0-1.5-1-2.5t-2.5-1q-1.175 0-2.175.662T12.95 7h-1.9q-.375-1.025-1.375-1.687T7.5 4.65q-1.5 0-2.5 1t-1 2.5q0 .875.35 1.763t1.25 2.025t2.45 2.675T12 18.3m0-6.825" />
+                            <path fill="#1c3879"
+                                d="m12 21l-1.45-1.3q-2.525-2.275-4.175-3.925T3.75 12.812T2.388 10.4T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.3 0 2.475.55T12 4.75q.85-1 2.025-1.55t2.475-.55q2.35 0 3.925 1.575T22 8.15q0 1.15-.387 2.25t-1.363 2.412t-2.625 2.963T13.45 19.7zm0-2.7q2.4-2.15 3.95-3.687t2.45-2.675t1.25-2.026T20 8.15q0-1.5-1-2.5t-2.5-1q-1.175 0-2.175.662T12.95 7h-1.9q-.375-1.025-1.375-1.687T7.5 4.65q-1.5 0-2.5 1t-1 2.5q0 .875.35 1.763t1.25 2.025t2.45 2.675T12 18.3m0-6.825" />
                         </svg>
                     </span>
                 </a>
@@ -678,10 +678,8 @@
                                 </div>
                             </div>
                         </div>
-                </div>
-            </div>
-    </section>
-@endsection
+                    </section>
+                @endsection
 
 @section('script')
     <script src="{{ asset('additional-assets/jquery-3.7.1/jquery.min.js') }}"></script>
