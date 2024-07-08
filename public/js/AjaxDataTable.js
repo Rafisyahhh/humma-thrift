@@ -124,7 +124,6 @@ $.fn.AjaxDataTable = function (config) {
 
   handleFormSubmit(editModal, null, editSuccess, editOnError);
 
-  table.columns.adjust();
   this.table = table;
   return this;
 };
