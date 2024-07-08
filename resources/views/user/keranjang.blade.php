@@ -79,7 +79,7 @@
                                                     <p>{{ number_format($item->product->price, 0, ',', '.') }}</p>
                                                 </div>
                                                 <button
-                                                    style="color: red; font-weight: bold; font-size: 13px; background-color: #dbc2c2; padding: 5px 20px; border-radius: 20px; margin-right: 0.1rem;">
+                                                    style="color: red; font-weight: bold; font-size: 13px; padding: 5px 20px; border-radius: 20px; margin-right: 0.1rem; text-decoration: underline;">
                                                     Hapus</button>
                                             </div>
                                         </div>

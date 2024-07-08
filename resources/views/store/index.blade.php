@@ -186,11 +186,16 @@
         }
 
         .badge {
-            font-size: 12px; /* Ubah ukuran teks */
-            padding: 0.5em 1em; /* Ubah padding */
+            font-size: 12px;
+            /* Ubah ukuran teks */
+            padding: 0.5em 1em;
+            /* Ubah padding */
         }
 
-        .profile-header { display: flex; align-items: center; }
+        .profile-header {
+            display: flex;
+            align-items: center;
+        }
     </style>
 @endpush
 
@@ -211,7 +216,7 @@
                         <div class="profile-name-wrapper">
                             <div class="profile-header">
                                 <h5 class="profile-name mb-2">{{ $store->name }}</h5>
-                                <span class="badge text-bg-success me-4 ms-3" >Buka</span>
+                                <span class="badge text-bg-success me-4 ms-3">Buka</span>
                             </div>
                             <p class="profile-description opacity-75 mb-0">{{ '@' . $store->username }}</p>
                             <div class="location mt-3">
@@ -240,13 +245,14 @@
                     </div>
                 </div>
             </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="location mt-2" style="max-height: 65px;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;padding-left: 45px;max-width: 107em;">
-                          &nbsp;&nbsp;<span class="location mt-2">{!! $store->description !!}</span>
-                        </div>
-                      </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="location mt-2"
+                        style="max-height: 65px;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;padding-left: 45px;max-width: 107em;">
+                        &nbsp;&nbsp;<span class="location mt-2">{!! $store->description !!}</span>
+                    </div>
                 </div>
+            </div>
             <br>
             <br>
 
@@ -261,7 +267,8 @@
     </section>
     <section class="product mt-5 pt-0 mb-5">
         <div class="container">
-            <ul class="nav nav-underline mb-3" style="display:flex; justify-content: left; margin-bottom: 5rem; margin-left:4rem;">
+            <ul class="nav nav-underline mb-3"
+                style="display:flex; justify-content: left; margin-bottom: 5rem; margin-left:4rem;">
                 <li class="nav-item">
                     <a class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
                         type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Produk</a>
@@ -395,8 +402,8 @@
                 <div class="tab-pane fade" id="ulasan-tab-pane" role="tabpanel" aria-labelledby="ulasan-tab"
                     tabindex="0">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex mt-5 list-group-item-secondary rounded pt-3"
-                            style="height: 20rem">
+                        <li class="list-group-item d-flex mt-5 rounded pt-3"
+                            style="height: 20rem; background-color: rgba(202, 202, 202, 0.2);">
                             <div style="width: 30rem;">
                                 <img src="https://placehold.co/400" class="img-fluid rounded mb-2"
                                     style="width: 7.5rem" />

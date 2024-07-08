@@ -54,7 +54,7 @@
                   {{ $about->title }}
                 </h3>
                 <p class="about-info"
-                  style="font-family: 'Roboto', serif; font-size: 20px !important; word-wrap: break-word; width: 150%; max-width: 70rem;  text-align: justify;">
+                  style="font-family: 'Roboto', serif; font-size: 20px !important; word-wrap: break-word; width: 100%; max-width: 70rem;  text-align: justify;">
                   {{ $about->description }}
                 </p>
               </div>
@@ -314,6 +314,7 @@
         }
       },
       options: {
+        responsive: true,
         layout: {
           topStart: $(`<div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="ms-3 mb-0">Data Tentang Kami</h5>

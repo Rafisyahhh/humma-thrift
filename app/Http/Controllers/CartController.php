@@ -23,7 +23,8 @@ class CartController extends Controller
         $store = UserStore::all();
         $product_category_pivots = ProductCategoryPivot::all();
 
-        return view('user.keranjang', compact('carts', 'store', 'product_category_pivots'));
+        $countcart = cart::where('user_id',auth()->id())->count();
+        return view('user.keranjang', compact('carts', 'store', 'product_category_pivots','countcart'));
     }
 
     /**

@@ -61,6 +61,10 @@ class Lelang extends Notification
             'action' => $this->storeLink,
             'image' => $this->auctions->productAuction->thumbnail,
             'title' => 'Anda Menang Lelang',
+            'url' => route('store.product.detail', [
+                'store' => $this->auctions->productAuction->userStore->username,
+                'product' => $this->auctions->productAuction->slug
+            ])
         ];
     }
 }

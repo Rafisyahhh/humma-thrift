@@ -212,7 +212,7 @@
                             <div class="row-rating mt-4">
                                 <div class="wrapper-img">
                                     <img src="{{ asset($item['order']['product']['cover_image']) }}" alt="img"
-                                        style="height: 15rem; border: 1px solid rgba(126, 163, 219, 0.40); border-radius: 8px;">
+                                        style="height: 15rem; width: 15rem; border: 1px solid rgba(126, 163, 219, 0.40); border-radius: 8px;">
                                 </div>
                                 <div class="wrapper-content mx-5">
                                     <h5 class="heading">{{ $item['order']['product']['title'] }}</h5>
