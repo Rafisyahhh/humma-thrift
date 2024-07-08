@@ -12,10 +12,10 @@
 @endpush
 
 @section('content')
-    <!-- Tabel -->
-    <div class="card">
-        <h5 class="card-header">Kategori</h5>
-        <div class="table-responsive text-nowrap">
+  <!-- Tabel -->
+  <div class="card">
+    <h5 class="card-header">Kategori</h5>
+    <div class="table-responsive text-nowrap">
       <table class="table yajra-datatable w-100">
         <thead class="table-light">
           <tr>
@@ -27,7 +27,7 @@
         </thead>
         <tbody class="table-border-bottom-0"></tbody>
       </table>
-            {{-- <table class="table">
+      {{-- <table class="table">
                 <thead class="table-light">
                     <tr>
                         <th>No</th>
@@ -67,62 +67,61 @@
                     @endforeach
                 </tbody>
             </table> --}}
-        </div>
     </div>
-    <!-- Tabel -->
+  </div>
+  <!-- Tabel -->
 
-    {{-- Modal Tambah --}}
-    <div class="modal fade" tabindex="-1" id="tambahModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="m-0 font-weight-bold d-flex gap-2 align-items-center"><i
-                            class="fas fa-newspaper me-1"></i>Tambahkan Kategori</h6>
+  {{-- Modal Tambah --}}
+  <div class="modal fade" tabindex="-1" id="tambahModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="m-0 font-weight-bold d-flex gap-2 align-items-center"><i class="fas fa-newspaper me-1"></i>Tambahkan
+            Kategori</h6>
 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('admin.product-category.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nama Kategori</label>
-                            <input type="text" class="form-control @error('title') is-invalid @enderror" id="name"
-                                name="title" value="{{ old('title') }}" placeholder="Masukkan nama kategori" />
-                            @error('title')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="icon" class="form-label">Icon</label>
-                            <input type="file" class="form-control @error('icon') is-invalid @enderror" id="icon"
-                                name="icon">
-                            @if (old('icon'))
-                                <img id="preview" src="{{ asset('storage/' . old('icon')) }}" alt="Old gambar"
-                                    style="max-width: 100px; max-height: 100px;">
-                            @endif
-                            @error('icon')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="pt-2 d-flex gap-3 justify-content-end">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn"
-                                style="background: #7367f0; color:#fff;">Tambahkan</button>
-                        </div>
-                    </form>
-                </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="{{ route('admin.product-category.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-3">
+              <label for="name" class="form-label">Nama Kategori</label>
+              <input type="text" class="form-control @error('title') is-invalid @enderror" id="name"
+                name="title" value="{{ old('title') }}" placeholder="Masukkan nama kategori" />
+              @error('title')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
             </div>
-        </div>
-    </div>
-    {{-- end --}}
 
-    {{-- Modal Edit --}}
-    {{-- @foreach ($productCategories as $key => $category)
+            <div class="mb-3">
+              <label for="icon" class="form-label">Icon</label>
+              <input type="file" class="form-control @error('icon') is-invalid @enderror" id="icon"
+                name="icon">
+              @if (old('icon'))
+                <img id="preview" src="{{ asset('storage/' . old('icon')) }}" alt="Old gambar"
+                  style="max-width: 100px; max-height: 100px;">
+              @endif
+              @error('icon')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+            </div>
+            <div class="pt-2 d-flex gap-3 justify-content-end">
+              <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn" style="background: #7367f0; color:#fff;">Tambahkan</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- end --}}
+
+  {{-- Modal Edit --}}
+  {{-- @foreach ($productCategories as $key => $category)
         <div class="modal fade" tabindex="-1" id="editModal{{ $category->id }}">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -172,47 +171,50 @@
             </div>
         </div>
     @endforeach --}}
-    {{-- end --}}
+  {{-- end --}}
 
-    <div class="modal fade" tabindex="-1" id="editModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit Kategori</h6>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('admin.product-category.update', ':id:') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        <div class="mb-3">
-                            <label for="title" class="form-label">Nama Kategori</label>
-                            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="">
-                            @error('title')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="icon" class="form-label">Icon</label>
-                            <input type="file" class="form-control @error('icon') is-invalid @enderror" id="icon" name="icon" />
-                            <img src="#" class="w-100 mt-3 rounded-3" alt="" id="icon_image"/>
-                            @error('icon')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="pt-2 d-flex gap-3 justify-content-end">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn" style="background: #7367f0; color:#fff;">Simpan</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+  <div class="modal fade" tabindex="-1" id="editModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit Kategori</h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          <form action="{{ route('admin.product-category.update', ':id:') }}" method="POST"
+            enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="mb-3">
+              <label for="title" class="form-label">Nama Kategori</label>
+              <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
+                name="title" value="">
+              @error('title')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+            </div>
+            <div class="mb-3">
+              <label for="icon" class="form-label">Icon</label>
+              <input type="file" class="form-control @error('icon') is-invalid @enderror" id="icon"
+                name="icon" />
+              <img src="#" class="w-100 mt-3 rounded-3" alt="" id="icon_image" />
+              @error('icon')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+            </div>
+            <div class="pt-2 d-flex gap-3 justify-content-end">
+              <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn" style="background: #7367f0; color:#fff;">Simpan</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 @endsection
 
 @push('scripts')
@@ -223,7 +225,7 @@
   <script src="{{ asset('js/AjaxDataTable.js') }}"></script>
 @endpush
 
-@push("js")
+@push('js')
   <script type="text/javascript">
     const {
       table
@@ -253,14 +255,9 @@
           topStart: {
             buttons: ["create"]
           },
-          topEnd: $(`<form action="#" method="get" id="search" class="me-4">
-            <div class="input-group mb-3">
-              <input type="search" name="search" class="form-control" placeholder="Cari Kategori&hellip;"
-                value="{{ old('search', request('search')) }}" />
-              <button type="submit" class="btn"
-                style="background: #7367f0; color:#fff;">Cari</button>
-            </div>
-          </form>`),
+          topEnd: $(`<div class="input-group">
+            <input class="form-control me-4" placeholder="Cari Kategori&hellip;" id="searchInput" />
+          </div>`),
           bottomStart: {
             info: {
               text: 'Menampilkan _START_ dari _END_ hasil'
@@ -306,6 +303,16 @@
     $("#search").submit(function(e) {
       e.preventDefault();
       table.search($(this).find("input[name='search']").val()).draw();
+    });
+    let searchTimeout;
+
+    $('#searchInput').on('input', function() {
+      clearTimeout(searchTimeout);
+
+      searchTimeout = setTimeout(function() {
+        const searchTerm = $('#searchInput').val().trim();
+        table.search(searchTerm).draw();
+      }, 750);
     });
   </script>
 @endpush

@@ -28,11 +28,15 @@
   <section class="about card" id="basics" style="display: none;">
     <div class="container">
       <div class="card-header d-flex justify-content-between align-items-center">
-        <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
-          style="background:#7367f0;">
-          Tambahkan About
-        </a>
-        <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#editModal2"
+        @if ($aboutUs->isEmpty())
+          <a type="button" class="btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
+            style="background:#7367f0;">
+            Tambahkan About
+          </a>
+        @else
+          <div></div>
+        @endif
+        <a type="button" class="btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#editModal2"
           style="background:#7367f0;">
           Edit About
         </a>
@@ -128,8 +132,7 @@
 
             <div class="pt-2 d-flex gap-3 justify-content-end">
               <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-              <button type="submit" class="btn btn"
-                style="background: #7367f0">Tambahkan</button>
+              <button type="submit" class="btn btn" style="background: #7367f0">Tambahkan</button>
             </div>
           </form>
         </div>
@@ -184,8 +187,7 @@
             </div>
             <div class="pt-2 d-flex gap-3 justify-content-end">
               <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-              <button type="submit" class="btn btn"
-                style="background:#7367f0;">Simpan</button>
+              <button type="submit" class="btn btn" style="background:#7367f0;">Simpan</button>
             </div>
           </form>
         </div>
@@ -242,8 +244,7 @@
               </div>
               <div class="pt-2 d-flex gap-3 justify-content-end">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn"
-                  style="background: #7367f0; color:#fff;">Simpan</button>
+                <button type="submit" class="btn btn" style="background: #7367f0; color:#fff;">Simpan</button>
               </div>
             </form>
           </div>
