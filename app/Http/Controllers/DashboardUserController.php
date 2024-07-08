@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\cart;
 use App\Models\Event;
+use App\Models\Favorite;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
@@ -23,6 +25,23 @@ class DashboardUserController extends Controller
      */
     public function dashboard()
     {
-        return view('user.user');
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+        $countcart = cart::where('user_id', auth()->id())->count();
+        $favorites = Favorite::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+        return view('user.user', compact(
+            'countcart',
+            'carts',
+            'favorites',
+            'countFavorite'
+        ));
+
     }
 }

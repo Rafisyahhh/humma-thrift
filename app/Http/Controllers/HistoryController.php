@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\cart;
+use App\Models\Favorite;
 use App\Models\User;
 use Carbon\Carbon;
 use Faker\Provider\bn_BD\Company;
@@ -13,6 +15,18 @@ class HistoryController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+        $countcart = cart::where('user_id', auth()->id())->count();
+        $favorites = Favorite::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+
         $NumberFormatter = number_format(1_000, 0, '', '.');
         $transaction = [
             [
@@ -76,7 +90,7 @@ class HistoryController extends Controller {
         // $key['price_format'] = str_replace(',00', '', number_format(1_000, 0, '', '.'));
         // }
         // unset($key);
-        return view('user.history', compact('transaction'));
+        return view('user.history', compact('transaction','carts','countcart','countFavorite'));
     }
 
     /**
