@@ -44,7 +44,7 @@ class ProductController extends Controller
         $data = $request->validated();
         $data['thumbnail'] = $this->storeFile($request->file('thumbnail'), 'uploads/thumbnails');
         $data['user_id'] = Auth::id();
-        $data['store_id'] = Auth::user()->store->id;
+        $data['store_id'] = Auth::user()->getAttribute('store')->id;
 
         $isAuction = $request->product_type === 'product_auctions';
         $model = $isAuction ? ProductAuction::class : Product::class;
