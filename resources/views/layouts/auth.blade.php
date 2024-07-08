@@ -51,7 +51,7 @@
                 <div class="header-center">
                     <div class="logo">
                         <a href="{{ url('/') }}">
-                            <img src="{{ asset('images/brands/png/logo-color-dark-8.png') }}" alt="logo" style="height: 36px">
+                            <img src="{{ asset('images/brands/png/logo-color-darkxxxhdpi.png') }}" alt="logo" style="height: 36px">
                         </a>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="footer-order">
                             <div class="logo">
-                                <img src="{{ asset('images/brands/png/logo-white-8.png') }}" height="36px" alt="logo">
+                                <img src="{{ asset('images/brands/png/logo-whitexxxhdpi.png') }}" height="36px" alt="logo">
                             </div>
                             <div class="footer-link order-link">
                                 <ul>

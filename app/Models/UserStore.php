@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\StoreStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Collection;
 
 class UserStore extends Model
 {
@@ -81,5 +83,25 @@ class UserStore extends Model
     public function cover()
     {
         return asset("storage/{$this->getAttribute('store_logo')}");
+    }
+
+    /**
+     * Getting User Store Status enum
+     *
+     * @return Collection
+     */
+    public static function getStoreStatusEnums(): Collection
+    {
+        return collect(StoreStatusEnum::cases())->pluck('value');
+    }
+
+    /**
+     * Getting current User Store status
+     *
+     * @return StoreStatusEnum
+     */
+    public function getStatusEnum(): StoreStatusEnum
+    {
+        return StoreStatusEnum::from($this->status);
     }
 }
