@@ -75,7 +75,7 @@ class LandingpageController extends Controller
         ->whereNotNull('product_id')
         ->orderBy('created_at')
         ->get();
-        $countcart = cart::where('user_id',auth()->id())->count();
+        $countcart = cart::where('user_id', auth()->id())->count();
         $user = Auth::user();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         // $auctions = auctions::where('user_id', $user->id)->first();
