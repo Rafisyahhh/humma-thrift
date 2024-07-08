@@ -243,7 +243,8 @@
                       </tr>
                       <tr>
                         <th>Deskripsi</th>
-                        <td colspan="2"><span class="inner-text" data-row="description"></span></td>
+                        <td class="d-inline-block text-break pe-5" style="width: 20rem;"><span class="inner-text"
+                            data-row="description"></span></td>
                       </tr>
                       <tr>
                         <th>Status</th>
