@@ -26,6 +26,11 @@ class LandingpageController extends Controller
         ->whereNotNull('product_id')
         ->orderBy('created_at')
         ->get();
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+        $countcart = cart::where('user_id',auth()->id())->count();
         $product_auction = ProductAuction::all();
 
         return view('landing.home', compact(
@@ -34,7 +39,9 @@ class LandingpageController extends Controller
             'categories',
             'product',
             'favorites',
-            'product_auction'
+            'product_auction',
+            'countcart',
+            'carts'
         ));
     }
 
@@ -58,11 +65,16 @@ class LandingpageController extends Controller
         $product_auction = ProductAuction::paginate(24);
         $brands = Brand::all();
         $categories = ProductCategory::all();
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+        $countcart = cart::where('user_id',auth()->id())->count();
         $user = Auth::user();
         // $auctions = auctions::where('user_id', $user->id)->first();
         // $notifications = auth()->user()->notifications;
 
-        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories','user'));
+        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories','user','countcart','carts'));
     }
 
     // Tambahkan metode regular
@@ -71,13 +83,23 @@ class LandingpageController extends Controller
         $products = Product::paginate(24);
         $brands = Brand::all();
         $categories = ProductCategory::all();
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+        $countcart = cart::where('user_id',auth()->id())->count();
 
-        return view('landing.produk-regular', compact('products', 'brands', 'categories'));
+        return view('landing.produk-regular', compact('products', 'brands', 'categories','countcart','carts'));
     }
 
     public function store(){
         $store = UserStore::all();
-        return view('landing.toko', compact('store'));
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+        $countcart = cart::where('user_id',auth()->id())->count();
+        return view('landing.toko', compact('store','carts','countcart'));
     }
 
     public function wishlist(){
@@ -88,14 +110,24 @@ class LandingpageController extends Controller
         // dd($favorite);
         $product_auction = Favorite::whereNotNull('product_auction_id')->where('user_id', auth()->id())->get();
         $product_favorite = Favorite::whereNotNull('product_id')->where('user_id', auth()->id())->get();
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+        $countcart = cart::where('user_id',auth()->id())->count();
         // dd($product_auction);
-        return view('user.wishlist', compact('categories','brands','product','favorite','product_auction', 'product_favorite'));
+        return view('user.wishlist', compact('categories','brands','product','favorite','product_auction', 'product_favorite','carts','countcart'));
     }
 
     public function cart(){
         $cart = cart::all();
         $product_category_pivots = ProductCategoryPivot::all();
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+        $countcart = cart::where('user_id',auth()->id())->count();
 
-        return view('user.keranjang', compact('cart','product_category_pivots'));
+        return view('user.keranjang', compact('cart','product_category_pivots','carts','countcart'));
     }
 }
