@@ -120,7 +120,7 @@
                             </div>
 
                                 <div class="result mb-6">
-                                    <p><strong style="font-size: 1.5rem">{{ $countFavorite }}</strong><span> Barang</span></p>
+                                    <p><strong style="font-size: 1.5rem">({{ $countFavorite }})</strong><span> Barang</span></p>
                                 </div>
                                 @forelse ($product_favorite as $item)
                                 <div class="col-lg-3 col-sm-6">
@@ -144,17 +144,21 @@
                                                     <i class="fas fa-ellipsis-h"></i>
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="wishlistDropdown">
-                                                    <li><a class="dropdown-item" href="#">Hapus Favorit</a></li>
+                                                    <li>
+                                                        <form action="{{ route('destroyProduct.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Apakah anda yakin ingin menghapus produk ini dari daftar favorit?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <a role="button" type="submit" class="dropdown-item" onclick="$(this).closest('form').submit()">Hapus Favorit</a>
+                                                        </form>
+                                                    </li>
                                                     <hr>
                                                     <li><a class="dropdown-item" href="#">Batal</a></li>
                                                 </ul>
                                             </div>
-
                                             <a href="/user/checkout" class="product-btn">
                                                 <i class="fas fa-shopping-cart"></i>
                                             </a>
                                         </div>
-
                                     </div>
                                 </div>
                             @empty
@@ -180,7 +184,8 @@
                                                 <div class="price">
                                                     <span
                                                         class="new-price">Rp {{ number_format($item->productAuction->bid_price_start, null, null, '.') }}
-                                                        - Rp {{ number_format($item->productAuction->bid_price_end, null, null, '.') }}</span>
+                                                        - Rp {{ number_format($item->productAuction->bid_price_end, null, null, '.') }}
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -190,12 +195,17 @@
                                                     <i class="fas fa-ellipsis-h"></i>
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="wishlistDropdown">
-                                                    <li><a class="dropdown-item" href="#">Hapus Favorit</a></li>
+                                                    <li>
+                                                        <form action="{{ route('destroyAuction.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Apakah anda yakin ingin menghapus produk lelang ini dari daftar favorit?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <a role="button" type="submit" class="dropdown-item" onclick="$(this).closest('form').submit()">Hapus Favorit</a>
+                                                        </form>
+                                                    </li>
                                                     <hr>
                                                     <li><a class="dropdown-item" href="#">Batal</a></li>
                                                 </ul>
                                             </div>
-
                                             <a href="/user/checkout" class="product-btn">
                                                 <i class="fas fa-shopping-cart"></i>
                                             </a>
