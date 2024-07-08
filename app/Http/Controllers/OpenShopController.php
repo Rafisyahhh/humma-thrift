@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\StoreStatusEnum;
 use App\Http\Requests\OpenStoreRequest;
 use App\Models\User;
 use App\Models\UserStore;
@@ -43,6 +44,9 @@ class OpenShopController extends Controller
         $data->put('verification_code', Str::random(60));
         $data->put('verified_at', null);
         $data->put('active', false);
+        $data->put('open', '08:00:00');
+        $data->put('close', '20:00:00');
+        $data->put('status', StoreStatusEnum::OFFLINE->value);
 
         // dd($data->toArray());
 

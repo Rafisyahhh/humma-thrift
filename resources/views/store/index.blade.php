@@ -51,7 +51,7 @@
             margin-top: -7.5rem;
             padding-bottom: 5rem;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
         }
 
@@ -74,11 +74,6 @@
 
         .product-cart-items span i {
             font-size: 1.25em;
-        }
-
-        .profile-content {
-            display: flex;
-            align-items: center;
         }
 
         .location {
@@ -186,13 +181,30 @@
         }
 
         .badge {
-            font-size: 15px; /* Ubah ukuran teks */
-            padding: 0.5em 1em; /* Ubah padding */
+            font-size: 15px;
+            /* Ubah ukuran teks */
+            padding: 0.5em 1em;
+            /* Ubah padding */
         }
 
         .profile-header {
             display: flex;
             align-items: center;
+        }
+
+        .profile-wrapper .avatar {
+            position: relative;
+            width: fit-content
+        }
+
+        .profile-wrapper .avatar .online-status {
+            position: absolute;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            height: 4rem;
+            width: 4rem;
+            border: .5rem solid #fff;
+            border-radius: 50%;
         }
     </style>
 @endpush
@@ -201,37 +213,48 @@
     <section class="section-banner">
         <div class="container border-bottom">
             <div class="banner-wrapper">
-                <div class="banner-cover"> <img
-                        src="{{ asset($store->store_cover ? "storage/{$store->store_cover}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
-                        alt="upload" class="responsive-img" id="responsive-img" /> </div>
+                <div class="banner-cover">
+                    <img src="{{ asset($store->store_cover ? "storage/{$store->store_cover}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
+                        alt="upload" class="responsive-img" id="responsive-img" />
+                </div>
                 <div class="profile-wrapper">
-                    <div class="avatar-cover"> <img
-                            src="{{ asset($store->store_logo ? "storage/{$store->store_logo}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}" />
-
+                    <div class="avatar">
+                        <div class="avatar-cover">
+                            <img
+                                src="{{ asset($store->store_logo ? "storage/{$store->store_logo}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}" />
+                        </div>
+                        <span
+                            class="badge online-status bg-{{ Cache::has('user-is-online-' . auth()->id()) ? 'success' : 'danger' }}">&nbsp;</span>
                     </div>
                     <div class="profile-content">
                         <div class="profile-name-wrapper">
                             <div class="profile-header">
                                 <h5 class="profile-name mb-2">{{ $store->name }}</h5>
-                                <span class="badge text-bg-success ms-4">Aktif</span>
                             </div>
                             <p class="profile-description opacity-75 mb-0">{{ '@' . $store->username }}</p>
                             <div class="location mt-3">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <span style="font-size: 16px;">{{ $store->address }}</span>
+                                <span style="font-size: 16px;">{{ $store->address ?? 'Alamat Belum Diatur' }}</span>
                             </div>
+
                             @php
-                                $open = \Carbon\Carbon::parse($store->open)->format('H:i');
-                                $close = \Carbon\Carbon::parse($store->close)->format('H:i');
+                                // Get current hours
+                                $openInstance = \Carbon\Carbon::parse($store->open);
+                                $closeInstance = \Carbon\Carbon::parse($store->close);
+
+                                // Get current hours
                                 $now = \Carbon\Carbon::now();
                             @endphp
                             <p class="profile-description opacity-75 mt-3 mb-0">
-                            @if ($now > $open && $now <= $close)
-                            <span class="badge text-bg-success me-2" >Buka</span>
-                            @else
-                            <span class="badge text-bg-danger me-2" >Tutup</span>
-                            @endif
-                            {{$open}} - {{$close}} </p>
+                                @if ($now->between($openInstance, $closeInstance) && $store->getStatusEnum()->value === 'online')
+                                    <span class="badge text-bg-success me-2">Buka</span>
+                                @else
+                                    <span class="badge text-bg-danger me-2">Tutup</span>
+                                @endif
+                                {{ $openInstance->format('H:i') }} - {{ $closeInstance->format('H:i') }}
+                            </p>
+
+                            <span class="location mt-5">{!! $store->description !!}</span>
                         </div>
 
                         <div class="profile-info-detail-wrapper">
@@ -253,19 +276,18 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="location mt-2"
-                        style="max-height: 65px;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;padding-left: 45px;max-width: 107em;">
-                        &nbsp;&nbsp;<span class="location mt-2">{!! $store->description !!}</span>
-                    </div>
+
+            @if ($store->getStatusEnum()->value === 'holiday')
+                <div class="alert alert-warning mt-3 alert-dismissible fade show" role="alert" style="font-size: 0.9rem;">
+                    <p>Toko kami saat ini sedang libur. Kami mohon maaf atas ketidaknyamanan ini. Toko akan buka kembali
+                        sesuai dengan jadwal yang telah ditentukan. Terima kasih atas pengertian Anda. Silakan cek kembali
+                        nanti untuk informasi lebih lanjut.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            </div>
-            <br>
-            <br>
+            @endif
 
             @if (!$store->verified_at && auth()->id() === $store->user_id)
-                <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size: 0.9rem;">
+                <div class="alert alert-warning mt-3 alert-dismissible fade show" role="alert" style="font-size: 0.9rem;">
                     <p>Toko anda belum terverifikasi. Silahkan verifikasikan toko anda dari tautan yang sudah kami kirim ke
                         surel anda.</p> <button type="button" class="btn-close" data-bs-dismiss="alert"
                         aria-label="Close"></button>
@@ -414,7 +436,8 @@
                             style="height: 20rem; background-color: rgba(202, 202, 202, 0.2);">
                             <div style="width: 30rem;">
                                 <img src="https://placehold.co/400" class="img-fluid rounded mb-2 float-start"
-                                    style="width: 7.5rem" /><div class="h-50"></div>
+                                    style="width: 7.5rem" />
+                                <div class="h-50"></div>
                                 <h5 class="text-start">Tinta original</h5>
                                 <p class="text-start">Warna: pink</p>
                             </div>
