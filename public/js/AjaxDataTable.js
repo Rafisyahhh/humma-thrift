@@ -46,7 +46,6 @@ $.fn.AjaxDataTable = function (config) {
     columns,
     processing: true,
     serverSide: true,
-    scrollX: true,
     createdRow: (row) => $(row).hide().fadeIn(1000),
     ...options,
     drawCallback: () => {
@@ -124,7 +123,6 @@ $.fn.AjaxDataTable = function (config) {
 
   handleFormSubmit(editModal, null, editSuccess, editOnError);
 
-  table.columns.adjust();
   this.table = table;
   return this;
 };

@@ -23,6 +23,8 @@ return new class extends Migration {
             $table->boolean('active')->nullable()->default(0);
             $table->text('address')->nullable();
             $table->text('description')->nullable();
+            $table->time('open')->nullable();
+            $table->time('close')->nullable();
         });
     }
 

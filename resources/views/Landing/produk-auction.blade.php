@@ -169,7 +169,7 @@
                                             <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img"
                                                 class="object-fit-cover">
                                             <div class="product-cart-items">
-                                                <a href="/user/wishlist" class="favourite cart-item">
+                                                {{-- <a href="/user/wishlist" class="favourite cart-item">
                                                     <span>
                                                         <i class="fas fa-heart"></i>
                                                     </span>
@@ -178,7 +178,7 @@
                                                     <span>
                                                         <i class="fas fa-shopping-cart"></i>
                                                     </span>
-                                                </a>
+                                                </a> --}}
                                                 <a href="/user/keranjang" class="compaire cart-item">
                                                     <span>
                                                         <i class="fas fa-share"></i>
@@ -203,9 +203,11 @@
                                             $user = Auth::user();
                                             if ($user) {
                                                 $existingAuction = App\Models\auctions::where('user_id', Auth::id())
-                                                ->where('product_auction_id', $item->id)
-                                                ->first();
-                                                $auctions = App\Models\Auctions::where('user_id', $user->id)->where('product_auction_id', $item->id)->first();
+                                                    ->where('product_auction_id', $item->id)
+                                                    ->first();
+                                                $auctions = App\Models\Auctions::where('user_id', $user->id)
+                                                    ->where('product_auction_id', $item->id)
+                                                    ->first();
                                             }
                                             $auctionproduct = App\Models\Auctions::where('product_auction_id', $item->id)->where('status', 1)->first();
 
@@ -300,7 +302,6 @@
 @section('script')
 
     <script>
-
         document.addEventListener('DOMContentLoaded', function() {
             var modals = document.querySelectorAll('.modal');
             var btns = document.querySelectorAll('.openModal');

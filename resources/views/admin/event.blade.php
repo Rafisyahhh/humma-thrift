@@ -38,13 +38,11 @@
     <div class="table-responsive text-nowrap">
       <table class="table yajra-datatable w-100">
         <thead class="table-light">
-          <tr>
-            <th class="text-start">NO.</th>
-            <th class="text-start">JUDUL</th>
-            <th class="text-start">SUB JUDUL</th>
-            <th class="text-start">FOTO</th>
-            <th class="text-center">AKSI</th>
-          </tr>
+          <th>NO.</th>
+          <th>JUDUL</th>
+          <th>SUB JUDUL</th>
+          <th>FOTO</th>
+          <th>AKSI</th>
         </thead>
         <tbody class="table-border-bottom-0"></tbody>
       </table>
@@ -297,94 +295,103 @@
 
 @push('js')
   <script type="text/javascript">
-    const {
-      table
-    } = $('.yajra-datatable').AjaxDataTable({
-      onCreate: {
-        modal: $('#tambahModal'),
-        text: 'Tambahkan Event',
-        className: 'btn ms-4'
-      },
-      onEdit: {
-        modal: $('#editModal'),
-        onClick: (form, data) => {
-          form.find('img#logo_image').attr('src', `{{ asset('storage/') }}/${data.logo}`)
-        }
-      },
-      onDelete: {
-        url: '{{ route('admin.event.destroy', ':id:') }}',
-        onClick: ($delete) => {
-          confirmDeletion(() => {
-            $delete()
-          });
-        }
-      },
-      options: {
-        layout: {
-          topStart: {
-            buttons: ["create"]
-          },
-          topEnd: $(`<div class="input-group">
+    $(document).ready(function() {
+      const {
+        table
+      } = $('.yajra-datatable').AjaxDataTable({
+        onCreate: {
+          modal: $('#tambahModal'),
+          text: 'Tambahkan Event',
+          className: 'btn ms-4'
+        },
+        onEdit: {
+          modal: $('#editModal'),
+          onClick: (form, data) => {
+            form.find('img#logo_image').attr('src', `{{ asset('storage/') }}/${data.logo}`)
+          }
+        },
+        onDelete: {
+          url: '{{ route('admin.event.destroy', ':id:') }}',
+          onClick: ($delete) => {
+            confirmDeletion(() => {
+              $delete()
+            });
+          }
+        },
+        options: {
+          layout: {
+            topStart: {
+              buttons: ["create"]
+            },
+            topEnd: $(`<div class="input-group">
             <input class="form-control me-4" placeholder="Cari Event&hellip;" id="searchInput" />
           </div>`),
-          bottomStart: {
-            info: {
-              text: 'Menampilkan _START_ dari _END_ hasil'
-            }
+            bottomStart: {
+              info: {
+                text: 'Menampilkan _START_ dari _END_ hasil'
+              }
+            },
           },
-        }
-      },
-      ajax: "{{ route('yajra.events') }}",
-      columns: [{
-          data: 'DT_RowIndex',
-          orderable: false,
-          searchable: false,
+          autoWidth: true
         },
-        {
-          data: 'judul',
-        },
-        {
-          data: 'subjudul',
-        },
-        {
-          data: 'foto',
-          orderable: false,
-          searchable: false,
-          render: (data, type) => `<img src="{{ asset('storage/') }}/${data}" class="rounded-3" height="96px">`
-        },
-        {
-          data: 'id',
-          className: 'text-center',
-          orderable: false,
-          searchable: false,
-          render: (data, type) => {
-            const editButton = `<button type="button" class="badge bg-label-warning me-1 border-0 edit" style="background: none">
+        ajax: "{{ route('yajra.events') }}",
+        columns: [{
+            data: 'DT_RowIndex',
+            orderable: false,
+            searchable: false,
+            width: "5%",
+          },
+          {
+            data: 'judul',
+          },
+          {
+            data: 'subjudul',
+          },
+          {
+            data: 'foto',
+            orderable: false,
+            searchable: false,
+            render: (data, type) =>
+              `<img src="{{ asset('storage/') }}/${data}" class="rounded-3" height="96px" loading="lazy">`
+          },
+          {
+            data: 'id',
+            className: 'text-center',
+            orderable: false,
+            searchable: false,
+            width: "10%",
+            render: (data, type) => {
+              const editButton = `<button type="button" class="badge bg-label-warning me-1 border-0 edit" style="background: none">
               <i class="ti ti-pencil"></i>
             </button>`;
-            const deleteButton = `<button type="button" class="badge bg-label-danger me-1 border-0 delete" style="background: none">
+              const deleteButton = `<button type="button" class="badge bg-label-danger me-1 border-0 delete" style="background: none">
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
                 <path fill="#FA7070" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
               </svg>
             </button>`;
-            return editButton + deleteButton;
+              return editButton + deleteButton;
+            }
           }
+        ],
+        drawCallback: () => {
+          table.columns.adjust();
         }
-      ]
-    });
+      });
 
-    $("#search").submit(function(e) {
-      e.preventDefault();
-      table.search($(this).find("input[name='search']").val()).draw();
-    });
-    let searchTimeout;
+      $("#search").submit(function(e) {
+        e.preventDefault();
+        table.search($(this).find("input[name='search']").val()).draw();
+      });
+      let searchTimeout;
 
-    $('#searchInput').on('input', function() {
-      clearTimeout(searchTimeout);
+      $('#searchInput').on('input', function() {
+        clearTimeout(searchTimeout);
 
-      searchTimeout = setTimeout(function() {
-        const searchTerm = $('#searchInput').val().trim();
-        table.search(searchTerm).draw();
-      }, 750);
+        searchTimeout = setTimeout(function() {
+          const searchTerm = $('#searchInput').val().trim();
+          table.search(searchTerm).draw();
+        }, 750);
+      });
     });
   </script>
 @endpush

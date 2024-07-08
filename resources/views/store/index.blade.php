@@ -220,7 +220,18 @@
                                 <i class="fas fa-map-marker-alt"></i>
                                 <span style="font-size: 16px;">{{ $store->address }}</span>
                             </div>
-                            <p class="profile-description opacity-75 mt-3 mb-0"> <span class="badge text-bg-success me-2" >Buka</span>07.00 - 20.00 </p>
+                            @php
+                                $open = \Carbon\Carbon::parse($store->open)->format('H:i');
+                                $close = \Carbon\Carbon::parse($store->close)->format('H:i');
+                                $now = \Carbon\Carbon::now();
+                            @endphp
+                            <p class="profile-description opacity-75 mt-3 mb-0">
+                            @if ($now > $open && $now <= $close)
+                            <span class="badge text-bg-success me-2" >Buka</span>
+                            @else
+                            <span class="badge text-bg-danger me-2" >Tutup</span>
+                            @endif
+                            {{$open}} - {{$close}} </p>
                         </div>
 
                         <div class="profile-info-detail-wrapper">
@@ -349,7 +360,7 @@
                                             <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="product-img"
                                                 class="object-fit-cover">
                                             <div class="product-cart-items">
-                                                <a href="/user/wishlist" class="favourite cart-item">
+                                                {{-- <a href="/user/wishlist" class="favourite cart-item">
                                                     <span>
                                                         <i class="fas fa-heart"></i>
                                                     </span>
@@ -358,7 +369,7 @@
                                                     <span>
                                                         <i class="fas fa-shopping-cart"></i>
                                                     </span>
-                                                </a>
+                                                </a> --}}
                                                 <a href="/user/keranjang" class="compaire cart-item">
                                                     <span>
                                                         <i class="fas fa-share"></i>
@@ -396,16 +407,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="ulasan-tab-pane" role="tabpanel" aria-labelledby="ulasan-tab"
+                <div class="tab-pane fade mt-5" id="ulasan-tab-pane" role="tabpanel" aria-labelledby="ulasan-tab"
                     tabindex="0">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex mt-5 rounded pt-3"
                             style="height: 20rem; background-color: rgba(202, 202, 202, 0.2);">
                             <div style="width: 30rem;">
-                                <img src="https://placehold.co/400" class="img-fluid rounded mb-2"
-                                    style="width: 7.5rem" />
-                                <h5>Tinta original</h5>
-                                <p>Warna: pink</p>
+                                <img src="https://placehold.co/400" class="img-fluid rounded mb-2 float-start"
+                                    style="width: 7.5rem" /><div class="h-50"></div>
+                                <h5 class="text-start">Tinta original</h5>
+                                <p class="text-start">Warna: pink</p>
                             </div>
                             <div class="w-100">
                                 <div class="d-flex position-relative mb-4">
@@ -430,7 +441,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="border-top pt-2" style="min-height: 5rem">Aku lupa aku siapa</p>
+                                <p class="border-top pt-2 text-start" style="min-height: 5rem">Aku lupa aku siapa</p>
                             </div>
                         </li>
 

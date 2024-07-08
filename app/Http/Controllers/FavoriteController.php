@@ -19,17 +19,6 @@ class FavoriteController extends Controller
                     ->orderBy('created_at')
                     ->get();
 
-        // dd($favorites);
-        // $product = Product::where('user_id', auth()->id())
-        //                     ->whereNotNull('product_id')
-        //                     ->orderB('created_at')
-        //                     ->get();
-
-        // $productAuction = ProductAuction::where('user_id', auth()->id())
-        //                     ->whereNotNull('productAuction_id')
-        //                     ->orderB('created_at')
-        //                     ->get();
-
         return view('Landing.home', compact('favorites'));
     }
 
@@ -41,25 +30,37 @@ class FavoriteController extends Controller
         //
     }
 
+
     public function storesproduct(Product $product)
     {
         $dataproduct['product_id'] = $product->id;
         $dataproduct['user_id'] = auth()->id();
 
+        $favorite = Favorite::where('product_id', $product->id)->where('user_id', auth()->id());
+
+        if($favorite->exists()) {
+            return redirect()->back()->with('error', "Produknya udah ada di favorit nih...");
+        }
         Favorite::create($dataproduct);
 
-        return redirect()->back()->with('success', 'Favorite created successfully.');
+        return redirect()->back()->with('success', 'Favorite berhasil ditambahkan.');
     }
 
+
+// LELANG
     public function storesproductAuction(ProductAuction $productAuction)
     {
         $dataproduct_auction['product_auction_id'] = $productAuction->id;
         $dataproduct_auction['user_id'] = auth()->id();
 
-        // dd($dataproduct_auction);
+        $favoriteAuction = Favorite::where('product_auction_id', $productAuction->id)->where('user_id', auth()->id());
+
+        if($favoriteAuction->exists()) {
+            return redirect()->back()->with('error', "Produknya Lelang udah ada di favorit nih...");
+        }
         Favorite::create($dataproduct_auction);
 
-        return redirect()->back()->with('success', 'Favorite created successfully.');
+        return redirect()->back()->with('success', 'Favorite berhasil ditambahkan.');
     }
     /**
      * Store a newly created resource in storage.
@@ -96,8 +97,26 @@ class FavoriteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Favorite $favorite)
+
+     public function destroyProduct(Favorite $destroy)
+     {
+         if ($destroy->user_id != auth()->id()) {
+             return redirect()->back()->with('error', 'Anda gagal menghapus favorit ini.');
+         }
+         $destroy->delete();
+
+         return redirect()->back()->with('success', 'Favorite Berhasil Dihapus.');
+     }
+
+// DESTROY LELANG
+    public function destroyAuction(Favorite $destroyAuction)
     {
-        //
+        if ($destroyAuction->user_id != auth()->id()) {
+            return redirect()->back()->with('error', 'Anda gagal menghapus favorit ini.');
+        }
+        $destroyAuction->delete();
+
+        return redirect()->back()->with('success', 'Favorite Lelang Berhasil Dihapus.');
     }
+
 }

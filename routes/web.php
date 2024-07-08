@@ -55,7 +55,7 @@ Route::get('/', [LandingpageController::class, 'index']);
 
 # Seller Routes
 Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(function () {
-    Route::get('/home', [UserStoreController::class,'index'])->name('home');
+    Route::get('/home', [UserStoreController::class, 'index'])->name('home');
     Route::view('/transaction', 'seller.transaksi')->name('transaction');
     Route::view('/income', 'seller.penghasilan')->name('income');
     // Route::view('/product', 'seller.produk')->name('product');
@@ -65,12 +65,12 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
     Route::resource('productauction', ProductAuctionController::class);
 
 
-// Show seller product auction
-Route::get('auction/seller/{id}', [AuctionsController::class, 'showSeller'])->name('auction.showSeller');
+    // Show seller product auction
+    Route::get('auction/seller/{id}', [AuctionsController::class, 'showSeller'])->name('auction.showSeller');
 
-// Edit and Update routes for auctions
-Route::get('auction/{auctions}/edit', [AuctionsController::class, 'editlelang'])->name('auction.editlelang');
-Route::put('auction/{auctions}', [AuctionsController::class, 'updatelelang'])->name('auction.updatelelang');
+    // Edit and Update routes for auctions
+    Route::get('auction/{auctions}/edit', [AuctionsController::class, 'editlelang'])->name('auction.editlelang');
+    Route::put('auction/{auctions}', [AuctionsController::class, 'updatelelang'])->name('auction.updatelelang');
 });
 
 # User Routes
@@ -86,7 +86,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
         Route::get('profile', [UserController::class, 'show'])->name('profile');
         Route::post('profile/{id}', [UserController::class, 'update'])->name('profile.update');
         Route::view('order', 'user.order')->name('order');
-        Route::get('cart', [CartController::class,'index'])->name('cart');
+        Route::get('cart', [CartController::class, 'index'])->name('cart');
         Route::get('wishlist', [LandingpageController::class, 'wishlist'])->name('wishlist');
         Route::get('shop', [DetailProductController::class, 'showProduct'])->name('shop');
         Route::get('store', [StoreProfileController::class, 'showStore'])->name('store');
@@ -119,10 +119,16 @@ Route::get('stores', [StoreProfileController::class, 'showStore'])->name('store'
 Route::view('detail', 'landing.detail');
 Route::get('about-us', [AboutUsController::class, 'landingpage']);
 Route::view('news', 'landing.detailNews');
-Route::view('/regstrasi','afterregister');
+Route::view('/regstrasi', 'afterregister');
+# Product
 Route::post('/product/storesproduct/{product}', [FavoriteController::class, 'storesproduct'])->name('storesproduct');
+Route::delete('/destroyProduct/{destroy}', [FavoriteController::class, 'destroyProduct'])->name('destroyProduct.destroy');
+#product Auction
 Route::post('/productAuction/storesproductAuction/{productAuction}', [FavoriteController::class, 'storesproductAuction'])->name('storesproductAuction');
-Route::post('/product/storecart/{product}',[CartController::class, 'storecart'])->name('storecart');
+Route::delete('/destroyAuction/{destroyAuction}', [FavoriteController::class, 'destroyAuction'])->name('destroyAuction.destroy');
+Route::post('/product/storecart/{product}', [CartController::class, 'storecart'])->name('storecart');
+Route::delete('/product/storecart/{cart}', [CartController::class, 'deletecart'])->name('deletecart');
+// Route::delete('/product/storecart/{productAuction}', [CartController::class, 'deletecartAuction'])->name('deletecartAuction');
 
 # Home Redirect
 Route::get('/home', RedirectUserController::class)->name('home');
@@ -157,6 +163,6 @@ Route::prefix('@{store:username}')->controller(StoreProfileController::class)->g
 
 # Payment Routes
 Route::prefix('payment')->group(function () {
-    Route::post('transaction/store',[TransactionController::class,'store'])->name('transaction.store');
-    Route::post('transaction',[TransactionController::class,'show'])->name('transaction.show');
+    Route::post('transaction/store', [TransactionController::class, 'store'])->name('transaction.store');
+    Route::post('transaction', [TransactionController::class, 'show'])->name('transaction.show');
 });

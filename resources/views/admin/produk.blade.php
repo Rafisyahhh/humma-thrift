@@ -104,8 +104,8 @@
             <th class="text-start">TOKO</th>
             <th class="text-start">KATEGORI</th>
             <th class="text-start">HARGA</th>
-            <th class="text-start">STATUS</th>
-            <th class="text-start">DETAIL</th>
+            <th class="text-center">STATUS</th>
+            <th class="text-center">DETAIL</th>
           </tr>
         </thead>
         <tbody class="table-border-bottom-0"></tbody>
@@ -243,7 +243,8 @@
                       </tr>
                       <tr>
                         <th>Deskripsi</th>
-                        <td colspan="2"><span class="inner-text" data-row="description"></span></td>
+                        <td class="d-inline-block text-break pe-5" style="width: 20rem;"><span class="inner-text"
+                            data-row="description"></span></td>
                       </tr>
                       <tr>
                         <th>Status</th>
@@ -272,7 +273,9 @@
 
 @push('js')
   <script>
-    function submitForm(radioBtn) {
+    function submitForm(radioBtn, value) {
+      // radioBtn.closest('input.d-none')[0].val(value);
+      $(radioBtn.closest('form')).find('input.d-none').val(value)
       var form = radioBtn.closest('form').submit();
     }
   </script>
@@ -328,9 +331,11 @@
           data: 'DT_RowIndex',
           orderable: false,
           searchable: false,
+          width: "5%"
         },
         {
           data: 'title',
+          width: "10%",
           render: (data, __, row) => {
             return data + `<span class="opacity-0 position-absolute">${row.type}</span>`;
           }
@@ -339,13 +344,9 @@
           data: 'thumbnail',
           orderable: false,
           searchable: false,
+          width: "10%",
           render: (data, type) =>
             `<img src="{{ asset('storage/') }}/${data}" class="rounded-3" height="96px" loading="lazy">`
-        },
-        {
-          data: 'type',
-          searchable: true,
-          visible: false
         },
         {
           data: 'userstore.username',
@@ -359,50 +360,56 @@
         {
           data: 'price',
         },
-        // {
-        //   data: 'id',
-        //   orderable: false,
-        //   searchable: false,
-        //   render: (data, _, row) => {
-        //     const inactive = `<button class="btn btn-sm btn-danger">Tidak Aktif</button>`;
-        //     const active = `<button class="btn btn-sm btn-success">Aktif</button>`;
-        //     const editButton = `<div class="dropdown">
-      //       <button type="button" class="badge bg-label-warning me-1 border-0 edit" style="background: none" data-bs-toggle="dropdown" aria-expanded="false">
-      //         <i class="ti ti-pencil"></i>
-      //       </button>
-      //       <ul class="dropdown-menu">
-      //         <li><a class="dropdown-item" href="#">Action</a></li>
-      //       </ul>
-      //     </div>`;
-        //     return `<div class="d-flex gap-2">${(row.status == 'inactive' ? inactive : active) + editButton}</div>`;
-        //   }
-        // },
         {
           data: 'id',
           orderable: false,
           searchable: false,
           render: (data, _, row) => {
-            const status = `<form action="${"{{ route('admin.produk.update', ':id:') }}".replace(":id:", data)}" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="d-flex gap-2">
-              <div>
-                <input type="radio" onchange="submitForm(this)" class="btn-check" name="status"
-                  id="inactive" value="inactive"
-                  ${ row.status == 'inactive' ? 'checked' : '' } />
-                <label class="btn btn-sm btn-danger" for="inactive">Tidak Aktif</label>
-              </div>
-              <div>
-                <input type="radio" onchange="submitForm(this)" class="btn-check" name="status"
-                  id="active" value="active" ${ row.status == 'active' ? 'checked' : '' }
-                  />
-                <label class="btn btn-sm btn-success" for="active">Aktif</label>
-              </div>
-            </div>
-          </form>`;
-            return status;
+            const inactive = `<button class="btn btn-sm btn-danger">Tidak Aktif</button>`;
+            const active = `<button class="btn btn-sm btn-success">Aktif</button>`;
+            const editButton = `<div class="dropdown dropstart" id="datatables-dropdown">
+            <button type="button" class="badge bg-label-dark me-1 border-0 editStatus" style="background: none;" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="ti ti-dots-vertical"></i>
+            </button>
+            <ul class="dropdown-menu p-0">
+              <form action="${"{{ route('admin.produk.update', ':id:') }}".replace(":id:", data)}" method="POST">
+                @csrf
+                @method('PUT')
+                <input class="d-none" value="${row.status}" name="status"/>
+                <li><a class="dropdown-item btn btn-sm btn-danger text-white" role="button" onclick="submitForm(this, 'inactive')">Tidak Aktif</a></li>
+                <li><a class="dropdown-item btn btn-sm btn-success text-white" role="button" onclick="submitForm(this, 'active')">Aktif</a></li>
+              </form>
+            </ul>
+          </div>`;
+            return `<div class="d-flex gap-2 float-end">${(row.status == 'inactive' ? inactive : active) + editButton}</div>`;
           }
         },
+        // {
+        //   data: 'id',
+        //   orderable: false,
+        //   searchable: false,
+        //   render: (data, _, row) => {
+        //     const status = `<form action="${"{{ route('admin.produk.update', ':id:') }}".replace(":id:", data)}" method="POST">
+      //     @csrf
+      //     @method('PUT')
+      //     <div class="d-flex gap-2">
+      //       <div>
+      //         <input type="radio" onchange="submitForm(this)" class="btn-check" name="status"
+      //           id="inactive" value="inactive"
+      //           ${ row.status == 'inactive' ? 'checked' : '' } />
+      //         <label class="btn btn-sm btn-danger" for="inactive">Tidak Aktif</label>
+      //       </div>
+      //       <div>
+      //         <input type="radio" onchange="submitForm(this)" class="btn-check" name="status"
+      //           id="active" value="active" ${ row.status == 'active' ? 'checked' : '' }
+      //           />
+      //         <label class="btn btn-sm btn-success" for="active">Aktif</label>
+      //       </div>
+      //     </div>
+      //   </form>`;
+        //     return status;
+        //   }
+        // },
         {
           data: 'id',
           className: 'text-center',
@@ -415,7 +422,12 @@
             </svg>
           </button>`
           }
-        }
+        },
+        {
+          data: 'type',
+          searchable: true,
+          visible: false
+        },
       ]
     });
 
@@ -458,6 +470,10 @@
 
       modal.modal("show");
     });
+    table.on("click", "button.editStatus", function() {
+      $(this).dropdown('toggle');
+    });
+
 
     let searchTimeout;
 
