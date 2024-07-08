@@ -272,7 +272,9 @@
 
 @push('js')
   <script>
-    function submitForm(radioBtn) {
+    function submitForm(radioBtn, value) {
+      // radioBtn.closest('input.d-none')[0].val(value);
+      $(radioBtn.closest('form')).find('input.d-none').val(value)
       var form = radioBtn.closest('form').submit();
     }
   </script>
@@ -357,50 +359,56 @@
         {
           data: 'price',
         },
-        // {
-        //   data: 'id',
-        //   orderable: false,
-        //   searchable: false,
-        //   render: (data, _, row) => {
-        //     const inactive = `<button class="btn btn-sm btn-danger">Tidak Aktif</button>`;
-        //     const active = `<button class="btn btn-sm btn-success">Aktif</button>`;
-        //     const editButton = `<div class="dropdown">
-      //       <button type="button" class="badge bg-label-warning me-1 border-0 edit" style="background: none" data-bs-toggle="dropdown" aria-expanded="false">
-      //         <i class="ti ti-pencil"></i>
-      //       </button>
-      //       <ul class="dropdown-menu">
-      //         <li><a class="dropdown-item" href="#">Action</a></li>
-      //       </ul>
-      //     </div>`;
-        //     return `<div class="d-flex gap-2">${(row.status == 'inactive' ? inactive : active) + editButton}</div>`;
-        //   }
-        // },
         {
           data: 'id',
           orderable: false,
           searchable: false,
           render: (data, _, row) => {
-            const status = `<form action="${"{{ route('admin.produk.update', ':id:') }}".replace(":id:", data)}" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="d-flex gap-2">
-              <div>
-                <input type="radio" onchange="submitForm(this)" class="btn-check" name="status"
-                  id="inactive" value="inactive"
-                  ${ row.status == 'inactive' ? 'checked' : '' } />
-                <label class="btn btn-sm btn-danger" for="inactive">Tidak Aktif</label>
-              </div>
-              <div>
-                <input type="radio" onchange="submitForm(this)" class="btn-check" name="status"
-                  id="active" value="active" ${ row.status == 'active' ? 'checked' : '' }
-                  />
-                <label class="btn btn-sm btn-success" for="active">Aktif</label>
-              </div>
-            </div>
-          </form>`;
-            return status;
+            const inactive = `<button class="btn btn-sm btn-danger">Tidak Aktif</button>`;
+            const active = `<button class="btn btn-sm btn-success">Aktif</button>`;
+            const editButton = `<div class="dropdown dropstart" id="datatables-dropdown">
+            <button type="button" class="badge bg-label-dark me-1 border-0 editStatus" style="background: none;" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="ti ti-dots-vertical"></i>
+            </button>
+            <ul class="dropdown-menu p-0">
+              <form action="${"{{ route('admin.produk.update', ':id:') }}".replace(":id:", data)}" method="POST">
+                @csrf
+                @method('PUT')
+                <input class="d-none" value="${row.status}" name="status"/>
+                <li><a class="dropdown-item btn btn-sm btn-danger text-white" role="button" onclick="submitForm(this, 'inactive')">Tidak Aktif</a></li>
+                <li><a class="dropdown-item btn btn-sm btn-success text-white" role="button" onclick="submitForm(this, 'active')">Aktif</a></li>
+              </form>
+            </ul>
+          </div>`;
+            return `<div class="d-flex gap-2 float-end">${(row.status == 'inactive' ? inactive : active) + editButton}</div>`;
           }
         },
+        // {
+        //   data: 'id',
+        //   orderable: false,
+        //   searchable: false,
+        //   render: (data, _, row) => {
+        //     const status = `<form action="${"{{ route('admin.produk.update', ':id:') }}".replace(":id:", data)}" method="POST">
+      //     @csrf
+      //     @method('PUT')
+      //     <div class="d-flex gap-2">
+      //       <div>
+      //         <input type="radio" onchange="submitForm(this)" class="btn-check" name="status"
+      //           id="inactive" value="inactive"
+      //           ${ row.status == 'inactive' ? 'checked' : '' } />
+      //         <label class="btn btn-sm btn-danger" for="inactive">Tidak Aktif</label>
+      //       </div>
+      //       <div>
+      //         <input type="radio" onchange="submitForm(this)" class="btn-check" name="status"
+      //           id="active" value="active" ${ row.status == 'active' ? 'checked' : '' }
+      //           />
+      //         <label class="btn btn-sm btn-success" for="active">Aktif</label>
+      //       </div>
+      //     </div>
+      //   </form>`;
+        //     return status;
+        //   }
+        // },
         {
           data: 'id',
           className: 'text-center',
@@ -461,6 +469,10 @@
 
       modal.modal("show");
     });
+    table.on("click", "button.editStatus", function() {
+      $(this).dropdown('toggle');
+    });
+
 
     let searchTimeout;
 

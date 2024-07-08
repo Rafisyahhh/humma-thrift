@@ -24,7 +24,7 @@ class YajraController extends Controller {
             $data = User::all();
             return DataTables::of($data)->editColumn('name', function (User $user) {
                 return "<div class='d-flex gap-3 align-items-center'>
-                    <img src='" . ($user->avatar ? asset("storage/$user->avatar") : $user->getGravatarLink()) . "' class='rounded-3 rounded-circle' height='48px' />
+                    <img src='" . ($user->avatar ? asset("storage/$user->avatar") : $user->getGravatarLink()) . "' class='rounded-3 rounded-circle' height='48px' loading='lazy'/>
                     <div class='d-flex flex-column gap-1'>
                         <strong>$user->name</strong>
                         <span class='text-muted'>$user->email</span>
@@ -57,13 +57,6 @@ class YajraController extends Controller {
             return DataTables::of($data)->addIndexColumn()->make(true);
         }
     }
-    // public function products(Request $request) {
-    //     if ($request->ajax()) {
-    //         $product = Product::with(['categories', 'userstore'])->get();
-    //         $productAuction = ProductAuction::with(['categories', 'userstore'])->get();
-    //         return DataTables::of($product)->addIndexColumn()->make(true);
-    //     }
-    // }
     public function products(Request $request) {
         if ($request->ajax()) {
             $products = Product::with(['categories', 'userstore', 'brand'])->get();

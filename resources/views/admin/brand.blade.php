@@ -234,7 +234,7 @@
           data: 'logo',
           orderable: false,
           searchable: false,
-          render: (data, type) => `<img src="{{ asset('storage/') }}/${data}" class="rounded-3" height="96px">`
+          render: (data, type) => `<img src="{{ asset('storage/') }}/${data}" class="rounded-3" height="96px" loading="lazy">`
         },
         {
           data: 'id',
