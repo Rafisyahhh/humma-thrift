@@ -28,11 +28,15 @@
   <section class="about card" id="basics" style="display: none;">
     <div class="container">
       <div class="card-header d-flex justify-content-between align-items-center">
-        <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
-          style="background:#7367f0;">
-          Tambahkan About
-        </a>
-        <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#editModal2"
+        @if ($aboutUs->isEmpty())
+          <a type="button" class="btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
+            style="background:#7367f0;">
+            Tambahkan About
+          </a>
+        @else
+          <div></div>
+        @endif
+        <a type="button" class="btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#editModal2"
           style="background:#7367f0;">
           Edit About
         </a>
@@ -69,11 +73,11 @@
       <table class="table yajra-datatable w-100">
         <thead class="table-light">
           <tr>
-            <th class="text-start">NO.</th>
-            <th class="text-start">JUDUL</th>
-            <th class="text-start">GAMBAR</th>
-            <th class="text-start">DESKRIPSI</th>
-            <th class="text-center">AKSI</th>
+            <th>NO.</th>
+            <th>JUDUL</th>
+            <th>GAMBAR</th>
+            <th>DESKRIPSI</th>
+            <th>AKSI</th>
           </tr>
         </thead>
         <tbody class="table-border-bottom-0"></tbody>
@@ -128,8 +132,7 @@
 
             <div class="pt-2 d-flex gap-3 justify-content-end">
               <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-              <button type="submit" class="btn btn"
-                style="background: #7367f0">Tambahkan</button>
+              <button type="submit" class="btn btn" style="background: #7367f0">Tambahkan</button>
             </div>
           </form>
         </div>
@@ -184,8 +187,7 @@
             </div>
             <div class="pt-2 d-flex gap-3 justify-content-end">
               <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-              <button type="submit" class="btn btn"
-                style="background:#7367f0;">Simpan</button>
+              <button type="submit" class="btn btn" style="background:#7367f0;">Simpan</button>
             </div>
           </form>
         </div>
@@ -242,8 +244,7 @@
               </div>
               <div class="pt-2 d-flex gap-3 justify-content-end">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn"
-                  style="background: #7367f0; color:#fff;">Simpan</button>
+                <button type="submit" class="btn btn" style="background: #7367f0; color:#fff;">Simpan</button>
               </div>
             </form>
           </div>
@@ -296,81 +297,80 @@
 
 @push('js')
   <script type="text/javascript">
-    const {
-      table
-    } = $('.yajra-datatable').AjaxDataTable({
-      onCreate: {
-        modal: $('#tambahModal'),
-        text: 'Tambahkan Data',
-        className: 'btn me-4 mt-4',
-        onSuccess: () => {
-          $('.createButton').remove();
-        }
-      },
-      onEdit: {
-        modal: $('#editModal'),
-        onClick: (form, data) => {
-          form.find('img#image_placeholder').attr('src', `{{ asset('storage/') }}/${data.image}`)
-        }
-      },
-      options: {
-        responsive: true,
-        layout: {
-          topStart: $(`<div class="card-header d-flex justify-content-between align-items-center">
+    $(document).ready(function() {
+      const {
+        table
+      } = $('.yajra-datatable').AjaxDataTable({
+        onCreate: {
+          modal: $('#tambahModal'),
+          text: 'Tambahkan Data',
+          className: 'btn me-4 mt-4',
+          onSuccess: () => {
+            $('.createButton').remove();
+          }
+        },
+        onEdit: {
+          modal: $('#editModal'),
+          onClick: (form, data) => {
+            form.find('img#image_placeholder').attr('src', `{{ asset('storage/') }}/${data.image}`)
+          }
+        },
+        options: {
+          layout: {
+            topStart: $(`<div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="ms-3 mb-0">Data Tentang Kami</h5>
           </div>`),
-          @if ($aboutUs->isEmpty())
-            topEnd: {
-              buttons: ["create"]
-            },
-          @else
-            topEnd: null,
-          @endif
-          bottomStart: null,
-          bottomEnd: null
-        }
-      },
-      ajax: "{{ route('yajra.abouts') }}",
-      columns: [{
-          data: 'DT_RowIndex',
-          orderable: false,
-          searchable: false,
+            @if ($aboutUs->isEmpty())
+              topEnd: {
+                buttons: ["create"]
+              },
+            @else
+              topEnd: null,
+            @endif
+            bottomStart: null,
+            bottomEnd: null
+          }
         },
-        {
-          data: 'title',
-        },
-        {
-          data: 'image',
-          orderable: false,
-          searchable: false,
-          render: (data, type) => `<img src="{{ asset('storage/') }}/${data}" class="rounded-3" height="96px">`
-        },
-        {
-          data: 'description',
-          className: 'text-wrap description',
-        },
-        {
-          data: 'id',
-          className: 'text-center',
-          orderable: false,
-          searchable: false,
-          render: (data, type) => {
-            const editButton = `<button type="button" class="badge bg-label-warning me-1 border-0 edit" style="background: none">
+        ajax: "{{ route('yajra.abouts') }}",
+        columns: [{
+            data: 'DT_RowIndex',
+            orderable: false,
+            searchable: false,
+          },
+          {
+            data: 'title',
+          },
+          {
+            data: 'image',
+            orderable: false,
+            searchable: false,
+            render: (data, type) =>
+              `<img src="{{ asset('storage/') }}/${data}" class="rounded-3" height="96px">`
+          },
+          {
+            data: 'description',
+            className: 'text-wrap description',
+          },
+          {
+            data: 'id',
+            className: 'text-center',
+            orderable: false,
+            searchable: false,
+            render: (data, type) => {
+              const editButton = `<button type="button" class="badge bg-label-warning me-1 border-0 edit" style="background: none">
               <i class="ti ti-pencil"></i>
             </button>`;
-            return editButton;
+              return editButton;
+            }
           }
-        }
-      ]
-    });
+        ]
+      });
 
-    $("#search").submit(function(e) {
-      e.preventDefault();
-      table.search($(this).find("input[name='search']").val()).draw();
-    });
+      $("#search").submit(function(e) {
+        e.preventDefault();
+        table.search($(this).find("input[name='search']").val()).draw();
+      });
 
-
-    $(document).ready(function() {
       $(document).keydown(function(event) {
         if (event.key === 'Home') {
           $("#basics").show();

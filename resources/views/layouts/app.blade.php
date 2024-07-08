@@ -222,11 +222,6 @@
           'X-CSRF-TOKEN': '{{ csrf_token() }}'
         }
       });
-      $("nav .dropdown").each(function(index, el) {
-        $(el).on("click", function() {
-          $(el).find(".dropdown-toggle").dropdown('toggle');
-        });
-      });
     </script>
     @yield('js')
     @stack('js')

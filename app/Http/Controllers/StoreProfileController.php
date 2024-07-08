@@ -61,7 +61,12 @@ class StoreProfileController extends Controller
     {
         $store = UserStore::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        
-        return view('user.store', compact('store','countFavorite'));
+        $countcart = cart::where('user_id',auth()->id())->count();
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+
+        return view('user.store', compact('store','countFavorite', 'countcart', 'carts'));
     }
 }
