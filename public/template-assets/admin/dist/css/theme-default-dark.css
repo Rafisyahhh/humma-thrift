@@ -626,12 +626,12 @@ button.list-group-item-primary.active {
   color: #fff;
 }
 .menu.bg-primary.menu-vertical .menu-item.active > .menu-link:not(.menu-toggle) {
-  background: linear-gradient(72.47deg, #776bf0 22.16%, rgba(119, 107, 240, 0.7) 76.47%);
+  background: #7367f0;
   box-shadow: 0px 2px 6px 0px rgba(119, 107, 240, 0.48);
   color: #fff !important;
 }
 .menu.bg-primary.menu-horizontal .menu-inner > .menu-item.active > .menu-link.menu-toggle {
-  background: linear-gradient(72.47deg, #776bf0 22.16%, rgba(119, 107, 240, 0.7) 76.47%);
+  background: #7367f0;
   color: #fff !important;
   box-shadow: 0px 2px 6px 0px rgba(119, 107, 240, 0.48);
 }
@@ -1183,7 +1183,7 @@ li.ui-timepicker-selected,
 }
 
 .app-chat .sidebar-body .chat-contact-list li.active {
-  background: linear-gradient(72.47deg, #7367f0 22.16%, rgba(115, 103, 240, 0.7) 76.47%);
+  background: #7367f0;
 }
 .app-chat .app-chat-history .chat-history .chat-message.chat-message-right .chat-message-text {
   background-color: #7367f0 !important;
@@ -1327,12 +1327,12 @@ li.ui-timepicker-selected,
   color: #cfd3ec;
 }
 .bg-menu-theme.menu-vertical .menu-item.active > .menu-link:not(.menu-toggle) {
-  background: linear-gradient(72.47deg, #7367f0 22.16%, rgba(115, 103, 240, 0.7) 76.47%);
+  background: #7367f0;
   box-shadow: 0px 2px 6px 0px rgba(115, 103, 240, 0.48);
   color: #fff !important;
 }
 .bg-menu-theme.menu-horizontal .menu-inner > .menu-item.active > .menu-link.menu-toggle {
-  background: linear-gradient(72.47deg, #7367f0 22.16%, rgba(115, 103, 240, 0.7) 76.47%);
+  background: #7367f0;
   color: #fff !important;
   box-shadow: 0px 2px 6px 0px rgba(115, 103, 240, 0.48);
 }

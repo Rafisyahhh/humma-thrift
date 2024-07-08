@@ -17,7 +17,7 @@
     }
 
     .btn {
-      background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%);
+      background: #7367f0;
       color: #fff;
     }
   </style>
@@ -29,11 +29,11 @@
     <div class="container">
       <div class="card-header d-flex justify-content-between align-items-center">
         <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
-          style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">
+          style="background:#7367f0;">
           Tambahkan About
         </a>
         <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#editModal2"
-          style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">
+          style="background:#7367f0;">
           Edit About
         </a>
       </div>
@@ -129,7 +129,7 @@
             <div class="pt-2 d-flex gap-3 justify-content-end">
               <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
               <button type="submit" class="btn btn"
-                style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color: #fff;">Tambahkan</button>
+                style="background: #7367f0">Tambahkan</button>
             </div>
           </form>
         </div>
@@ -185,7 +185,7 @@
             <div class="pt-2 d-flex gap-3 justify-content-end">
               <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
               <button type="submit" class="btn btn"
-                style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">Simpan</button>
+                style="background:#7367f0;">Simpan</button>
             </div>
           </form>
         </div>
@@ -243,7 +243,7 @@
               <div class="pt-2 d-flex gap-3 justify-content-end">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
                 <button type="submit" class="btn btn"
-                  style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">Simpan</button>
+                  style="background: #7367f0; color:#fff;">Simpan</button>
               </div>
             </form>
           </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\auctions;
+use App\Models\Favorite;
 use App\Models\cart;
 use App\Models\UserStore;
 use App\Models\Product;
@@ -22,14 +23,15 @@ class StoreProfileController extends Controller
             ->where('store_id', $store->id)
             ->get();
         $isProductAuction = ProductAuction::where('store_id', $store->id)->get();
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+
         $carts = cart::where('user_id', auth()->id())
         ->whereNotNull('product_id')
         ->orderBy('created_at')
         ->get();
         $countcart = cart::where('user_id',auth()->id())->count();
 
-
-        return view('store.index', compact('store', 'isProduct', 'isProductAuction','carts','countcart'));
+        return view('store.index', compact('store', 'isProduct', 'isProductAuction','carts','countcart', 'countFavorite'));
     }
 
     /**
@@ -49,14 +51,17 @@ class StoreProfileController extends Controller
         ->orderBy('created_at')
         ->get();
         $countcart = cart::where('user_id',auth()->id())->count();
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $user = Auth::user();
-        // $auctions = auctions::where('user_id', $user->id)->first();
-        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction','user','carts','countcart'));
+
+        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction','user','carts','countcart', 'countFavorite'));
     }
 
     public function showStore()
     {
         $store = UserStore::all();
-        return view('user.store', compact('store'));
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+        
+        return view('user.store', compact('store','countFavorite'));
     }
 }

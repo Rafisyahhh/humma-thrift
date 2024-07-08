@@ -5,7 +5,7 @@
 @push('style')
   <style>
     .btn {
-      background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%);
+      background: #7367f0;
       color: #fff;
     }
   </style>
@@ -187,7 +187,7 @@
               <input type="search" name="search" class="form-control" placeholder="Cari User&hellip;"
                 value="{{ old('search', request('search')) }}" />
               <button type="submit" class="btn"
-                style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">Cari</button>
+                style="background: #7367f0; color:#fff;">Cari</button>
             </div>
           </form>`),
           bottomStart: {

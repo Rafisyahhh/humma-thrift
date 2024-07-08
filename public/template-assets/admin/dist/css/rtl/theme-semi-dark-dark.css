@@ -380,7 +380,7 @@ button.list-group-item-primary.active {
   background: transparent;
 }
 .btn-outline-primary.waves-effect .waves-ripple {
-  background: radial-gradient(rgba(115, 103, 240, 0.2) 0, rgba(115, 103, 240, 0.3) 40%, rgba(115, 103, 240, 0.4) 50%, rgba(115, 103, 240, 0.5) 60%, rgba(255, 255, 255, 0) 70%);
+  background: #7367f0;
 }
 .btn-outline-primary:hover {
   color: #7367f0 !important;

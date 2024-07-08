@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreCheckoutRequest;
 use App\Http\Requests\UpdateCheckoutRequest;
+use App\Models\Favorite;
 
 class CheckoutController extends Controller
 {
@@ -28,6 +29,8 @@ class CheckoutController extends Controller
         $product_auction = Auctions::where('product_auction_id',$request->productauction_id)
         ->where('status', 1)->first();
         return view('user.checkout', compact('users','addresses','product','channels','product_auction'));
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+        return view('user.checkout', compact('users','addresses','product','channels', 'countFavorite'));
     }
 
     /**
