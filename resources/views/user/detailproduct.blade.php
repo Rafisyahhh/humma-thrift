@@ -234,6 +234,9 @@
                         <div class="col-md-6">
                             <div class="product-info-content" data-aos="fade-left">
                                 <h5 style="z-index:1;position: relative;">{{ $isProduct->title }}</h5>
+                                {{-- <a href="{{ route('product.detail', $isProduct->id) }}" style="z-index: 1; position: relative;">
+                                    <h5>{{ $isProduct->title }}</h5>
+                                </a> --}}
                                 <div class="price">
                                     <span class="new-price fs-1"
                                         style="z-index:1">Rp.{{ number_format($isProduct->price, null, null, '.') }}</span>
@@ -268,10 +271,6 @@
                                         </form>
                                     </div>
                                     <div class="col" style="--bs-gutter-y: 0">
-                                        {{-- <a href="#" class="shop-btn d-flex gap-3 align-items-center justify-content-center float-end">
-                                            <i class="fas fa-arrow-right"></i>
-                                            Beli Sekarang
-                                        </a> --}}
                                         <form action="" method="POST">
                                             @csrf
                                             <button type="submit" class="shop-btn" style="display: flex; align-items: center; gap: 10px; z-index:1">
