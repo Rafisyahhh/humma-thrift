@@ -104,8 +104,8 @@
             <th class="text-start">TOKO</th>
             <th class="text-start">KATEGORI</th>
             <th class="text-start">HARGA</th>
-            <th class="text-start">STATUS</th>
-            <th class="text-start">DETAIL</th>
+            <th class="text-center">STATUS</th>
+            <th class="text-center">DETAIL</th>
           </tr>
         </thead>
         <tbody class="table-border-bottom-0"></tbody>
@@ -243,7 +243,8 @@
                       </tr>
                       <tr>
                         <th>Deskripsi</th>
-                        <td colspan="2"><span class="inner-text" data-row="description"></span></td>
+                        <td class="d-inline-block text-break pe-5" style="width: 20rem;"><span class="inner-text"
+                            data-row="description"></span></td>
                       </tr>
                       <tr>
                         <th>Status</th>
