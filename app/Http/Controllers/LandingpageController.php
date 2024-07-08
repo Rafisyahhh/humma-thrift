@@ -13,25 +13,24 @@ use App\Models\UserStore;
 use App\Models\ProductCategory;
 use App\Models\ProductCategoryPivot;
 use Auth;
+use Illuminate\Http\Request;
 
-class LandingpageController extends Controller
-{
-    public function index()
-    {
-        $event =  Event::all();
+class LandingpageController extends Controller {
+    public function index() {
+        $event = Event::all();
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $product = Product::all();
         $favorites = Favorite::where('user_id', auth()->id())
-        ->whereNotNull('product_id')
-        ->orderBy('created_at')
-        ->get();
+            ->whereNotNull('product_id')
+            ->orderBy('created_at')
+            ->get();
 
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
-        ->whereNotNull('product_id')
-        ->orderBy('created_at')
-        ->get();
+            ->whereNotNull('product_id')
+            ->orderBy('created_at')
+            ->get();
         $countcart = cart::where('user_id', auth()->id())->count();
 
         $product_auction = ProductAuction::all();
@@ -50,17 +49,16 @@ class LandingpageController extends Controller
         ));
     }
 
-    public function brand()
-    {
+    public function brand() {
         $brands = Brand::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
-        ->whereNotNull('product_id')
-        ->orderBy('created_at')
-        ->get();
+            ->whereNotNull('product_id')
+            ->orderBy('created_at')
+            ->get();
         $countcart = cart::where('user_id', auth()->id())->count();
 
-        return view('landing.brand', compact('brands', 'countFavorite' , 'carts' , 'countcart'));
+        return view('landing.brand', compact('brands', 'countFavorite', 'carts', 'countcart'));
     }
 
     // public function product(){
@@ -72,52 +70,50 @@ class LandingpageController extends Controller
     // }
 
     // Tambahkan metode auction
-    public function productAuction()
-    {
+    public function productAuction() {
         $product_auction = ProductAuction::paginate(24);
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $carts = cart::where('user_id', auth()->id())
-        ->whereNotNull('product_id')
-        ->orderBy('created_at')
-        ->get();
+            ->whereNotNull('product_id')
+            ->orderBy('created_at')
+            ->get();
         $countcart = cart::where('user_id', auth()->id())->count();
         $user = Auth::user();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         // $auctions = auctions::where('user_id', $user->id)->first();
         // $notifications = auth()->user()->notifications;
 
-        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories','user','countcart','carts', 'countFavorite'));
+        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories', 'user', 'countcart', 'carts', 'countFavorite'));
     }
 
     // Tambahkan metode regular
-    public function productRegular()
-    {
+    public function productRegular() {
         $products = Product::paginate(24);
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
-        ->whereNotNull('product_id')
-        ->orderBy('created_at')
-        ->get();
-        $countcart = cart::where('user_id',auth()->id())->count();
+            ->whereNotNull('product_id')
+            ->orderBy('created_at')
+            ->get();
+        $countcart = cart::where('user_id', auth()->id())->count();
 
-        return view('landing.produk-regular', compact('products', 'brands', 'categories','countcart','carts', 'countFavorite'));
+        return view('landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite'));
     }
 
-    public function store(){
+    public function store() {
         $store = UserStore::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
-        ->whereNotNull('product_id')
-        ->orderBy('created_at')
-        ->get();
-        $countcart = cart::where('user_id',auth()->id())->count();
-        return view('landing.toko', compact('store','carts','countcart', 'countFavorite'));
+            ->whereNotNull('product_id')
+            ->orderBy('created_at')
+            ->get();
+        $countcart = cart::where('user_id', auth()->id())->count();
+        return view('landing.toko', compact('store', 'carts', 'countcart', 'countFavorite'));
     }
 
-    public function wishlist(){
+    public function wishlist() {
         $categories = ProductCategory::all();
         $brands = Brand::all();
         $product = Product::all();
@@ -127,24 +123,40 @@ class LandingpageController extends Controller
         $product_favorite = Favorite::whereNotNull('product_id')->where('user_id', auth()->id())->get();
 
         $carts = cart::where('user_id', auth()->id())
-        ->whereNotNull('product_id')
-        ->orderBy('created_at')
-        ->get();
-        $countcart = cart::where('user_id',auth()->id())->count();
+            ->whereNotNull('product_id')
+            ->orderBy('created_at')
+            ->get();
+        $countcart = cart::where('user_id', auth()->id())->count();
         // dd($product_auction);
-        return view('user.wishlist', compact('categories','brands','product','favorite','product_auction', 'product_favorite','carts','countcart', 'countFavorite'));
+        return view('user.wishlist', compact('categories', 'brands', 'product', 'favorite', 'product_auction', 'product_favorite', 'carts', 'countcart', 'countFavorite'));
     }
 
-    public function cart(){
+    public function cart() {
         $cart = cart::all();
         $product_category_pivots = ProductCategoryPivot::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
-        ->whereNotNull('product_id')
-        ->orderBy('created_at')
-        ->get();
-        $countcart = cart::where('user_id',auth()->id())->count();
+            ->whereNotNull('product_id')
+            ->orderBy('created_at')
+            ->get();
+        $countcart = cart::where('user_id', auth()->id())->count();
 
-        return view('user.keranjang', compact('cart','product_category_pivots','carts','countcart', 'countFavorite'));
+        return view('user.keranjang', compact('cart', 'product_category_pivots', 'carts', 'countcart', 'countFavorite'));
+    }
+
+    public function searchProduct(Request $request) {
+        $brands = Brand::all();
+        $categories = ProductCategory::all();
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+        $carts = cart::where('user_id', auth()->id())
+            ->whereNotNull('product_id')
+            ->orderBy('created_at')
+            ->get();
+        $countcart = cart::where('user_id', auth()->id())->count();
+
+        $search = $request->search;
+        $products = Product::where('title', 'like', "%$search%")->paginate(24);
+
+        return view('landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search'));
     }
 }
