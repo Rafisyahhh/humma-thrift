@@ -113,6 +113,7 @@ Route::prefix('dev')->group(function () {
 Route::prefix('product')->group(function () {
     Route::get('auction', [LandingpageController::class, 'productAuction']);
     Route::get('regular', [LandingpageController::class, 'productRegular']);
+    Route::get('regular/search', [LandingpageController::class, 'searchProduct'])->name('searchProduct');
 });
 Route::get('brand', [LandingpageController::class, 'brand']);
 Route::get('stores', [StoreProfileController::class, 'showStore'])->name('store');
