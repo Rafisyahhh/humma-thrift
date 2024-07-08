@@ -52,22 +52,23 @@ class CartController extends Controller {
 
     //     return redirect()->back()->with('success', 'Keranjang created successfully.');
     // }
-    public function storecart(Product $Product) {
-        $dataproduct['product_id'] = $Product->id;
-        $dataproduct['user_id'] = auth()->id();
+    public function storecart(Product $Product)
+{
+    $dataproduct['product_id'] = $Product->id;
+    $dataproduct['user_id'] = auth()->id();
 
-        $keranjang = Cart::where('product_id', $Product->id)
-            ->where('user_id', $dataproduct['user_id'])
-            ->first();
+    $keranjang = Cart::where('product_id', $Product->id)
+                    ->where('user_id', $dataproduct['user_id'])
+                    ->first();
 
-        if ($keranjang) {
-            return redirect()->back()->with('error', "Produknya udah ada di keranjang nih...");
-        }
-
-        Cart::create($dataproduct);
-
-        return redirect()->back()->with('success', 'Keranjang berhasil dibuat.');
+    if ($keranjang) {
+        return redirect()->back()->with('error', "Produknya udah ada di keranjang nih...");
     }
+
+    Cart::create($dataproduct);
+
+    return redirect()->back()->with('success', 'Keranjang berhasil dibuat.');
+}
 
     public function cart($id) {
         $keranjang = cart::find($id);

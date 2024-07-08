@@ -82,7 +82,7 @@ class UserStoreController extends Controller
 
         if ($request->hasFile('store_cover')) {
             // Hapus avatar lama jika ada
-            if (Storage::disk('public')->exists($id->store_cover)) {
+            if ($id->store_cover !== null && Storage::disk('public')->exists($id->store_cover)) {
                 Storage::disk('public')->delete($id->store_cover);
             }
 

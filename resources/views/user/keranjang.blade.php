@@ -62,12 +62,12 @@
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
                           style="border-color: #215791;">
                       </div>
-                      <div class="wrapper-img" style="margin-right: 1rem;">
+                      <div class="wrapper-img" style="margin-right: 1rem;" data-route="{{ route('store.product.detail', ['store' => $item->product->userStore->username, 'product' => $item->product->slug]) }}">
                         <img src="{{ asset('storage/' . $item->product->thumbnail) }}" alt="img">
                       </div>
                       <div class="wrapper-content"
                         style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1;">
-                        <h5 class="heading" style="font-size: 18px; ">{{ $item->product->title }}
+                        <h5 class="heading" style="font-size: 18px; " data-route="{{ route('store.product.detail', ['store' => $item->product->userStore->username, 'product' => $item->product->slug]) }}">{{ $item->product->title }}
                         </h5>
                         <div style="display: flex; align-items: center; margin-left: 55px; ">
                           <p class="inner-text">
@@ -180,3 +180,15 @@
     </div>
   </div>
 @endsection
+
+@push('script')
+<script>
+    $("[data-route]").click(function({
+            target: {
+                tagName
+            }
+        }) {
+            if (!["A", "I"].includes(tagName)) window.location.href = $(this).data("route");
+        });
+</script>
+@endpush
