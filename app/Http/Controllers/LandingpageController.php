@@ -33,6 +33,7 @@ class LandingpageController extends Controller
         ->orderBy('created_at')
         ->get();
         $countcart = cart::where('user_id', auth()->id())->count();
+
         $product_auction = ProductAuction::all();
 
         return view('landing.home', compact(
@@ -53,8 +54,13 @@ class LandingpageController extends Controller
     {
         $brands = Brand::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+        $countcart = cart::where('user_id', auth()->id())->count();
 
-        return view('landing.brand', compact('brands', 'countFavorite'));
+        return view('landing.brand', compact('brands', 'countFavorite' , 'carts' , 'countcart'));
     }
 
     // public function product(){
