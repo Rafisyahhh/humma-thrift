@@ -1,3 +1,10 @@
+//fix dropdown error
+$("nav .dropdown").each(function (index, el) {
+  $(el).on("click", function () {
+    $(el).find(".dropdown-toggle").dropdown('toggle');
+  });
+});
+
 $.fn.AjaxDataTable = function (config) {
   const {
     options,
@@ -117,6 +124,7 @@ $.fn.AjaxDataTable = function (config) {
 
   handleFormSubmit(editModal, null, editSuccess, editOnError);
 
+  table.columns.adjust();
   this.table = table;
   return this;
 };
