@@ -124,6 +124,7 @@ Route::view('/regstrasi','afterregister');
 Route::post('/product/storesproduct/{product}', [FavoriteController::class, 'storesproduct'])->name('storesproduct');
 Route::post('/productAuction/storesproductAuction/{productAuction}', [FavoriteController::class, 'storesproductAuction'])->name('storesproductAuction');
 Route::post('/product/storecart/{product}',[CartController::class, 'storecart'])->name('storecart');
+Route::delete('/product/storecart/{cart}',[CartController::class, 'deletecart'])->name('deletecart');
 
 # Home Redirect
 Route::get('/home', RedirectUserController::class)->name('home');
