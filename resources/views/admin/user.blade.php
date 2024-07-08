@@ -182,14 +182,9 @@
               <a class="nav-link" type="button" id="order-seller"">Admin</a>
             </li>
           </ul>`),
-          topEnd: $(`<form action="#" method="get" id="search" class="me-4">
-            <div class="input-group mb-3">
-              <input type="search" name="search" class="form-control" placeholder="Cari User&hellip;"
-                value="{{ old('search', request('search')) }}" />
-              <button type="submit" class="btn"
-                style="background: #7367f0; color:#fff;">Cari</button>
-            </div>
-          </form>`),
+          topEnd: $(`<div class="input-group">
+              <input class="form-control me-4" placeholder="Cari User&hellip;" id="searchInput" />
+            </div>`),
           bottomStart: {
             info: {
               text: 'Menampilkan _START_ dari _END_ hasil'
@@ -241,11 +236,22 @@
         $("ul").find("li a").removeClass("active");
         $(this).addClass("active");
         table.search(searchValue).draw();
+        $('#searchInput').val("");
       });
     }
 
     setupOrderButton($("#order-all"), "");
     setupOrderButton($("#order-user"), "Pengguna");
     setupOrderButton($("#order-seller"), "Admin");
+    let searchTimeout;
+
+    $('#searchInput').on('input', function() {
+      clearTimeout(searchTimeout);
+
+      searchTimeout = setTimeout(function() {
+        const searchTerm = $('#searchInput').val().trim();
+        table.search(searchTerm).draw();
+      }, 750);
+    });
   </script>
 @endpush

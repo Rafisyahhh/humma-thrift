@@ -12,14 +12,14 @@
 @endpush
 
 @section('content')
-    <div>
-        @include('components.show-errors')
-    </div>
+  <div>
+    @include('components.show-errors')
+  </div>
 
-    <!-- Bootstrap Table with Header - Light -->
-    <div class="card">
-        <h5 class="card-header">Daftar Event</h5>
-        {{-- <div class="card-header d-flex justify-content-between align-items-center">
+  <!-- Bootstrap Table with Header - Light -->
+  <div class="card">
+    <h5 class="card-header">Daftar Event</h5>
+    {{-- <div class="card-header d-flex justify-content-between align-items-center">
 
             <a type="button" class="btn btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"
                 style="background: #7367f0; color:#fff;">
@@ -35,7 +35,7 @@
             </form>
         </div> --}}
 
-        <div class="table-responsive text-nowrap">
+    <div class="table-responsive text-nowrap">
       <table class="table yajra-datatable w-100">
         <thead class="table-light">
           <tr>
@@ -48,7 +48,7 @@
         </thead>
         <tbody class="table-border-bottom-0"></tbody>
       </table>
-          {{--  <table class="table">
+      {{--  <table class="table">
                 <thead class="table-light">
                     <tr>
                         <th>No.</th>
@@ -98,69 +98,67 @@
                     @endforeach
                 </tbody>
             </table> --}}
-            <div class="modal fade" tabindex="-1" id="tambahModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h6 class="m-0 font-weight-bold d-flex align-items-center gap-2"><i
-                                    class="fas fa-newspaper me-1"></i>Tambahkan Event</h6>
+      <div class="modal fade" tabindex="-1" id="tambahModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h6 class="m-0 font-weight-bold d-flex align-items-center gap-2"><i
+                  class="fas fa-newspaper me-1"></i>Tambahkan Event</h6>
 
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ route('admin.event.store') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-
-                                <div class="mb-3">
-                                    <label for="judul" class="form-label">Judul</label>
-                                    <input type="text" class="form-control @error('judul') is-invalid @enderror"
-                                        id="judul" name="judul" value="{{ old('judul') }}"
-                                        placeholder="Masukkan nama kategori" />
-                                    @error('judul')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="subjudul" class="form-label">Sub Judul</label>
-                                    <textarea type="text" class="form-control @error('subjudul') is-invalid @enderror" id="subjudul" name="subjudul"
-                                        placeholder="Masukkan sub judul">{{ old('subjudul') }}</textarea>
-                                    @error('subjudul')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="foto" class="form-label">Foto</label>
-                                    <input type="file" class="form-control @error('foto') is-invalid @enderror"
-                                        id="foto" name="foto">
-                                    @if (old('foto'))
-                                        <img id="preview" src="{{ asset('storage/' . old('foto')) }}" alt="Old gambar"
-                                            style="max-width: 100px; max-height: 100px;">
-                                    @endif
-                                    @error('logo')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-                                <div class="pt-2 d-flex gap-3 justify-content-end">
-                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-                                    <button type="submit" class="btn btn"
-                                        style="background: #7367f0; color: #fff;">Tambahkan</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
+              <form action="{{ route('admin.event.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
 
-          {{--  @foreach ($event as $key => $even)
+                <div class="mb-3">
+                  <label for="judul" class="form-label">Judul</label>
+                  <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul"
+                    name="judul" value="{{ old('judul') }}" placeholder="Masukkan nama kategori" />
+                  @error('judul')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+
+                <div class="mb-3">
+                  <label for="subjudul" class="form-label">Sub Judul</label>
+                  <textarea type="text" class="form-control @error('subjudul') is-invalid @enderror" id="subjudul" name="subjudul"
+                    placeholder="Masukkan sub judul">{{ old('subjudul') }}</textarea>
+                  @error('subjudul')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+
+                <div class="mb-3">
+                  <label for="foto" class="form-label">Foto</label>
+                  <input type="file" class="form-control @error('foto') is-invalid @enderror" id="foto"
+                    name="foto">
+                  @if (old('foto'))
+                    <img id="preview" src="{{ asset('storage/' . old('foto')) }}" alt="Old gambar"
+                      style="max-width: 100px; max-height: 100px;">
+                  @endif
+                  @error('logo')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+
+                <div class="pt-2 d-flex gap-3 justify-content-end">
+                  <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                  <button type="submit" class="btn btn" style="background: #7367f0; color: #fff;">Tambahkan</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {{--  @foreach ($event as $key => $even)
                 <div class="modal fade" tabindex="-1" id="editModal{{ $even->id }}">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -229,70 +227,64 @@
                 </div>
             @endforeach --}}
 
-        </div>
     </div>
-                <div class="modal fade" tabindex="-1" id="editModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit Kategori</h6>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{ route('admin.event.update', ':id:') }}" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
+  </div>
+  <div class="modal fade" tabindex="-1" id="editModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit Kategori</h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="{{ route('admin.event.update', ':id:') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
 
-                                    <div class="mb-3">
-                                        <label for="judul_update" class="form-label">Judul</label>
-                                        <input type="text"
-                                            class="form-control @error('judul_update') is-invalid @enderror"
-                                            id="judul_update" name="judul"
-                                            value="">
-                                        @error('judul_update')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+            <div class="mb-3">
+              <label for="judul_update" class="form-label">Judul</label>
+              <input type="text" class="form-control @error('judul_update') is-invalid @enderror" id="judul_update"
+                name="judul" value="">
+              @error('judul_update')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+            </div>
 
-                                    <div class="mb-3">
-                                        <label for="subjudul_update" class="form-label">Sub Judul</label>
-                                        <textarea type="text" class="form-control @error('subjudul_update') is-invalid @enderror" id="subjudul_update"
-                                            name="subjudul"></textarea>
-                                        @error('subjudul_update')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+            <div class="mb-3">
+              <label for="subjudul_update" class="form-label">Sub Judul</label>
+              <textarea type="text" class="form-control @error('subjudul_update') is-invalid @enderror" id="subjudul_update"
+                name="subjudul"></textarea>
+              @error('subjudul_update')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+            </div>
 
-                                    <div class="mb-3">
-                                        <label for="foto_update" class="form-label">Foto Cover</label>
-                                        <input type="file"
-                                            class="form-control @error('foto_update') is-invalid @enderror"
-                                            id="foto_update" name="foto_update" />
+            <div class="mb-3">
+              <label for="foto_update" class="form-label">Foto Cover</label>
+              <input type="file" class="form-control @error('foto_update') is-invalid @enderror" id="foto_update"
+                name="foto_update" />
 
-                                            <img src="#" class="w-100 mt-3 rounded-3" id="logo_image" alt="" />
-                                        @error('foto_update')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn"
-                                    style="background: #7367f0; color:#fff;">Simpan</button>
-                            </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-    <!-- Bootstrap Table with Header - Light -->
+              <img src="#" class="w-100 mt-3 rounded-3" id="logo_image" alt="" />
+              @error('foto_update')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn" style="background: #7367f0; color:#fff;">Simpan</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap Table with Header - Light -->
 @endsection
 
 @push('scripts')
@@ -303,7 +295,7 @@
   <script src="{{ asset('js/AjaxDataTable.js') }}"></script>
 @endpush
 
-@push("js")
+@push('js')
   <script type="text/javascript">
     const {
       table
@@ -332,14 +324,9 @@
           topStart: {
             buttons: ["create"]
           },
-          topEnd: $(`<form action="#" method="get" id="search" class="me-4">
-            <div class="input-group mb-3">
-              <input type="search" name="search" class="form-control" placeholder="Cari Event&hellip;"
-                value="{{ old('search', request('search')) }}" />
-              <button type="submit" class="btn"
-                style="background: #7367f0; color:#fff;">Cari</button>
-            </div>
-          </form>`),
+          topEnd: $(`<div class="input-group">
+            <input class="form-control me-4" placeholder="Cari Event&hellip;" id="searchInput" />
+          </div>`),
           bottomStart: {
             info: {
               text: 'Menampilkan _START_ dari _END_ hasil'
@@ -388,6 +375,16 @@
     $("#search").submit(function(e) {
       e.preventDefault();
       table.search($(this).find("input[name='search']").val()).draw();
+    });
+    let searchTimeout;
+
+    $('#searchInput').on('input', function() {
+      clearTimeout(searchTimeout);
+
+      searchTimeout = setTimeout(function() {
+        const searchTerm = $('#searchInput').val().trim();
+        table.search(searchTerm).draw();
+      }, 750);
     });
   </script>
 @endpush

@@ -69,8 +69,7 @@
 
                 <div class="pt-2 d-flex gap-3 justify-content-end">
                   <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-                  <button type="submit" class="btn btn"
-                    style="background: #7367f0;">Tambahkan</button>
+                  <button type="submit" class="btn btn" style="background: #7367f0;">Tambahkan</button>
                 </div>
               </form>
             </div>
@@ -163,8 +162,7 @@
                 </div>
                 <div class="pt-2 d-flex gap-3 justify-content-end">
                   <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-                  <button type="submit" class="btn btn"
-                    style="background: #7367f0;">Simpan</button>
+                  <button type="submit" class="btn btn" style="background: #7367f0;">Simpan</button>
                 </div>
               </form>
             </div>
@@ -183,7 +181,7 @@
   <script src="{{ asset('js/AjaxDataTable.js') }}"></script>
 @endpush
 
-@push("js")
+@push('js')
   <script type="text/javascript">
     const {
       table
@@ -213,14 +211,9 @@
           topStart: {
             buttons: ["create"]
           },
-          topEnd: $(`<form action="#" method="get" id="search" class="me-4">
-            <div class="input-group mb-3">
-              <input type="search" name="search" class="form-control" placeholder="Cari Brand&hellip;"
-                value="{{ old('search', request('search')) }}" />
-              <button type="submit" class="btn"
-                style="background: #7367f0);">Cari</button>
-            </div>
-          </form>`),
+          topEnd: $(`<div class="input-group">
+            <input class="form-control me-4" placeholder="Cari Brand&hellip;" id="searchInput" />
+          </div>`),
           bottomStart: {
             info: {
               text: 'Menampilkan _START_ dari _END_ hasil'
@@ -266,6 +259,16 @@
     $("#search").submit(function(e) {
       e.preventDefault();
       table.search($(this).find("input[name='search']").val()).draw();
+    });
+    let searchTimeout;
+
+    $('#searchInput').on('input', function() {
+      clearTimeout(searchTimeout);
+
+      searchTimeout = setTimeout(function() {
+        const searchTerm = $('#searchInput').val().trim();
+        table.search(searchTerm).draw();
+      }, 750);
     });
   </script>
 @endpush
