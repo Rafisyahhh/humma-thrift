@@ -6,6 +6,7 @@ use App\Models\Checkout;
 use App\Http\Controllers\Payment\TripayController;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Auctions;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,9 @@ class CheckoutController extends Controller
         $users = Auth::user();
         $addresses = UserAddress::where('user_id', $users->id)->get();
         $product = Product::where('id',$request->product_id)->first();
-        return view('user.checkout', compact('users','addresses','product','channels'));
+        $product_auction = Auctions::where('product_auction_id',$request->productauction_id)
+        ->where('status', 1)->first();
+        return view('user.checkout', compact('users','addresses','product','channels','product_auction'));
     }
 
     /**
