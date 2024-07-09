@@ -53,6 +53,8 @@ Route::prefix('/debug')->middleware(\App\Http\Middleware\DevelopmentMiddleware::
 # Public Routes
 Route::get('/', [LandingpageController::class, 'index']);
 
+
+
 # Seller Routes
 Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(function () {
     Route::get('/home', [UserStoreController::class,'index'])->name('home');
@@ -97,6 +99,8 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
         // Route::get('/product/{id}', [AuctionsController::class, 'create'])->name('product.create');
         // Route::post('/product/{id}/auction', [AuctionsController::class, 'store'])->name('product.auction.store');
         Route::get('notify', [AuctionsController::class, 'notify'])->name('notify');
+        Route::get('/test-notification', [AuctionsController::class, 'testNotification']);
+
     });
 
     Route::get('open-shop', [OpenShopController::class, 'index'])->name('register-seller');
