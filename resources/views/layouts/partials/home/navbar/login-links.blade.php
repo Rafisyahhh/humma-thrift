@@ -29,6 +29,8 @@
             </span>
         </a>
     </div>
+    {{-- @else --}}
+    {{-- @include('layouts.partials.home.navbar.notify-links') --}}
     @endif
 
     {{-- ICON PROFILE --}}
