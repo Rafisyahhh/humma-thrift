@@ -348,7 +348,7 @@
                                                 <i class="fas fa-shopping-cart"></i>
                                                 Masukkan Keranjang
                                             </span>
-                                        </a> --}}
+                                        </a> 
 
                                         @php
                                             $user = Auth::user();
