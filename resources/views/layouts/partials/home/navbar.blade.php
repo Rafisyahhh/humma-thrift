@@ -10,6 +10,7 @@
                 @includeWhen(!request()->routeIs(['register', 'login']), 'layouts.partials.home.navbar.other-links')
                 @includeWhen(auth()->check() && auth()->user()->getUserRoleInstance()->value !== 'admin' && !auth()->user()->store && !request()->routeIs(['register', 'login']), 'layouts.partials.home.navbar.cart-links')
                 @includeWhen(auth()->check() && auth()->user()->getUserRoleInstance()->value !== 'admin' && !auth()->user()->store && !request()->routeIs(['register', 'login']), 'layouts.partials.home.navbar.notify-links')
+                @includeWhen(auth()->check() && auth()->user()->store  && !request()->routeIs(['register', 'login']), 'layouts.partials.home.navbar.notifyseller-links')
                 @include('layouts.partials.home.navbar.login-links')
             </div>
         </div>

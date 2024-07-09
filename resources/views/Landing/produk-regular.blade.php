@@ -119,11 +119,14 @@
                     <div class="product-img">
                       <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover">
                       <div class="product-cart-items">
-                        <a href="/user/wishlist" class="favourite cart-item">
-                          <span>
-                            <i class="fas fa-heart"></i>
-                          </span>
-                        </a>
+                        <form action="{{ route('storesproduct', $item->id) }}" method="POST">
+                            @csrf
+                            <button class="favourite cart-item">
+                                <span>
+                                    <i class="fas fa-heart"></i>
+                                </span>
+                            </button>
+                        </form>
                         <a href="/user/checkout" class="favourite cart-item">
                           <span>
                             <i class="fas fa-shopping-cart"></i>
@@ -142,7 +145,7 @@
                           class="product-details">{{ $item->title }}
                         </a>
                         <div class="price">
-                          <span class="new-price">Rp.{{ number_format($item->price, 2, ',', '.') }}</span>
+                          <span class="new-price">Rp{{ number_format($item->price, 2, ',', '.') }}</span>
                         </div>
                       </div>
                     </div>
@@ -174,7 +177,7 @@
   <script>
     $(document).ready(function() {
       let products = [];
-      let brands = [];
+      //let brands = [];
       let checkedCategories = [];
       $('[data-brand][data-categories]').each(function() {
         products.push([$(this).data('brand'), $(this).data('categories')]);
@@ -193,7 +196,9 @@
           return this.value;
         }).get();
         $('[data-brand][data-categories]').each(function() {
-          console.log(products.find);
+          const brands = $(this).data('brand')
+          const categories = $(this).data('categories')
+          console.log(brands, categories);
         })
       });
       //   $('input:checkbox[name^="brands"]').click(function(e) {

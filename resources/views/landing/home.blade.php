@@ -424,7 +424,8 @@
                                             </a>
                                             <div class="price">
                                                 <span
-                                                    class="new-price">Rp{{ number_format($item->price, null, null, '.') }}</span>
+                                                    class="new-price">Rp{{ number_format($item->price, null, null, '.') }}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -507,8 +508,9 @@
                                             </a>
                                             <div class="price">
                                                 <span
-                                                    class="new-price">Rp.{{ number_format($item->bid_price_start, null, null, '.') }}
-                                                    - Rp.{{ number_format($item->bid_price_end, null, null, '.') }}</span>
+                                                    class="new-price">Rp{{ number_format($item->bid_price_start, null, null, '.') }}
+                                                    - Rp{{ number_format($item->bid_price_end, null, null, '.') }}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -588,7 +590,6 @@
                                         </form>
                                     @endif
                                     @endif
-
                                 </div>
                             </div>
                         @endforeach

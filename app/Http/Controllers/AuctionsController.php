@@ -9,6 +9,7 @@ use App\Models\Favorite;
 use App\Models\ProductAuction;
 use App\Models\ProductCategory;
 use App\Notifications\Lelang;
+use App\Notifications\SellerLelang;
 use Auth;
 
 class AuctionsController extends Controller
@@ -43,30 +44,53 @@ class AuctionsController extends Controller
         $user = Auth::user();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         return view('Landing.produk-auction', compact('auctions','user', 'countFavorite'));
-    }
+        }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreauctionsRequest $request)
-{
-    try {
-        $product = ProductAuction::findOrFail($request->product_id);
-        $user = Auth::user();
+    {
+        try {
+            $product = ProductAuction::findOrFail($request->product_id);
+            $user = Auth::user();
 
-        auctions::create([
-            'user_id' => $user->id,
-            'product_auction_id' => $product->id,
-            'auction_price' => $request->auction_price,
-            'status' => false,
-            'delivery_status' => 'selesaikan pesanan',
-        ]);
+            $auctions = auctions::create([
+                'user_id' => $user->id,
+                'product_auction_id' => $product->id,
+                'auction_price' => $request->auction_price,
+                'status' => false,
+                'delivery_status' => 'selesaikan pesanan',
+            ]);
 
-        return redirect()->back()->with('success', 'Lelang berhasil ditambahkan');
-    } catch (\Throwable $th) {
-        return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
+            // Log the notification details for debugging
+            \Log::info('Sending notification to user: ' . $product->user->id);
+
+            $product->user->notify(new SellerLelang($product));
+
+            return redirect()->back()->with('success', 'Lelang berhasil ditambahkan');
+        } catch (\Throwable $th) {
+            \Log::error('Error creating auction or sending notification: ' . $th->getMessage());
+            return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
+        }
     }
-}
+
+
+    public function testNotificationCreation()
+    {
+        $productAuction = ProductAuction::first(); // Assuming you have some ProductAuction data
+        $user = $productAuction->user;
+
+        // Notify the user
+        $user->notify(new SellerLelang($productAuction));
+
+        // Check the notifications table
+        $this->assertDatabaseHas('notifications', [
+            'notifiable_id' => $user->id,
+            'notifiable_type' => get_class($user),
+        ]);
+    }
+
 
     /**
      * Display the specified resource.

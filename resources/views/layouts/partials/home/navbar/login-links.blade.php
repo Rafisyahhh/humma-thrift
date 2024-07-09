@@ -49,7 +49,6 @@
             </span>
         </a>
     </div>
-
     @endif
 
     {{-- ICON PROFILE --}}

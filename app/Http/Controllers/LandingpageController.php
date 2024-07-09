@@ -99,7 +99,7 @@ class LandingpageController extends Controller {
             ->get();
         $countcart = cart::where('user_id', auth()->id())->count();
 
-        return view('landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite'));
+        return view('Landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite'));
     }
 
     public function store() {

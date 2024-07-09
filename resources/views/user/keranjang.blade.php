@@ -50,7 +50,7 @@
                         style="border-color: #215791; margin-right: 2rem;">
                       <i class="fa-solid fa-store"
                         style="margin-right: 1rem; color: #215791; font-size: 2rem; margin-left:2rem;"></i>
-                      <p style="font-weight: bold"">{{ $item->product->userStore->name }}</p>
+                      <p style="font-weight: bold">{{ $item->product->userStore->name }}</p>
                     </div>
                   </td>
                 </tr>
@@ -108,9 +108,9 @@
                 <td style="display: flex; justify-content: flex-end; align-items: center;">
                   <div class="wrapper-content me-5"
                     style="display: flex; justify-content: flex-end; align-items: center;">
-                    <p style="margin-right: 1rem;">Total (0) produk :</p>
+                    <p style="margin-right: 1rem;">Total ({{ $countcart }}) produk :</p>
                     <p>
-                    <h6 style="font-size: 18px; font-weight: bold;  color: red;">Rp 0 </h6>
+                    <h6 style="font-size: 18px; font-weight: bold;  color: red;">Rp{{ number_format($item->product->price, 0, ',', '.') }} </h6>
                     </p>
                     <button class="shop-btn openModal" style="margin-left: 1rem;">Checkout</button>
                   </div>

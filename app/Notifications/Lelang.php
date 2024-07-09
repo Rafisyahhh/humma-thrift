@@ -14,7 +14,6 @@ class Lelang extends Notification
     use Queueable;
 
     public auctions $auctions;
-    public string $storeLink;
 
 
     /**
@@ -23,7 +22,6 @@ class Lelang extends Notification
     public function __construct($auctions)
     {
         $this->auctions = $auctions;
-        $this->storeLink = url('/product/auction/' . $auctions->productAuction->id); // Initialize storeLink here
     }
 
     /**
@@ -45,7 +43,6 @@ class Lelang extends Notification
                 ->subject('Bid Lelang Anda Terpilih')
                 ->greeting("Halo {$this->auctions->user->email}, produk {$this->auctions->productAuction->title}.")
                 ->line('Checkout sekarang!!.')
-                ->action('Lihat Produk', $this->storeLink)
                 ->line('Thank you!');
     }
 
@@ -57,8 +54,7 @@ class Lelang extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'data' => "Anda Menang Lelang \"{$this->auctions->productAuction->title}\" Checkout sekarang!! .",
-            'action' => $this->storeLink,
+            'data' => "Anda Menang Lelang untuk produk \"{$this->auctions->productAuction->title}\" Checkout sekarang!! .",
             'image' => $this->auctions->productAuction->thumbnail,
             'title' => 'Anda Menang Lelang',
             'url' => route('store.product.detail', [
