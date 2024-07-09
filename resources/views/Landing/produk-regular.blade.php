@@ -15,7 +15,7 @@
                   <ul class="sidebar-list">
                     @foreach ($categories as $item)
                       <li>
-                        <input type="checkbox" id="{{ $item->id }}" name="category[]" />
+                        <input type="checkbox" id="{{ $item->id }}" name="category[]" value="{{ $item->title }}" />
                         <label for="{{ $item->id }}">{{ $item->title }}</label>
                       </li>
                     @endforeach
@@ -169,3 +169,41 @@
     </div>
   </section>
 @endsection
+
+@push('script')
+  <script>
+    $(document).ready(function() {
+      let products = [];
+      let brands = [];
+      let checkedCategories = [];
+      $('[data-brand][data-categories]').each(function() {
+        products.push([$(this).data('brand'), $(this).data('categories')]);
+      })
+      //   $('[data-brand]').each(function() {
+      //     brands.push($(this).data('brand'));
+      //     console.log(this);
+      //   })
+      //   $('[data-categories]').each(function() {
+      //     var categories = $(this).data('categories');
+      //   })
+
+      $('input:checkbox[name^="category"]').click(function(e) {
+        // console.log($('input:checkbox[name^="category"]').index(this));
+        checkedCategories = $('input:checkbox[name^="category"]:checked').map(function() {
+          return this.value;
+        }).get();
+        $('[data-brand][data-categories]').each(function() {
+          console.log(products.find);
+        })
+      });
+      //   $('input:checkbox[name^="brands"]').click(function(e) {
+      //     console.log($(this).index());
+      //     console.log(brand);
+      //     $('[data-brand]:checkbox:checked').each(function() {
+      //       var checkedBrand = $(this).data('brand');
+      //       console.log(checkedBrand);
+      //     })
+      //   });
+    });
+  </script>
+@endpush

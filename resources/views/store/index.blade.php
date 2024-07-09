@@ -224,7 +224,7 @@
                                 src="{{ asset($store->store_logo ? "storage/{$store->store_logo}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}" />
                         </div>
                         <span
-                            class="badge online-status bg-{{ Cache::has('user-is-online-' . auth()->id()) ? 'success' : 'danger' }}">&nbsp;</span>
+                            class="badge online-status bg-{{ Cache::has('user-is-online-' . $store->user_id) ? 'success' : 'danger' }}">&nbsp;</span>
                     </div>
                     <div class="profile-content">
                         <div class="profile-name-wrapper">
