@@ -95,6 +95,17 @@
             <div class="card-header border-bottom d-flex gap-3 align-items-center justify-content-between">
                 <h5 class="mb-0">Notifikasi</h5>
             </div>
+@php
+    $notifications = Auth::user()->notifications;
+
+@endphp
+
+            @forelse ($notifications as $notification)
+            {{-- <p class="new-price">{{ Str::limit($notification->data['data'], 200) }}</p> --}}
+sdfghjkjhgfdsdfghj
+            @empty
+            xx
+            @endforelse
             {{-- @forelse(auth()->user()->unreadNotifications as $notification)
 
         <a href="{{ $notification->data['url'] }}">
@@ -123,7 +134,6 @@
             @endforelse --}}
 
 
-            seller
         </div>
         <div class="cart-wrapper-section">
             <div class="wrapper-line"></div>
