@@ -1,3 +1,10 @@
+//fix dropdown error
+$("nav .dropdown").each(function (index, el) {
+  $(el).on("click", function () {
+    $(el).find(".dropdown-toggle").dropdown('toggle');
+  });
+});
+
 $.fn.AjaxDataTable = function (config) {
   const {
     options,
@@ -39,7 +46,6 @@ $.fn.AjaxDataTable = function (config) {
     columns,
     processing: true,
     serverSide: true,
-    scrollX: true,
     createdRow: (row) => $(row).hide().fadeIn(1000),
     ...options,
     drawCallback: () => {

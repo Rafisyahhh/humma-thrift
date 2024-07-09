@@ -123,9 +123,9 @@
       @foreach ($products as $item)
         <div class="col-lg-4 col-sm-6">
           <div class="product-wrapper" data-aos="fade-up">
-            <div class="product-img">
+            <div class="product-img" style="background-color:black">
               <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover"
-                @style(['opacity: 0.25;' => $item->status != 'active'])>
+                @style(['opacity: 0.4;' => $item->status != 'active'])>
               @if ($item->status != 'active')
                 <div class="ribbon-status danger">
                   {{ $item->status }}
@@ -176,9 +176,9 @@
       @foreach ($product_auctions as $item)
         <div class="col-lg-4 col-sm-6">
           <div class="product-wrapper" data-aos="fade-up">
-            <div class="product-img">
+            <div class="product-img" style="background-color:black">
               <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover"
-                @style(['opacity: 0.25;' => $item->status != 'active'])>
+                @style(['opacity: 0.4;' => $item->status != 'active'])>
               @if ($item->status != 'active')
                 <div class="ribbon-status danger">
                   {{ $item->status }}

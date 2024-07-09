@@ -424,7 +424,8 @@
                                             </a>
                                             <div class="price">
                                                 <span
-                                                    class="new-price">Rp{{ number_format($item->price, null, null, '.') }}</span>
+                                                    class="new-price">Rp{{ number_format($item->price, null, null, '.') }}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -459,7 +460,7 @@
                                         <div class="product-cart-items">
                                             <div class="product-cart-items">
                                                 @auth
-                                                    <form action="{{ route('storesproduct', $item->id) }}" method="POST">
+                                                    <form action="{{ route('storesproductAuction', $item->id) }}" method="POST">
                                                         @csrf
                                                         <button class="favourite cart-item">
                                                             <span>
@@ -507,8 +508,9 @@
                                             </a>
                                             <div class="price">
                                                 <span
-                                                    class="new-price">Rp.{{ number_format($item->bid_price_start, null, null, '.') }}
-                                                    - Rp.{{ number_format($item->bid_price_end, null, null, '.') }}</span>
+                                                    class="new-price">Rp{{ number_format($item->bid_price_start, null, null, '.') }}
+                                                    - Rp{{ number_format($item->bid_price_end, null, null, '.') }}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -588,7 +590,6 @@
                                         </form>
                                     @endif
                                     @endif
-
                                 </div>
                             </div>
                         @endforeach

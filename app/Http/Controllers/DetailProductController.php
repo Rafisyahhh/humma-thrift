@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use App\Models\Favorite;
 use App\Models\Product;
 use App\Models\ProductAuction;
 use App\Models\ProductCategory;
@@ -17,11 +18,14 @@ class DetailProductController extends Controller
         $categories = ProductCategory::all();
         $product = Product::all();
         $product_auction = ProductAuction::all();
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+
         return view('user.shop', compact(
             'brands',
             'categories',
             'product',
-            'product_auction'
+            'product_auction',
+            'countFavorite'
         ));
     }
 }

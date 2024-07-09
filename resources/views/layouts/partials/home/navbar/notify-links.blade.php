@@ -25,7 +25,7 @@
     width: 50px;
     height: 50px;
     object-fit: cover;
-    border-radius: 50%;
+    /* border-radius: 50%; */
 }
 
 .wrapper-content {
@@ -94,13 +94,14 @@
                 <h5 class="mb-0">Notifikasi</h5>
             </div>
             @forelse(auth()->user()->unreadNotifications as $notification)
+            {{-- @dd($notification->data) --}}
             {{-- @php
                 $store = $notification->product_auction_id; // Sesuaikan dengan nama atribut yang benar
                 $product = $notification->slug; // Sesuaikan dengan nama atribut yang benar
                 $routeParameters = compact('store', 'product');
                 $route = route('store.product.detail', $routeParameters);
             @endphp --}}
-        <a href="{{ $notification->data['url'] }}">
+        <a href="{{ $notification->data && $notification->data['action'] ? $notification->data['action'] : '' }}">
 
             <div class="wrapper" style="padding:2px;">
                 <div class="wrapper-item">

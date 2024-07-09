@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\auctions;
 use App\Http\Requests\StoreauctionsRequest;
 use App\Http\Requests\UpdateauctionsRequest;
+use App\Models\Favorite;
 use App\Models\ProductAuction;
 use App\Models\ProductCategory;
 use App\Notifications\Lelang;
@@ -21,17 +22,16 @@ class AuctionsController extends Controller
         $auctions = auctions::all();
         $user = Auth::user();
         $notifications = auth()->user()->notifications;
-
-        return view('Landing.produk-auction', compact('auctions','user','notifications'));
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+        return view('Landing.produk-auction', compact('auctions','user','notifications', 'countFavorite'));
     }
     public function notify()
     {
         $auctions = auctions::all();
         $user = Auth::user();
         $notifications = auth()->user()->notifications;
-
-
-        return view('user.notification', compact('auctions','user','notifications'));
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+        return view('user.notification', compact('auctions','user','notifications', 'countFavorite'));
     }
 
     /**
@@ -42,9 +42,9 @@ class AuctionsController extends Controller
         // $product = ProductAuction::findOrFail($id);
         $auctions = auctions::all();
         $user = Auth::user();
-
-        return view('Landing.produk-auction', compact('auctions','user'));
-    }
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+        return view('Landing.produk-auction', compact('auctions','user', 'countFavorite'));
+        }
 
     /**
      * Store a newly created resource in storage.

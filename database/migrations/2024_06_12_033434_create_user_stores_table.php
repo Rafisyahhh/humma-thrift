@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\UserStore;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,6 +24,9 @@ return new class extends Migration {
             $table->boolean('active')->nullable()->default(0);
             $table->text('address')->nullable();
             $table->text('description')->nullable();
+            $table->time('open')->nullable();
+            $table->time('close')->nullable();
+            $table->enum('status', UserStore::getStoreStatusEnums()->toArray())->nullable();
         });
     }
 

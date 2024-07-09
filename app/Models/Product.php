@@ -14,11 +14,15 @@ class Product extends Model {
     protected static function boot() {
         parent::boot();
 
-        static::creating(function ($question) {
-            $question->slug = Str::slug($question->title);
+        static::creating(function ($models) {
+            if(!$models->slug) {
+                $models->slug = Str::slug($models->title);
+            }
         });
-        static::updating(function ($question) {
-            $question->slug = Str::slug($question->title);
+        static::updating(function ($models) {
+            if(!$models->slug) {
+                $models->slug = Str::slug($models->title);
+            }
         });
     }
 

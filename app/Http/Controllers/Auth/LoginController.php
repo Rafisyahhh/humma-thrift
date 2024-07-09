@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class LoginController extends Controller
 {
@@ -72,5 +74,18 @@ class LoginController extends Controller
     protected function credentials(Request $request)
     {
         return collect($request->only($this->username(), 'password'))->put('banned', 0)->toArray();
+    }
+
+    /**
+     * The user has logged out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return mixed
+     */
+    protected function loggedOut(Request $request)
+    {
+        if (Auth::check()) {
+            Cache::forget('user-is-online-' . Auth::id());
+        }
     }
 }

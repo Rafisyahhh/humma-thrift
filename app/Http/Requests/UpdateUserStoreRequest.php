@@ -34,6 +34,8 @@ class UpdateUserStoreRequest extends FormRequest
             'phone' => 'required|string|max:15',
             'address' => 'required|string',
             'description' => 'required|string',
+            'open' => 'required',
+            'close' => 'required',
             'store_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'store_cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
@@ -46,6 +48,8 @@ class UpdateUserStoreRequest extends FormRequest
             'phone.required' => 'Nomor telepon wajib diisi',
             'address.required' => 'Alamat wajib diisi',
             'description.required' => 'Deskripsi wajib diisi',
+            'open.required' => 'Jam Buka Toko wajib diisi',
+            'close.required' => 'Jam Tutup Toko  wajib diisi',
             'username.required' => 'Username wajib diisi',
             'username.unique' => 'Username sudah terdaftar',
             'username.max' => 'Username maksimal 255 karakter',
