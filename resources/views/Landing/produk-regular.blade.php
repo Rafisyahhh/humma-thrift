@@ -195,8 +195,8 @@
         checkedCategories = $('input:checkbox[name^="category"]:checked').map(function() {
           return this.value;
         }).get();
-        $('[data-brand][data-categories]').each(function() {
-          console.log(products.find);
+        $('[data-brand], [data-categories]').each(function() {
+          console.log(this);
         })
       });
       //   $('input:checkbox[name^="brands"]').click(function(e) {
