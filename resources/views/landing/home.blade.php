@@ -459,7 +459,7 @@
                                         <div class="product-cart-items">
                                             <div class="product-cart-items">
                                                 @auth
-                                                    <form action="{{ route('storesproduct', $item->id) }}" method="POST">
+                                                    <form action="{{ route('storesproductAuction', $item->id) }}" method="POST">
                                                         @csrf
                                                         <button class="favourite cart-item">
                                                             <span>
