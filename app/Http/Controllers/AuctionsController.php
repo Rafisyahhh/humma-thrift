@@ -77,19 +77,19 @@ class AuctionsController extends Controller
 
 
     public function testNotificationCreation()
-{
-    $productAuction = ProductAuction::first(); // Assuming you have some ProductAuction data
-    $user = $productAuction->user;
+    {
+        $productAuction = ProductAuction::first(); // Assuming you have some ProductAuction data
+        $user = $productAuction->user;
 
-    // Notify the user
-    $user->notify(new SellerLelang($productAuction));
+        // Notify the user
+        $user->notify(new SellerLelang($productAuction));
 
-    // Check the notifications table
-    $this->assertDatabaseHas('notifications', [
-        'notifiable_id' => $user->id,
-        'notifiable_type' => get_class($user),
-    ]);
-}
+        // Check the notifications table
+        $this->assertDatabaseHas('notifications', [
+            'notifiable_id' => $user->id,
+            'notifiable_type' => get_class($user),
+        ]);
+    }
 
 
     /**

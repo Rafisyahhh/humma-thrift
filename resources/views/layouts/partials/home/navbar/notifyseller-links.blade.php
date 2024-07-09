@@ -95,9 +95,9 @@
             <div class="card-header border-bottom d-flex gap-3 align-items-center justify-content-between">
                 <h5 class="mb-0">Notifikasi</h5>
             </div>
-            @forelse(auth()->user()->unreadNotifications as $notification)
+            {{-- @forelse(auth()->user()->unreadNotifications as $notification)
 
-        {{-- <a href="{{ $notification->data['url'] }}"> --}}
+        <a href="{{ $notification->data['url'] }}">
 
             <div class="wrapper" style="padding:2px;">
                 <div class="wrapper-item">
@@ -117,10 +117,10 @@
                             class="ti ti-x"></span></a>
                 </div>
             </div>
-            {{-- </a> --}}
+            </a>
             @empty
             <li class="list-group-item list-group-item-action" >Tidak ada notifikasi yang belum dibaca</li>
-            @endforelse
+            @endforelse --}}
 
 
             seller
