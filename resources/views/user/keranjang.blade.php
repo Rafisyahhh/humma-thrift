@@ -191,4 +191,20 @@
             if (!["A", "I"].includes(tagName)) window.location.href = $(this).data("route");
         });
 </script>
+<script>
+    $(function(){
+      $('.add_to_cart').on("click", function () {
+        var id = ($("#item_id").val());
+        $.ajax({
+          url: 'cart/' + id+'/edit',';'
+          type: "get",
+          success: function (data) {
+
+            $('#myModal').modal('hide');
+            $('#cart_product').html(data);
+          }
+        });
+      });
+    });
+    </script>
 @endpush
