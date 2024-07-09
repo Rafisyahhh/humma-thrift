@@ -68,7 +68,8 @@ class AuctionsController extends Controller
             $userStore = $product->userStore;
 
             if ($userStore) {
-                $userStore->notify(new SellerLelang($auctions));
+                // Ini yang aku tambahin
+                $userStore->user->notify(new SellerLelang($auctions));
                 Log::info('Notification sent to UserStore: ' . $userStore->id);
             } else {
                 Log::error('UserStore not found for product: ' . $product->id);
