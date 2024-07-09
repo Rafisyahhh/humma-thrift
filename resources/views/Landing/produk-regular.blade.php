@@ -6,97 +6,96 @@
   <section class="product product-sidebar footer-padding">
     <div class="container">
       <div class="row g-5">
-        <div class="col-lg-3">
-          <div class="sidebar" data-aos="fade-right">
-            <div class="sidebar-section">
-              <div class="sidebar-wrapper">
-                <h5 class="wrapper-heading">Kategori Produk</h5>
-                <div class="sidebar-item">
-                  <ul class="sidebar-list">
-                    @foreach ($categories as $item)
-                      <li>
-                        <input type="checkbox" id="{{ $item->id }}" name="category[]" value="{{ $item->title }}" />
-                        <label for="{{ $item->id }}">{{ $item->title }}</label>
-                      </li>
-                    @endforeach
-                  </ul>
-                </div>
+        <div class="col-lg-3 pt-5">
+          <ul class="nav nav-pills justify-content-around sidebar gap-3 bg-body-secondary p-3" id="myTab" role="tablist"
+            style="border-top-left-radius: 2rem; border-top-right-radius: 2rem;">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active position-relative" id="home-tab" data-bs-toggle="tab"
+                data-bs-target="#category-tab" type="button" role="tab" aria-controls="category-tab"
+                aria-selected="true">Kategori
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info"
+                  style="display: none;" id="categoriesCount">0</span>
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link position-relative" id="profile-tab" data-bs-toggle="tab" data-bs-target="#brand-tab"
+                type="button" role="tab" aria-controls="brand-tab" aria-selected="false">Brand
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info"
+                  style="display: none;" id="brandCount">0</span>
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link position-relative" id="contact-tab" data-bs-toggle="tab" data-bs-target="#color-tab"
+                type="button" role="tab" aria-controls="color-tab" aria-selected="false">Warna
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info"
+                  style="display: none;" id="colorCount">0</span>
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link position-relative" id="contact-tab" data-bs-toggle="tab" data-bs-target="#size-tab"
+                type="button" role="tab" aria-controls="size-tab" aria-selected="false">Ukuran
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info"
+                  style="display: none;" id="sizeCount">0</span>
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#price-tab" type="button"
+                role="tab" aria-controls="price-tab" aria-selected="false">Harga</button>
+            </li>
+          </ul>
+          <div class="tab-content sidebar-section bg-body-tertiary" id="myTabContent"
+            style="border-top-left-radius: unset; border-top-right-radius: unset">
+            <div class="tab-pane fade show active sidebar-wrapper" id="category-tab" role="tabpanel"
+              aria-labelledby="category-tab" tabindex="0">
+              <div class="sidebar-item">
+                <ul class="sidebar-list">
+                  @foreach ($categories as $item)
+                    <li>
+                      <input type="checkbox" id="{{ $item->id }}" name="categories[]" value="{{ $item->title }}" />
+                      <label for="{{ $item->id }}">{{ $item->title }}</label>
+                    </li>
+                  @endforeach
+                </ul>
               </div>
-              <hr>
-              <div class="sidebar-wrapper sidebar-range">
-                <h5 class="wrapper-heading">Kisaran harga</h5>
-                <div class="price-slide range-slider">
-                  <div class="price">
-                    <div class="range-slider style-1">
-                      <div id="slider-tooltips" class="slider-range mb-3"></div>
-                      <span class="example-val" id="slider-margin-value-min"></span>
-                      <span>-</span>
-                      <span class="example-val" id="slider-margin-value-max"></span>
-                    </div>
-                  </div>
-                </div>
+            </div>
+            <div class="tab-pane fade sidebar-wrapper" id="brand-tab" role="tabpanel" aria-labelledby="brand-tab"
+              tabindex="0">
+              <div class="sidebar-item">
+                <ul class="sidebar-list">
+                  @foreach ($brands as $item)
+                    <li>
+                      <input type="checkbox" id="brands-{{ $item->id }}" name="brands[]"
+                        value="{{ $item->title }}" />
+                      <label for="brands-{{ $item->id }}">{{ $item->title }}</label>
+                    </li>
+                  @endforeach
+                </ul>
               </div>
-              <hr>
-              <div class="sidebar-wrapper">
-                <h5 class="wrapper-heading">Brands</h5>
-                <div class="sidebar-item">
-                  <ul class="sidebar-list">
-                    @foreach ($brands as $item)
-                      <li>
-                        <input type="checkbox" id="brands-{{ $item->id }}" name="brands[]" />
-                        <label for="brands-{{ $item->id }}">{{ $item->title }}</label>
-                      </li>
-                    @endforeach
-                  </ul>
-                </div>
+            </div>
+            <div class="tab-pane fade sidebar-wrapper" id="color-tab" role="tabpanel" aria-labelledby="color-tab"
+              tabindex="0">
+              <div class="sidebar-item">
+                <ul class="sidebar-list">
+                  @foreach ($colors as $item)
+                    <li>
+                      <input type="checkbox" id="{{ $item }}" name="colors[]" value="{{ $item }}" />
+                      <label for="{{ $item }}" class="text-capitalize">{{ $item }}</label>
+                    </li>
+                  @endforeach
+                </ul>
               </div>
-              <hr>
-              <div class="sidebar-wrapper">
-                <h5 class="wrapper-heading">Warna</h5>
-                <div class="sidebar-item">
-                  <ul class="sidebar-list">
+            </div>
+            <div class="tab-pane fade sidebar-wrapper" id="size-tab" role="tabpanel" aria-labelledby="size-tab"
+              tabindex="0">
+              <div class="sidebar-item">
+                <ul class="sidebar-list">
+                  @foreach ($sizes as $item)
                     <li>
-                      <input type="checkbox" id="red" name="red">
-                      <label for="red">Merah</label>
+                      <input type="checkbox" id="{{ $item }}" name="sizes[]" value="{{ $item }}" />
+                      <label for="{{ $item }}" class="text-capitalize">{{ $item }}</label>
                     </li>
-                    <li>
-                      <input type="checkbox" id="blue" name="blue">
-                      <label for="blue">Biru</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="navy" name="navy">
-                      <label for="navy">Navy</label>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <hr>
-              <div class="sidebar-wrapper">
-                <h5 class="wrapper-heading">Ukuran</h5>
-                <div class="sidebar-item">
-                  <ul class="sidebar-list">
-                    <li>
-                      <input type="checkbox" id="small" name="small">
-                      <label for="small">Kecil</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="medium" name="medium">
-                      <label for="medium">Sedang</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="large" name="large">
-                      <label for="large">Besar</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="xl" name="xl">
-                      <label for="xl">XL</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="2xl" name="2xl">
-                      <label for="2xl">2XL</label>
-                    </li>
-                  </ul>
-                </div>
+                  @endforeach
+                </ul>
               </div>
             </div>
           </div>
@@ -114,18 +113,19 @@
               </div>
               @forelse ($products as $item)
                 <div class="col-lg-4 col-sm-6" data-brand="{{ $item->brand->title }}"
-                  data-categories="{{ json_encode($item->categories->pluck('title')->toArray()) }}">
+                  data-categories="{{ json_encode($item->categories->pluck('title')->toArray()) }}"
+                  data-color="{{ $item->color }}" data-size="{{ $item->size }}">
                   <div class="product-wrapper p-0" data-aos="fade-up">
                     <div class="product-img">
                       <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover">
                       <div class="product-cart-items">
                         <form action="{{ route('storesproduct', $item->id) }}" method="POST">
-                            @csrf
-                            <button class="favourite cart-item">
-                                <span>
-                                    <i class="fas fa-heart"></i>
-                                </span>
-                            </button>
+                          @csrf
+                          <button class="favourite cart-item">
+                            <span>
+                              <i class="fas fa-heart"></i>
+                            </span>
+                          </button>
                         </form>
                         <a href="/user/checkout" class="favourite cart-item">
                           <span>
@@ -145,7 +145,7 @@
                           class="product-details">{{ $item->title }}
                         </a>
                         <div class="price">
-                          <span class="new-price">Rp{{ number_format($item->price, 2, ',', '.') }}</span>
+                          <span class="new-price">Rp{{ number_format($item->price, 0, '', '.') }}</span>
                         </div>
                       </div>
                     </div>
@@ -176,39 +176,38 @@
 @push('script')
   <script>
     $(document).ready(function() {
-      let products = [];
-      //let brands = [];
-      let checkedCategories = [];
-      $('[data-brand][data-categories]').each(function() {
-        products.push([$(this).data('brand'), $(this).data('categories')]);
-      })
-      //   $('[data-brand]').each(function() {
-      //     brands.push($(this).data('brand'));
-      //     console.log(this);
-      //   })
-      //   $('[data-categories]').each(function() {
-      //     var categories = $(this).data('categories');
-      //   })
+      function updateFilters() {
+        const filters = ['categories', 'brands', 'colors', 'sizes'];
+        const checked = {};
 
-      $('input:checkbox[name^="category"]').click(function(e) {
-        // console.log($('input:checkbox[name^="category"]').index(this));
-        checkedCategories = $('input:checkbox[name^="category"]:checked').map(function() {
-          return this.value;
-        }).get();
-        $('[data-brand][data-categories]').each(function() {
-          const brands = $(this).data('brand')
-          const categories = $(this).data('categories')
-          console.log(brands, categories);
-        })
-      });
-      //   $('input:checkbox[name^="brands"]').click(function(e) {
-      //     console.log($(this).index());
-      //     console.log(brand);
-      //     $('[data-brand]:checkbox:checked').each(function() {
-      //       var checkedBrand = $(this).data('brand');
-      //       console.log(checkedBrand);
-      //     })
-      //   });
+        filters.forEach(filter => {
+          checked[filter] = $(`input:checkbox[name="${filter}[]"]:checked`).map(function() {
+            return this.value;
+          }).get();
+        });
+        console.log(checked);
+
+        $('[data-brand][data-categories][data-color][data-size]').each(function() {
+          const data = $(this).data();
+          const matches = filters.every(filter => {
+            const key = filter === 'categories' ? 'categories' : filter.slice(0, -1);
+            return checked[filter].length === 0 || checked[filter].some(item => data[key].includes(item));
+          });
+
+          $(this).toggle(matches);
+        });
+
+        filters.forEach(filter => {
+          const count = checked[filter].length;
+          const selector = `#${filter === 'categories' ? 'categories' : filter.slice(0, -1)}Count`;
+          $(selector).toggle(count > 0).text(count);
+        });
+      }
+
+
+
+      $('input:checkbox[name="categories[]"], input:checkbox[name="brands[]"], input:checkbox[name="colors[]"], input:checkbox[name="sizes[]"]')
+        .on('change', updateFilters);
     });
   </script>
 @endpush
