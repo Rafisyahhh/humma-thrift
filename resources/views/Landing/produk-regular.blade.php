@@ -177,7 +177,7 @@
   <script>
     $(document).ready(function() {
       let products = [];
-      let brands = [];
+      //let brands = [];
       let checkedCategories = [];
       $('[data-brand][data-categories]').each(function() {
         products.push([$(this).data('brand'), $(this).data('categories')]);
@@ -195,8 +195,10 @@
         checkedCategories = $('input:checkbox[name^="category"]:checked').map(function() {
           return this.value;
         }).get();
-        $('[data-brand], [data-categories]').each(function() {
-          console.log(this);
+        $('[data-brand][data-categories]').each(function() {
+          const brands = $(this).data('brand')
+          const categories = $(this).data('categories')
+          console.log(brands, categories);
         })
       });
       //   $('input:checkbox[name^="brands"]').click(function(e) {

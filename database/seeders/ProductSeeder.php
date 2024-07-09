@@ -37,7 +37,7 @@ class ProductSeeder extends Seeder {
 
             if (Storage::disk('public')->put($destinationPath, file_get_contents($sourcePath))) {
                 Product::create([
-                    "user_id" => 1,
+                    "user_id" => 16,
                     "store_id" => 1,
                     "brand_id" => 1,
                     "title" => $data["title"],
