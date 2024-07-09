@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreCheckoutRequest;
 use App\Http\Requests\UpdateCheckoutRequest;
+use App\Models\cart;
 use App\Models\Favorite;
 
 class CheckoutController extends Controller
@@ -26,11 +27,19 @@ class CheckoutController extends Controller
         $users = Auth::user();
         $addresses = UserAddress::where('user_id', $users->id)->get();
         $product = Product::where('id',$request->product_id)->first();
-        $product_auction = Auctions::where('product_auction_id',$request->productauction_id)
-        ->where('status', 1)->first();
-        return view('user.checkout', compact('users','addresses','product','channels','product_auction'));
+        $product_auction = Auctions::where('product_auction_id',$request->productauction_id)->where('status', 1)->first();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        return view('user.checkout', compact('users','addresses','product','channels', 'countFavorite'));
+
+#jangan dihapus dulu guys comentnya
+
+        // $cartItems = cart::where('user_id', $users->id)->get();
+        // $storeIds = $cartItems->pluck('product.store_id')->unique();
+
+        // if ($storeIds->count() > 1) {
+        //     return redirect()->back()->with('error', 'Maaf, anda harus checkout di 1 toko.');
+        // }
+
+        return view('user.checkout', compact('users','addresses','product','channels', 'countFavorite', 'product_auction'));
     }
 
     /**

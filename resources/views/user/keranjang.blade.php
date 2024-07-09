@@ -108,7 +108,7 @@
                 <td style="display: flex; justify-content: flex-end; align-items: center;">
                   <div class="wrapper-content me-5"
                     style="display: flex; justify-content: flex-end; align-items: center;">
-                    <p style="margin-right: 1rem;">Total (0) produk :</p>
+                    <p style="margin-right: 1rem;">Total ({{ $countcart }}) produk :</p>
                     <p>
                     <h6 style="font-size: 18px; font-weight: bold;  color: red;">Rp 0 </h6>
                     </p>
