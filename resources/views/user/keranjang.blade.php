@@ -29,7 +29,7 @@
                 style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100rem;">
                 <td class="table-wrapper wrapper-product" style="display: flex; align-items: center;">
                   <div class="form-check" style="display: flex; align-items: center;">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                    <input class="form-check-input" type="checkbox" value="" id="cartSelectAll"
                       style="border-color: #215791; margin-right: 1rem;">
                     <p style="margin-right: 44.5rem; margin-left:3rem;">Produk</p>
                     <p style="margin-right: 25rem;">Kategori</p>
@@ -46,11 +46,11 @@
                   style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100rem;">
                   <td class="table-wrapper wrapper-product" style="display: flex; align-items: center;">
                     <div class="form-check" style="display: flex; align-items: center;">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                      <input class="form-check-input" type="checkbox" value="" id="storeselectall" data-store="{{ $item->product->userStore->id }}"
                         style="border-color: #215791; margin-right: 2rem;">
                       <i class="fa-solid fa-store"
                         style="margin-right: 1rem; color: #215791; font-size: 2rem; margin-left:2rem;"></i>
-                      <p style="font-weight: bold">{{ $item->product->userStore->name }}</p>
+                      <p style="font-weight: bold"">{{ $item->product->userStore->name }}</p>
                     </div>
                   </td>
                 </tr>
@@ -59,7 +59,7 @@
                   <td class="table-wrapper wrapper-product">
                     <div class="wrapper" style="display: flex; align-items: center; width:122rem;">
                       <div class="form-check" style="margin-right: 1rem;">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" data-store="{{ $item->product->userStore->id }}"
                           style="border-color: #215791;">
                       </div>
                       <div class="wrapper-img" style="margin-right: 1rem;" data-route="{{ route('store.product.detail', ['store' => $item->product->userStore->username, 'product' => $item->product->slug]) }}">
@@ -190,5 +190,22 @@
         }) {
             if (!["A", "I"].includes(tagName)) window.location.href = $(this).data("route");
         });
+        $('#storeselectall').click(function (e) {
+          const storeId = $(this).data('store')
+          $(`[data-store="${storeId}"]`).not(this).each(function () {
+            /*$(this).prop('checked', true)*/
+            this.checked = !this.checked;
+          })
+          $(`#cartSelectAll`).each(function () {
+            /*$(this).prop('checked', true)*/
+            this.checked = false;
+          })
+        })
+        $('#cartSelectAll').click(function (e) {
+          $(`[data-store]`).each(function () {
+            /*$(this).prop('checked', true)*/
+            this.checked = !this.checked;
+          })
+        })
 </script>
 @endpush
