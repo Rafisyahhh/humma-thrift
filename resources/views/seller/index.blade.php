@@ -124,8 +124,10 @@
                                             <p>Nama: {{auth()->user()->name}}</p>
                                             <p>Email: {{auth()->user()->email}}</p>
                                             <p>No Telepon: +{{auth()->user()->phone}}</p>
-                                            @foreach ($address as $stores )
+                                            @foreach ($address as $stores ) 
+                                            @if ($stores->status)
                                             <p>Alamat: {{ $stores->address }}</p>
+                                            @endif
                                             @endforeach
 
                                         </div>
