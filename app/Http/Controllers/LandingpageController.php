@@ -25,7 +25,7 @@ class LandingpageController extends Controller {
             ->whereNotNull('product_id')
             ->orderBy('created_at')
             ->get();
-        View::share(['countFavorite', 'countcart', 'carts']);
+        View::share(compact('countFavorite', 'countcart', 'carts'));
     }
 
     public function index() {
@@ -37,12 +37,6 @@ class LandingpageController extends Controller {
             ->whereNotNull('product_id')
             ->orderBy('created_at')
             ->get();
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
         $product_auction = ProductAuction::all();
 
         return view('landing.home', compact(
@@ -52,9 +46,6 @@ class LandingpageController extends Controller {
             'product',
             'favorites',
             'product_auction',
-            'countFavorite',
-            'countcart',
-            'carts'
         ));
     }
 
@@ -154,15 +145,12 @@ class LandingpageController extends Controller {
     public function searchProduct(Request $request) {
         $brands = Brand::all();
         $categories = ProductCategory::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
         $search = $request->search;
         $products = Product::where('title', 'like', "%$search%")->paginate(24);
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
 
-        return view('landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search'));
+        $colors = $products->pluck('color')->map('strtolower')->unique();
+        $sizes = $products->pluck('size')->map('strtolower')->unique();
+
+        return view('landing.produk-regular', compact('products', 'brands', 'categories', 'colors', 'sizes', 'search'));
     }
 }

@@ -21,6 +21,35 @@
             bottom: 0;
         }
 
+        /* Include the CSS styles here */
+        .dropdown-menu {
+            background-color: #ffffff;
+            /* border: 1px solid #ffffff; */
+            /* border-radius: 0.25rem;
+            padding: 0.5rem 0; */
+        }
+
+        .dropdown-menu .dropdown-item {
+            padding: 0.5rem 1rem;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .dropdown-menu .dropdown-item:hover,
+        .dropdown-menu .dropdown-item:focus {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+
+        .dropdown-menu .dropdown-item[style="color: red;"] {
+            color: red;
+        }
+
+        .dropdown-menu hr {
+            margin: 0.5rem 0;
+            border: 0;
+            border-top: 1px solid #ffffff;
+        }
     </style>
 @endpush
 
@@ -131,10 +160,10 @@
                                         </div>
                                         <div class="product-info">
                                             <div class="product-description">
-                                                <a href="" class="product-details">{{ $item->product->title }}
+                                                <a href="" class="product-details" style="font-size: 2rem">{{ $item->product->title }}
                                                 </a>
                                                 <div class="price">
-                                                    <span class="new-price">Rp{{ number_format($item->product->price, null, null, '.') }}</span>
+                                                    <span class="new-price" style="font-size: 1.8rem">Rp{{ number_format($item->product->price, null, null, '.') }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -155,9 +184,17 @@
                                                     <li><a class="dropdown-item" href="#">Batal</a></li>
                                                 </ul>
                                             </div>
-                                            <a href="/user/checkout" class="product-btn">
+                                            <form action="{{ route('storecart', $item->product->id) }}" method="POST">
+                                                @csrf
+                                                <button class="product-btn" type="submit">
+                                                    <span>
+                                                        <i class="fas fa-shopping-cart"></i>
+                                                    </span>
+                                                </button>
+                                            </form>
+                                            {{-- <a href="/user/checkout" class="product-btn">
                                                 <i class="fas fa-shopping-cart"></i>
-                                            </a>
+                                            </a> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -178,11 +215,11 @@
                                         </div>
                                         <div class="product-info">
                                             <div class="product-description">
-                                                <a href="" class="product-details">{{ $item->productAuction->title }}
+                                                <a href="" class="product-details" style="font-size: 2rem">{{ $item->productAuction->title }}
                                                 </a>
                                                 <div class="price">
                                                     <span
-                                                        class="new-price">Rp{{ number_format($item->productAuction->bid_price_start, null, null, '.') }}
+                                                        class="new-price" style="font-size: 1.8rem">Rp{{ number_format($item->productAuction->bid_price_start, null, null, '.') }}
                                                         - Rp{{ number_format($item->productAuction->bid_price_end, null, null, '.') }}
                                                     </span>
                                                 </div>
@@ -205,9 +242,9 @@
                                                     <li><a class="dropdown-item" href="#">Batal</a></li>
                                                 </ul>
                                             </div>
-                                            <a href="/user/checkout" class="product-btn">
+                                            {{-- <a href="/user/checkout" class="product-btn">
                                                 <i class="fas fa-shopping-cart"></i>
-                                            </a>
+                                            </a> --}}
                                         </div>
                                     </div>
                                 </div>
