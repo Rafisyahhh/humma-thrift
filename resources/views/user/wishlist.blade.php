@@ -160,10 +160,10 @@
                                         </div>
                                         <div class="product-info">
                                             <div class="product-description">
-                                                <a href="" class="product-details">{{ $item->product->title }}
+                                                <a href="" class="product-details" style="font-size: 2rem">{{ $item->product->title }}
                                                 </a>
                                                 <div class="price">
-                                                    <span class="new-price">Rp{{ number_format($item->product->price, null, null, '.') }}</span>
+                                                    <span class="new-price" style="font-size: 1.8rem">Rp{{ number_format($item->product->price, null, null, '.') }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -184,9 +184,17 @@
                                                     <li><a class="dropdown-item" href="#">Batal</a></li>
                                                 </ul>
                                             </div>
-                                            <a href="/user/checkout" class="product-btn">
+                                            <form action="{{ route('storecart', $item->product->id) }}" method="POST">
+                                                @csrf
+                                                <button class="product-btn" type="submit">
+                                                    <span>
+                                                        <i class="fas fa-shopping-cart"></i>
+                                                    </span>
+                                                </button>
+                                            </form>
+                                            {{-- <a href="/user/checkout" class="product-btn">
                                                 <i class="fas fa-shopping-cart"></i>
-                                            </a>
+                                            </a> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -207,11 +215,11 @@
                                         </div>
                                         <div class="product-info">
                                             <div class="product-description">
-                                                <a href="" class="product-details">{{ $item->productAuction->title }}
+                                                <a href="" class="product-details" style="font-size: 2rem">{{ $item->productAuction->title }}
                                                 </a>
                                                 <div class="price">
                                                     <span
-                                                        class="new-price">Rp{{ number_format($item->productAuction->bid_price_start, null, null, '.') }}
+                                                        class="new-price" style="font-size: 1.8rem">Rp{{ number_format($item->productAuction->bid_price_start, null, null, '.') }}
                                                         - Rp{{ number_format($item->productAuction->bid_price_end, null, null, '.') }}
                                                     </span>
                                                 </div>
@@ -234,9 +242,9 @@
                                                     <li><a class="dropdown-item" href="#">Batal</a></li>
                                                 </ul>
                                             </div>
-                                            <a href="/user/checkout" class="product-btn">
+                                            {{-- <a href="/user/checkout" class="product-btn">
                                                 <i class="fas fa-shopping-cart"></i>
-                                            </a>
+                                            </a> --}}
                                         </div>
                                     </div>
                                 </div>

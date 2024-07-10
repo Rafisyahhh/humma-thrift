@@ -169,6 +169,9 @@ class LandingpageController extends Controller {
             ->orderBy('created_at')
             ->get();
 
-        return view('landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search'));
+        $colors = $products->pluck('color')->map('strtolower')->unique();
+        $sizes = $products->pluck('size')->map('strtolower')->unique();
+
+        return view('landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts',  'colors', 'sizes', 'countFavorite', 'search'));
     }
 }
