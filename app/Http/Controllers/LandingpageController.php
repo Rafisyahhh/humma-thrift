@@ -78,10 +78,12 @@ class LandingpageController extends Controller {
             ->whereNotNull('product_id')
             ->orderBy('created_at')
             ->get();
+        $colors = $product_auction->pluck('color')->map('strtolower')->unique();
+        $sizes = $product_auction->pluck('size')->map('strtolower')->unique();
         // $auctions = auctions::where('user_id', $user->id)->first();
         // $notifications = auth()->user()->notifications;
 
-        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories', 'user', 'countcart', 'carts', 'countFavorite'));
+        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories', 'user', 'countcart', 'carts', 'countFavorite', 'colors', 'sizes'));
     }
 
     public function store() {
