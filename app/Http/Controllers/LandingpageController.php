@@ -147,8 +147,14 @@ class LandingpageController extends Controller {
         $categories = ProductCategory::all();
         $colors = $products->pluck('color')->map('strtolower')->unique();
         $sizes = $products->pluck('size')->map('strtolower')->unique();
+        $countcart = cart::where('user_id', auth()->id())->count();
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
 
-        return view('Landing.produk-regular', compact('products', 'brands', 'categories', 'colors', 'sizes'));
+        return view('Landing.produk-regular', compact('products', 'brands', 'categories', 'colors', 'sizes', 'carts' , 'countcart' ,'countFavorite'));
     }
 
     public function searchProduct(Request $request) {
@@ -163,6 +169,9 @@ class LandingpageController extends Controller {
             ->orderBy('created_at')
             ->get();
 
-        return view('landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search'));
+        $colors = $products->pluck('color')->map('strtolower')->unique();
+        $sizes = $products->pluck('size')->map('strtolower')->unique();
+
+        return view('landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts',  'colors', 'sizes', 'countFavorite', 'search'));
     }
 }
