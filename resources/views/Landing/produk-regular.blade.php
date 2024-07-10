@@ -261,7 +261,6 @@
       initPriceSlider();
       $('input:checkbox[name="categories[]"], input:checkbox[name="brands[]"], input:checkbox[name="colors[]"], input:checkbox[name="sizes[]"]')
         .on('change', updateFilters);
-
     });
   </script>
 @endpush
