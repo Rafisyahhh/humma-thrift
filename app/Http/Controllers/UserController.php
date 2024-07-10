@@ -111,10 +111,6 @@ class UserController extends Controller
             'dbirth' => $request->dbirth,
         ]);
 
-        $address = UserAddress::updateOrCreate(
-                ['user_id' => $user->id],
-                ['address' => $request -> address,'status'=> 1],
-        );
         return redirect()->back()->with("success", "Berhasil Memperbarui Profil");
     }
 

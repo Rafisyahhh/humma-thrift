@@ -14,20 +14,9 @@ use App\Models\ProductCategory;
 use App\Models\ProductCategoryPivot;
 use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Cache;
 
 class LandingpageController extends Controller {
-
-    public function __construct() {
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
-        View::share(['countFavorite', 'countcart', 'carts']);
-    }
-
     public function index() {
         $event = Event::all();
         $brands = Brand::all();
@@ -90,13 +79,13 @@ class LandingpageController extends Controller {
             ->whereNotNull('product_id')
             ->orderBy('created_at')
             ->get();
+        $colors = $product_auction->pluck('color')->map('strtolower')->unique();
+        $sizes = $product_auction->pluck('size')->map('strtolower')->unique();
         // $auctions = auctions::where('user_id', $user->id)->first();
         // $notifications = auth()->user()->notifications;
 
-        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories', 'user', 'countcart', 'carts', 'countFavorite'));
+        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories', 'user', 'countcart', 'carts', 'countFavorite', 'colors', 'sizes'));
     }
-
-    // Tambahkan metode regular
 
     public function store() {
         $store = UserStore::all();
@@ -140,21 +129,22 @@ class LandingpageController extends Controller {
         return view('user.keranjang', compact('cart', 'product_category_pivots', 'carts', 'countcart', 'countFavorite'));
     }
 
-
+    // Tambahkan metode regular
     public function productRegular() {
         $products = Product::paginate(24);
         $brands = Brand::all();
         $categories = ProductCategory::all();
-        $colors = $products->pluck('color')->map('strtolower')->unique();
-        $sizes = $products->pluck('size')->map('strtolower')->unique();
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $countcart = cart::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
-        ->whereNotNull('product_id')
-        ->orderBy('created_at')
-        ->get();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+            ->whereNotNull('product_id')
+            ->orderBy('created_at')
+            ->get();
 
-        return view('Landing.produk-regular', compact('products', 'brands', 'categories', 'colors', 'sizes', 'carts' , 'countcart' ,'countFavorite'));
+        $colors = $products->pluck('color')->map('strtolower')->unique();
+        $sizes = $products->pluck('size')->map('strtolower')->unique();
+
+        return view('Landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'colors', 'sizes'));
     }
 
     public function searchProduct(Request $request) {
@@ -168,9 +158,10 @@ class LandingpageController extends Controller {
             ->whereNotNull('product_id')
             ->orderBy('created_at')
             ->get();
+
         $colors = $products->pluck('color')->map('strtolower')->unique();
         $sizes = $products->pluck('size')->map('strtolower')->unique();
 
-        return view('landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'colors', 'sizes', 'countFavorite', 'search'));
+        return view('landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search', 'colors', 'sizes'));
     }
 }

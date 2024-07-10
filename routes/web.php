@@ -100,6 +100,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
         // Route::post('/product/{id}/auction', [AuctionsController::class, 'store'])->name('product.auction.store');
         Route::get('notify', [AuctionsController::class, 'notify'])->name('notify');
         Route::get('/test-notification', [AuctionsController::class, 'testNotification']);
+        Route::get('location', [UserAddressController::class, 'index'])->name('location');
 
     });
 

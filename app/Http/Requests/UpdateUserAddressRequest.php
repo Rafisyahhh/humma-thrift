@@ -22,14 +22,14 @@ class UpdateUserAddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'address_update' => 'required',
+            'address_update' => 'nullable',
         ];
     }
 
     public function massages(): array
     {
         return [
-            'address_update.required' => 'Alamat tidak boleh kosdong',
+            'address_update.required' => 'Alamat tidak boleh kosong',
         ];
     }
 }
