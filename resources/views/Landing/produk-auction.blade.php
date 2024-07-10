@@ -388,6 +388,7 @@
 
 @push('script')
   <script>
+    $('#global-search').attr('action', '{{ route('searchProductAuction') }}');
     $(document).ready(function() {
       function updateFilters(price = []) {
         const filters = ['categories', 'brands', 'colors', 'sizes'];

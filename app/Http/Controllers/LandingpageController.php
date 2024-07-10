@@ -146,7 +146,7 @@ class LandingpageController extends Controller {
         return view('landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search', 'colors', 'sizes'));
     }
 
-    
+
     // Tambahkan metode auction
     public function productAuction() {
         $product_auction = ProductAuction::paginate(24);
@@ -174,14 +174,15 @@ class LandingpageController extends Controller {
         $countcart = cart::where('user_id', auth()->id())->count();
         $search = $request->search;
         $product_auction = ProductAuction::where('title', 'like', "%$search%")->paginate(24);
+        $product_auction2 = ProductAuction::paginate(24);
         $carts = cart::where('user_id', auth()->id())
             ->whereNotNull('product_id')
             ->orderBy('created_at')
             ->get();
 
-        $colors = $product_auction->pluck('color')->map('strtolower')->unique();
-        $sizes = $product_auction->pluck('size')->map('strtolower')->unique();
+        $colors = $product_auction2->pluck('color')->map('strtolower')->unique();
+        $sizes = $product_auction2->pluck('size')->map('strtolower')->unique();
 
-        return view('landing.produk-regular', compact('product_auction', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search', 'colors', 'sizes'));
+        return view('landing.produk-auction', compact('product_auction', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search', 'colors', 'sizes'));
     }
 }
