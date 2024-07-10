@@ -162,10 +162,9 @@ class LandingpageController extends Controller {
             ->whereNotNull('product_id')
             ->orderBy('created_at')
             ->get();
-
         $colors = $products->pluck('color')->map('strtolower')->unique();
         $sizes = $products->pluck('size')->map('strtolower')->unique();
 
-        return view('landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts',  'colors', 'sizes', 'countFavorite', 'search'));
+        return view('landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'colors', 'sizes', 'countFavorite', 'search'));
     }
 }
