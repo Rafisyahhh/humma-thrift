@@ -361,7 +361,7 @@
             <div class="container">
                 <div class="section-title">
                     <h5>TERBARU!</h5>
-                    <a href="/product" class="view">Lihat Semua</a>
+                    <a href="{{ url('/product/regular') }}" class="view">Lihat Semua</a>
                 </div>
                 <div class="arrival-section">
                     <swiper-container slides-per-view="4" loop="true" navigation="true" space-between="30"
@@ -380,7 +380,7 @@
                                                         @csrf
                                                         <button class="favourite cart-item">
                                                             <span>
-                                                                <i class="fas fa-heart"></i>
+                                                                <i class="fas fa-heart" style="font-size: 18px;"></i>
                                                             </span>
                                                         </button>
                                                     </form>
@@ -388,13 +388,13 @@
                                                         @csrf
                                                         <button class="favourite cart-item">
                                                             <span>
-                                                                <i class="fas fa-shopping-cart"></i>
+                                                                <i class="fas fa-shopping-cart" style="font-size: 18px;"></i>
                                                             </span>
                                                         </button>
                                                     </form>
                                                     <a href="#" class="compaire cart-item">
                                                         <span>
-                                                            <i class="fas fa-share"></i>
+                                                            <i class="fas fa-share" style="font-size: 19px;"></i>
                                                         </span>
                                                     </a>
                                                 @else
@@ -444,7 +444,7 @@
             <div class="container">
                 <div class="section-title" style="position: relative; z-index: 1;">
                     <h5>SESI LELANG</h5>
-                    <a href="/product" class="view">Lihat Semua</a>
+                    <a href="{{ url('/product/auction') }}" class="view">Lihat Semua</a>
                 </div>
                 <div class="flash-sale-section" style="position: relative; z-index: 1;">
                     <swiper-container slides-per-view="4" loop="true" navigation="true" space-between="30"
@@ -464,21 +464,21 @@
                                                         @csrf
                                                         <button class="favourite cart-item">
                                                             <span>
-                                                                <i class="fas fa-heart"></i>
+                                                                <i class="fas fa-heart" style="font-size: 18px;"></i>
                                                             </span>
                                                         </button>
                                                     </form>
-                                                    <form action="{{ route('storecart', $item->id) }}" method="POST">
+                                                    {{-- <form action="{{ route('storecart', $item->id) }}" method="POST">
                                                         @csrf
                                                         <button class="favourite cart-item">
                                                             <span>
-                                                                <i class="fas fa-shopping-cart"></i>
+                                                                <i class="fas fa-shopping-cart" style="font-size: 18px;"></i>
                                                             </span>
                                                         </button>
-                                                    </form>
+                                                    </form> --}}
                                                     <a href="#" class="compaire cart-item">
                                                         <span>
-                                                            <i class="fas fa-share"></i>
+                                                            <i class="fas fa-share" style="font-size: 19px;"></i>
                                                         </span>
                                                     </a>
                                                 @else

@@ -425,7 +425,7 @@ button {
 .section-title .view:hover::before {
     opacity: 1;
     visibility: visible;
-    width: 7rem;
+    width: 10rem;
 }
 @media (max-width: 767px) {
     .section-title h5 {

@@ -30,15 +30,6 @@ class CheckoutController extends Controller
         $product_auction = Auctions::where('product_auction_id',$request->productauction_id)->where('status', 1)->first();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
 
-#jangan dihapus dulu guys comentnya
-
-        // $cartItems = cart::where('user_id', $users->id)->get();
-        // $storeIds = $cartItems->pluck('product.store_id')->unique();
-
-        // if ($storeIds->count() > 1) {
-        //     return redirect()->back()->with('error', 'Maaf, anda harus checkout di 1 toko.');
-        // }
-
         return view('user.checkout', compact('users','addresses','product','channels', 'countFavorite', 'product_auction'));
     }
 
