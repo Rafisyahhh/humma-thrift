@@ -420,11 +420,11 @@
                                     <div class="product-info">
                                         <div class="product-description">
                                             <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
-                                                class="product-details"> {{ $item->title }}
+                                                class="product-details" style="font-size: 2rem"> {{ $item->title }}
                                             </a>
                                             <div class="price">
                                                 <span
-                                                    class="new-price">Rp{{ number_format($item->price, null, null, '.') }}
+                                                    class="new-price" style="font-size: 1.8rem">Rp{{ number_format($item->price, null, null, '.') }}
                                                 </span>
                                             </div>
                                         </div>
@@ -504,11 +504,11 @@
                                     <div class="product-info">
                                         <div class="product-description">
                                             <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
-                                                class="product-details">{{ $item->title }}
+                                                class="product-details" style="font-size: 2rem">{{ $item->title }}
                                             </a>
                                             <div class="price">
                                                 <span
-                                                    class="new-price">Rp{{ number_format($item->bid_price_start, null, null, '.') }}
+                                                    class="new-price" style="font-size: 1.8rem">Rp{{ number_format($item->bid_price_start, null, null, '.') }}
                                                     - Rp{{ number_format($item->bid_price_end, null, null, '.') }}
                                                 </span>
                                             </div>

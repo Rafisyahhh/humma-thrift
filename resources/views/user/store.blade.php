@@ -18,10 +18,10 @@
                             </div>
                             <div class="product-info">
                                 <div class="product-description">
-                                    <a class="product-details">{{ $item->name }}
+                                    <a class="product-details" style="font-size: 2rem">{{ $item->name }}
                                     </a>
                                     <div class="price">
-                                        <span class="new-price">{{$item->address}}</span>
+                                        <span class="new-price" style="font-size: 1.8rem">{{$item->address}}</span>
                                     </div>
                                 </div>
                             </div>
