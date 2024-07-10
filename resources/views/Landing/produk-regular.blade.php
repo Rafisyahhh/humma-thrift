@@ -39,8 +39,11 @@
               </button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#price-tab" type="button"
-                role="tab" aria-controls="price-tab" aria-selected="false">Harga</button>
+              <button class="nav-link position-relative" id="contact-tab" data-bs-toggle="tab" data-bs-target="#price-tab"
+                type="button" role="tab" aria-controls="price-tab" aria-selected="false">Harga
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info"
+                  style="display: none;" id="priceCount">0</span>
+              </button>
             </li>
           </ul>
           <div class="tab-content sidebar-section bg-body-tertiary" id="myTabContent"
@@ -98,13 +101,26 @@
                 </ul>
               </div>
             </div>
+            <div class="tab-pane fade sidebar-wrapper sidebar-range" id="price-tab" role="tabpanel"
+              aria-labelledby="price-tab" tabindex="0">
+              <div class="price-slide range-slider">
+                <div class="price">
+                  <div class="range-slider style-1">
+                    <div id="price-slider" class="slider-range mb-3"></div>
+                    <span class="example-val" id="slider-margin-value-min"></span>
+                    <span>-</span>
+                    <span class="example-val" id="slider-margin-value-max"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-lg-9">
           <div class="product-sidebar-section" data-aos="fade-up">
             <div class="row g-5">
               <div class="col-lg-12">
-                <div class="product-sorting-section">
+                <div class="product-sorting-section" style="padding-bottom: unset; margin-bottom: unset">
                   <div class="result">
                     <p>Menampilkan {{ $products->firstItem() }}–{{ $products->lastItem() }} dari
                       {{ $products->total() }} hasil</p>
@@ -114,7 +130,7 @@
               @forelse ($products as $item)
                 <div class="col-lg-4 col-sm-6" data-brand="{{ $item->brand->title }}"
                   data-categories="{{ json_encode($item->categories->pluck('title')->toArray()) }}"
-                  data-color="{{ $item->color }}" data-size="{{ $item->size }}">
+                  data-color="{{ $item->color }}" data-size="{{ $item->size }}" data-price="{{ $item->price }}">
                   <div class="product-wrapper p-0" data-aos="fade-up">
                     <div class="product-img">
                       <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover">
@@ -185,14 +201,15 @@
             return this.value;
           }).get();
         });
-        console.log(checked);
 
-        $('[data-brand][data-categories][data-color][data-size]').each(function() {
+        const priceRange = $('#price-slider')[0].noUiSlider.get().map(value => Number(value));
+
+        $('[data-brand][data-categories][data-color][data-size][data-price]').each(function() {
           const data = $(this).data();
           const matches = filters.every(filter => {
             const key = filter === 'categories' ? 'categories' : filter.slice(0, -1);
             return checked[filter].length === 0 || checked[filter].some(item => data[key].includes(item));
-          });
+          }) && data.price >= priceRange[0] && data.price <= priceRange[1];
 
           $(this).toggle(matches);
         });
@@ -204,10 +221,47 @@
         });
       }
 
+      function initPriceSlider() {
+        const maxPrice = {{ max($products->pluck('price')->unique()->toArray()) }};
+        if ($("#price-slider").length > 0) {
+          var tooltipSlider = document.getElementById("price-slider");
 
+          noUiSlider.create(tooltipSlider, {
+            start: [0, maxPrice],
+            connect: true,
+            format: {
+              from: function(value) {
+                return Number(value);
+              },
+              to: function(value) {
+                return Math.round(value);
+              },
+            },
+            step: 500,
+            range: {
+              min: 0,
+              max: maxPrice,
+            },
+          });
 
+          var formatValues = [
+            $("#slider-margin-value-min"),
+            $("#slider-margin-value-max")
+          ];
+
+          tooltipSlider.noUiSlider.on("update", function(values) {
+            formatValues[0].text("Harga: Rp" + values[0]);
+            formatValues[1].text("Rp" + values[1]);
+            updateFilters();
+            $('#priceCount').toggle(values[0] > 0 || values[1] < maxPrice).text(1);
+          });
+        }
+      }
+
+      initPriceSlider();
       $('input:checkbox[name="categories[]"], input:checkbox[name="brands[]"], input:checkbox[name="colors[]"], input:checkbox[name="sizes[]"]')
         .on('change', updateFilters);
+
     });
   </script>
 @endpush
