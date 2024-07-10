@@ -105,8 +105,8 @@
                         <i class="fas fa-heart"></i>
                     </div>
                     <div>
-                        <h5>8</h5>
-                        <p class="mb-0">Daftar Keinginan</p>
+                        <h5>{{ $countFavorite }}</h5>
+                        <p class="mb-0">Favorite</p>
                     </div>
                 </a>
             </div>

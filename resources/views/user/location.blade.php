@@ -178,7 +178,7 @@
                         Tambah Alamat Baru
                     </button>
                 </div>
-                <p class="fs-5">*pilih alamat yang sesuai dengan alamat anda</p>
+                <p class="fs-5" style="color: red;">*Pilih alamat yang sesuai dengan alamat anda</p>
                 <hr>
                 <p style="font-size: 1.9rem">Alamat</p>
                 <div class="order-summery">
@@ -194,7 +194,6 @@
                                                 <b style="font-size: 17px;">{{ $users->username }}</b> |
                                                 +{{ $users->phone }}
                                             </p>
-
                                             <div style="display: flex; align-items: center;">
                                                 <button type="button" class="openModalUpdate"
                                                     data-modal-id="updateModal{{ $address->id }}"
@@ -215,7 +214,7 @@
                                             {{ $address->address }}
                                         </p>
                                         @if ( $address->status )
-                                            <span class="mark" style="width: 6rem;">Utama</span>
+                                            <span class="mark position-relative" style="width: 11rem; height: 4.60rem;"><span class="position-relative" style="left: 45%; top: 10%;">Utama</span></span>
                                         @endif
                                     </label>
                                 </div>
@@ -240,7 +239,7 @@
                             <label for="address" class="form-label"
                                 style="background-color: white; font-size: 18px">Alamat</label>
                             <textarea type="text" name="address" id="address" class="form-control @error('address') is-invalid @enderror"
-                                placeholder="Tambahkan Alamat" rows="5" style=" font-size: 15px"></textarea>
+                                placeholder="Tambahkan Alamat Anda" rows="5" style=" font-size: 15px"></textarea>
                             @error('address')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
