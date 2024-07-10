@@ -178,7 +178,7 @@
                         Tambah Alamat Baru
                     </button>
                 </div>
-                <p class="fs-5" style="color: red;">*Pilih alamat yang sesuai dengan alamat anda</p>
+                <p class="fs-5" style="color: red;">*Silahkan Sesuaikan dengan alamat dan informasi pribadi Anda.</p>
                 <hr>
                 <p style="font-size: 1.9rem">Alamat</p>
                 <div class="order-summery">
