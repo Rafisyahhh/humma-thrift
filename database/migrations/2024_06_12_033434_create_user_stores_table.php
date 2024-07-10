@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('nic_photo')->nullable();
             $table->timestamp('verified_at')->nullable()->useCurrent();
             $table->char('verification_code', 60)->nullable();
-            $table->boolean('active')->nullable()->default(0);
+            // $table->boolean('active')->nullable()->default(0);
             $table->text('address')->nullable();
             $table->text('description')->nullable();
             $table->time('open')->nullable();

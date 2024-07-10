@@ -24,11 +24,11 @@ class AboutUsController extends Controller {
     public function user() {
         $aboutUs = AboutUs::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $carts = cart::where('user_id', auth()->id())
-        ->whereNotNull('product_id')
-        ->orderBy('created_at')
-        ->get();
         $countcart = cart::where('user_id',auth()->id())->count();
+        $carts = cart::where('user_id', auth()->id())
+                        ->whereNotNull('product_id')
+                        ->orderBy('created_at')
+                        ->get();
 
         return view('user.tentang', compact('aboutUs', 'countFavorite', 'countcart', 'carts'));
     }
@@ -36,11 +36,11 @@ class AboutUsController extends Controller {
     public function landingpage() {
         $aboutUs = AboutUs::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $carts = cart::where('user_id', auth()->id())
-        ->whereNotNull('product_id')
-        ->orderBy('created_at')
-        ->get();
         $countcart = cart::where('user_id',auth()->id())->count();
+        $carts = cart::where('user_id', auth()->id())
+                        ->whereNotNull('product_id')
+                        ->orderBy('created_at')
+                        ->get();
 
         return view('landing.about', compact('aboutUs', 'countFavorite', 'countcart', 'carts'));
     }

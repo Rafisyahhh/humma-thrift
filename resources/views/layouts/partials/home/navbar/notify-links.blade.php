@@ -101,7 +101,8 @@
                 $routeParameters = compact('store', 'product');
                 $route = route('store.product.detail', $routeParameters);
             @endphp --}}
-        <a href="{{ $notification->data && $notification->data['action'] ? $notification->data['action'] : '' }}">
+        {{-- <a href="{{ $notification->data && $notification->data['action'] ? $notification->data['action'] : '' }}"> --}}
+            <a href="{{ $notification->data['url'] }}">
 
             <div class="wrapper" style="padding:2px;">
                 <div class="wrapper-item">
