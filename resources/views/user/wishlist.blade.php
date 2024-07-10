@@ -21,6 +21,35 @@
             bottom: 0;
         }
 
+        /* Include the CSS styles here */
+        .dropdown-menu {
+            background-color: #ffffff;
+            /* border: 1px solid #ffffff; */
+            /* border-radius: 0.25rem;
+            padding: 0.5rem 0; */
+        }
+
+        .dropdown-menu .dropdown-item {
+            padding: 0.5rem 1rem;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .dropdown-menu .dropdown-item:hover,
+        .dropdown-menu .dropdown-item:focus {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+
+        .dropdown-menu .dropdown-item[style="color: red;"] {
+            color: red;
+        }
+
+        .dropdown-menu hr {
+            margin: 0.5rem 0;
+            border: 0;
+            border-top: 1px solid #ffffff;
+        }
     </style>
 @endpush
 
