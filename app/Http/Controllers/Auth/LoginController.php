@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
-class LoginController extends Controller
-{
+class LoginController extends Controller {
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -36,8 +36,7 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
     }
@@ -49,8 +48,10 @@ class LoginController extends Controller
      * @param  mixed  $user
      * @return mixed
      */
-    protected function authenticated(Request $request, $user)
-    {
+    protected function authenticated(Request $request, $user) {
+        $user->update([
+            'last_login' => Carbon::now()
+        ]);
         if ($user->hasRole('admin')) {
             return redirect()->intended('/admin');
         }
@@ -61,7 +62,6 @@ class LoginController extends Controller
             }
             return redirect()->intended('/');
         }
-
         return redirect()->intended('/');
     }
 
@@ -71,8 +71,7 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    protected function credentials(Request $request)
-    {
+    protected function credentials(Request $request) {
         return collect($request->only($this->username(), 'password'))->put('banned', 0)->toArray();
     }
 
@@ -82,8 +81,7 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return mixed
      */
-    protected function loggedOut(Request $request)
-    {
+    protected function loggedOut(Request $request) {
         if (Auth::check()) {
             Cache::forget('user-is-online-' . Auth::id());
         }

@@ -14,6 +14,7 @@ use App\Models\ProductCategory;
 use App\Models\ProductCategoryPivot;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class LandingpageController extends Controller {
     public function index() {

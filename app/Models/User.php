@@ -66,8 +66,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutRole($roles, $guard = null)
  * @mixin \Eloquent
  */
-class User extends Authenticatable implements MustVerifyEmail
-{
+class User extends Authenticatable implements MustVerifyEmail {
     use HasApiTokens, HasFactory, Notifiable, HasRoles, VerifyEmailTrait;
 
     /**
@@ -84,6 +83,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'pbirth',
         'dbirth',
         'password',
+        'last_login',
     ];
 
     /**
@@ -110,8 +110,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return string
      */
-    public function getGravatarLink()
-    {
+    public function getGravatarLink() {
         return Gravatar::get($this->getAttribute('email'));
     }
 
@@ -120,8 +119,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return UserLevelEnum
      */
-    public function getUserRoleInstance()
-    {
+    public function getUserRoleInstance() {
         $roles = $this->getRoleNames();
         $roleName = !empty($roles) && isset($roles[0]) ? $roles[0] : null;
         return $roleName ? UserLevelEnum::from($roleName) : UserLevelEnum::USER;
@@ -132,8 +130,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return array
      */
-    public function getUserStatusInstance()
-    {
+    public function getUserStatusInstance() {
         $label = ['Aktif', 'Nonaktif'];
         $color = ['success', 'danger'];
 
@@ -148,8 +145,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return HasOne
      */
-    public function store()
-    {
+    public function store() {
         return $this->hasOne(UserStore::class);
     }
 
@@ -158,14 +154,13 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return string
      */
-    public function getAvatar()
-    {
+    public function getAvatar() {
         $avatar = $this->getAttribute('avatar');
         $isUrlOnAvatar = UrlHelper::isUrl($avatar);
         return $avatar ? ($isUrlOnAvatar ? $avatar : asset("storage/{$avatar}")) : Gravatar::get($this->getAttribute('email'));
     }
 
     public function UserAddress() {
-        return $this->hasMany( UserAddress::class);
+        return $this->hasMany(UserAddress::class);
     }
 }
