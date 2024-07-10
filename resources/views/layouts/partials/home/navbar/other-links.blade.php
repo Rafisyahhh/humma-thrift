@@ -21,7 +21,7 @@
     <div class="wrapper-close-btn" onclick="modalAction('.search')">
     </div>
     <div class="wrapper-main">
-      <form class="search-section" action="{{ route('searchProduct') }}">
+      <form class="search-section" action="{{ route('searchProductRegular') }}" id="global-search">
         <input type="search" placeholder="Telusuri produk..." name="search"
           value="{{ isset($search) ? $search : '' }}">
         <div class="divider"></div>

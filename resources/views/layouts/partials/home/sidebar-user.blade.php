@@ -48,7 +48,7 @@
         [
             'title' => 'Alamat Saya',
             'route' => 'user.location',
-            'icon' => 'location',
+            'icon' => 'map',
             'role' => 'user',
         ],
         [
