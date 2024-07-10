@@ -118,7 +118,8 @@ Route::prefix('dev')->group(function () {
 Route::prefix('product')->group(function () {
     Route::get('auction', [LandingpageController::class, 'productAuction']);
     Route::get('regular', [LandingpageController::class, 'productRegular']);
-    Route::get('regular/search', [LandingpageController::class, 'searchProduct'])->name('searchProduct');
+    Route::get('auction/search', [LandingpageController::class, 'searchProductAuction'])->name('searchProductAuction');
+    Route::get('regular/search', [LandingpageController::class, 'searchProductRegular'])->name('searchProductRegular');
 });
 Route::get('brand', [LandingpageController::class, 'brand']);
 Route::get('stores', [StoreProfileController::class, 'showStore'])->name('store');
