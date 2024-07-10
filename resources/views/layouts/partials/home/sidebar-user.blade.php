@@ -46,6 +46,12 @@
             'role' => 'user',
         ],
         [
+            'title' => 'Alamat Saya',
+            'route' => 'user.location',
+            'icon' => 'location',
+            'role' => 'user',
+        ],
+        [
             'title' => 'Riwayat Transaksi',
             'route' => 'user.history.index',
             'icon' => 'history',

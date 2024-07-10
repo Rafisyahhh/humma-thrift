@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('user_addresses', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->text('address');
-            $table->boolean('status');
+            $table->unsignedBigInteger('user_id');
+            $table->string('address')->nullable();
+            $table->boolean('status')->default(false);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

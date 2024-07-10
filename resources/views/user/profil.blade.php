@@ -74,15 +74,6 @@
                                 <input type="file" name="avatar" accept="image/jpeg, image/jpg, image/png, image/webp" id="input-file">
                             </div>
                         </div>
-                        <div class="review-form">
-                            <div class="account-inner-form">
-                                <div class="review-form-name mb-4">
-                                    <label for="address" class="form-label" style="background-color: white">Alamat</label>
-                                    <textarea type="text" name="address" id="address" class="form-control"
-                                    placeholder="Tambahkan Alamat" rows="7" >{{ implode(", ", auth()->user()->UserAddress->where('status', true)->pluck('address')->toArray()) }}</textarea>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-lg-12">
                             <div class="submit-btn d-flex justify-content-center w-100 mt-5">
                                 <button type="submit" class="shop-btn update-btn">Perbarui Profil</button>
@@ -95,3 +86,35 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the modal element
+        var addressModal = document.getElementById("addressModal");
+
+        // Get the button that opens the modal
+        var openAddressModalBtn = document.querySelector(".openModalAddress");
+
+        // Get the close button for address modal
+        var addressCloseBtn = addressModal.querySelector(".close-modal");
+
+        // When the user clicks the button, open the address modal
+        openAddressModalBtn.onclick = function() {
+            addressModal.style.display = "block";
+        }
+
+        // When the user clicks on close button in address modal, close the address modal
+        addressCloseBtn.onclick = function() {
+            addressModal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close the address modal
+        window.onclick = function(event) {
+            if (event.target == addressModal) {
+                addressModal.style.display = "none";
+            }
+        }
+    });
+</script>
+@endpush
