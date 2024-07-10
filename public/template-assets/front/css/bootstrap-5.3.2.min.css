@@ -334,9 +334,13 @@ small {
 }
 .mark,
 mark {
-    padding: 0.1875em;
-    color: #ffffff;
-    background-color: #1c3879ba;
+    padding: 0.1880em;
+    color:rgb(255, 255, 255);
+    background: #1c3879;
+    border-radius: 8px;
+    border: 5px solid var(--NN500, #fafafa);
+    padding-right: 5.75rem;
+    font-size: 1.75rem;
 }
 sub,
 sup {
