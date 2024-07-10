@@ -45,7 +45,7 @@
                         <div class="col-lg-3 col-sm-4">
                             <div class="product-wrapper"
                                 style="height: 230px;padding: 11.5px;align-items:center;text-align:center;">
-                                <div class="wrapper-img">
+                                <div class="wrapper-img mt-5">
                                     <span>
                                         <svg width="48" height="48">
                                             <use
@@ -63,7 +63,7 @@
                         <div class="col-lg-3 col-sm-4">
                             <div class="product-wrapper"
                                 style="height: 230px;padding: 11.5px;align-items:center;text-align:center;">
-                                <div class="wrapper-img">
+                                <div class="wrapper-img mt-5">
                                     <span>
                                         <svg width="48" height="48">
                                             <use
@@ -81,7 +81,7 @@
                         <div class="col-lg-3 col-sm-4">
                             <div class="product-wrapper"
                                 style="height: 230px;padding: 11.5px;align-items:center;text-align:center;">
-                                <div class="wrapper-img">
+                                <div class="wrapper-img mt-5">
                                     <span>
                                         <svg width="48" height="48">
                                             <use
@@ -99,7 +99,7 @@
                         <div class="col-lg-3 col-sm-4">
                             <div class="product-wrapper"
                                 style="height: 230px;padding: 11.5px;align-items:center;text-align:center;">
-                                <div class="wrapper-img">
+                                <div class="wrapper-img mt-5">
                                     <span>
                                         <svg width="48" height="48">
                                             <use
@@ -110,7 +110,7 @@
                                 </div>
                                 <div class="wrapper-content">
                                     <p class="paragraph">Jumlah Produk</p>
-                                    <h3 class="mb-0 paragraph">09</h3>
+                                    <h3 class="mb-0 paragraph">{{ $count }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -124,12 +124,12 @@
                                             <p>Nama: {{auth()->user()->name}}</p>
                                             <p>Email: {{auth()->user()->email}}</p>
                                             <p>No Telepon: +{{auth()->user()->phone}}</p>
-                                            @foreach ($address as $stores ) 
+                                            @foreach ($address as $stores )
                                             <p>Alamat: {{ $stores->address }}</p>
                                             @endforeach
-                                            
+
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="devider"></div>

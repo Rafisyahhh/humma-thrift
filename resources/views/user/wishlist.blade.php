@@ -225,7 +225,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="product-cart-btn">
+                                        <div class="product-cart-btn mb-4">
                                             <div class="dropdown">
                                                 <a class="wishlist-link" href="#" role="button" id="wishlistDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="fas fa-ellipsis-h"></i>
