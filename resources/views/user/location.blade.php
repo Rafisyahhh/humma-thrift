@@ -195,11 +195,33 @@
                                                 +{{ $users->phone }}
                                             </p>
                                             <div style="display: flex; align-items: center;">
-                                                <button type="button" class="openModalUpdate"
-                                                    data-modal-id="updateModal{{ $address->id }}"
-                                                    style="color: blue; background: none; border: none; padding: 0; cursor: pointer; margin-right: 110px;">
-                                                    Ubah
-                                                </button>
+
+                                                <div class="row align-items-center">
+                                                    <!-- Update Button -->
+                                                    <div class="col-auto">
+                                                        <button type="button" class="openModalUpdate me-4"
+                                                                data-modal-id="updateModal{{ $address->id }}"
+                                                                style="color: rgb(138, 138, 138); background: none; border: none; padding: 0; cursor: pointer;">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                                                                <path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h8.925l-2 2H5v14h14v-6.95l2-2V19q0 .825-.587 1.413T19 21zm4-6v-4.25l9.175-9.175q.3-.3.675-.45t.75-.15q.4 0 .763.15t.662.45L22.425 3q.275.3.425.663T23 4.4t-.137.738t-.438.662L13.25 15zM21.025 4.4l-1.4-1.4zM11 13h1.4l5.8-5.8l-.7-.7l-.725-.7L11 11.575zm6.5-6.5l-.725-.7zl.7.7z"/>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                    <!-- Delete Button -->
+                                                    <div class="col-auto">
+                                                        <form action="{{ route('user.address.destroy', $address->id) }}" method="post" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                    style="color: rgb(138, 138, 138); background: none; border: none; padding: 0; cursor: pointer; margin-right: 110px;">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                                                                    <path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z"/>
+                                                                </svg>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
                                                 <form method="POST" action="{{route('user.address.edit', ['user' => auth()->user()->id, 'address' => $address->id]) }}">
                                                     @csrf
                                                     @method('PUT')
@@ -254,6 +276,40 @@
             </div>
         </div>
     </div>
+
+    @foreach ($addresses as $key => $address)
+        <div id="updateModal{{ $address->id }}" class="modal">
+            <div class="modal-content">
+                <button class="close-modal mx-5">&times;</button>
+                <h5 class="mb-5" style="text-align: center">Ubah Alamat</h5>
+                <div class="mx-5">
+                    <form
+                        action="{{ route('user.address.edit', ['user' => auth()->user()->id, 'address' => $address->id]) }}"
+                        method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="account-inner-form">
+                            <div class="review-form-name mb-2">
+                                <label for="address_update" class="form-label"
+                                    style="background-color: white; font-size: 18px">Alamat</label>
+                                <textarea name="address_update" id="address_update"
+                                    class="form-control @error('address_update') is-invalid @enderror" placeholder="Tambahkan Alamat" rows="5"
+                                    style="font-size: 15px">{{ $address->address }}</textarea>
+                                @error('address_update')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: flex-end;">
+                            <button class="shop-btn" type="submit" style="width: 20rem;">Ubah Alamat</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection
 
 @push('script')
@@ -284,6 +340,41 @@
                 addressModal.style.display = "none";
             }
         }
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get all buttons that open the modal
+        var openUpdateModalBtns = document.querySelectorAll(".openModalUpdate");
+
+        // Loop through each button and attach event listeners
+        openUpdateModalBtns.forEach(function(btn) {
+            btn.addEventListener("click", function() {
+                // Get the modal ID from data attribute
+                var modalId = btn.getAttribute("data-modal-id");
+                // Get the modal element
+                var updateModal = document.getElementById(modalId);
+
+                // Show the modal
+                updateModal.style.display = "block";
+
+                // Get the close button for the modal
+                var updateCloseBtn = updateModal.querySelector(".close-modal");
+
+                // When the user clicks on close button in the modal, close the modal
+                updateCloseBtn.addEventListener("click", function() {
+                    updateModal.style.display = "none";
+                });
+
+                // When the user clicks anywhere outside of the modal, close the modal
+                window.addEventListener("click", function(event) {
+                    if (event.target == updateModal) {
+                        updateModal.style.display = "none";
+                    }
+                });
+            });
+        });
     });
 </script>
 @endpush

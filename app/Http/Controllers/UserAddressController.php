@@ -105,7 +105,7 @@ class UserAddressController extends Controller
                     'address' => $validatedData['address_update'],
                 ]);
 
-            }
+            }else{
 
 
                 $userAddress = UserAddress::all()->toQuery()->update(['status' => 0]);
@@ -113,7 +113,7 @@ class UserAddressController extends Controller
 
                 $userAddress->update(['status' => !$userAddress->status]);
 
-            
+            }
             //    dd( $userAddress->status);
 
 
@@ -127,8 +127,12 @@ class UserAddressController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserAddress $userAddress)
+    public function destroy(UserAddress $userAddress, $id)
     {
-        //
+        $userAddress = UserAddress::findOrFail($id);
+        $userAddress->delete();
+
+        return redirect()->back()->with('success', 'Sukses menghapus alamat');
     }
+
 }
