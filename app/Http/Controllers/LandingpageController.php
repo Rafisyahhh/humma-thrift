@@ -128,25 +128,6 @@ class LandingpageController extends Controller {
         return view('Landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'colors', 'sizes'));
     }
 
-    public function searchProductRegular(Request $request) {
-        $brands = Brand::all();
-        $categories = ProductCategory::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
-        $search = $request->search;
-        $products = Product::where('title', 'like', "%$search%")->paginate(24);
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
-
-        $colors = $products->pluck('color')->map('strtolower')->unique();
-        $sizes = $products->pluck('size')->map('strtolower')->unique();
-
-        return view('landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search', 'colors', 'sizes'));
-    }
-
-
     // Tambahkan metode auction
     public function productAuction() {
         $product_auction = ProductAuction::paginate(24);
@@ -166,6 +147,27 @@ class LandingpageController extends Controller {
 
         return view('landing.produk-auction', compact('product_auction', 'brands', 'categories', 'user', 'countcart', 'carts', 'countFavorite', 'colors', 'sizes'));
     }
+
+
+
+    public function searchProductRegular(Request $request) {
+        $brands = Brand::all();
+        $categories = ProductCategory::all();
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+        $countcart = cart::where('user_id', auth()->id())->count();
+        $search = $request->search;
+        $products = Product::where('title', 'like', "%$search%")->paginate(24);
+        $carts = cart::where('user_id', auth()->id())
+            ->whereNotNull('product_id')
+            ->orderBy('created_at')
+            ->get();
+
+        $colors = $products->pluck('color')->map('strtolower')->unique();
+        $sizes = $products->pluck('size')->map('strtolower')->unique();
+
+        return view('landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search', 'colors', 'sizes'));
+    }
+
 
     public function searchProductAuction(Request $request) {
         $brands = Brand::all();
