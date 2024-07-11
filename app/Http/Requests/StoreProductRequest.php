@@ -29,7 +29,7 @@ class StoreProductRequest extends FormRequest {
             'color' => 'required',
             'product_type' => 'required',
             'price' => 'required_if:product_type,products|nullable|numeric',
-            'bid_price_start' => ['required_if:product_type,product_auctions', 'nullable', 'numeric', "max:$this->bid_price_end"],
+            'bid_price_start' => ['required_if:product_type,product_auctions', 'nullable', 'numeric', "max:$this->bid_price_end", "min:500"],
             'bid_price_end' => ['required_if:product_type,product_auctions', 'nullable', 'numeric'],
             // 'bid_price_end' => ['required_if:product_type,1', 'nullable', 'numeric', "min:$this->bid_price_start"],
             'category_id' => 'required|array',
