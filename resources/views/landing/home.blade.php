@@ -487,11 +487,11 @@
                                                             <i class="fas fa-heart"></i>
                                                         </span>
                                                     </a>
-                                                    <a href="{{ route('login') }}" class="favourite cart-item">
+                                                    {{-- <a href="{{ route('login') }}" class="favourite cart-item">
                                                         <span>
                                                             <i class="fas fa-shopping-cart"></i>
                                                         </span>
-                                                    </a>
+                                                    </a> --}}
                                                     <a href="{{ route('login') }}" class="compaire cart-item">
                                                         <span>
                                                             <i class="fas fa-share"></i>

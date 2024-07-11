@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserUpdatePasswordRequest;
+use App\Models\cart;
 use App\Models\Favorite;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,8 +16,13 @@ class UserUpdatePasswordController extends Controller {
      */
     public function index() {
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
+        $countcart = cart::where('user_id', auth()->id())->count();
+        $carts = cart::where('user_id', auth()->id())
+            ->whereNotNull('product_id')
+            ->orderBy('created_at')
+            ->get();
 
-        return view('user.update-password', 'countFavorite');
+        return view('user.update-password', compact('countFavorite', 'countcart', 'carts'));
     }
 
     /**
