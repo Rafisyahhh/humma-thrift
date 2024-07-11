@@ -229,7 +229,7 @@
       }
 
       function initPriceSlider() {
-        const maxPrice = {{ max($products->pluck('price')->unique()->toArray()) }};
+        const maxPrice = +'{{ $products->pluck('price')->max() }}';
         if ($("#price-slider").length > 0) {
           var tooltipSlider = document.getElementById("price-slider");
 

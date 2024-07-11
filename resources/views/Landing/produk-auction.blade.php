@@ -421,8 +421,8 @@
       }
 
       function initPriceSlider() {
-        const maxPriceStart = {{ $product_auction->pluck('bid_price_start')->max() }};
-        const maxPriceEnd = {{ $product_auction->pluck('bid_price_end')->max() }};
+        const maxPriceStart = +'{{ $product_auction->pluck('bid_price_start')->max() }}';
+        const maxPriceEnd = +'{{ $product_auction->pluck('bid_price_end')->max() }}';
         if ($("#price-slider").length > 0 && $("#price-slider-2").length > 0) {
           var sliderPriceStart = document.getElementById("price-slider");
           var sliderPriceEnd = document.getElementById("price-slider-2");
