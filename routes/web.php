@@ -75,6 +75,7 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
         Route::get('/', 'index')->name('index');
         Route::get('/{notificationId}', 'show')->name('show');
         Route::get('/read-all', 'readAll')->name('readAll');
+        Route::delete('{id}', 'destroy')->name('destroy');
     });
 
     // Show seller product auction
@@ -117,6 +118,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
             Route::get('/', 'notifyuser')->name('index');
             Route::get('/{notificationId}', 'notifyshow')->name('show');
             Route::get('/read-all', 'readAll')->name('readAll');
+            Route::delete('{id}', 'destroynotify')->name('destroy');
         });
         # Payment Routes
         Route::prefix('payment')->group(function () {

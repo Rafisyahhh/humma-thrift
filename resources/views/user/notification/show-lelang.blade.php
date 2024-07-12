@@ -51,12 +51,20 @@
                         <div class="ms-lg-auto mt-3 d-flex flex-column align-items-end gap-2 mt-lg-0">
                             <span class="text-muted">{{ $notification->created_at->locale('id')->diffForHumans() }}</span>
                             <div class="d-flex gap-2">
-                                <a class="btn btn-danger"
+                                <form action="{{ route('user.notification.destroy', $notification->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">
+                                        <i
+                                        class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                                {{-- <a class="btn btn-danger"
                                     href="{{ route('admin.notification.destroy', $notification->id) }}"><i
-                                        class="fas fa-trash"></i></a>
-                                <a class="btn btn-primary"
+                                        class="fas fa-trash"></i></a> --}}
+                                {{-- <a class="btn btn-primary"
                                     href="{{ route('admin.notification.unread', $notification->id) }}"><i
-                                        class="fas fa-envelope-open"></i></a>
+                                        class="fas fa-envelope-open"></i></a> --}}
                             </div>
                         </div>
                     </div>
