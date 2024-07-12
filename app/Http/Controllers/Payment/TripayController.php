@@ -43,12 +43,12 @@ class TripayController extends Controller
         return $responseData;
     }
 
-    public function requestTransaction($method,$product)
+    public function requestTransaction($method, $product)
     {
         $apiKey       = config('tripay.api_key');
         $privateKey   = config('tripay.private_key');
         $merchantCode = config('tripay.merchant_code');
-        $merchantRef  = 'PX-'.time();
+        $merchantRef  = 'PX-' . time();
 
         $users = auth()->user();
 
@@ -65,7 +65,7 @@ class TripayController extends Controller
                     'price'       => $product->price,
                     'quantity'    => 1,
                     'product_url' => 'https://tokokamu.com/product/nama-produk-1',
-                    'image_url'   => $product->thumbnail,
+                    'image_url'   => url(asset("storage/{$product->getAttribute('thumbnail')}")),
                 ]
             ],
             'return_url'   => 'https://domainanda.com/redirect',
@@ -92,6 +92,60 @@ class TripayController extends Controller
 
         curl_close($curl);
 
-        echo empty($error) ? $response : $error;
+        if ($error) {
+            return (object)['error' => $error];
+        }
+
+        $decodedResponse = json_decode($response);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return (object)['error' => 'Invalid JSON response'];
+        }
+
+        if (!isset($decodedResponse->data)) {
+            return (object)['error' => 'No data property in response'];
+        }
+
+        return $decodedResponse->data;
+    }
+
+
+
+    public function detailTransaction($reference)
+    {
+        $apiKey = config('tripay.api_key');
+        $payload = ['reference' => $reference];
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_FRESH_CONNECT  => true,
+            CURLOPT_URL            => 'https://tripay.co.id/api-sandbox/transaction/detail?' . http_build_query($payload),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HEADER         => false,
+            CURLOPT_HTTPHEADER     => ['Authorization: Bearer ' . $apiKey],
+            CURLOPT_FAILONERROR    => false,
+            CURLOPT_IPRESOLVE      => CURL_IPRESOLVE_V4
+        ]);
+
+        $response = curl_exec($curl);
+        $error = curl_error($curl);
+        curl_close($curl);
+
+        if ($response === false) {
+            return $error;
+        }
+
+        $decodedResponse = json_decode($response);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return 'JSON decode error: ' . json_last_error_msg();
+        }
+
+        if (!isset($decodedResponse->data)) {
+            return 'Data property is missing in the response';
+        }
+
+        return $decodedResponse->data;
     }
 }
