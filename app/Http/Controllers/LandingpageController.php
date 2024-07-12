@@ -21,7 +21,7 @@ class LandingpageController extends Controller {
         $event = Event::all();
         $brands = Brand::all();
         $categories = ProductCategory::all();
-        $product = Product::all();
+        $product = Product::where('status', 'active')->get();
         $favorites = Favorite::where('user_id', auth()->id())
             ->whereNotNull('product_id')
             ->orderBy('created_at')
