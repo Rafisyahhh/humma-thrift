@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreUserStoreRequest;
 use App\Http\Requests\UpdateUserStoreRequest;
+use App\Models\Product;
+use App\Models\ProductAuction;
 
 class UserStoreController extends Controller
 {
@@ -23,10 +25,13 @@ class UserStoreController extends Controller
             $store = UserStore::all();
             $address = UserAddress::all();
             $user = User::all();
+            $count = Product::where('user_id', auth()->id())->count();
+            $count += ProductAuction::where('user_id', auth()->id())->count();
         } else {
             return redirect()->route('login')->with('error', 'Anda harus masuk untuk melihat informasi toko.');
         }
-        return view('seller.index', compact('store', 'address', 'user'));
+        
+        return view('seller.index', compact('store', 'address', 'user', 'count'));
     }
 
     /**

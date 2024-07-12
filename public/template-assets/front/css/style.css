@@ -91,6 +91,7 @@ p {
     font-weight: 400;
     font-family: inter, sans-serif;
     margin-bottom: 0;
+    margin-left: 0;
 }
 ul {
     padding-left: 0;
@@ -425,7 +426,7 @@ button {
 .section-title .view:hover::before {
     opacity: 1;
     visibility: visible;
-    width: 7rem;
+    width: 10rem;
 }
 @media (max-width: 767px) {
     .section-title h5 {
@@ -5258,7 +5259,7 @@ table .ticket-row:hover {
     gap: 2rem;
     height: auto;
     padding: 2.6rem;
-    background-color: rgba(41, 72, 146, 0.1);
+    background-color: rgba(41, 72, 146, 0.3);
     border: none;
     box-shadow: none;
 }
@@ -5291,7 +5292,7 @@ table .ticket-row:hover {
     justify-content: space-between;
     gap: 0;
     padding: 4rem;
-    background: rgba(41, 72, 146, 0.1);
+    background: rgba(41, 72, 146, 0.3);
     border-radius: 0.5rem;
 }
 .user-dashboard .nav-content .profile-section .info-section .heading {

@@ -241,15 +241,17 @@
                                 // Get current hours
                                 $openInstance = \Carbon\Carbon::parse($store->open);
                                 $closeInstance = \Carbon\Carbon::parse($store->close);
-
                                 // Get current hours
                                 $now = \Carbon\Carbon::now();
                             @endphp
                             <p class="profile-description opacity-75 mt-3 mb-0">
-                                @if ($now->between($openInstance, $closeInstance) && $store->getStatusEnum()->value === 'online')
-                                    <span class="badge text-bg-success me-2">Buka</span>
+                                {{-- {{ $store->getStatusEnum()->value === 'online' }} --}}
+                                {{-- @if ($now->between($openInstance, $closeInstance) && $store->getStatusEnum()->value === 'online') --}}
+                                @if ($now->between($openInstance, $closeInstance) && Cache::has('user-is-online-' . $store->user_id))
+                                <span class="badge text-bg-success me-2">Buka</span>
                                 @else
                                     <span class="badge text-bg-danger me-2">Tutup</span>
+                                    {{-- {{ dd('Open Instance: ' . $openInstance, 'Close Instance: ' . $closeInstance, 'Now: ' . $now, 'Status: ' . $store->getStatusEnum()->value) }} --}}
                                 @endif
                                 {{ $openInstance->format('H:i') }} - {{ $closeInstance->format('H:i') }}
                             </p>
@@ -361,11 +363,9 @@
                                 </div>
                             @empty
                                 <div class="col-lg-12">
-                                    <h3 class="text-center">Produk Masih Kosong</h3>
-                                    <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam
-                                        waktu dekat kami
-                                        akan
-                                        menambahkan beberapa produk untukmu, stay tune.</p>
+                                    <h5 class="text-center" style="color: #a5a3ae">Produk Masih Kosong</h5>
+                                    <p class="text-center" style="color: #a5a3ae">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam
+                                        waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
                                 </div>
                             @endforelse
                         </div>

@@ -22,15 +22,14 @@ class StoreUserAddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'address' => 'required',
+
         ];
     }
 
     public function messages(): array
     {
         return [
-            'address.required' => 'Alamat harus diisi',
+            
         ];
-
     }
 }

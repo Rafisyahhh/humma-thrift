@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\cart;
 use App\Models\User;
+use App\Models\Favorite;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreUserAddressRequest;
 use App\Http\Requests\UpdateUserAddressRequest;
 
@@ -15,7 +18,15 @@ class UserAddressController extends Controller
      */
     public function index()
     {
-        //
+        $users = Auth::user();
+        $addresses = UserAddress::all();
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+        $countcart = cart::where('user_id',auth()->id())->count();
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+        return view('user.location', compact('countcart','carts','countFavorite', 'addresses','users'));
     }
 
     /**
@@ -29,18 +40,26 @@ class UserAddressController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUserAddressRequest $request , $id)
+    public function store(StoreUserAddressRequest $request, $id)
     {
         $user = User::findOrFail($id);
+
         try {
+            // Jika alamat ini dijadikan alamat utama, update alamat lain untuk user ini menjadi non-prioritas
+            // if ($request->status) {
+            //     UserAddress::where('user_id', $user->id)
+            //         ->update(['status' => 0]);
+            // }
+
             UserAddress::create([
-                'user_id' =>$user->id,
-                'address'=>$request->address,
-                'status'=> 0
+                'user_id' => $user->id,
+                'address' => $request->address,
+                'status' => 0,
             ]);
-        return redirect()->back()->with("success", "Alamat berhasil ditambahkan");
+
+            return redirect()->back()->with("success", "Alamat berhasil ditambahkan");
         } catch (\Throwable $th) {
-            //throw $th;
+            return redirect()->back()->with("error", "Gagal menambahkan alamat");
         }
     }
 
@@ -65,35 +84,55 @@ class UserAddressController extends Controller
      */
     public function update(UpdateUserAddressRequest $request, $userId, $addressId)
     {
-        try {
+        // try {
+
+            $user = User::findOrFail($userId);
             // Ensure the user is authorized to update the address
             if (auth()->id() !== (int)$userId) {
                 return redirect()->back()->with('error', 'Unauthorized action.');
             }
 
             $validatedData = $request->validate([
-                'address_update' => 'required',
+                'address_update' => 'nullable',
             ]);
 
-            // Find the address by ID regardless of its status
-            $userAddress = UserAddress::findOrFail($addressId);
-            // dd( $userAddress);
-            // Update the address
-            $userAddress->update([
-                'address' => $validatedData['address_update'],
-            ]);
+            if (isset ($validatedData['address_update'])){
+                 // Find the address by ID regardless of its status
+                $userAddress = UserAddress::findOrFail($addressId);
+
+                // Update the address
+                $userAddress->update([
+                    'address' => $validatedData['address_update'],
+                ]);
+
+            }else{
+
+
+                $userAddress = UserAddress::all()->toQuery()->update(['status' => 0]);
+                $userAddress = UserAddress::find($addressId);
+
+                $userAddress->update(['status' => !$userAddress->status]);
+
+            }
+            //    dd( $userAddress->status);
+
+
 
             return redirect()->back()->with('success', 'Alamat berhasil diperbarui.');
-        } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui alamat.');
-        }
+        // } catch (\Throwable $th) {
+        //     return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui alamat.');
+        // }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserAddress $userAddress)
+    public function destroy(UserAddress $userAddress, $id)
     {
-        //
+        $userAddress = UserAddress::findOrFail($id);
+        $userAddress->delete();
+
+        return redirect()->back()->with('success', 'Sukses menghapus alamat');
     }
+
 }

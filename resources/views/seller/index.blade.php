@@ -38,14 +38,14 @@
         <div class="tab-content nav-content" id="v-pills-tabContent" style="flex: 1 0%;">
             <div class="user-profile">
                 <div class="user-title">
-                    <h5 class="heading" style="font-size: 45px">PROFIL ANDA </h5>
+                    <h5 class="heading" style="font-size: 35px">PROFIL ANDA</h5>
                 </div>
                 <div class="profile-section">
                     <div class="row g-5 summary-icons">
                         <div class="col-lg-3 col-sm-4">
                             <div class="product-wrapper"
                                 style="height: 230px;padding: 11.5px;align-items:center;text-align:center;">
-                                <div class="wrapper-img">
+                                <div class="wrapper-img mt-5">
                                     <span>
                                         <svg width="48" height="48">
                                             <use
@@ -63,7 +63,7 @@
                         <div class="col-lg-3 col-sm-4">
                             <div class="product-wrapper"
                                 style="height: 230px;padding: 11.5px;align-items:center;text-align:center;">
-                                <div class="wrapper-img">
+                                <div class="wrapper-img mt-5">
                                     <span>
                                         <svg width="48" height="48">
                                             <use
@@ -81,7 +81,7 @@
                         <div class="col-lg-3 col-sm-4">
                             <div class="product-wrapper"
                                 style="height: 230px;padding: 11.5px;align-items:center;text-align:center;">
-                                <div class="wrapper-img">
+                                <div class="wrapper-img mt-5">
                                     <span>
                                         <svg width="48" height="48">
                                             <use
@@ -99,7 +99,7 @@
                         <div class="col-lg-3 col-sm-4">
                             <div class="product-wrapper"
                                 style="height: 230px;padding: 11.5px;align-items:center;text-align:center;">
-                                <div class="wrapper-img">
+                                <div class="wrapper-img mt-5">
                                     <span>
                                         <svg width="48" height="48">
                                             <use
@@ -110,7 +110,7 @@
                                 </div>
                                 <div class="wrapper-content">
                                     <p class="paragraph">Jumlah Produk</p>
-                                    <h3 class="mb-0 paragraph">09</h3>
+                                    <h3 class="mb-0 paragraph">{{ $count }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -121,15 +121,15 @@
                                     <h5 class="heading">Informasi pribadi</h5>
                                     <div class="info-list">
                                         <div class="info-title">
-                                            <p>Nama: {{auth()->user()->name}}</p>
-                                            <p>Email: {{auth()->user()->email}}</p>
-                                            <p>No Telepon: +{{auth()->user()->phone}}</p>
-                                            @foreach ($address as $stores ) 
-                                            <p>Alamat: {{ $stores->address }}</p>
+                                            <p>Nama: <strong style="font-size: 1.6rem">{{ auth()->user()->name }}</strong></p>
+                                            <p>Email: <strong style="font-size: 1.6rem">{{auth()->user()->email}}</strong></p>
+                                            <p>No Telepon: <strong style="font-size: 1.6rem">+{{auth()->user()->phone}}</strong></p>
+                                                @foreach ($address as $stores )
+                                                    @if ($stores->status)
+                                                    <p>Alamat: <strong style="font-size: 1.6rem">{{ $stores->address }}</strong></p>
+                                                @endif
                                             @endforeach
-                                            
                                         </div>
-                                        
                                     </div>
                                 </div>
                                 <div class="devider"></div>
@@ -138,12 +138,12 @@
                                     <div class="info-list">
                                         <div class="info-title">
                                             @foreach ($store as $store)
-                                            @if ($store->user_id == auth()->id())
-                                            <p>Nama: {{$store->name}}</p>
-                                            <p>Email: {{$store->user->email}}</p>
-                                            <p>No Telepon: {{$store->user->phone}}</p>
-                                            <p>Alamat: {{$store->address}}</p>
-                                            @endif
+                                                @if ($store->user_id == auth()->id())
+                                                    <p>Nama: <strong style="font-size: 1.6rem">{{$store->name}}</strong></p>
+                                                    <p>Email: <strong style="font-size: 1.6rem">{{$store->user->email}}</strong></p>
+                                                    <p>No Telepon: <strong style="font-size: 1.6rem">+{{$store->user->phone}}</strong></p>
+                                                    <p>Alamat: <strong style="font-size: 1.6rem">{{$store->address}}</strong></p>
+                                                @endif
                                             @endforeach
                                         </div>
                                     </div>

@@ -10,13 +10,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Str;
 
-class ProductController extends Controller
-{
+class ProductController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
+    public function index() {
         $product_category_pivots = ProductCategoryPivot::all();
         $products = Product::where("store_id", Auth::user()->store()->first()->id)->get();
         $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get();
@@ -45,8 +43,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
+    public function create() {
         $brands = Brand::all();
         $categories = ProductCategory::all();
 
@@ -56,8 +53,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequest $request)
-    {
+    public function store(StoreProductRequest $request) {
         $data = $request->validated();
         $data['thumbnail'] = $this->storeFile($request->file('thumbnail'), 'uploads/thumbnails');
         $data['user_id'] = Auth::id();
@@ -71,20 +67,18 @@ class ProductController extends Controller
         DB::transaction(function () use ($request, $data, $model, $isAuction) {
             $product = $model::create($data);
 
-            $this->storeGallery($request->image_gallery ?? [], $product->id, $isAuction);
+            $this->storeGallery($request->image_galery ?? [], $product->id, $isAuction);
             $this->storeCategories($request->category_id ?? [], $product->id, $isAuction);
         });
 
         return redirect()->route('seller.product.index')->with('success', 'Sukses menambah produk');
     }
 
-    private function storeFile($file, $path)
-    {
+    private function storeFile($file, $path) {
         return $file ? $file->store($path, 'public') : null;
     }
 
-    private function storeGallery($images, $productId, $isAuction)
-    {
+    private function storeGallery($images, $productId, $isAuction) {
         $galleryData = array_map(function ($image) use ($productId, $isAuction) {
             return [
                 $isAuction ? 'product_auction_id' : 'product_id' => $productId,
@@ -95,8 +89,7 @@ class ProductController extends Controller
         ProductGallery::insert($galleryData);
     }
 
-    private function storeCategories($categoryIds, $productId, $isAuction)
-    {
+    private function storeCategories($categoryIds, $productId, $isAuction) {
         $categoryData = array_map(function ($categoryId) use ($productId, $isAuction) {
             return [
                 $isAuction ? 'product_auction_id' : 'product_id' => $productId,
@@ -107,8 +100,7 @@ class ProductController extends Controller
         ProductCategoryPivot::insert($categoryData);
     }
 
-    private function generateSlug($title, $model)
-    {
+    private function generateSlug($title, $model) {
         $slug = Str::slug($title);
         $modelInstance = new $model;
 
@@ -122,8 +114,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
-    {
+    public function show(Product $product) {
         $product_category_pivots = ProductCategoryPivot::all();
         $products = Product::where("store_id", Auth::user()->store()->first()->id)->get();
         $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get();
@@ -137,8 +128,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
-    {
+    public function edit(Product $product) {
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $is_edit = true;
@@ -149,8 +139,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, $product)
-    {
+    public function update(UpdateProductRequest $request, $product) {
         $data = $request->validated();
         $data['store_id'] = Auth::user()->store()->first()->id;
         $isAuction = $request->product_type === 'product_auctions';
@@ -182,12 +171,12 @@ class ProductController extends Controller
         $currentProduct->update($data);
 
         if (isset($request->image_galery)) {
-            $galleryData = array_map(fn ($image) => [
+            $galleryData = array_map(fn($image) => [
                 $isAuction ? 'product_auction_id' : 'product_id' => $currentProduct->id,
                 'image' => $image->store('uploads/galeries', 'public')
             ], $request->image_galery);
 
-            $categoryData = array_map(fn ($categoryId) => [
+            $categoryData = array_map(fn($categoryId) => [
                 $isAuction ? 'product_auction_id' : 'product_id' => $currentProduct->id,
                 'product_category_id' => $categoryId
             ], $request->category_id);
@@ -204,8 +193,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
-    {
+    public function destroy(Product $product) {
         $productGalleries = ProductGallery::where('product_id', $product->id)->get();
         foreach ($productGalleries as $gallery) {
             Storage::disk('public')->delete($gallery->image);
@@ -218,8 +206,7 @@ class ProductController extends Controller
         return redirect()->back()->with('success', 'Sukses menghapus produk');
     }
 
-    function slugify($text)
-    {
+    function slugify($text) {
         $text = strtolower($text);
         $text = preg_replace('/[^a-z0-9]+/', '-', $text);
         $text = trim($text, '-');

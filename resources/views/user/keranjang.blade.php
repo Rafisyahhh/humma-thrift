@@ -59,7 +59,7 @@
 
                                 @forelse ($storeItem['cartItems'] as $item)
                                     <tr class="table-row ticket-row product-list"
-                                        style="border: 1px solid #e6d5d593; width:100rem;">
+                                        style="border: 1px solid #e6d5d593; width:100rem; margin-left:55">
                                         <td class="table-wrapper wrapper-product">
                                             <div class="wrapper" style="display: flex; align-items: center; width:122rem;">
                                                 <div class="form-check" style="margin-right: 1rem;">
@@ -80,12 +80,12 @@
                                                         data-route="{{ route('store.product.detail', ['store' => $item->product->userStore->username, 'product' => $item->product->slug]) }}">
                                                         {{ $item->product->title }}
                                                     </h5>
-                                                    <div style="display: flex; align-items: center; margin-left: 55px; ">
+                                                    <div style="display: flex; align-items: center; margin-left: 125px;">
                                                         <p class="inner-text">
                                                             {{ implode(', ', array_column($item->product->categories->toArray(), 'title')) }}
                                                         </p>
                                                     </div>
-                                                    <div style="display: flex; align-items: center; margin-left: 0px;">
+                                                    <div style="display: flex; align-items: center; margin-inline-start: 10px;">
                                                         <p>Rp</p>
                                                         <p>{{ number_format($item->product->price, 0, ',', '.') }}</p>
                                                     </div>
@@ -101,18 +101,18 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <tr class="table-row ticket-row" style="border:none; background-color: #ffffff;">
-                                        <td class="cart-section wishlist-section" style="padding:2rem;">
-                                            <div class="wrapper-content"
-                                                style="display: flex; align-items: center; text-align: center; justify-content: center; flex-grow: 1; margin: 0 auto;">
-                                                <h5 class="heading" style="font-size: 18px;">Maaf Anda belum memasukkan
-                                                    produk
-                                                    apapun</h5>
-                                            </div>
-                                        </td>
-                                    </tr>
                                 @endforelse
                             @empty
+                            <tr class="table-row ticket-row" style="border:none; background-color: #ffffff;">
+                                <td class="cart-section wishlist-section" style="padding:2rem;">
+                                    <div class="wrapper-content"
+                                        style="display: flex; align-items: center; text-align: center; justify-content: center; flex-grow: 1; margin: 0 auto;">
+                                        <h5 class="heading" style="font-size: 18px;">Maaf Anda belum memasukkan
+                                            produk
+                                            apapun</h5>
+                                    </div>
+                                </td>
+                            </tr>
                             @endif
 
                             <tr class="table-row ticket-row"

@@ -334,9 +334,13 @@ small {
 }
 .mark,
 mark {
-    padding: 0.1875em;
-    color: var(--bs-highlight-color);
-    background-color: var(--bs-highlight-bg);
+    padding: 0.1880em;
+    color:rgb(255, 255, 255);
+    background: #1c3879;
+    border-radius: 8px;
+    border: 5px solid var(--NN500, #fafafa);
+    padding-right: 5.75rem;
+    font-size: 1.60rem;
 }
 sub,
 sup {
@@ -3426,7 +3430,7 @@ fieldset:disabled .btn {
     --bs-dropdown-font-size: 1rem;
     --bs-dropdown-color: var(--bs-body-color);
     --bs-dropdown-bg: var(--bs-body-bg);
-    --bs-dropdown-border-color: var(--bs-border-color-translucent);
+    --bs-dropdown-border-color: #1c3879;
     --bs-dropdown-border-radius: var(--bs-border-radius);
     --bs-dropdown-border-width: var(--bs-border-width);
     --bs-dropdown-inner-border-radius: calc(
@@ -3804,8 +3808,8 @@ fieldset:disabled .btn {
     --bs-nav-link-padding-x: 1rem;
     --bs-nav-link-padding-y: 0.5rem;
     --bs-nav-link-font-weight: ;
-    --bs-nav-link-color: var(--bs-link-color);
-    --bs-nav-link-hover-color: var(--bs-link-hover-color);
+    --bs-nav-link-color: #1c3879;
+    --bs-nav-link-hover-color: #2c63e1;
     --bs-nav-link-disabled-color: var(--bs-secondary-color);
     display: flex;
     flex-wrap: wrap;
@@ -3888,7 +3892,7 @@ fieldset:disabled .btn {
 .nav-pills {
     --bs-nav-pills-border-radius: var(--bs-border-radius);
     --bs-nav-pills-link-active-color: #fff;
-    --bs-nav-pills-link-active-bg: #0d6efd;
+    --bs-nav-pills-link-active-bg: #1c3879;
 }
 .nav-pills .nav-link {
     border-radius: var(--bs-nav-pills-border-radius);
@@ -3896,7 +3900,7 @@ fieldset:disabled .btn {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
     color: var(--bs-nav-pills-link-active-color);
-    background-color: var(--bs-nav-pills-link-active-bg);
+    background-color: #1c3879;
 }
 .nav-underline {
     --bs-nav-underline-gap: 1rem;

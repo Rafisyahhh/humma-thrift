@@ -32,6 +32,7 @@ use App\Http\Controllers\{
     UserStoreController,
     OrderController,
 };
+use App\Http\Controllers\Payment\CallbackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +61,9 @@ Route::get('/', [LandingpageController::class, 'index']);
 # Seller Routes
 Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(function () {
     Route::get('/home', [UserStoreController::class, 'index'])->name('home');
-    Route::view('/transaction', 'seller.transaksi')->name('transaction');
+    Route::get('/transaction', [OrderController::class, 'indexTransaction'])->name('transaction');
+    Route::get('/transactiondetail/{transaction}', [OrderController::class, 'indexDetail'])->name('transaction.detail');
+    Route::post('/transactiondetail/update/{transaction}', [OrderController::class, 'updateDetail'])->name('transaction.detail.update');
     Route::view('/income', 'seller.penghasilan')->name('income');
     // Route::view('/product', 'seller.produk')->name('product');
     Route::get('profil', [UserStoreController::class, 'show'])->name('profile');
@@ -89,12 +92,14 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
         Route::post('checkout', [CheckoutController::class, 'index'])->name('checkout');
         Route::post('address/{id}', [UserAddressController::class, 'store'])->name('address.store');
         Route::put('edit/address/{user}/{address}', [UserAddressController::class, 'update'])->name('address.edit');
+        Route::delete('delete/address/{address}', [UserAddressController::class, 'destroy'])->name('address.destroy');
         Route::view('about', 'user.tentang')->name('about');
         Route::get('brand', [LandingpageController::class, 'brand'])->name('brand');
         Route::view('detail', 'user.detail')->name('detail');
         Route::get('profile', [UserController::class, 'show'])->name('profile');
         Route::post('profile/{id}', [UserController::class, 'update'])->name('profile.update');
-        Route::view('order', 'user.order')->name('order');
+        Route::get('order', [OrderController::class, 'index'])->name('order');
+        Route::post('orderupdate/{transaction}', [OrderController::class, 'updateOrder'])->name('order.update');
         Route::get('cart', [CartController::class, 'index'])->name('cart');
         Route::get('wishlist', [LandingpageController::class, 'wishlist'])->name('wishlist');
         Route::get('shop', [DetailProductController::class, 'showProduct'])->name('shop');
@@ -107,11 +112,16 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
         // Route::post('/product/{id}/auction', [AuctionsController::class, 'store'])->name('product.auction.store');
         Route::get('notify', [AuctionsController::class, 'notify'])->name('notify');
         Route::get('/test-notification', [AuctionsController::class, 'testNotification']);
-
+        Route::get('location', [UserAddressController::class, 'index'])->name('location');
         Route::prefix('/notification')->controller(AuctionsController::class)->name('notification.')->group(function () {
             Route::get('/', 'notifyuser')->name('index');
             Route::get('/{notificationId}', 'notifyshow')->name('show');
             Route::get('/read-all', 'readAll')->name('readAll');
+        });
+        # Payment Routes
+        Route::prefix('payment')->group(function () {
+            Route::post('transaction/store', [TransactionController::class, 'store'])->name('transaction.store');
+            Route::get('transaction/{reference}', [TransactionController::class, 'show'])->name('transaction.show');
         });
     });
 
@@ -129,7 +139,8 @@ Route::prefix('dev')->group(function () {
 Route::prefix('product')->group(function () {
     Route::get('auction', [LandingpageController::class, 'productAuction']);
     Route::get('regular', [LandingpageController::class, 'productRegular']);
-    Route::get('regular/search', [LandingpageController::class, 'searchProduct'])->name('searchProduct');
+    Route::get('auction/search', [LandingpageController::class, 'searchProductAuction'])->name('searchProductAuction');
+    Route::get('regular/search', [LandingpageController::class, 'searchProductRegular'])->name('searchProductRegular');
 });
 Route::get('brand', [LandingpageController::class, 'brand']);
 Route::get('stores', [StoreProfileController::class, 'showStore'])->name('store');
@@ -177,8 +188,5 @@ Route::prefix('@{store:username}')->controller(StoreProfileController::class)->g
     Route::get('{product:slug}', 'productDetail')->name('store.product.detail');
 });
 
-# Payment Routes
-Route::prefix('payment')->group(function () {
-    Route::post('transaction/store', [TransactionController::class, 'store'])->name('transaction.store');
-    Route::post('transaction', [TransactionController::class, 'show'])->name('transaction.show');
-});
+#callback
+Route::post('callback', [CallbackController::class, 'handle'])->name('callback');
