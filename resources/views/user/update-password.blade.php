@@ -14,8 +14,8 @@
     <form action="{{ route('user.update-password.update', auth()->id()) }}" method="POST">
       @csrf
       @method('PUT')
-      <h5 class="comment-title">Perbaharui Sandi</h5>
-      <p class="paragraph">Silahkan perbaharui sandi anda.</p>
+      <h5 class="comment-title">Perbarui Sandi</h5>
+      <p class="paragraph">Silahkan perbarui sandi anda.</p>
       <div class="review-form">
         <div class="account-inner-form">
           @foreach ([
