@@ -335,7 +335,11 @@
       </div>
     </div>
   </section>
+  <div class="d-none">
+    {{ $product_auction->links() }}
+  </div>
 @endsection
+
 @section('script')
 
   <script>
@@ -388,6 +392,7 @@
 @endsection
 
 @push('script')
+  <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
   <script>
     $('#global-search').attr('action', '{{ route('searchProductAuction') }}');
     $(document).ready(function() {
@@ -492,3 +497,4 @@
     });
   </script>
 @endpush
+{{-- page-link --}}
