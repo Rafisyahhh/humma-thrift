@@ -373,9 +373,8 @@
                                                 <form action="{{ route('user.checkout') }}" method="post">
                                                     @csrf
                                                     <div style="bottom:0;">
-                                                        <input type="hidden" value="{{ $item->id }}"
-                                                            name="product_id">
-                                                        <button type="submit" class="shop-btn">Beli sekarang</button>
+                                                        <input type="hidden" value="{{ $isProductAuction->id }}" name="product_id">
+                                                        <button type="submit"  class="shop-btn">Beli sekarang</button>
                                                     </div>
                                                 </form>
                                             @elseif ($auctionproduct)

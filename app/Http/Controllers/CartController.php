@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductCategoryPivot;
 use App\Models\UserStore;
+use App\Notifications\UserCart;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -87,6 +88,8 @@ class CartController extends Controller
         }
 
         Cart::create($dataproduct);
+
+        $Product->userStore->user->notify(new UserCart($Product));
 
         return redirect()->back()->with('success', 'Keranjang berhasil dibuat.');
     }

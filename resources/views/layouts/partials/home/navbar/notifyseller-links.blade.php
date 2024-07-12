@@ -68,11 +68,11 @@
 }
 </style>
 <div class="header-cart header-right-dropdown">
-    <a href="{{ route('user.cart') }}" class="cart-item">
+    <a href="{{ route('seller.notification.index') }}" class="cart-item">
         <span style="position: relative; display: inline-block;">
             <i class="fas fa-bell" style="font-size: 1.5em; position: relative;"></i>
-            {{-- @if(!auth()->user()->unreadNotifications->isEmpty()) --}}
-            {{-- <span style="
+            @if(!auth()->user()->unreadNotifications->isEmpty())
+            <span style="
                 position: absolute;
                 top: -10px; /* Adjust as needed */
                 right: -10px; /* Adjust as needed */
@@ -84,10 +84,10 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-            "> --}}
-            {{-- {{ auth()->user()->unreadNotifications->count() }} --}}
-        </span>
-            {{-- @endif --}}
+            ">
+            {{ auth()->user()->unreadNotifications->count() }}
+            </span>
+            @endif
         </span>
     </a>
     <div class="cart-submenu">
@@ -95,27 +95,20 @@
             <div class="card-header border-bottom d-flex gap-3 align-items-center justify-content-between">
                 <h5 class="mb-0">Notifikasi</h5>
             </div>
-@php
-    $notifications = Auth::user()->notifications;
 
-@endphp
 
-            @forelse ($notifications as $notification)
-            {{-- <p class="new-price">{{ Str::limit($notification->data['data'], 200) }}</p> --}}
-sdfghjkjhgfdsdfghj
-            @empty
-            xx
-            @endforelse
-            {{-- @forelse(auth()->user()->unreadNotifications as $notification)
-
-        <a href="{{ $notification->data['url'] }}">
-
-            <div class="wrapper" style="padding:2px;">
+            @forelse(auth()->user()->unreadNotifications as $notification)
+                @php
+                $data = $notification->data;
+                @endphp
+                        <div class="wrapper" style="padding:2px;">
                 <div class="wrapper-item">
                     <div class="wrapper-content">
                         <h5 class="wrapper-title ms-4" style="font-size:1.5rem;">{{ $notification->data['title'] }}</h5>
                         <div class="price mx-4">
+                            @if (array_key_exists('data', $data))
                             <p class="new-price">{{ Str::limit($notification->data['data'], 200) }}</p>
+                            @endif
                         </div>
 
                     </div>
@@ -128,10 +121,9 @@ sdfghjkjhgfdsdfghj
                             class="ti ti-x"></span></a>
                 </div>
             </div>
-            </a>
             @empty
             <li class="list-group-item list-group-item-action" >Tidak ada notifikasi yang belum dibaca</li>
-            @endforelse --}}
+            @endforelse
 
 
         </div>
@@ -139,7 +131,7 @@ sdfghjkjhgfdsdfghj
             <div class="wrapper-line"></div>
 
             <div class="cart-btn">
-                <a href="cart" class="shop-btn">Lihat Semua</a>
+                <a href="{{ route('seller.notification.index') }}" class="shop-btn">Lihat Semua</a>
             </div>
         </div>
     </div>

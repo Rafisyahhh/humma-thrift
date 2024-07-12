@@ -53,10 +53,14 @@ class SellerLelang extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            'auction_id' => $this->auction->id,
-            'product_title' => $this->auction->productAuction->title,
+            'data' => "\"{$this->auction->productAuction->userStore->user->username}\" mengikuti lelang produk \"{$this->auction->productAuction->title}\" Dengan bid \"{$this->auction->auction_price}\".",
             'auction_price' => $this->auction->auction_price,
-            'user_id' => $this->auction->user_id,
+            'title' => "{$this->auction->productAuction->userStore->user->username} Mengikuti Lelang",
+            'url' => route('store.product.detail', [
+                'store' => $this->auction->productAuction->userStore->user->username,
+                'product' => $this->auction->productAuction->slug
+            ]),
+
         ];
     }
 }

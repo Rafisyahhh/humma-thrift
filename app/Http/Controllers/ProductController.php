@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{auctions, Product, Brand, ProductAuction, ProductCategory, ProductCategoryPivot, ProductGallery};
+use App\Models\{auctions, Product, Brand, cart, Favorite, ProductAuction, ProductCategory, ProductCategoryPivot, ProductGallery};
 use App\Http\Requests\{StoreProductRequest, UpdateProductRequest};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,11 +18,28 @@ class ProductController extends Controller
     public function index()
     {
         $product_category_pivots = ProductCategoryPivot::all();
-        $auctions = Auctions::orderBy('auction_price', 'desc')->orderBy('created_at', 'asc')->get();
         $products = Product::where("store_id", Auth::user()->store()->first()->id)->get();
         $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get();
+        $auctions = Auctions::orderBy('auction_price', 'desc')->orderBy('created_at', 'asc')->get();
+        // $countFavorite = Favorite::groupBy('product_id')->count();
+        // $countLFavorite = Favorite::groupBy('product_auction_id')->count();
+        // $countCart = cart::groupBy('product_id')->count();
+        $countFavorite = Favorite::select('product_id', \DB::raw('count(*) as total'))
+            ->groupBy('product_id')
+            ->pluck('total', 'product_id');
 
-        return view('seller.produk', compact('auctions', 'product_category_pivots', 'products', 'product_auctions'));
+        $countLFavorite = Favorite::select('product_auction_id', \DB::raw('count(*) as total'))
+            ->groupBy('product_auction_id')
+            ->pluck('total', 'product_auction_id');
+
+        $countCart = Cart::select('product_id', \DB::raw('count(*) as total'))
+            ->groupBy('product_id')
+            ->pluck('total', 'product_id');
+
+        $favorites = Favorite::all();
+        $carts = cart::all();
+
+        return view('seller.produk', compact('auctions', 'product_category_pivots', 'products', 'product_auctions', 'countFavorite','countLFavorite', 'countCart', 'favorites','carts'));
     }
 
     /**
@@ -111,8 +128,10 @@ class ProductController extends Controller
         $products = Product::where("store_id", Auth::user()->store()->first()->id)->get();
         $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get();
         $auctions = Auctions::orderBy('created_at', 'asc')->orderBy('auction_price', 'desc')->get();
+        $countFavorite = Favorite::where('store_id',  Auth::user()->store()->first()->id)->where('product_id', $products->id);
+        $countLFavorite = Favorite::where('store_id',  Auth::user()->store()->first()->id)->where('product_auction_id', $product_auctions->id);
 
-        return view('seller.produk', compact('auctions', 'product_category_pivots', 'products', 'product_auctions'));
+        return view('seller.produk', compact('auctions', 'product_category_pivots', 'products', 'product_auctions', 'countLFavorite', 'countFavorite'));
     }
 
     /**

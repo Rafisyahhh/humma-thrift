@@ -18,7 +18,9 @@ class ProductAuctionController extends Controller {
      */
     public function index() {
         $productAuction = ProductAuction::all();
-        return view('seller.produk', compact('productAuction'));
+        $notifications = auth()->user()->notifications;
+
+        return view('seller.produk', compact('productAuction','notifications'));
     }
 
     /**

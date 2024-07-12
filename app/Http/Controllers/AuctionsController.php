@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\auctions;
 use App\Http\Requests\StoreauctionsRequest;
 use App\Http\Requests\UpdateauctionsRequest;
+use App\Models\cart;
 use App\Models\Favorite;
+use App\Models\Notification;
 use App\Models\ProductAuction;
 use App\Models\ProductCategory;
 use App\Notifications\Lelang;
@@ -48,6 +50,42 @@ class AuctionsController extends Controller
         return view('Landing.produk-auction', compact('auctions', 'user', 'countFavorite'));
     }
 
+    public function notifyuser()
+    {
+        $notifications = Auth::user()->notifications()->paginate(20);
+        $countcart = cart::where('user_id', auth()->id())->count();
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+
+        return view('user.notification.notify-lelang', compact('notifications','countcart','carts','countFavorite'));
+
+    }
+
+    public function notifyshow(string $notificationId)
+    {
+        $notification = Auth::user()->notifications()->findOrFail($notificationId);
+        $notification->markAsRead();
+
+        $notifications = Auth::user()->notifications()->paginate(20);
+        $countcart = cart::where('user_id', auth()->id())->count();
+        $carts = cart::where('user_id', auth()->id())
+        ->whereNotNull('product_id')
+        ->orderBy('created_at')
+        ->get();
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+
+
+        return view('user.notification.show-lelang', compact('notifications','countcart','carts','countFavorite','notification'));
+    }
+
+    public function readAll()
+    {
+        Auth::user()->getAttribute('unreadNotifications')->markAsRead();
+        return redirect()->route('user.notification.index');
+    }
     /**
      * Store a newly created resource in storage.
      */

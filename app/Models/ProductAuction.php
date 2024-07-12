@@ -34,6 +34,11 @@ class ProductAuction extends Model {
         return $this->belongsToMany(ProductCategory::class, 'product_category_pivots');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function gallery() {
         return $this->hasMany(ProductGallery::class);
     }

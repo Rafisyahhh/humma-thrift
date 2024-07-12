@@ -67,8 +67,10 @@
     transform: translateY(-50%);
 }
 </style>
+{{-- @if (auth()->check() && auth()->user()->getUserRoleInstance()->value === 'user' ) --}}
+
 <div class="header-cart header-right-dropdown">
-    <a href="{{ route('user.cart') }}" class="cart-item">
+    <a href="{{ route('user.notification.index') }}" class="cart-item">
         <span style="position: relative; display: inline-block;">
             <i class="fas fa-bell" style="font-size: 1.5em; position: relative;"></i>
             @if(!auth()->user()->unreadNotifications->isEmpty())
@@ -137,8 +139,11 @@
             <div class="wrapper-line"></div>
 
             <div class="cart-btn">
-                <a href="cart" class="shop-btn">Lihat Semua</a>
+                <a href="{{ route('user.notification.index') }}" class="shop-btn">Lihat Semua</a>
             </div>
         </div>
     </div>
 </div>
+
+{{-- @endif --}}
+

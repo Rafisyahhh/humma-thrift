@@ -20,6 +20,10 @@ class cart extends Model
     {
         return $this->belongsTo(UserStore::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function categories() {
         return $this->belongsToMany(ProductCategory::class, 'product_category_pivots');
     }

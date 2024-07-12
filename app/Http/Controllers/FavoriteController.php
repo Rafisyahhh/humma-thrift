@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Favorite;
 use App\Models\Product;
 use App\Models\ProductAuction;
+use App\Notifications\UserFavorite;
 use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
@@ -43,6 +44,9 @@ class FavoriteController extends Controller
         }
         Favorite::create($dataproduct);
 
+        $product->load('user'); // Ensure the user relationship is loaded
+        $product->userStore->user->notify(new UserFavorite($product));
+
         return redirect()->back()->with('success', 'Favorite berhasil ditambahkan.');
     }
 
@@ -59,6 +63,9 @@ class FavoriteController extends Controller
             return redirect()->back()->with('error', "Produknya Lelang udah ada di favorit nih...");
         }
         Favorite::create($dataproduct_auction);
+
+        $productAuction->load('user'); // Ensure the user relationship is loaded
+        $productAuction->userStore->user->notify(new UserFavorite($productAuction));
 
         return redirect()->back()->with('success', 'Favorite berhasil ditambahkan.');
     }
