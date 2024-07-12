@@ -161,7 +161,8 @@
                         <div class="container custom-margin-bottom">
                             <div class="row custom-margin-bottom">
                                 <div class="col-lg-2">
-                                    <div class="position-absolute" data-aos="fade-up">
+                                    <div class="position-absolute" data-aos="fade-up"
+                                    style="top:35%;">
                                         <div class="wrapper-section">
                                             <h5 class="wrapper-details" style="color:white;">
                                                 {{ $even->subjudul }}
