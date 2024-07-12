@@ -2,189 +2,136 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\auctions;
+use App\Models\Auctions;
 use App\Models\Brand;
-use App\Models\cart;
-use App\Models\event;
+use App\Models\Cart;
+use App\Models\Event;
 use App\Models\Favorite;
 use App\Models\Product;
 use App\Models\ProductAuction;
 use App\Models\UserStore;
 use App\Models\ProductCategory;
 use App\Models\ProductCategoryPivot;
-use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
 
 class LandingpageController extends Controller {
-    public function index() {
-        $event = Event::all();
-        $brands = Brand::all();
-        $categories = ProductCategory::all();
-        $product = Product::all();
-        $favorites = Favorite::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
-        $product_auction = ProductAuction::all();
 
-        return view('landing.home', compact(
-            'event',
-            'brands',
-            'categories',
-            'product',
-            'favorites',
-            'product_auction',
-            'countFavorite',
-            'countcart',
-            'carts'
-        ));
+    private function getUserCounts() {
+        $userId = auth()->id();
+        return [
+            'countFavorite' => Favorite::where('user_id', $userId)->count(),
+            'countCart' => Cart::where('user_id', $userId)->count(),
+            'carts' => Cart::where('user_id', $userId)->whereNotNull('product_id')->orderBy('created_at')->get()
+        ];
+    }
+
+    public function index() {
+        $data = array_merge([
+            'event' => Event::all(),
+            'brands' => Brand::all(),
+            'categories' => ProductCategory::all(),
+            'product' => Product::all(),
+            'favorites' => Favorite::where('user_id', auth()->id())->whereNotNull('product_id')->orderBy('created_at')->get(),
+            'product_auction' => ProductAuction::all(),
+        ], $this->getUserCounts());
+
+        return view('landing.home', $data);
     }
 
     public function brand() {
-        $brands = Brand::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
+        $data = array_merge([
+            'brands' => Brand::all(),
+        ], $this->getUserCounts());
 
-        return view('landing.brand', compact('brands', 'countFavorite', 'carts', 'countcart'));
+        return view('landing.brand', $data);
     }
 
-    // public function product(){
-    //     $products = Product::all();
-    //     $brands = Brand::all();
-    //     $categories = ProductCategory::all();
-    //     $product_auction = ProductAuction::all();
-    //     return view('landing.produk', compact('products','brands','categories','product_auction'));
-    // }
-
-
     public function store() {
-        $store = UserStore::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
+        $data = array_merge([
+            'store' => UserStore::all(),
+        ], $this->getUserCounts());
 
-        return view('landing.toko', compact('store', 'carts', 'countcart', 'countFavorite'));
+        return view('landing.toko', $data);
     }
 
     public function wishlist() {
-        $categories = ProductCategory::all();
-        $brands = Brand::all();
-        $product = Product::all();
-        $favorite = Favorite::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $product_auction = Favorite::whereNotNull('product_auction_id')->where('user_id', auth()->id())->get();
-        $product_favorite = Favorite::whereNotNull('product_id')->where('user_id', auth()->id())->get();
-        $countcart = cart::where('user_id', auth()->id())->count();
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
+        $data = array_merge([
+            'categories' => ProductCategory::all(),
+            'brands' => Brand::all(),
+            'product' => Product::all(),
+            'favorite' => Favorite::all(),
+            'product_auction' => Favorite::whereNotNull('product_auction_id')->where('user_id', auth()->id())->get(),
+            'product_favorite' => Favorite::whereNotNull('product_id')->where('user_id', auth()->id())->get(),
+        ], $this->getUserCounts());
 
-        return view('user.wishlist', compact('categories', 'brands', 'product', 'favorite', 'product_auction', 'product_favorite', 'carts', 'countcart', 'countFavorite'));
+        return view('user.wishlist', $data);
     }
 
     public function cart() {
-        $cart = cart::all();
-        $product_category_pivots = ProductCategoryPivot::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
+        $data = array_merge([
+            'cart' => Cart::all(),
+            'product_category_pivots' => ProductCategoryPivot::all(),
+        ], $this->getUserCounts());
 
-        return view('user.keranjang', compact('cart', 'product_category_pivots', 'carts', 'countcart', 'countFavorite'));
+        return view('user.keranjang', $data);
     }
 
-    // Tambahkan metode regular
     public function productRegular() {
         $products = Product::where('status', 'active')->paginate(24);
-        $brands = Brand::all();
-        $categories = ProductCategory::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
+        $data = array_merge([
+            'products' => $products,
+            'brands' => Brand::all(),
+            'categories' => ProductCategory::all(),
+            'colors' => $products->pluck('color')->map('strtolower')->unique(),
+            'sizes' => $products->pluck('size')->map('strtolower')->unique(),
+        ], $this->getUserCounts());
 
-        $colors = $products->pluck('color')->map('strtolower')->unique();
-        $sizes = $products->pluck('size')->map('strtolower')->unique();
-
-        return view('Landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'colors', 'sizes'));
+        return view('Landing.produk-regular', $data);
     }
 
-    // Tambahkan metode auction
     public function productAuction() {
-        $product_auction = ProductAuction::where('status', 'active')->paginate(24);
-        $brands = Brand::all();
-        $categories = ProductCategory::all();
-        $countcart = cart::where('user_id', auth()->id())->count();
-        $user = Auth::user();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
-        $colors = $product_auction->pluck('color')->map('strtolower')->unique();
-        $sizes = $product_auction->pluck('size')->map('strtolower')->unique();
-        // $auctions = auctions::where('user_id', $user->id)->first();
-        // $notifications = auth()->user()->notifications;
+        $productAuction = ProductAuction::where('status', 'active')->paginate(24);
+        $data = array_merge([
+            'product_auction' => $productAuction,
+            'brands' => Brand::all(),
+            'categories' => ProductCategory::all(),
+            'user' => Auth::user(),
+            'colors' => $productAuction->pluck('color')->map('strtolower')->unique(),
+            'sizes' => $productAuction->pluck('size')->map('strtolower')->unique(),
+        ], $this->getUserCounts());
 
-        return view('Landing.produk-auction', compact('product_auction', 'brands', 'categories', 'user', 'countcart', 'carts', 'countFavorite', 'colors', 'sizes'));
+        return view('Landing.produk-auction', $data);
     }
-
-
 
     public function searchProductRegular(Request $request) {
-        $brands = Brand::all();
-        $categories = ProductCategory::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
         $search = $request->search;
         $products = Product::where('status', 'active')->where('title', 'like', "%$search%")->paginate(24);
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
+        $data = array_merge([
+            'products' => $products,
+            'brands' => Brand::all(),
+            'categories' => ProductCategory::all(),
+            'search' => $search,
+            'colors' => $products->pluck('color')->map('strtolower')->unique(),
+            'sizes' => $products->pluck('size')->map('strtolower')->unique(),
+        ], $this->getUserCounts());
 
-        $colors = $products->pluck('color')->map('strtolower')->unique();
-        $sizes = $products->pluck('size')->map('strtolower')->unique();
-
-        return view('Landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search', 'colors', 'sizes'));
+        return view('Landing.produk-regular', $data);
     }
 
-
     public function searchProductAuction(Request $request) {
-        $brands = Brand::all();
-        $categories = ProductCategory::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
         $search = $request->search;
-        $product_auction = ProductAuction::where('status', 'active')->where('title', 'like', "%$search%")->paginate(24);
-        $product_auction2 = ProductAuction::paginate(24);
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
+        $productAuction = ProductAuction::where('status', 'active')->where('title', 'like', "%$search%")->paginate(24);
+        $productAuctionAll = ProductAuction::paginate(24);
+        $data = array_merge([
+            'product_auction' => $productAuction,
+            'brands' => Brand::all(),
+            'categories' => ProductCategory::all(),
+            'search' => $search,
+            'colors' => $productAuctionAll->pluck('color')->map('strtolower')->unique(),
+            'sizes' => $productAuctionAll->pluck('size')->map('strtolower')->unique(),
+        ], $this->getUserCounts());
 
-        $colors = $product_auction2->pluck('color')->map('strtolower')->unique();
-        $sizes = $product_auction2->pluck('size')->map('strtolower')->unique();
-
-        return view('Landing.produk-auction', compact('product_auction', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search', 'colors', 'sizes'));
+        return view('Landing.produk-auction', $data);
     }
 }
