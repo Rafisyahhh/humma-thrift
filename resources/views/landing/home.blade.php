@@ -52,7 +52,7 @@
         }
 
         .product-category {
-            background: #5c9bf8;
+            background: #bacaff;
             padding-top: 5rem;
             padding-bottom: 5rem;
         }
@@ -209,7 +209,7 @@
                     class="transition duration-300 ease-in-out delay-150">
                     <path
                         d="M 0,500 L 0,187 C 118.1531100478469,175.94736842105263 236.3062200956938,164.89473684210526 333,184 C 429.6937799043062,203.10526315789474 504.92822966507185,252.3684210526316 592,227 C 679.0717703349281,201.6315789473684 777.980861244019,101.63157894736841 862,107 C 946.019138755981,112.36842105263159 1015.1483253588517,223.10526315789474 1109,254 C 1202.8516746411483,284.89473684210526 1321.4258373205741,235.94736842105263 1440,187 L 1440,500 L 0,500 Z"
-                        stroke="none" stroke-width="0" fill="#5c9bf8" fill-opacity="1"
+                        stroke="none" stroke-width="0" fill="#bacaff" fill-opacity="1"
                         class="transition-all duration-300 ease-in-out delay-150 path-0" transform="rotate(-180 720 250)">
                     </path>
                 </svg>
