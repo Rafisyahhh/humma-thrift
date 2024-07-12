@@ -31,20 +31,20 @@
             }
 
             .details-table {
-                    width: 100%;
-                    border-collapse: collapse;
-                }
+                width: 100%;
+                border-collapse: collapse;
+            }
 
-                .details-table th,
-                .details-table td {
-                    padding: 10px;
-                    border: 1px solid #ddd;
-                    text-align: left;
-                }
+            .details-table th,
+            .details-table td {
+                padding: 10px;
+                border: 1px solid #ddd;
+                text-align: left;
+            }
 
-                .details-table th {
-                    background-color: #f0f0f0;
-                }
+            .details-table th {
+                background-color: #f0f0f0;
+            }
 
             .total {
                 font-size: 18px;
@@ -82,9 +82,9 @@
             }
 
             .table-wrapper-center .table-heading {
-            color: white; /* Sets text color to white */
+                color: white;
+                /* Sets text color to white */
             }
-
         </style>
     </head>
 @endsection
@@ -109,7 +109,7 @@
                     <div class="filter">
                         <form action="" method="POST">
                             <select class="form-select form-select-lg" aria-label="Default select example"
-                                style="width: 200px;">
+                                style="width: 200px;border-color:#1c3879">
                                 <option selected>Semua</option>
                                 <option value="1">Dikemas</option>
                                 <option value="2">Diantar</option>
@@ -148,49 +148,70 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr class="table-row ticket-row">
-                                        <td class="table-wrapper wrapper-product" style="width: 35%; ">
-                                            <div class="wrapper">
+                                    @foreach ($transaction as $item)
+                                        <tr class="table-row ticket-row">
+                                            <td class="table-wrapper wrapper-product" style="width: 35%; ">
+                                                <div class="wrapper">
 
-                                            </div>
-                                            <div class="wrapper">
-                                                <div class="wrapper-img">
-                                                    <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
-                                                        alt="img">
                                                 </div>
-                                                <div class="wrapper-content">
-                                                    <h5 class="heading">Classic Design Skart</h5>
-                                                    <p class="mb-2" style="color: #636363;">Dress</p>
+                                                <div class="wrapper">
+                                                    <div class="wrapper-img">
+                                                        <img src="{{ asset('storage/' . $item->Product->thumbnail) }}"
+                                                            alt="img">
+                                                    </div>
+                                                    <div class="wrapper-content">
+                                                        <h5 class="heading">{{ $item->Product->title }}</h5>
+                                                        <p class="mb-2" style="color: #636363;">
+                                                            {{ $item->Product->brand->title }}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
+                                            </td>
 
-                                        <td class="table-wrapper">
-                                            <div class="table-wrapper-center">
-                                                <p>Rp. 200.000,00</p>
-                                            </div>
-                                        </td>
-                                        <td class="table-wrapper">
-                                            <div class="table-wrapper-center">
-                                                <h5 class="heading">Dikemas</h5>
-                                            </div>
-                                        </td>
-
-                                        <td class="table-wrapper">
-                                            <div class="table-wrapper-center">
-                                                <div class="wrapper-btn">
-                                                    <button type="button" class="shop-btn" data-bs-toggle="modal"
-                                                        data-bs-target="#detailModal">
-                                                        Detail
-                                                    </button>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <p>Rp. {{ $item->total }}</p>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                @if ($item->delivery_status == 'diterima')
+                                                    <form action="{{ route('user.order.update', $item->transaction_id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="status" value="selesai">
+                                                        <div class="table-wrapper-center">
+                                                            <button type="submit" class="shop-btn m-0"
+                                                                style="font-size: 15px;">
+                                                                Konfirmasi telah diterima
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                @else
+                                                    <div class="table-wrapper-center">
+                                                        <h5 class="heading">{{ $item->delivery_status }}</h5>
+                                                    </div>
+                                                @endif
+                                            </td>
+
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <div class="wrapper-btn">
+                                                        <a href="{{ route('user.transaction.show', ['reference' => $item->reference_id]) }}"
+                                                            class="shop-btn">
+                                                            Detail
+                                                        </a>
+                                                        {{-- <button type="button" class="shop-btn" data-bs-toggle="modal"
+                                                            data-bs-target="#detailModal">
+                                                            Detail
+                                                        </button> --}}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                             {{-- Detail --}}
-                            <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            {{-- <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true" style="height: 99%;">
                                 <div class="modal-dialog" style="margin-left: auto;">
                                     <div class="login-section account-section p-0">
@@ -252,7 +273,8 @@
                                                                         <td
                                                                             style="justify-content:right; align-items:right;">
                                                                             <span class="inner-text">
-                                                                            Dress</span></td>
+                                                                                Dress</span>
+                                                                        </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>
@@ -263,7 +285,8 @@
                                                                         <td
                                                                             style="justify-content:right; align-items:right;">
                                                                             <span class="inner-text">
-                                                                            Adidas</span></td>
+                                                                                Adidas</span>
+                                                                        </td>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -272,7 +295,8 @@
                                                                         <td
                                                                             style="justify-content:right; align-items:right;">
                                                                             <span class="inner-text">
-                                                                            Humma_store</span></td>
+                                                                                Humma_store</span>
+                                                                        </td>
                                                                         </td>
                                                                     </tr>
 
@@ -282,7 +306,8 @@
                                                                         <td
                                                                             style="justify-content:right; align-items:right;">
                                                                             <span class="inner-text">
-                                                                            24 Juni 2024</span></td>
+                                                                                24 Juni 2024</span>
+                                                                        </td>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -291,7 +316,8 @@
                                                                         <td
                                                                             style="justify-content:right; align-items:right;">
                                                                             <span class="inner-text">
-                                                                            Jln. Kapten Sutadji, Malang</span></td>
+                                                                                Jln. Kapten Sutadji, Malang</span>
+                                                                        </td>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -299,8 +325,10 @@
                                                                         <td style="padding: 8px 12px;">: </td>
                                                                         <td
                                                                             style="justify-content:right; align-items:right;">
-                                                                            <span class="inner-status" style="font-size: 12px; font-weight: bold;">
-                                                                            Diproses</span></td>
+                                                                            <span class="inner-status"
+                                                                                style="font-size: 12px; font-weight: bold;">
+                                                                                Diproses</span>
+                                                                        </td>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -309,7 +337,8 @@
                                                                         <td
                                                                             style="justify-content:right; align-items:right;">
                                                                             <span class="inner-text">
-                                                                            Kartu Kredit</span></td>
+                                                                                Kartu Kredit</span>
+                                                                        </td>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -319,7 +348,8 @@
                                                                         <td
                                                                             style="justify-content:right; align-items:right; font-weight: bold; color: blue;">
                                                                             <span class="inner-text">
-                                                                                Rp.140.000,00</span></td>
+                                                                                Rp.140.000,00</span>
+                                                                        </td>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -327,8 +357,10 @@
                                                                         <td style="padding: 8px 12px;">: </td>
                                                                         <td
                                                                             style="justify-content:right; align-items:right;">
-                                                                            <span class="inner-status" style="font-size: 12px; font-weight: bold;">
-                                                                            Sudah Dibayar</span></td>
+                                                                            <span class="inner-status"
+                                                                                style="font-size: 12px; font-weight: bold;">
+                                                                                Sudah Dibayar</span>
+                                                                        </td>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -342,7 +374,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-lelang" role="tabpanel" aria-labelledby="nav-lelang-tab"

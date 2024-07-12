@@ -24,7 +24,6 @@
                                             enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
-
                                             <div class="review-form">
                                                 <div class="review-inner-form ">
                                                     <div class="review-form-name">
@@ -47,7 +46,7 @@
                                                         <input type="text" id="username" name="username"
                                                             class="form-control" placeholder="mis: hummathrift"
                                                             value="{{ old('username', $store->username) }}" />
-                                                        <span class="opacity-75 mt-2">
+                                                        <span class="opacity-75 mt-2" style="color: red;">
                                                             Isikan tanpa tanda "@"
                                                         </span>
                                                     </div>
@@ -74,19 +73,23 @@
                                                             <table>
                                                                 <tr>
                                                                     <td>
-                                                                        <label for="open" class="form-label">Jam Buka</label>
-                                                                        <input type="time" id="open" name="open" class="form-control" value="{{ old('open', $store->open)}}">
+                                                                        <label for="open" class="form-label">Jam
+                                                                            Buka</label>
+                                                                        <input type="time" id="open" name="open"
+                                                                            class="form-control"
+                                                                            value="{{ old('open', $store->open) }}">
                                                                     </td>
                                                                     <td class="ps-3">
-                                                                        <label for="close" class="form-label">Jam Tutup</label>
-                                                                        <input type="time" id="close" name="close" class="form-control" value="{{ old('close', $store->close)}}">
+                                                                        <label for="close" class="form-label">Jam
+                                                                            Tutup</label>
+                                                                        <input type="time" id="close" name="close"
+                                                                            class="form-control"
+                                                                            value="{{ old('close', $store->close) }}">
                                                                     </td>
                                                                 </tr>
                                                             </table>
                                                         </div>
                                                     </div>
-
-
                                                 </div>
                                             </div>
                                     </div>
