@@ -112,7 +112,7 @@ class LandingpageController extends Controller {
 
     // Tambahkan metode regular
     public function productRegular() {
-        $products = Product::paginate(24);
+        $products = Product::where('status', 'active')->paginate(24);
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
@@ -130,7 +130,7 @@ class LandingpageController extends Controller {
 
     // Tambahkan metode auction
     public function productAuction() {
-        $product_auction = ProductAuction::paginate(24);
+        $product_auction = ProductAuction::where('status', 'active')->paginate(24);
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $countcart = cart::where('user_id', auth()->id())->count();
@@ -156,7 +156,7 @@ class LandingpageController extends Controller {
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $countcart = cart::where('user_id', auth()->id())->count();
         $search = $request->search;
-        $products = Product::where('title', 'like', "%$search%")->paginate(24);
+        $products = Product::where('status', 'active')->where('title', 'like', "%$search%")->paginate(24);
         $carts = cart::where('user_id', auth()->id())
             ->whereNotNull('product_id')
             ->orderBy('created_at')
@@ -175,7 +175,7 @@ class LandingpageController extends Controller {
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $countcart = cart::where('user_id', auth()->id())->count();
         $search = $request->search;
-        $product_auction = ProductAuction::where('title', 'like', "%$search%")->paginate(24);
+        $product_auction = ProductAuction::where('status', 'active')->where('title', 'like', "%$search%")->paginate(24);
         $product_auction2 = ProductAuction::paginate(24);
         $carts = cart::where('user_id', auth()->id())
             ->whereNotNull('product_id')
