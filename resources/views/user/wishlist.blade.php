@@ -26,7 +26,7 @@
       background-color: #ffffff;
       /* border: 1px solid #ffffff; */
       /* border-radius: 0.25rem;
-                            padding: 0.5rem 0; */
+                                padding: 0.5rem 0; */
     }
 
     .dropdown-menu .dropdown-item {
@@ -219,9 +219,28 @@
               @forelse ($product_auction as $item)
                 <div class="col-lg-3 col-sm-6">
                   <div class="product-wrapper" data-aos="fade-up">
-                    <div class="product-img">
+                    <div class="product-img position-relative">
                       <img src="{{ asset('storage/' . $item->productAuction->thumbnail) }}" alt="product-img"
                         class="object-fit-cover">
+                      <div class="dropdown position-absolute" style="top: 0; right: 0;">
+                        <a class="wishlist-link" href="#" role="button" id="wishlistDropdown"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                          <i class="fas fa-ellipsis-h"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="wishlistDropdown">
+                          <li>
+                            <form action="{{ route('destroyAuction.destroy', $item->id) }}" method="POST"
+                              onsubmit="return confirmDeletion('Apakah anda yakin ingin menghapus produk ini dari daftar favorit?', event.preventDefault())">
+                              @csrf
+                              @method('DELETE')
+                              <a role="button" type="submit" class="dropdown-item"
+                                onclick="$(this).closest('form').submit()" style="color: red;">Hapus Favorit</a>
+                            </form>
+                          </li>
+                          <hr>
+                          <li><a class="dropdown-item" href="#">Batal</a></li>
+                        </ul>
+                      </div>
                     </div>
                     <div class="product-info">
                       <div class="product-description">
@@ -237,25 +256,7 @@
                       </div>
                     </div>
                     <div class="product-cart-btn mb-4">
-                      <div class="dropdown">
-                        <a class="wishlist-link" href="#" role="button" id="wishlistDropdown"
-                          data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="fas fa-ellipsis-h"></i>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="wishlistDropdown">
-                          <li>
-                            <form action="{{ route('destroyAuction.destroy', $item->id) }}" method="POST"
-                              onsubmit="return confirm('Apakah anda yakin ingin menghapus produk lelang ini dari daftar favorit?');">
-                              @csrf
-                              @method('DELETE')
-                              <a role="button" type="submit" class="dropdown-item"
-                                onclick="$(this).closest('form').submit()" style="color: red;">Hapus Favorit</a>
-                            </form>
-                          </li>
-                          <hr>
-                          <li><a class="dropdown-item" href="#">Batal</a></li>
-                        </ul>
-                      </div>
+                      <div></div>
                       {{-- <a href="/user/checkout" class="product-btn">
                                                 <i class="fas fa-shopping-cart"></i>
                                             </a> --}}
