@@ -132,7 +132,7 @@
                 </div>
               @endif
 
-              <div class="product-cart-items dropstart dropdown-hover"
+            <div class="product-cart-items dropstart dropdown-hover"
               style="top: 0; transform: translate(0, 0); bottom: unset; left: unset; right: 0; opacity: unset; visibility: unset; transition: unset;">
              <a type="button" class="favourite cart-item">
                <span>

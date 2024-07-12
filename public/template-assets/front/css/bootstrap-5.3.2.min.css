@@ -3430,7 +3430,7 @@ fieldset:disabled .btn {
     --bs-dropdown-font-size: 1rem;
     --bs-dropdown-color: var(--bs-body-color);
     --bs-dropdown-bg: var(--bs-body-bg);
-    --bs-dropdown-border-color: var(--bs-border-color-translucent);
+    --bs-dropdown-border-color: #1c3879;
     --bs-dropdown-border-radius: var(--bs-border-radius);
     --bs-dropdown-border-width: var(--bs-border-width);
     --bs-dropdown-inner-border-radius: calc(
