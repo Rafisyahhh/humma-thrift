@@ -303,17 +303,17 @@
 
     <section class="product flash-sale mt-5">
       <div class="container pb-5 mb-5">
-        <div class="section-title" style="position: relative; z-index: 1;">
+        <div class="section-title" style="position: relative; z-index: 11;">
           <h5>SESI LELANG</h5>
           <a href="{{ url('/product/auction') }}" class="view">Lihat Semua</a>
         </div>
-        <div class="flash-sale-section" style="position: relative; z-index: 1;">
+        <div class="flash-sale-section" style="position: relative; z-index: 11;">
           <swiper-container slides-per-view="4" loop="true" navigation="true" space-between="30"
             autoplay-delay="10000" autoplay-disable-on-interaction="false">
             @foreach ($product_auction as $item)
               <swiper-slide id="cardButton"
                 data-route="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}">
-                <div class="product-wrapper" style="z-index: 1;" data-aos="fade-right" data-aos-duration="100">
+                <div class="product-wrapper" style="z-index: 11;" data-aos="fade-right" data-aos-duration="100">
                   <div class="product-img">
                     <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover">
                     <div class="product-cart-items">
