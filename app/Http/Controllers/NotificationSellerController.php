@@ -57,7 +57,10 @@ class NotificationSellerController extends Controller
             ->get();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
 
-        return view('seller.notification.show', compact('notifications','countcart','carts','countFavorite','notification'));
+        // dd($notification);
+        // dd(compact('notifications', 'countcart', 'carts', 'countFavorite', 'notification'));
+
+        return view('seller.notification.show', compact('notifications', 'countcart', 'carts', 'countFavorite', 'notification'));
 
     }
 
