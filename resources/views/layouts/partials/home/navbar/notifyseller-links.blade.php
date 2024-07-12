@@ -114,12 +114,12 @@
                     </div>
                 </div>
 
-                <div class="flex-shrink-0 dropdown-notifications-actions">
+                {{-- <div class="flex-shrink-0 dropdown-notifications-actions">
                     <a href="javascript:void(0)" class="dropdown-notifications-read"><span
                             class="badge badge-dot"></span></a>
                     <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
                             class="ti ti-x"></span></a>
-                </div>
+                </div> --}}
             </div>
             @empty
             <li class="list-group-item list-group-item-action" >Tidak ada notifikasi yang belum dibaca</li>

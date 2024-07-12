@@ -81,6 +81,17 @@ class AuctionsController extends Controller
         return view('user.notification.show-lelang', compact('notifications','countcart','carts','countFavorite','notification'));
     }
 
+    public function destroynotify($id) {
+        try {
+            $notification = Auth::user()->notifications()->findOrFail($id);
+            $notification->delete();
+            return redirect()->route('user.notification.index')->with('success', 'Berhasil menghapus notifikasi');
+        } catch (\Throwable $th) {
+            return redirect()->route('user.notification.index')->with('error', 'Gagal menghapus notifikasi');
+        } catch (\Exception $e) {
+            return redirect()->route('user.notification.index')->with('error', 'Gagal menghapus notifikasi');
+        }
+    }
     public function readAll()
     {
         Auth::user()->getAttribute('unreadNotifications')->markAsRead();
