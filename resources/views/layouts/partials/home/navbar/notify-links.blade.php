@@ -123,12 +123,12 @@
                         </path>
                     </svg>
                 </span> --}}
-                <div class="flex-shrink-0 dropdown-notifications-actions">
+                {{-- <div class="flex-shrink-0 dropdown-notifications-actions">
                     <a href="javascript:void(0)" class="dropdown-notifications-read"><span
                             class="badge badge-dot"></span></a>
                     <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
                             class="ti ti-x"></span></a>
-                </div>
+                </div> --}}
             </div>
             </a>
             @empty
