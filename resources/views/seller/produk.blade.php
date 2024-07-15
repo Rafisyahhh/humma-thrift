@@ -222,11 +222,12 @@
                          <div class="product-cart-btn">
                              <a role="button" class="product-btn" data-bs-toggle="modal"
                                  data-bs-target="#detailModal{{ $item->id }}">Detail</a>
-                         </div><br><br>
+                         </div>
                          {{-- FAVORITE --}}
                          <div class="favorite-cart-container">
                              <a role="button" data-bs-toggle="modal" data-bs-target="#favoriteModal{{ $item->id }}"
-                                 class="favorite-cart-icon" style="position: relative; display: inline-block;">
+                                 class="favorite-cart-icon"
+                                 style="position: relative; display: inline-block; height: 2rem; ">
                                  @if (isset($countFavorite[$item->id]))
                                      <span style="background-color: unset">
                                          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
@@ -235,10 +236,8 @@
                                                  d="m12 21l-1.45-1.3q-2.525-2.275-4.175-3.925T3.75 12.812T2.388 10.4T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.3 0 2.475.55T12 4.75q.85-1 2.025-1.55t2.475-.55q2.35 0 3.925 1.575T22 8.15q0 1.15-.387 2.25t-1.363 2.412t-2.625 2.963T13.45 19.7zm0-2.7q2.4-2.15 3.95-3.687t2.45-2.675t1.25-2.026T20 8.15q0-1.5-1-2.5t-2.5-1q-1.175 0-2.175.662T12.95 7h-1.9q-.375-1.025-1.375-1.687T7.5 4.65q-1.5 0-2.5 1t-1 2.5q0 .875.35 1.763t1.25 2.025t2.45 2.675T12 18.3m0-6.825" />
                                          </svg>
                                      </span>
-                                     <span
-                                         style="margin-left:0.5px; font-size: 15px; background-color: unset">Favorit</span>
-                                     <span
-                                         style="margin-left:0.5px; font-size: 15px; background-color: unset">({{ $countFavorite[$item->id] }})</span>
+                                     <span style="margin-left:0.5px; font-size: 15px; background-color: unset; color: #797979;">Favorit</span>
+                                     <span style="margin-left:0.5px; font-size: 15px; background-color: unset; color: #797979;">({{ $countFavorite[$item->id] }})</span>
                                      {{-- <p><i class="fas fa-heart" style="font-size: 1.1em; color: red;"></i> {{ $countFavorite[$item->id] }} orang menyukai produk ini<span style="background-color: unset"> </span></p> --}}
 
                                      {{-- <i class="fas fa-heart" style="font-size: 1.2em;"></i> --}}
@@ -287,9 +286,19 @@
                              <a role="button" data-bs-toggle="modal" data-bs-target="#cartModal{{ $item->id }}"
                                  class="favorite-cart-icon">
                                  @if (isset($countCart[$item->id]))
-                                     <p><i class="fas fa-shopping-cart"
-                                             style="font-size: 1em; margin-left:0.5px; color: #1b336b;"></i> Keranjang<span
-                                             style="background-color: unset">({{ $countCart[$item->id] }})</span></p>
+                                     {{-- <p><i class="fas fa-shopping-cart"
+                                             style="font-size: 1em; margin-left: 1rem; color: #1b336b;"></i> Keranjang<span
+                                             style="background-color: unset">({{ $countCart[$item->id] }})</span></p> --}}
+                                    <span style="background-color: unset">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 36 36">
+                                            <circle cx="13.33" cy="29.75" r="2.25" fill="#1b336b" class="clr-i-outline clr-i-outline-path-1" stroke="#1b336b" stroke-width="1"/>
+                                            <circle cx="27" cy="29.75" r="2.25" fill="#1b336b" class="clr-i-outline clr-i-outline-path-2" stroke="#1b336b" stroke-width="1"/>
+                                                <path fill="#1b336b" d="M33.08 5.37a1 1 0 0 0-.77-.37H11.49l.65 2H31l-2.67 12h-15L8.76 4.53a1 1 0 0 0-.66-.65L4 2.62a1 1 0 1 0-.59 1.92L7 5.64l4.59 14.5l-1.64 1.34l-.13.13A2.66 2.66 0 0 0 9.74 25A2.75 2.75 0 0 0 12 26h16.69a1 1 0 0 0 0-2H11.84a.67.67 0 0 1-.56-1l2.41-2h15.44a1 1 0 0 0 1-.78l3.17-14a1 1 0 0 0-.22-.85" class="clr-i-outline clr-i-outline-path-3" stroke="#1b336b" stroke-width="1"/>
+                                                <path fill="none" d="M0 0h36v36H0z"/>
+                                        </svg>
+                                    </span>
+                                     <span style="margin-left: 5px; font-size: 15px; background-color: unset; color: #797979;">Keranjang</span>
+                                     <span style="margin-left: 2.8rem; font-size: 15px; background-color: unset; color: #797979;">({{ $countCart[$item->id] }})</span>
 
                                      {{-- <i class="fas fa-shopping-cart" style="font-size: 1.1em;">{{ count($countCart) }} test</i> --}}
                                      {{-- <span class="badge">{{ $countCart[$item->id] }}</span> --}}
@@ -340,7 +349,7 @@
              {{-- LELANG --}}
              @foreach ($product_auctions as $item)
                  <div class="col-lg-4 col-sm-6">
-                     <div class="product-wrapper" data-aos="fade-up" style="height: 510px;">
+                     <div class="product-wrapper" data-aos="fade-up">
                          <div class="product-img" style="background-color:black">
                              <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img"
                                  class="object-fit-cover" @style(['opacity: 0.4;' => $item->status != 'active'])>
@@ -516,8 +525,7 @@
                                          <div class="swiper product-top" style="height:50rem;">
                                              <div class="swiper-wrapper">
                                                  <div class="swiper-slide slider-top-img">
-                                                     <img src="{{ asset("storage/$item->thumbnail") }}" alt="img"
-                                                         class="object-fit-cover">
+                                                     <img src="{{ asset("storage/$item->thumbnail") }}" alt="img" class="object-fit-cover">
                                                  </div>
                                              </div>
                                          </div>
@@ -535,8 +543,7 @@
                                              <table>
                                                  <tr>
                                                      <th>Kategori</th>
-                                                     <td><span
-                                                             class="inner-text">{{ implode(', ', array_column($item->categories->toArray(), 'title')) }}</span>
+                                                     <td><span class="inner-text">{{ implode(', ', array_column($item->categories->toArray(), 'title')) }}</span>
                                                      </td>
                                                  </tr>
                                                  <tr>
@@ -553,14 +560,12 @@
                                                  </tr>
                                                  <tr>
                                                      <th>Deskripsi</th>
-                                                     <th colspan="2"><span
-                                                             class="inner-text">{{ $item->description }}</span>
+                                                     <th colspan="2"><span class="inner-text">{{ $item->description }}</span>
                                                      </th>
                                                  </tr>
                                                  <tr>
                                                      <th>Status</th>
-                                                     <td><span class="inner-status"
-                                                             style="color: red">{{ $item->status }}</span></td>
+                                                     <td><span class="inner-status" style="color: red">{{ $item->status }}</span></td>
                                                  </tr>
                                              </table>
                                          </div>
@@ -595,8 +600,7 @@
                                          <div class="swiper product-top" style="height:50rem;">
                                              <div class="swiper-wrapper">
                                                  <div class="swiper-slide slider-top-img">
-                                                     <img src="{{ asset("storage/$item->thumbnail") }}" alt="img"
-                                                         class="object-fit-cover">
+                                                     <img src="{{ asset("storage/$item->thumbnail") }}" alt="img" class="object-fit-cover">
                                                  </div>
                                              </div>
                                          </div>
@@ -762,11 +766,9 @@
                                                          d="m9.55 17.308l-4.97-4.97l.714-.713l4.256 4.256l9.156-9.156l.713.714z" />
                                                  </svg>
                                              </label>
-
                                          </form>
                                      </div>
                                  </td>
-
                              </tr>
                          @endforeach
                      </tbody>
