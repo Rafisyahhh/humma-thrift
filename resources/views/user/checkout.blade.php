@@ -59,51 +59,68 @@
     .m-0 {
         margin: 0;
     }
+
     .radio-container {
-    display: flex;
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
-    height: 100%; /* Ensure the container takes the full height */
-}
+        display: flex;
+        justify-content: center;
+        /* Centers horizontally */
+        align-items: center;
+        /* Centers vertically */
+        height: 100%;
+        /* Ensure the container takes the full height */
+    }
 
-.radio-labell {
-    position: relative; /* Position relative to enable pseudo-element */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centers elements inside the label horizontally */
-    justify-content: center; /* Centers elements inside the label vertically */
-    text-align: center;
-    padding: 20px; /* Add padding for better spacing */
-    border: 2px solid transparent; /* Default border */
-    border-radius: 10px; /* Rounded corners */
-    transition: border-color 0.3s ease, background-color 0.3s ease; /* Smooth transition for hover effect */
-    cursor: pointer; /* Change cursor to pointer for better UX */
-}
+    .radio-button-labels {
+        position: relative;
+        /* Position relative to enable pseudo-element */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Centers elements inside the label horizontally */
+        justify-content: center;
+        /* Centers elements inside the label vertically */
+        text-align: center;
+        padding: 20px;
+        /* Add padding for better spacing */
+        border: 2px solid transparent;
+        /* Default border */
+        border-radius: 10px;
+        /* Rounded corners */
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+        /* Smooth transition for hover effect */
+        cursor: pointer;
+        /* Change cursor to pointer for better UX */
+    }
 
-.radio-labell:hover {
-    border-color: #007bff; /* Change border color on hover */
-    background-color: #f0f8ff; /* Light background color on hover */
-}
+    .radio-button-labels:hover {
+        border-color: #007bff;
+        /* Change border color on hover */
+        background-color: #f0f8ff;
+        /* Light background color on hover */
+    }
 
+    .radio-button-labels:checked ~ label {
+        border-color: #007bff;
+        background-color: #f0f8ff;
+        color: white;
+    }
 
+    .custom-radio:checked+.radio-button-labels {
+        border-color: #007bff;
+        background-color: #f0f8ff;
+    }
 
-.custom-radio:checked + .radio-labell {
-    border-color: #007bff;
-    background-color: #f0f8ff;
-}
-
-.custom-radio:checked + .radio-labell::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background-color: rgba(0, 123, 255, 0.2);
-    border: 2px solid #007bff;
-    border-radius: 10px;
-}
-
+    .custom-radio:checked~.radio-button-labels::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background-color: rgba(0, 123, 255, 0.2);
+        border: 2px solid #007bff;
+        border-radius: 10px;
+    }
 </style>
 <style>
     /* Style the form */
@@ -154,7 +171,6 @@
     .step.finish {
         background-color: #1c3879;
     }
-
 </style>
 @endpush @section('content')
 <form id="coForm" action="{{ route('user.transaction.store') }}" method="POST">
@@ -176,7 +192,7 @@
                         <ul class="product-list">
                             <li>
                                 <div class="d-flex gap-3">
-                                    <img src="{{ asset("storage/$product->thumbnail") }}" width="60" />
+                                    <img src="{{ asset("storage/$product->thumbnail") }}" class="mb-4" width="60" />
                                     <div class="mt-1">
                                         <h5 class="wrapper-heading" style="font-size: 20px">{{ $product->title }}</h5>
                                         <p class="paragraph">{{ $product->brand->title }}</p>
@@ -249,22 +265,23 @@
     <div class="tab mt-3">
         <div class="checkout-wrapper">
             <div class="account-section billing-section">
-                <h5 class="fw-bold" style="text-align: center">Pilih Pembayaran</h5>
+                <h5 class="fw-bold mb-4" style="text-align: center">Pilih Pembayaran</h5>
                 <div class="mx-5 mt-2 mb-5 p-6">
                     <div class="radio-container">
                         <div class="row">
                             @foreach ($channels['data'] as $item)
-                                <div class="col-md-6">
-                                    <input type="radio"  id="option{{ $loop->index }}" name="method" value="{{ $item['code'] }}"
-                                        class="custom-radio" />
+                                <div class="col-lg-4 col-md-6 mb-3">
+                                    <input type="radio" id="payment-method-{{ $loop->index }}" name="method"
+                                        value="{{ $item['code'] }}" class="custom-radio d-none" />
                                     <input type="hidden" name="adminfeeFlat"
                                         value="{{ $item['total_fee']['flat'] }}" />
                                     <input type="hidden" name="adminfeePercent"
                                         value="{{ $item['total_fee']['percent'] }}" />
                                     <input type="hidden" name="paymentName" value="{{ $item['name'] }}" />
-                                    <label for="option{{ $loop->index }}" class="radio-labell">
+
+                                    <label for="payment-method-{{ $loop->index }}" class="radio-button-labels">
                                         <div class="d-flex flex-column  mt-3">
-                                            <img src="{{ $item['icon_url'] }}" width="120" height="45" />
+                                            <img src="{{ $item['icon_url'] }}" height="45" />
                                             <div class="text-center mt-2">
                                                 <p class="fs-3 fw-bold">{{ $item['name'] }}</p>
                                                 <p class="fs-5">
@@ -307,9 +324,11 @@
                             @if ($product)
                                 <div class="col-md-6">
                                     <p class="fw-bold" style="font-size: 17px; margin: 0">
-                                        <b style="font-size: 17px">{{$product->userstore->name}}</b> | {{$product->userstore->user->phone}}
+                                        <b style="font-size: 17px">{{ $product->userstore->name }}</b> |
+                                        {{ $product->userstore->user->phone }}
                                     </p>
-                                    <p class="float-end" style="font-size: 17px; margin: 0">{{$product->userstore->address}}</p>
+                                    <p class="float-end" style="font-size: 17px; margin: 0">
+                                        {{ $product->userstore->address }}</p>
                                 </div>
                             @endif
                             <div class="col-md-6">
@@ -668,7 +687,5 @@
             });
         });
     });
-
-
 </script>
 @endpush
