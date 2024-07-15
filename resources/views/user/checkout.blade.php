@@ -87,12 +87,12 @@
 
 
 
-.custom-rradio:checked + .radio-labell {
+.custom-radio:checked + .radio-labell {
     border-color: #007bff;
     background-color: #f0f8ff;
 }
 
-.custom-rradio:checked + .radio-labell::before {
+.custom-radio:checked + .radio-labell::before {
     content: '';
     position: absolute;
     top: -2px;
@@ -220,18 +220,21 @@
                                         value="{{ $address->id }}" class="custom-radio p-0" />
                                     <label for="option{{ $address->id }}" class="radio-label"
                                         style="display: flex; flex-direction: column; width: 77.5rem">
-                                        <p class="mb-1" style="font-size: 17px; margin: 0;">
-                                            <b style="font-size: 17px;">{{ $users->username }}</b> |
-                                            +{{ $users->phone }}
-                                        </p>
-                                        <p style="font-size: 15px; margin: 5px 0;">
+                                        <div
+                                            style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                            <p class="mb-1" style="font-size: 17px; margin: 0">
+                                                <b style="font-size: 17px">{{ $users->name }}</b> |
+                                                +{{ $users->phone }}
+                                            </p>
+                                            <button type="button" class="openModalUpdate"
+                                                data-modal-id="updateModal{{ $address->id }}"
+                                                style="color: blue; background: none; border: none; padding: 0; cursor: pointer;">
+                                                Ubah
+                                            </button>
+                                        </div>
+                                        <p style="font-size: 15px; margin: 5px 0">
                                             {{ $address->address }}
                                         </p>
-                                        @if ($address->status)
-                                            <span class="mark position-relative"
-                                                style="width: 11rem; height: 4.60rem;"><span class="position-relative"
-                                                    style="left: 45%; top: 10%;">Utama</span></span>
-                                        @endif
                                     </label>
                                 </div>
                                 <hr />
@@ -249,11 +252,11 @@
                 <h5 class="fw-bold" style="text-align: center">Pilih Pembayaran</h5>
                 <div class="mx-5 mt-2 mb-5 p-6">
                     <div class="radio-container">
-                        <div cl ass="row">
+                        <div class="row">
                             @foreach ($channels['data'] as $item)
                                 <div class="col-md-6">
                                     <input type="radio"  id="option{{ $loop->index }}" name="method" value="{{ $item['code'] }}"
-                                        class="custom-rradio" />
+                                        class="custom-radio" />
                                     <input type="hidden" name="adminfeeFlat"
                                         value="{{ $item['total_fee']['flat'] }}" />
                                     <input type="hidden" name="adminfeePercent"
@@ -304,11 +307,9 @@
                             @if ($product)
                                 <div class="col-md-6">
                                     <p class="fw-bold" style="font-size: 17px; margin: 0">
-                                        <b style="font-size: 17px">{{ $product->userstore->name }}</b> |
-                                        {{ $product->userstore->user->phone }}
+                                        <b style="font-size: 17px">{{$product->userstore->name}}</b> | {{$product->userstore->user->phone}}
                                     </p>
-                                    <p class="float-end" style="font-size: 17px; margin: 0">
-                                        {{ $product->userstore->address }}</p>
+                                    <p class="float-end" style="font-size: 17px; margin: 0">{{$product->userstore->address}}</p>
                                 </div>
                             @endif
                             <div class="col-md-6">
