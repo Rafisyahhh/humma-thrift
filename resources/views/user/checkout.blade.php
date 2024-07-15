@@ -348,10 +348,10 @@
     <div style="overflow: auto">
         <div style="float: right">
             <button type="button" id="prevBtn" class="shop-btn" onclick="nextPrev(-1)">
-                Previous
+                Kembali
             </button>
             <button type="button" id="nextBtn" class="shop-btn" onclick="nextPrev(1)">
-                Next
+                Lanjut
             </button>
         </div>
     </div>
@@ -572,9 +572,9 @@
             document.getElementById("prevBtn").style.display = "inline";
         }
         if (n == x.length - 1) {
-            document.getElementById("nextBtn").innerHTML = "Submit";
+            document.getElementById("nextBtn").innerHTML = "Bayar Sekarang";
         } else {
-            document.getElementById("nextBtn").innerHTML = "Next";
+            document.getElementById("nextBtn").innerHTML = "Lanjutkan";
         }
         // ... and run a function that displays the correct step indicator:
         fixStepIndicator(n);
