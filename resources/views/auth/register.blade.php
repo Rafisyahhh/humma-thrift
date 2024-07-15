@@ -30,7 +30,7 @@
 
                         <div class="account-inner-form">
                             <div class="review-form-name">
-                                <label for="username" class="form-label">Nama Pengguna (Tanpa tanda "@")</label>
+                                <label for="username" class="form-label">Username (Tanpa tanda "@")</label>
                                 <input id="username" type="text"
                                     class="form-control @error('username') is-invalid @enderror" name="username"
                                     value="{{ old('username') }}" placeholder="Mis: akbarrafsyah"

@@ -541,7 +541,7 @@
                 </form>
                 @endif
             </div>
-
+        </div>
     </div>
 
     <section class="product product-description">
