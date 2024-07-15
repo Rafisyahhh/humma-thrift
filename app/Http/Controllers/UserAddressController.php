@@ -19,7 +19,7 @@ class UserAddressController extends Controller
     public function index()
     {
         $users = Auth::user();
-        $addresses = UserAddress::all();
+        $addresses = UserAddress::orderBy('status', 'desc')->get();
         $carts = cart::where('user_id', auth()->id())
         ->whereNotNull('product_id')
         ->orderBy('created_at')
@@ -130,9 +130,11 @@ class UserAddressController extends Controller
     public function destroy(UserAddress $userAddress, $id)
     {
         $userAddress = UserAddress::findOrFail($id);
+        if ($userAddress->status) {
+        return  redirect()->back()->with('error', 'Gagal menghapus data! alamat menjadi utama!');
+        }
         $userAddress->delete();
-
-        return redirect()->back()->with('success', 'Sukses menghapus alamat');
+        return  redirect()->back()->with('success', 'Sukses menghapus alamat');
     }
 
 }

@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 class CallbackController extends Controller
 {
     // Isi dengan private key anda
-    protected $privateKey = 'AVI1P-HcPWV-b5gwQ-6uU3d-61101';
+    protected $privateKey = 'MJX8G-Xiznc-oQ36k-Es0Gy-DCI1j';
 
     public function handle(Request $request)
     {

@@ -169,7 +169,7 @@
 
                                             <td class="table-wrapper">
                                                 <div class="table-wrapper-center">
-                                                    <p>Rp. {{ $item->total }}</p>
+                                                    <p>Rp. {{ number_format($item->total, null, null, '.') }}</p>
                                                 </div>
                                             </td>
                                             <td class="table-wrapper">
@@ -185,9 +185,29 @@
                                                             </button>
                                                         </div>
                                                     </form>
-                                                @else
+                                                @elseif($item->delivery_status == 'selesai')
                                                     <div class="table-wrapper-center">
-                                                        <h5 class="heading">{{ $item->delivery_status }}</h5>
+                                                        <span class="badge text-bg-success">
+                                                            <h5 class="heading text-light">{{ $item->delivery_status }}</h5>
+                                                        </span>
+                                                    </div>
+                                                @elseif($item->delivery_status == 'dikemas')
+                                                    <div class="table-wrapper-center">
+                                                        <span class="badge text-bg-warning">
+                                                            <h5 class="heading text-light">{{ $item->delivery_status }}</h5>
+                                                        </span>
+                                                    </div>
+                                                @elseif($item->delivery_status == 'diantar')
+                                                    <div class="table-wrapper-center">
+                                                        <span class="badge text-bg-warning">
+                                                            <h5 class="heading text-light">{{ $item->delivery_status }}</h5>
+                                                        </span>
+                                                    </div>
+                                                @elseif($item->delivery_status == 'selesaikan pesanan')
+                                                    <div class="table-wrapper-center">
+                                                        <span class="badge text-bg-danger">
+                                                            <h5 class="heading text-light">{{ $item->delivery_status }}</h5>
+                                                        </span>
                                                     </div>
                                                 @endif
                                             </td>

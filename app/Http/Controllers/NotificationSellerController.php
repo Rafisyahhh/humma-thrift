@@ -14,7 +14,7 @@ class NotificationSellerController extends Controller
      */
     public function index()
     {
-        $notifications = Auth::user()->notifications()->paginate(20);
+        $notifications = Auth::user()->notifications()->take(4)->paginate(20);
         $countcart = cart::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
         ->whereNotNull('product_id')
@@ -90,6 +90,14 @@ class NotificationSellerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $notification = Auth::user()->notifications()->findOrFail($id);
+            $notification->delete();
+            return redirect()->route('seller.notification.index')->with('success', 'Berhasil menghapus notifikasi');
+        } catch (\Throwable $th) {
+            return redirect()->route('seller.notification.index')->with('error', 'Gagal menghapus notifikasi');
+        } catch (\Exception $e) {
+            return redirect()->route('seller.notification.index')->with('error', 'Gagal menghapus notifikasi');
+        }
     }
 }
