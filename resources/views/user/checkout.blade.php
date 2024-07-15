@@ -269,26 +269,26 @@
                 <div class="mx-5 mt-2 mb-5 p-6">
                     <div class="radio-container">
                         <div class="row">
-                            @foreach ($channels['data'] as $item)
+                            @foreach ($channel_pembayaran as $item)
                                 <div class="col-lg-4 col-md-6 mb-3">
                                     <input type="radio" id="payment-method-{{ $loop->index }}" name="method"
-                                        value="{{ $item['code'] }}" class="custom-radio d-none" />
+                                        value="{{ $item->channel_code }}" class="custom-radio d-none" />
                                     <input type="hidden" name="adminfeeFlat"
-                                        value="{{ $item['total_fee']['flat'] }}" />
+                                        value="{{ $item->flat }}" />
                                     <input type="hidden" name="adminfeePercent"
-                                        value="{{ $item['total_fee']['percent'] }}" />
-                                    <input type="hidden" name="paymentName" value="{{ $item['name'] }}" />
+                                        value="{{ $item->percent }}" />
+                                    <input type="hidden" name="paymentName" value="{{ $item->name }}" />
 
                                     <label for="payment-method-{{ $loop->index }}" class="radio-button-labels">
                                         <div class="d-flex flex-column  mt-3">
-                                            <img src="{{ $item['icon_url'] }}" height="45" />
+                                            <img src="{{ $item->icon_url }}" height="45" />
                                             <div class="text-center mt-2">
-                                                <p class="fs-3 fw-bold">{{ $item['name'] }}</p>
+                                                <p class="fs-3 fw-bold">{{ $item->name }}</p>
                                                 <p class="fs-5">
-                                                    @if ($item['total_fee']['flat'] == null)
-                                                        Rp{{ number_format($product->price * ($item['total_fee']['percent'] / 100), null, null, '.') }}
+                                                    @if ($item->flat == null)
+                                                        Rp{{ number_format($product->price * ($item->percent / 100), null, null, '.') }}
                                                     @else
-                                                        Rp{{ number_format($item['total_fee']['flat'], null, null, '.') }}
+                                                        Rp{{ number_format($item->flat, null, null, '.') }}
                                                     @endif
                                                 </p>
                                             </div>
