@@ -681,7 +681,8 @@
                             </div>
                         </div>
                     </div>
-                    </section>
+                </div>
+            </section>
                 @endsection
 
 @section('script')

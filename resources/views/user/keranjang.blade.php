@@ -18,19 +18,17 @@
     <div class="container">
         <div class="cart-section">
             <div class="wishlist">
-                <div>
+                {{-- <div>
                     <h5 class="cart-heading mt-4 pt-4 mb-4">Keranjang</h5>
-                </div>
+                </div> --}}
 
                 <div class="cart-section wishlist-section">
                     <table style="border-spacing: 10px; width: 100%;">
                         <tbody>
-                            <tr class="table-row ticket-row"
-                                style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100rem;">
-                                <td class="table-wrapper wrapper-product" style="display: flex; align-items: center;">
+                            <tr class="table-row ticket-row" style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100rem;">
+                                <td class="table-wrapper wrapper-product" style="display: flex; align-items: center; padding-top: 25px;">
                                     <div class="form-check" style="display: flex; align-items: center;">
-                                        <input class="form-check-input" type="checkbox" value="" id="cartSelectAll"
-                                            style="border-color: #215791; margin-right: 1rem;">
+                                        <p style="flex: 0 0 3rem; text-align: left; margin-left: -1.70rem;">#</p>
                                         <p style="margin-right: 44.5rem; margin-left:3rem;">Produk</p>
                                         <p style="margin-right: 25rem;">Kategori</p>
                                         <p style="margin-right: 26rem;">Harga</p>
@@ -38,6 +36,7 @@
                                     </div>
                                 </td>
                             </tr>
+
                             <tr class="table-row ticket-row" style="border:none; background-color: #ffffff;">
                                 <td style="height:10px;"></td>
                             </tr>
