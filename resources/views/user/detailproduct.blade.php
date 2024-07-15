@@ -343,13 +343,13 @@
                                 <div class="row">
                                     <div class="product-quantity mt-0"
                                         style="display: flex; align-items: center; gap: 10px; z-index:1">
-                                        <a href="#" style="width :10px" class="shop-btn"
+                                        {{-- <a href="#" style="width :10px" class="shop-btn"
                                             style="display: flex; align-items: center; gap: 10px; z-index:1">
                                             <span style="width: 37rem; align-items:center; justify-content:center;">
                                                 <i class="fas fa-shopping-cart"></i>
                                                 Masukkan Keranjang
                                             </span>
-                                        </a>
+                                        </a> --}}
 
                                         @php
                                             $user = Auth::user();
