@@ -523,7 +523,7 @@
                     <span style="margin-left:0.5px; font-size: 15px">(3,8RB)</span>
                 </form>
             </div>
-
+        </div>
     </div>
 
     <section class="product product-description">

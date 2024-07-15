@@ -322,7 +322,7 @@
                                         <div class="product-cart-items">
                                             <div class="product-cart-items">
                                                 @auth
-                                                    <form action="{{ route('storesproductAuction', $item->id) }}"
+                                                    {{-- <form action="{{ route('storesproductAuction', $item->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         <button class="favourite cart-item">
@@ -330,7 +330,7 @@
                                                                 <i class="fas fa-heart" style="font-size: 18px;"></i>
                                                             </span>
                                                         </button>
-                                                    </form>
+                                                    </form> --}}
                                                     {{-- <form action="{{ route('storecart', $item->id) }}" method="POST">
                                                         @csrf
                                                         <button class="favourite cart-item">
@@ -345,11 +345,11 @@
                                                         </span>
                                                     </a>
                                                 @else
-                                                    <a href="{{ route('login') }}" class="favourite cart-item">
+                                                    {{-- <a href="{{ route('login') }}" class="favourite cart-item">
                                                         <span>
                                                             <i class="fas fa-heart"></i>
                                                         </span>
-                                                    </a>
+                                                    </a> --}}
                                                     {{-- <a href="{{ route('login') }}" class="favourite cart-item">
                                                         <span>
                                                             <i class="fas fa-shopping-cart"></i>

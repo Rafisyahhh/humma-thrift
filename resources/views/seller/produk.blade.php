@@ -30,7 +30,6 @@
              box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
          }
 
-
          .close {
              color: #aaa;
              float: right;
@@ -123,20 +122,20 @@
              bottom: 5px;
              left: 10px;
              display: flex;
-             gap: 10px;
-             margin-left: 17px;
+             gap: 1rem;
+             flex-direction: column;
+             padding: 1rem;
          }
 
          .favorite-cart-icon {
              display: flex;
              align-items: center;
-
          }
 
          .favorite-cart-icon .badge {
              position: absolute;
              top: -8px;
-             right: -10px;
+             right: 41px;
              background-color: #1c3879;
              color: white;
              border-radius: 50%;
@@ -152,6 +151,15 @@
 
          .product-btn {
              display: inline-block;
+         }
+
+         .product-wrapper {
+             height: unset;
+         }
+
+         .product-wrapper .product-info {
+             font-size: 2px;
+             margin: 1.5rem 3rem 8rem;
          }
      </style>
  @endsection
@@ -200,8 +208,6 @@
                                      </li>
                                  </ul>
                              </div>
-
-
                          </div>
                          <div class="product-info">
                              <div class="product-description">
@@ -216,13 +222,28 @@
                          <div class="product-cart-btn">
                              <a role="button" class="product-btn" data-bs-toggle="modal"
                                  data-bs-target="#detailModal{{ $item->id }}">Detail</a>
-                         </div>
+                         </div><br><br>
+                         {{-- FAVORITE --}}
                          <div class="favorite-cart-container">
                              <a role="button" data-bs-toggle="modal" data-bs-target="#favoriteModal{{ $item->id }}"
                                  class="favorite-cart-icon" style="position: relative; display: inline-block;">
-                                 <i class="fas fa-heart" style="font-size: 1.3em;"></i>
                                  @if (isset($countFavorite[$item->id]))
-                                     <span class="badge">{{ $countFavorite[$item->id] }}</span>
+                                     <span style="background-color: unset">
+                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                             viewBox="0 0 24 24">
+                                             <path fill="#1c3879"
+                                                 d="m12 21l-1.45-1.3q-2.525-2.275-4.175-3.925T3.75 12.812T2.388 10.4T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.3 0 2.475.55T12 4.75q.85-1 2.025-1.55t2.475-.55q2.35 0 3.925 1.575T22 8.15q0 1.15-.387 2.25t-1.363 2.412t-2.625 2.963T13.45 19.7zm0-2.7q2.4-2.15 3.95-3.687t2.45-2.675t1.25-2.026T20 8.15q0-1.5-1-2.5t-2.5-1q-1.175 0-2.175.662T12.95 7h-1.9q-.375-1.025-1.375-1.687T7.5 4.65q-1.5 0-2.5 1t-1 2.5q0 .875.35 1.763t1.25 2.025t2.45 2.675T12 18.3m0-6.825" />
+                                         </svg>
+                                     </span>
+                                     <span
+                                         style="margin-left:0.5px; font-size: 15px; background-color: unset">Favorit</span>
+                                     <span
+                                         style="margin-left:0.5px; font-size: 15px; background-color: unset">({{ $countFavorite[$item->id] }})</span>
+                                     {{-- <p><i class="fas fa-heart" style="font-size: 1.1em; color: red;"></i> {{ $countFavorite[$item->id] }} orang menyukai produk ini<span style="background-color: unset"> </span></p> --}}
+
+                                     {{-- <i class="fas fa-heart" style="font-size: 1.2em;"></i> --}}
+                                     {{-- @if (isset($countFavorite[$item->id])) --}}
+                                     {{-- <span class="badge">{{ $countFavorite[$item->id] }}</span> --}}
 
                                      <div class="modal fade" id="favoriteModal{{ $item->id }}" tabindex="-1"
                                          aria-labelledby="favoriteModalLabel{{ $item->id }}" aria-hidden="true">
@@ -261,14 +282,17 @@
                                          </div>
                                      </div>
                                  @endif
-
                              </a>
+                             {{-- CART --}}
                              <a role="button" data-bs-toggle="modal" data-bs-target="#cartModal{{ $item->id }}"
-                                 class="favorite-cart-icon" style="position: relative; display: inline-block; left:5px;">
-                                 <i class="fas fa-shopping-cart" style="font-size: 1.3em;"></i>
+                                 class="favorite-cart-icon">
                                  @if (isset($countCart[$item->id]))
-                                     <span class="badge">{{ $countCart[$item->id] }}</span>
+                                     <p><i class="fas fa-shopping-cart"
+                                             style="font-size: 1em; margin-left:0.5px; color: #1b336b;"></i> Keranjang<span
+                                             style="background-color: unset">({{ $countCart[$item->id] }})</span></p>
 
+                                     {{-- <i class="fas fa-shopping-cart" style="font-size: 1.1em;">{{ count($countCart) }} test</i> --}}
+                                     {{-- <span class="badge">{{ $countCart[$item->id] }}</span> --}}
                                      <div class="modal fade" id="cartModal{{ $item->id }}" tabindex="-1"
                                          aria-labelledby="cartModalLabel{{ $item->id }}" aria-hidden="true">
                                          <div class="modal-dialog">
@@ -312,12 +336,14 @@
                      </div>
                  </div>
              @endforeach
+
+             {{-- LELANG --}}
              @foreach ($product_auctions as $item)
                  <div class="col-lg-4 col-sm-6">
-                     <div class="product-wrapper" data-aos="fade-up">
+                     <div class="product-wrapper" data-aos="fade-up" style="height: 510px;">
                          <div class="product-img" style="background-color:black">
-                             <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover"
-                                 @style(['opacity: 0.4;' => $item->status != 'active'])>
+                             <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img"
+                                 class="object-fit-cover" @style(['opacity: 0.4;' => $item->status != 'active'])>
                              @if ($item->status != 'active')
                                  <div class="ribbon-status danger">
                                      {{ $item->status }}
@@ -372,7 +398,7 @@
                              <a role="button" data-bs-toggle="modal"
                                  data-bs-target="#lfavoriteModal{{ $item->id }}" class="favorite-cart-icon"
                                  style="position: relative; display: inline-block;">
-                                 <i class="fas fa-heart" style="font-size: 1.3em;"></i>
+                                 {{-- <i class="fas fa-heart" style="font-size: 1em; color: red;"></i> --}}
                                  @if (isset($countLFavorite[$item->id]))
                                      <span class="badge">{{ $countLFavorite[$item->id] }}</span>
                                      <div class="modal fade" id="lfavoriteModal{{ $item->id }}" tabindex="-1"
@@ -469,8 +495,6 @@
     </div>
   </div> --}}
 
-
-
      {{-- Detail --}}
      @foreach ($products as $item)
          <div class="modal fade" id="detailModal{{ $item->id }}" tabindex="-1"
@@ -559,8 +583,7 @@
                  <div class="login-section account-section p-0">
                      <div class="review-form m-0" style="height: 80%; width: 95rem;">
                          <div class="text-end mb-4">
-                             <div class="close-btn">
-
+                             <div class="close-btn">    
                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
                                      aria-label="Close"></button>
                              </div>
