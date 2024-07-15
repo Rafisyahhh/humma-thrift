@@ -59,40 +59,51 @@
     .m-0 {
         margin: 0;
     }
-
-    /* Style the custom radio button */
     .radio-container {
-        display: flex;
-        align-items: flex-start;
-        /* Mengatur agar radio button dan teks sejajar di bagian atas */
-        margin-bottom: 10px;
-        /* Jarak antara setiap radio button */
-    }
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    height: 100%; /* Ensure the container takes the full height */
+}
 
-    .custom-radio {
-        transform: scale(1.5);
-        /* Ubah skala tombol radio */
-        margin-top: 2.5rem;
-        /* Mengatur posisi radio button agar sejajar dengan teks */
-        margin-right: 2.5rem;
-        /* Mengatur jarak antara radio button dan teks */
-    }
+.radio-labell {
+    position: relative; /* Position relative to enable pseudo-element */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers elements inside the label horizontally */
+    justify-content: center; /* Centers elements inside the label vertically */
+    text-align: center;
+    padding: 20px; /* Add padding for better spacing */
+    border: 2px solid transparent; /* Default border */
+    border-radius: 10px; /* Rounded corners */
+    transition: border-color 0.3s ease, background-color 0.3s ease; /* Smooth transition for hover effect */
+    cursor: pointer; /* Change cursor to pointer for better UX */
+}
 
-    .radio-label {
-        font-size: 16px;
-        /* Ukuran teks label */
-    }
+.radio-labell:hover {
+    border-color: #007bff; /* Change border color on hover */
+    background-color: #f0f8ff; /* Light background color on hover */
+}
 
-    /* Style the checked state */
-    input[type="radio"]:checked+label .custom-radio {
-        background-color: #1c3879;
-        /* Change color to indicate selection */
-    }
 
-    /* Hide the default label text */
-    input[type="radio"]+label {
-        cursor: pointer;
-    }
+
+.custom-rradio:checked + .radio-labell {
+    border-color: #007bff;
+    background-color: #f0f8ff;
+}
+
+.custom-rradio:checked + .radio-labell::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background-color: rgba(0, 123, 255, 0.2);
+    border: 2px solid #007bff;
+    border-radius: 10px;
+}
+
 </style>
 <style>
     /* Style the form */
@@ -143,6 +154,7 @@
     .step.finish {
         background-color: #1c3879;
     }
+
 </style>
 @endpush @section('content')
 <form id="coForm" action="{{ route('user.transaction.store') }}" method="POST">
@@ -237,20 +249,20 @@
                 <h5 class="fw-bold" style="text-align: center">Pilih Pembayaran</h5>
                 <div class="mx-5 mt-2 mb-5 p-6">
                     <div class="radio-container">
-                        <div class="row">
+                        <div cl ass="row">
                             @foreach ($channels['data'] as $item)
                                 <div class="col-md-6">
-                                    <input type="radio" id="option1" name="method" value="{{ $item['code'] }}"
-                                        class="custom-radio" />
+                                    <input type="radio"  id="option{{ $loop->index }}" name="method" value="{{ $item['code'] }}"
+                                        class="custom-rradio" />
                                     <input type="hidden" name="adminfeeFlat"
                                         value="{{ $item['total_fee']['flat'] }}" />
                                     <input type="hidden" name="adminfeePercent"
                                         value="{{ $item['total_fee']['percent'] }}" />
                                     <input type="hidden" name="paymentName" value="{{ $item['name'] }}" />
-                                    <label for="option1" class="radio-label">
-                                        <div class="d-flex gap-3 mt-3">
-                                            <img src="{{ $item['icon_url'] }}" width="100" height="40" />
-                                            <div class="mt-1">
+                                    <label for="option{{ $loop->index }}" class="radio-labell">
+                                        <div class="d-flex flex-column  mt-3">
+                                            <img src="{{ $item['icon_url'] }}" width="120" height="45" />
+                                            <div class="text-center mt-2">
                                                 <p class="fs-3 fw-bold">{{ $item['name'] }}</p>
                                                 <p class="fs-5">
                                                     @if ($item['total_fee']['flat'] == null)
@@ -258,7 +270,6 @@
                                                     @else
                                                         Rp{{ number_format($item['total_fee']['flat'], null, null, '.') }}
                                                     @endif
-
                                                 </p>
                                             </div>
                                         </div>
@@ -656,5 +667,7 @@
             });
         });
     });
+
+
 </script>
 @endpush
