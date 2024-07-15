@@ -100,7 +100,6 @@
 
 
     @include('layouts.partials.home.footer')
-
     <script src="{{ asset('template-assets/front/assets/js/jquery_3.7.1.min.js') }}"></script>
     <!-- Vendors JS -->
     <script src="{{ asset('additional-assets/sweetalert2-11.12.0/sweetalert2.all.min.js') }}"></script>

@@ -226,7 +226,7 @@
                                                     @csrf
                                                     @method('PUT')
                                                     <label class="switch">
-                                                        <input type="checkbox" name="status" value="1" onchange="this.form.submit()" {{ $address->status?"checked disabled":"" }}>
+                                                        <input type="checkbox" name="status" value="1"  {{ $address->status?"checked":"onchange=this.form.submit()" }}>
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </form>
@@ -377,4 +377,13 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function(){
+        $('input:checkbox:checked').change(function(){
+            flasher.error('Alamat ini sedang menjadi alamat utama');
+            $(this).prop('checked',true)
+        });
+    });
+</script>
+
 @endpush

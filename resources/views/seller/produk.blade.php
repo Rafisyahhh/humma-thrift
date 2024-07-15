@@ -1,4 +1,4 @@
- @extends('layouts.panel')
+@extends('layouts.panel')
 
  @section('title', 'Produk')
 
@@ -589,7 +589,8 @@
                      <div class="review-form m-0" style="height: 80%; width: 95rem;">
                          <div class="text-end mb-4">
                              <div class="close-btn">
-                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                     aria-label="Close"></button>
                              </div>
                          </div>
                          <section class="product product-info" style="width:85rem; height:60%;">
