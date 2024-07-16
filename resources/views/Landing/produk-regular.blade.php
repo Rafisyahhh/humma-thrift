@@ -186,7 +186,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <form action="{{ route('user.checkout') }}" method="post">
+                                            <form action="{{ route('user.checkout.process') }}" method="post">
                                                 @csrf
                                                 <div class="product-cart-btn" style="bottom:0;">
                                                     <input type="hidden" value="{{ $item->id }}" name="product_id">

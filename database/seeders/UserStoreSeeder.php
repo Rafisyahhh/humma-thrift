@@ -13,15 +13,18 @@ class UserStoreSeeder extends Seeder {
      */
     public function run(): void {
         //
-        Storage::disk('public')->put("uploads/thumbnails/logo.jpg", file_get_contents(public_path("asset-thrift/produk/celana-panjang/Snapinsta.app_448375742_850058740270825_8742631364981080060_n_1024.jpg")));
+        Storage::disk('public')->put("uploads/thumbnails/logo.jpg", file_get_contents(public_path("asset-thrift/brand/adidas.jpg")));
         UserStore::create([
-            "user_id" => 1,
-            "name" => "store_1",
-            "username" => "store_1",
-            "description" => "This is store 1",
-            "address" => "123 Main St",
+            "user_id" => 16,
+            "name" => "Dummy Shop",
+            "username" => "dummyshop35",
             "store_logo" => "uploads/thumbnails/logo.jpg",
-            "active" => "1"
+            "nic_owner" => "0099887766",
+            "address" => "123 Main St",
+            "description" => "This is store 1",
+            "open" => "  08:00:00",
+            "close" => "  20:00:00",
+            "status" => "online"
         ]);
     }
 }

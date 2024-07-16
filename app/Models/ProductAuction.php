@@ -42,6 +42,9 @@ class ProductAuction extends Model {
     public function gallery() {
         return $this->hasMany(ProductGallery::class);
     }
+    public function auctions() {
+        return $this->hasMany(auctions::class);
+    }
 
     /**
      * Get the favorite associated with the Product

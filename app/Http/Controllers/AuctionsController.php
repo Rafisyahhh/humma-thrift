@@ -14,7 +14,7 @@ use App\Notifications\Lelang;
 use App\Notifications\SellerLelang;
 use Auth;
 use Illuminate\Support\Facades\Log;
-
+use Request;
 
 class AuctionsController extends Controller
 {
@@ -117,10 +117,14 @@ class AuctionsController extends Controller
             $userStore = $product->userStore;
 
             if ($userStore) {
+                //kutambah
+                flash()->info('Notification sent to UserStore: ' . $userStore->id);
                 // Ini yang aku tambahin
                 $userStore->user->notify(new SellerLelang($auctions));
                 Log::info('Notification sent to UserStore: ' . $userStore->id);
             } else {
+                //kutambah
+                flash()->error('UserStore not found for product: ' . $product->id);
                 Log::error('UserStore not found for product: ' . $product->id);
                 return redirect()->back()->with('success', 'Lelang berhasil ditambahkan tetapi notifikasi gagal dikirim: UserStore not found');
             }
@@ -169,34 +173,73 @@ class AuctionsController extends Controller
     public function editlelang(auctions $auctions)
     {
         $auctions = Auctions::orderBy('created_at', 'asc')->orderBy('auction_price', 'desc')->get();
+        $productAuction = ProductAuction::find($auctions->product_auction_id);
         $user = Auth::user();
 
-        return view('seller.produk', compact('auctions', 'user'));
+        return view('seller.produk', compact('auctions', 'user','productAuction'));
     }
 
     /**
      * Update the specified resource in storage.
      */
+    // public function updatelelang(UpdateauctionsRequest $request, auctions $auctions)
+    // {
+    //     try {
+    //         $dataToUpdate = [
+    //             'status' => $request->input('status') == 1,
+    //         ];
+
+    //         $auctions->update($dataToUpdate);
+
+    //         if ($auctions->status) {
+    //             $auctions->user->notify(new Lelang($auctions));
+    //         }
+    //         $productAuction = ProductAuction::find($auctions->product_auction_id);
+
+    //         if ($productAuction) {
+    //             $productAuction->auction_price = $request->input('price');
+    //             $productAuction->save();
+    //         } else {
+    //             throw new \Exception('Product Auction not found');
+    //         }
+
+    //         return redirect()->route('seller.product.index')->with('success', 'Lelang berhasil dipilih');
+    //     }catch (\Throwable $th) {
+    //         Log::error('Error in updatelelang method: ' . $th->getMessage());
+    //         return redirect()->route('seller.product.index')->withInput()->withErrors(['error' => 'Terjadi kesalahan: ' . $th->getMessage()]);
+    //     }
+
+    // }
     public function updatelelang(UpdateauctionsRequest $request, auctions $auctions)
     {
         try {
-
             $dataToUpdate = [
-                'status' => $request->input('status') == 1,
+                'status' => $request->status == 1,
             ];
 
             $auctions->update($dataToUpdate);
 
-            // Kirim notifikasi jika status berhasil diperbarui
             if ($auctions->status) {
                 $auctions->user->notify(new Lelang($auctions));
             }
-            return redirect()->route('seller.product.index')->with('success', 'lelang berhasil di pilih');
+
+            $productAuction = ProductAuction::find($auctions->product_auction_id);
+
+            if ($productAuction) {
+                $productAuction->price = $auctions->auction_price; // Update the auction_price field in the product_auction table
+                $productAuction->save();
+            } else {
+                throw new \Exception('Product Auction not found');
+            }
+
+            return redirect()->route('seller.product.index')->with('success', 'Lelang berhasil dipilih');
         } catch (\Throwable $th) {
-            return redirect()->route('seller.product.index')->withInput()->withErrors(['error' => $th->getMessage()]);
+            Log::error('Error in updatelelang method: ' . $th->getMessage());
+            return redirect()->route('seller.product.index')
+                ->withInput()
+                ->withErrors(['error' => 'Terjadi kesalahan: ' . $th->getMessage()]);
         }
     }
-
     /**
      * Remove the specified resource from storage.
      */

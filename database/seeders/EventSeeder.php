@@ -17,15 +17,6 @@ class EventSeeder extends Seeder {
             [
                 "thumbnail" => "hero.jpg",
             ],
-            [
-                "thumbnail" => "hero2.jpg",
-            ],
-            [
-                "thumbnail" => "heroo.jpg",
-            ],
-            [
-                "thumbnail" => "heroo2.jpg",
-            ],
         ];
 
         $publicPath = public_path("asset-thrift/herosection/");
@@ -38,7 +29,7 @@ class EventSeeder extends Seeder {
             if (Storage::disk('public')->put($destinationPath, file_get_contents($sourcePath))) {
                 event::create([
                     "judul" => "Humma Thrift",
-                    "subjudul" => "Ini subtitle",
+                    "subjudul" => "Platfrom Thrift Website Pertama di Malang",
                     "foto" => $destinationPath,
                 ]);
             }

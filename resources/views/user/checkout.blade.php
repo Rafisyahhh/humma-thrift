@@ -60,38 +60,66 @@
         margin: 0;
     }
 
-    /* Style the custom radio button */
     .radio-container {
         display: flex;
-        align-items: flex-start;
-        /* Mengatur agar radio button dan teks sejajar di bagian atas */
-        margin-bottom: 10px;
-        /* Jarak antara setiap radio button */
+        justify-content: center;
+        /* Centers horizontally */
+        align-items: center;
+        /* Centers vertically */
+        height: 100%;
+        /* Ensure the container takes the full height */
     }
 
-    .custom-radio {
-        transform: scale(1.5);
-        /* Ubah skala tombol radio */
-        margin-top: 2.5rem;
-        /* Mengatur posisi radio button agar sejajar dengan teks */
-        margin-right: 2.5rem;
-        /* Mengatur jarak antara radio button dan teks */
-    }
-
-    .radio-label {
-        font-size: 16px;
-        /* Ukuran teks label */
-    }
-
-    /* Style the checked state */
-    input[type="radio"]:checked+label .custom-radio {
-        background-color: #1c3879;
-        /* Change color to indicate selection */
-    }
-
-    /* Hide the default label text */
-    input[type="radio"]+label {
+    .radio-button-labels {
+        position: relative;
+        /* Position relative to enable pseudo-element */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Centers elements inside the label horizontally */
+        justify-content: center;
+        /* Centers elements inside the label vertically */
+        text-align: center;
+        padding: 20px;
+        /* Add padding for better spacing */
+        border: 2px solid transparent;
+        /* Default border */
+        border-radius: 10px;
+        /* Rounded corners */
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+        /* Smooth transition for hover effect */
         cursor: pointer;
+        /* Change cursor to pointer for better UX */
+    }
+
+    .radio-button-labels:hover {
+        border-color: #007bff;
+        /* Change border color on hover */
+        background-color: #f0f8ff;
+        /* Light background color on hover */
+    }
+
+    .radio-button-labels:checked~label {
+        border-color: #007bff;
+        background-color: #f0f8ff;
+        color: white;
+    }
+
+    .custom-radio:checked+.radio-button-labels {
+        border-color: #007bff;
+        background-color: #f0f8ff;
+    }
+
+    .custom-radio:checked~.radio-button-labels::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background-color: rgba(0, 123, 255, 0.2);
+        border: 2px solid #007bff;
+        border-radius: 10px;
     }
 </style>
 <style>
@@ -159,23 +187,29 @@
             <div class="account-section billing-section" style="margin-top: 2.5rem">
                 <h5 class="wrapper-heading">Daftar Order</h5>
                 <div class="order-summery">
+
                     <hr />
+
                     <div class="subtotal product-total">
                         <ul class="product-list">
-                            <li>
-                                <div class="d-flex gap-3">
-                                    <img src="{{ asset("storage/$product->thumbnail") }}" width="60" />
-                                    <div class="mt-1">
-                                        <h5 class="wrapper-heading" style="font-size: 20px">{{ $product->title }}</h5>
-                                        <p class="paragraph">{{ $product->brand->title }}</p>
+                            @foreach ($product as $item)
+                                <li>
+                                    <div class="d-flex gap-3">
+                                        <img src="{{ asset("storage/$item->thumbnail") }}" class="mb-4"
+                                            width="60" />
+                                        <div class="mt-1">
+                                            <h5 class="wrapper-heading" style="font-size: 20px">{{ $item->title }}
+                                            </h5>
+                                            <p class="paragraph">{{ $item->brand->title }}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="price mt-3">
-                                    <h5 class="wrapper-heading" style="font-size: 20px">
-                                        Rp{{ number_format($product->price, null, null, '.') }}
-                                    </h5>
-                                </div>
-                            </li>
+                                    <div class="price mt-3" data-price="{{ $item->price }}">
+                                        <h5 class="wrapper-heading" style="font-size: 20px">
+                                            Rp{{ number_format($item->price, null, null, '.') }}
+                                        </h5>
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -208,18 +242,21 @@
                                         value="{{ $address->id }}" class="custom-radio p-0" />
                                     <label for="option{{ $address->id }}" class="radio-label"
                                         style="display: flex; flex-direction: column; width: 77.5rem">
-                                        <p class="mb-1" style="font-size: 17px; margin: 0;">
-                                            <b style="font-size: 17px;">{{ $users->username }}</b> |
-                                            +{{ $users->phone }}
-                                        </p>
-                                        <p style="font-size: 15px; margin: 5px 0;">
+                                        <div
+                                            style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                            <p class="mb-1" style="font-size: 17px; margin: 0">
+                                                <b style="font-size: 17px">{{ $users->name }}</b> |
+                                                +{{ $users->phone }}
+                                            </p>
+                                            <button type="button" class="openModalUpdate"
+                                                data-modal-id="updateModal{{ $address->id }}"
+                                                style="color: blue; background: none; border: none; padding: 0; cursor: pointer;">
+                                                Ubah
+                                            </button>
+                                        </div>
+                                        <p style="font-size: 15px; margin: 5px 0">
                                             {{ $address->address }}
                                         </p>
-                                        @if ($address->status)
-                                            <span class="mark position-relative"
-                                                style="width: 11rem; height: 4.60rem;"><span class="position-relative"
-                                                    style="left: 45%; top: 10%;">Utama</span></span>
-                                        @endif
                                     </label>
                                 </div>
                                 <hr />
@@ -234,31 +271,30 @@
     <div class="tab mt-3">
         <div class="checkout-wrapper">
             <div class="account-section billing-section">
-                <h5 class="fw-bold" style="text-align: center">Pilih Pembayaran</h5>
+                <h5 class="fw-bold mb-4" style="text-align: center">Pilih Pembayaran</h5>
                 <div class="mx-5 mt-2 mb-5 p-6">
                     <div class="radio-container">
                         <div class="row">
-                            @foreach ($channels['data'] as $item)
-                                <div class="col-md-6">
-                                    <input type="radio" id="option1" name="method" value="{{ $item['code'] }}"
-                                        class="custom-radio" />
-                                    <input type="hidden" name="adminfeeFlat"
-                                        value="{{ $item['total_fee']['flat'] }}" />
-                                    <input type="hidden" name="adminfeePercent"
-                                        value="{{ $item['total_fee']['percent'] }}" />
-                                    <input type="hidden" name="paymentName" value="{{ $item['name'] }}" />
-                                    <label for="option1" class="radio-label">
-                                        <div class="d-flex gap-3 mt-3">
-                                            <img src="{{ $item['icon_url'] }}" width="100" height="40" />
-                                            <div class="mt-1">
-                                                <p class="fs-3 fw-bold">{{ $item['name'] }}</p>
-                                                <p class="fs-5">
-                                                    @if ($item['total_fee']['flat'] == null)
-                                                        Rp{{ number_format($product->price * ($item['total_fee']['percent'] / 100), null, null, '.') }}
-                                                    @else
-                                                        Rp{{ number_format($item['total_fee']['flat'], null, null, '.') }}
-                                                    @endif
+                            @foreach ($channel_pembayaran as $item)
+                                <div class="col-lg-4 col-md-6 mb-3">
+                                    <input type="radio" id="payment-method-{{ $loop->index }}" name="method"
+                                        value="{{ $item->channel_code }}" class="custom-radio d-none" />
+                                    <input type="hidden" name="adminfeeFlat" value="{{ $item->flat }}" />
+                                    <input type="hidden" name="adminfeePercent" value="{{ $item->percent }}" />
+                                    <input type="hidden" name="paymentName" value="{{ $item->name }}" />
 
+                                    <label for="payment-method-{{ $loop->index }}" class="radio-button-labels">
+                                        <div class="d-flex flex-column  mt-3">
+                                            <img src="{{ $item->icon_url }}" height="45" />
+                                            <div class="text-center mt-2">
+                                                <p class="fs-3 fw-bold">{{ $item->name }}</p>
+                                                <p class="fs-5">
+                                                    {{-- @dd($product->sum('price')) --}}
+                                                    @if ($item->flat == null)
+                                                        Rp{{ number_format($product->sum('price') * ($item->percent / 100), null, null, '.') }}
+                                                    @else
+                                                        Rp{{ number_format($item->flat, null, null, '.') }}
+                                                    @endif
                                                 </p>
                                             </div>
                                         </div>
@@ -293,11 +329,11 @@
                             @if ($product)
                                 <div class="col-md-6">
                                     <p class="fw-bold" style="font-size: 17px; margin: 0">
-                                        <b style="font-size: 17px">{{ $product->userstore->name }}</b> |
-                                        {{ $product->userstore->user->phone }}
+                                        <b style="font-size: 17px">{{ $product->first()->userstore->name }}</b> |
+                                        {{ $product->first()->userstore->user->phone }}
                                     </p>
                                     <p class="float-end" style="font-size: 17px; margin: 0">
-                                        {{ $product->userstore->address }}</p>
+                                        {{ $product->first()->userstore->address }}</p>
                                 </div>
                             @endif
                             <div class="col-md-6">
@@ -329,7 +365,7 @@
                     <div class="subtotal product-total">
                         <h5 class="wrapper-heading" style="font-size: 17px;">Total Harga</h5>
                         <h5 class="wrapper-heading" style="font-size: 17px;">
-                            {{ number_format($product->price, null, null, '.') }}
+                            {{ number_format($product->sum('price'), null, null, '.') }}
                         </h5>
                     </div>
                     <div class="subtotal product-total">
@@ -348,10 +384,10 @@
     <div style="overflow: auto">
         <div style="float: right">
             <button type="button" id="prevBtn" class="shop-btn" onclick="nextPrev(-1)">
-                Previous
+                Kembali
             </button>
             <button type="button" id="nextBtn" class="shop-btn" onclick="nextPrev(1)">
-                Next
+                Lanjut
             </button>
         </div>
     </div>
@@ -362,7 +398,7 @@
         <span class="step"></span>
         <span class="step"></span>
     </div>
-    <input type="hidden" name="product_id" value="{{ $product->id }}">
+    {{-- <input type="hidden" name="product_id" value="{{ $product->id }}"> --}}
 </form>
 {{-- Address Modal --}}
 <div id="addressModal" class="modal">
@@ -524,7 +560,7 @@
         // Event listener untuk setiap metode pembayaran
         paymentMethods.forEach(method => {
             method.addEventListener('change', function() {
-                const productPrice = {{ $product->price }};
+                const productPrice = {{ $product->sum('price') }};
 
                 // Dapatkan elemen hidden input yang berisi biaya admin terkait
                 const adminFeeFlatInput = this.nextElementSibling;
@@ -554,7 +590,7 @@
         });
 
         // Kalkulasi total awal tanpa biaya admin (asumsi default)
-        calculateTotal({{ $product->price }}, 0, 0);
+        calculateTotal({{ $product->sum('price') }}, 0, 0);
     });
 </script>
 <script>
@@ -572,9 +608,9 @@
             document.getElementById("prevBtn").style.display = "inline";
         }
         if (n == x.length - 1) {
-            document.getElementById("nextBtn").innerHTML = "Submit";
+            document.getElementById("nextBtn").innerHTML = "Bayar Sekarang";
         } else {
-            document.getElementById("nextBtn").innerHTML = "Next";
+            document.getElementById("nextBtn").innerHTML = "Lanjutkan";
         }
         // ... and run a function that displays the correct step indicator:
         fixStepIndicator(n);
