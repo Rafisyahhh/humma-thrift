@@ -29,6 +29,7 @@ return new class extends Migration {
             $table->time('open')->nullable();
             $table->time('close')->nullable();
             $table->enum('status', UserStore::getStoreStatusEnums()->toArray())->nullable();
+            $table->boolean('cuti')->default(false);
         });
     }
 
