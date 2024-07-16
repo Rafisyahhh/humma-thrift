@@ -54,6 +54,9 @@ class TransactionController extends Controller
             # Kirim Notifikasi
             Auth::user()->notify(new NotificationUserCheckout($transactions));
 
+            # Session destroying
+            cart::whereIn('id', $products)->delete();
+
             # Redirect ke halaman transaksi
             return redirect()->route('user.transaction.show', ['reference' => $transaction['reference']]);
         } catch (\Throwable $th) {
