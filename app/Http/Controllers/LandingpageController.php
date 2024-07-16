@@ -111,8 +111,15 @@ class LandingpageController extends Controller {
     }
 
     // Tambahkan metode regular
-    public function productRegular() {
-        $products = Product::where('status', 'active')->paginate(24);
+    public function productRegular(Request $request) {
+        $products = Product::where('status', 'active')->paginate(3);
+        $colors = $products->pluck('color')->map('strtolower')->unique();
+        $sizes = $products->pluck('size')->map('strtolower')->unique();
+
+        if ($request->ajax()) {
+            return view('components.infinite-scroll.product-regular', compact('products', 'colors', 'sizes'))->render();
+        }
+
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
@@ -121,9 +128,6 @@ class LandingpageController extends Controller {
             ->whereNotNull('product_id')
             ->orderBy('created_at')
             ->get();
-
-        $colors = $products->pluck('color')->map('strtolower')->unique();
-        $sizes = $products->pluck('size')->map('strtolower')->unique();
 
         return view('Landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'colors', 'sizes'));
     }

@@ -5738,3 +5738,21 @@ a.shop-btn:hover {
     border: 1px solid var(--NN500, #8e8a8a);
     overflow: hidden;
 }
+
+
+.search-select {
+    cursor: pointer;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    border-radius: 8px;
+    height: 4.3rem;
+    min-width: 20rem;
+    max-width: 20rem;
+    margin-right: 19px;
+    /* border: 1px solid var(--NN500, #1c3879); */
+    overflow: hidden;
+}
+
