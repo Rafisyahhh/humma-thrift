@@ -17,9 +17,9 @@
   {{-- @if ($auctions)
               @if ($auctions->status === 0) --}}
   <div class="col-lg-4 col-sm-6" data-brand="{{ $item->brand->title }}"
-    data-categories="{{ json_encode($item->categories->pluck('title')->toArray()) }}" data-color="{{ $item->color }}"
-    data-size="{{ $item->size }}" data-priceStart="{{ $item->bid_price_start }}"
-    data-priceEnd="{{ $item->bid_price_end }}">
+    data-categories="{{ json_encode($item->categories->pluck('title')->toArray()) }}"
+    data-color="{{ strtolower($item->color) }}" data-size="{{ strtolower($item->size) }}"
+    data-priceStart="{{ $item->bid_price_start }}" data-priceEnd="{{ $item->bid_price_end }}">
     <div class="product-wrapper" data-aos="fade-up">
       <div class="product-img">
         <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover" loading="lazy">
