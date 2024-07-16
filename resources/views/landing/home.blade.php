@@ -161,8 +161,7 @@
                         <div class="container custom-margin-bottom">
                             <div class="row custom-margin-bottom">
                                 <div class="col-lg-2">
-                                    <div class="position-absolute" data-aos="fade-up"
-                                    style="top:35%;">
+                                    <div class="position-absolute" data-aos="fade-up" style="top:35%;">
                                         <div class="wrapper-section">
                                             <h5 class="wrapper-details" style="color:white;">
                                                 {{ $even->subjudul }}
@@ -292,9 +291,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="product-cart-btn">
-                                        <a href="/user/checkout" class="product-btn">Beli Sekarang</a>
-                                    </div>
+                                    <form action="{{ route('user.checkout') }}" method="post">
+                                        @csrf
+                                        <div class="product-cart-btn" style="bottom:0;">
+                                            <input type="hidden" value="{{ $item->id }}" name="product_id">
+                                            <button type="submit" class="product-btn">Beli sekarang</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </swiper-slide>
                         @endforeach
