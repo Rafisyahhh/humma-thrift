@@ -142,6 +142,7 @@ class LandingpageController extends Controller {
         if ($request->ajax()) {
             return view('components.infinite-scroll.product-auction', compact('product_auction', 'colors', 'sizes'))->render();
         }
+
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $countcart = cart::where('user_id', auth()->id())->count();
@@ -161,39 +162,50 @@ class LandingpageController extends Controller {
 
 
     public function searchProductRegular(Request $request) {
+        $search = $request->search;
+        $products = Product::where('status', 'active')->where('title', 'like', "%$search%")->paginate(24);
+
+        $colors = $products->pluck('color')->map('strtolower')->unique();
+        $sizes = $products->pluck('size')->map('strtolower')->unique();
+
+        if ($request->ajax()) {
+            return view('components.infinite-scroll.product-regular', compact('products', 'colors', 'sizes'))->render();
+        }
+
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $countcart = cart::where('user_id', auth()->id())->count();
-        $search = $request->search;
-        $products = Product::where('status', 'active')->where('title', 'like', "%$search%")->paginate(24);
         $carts = cart::where('user_id', auth()->id())
             ->whereNotNull('product_id')
             ->orderBy('created_at')
             ->get();
-
-        $colors = $products->pluck('color')->map('strtolower')->unique();
-        $sizes = $products->pluck('size')->map('strtolower')->unique();
 
         return view('Landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search', 'colors', 'sizes'));
     }
 
 
     public function searchProductAuction(Request $request) {
+        $search = $request->search;
+        $product_auction = ProductAuction::where('status', 'active')->where('title', 'like', "%$search%")->paginate(24);
+        $product_auction2 = ProductAuction::all();
+
+        $colors = $product_auction2->pluck('color')->map('strtolower')->unique();
+        $sizes = $product_auction2->pluck('size')->map('strtolower')->unique();
+
+        if ($request->ajax()) {
+            return view('components.infinite-scroll.product-auction', compact('product_auction', 'colors', 'sizes'))->render();
+        }
+
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $countcart = cart::where('user_id', auth()->id())->count();
-        $search = $request->search;
-        $product_auction = ProductAuction::where('status', 'active')->where('title', 'like', "%$search%")->paginate(24);
-        $product_auction2 = ProductAuction::paginate(24);
         $carts = cart::where('user_id', auth()->id())
             ->whereNotNull('product_id')
             ->orderBy('created_at')
             ->get();
 
-        $colors = $product_auction2->pluck('color')->map('strtolower')->unique();
-        $sizes = $product_auction2->pluck('size')->map('strtolower')->unique();
 
         return view('Landing.produk-auction', compact('product_auction', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search', 'colors', 'sizes'));
     }
