@@ -60,7 +60,7 @@ class NotificationSellerController extends Controller
         // dd($notification);
         // dd(compact('notifications', 'countcart', 'carts', 'countFavorite', 'notification'));
 
-        return view('seller.notification.show', compact('notifications', 'countcart', 'carts', 'countFavorite', 'notification'));
+        return view('seller.notification.index', compact('notifications', 'countcart', 'carts', 'countFavorite', 'notification'));
 
     }
 
