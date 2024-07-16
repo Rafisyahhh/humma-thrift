@@ -37,7 +37,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            x
+                            {{-- x --}}
                             <tr class="table-row ticket-row" style="border:none; background-color: #ffffff;">
                                 <td style="height:10px;"></td>
                             </tr>

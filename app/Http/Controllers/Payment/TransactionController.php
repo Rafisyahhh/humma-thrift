@@ -12,6 +12,7 @@ use App\Models\UserAddress;
 use App\Notifications\NotificationUserCheckout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class TransactionController extends Controller
 {
@@ -44,24 +45,26 @@ class TransactionController extends Controller
             ]);
 
             # Buat Data Daftar Order
-            $product->map(function ($item) use ($transactions) {
-                Order::create([
+            $orders = $product->map(function ($item) use ($transactions) {
+                return Order::create([
                     'product_id' => $item->id,
                     'transaction_order_id' => $transactions->id
                 ]);
             });
 
             # Kirim Notifikasi
-            Auth::user()->notify(new NotificationUserCheckout($transactions));
+            Auth::user()->notify(new NotificationUserCheckout($transactions, $orders));
 
             # Session destroying
             cart::whereIn('id', $products)->delete();
 
             # Redirect ke halaman transaksi
-            return redirect()->route('user.transaction.show', ['reference' => $transaction['reference']]);
+            return redirect()->route('user.transaction.show', $transaction['reference']);
         } catch (\Throwable $th) {
+            Log::error($th->getMessage(), $th->getTrace());
             return back()->with('error', $th->getMessage());
         } catch (\Exception $e) {
+            Log::error($e->getMessage(), $e->getTrace());
             return back()->with('error', $e->getMessage());
         }
     }
