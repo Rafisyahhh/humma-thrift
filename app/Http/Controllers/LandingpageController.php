@@ -133,8 +133,15 @@ class LandingpageController extends Controller {
     }
 
     // Tambahkan metode auction
-    public function productAuction() {
+    public function productAuction(Request $request) {
         $product_auction = ProductAuction::where('status', 'active')->paginate(24);
+
+        $colors = $product_auction->pluck('color')->map('strtolower')->unique();
+        $sizes = $product_auction->pluck('size')->map('strtolower')->unique();
+
+        if ($request->ajax()) {
+            return view('components.infinite-scroll.product-auction', compact('product_auction', 'colors', 'sizes'))->render();
+        }
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $countcart = cart::where('user_id', auth()->id())->count();
@@ -145,8 +152,6 @@ class LandingpageController extends Controller {
             ->orderBy('created_at')
             ->get();
         $auctions = auctions::all();
-        $colors = $product_auction->pluck('color')->map('strtolower')->unique();
-        $sizes = $product_auction->pluck('size')->map('strtolower')->unique();
         // $auctions = auctions::where('user_id', $user->id)->first();
         // $notifications = auth()->user()->notifications;
 

@@ -4,10 +4,12 @@
 :root,
 [data-bs-theme="light"] {
     --sa-white: black;
+    --loader-color: #1c3879;
 }
 [data-bs-theme="dark"] {
     color-scheme: dark;
     --sa-white: white;
+    --loader-color: #1c3879;
 }
 
 @keyframes btnAnimation {
@@ -5756,7 +5758,7 @@ a.shop-btn:hover {
 }
 
 .loader {
-    color: #ededed;
+    color: var(-loader-color);
     font-size: 90px;
     text-indent: -9999em;
     overflow: hidden;

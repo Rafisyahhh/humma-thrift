@@ -362,7 +362,7 @@
   <script>
     $(document).ready(function() {
       var page = 1;
-      var lastPage = {{ $products->lastPage() }};
+      var lastPage = {{ $product_auction->lastPage() }};
       var loading = true;
       loadPage(page)
 
@@ -386,7 +386,7 @@
           .done(function(data) {
             loading = false;
             const lastItem = $('#last-item');
-            lastItem.text(parseInt(lastItem.text()) + {{ $products->lastItem() }});
+            lastItem.text(parseInt(lastItem.text()) + {{ $product_auction->lastItem() }});
             $('.loader').hide();
             if (data.html === "") {
               $('.loader').html("No more records found");
