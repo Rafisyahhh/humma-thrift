@@ -67,7 +67,7 @@
                                                     style="display: flex; align-items: center; width:122rem;">
                                                     <div class="form-check" style="margin-right: 1rem;">
                                                         <input class="form-check-input" type="checkbox" name="product_id[]"
-                                                            value="{{ $item->id }}" id="product-{{ $item->id }}"
+                                                            value="{{ $item->product_id }}" id="product-{{ $item->id }}"
                                                             data-price="{{ $item->product->price }}"
                                                             data-store="{{ $item->product->userStore->id }}"
                                                             style="border-color: #215791;">
