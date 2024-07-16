@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder {
             UserStoreSeeder::class,
             ProductSeeder::class,
             ProductAuctionSeeder::class,
+            ProductGallerySeeder::class,
         ]);
     }
 }
