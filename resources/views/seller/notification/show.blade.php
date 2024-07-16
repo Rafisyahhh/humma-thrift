@@ -1,3 +1,4 @@
+
 @extends('layouts.panel')
 
 @section('style')
@@ -13,8 +14,8 @@
                     <h5 class="mb-0">Notifikasi</h5>
                     <a href="{{ route('admin.notification.readAll') }}"
                         class="@if (auth()->user()->unreadNotifications->isEmpty()) disabled @endif btn btn-sm btn-light d-flex gap-2 align-items-center">
-                        <i class="fas fa-bell"></i>
-                        <span>Baca Semua</span>
+                        <i class="fas fa-bell" style="font-size:15px;color: #d40000;"></i>
+                        <span style="color: #d40000;">Baca Semua</span>
                     </a>
                 </div>
                 <div class="row g-0">
