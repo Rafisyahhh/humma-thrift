@@ -31,6 +31,7 @@ class CartController extends Controller
         })->map(function ($items, $storeId) {
             // Get the store for the current group
             $store = UserStore::find($storeId);
+            // dd($items);
             return [
                 'store' => $store,
                 'cartItems' => $items

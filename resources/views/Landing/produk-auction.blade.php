@@ -197,6 +197,22 @@
               </div>
 
               @forelse ($product_auction as $item)
+              @php
+                $user = Auth::user();
+                if ($user) {
+                    $existingAuction = App\Models\auctions::where('user_id', Auth::id())
+                        ->where('product_auction_id', $item->id)
+                        ->first();
+                    $auctions = App\Models\Auctions::where('user_id', $user->id)
+                        ->where('product_auction_id', $item->id)
+                        ->first();
+                }
+                $auctionproduct = App\Models\Auctions::where('product_auction_id', $item->id)
+                    ->where('status', 1)
+                    ->first();
+
+            @endphp
+              @if ( $auctions->status === 0)
                 <div class="col-lg-4 col-sm-6" data-brand="{{ $item->brand->title }}"
                   data-categories="{{ json_encode($item->categories->pluck('title')->toArray()) }}"
                   data-color="{{ $item->color }}" data-size="{{ $item->size }}"
@@ -235,21 +251,7 @@
                         </div>
                       </div>
                     </div>
-                    @php
-                      $user = Auth::user();
-                      if ($user) {
-                          $existingAuction = App\Models\auctions::where('user_id', Auth::id())
-                              ->where('product_auction_id', $item->id)
-                              ->first();
-                          $auctions = App\Models\Auctions::where('user_id', $user->id)
-                              ->where('product_auction_id', $item->id)
-                              ->first();
-                      }
-                      $auctionproduct = App\Models\Auctions::where('product_auction_id', $item->id)
-                          ->where('status', 1)
-                          ->first();
 
-                    @endphp
 
                     @if ($user)
                       @if ($existingAuction && $auctions->status === 1)
@@ -321,6 +323,8 @@
                     </div>
                   </div>
                 </div>
+                @endif
+
               @empty
                 <div class="col-lg-12">
                   <h5 class="text-center" style="color: #a5a3ae">Produk Lelang Masih Kosong</h5>
@@ -329,6 +333,7 @@
                     waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
                 </div>
               @endforelse
+
             </div>
           </div>
         </div>

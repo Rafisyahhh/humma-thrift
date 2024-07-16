@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->enum('status', ['active', 'inactive', 'sold'])->default('active');
             $table->bigInteger('bid_price_start')->nullable();
             $table->bigInteger('bid_price_end')->nullable();
+            $table->bigInteger('price')->nullable();
             $table->string('slug')->nullable();
             $table->timestamps();
         });

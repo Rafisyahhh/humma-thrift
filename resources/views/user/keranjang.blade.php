@@ -21,12 +21,13 @@
                 {{-- <div>
                     <h5 class="cart-heading mt-4 pt-4 mb-4">Keranjang</h5>
                 </div> --}}
-
                 <div class="cart-section wishlist-section">
                     <table style="border-spacing: 10px; width: 100%;">
                         <tbody>
-                            <tr class="table-row ticket-row" style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100rem;">
-                                <td class="table-wrapper wrapper-product" style="display: flex; align-items: center; padding-top: 25px;">
+                            <tr class="table-row ticket-row"
+                                style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100rem;">
+                                <td class="table-wrapper wrapper-product"
+                                    style="display: flex; align-items: center; padding-top: 25px;">
                                     <div class="form-check" style="display: flex; align-items: center;">
                                         <p style="flex: 0 0 3rem; text-align: left; margin-left: -1.70rem;">#</p>
                                         <p style="margin-right: 44.5rem; margin-left:3rem;">Produk</p>
@@ -36,7 +37,7 @@
                                     </div>
                                 </td>
                             </tr>
-
+                            x
                             <tr class="table-row ticket-row" style="border:none; background-color: #ffffff;">
                                 <td style="height:10px;"></td>
                             </tr>
@@ -56,62 +57,71 @@
                                     </td>
                                 </tr>
 
-                                @forelse ($storeItem['cartItems'] as $item)
-                                    <tr class="table-row ticket-row product-list"
-                                        style="border: 1px solid #e6d5d593; width:100rem; margin-left:55">
-                                        <td class="table-wrapper wrapper-product">
-                                            <div class="wrapper" style="display: flex; align-items: center; width:122rem;">
-                                                <div class="form-check" style="margin-right: 1rem;">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="product-{{ $item->id }}"
-                                                        data-price="{{ $item->product->price }}"
-                                                        data-store="{{ $item->product->userStore->id }}"
-                                                        style="border-color: #215791;">
-                                                </div>
-                                                <div class="wrapper-img" style="margin-right: 1rem;"
-                                                    data-route="{{ route('store.product.detail', ['store' => $item->product->userStore->username, 'product' => $item->product->slug]) }}">
-                                                    <img src="{{ asset('storage/' . $item->product->thumbnail) }}"
-                                                        alt="img">
-                                                </div>
-                                                <div class="wrapper-content"
-                                                    style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1;">
-                                                    <h5 class="heading" style="font-size: 18px; "
+                                <form action="{{ route('user.checkout.process') }}" id="products-form" method="post">
+                                    @csrf
+                                    @forelse ($storeItem['cartItems'] as $item)
+                                        <tr class="table-row ticket-row product-list"
+                                            style="border: 1px solid #e6d5d593; width:100rem; margin-left:55">
+                                            <td class="table-wrapper wrapper-product">
+                                                <div class="wrapper"
+                                                    style="display: flex; align-items: center; width:122rem;">
+                                                    <div class="form-check" style="margin-right: 1rem;">
+                                                        <input class="form-check-input" type="checkbox" name="product_id[]"
+                                                            value="{{ $item->product_id }}" id="product-{{ $item->id }}"
+                                                            data-price="{{ $item->product->price }}"
+                                                            data-store="{{ $item->product->userStore->id }}"
+                                                            style="border-color: #215791;">
+                                                    </div>
+                                                    <div class="wrapper-img" style="margin-right: 1rem;"
                                                         data-route="{{ route('store.product.detail', ['store' => $item->product->userStore->username, 'product' => $item->product->slug]) }}">
-                                                        {{ $item->product->title }}
-                                                    </h5>
-                                                    <div style="display: flex; align-items: center; margin-left: 125px;">
-                                                        <p class="inner-text">
-                                                            {{ implode(', ', array_column($item->product->categories->toArray(), 'title')) }}
-                                                        </p>
+                                                        <img src="{{ asset('storage/' . $item->product->thumbnail) }}"
+                                                            alt="img">
                                                     </div>
-                                                    <div style="display: flex; align-items: center; margin-inline-start: 10px;">
-                                                        <p>Rp</p>
-                                                        <p>{{ number_format($item->product->price, 0, ',', '.') }}</p>
-                                                    </div>
-                                                    <form action="{{ route('deletecart', $item->id) }}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button
+                                                    <div class="wrapper-content"
+                                                        style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1;">
+                                                        <h5 class="heading" style="font-size: 18px; "
+                                                            data-route="{{ route('store.product.detail', ['store' => $item->product->userStore->username, 'product' => $item->product->slug]) }}">
+                                                            {{ $item->product->title }}
+                                                        </h5>
+                                                        <div
+                                                            style="display: flex; align-items: center; margin-left: 125px;">
+                                                            <p class="inner-text">
+                                                                {{ implode(', ', array_column($item->product->categories->toArray(), 'title')) }}
+                                                            </p>
+                                                        </div>
+                                                        <div
+                                                            style="display: flex; align-items: center; margin-inline-start: 10px;">
+                                                            <p>Rp</p>
+                                                            <p>{{ number_format($item->product->price, 0, ',', '.') }}</p>
+                                                        </div>
+                                                        <button type="button" class="deleteButton" data-form-target="deleteform-{{ $item->id }}"
                                                             style="color: red; font-weight: bold; font-size: 13px; padding: 5px 20px; border-radius: 20px; margin-right: 0.1rem; text-decoration: underline;">
                                                             Hapus</button>
-                                                    </form>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @empty
-                                @endforelse
+                                            </td>
+                                        </tr>
+                                    @empty
+                                    @endforelse
+                                </form>
+                                @foreach ($storeItem['cartItems'] as $item)
+                                    <form action="{{ route('deletecart', $item->id) }}" method="post"
+                                        id="deleteform-{{ $item->id }}">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                @endforeach
                             @empty
-                            <tr class="table-row ticket-row" style="border:none; background-color: #ffffff;">
-                                <td class="cart-section wishlist-section" style="padding:2rem;">
-                                    <div class="wrapper-content"
-                                        style="display: flex; align-items: center; text-align: center; justify-content: center; flex-grow: 1; margin: 0 auto;">
-                                        <h5 class="heading" style="font-size: 18px;">Maaf Anda belum memasukkan
-                                            produk
-                                            apapun</h5>
-                                    </div>
-                                </td>
-                            </tr>
+                                <tr class="table-row ticket-row" style="border:none; background-color: #ffffff;">
+                                    <td class="cart-section wishlist-section" style="padding:2rem;">
+                                        <div class="wrapper-content"
+                                            style="display: flex; align-items: center; text-align: center; justify-content: center; flex-grow: 1; margin: 0 auto;">
+                                            <h5 class="heading" style="font-size: 18px;">Maaf Anda belum memasukkan
+                                                produk
+                                                apapun</h5>
+                                        </div>
+                                    </td>
+                                </tr>
                             @endif
 
                             <tr class="table-row ticket-row"
@@ -124,14 +134,14 @@
                                         <h6 style="font-size: 18px; font-weight: bold;  color: red;" class="total-price">Rp
                                             0 </h6>
                                         </p>
-                                        <button class="shop-btn openModal" style="margin-left: 1rem;">Checkout</button>
+                                        <button class="shop-btn submitButton" type="button"
+                                            style="margin-left: 1rem;">Checkout</button>
                                     </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
             </div>
             {{-- Detail --}}
             <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
@@ -260,54 +270,54 @@
 
 
         $('.storeselectall').click(function(e) {
-    const parentEl = $(this);
-    const storeId = parentEl.data('store');
+            const parentEl = $(this);
+            const storeId = parentEl.data('store');
 
-    // Deselect all other stores
-    $('.storeselectall').not(parentEl).prop('checked', false);
-    $('.product-list [type=checkbox]').not(`[data-store=${storeId}]`).prop('checked', false);
+            // Deselect all other stores
+            $('.storeselectall').not(parentEl).prop('checked', false);
+            $('.product-list [type=checkbox]').not(`[data-store=${storeId}]`).prop('checked', false);
 
-    // Set the status of the current store's checkboxes
-    const isChecked = parentEl.prop('checked');
-    $(`.product-list [type=checkbox][data-store=${storeId}]`).prop('checked', isChecked);
+            // Set the status of the current store's checkboxes
+            const isChecked = parentEl.prop('checked');
+            $(`.product-list [type=checkbox][data-store=${storeId}]`).prop('checked', isChecked);
 
-    // Recalculate total price and products after changes
-    calculateTotal();
-});
+            // Recalculate total price and products after changes
+            calculateTotal();
+        });
 
-$('#cartSelectAll').click(function(e) {
-    const isChecked = $(this).prop('checked');
-    $(`[data-store]`).prop('checked', isChecked);
+        $('#cartSelectAll').click(function(e) {
+            const isChecked = $(this).prop('checked');
+            $(`[data-store]`).prop('checked', isChecked);
 
-    // Recalculate total price and products after changes
-    calculateTotal();
-});
+            // Recalculate total price and products after changes
+            calculateTotal();
+        });
 
-$('.product-list').find('[type=checkbox]').on('change', function() {
-    const storeId = $(this).data('store');
-    const parentSelectAll = $(`.storeselectall[data-store=${storeId}]`);
-    const checkboxes = $(`.product-list [type=checkbox][data-store=${storeId}]`);
-    const allChecked = checkboxes.length === checkboxes.filter(':checked').length;
+        $('.product-list').find('[type=checkbox]').on('change', function() {
+            const storeId = $(this).data('store');
+            const parentSelectAll = $(`.storeselectall[data-store=${storeId}]`);
+            const checkboxes = $(`.product-list [type=checkbox][data-store=${storeId}]`);
+            const allChecked = checkboxes.length === checkboxes.filter(':checked').length;
 
-    parentSelectAll.prop('checked', allChecked);
+            parentSelectAll.prop('checked', allChecked);
 
-    // Deselect checkboxes from other stores
-    $('.product-list [type=checkbox]').not(`[data-store=${storeId}]`).prop('checked', false);
-    $('.storeselectall').not(parentSelectAll).prop('checked', false);
+            // Deselect checkboxes from other stores
+            $('.product-list [type=checkbox]').not(`[data-store=${storeId}]`).prop('checked', false);
+            $('.storeselectall').not(parentSelectAll).prop('checked', false);
 
-    // Recalculate total price and products after changes
-    calculateTotal();
-});
+            // Recalculate total price and products after changes
+            calculateTotal();
+        });
 
-$('.product-list [type=checkbox],.storeselectall').on('change', function() {
-    // Recalculate total price and products after changes
-    calculateTotal();
+        $('.product-list [type=checkbox],.storeselectall').on('change', function() {
+            // Recalculate total price and products after changes
+            calculateTotal();
 
-    const findCheckboxes = $('.product-list,.storeselectall').find('[type=checkbox]').length;
-    const findChecked = $('.product-list,.storeselectall').find('[type=checkbox]:checked').length;
+            const findCheckboxes = $('.product-list,.storeselectall').find('[type=checkbox]').length;
+            const findChecked = $('.product-list,.storeselectall').find('[type=checkbox]:checked').length;
 
-    $('#cartSelectAll').prop('checked', findCheckboxes === findChecked);
-});
+            $('#cartSelectAll').prop('checked', findCheckboxes === findChecked);
+        });
 
         function calculateTotal() {
             totalPrice = 0;
@@ -323,5 +333,22 @@ $('.product-list [type=checkbox],.storeselectall').on('change', function() {
             $('.total-product').text(`Total ${totalProduct} produk`);
             $('.total-price').html(formatRupiah(totalPrice));
         }
+    </script>
+
+    <script>
+        $('.submitButton').click(function() {
+            if ($('.product-list [type=checkbox]:checked').length == 0) {
+                // flasher.error('Tidak ada produk yang dipilih');
+                return false;
+            }
+
+            $('#products-form').submit();
+        });
+    </script>
+    <script>
+        $('.deleteButton').click(function() {
+            let id = $(this).data('form-target');
+            $(`#${id}`).submit();
+        });
     </script>
 @endpush

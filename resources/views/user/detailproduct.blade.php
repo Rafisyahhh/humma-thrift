@@ -273,8 +273,9 @@
                                         </form>
                                     </div>
                                     <div class="col" style="--bs-gutter-y: 0">
-                                        <form action="" method="POST">
+                                        <form action="{{ route('user.checkout') }}" method="POST">
                                             @csrf
+                                            <input type="hidden" value="{{ $isProduct->id }}" name="product_id">
                                             <button type="submit" class="shop-btn"
                                                 style="display: flex; align-items: center; gap: 10px; z-index:1">
                                                 <span style="width: 20rem; align-items: center; justify-content: center;">
@@ -320,9 +321,18 @@
                             <div class="product-info-content" data-aos="fade-left">
                                 <h5 style="z-index:1;position: relative;">{{ $isProductAuction->title }}</h5>
                                 <div class="price">
+                                    @php
+                                        $auction = App\Models\Auctions::where('status', 1)->where('product_auction_id', $isProductAuction->id)->first();
+                                    @endphp
+                                    @if ($auction)
+                                    <span class="new-price fs-1"
+                                    style="z-index:1">Rp{{ number_format($isProductAuction->price, null, null, '.') }}</span>
+
+                                    @else   
                                     <span class="new-price fs-1"
                                         style="z-index:1">Rp{{ number_format($isProductAuction->bid_price_start, null, null, '.') }}
                                         - Rp{{ number_format($isProductAuction->bid_price_end, null, null, '.') }}</span>
+                                    @endif
                                 </div>
                                 <hr>
                                 <div class="row product-details">

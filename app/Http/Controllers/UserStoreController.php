@@ -30,7 +30,7 @@ class UserStoreController extends Controller
         } else {
             return redirect()->route('login')->with('error', 'Anda harus masuk untuk melihat informasi toko.');
         }
-        
+
         return view('seller.index', compact('store', 'address', 'user', 'count'));
     }
 
@@ -72,6 +72,18 @@ class UserStoreController extends Controller
      */
     public function update(UpdateUserStoreRequest $request, UserStore $id)
     {
+        // dd($request->all());
+        if(isset($request->gif)) {
+            $id->update(['cuti'=>!$id->cuti]);
+            if($request->cuti){      
+                return redirect()->back()->with("warning","Anda memasuki masa Cuti");
+            }else{
+                return redirect()->back()->with("success","Anda tidak dalam masa Cuti");
+
+            }
+            
+        }
+
         $data = collect($request->validated());
 
         // Proses unggah file avatar jika ada
@@ -111,5 +123,12 @@ class UserStoreController extends Controller
     public function destroy(UserStore $userStore)
     {
         //
+    }
+
+    public function cuti(UserStore $userStore){
+
+        $userStore->update(['status' => !$userStore->status]);
+
+        return redirect()->route('seller.profile')->with("warning", "Anda Memasuki mode c");
     }
 }
