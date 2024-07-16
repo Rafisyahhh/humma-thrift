@@ -38,6 +38,10 @@ class BrandSeeder extends Seeder {
                 "title" => "Fila",
                 "thumbnail" => "fila.jpg",
             ],
+            /*[
+                "title" => "Hoodie",
+                "thumbnail" => "hoodie.jpeg",
+            ],*/
             [
                 "title" => "Kappa",
                 "thumbnail" => "kappa.png",

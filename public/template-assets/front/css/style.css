@@ -3062,7 +3062,7 @@ hr {
 }
 .product-description .nav-item {
     border-bottom: 1px solid rgba(126, 163, 219, 0.4);
-    gap: 2rem;
+    gap: 1rem;
 }
 .product-description .nav-item .nav-link {
     font-size: 1.6rem;
@@ -3074,6 +3074,7 @@ hr {
 }
 .product-description .nav-item .nav-link:hover {
     border-color: rgba(126, 163, 219, 0.4);
+    color: white;
 }
 .product-description .nav-item .nav-link.active {
     background: #1c3879;
