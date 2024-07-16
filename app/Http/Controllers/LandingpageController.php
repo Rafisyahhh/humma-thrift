@@ -112,7 +112,7 @@ class LandingpageController extends Controller {
 
     // Tambahkan metode regular
     public function productRegular(Request $request) {
-        $products = Product::where('status', 'active')->paginate(3);
+        $products = Product::where('status', 'active')->paginate(24);
         $colors = $products->pluck('color')->map('strtolower')->unique();
         $sizes = $products->pluck('size')->map('strtolower')->unique();
 
