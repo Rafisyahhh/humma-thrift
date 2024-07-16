@@ -75,9 +75,10 @@ class TransactionController extends Controller
         $tripay = new TripayController();
         $detail = $tripay->detailTransaction($reference);
         $transaction_order = TransactionOrder::where('reference_id', $reference)->first();
+        $order = Order::where('transaction_order_id', $transaction_order->id)->get();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())->whereNotNull('product_id')->orderBy('created_at')->get();
         $countcart = cart::where('user_id', auth()->id())->count();
-        return view('user.transactiondetail', compact('detail', 'countFavorite', 'countcart', 'carts', 'transaction_order'));
+        return view('user.transactiondetail', compact('detail','order', 'countFavorite', 'countcart', 'carts', 'transaction_order'));
     }
 }

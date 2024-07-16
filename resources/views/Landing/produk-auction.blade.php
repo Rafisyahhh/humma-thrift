@@ -212,7 +212,8 @@
                     ->first();
 
             @endphp
-              @if ( $auctions->status === 0)
+            {{-- @if ($auctions)
+              @if ( $auctions->status === 0) --}}
                 <div class="col-lg-4 col-sm-6" data-brand="{{ $item->brand->title }}"
                   data-categories="{{ json_encode($item->categories->pluck('title')->toArray()) }}"
                   data-color="{{ $item->color }}" data-size="{{ $item->size }}"
@@ -323,7 +324,8 @@
                     </div>
                   </div>
                 </div>
-                @endif
+                {{-- @endif
+                @endif --}}
 
               @empty
                 <div class="col-lg-12">

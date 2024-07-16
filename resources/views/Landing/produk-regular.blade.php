@@ -65,57 +65,78 @@
                     @endforeach
                   </ul>
                 </div>
-              </div>
-              <div class="tab-pane fade sidebar-wrapper" id="brand-tab" role="tabpanel" aria-labelledby="brand-tab"
-                tabindex="0">
-                <div class="sidebar-item">
-                  <ul class="sidebar-list">
-                    @foreach ($brands as $item)
-                      <li>
-                        <input type="checkbox" id="brands-{{ $item->id }}" name="brands[]"
-                          value="{{ $item->title }}" />
-                        <label for="brands-{{ $item->id }}">{{ $item->title }}</label>
-                      </li>
-                    @endforeach
-                  </ul>
-                </div>
-              </div>
-              <div class="tab-pane fade sidebar-wrapper" id="color-tab" role="tabpanel" aria-labelledby="color-tab"
-                tabindex="0">
-                <div class="sidebar-item">
-                  <ul class="sidebar-list">
-                    @foreach ($colors as $item)
-                      <li>
-                        <input type="checkbox" id="{{ $item }}" name="colors[]" value="{{ $item }}" />
-                        <label for="{{ $item }}" class="text-capitalize">{{ $item }}</label>
-                      </li>
-                    @endforeach
-                  </ul>
-                </div>
-              </div>
-              <div class="tab-pane fade sidebar-wrapper" id="size-tab" role="tabpanel" aria-labelledby="size-tab"
-                tabindex="0">
-                <div class="sidebar-item">
-                  <ul class="sidebar-list">
-                    @foreach ($sizes as $item)
-                      <li>
-                        <input type="checkbox" id="{{ $item }}" name="sizes[]"
-                          value="{{ $item }}" />
-                        <label for="{{ $item }}" class="text-capitalize">{{ $item }}</label>
-                      </li>
-                    @endforeach
-                  </ul>
-                </div>
-              </div>
-              <div class="tab-pane fade sidebar-wrapper sidebar-range" id="price-tab" role="tabpanel"
-                aria-labelledby="price-tab" tabindex="0">
-                <div class="price-slide range-slider">
-                  <div class="price">
-                    <div class="range-slider style-1">
-                      <div id="price-slider" class="slider-range mb-3"></div>
-                      <span class="example-val" id="slider-margin-value-min"></span>
-                      <span>-</span>
-                      <span class="example-val" id="slider-margin-value-max"></span>
+                <div class="col-lg-9">
+                    <div class="product-sidebar-section" data-aos="fade-up">
+                        <div class="row g-5">
+                            <div class="col-lg-12">
+                                <div class="product-sorting-section" style="padding-bottom: unset; margin-bottom: unset">
+                                    <div class="result">
+                                        <p>Menampilkan {{ $products->firstItem() }}–{{ $products->lastItem() }} dari
+                                            {{ $products->total() }} hasil</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @forelse ($products as $item)
+                                @if ($item->status = 'active')
+                                    <div class="col-lg-4 col-sm-6" data-brand="{{ $item->brand->title }}"
+                                        data-categories="{{ json_encode($item->categories->pluck('title')->toArray()) }}"
+                                        data-color="{{ $item->color }}" data-size="{{ $item->size }}"
+                                        data-price="{{ $item->price }}">
+                                        <div class="product-wrapper p-0" data-aos="fade-up">
+                                            <div class="product-img">
+                                                <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img"
+                                                    class="object-fit-cover">
+                                                <div class="product-cart-items">
+                                                    <form action="{{ route('storesproduct', $item->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <button class="favourite cart-item">
+                                                            <span>
+                                                                <i class="fas fa-heart"></i>
+                                                            </span>
+                                                        </button>
+                                                    </form>
+                                                    <a href="/user/checkout" class="favourite cart-item">
+                                                        <span>
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </span>
+                                                    </a>
+                                                    <a href="#" class="compaire cart-item">
+                                                        <span>
+                                                            <i class="fas fa-share"></i>
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-info">
+                                                <div class="product-description">
+                                                    <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
+                                                        class="product-details">{{ $item->title }}
+                                                    </a>
+                                                    <div class="price">
+                                                        <span
+                                                            class="new-price">Rp{{ number_format($item->price, 0, '', '.') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <form action="{{ route('user.checkout.process') }}" method="post">
+                                                @csrf
+                                                <div class="product-cart-btn" style="bottom:0;">
+                                                    <input type="hidden" value="{{ $item->id }}" name="product_id[]">
+                                                    <button type="submit" class="product-btn">Beli sekarang</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endif
+                            @empty
+                                <div class="col-lg-12">
+                                    <h3 class="text-center">Produk Masih Kosong</h3>
+                                    <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam
+                                        waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
+                                </div>
+                            @endforelse
+                        </div>
                     </div>
                   </div>
                 </div>

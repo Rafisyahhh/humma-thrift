@@ -54,9 +54,8 @@ class StoreProfileController extends Controller
         $countcart = cart::where('user_id',auth()->id())->count();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $user = Auth::user();
-        $auctions = auctions::where('product_auction_id', $isProductAuction->id);
 
-        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction','user','carts','countcart', 'countFavorite','auctions'));
+        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction','user','carts','countcart', 'countFavorite'));
     }
 
     public function showStore()
