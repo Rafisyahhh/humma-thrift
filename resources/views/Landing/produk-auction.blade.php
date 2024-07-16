@@ -190,7 +190,7 @@
                 <div class="product-sorting-section" style="padding-bottom: unset; margin-bottom: unset">
                   <div class="result">
                     <p>Menampilkan
-                      {{ $product_auction->firstItem() ?? 0 }}–{{ $product_auction->lastItem() ?? 0 }}
+                      {{ $product_auction->firstItem() ?? 0 }}–<span id="last-item">?</span>
                       dari {{ $product_auction->total() ?? 0 }} hasil</p>
                   </div>
                 </div>
