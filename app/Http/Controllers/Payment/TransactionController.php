@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\cart;
 use App\Models\Favorite;
+use App\Models\Order;
 use App\Models\TransactionOrder;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
@@ -29,11 +30,9 @@ class TransactionController extends Controller
             return back()->withErrors(['error' => $transaction->error]);
         }
 
-        // dd($transaction);
-
         $order = TransactionOrder::create([
             'user_id' => auth()->id(),
-            'product_id' => $request->product_id,
+            // 'product_id' => $request->product_id,
             'user_address_id' => $address->id,
             'transaction_id' => $transaction['merchant_ref'],
             'reference_id' => $transaction['reference'],
@@ -46,7 +45,7 @@ class TransactionController extends Controller
             Order::create([
                 'product_id' => $item->id,
                 'transaction_order_id' => $order->id
-            ])
+            ]);
         });
 
         return redirect()->route('user.transaction.show', ['reference' => $transaction['reference']]);

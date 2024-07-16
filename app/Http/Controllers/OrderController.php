@@ -28,31 +28,35 @@ class OrderController extends Controller
             ->orderBy('created_at')
             ->get();
         $countcart = cart::where('user_id', auth()->id())->count();
-        return view('user.order', compact('carts', 'countcart', 'countFavorite','transaction'));
+        return view('user.order', compact('carts', 'countcart', 'countFavorite', 'transaction'));
     }
 
-    public function indexTransaction(){
+    public function indexTransaction()
+    {
         $transaction = TransactionOrder::latest()->get();
         return view('seller.transaksi', compact('transaction'));
     }
-    public function indexDetail($transaction){
+    public function indexDetail($transaction)
+    {
         $code = $transaction;
         $status = TransactionOrder::where('transaction_id', $transaction)->first();
         $transactions = TransactionOrder::where('transaction_id', $transaction)->get();
-        return view('seller.detailtransaction', compact('transactions','code','status'));
+        return view('seller.detailtransaction', compact('transactions', 'code', 'status'));
     }
-    public function updatedetail(Request $request,$transaction){
+    public function updatedetail(Request $request, $transaction)
+    {
         $transactions = TransactionOrder::where('transaction_id', $transaction)
-        ->update([
-            'delivery_status' => $request->status
-        ]);
+            ->update([
+                'delivery_status' => $request->status
+            ]);
         return redirect()->back();
     }
-    public function updateOrder(Request $request,$transaction){
+    public function updateOrder(Request $request, $transaction)
+    {
         $transactions = TransactionOrder::where('transaction_id', $transaction)
-        ->update([
-            'delivery_status' => $request->status
-        ]);
+            ->update([
+                'delivery_status' => $request->status
+            ]);
         return redirect()->back();
     }
 
@@ -69,7 +73,7 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-       //
+        //
     }
 
     /**
