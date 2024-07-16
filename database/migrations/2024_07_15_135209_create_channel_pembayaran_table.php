@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('channel_pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained();
-            $table->foreignId('transaction_order_id')->constrained();
+            $table->string('name');
+            $table->string('channel_code');
+            $table->bigInteger('flat')->nullable();
+            $table->bigInteger('percent')->nullable();
+            $table->string('icon_url');
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('channel_pembayaran');
     }
 };

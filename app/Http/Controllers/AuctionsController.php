@@ -117,10 +117,14 @@ class AuctionsController extends Controller
             $userStore = $product->userStore;
 
             if ($userStore) {
+                //kutambah
+                flash()->info('Notification sent to UserStore: ' . $userStore->id);
                 // Ini yang aku tambahin
                 $userStore->user->notify(new SellerLelang($auctions));
                 Log::info('Notification sent to UserStore: ' . $userStore->id);
             } else {
+                //kutambah
+                flash()->error('UserStore not found for product: ' . $product->id);
                 Log::error('UserStore not found for product: ' . $product->id);
                 return redirect()->back()->with('success', 'Lelang berhasil ditambahkan tetapi notifikasi gagal dikirim: UserStore not found');
             }

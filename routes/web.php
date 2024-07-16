@@ -90,7 +90,8 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
 Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function () {
     Route::middleware(\App\Http\Middleware\NotSellerMiddleware::class)->group(function () {
         Route::get('/', [DashboardUserController::class, 'dashboard'])->name('userhome');
-        Route::post('checkout', [CheckoutController::class, 'index'])->name('checkout');
+        Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
+        Route::post('checkout/process', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
         Route::post('address/{id}', [UserAddressController::class, 'store'])->name('address.store');
         Route::put('edit/address/{user}/{address}', [UserAddressController::class, 'update'])->name('address.edit');
         Route::delete('delete/address/{address}', [UserAddressController::class, 'destroy'])->name('address.destroy');

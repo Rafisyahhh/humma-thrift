@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Checkout;
+use App\Models\ChannelPembayaran;
 use App\Http\Controllers\Payment\TripayController;
 use App\Models\Order;
 use App\Models\Product;
@@ -22,11 +23,30 @@ class CheckoutController extends Controller
      */
     public function index(Request $request)
     {
-        $tripay = new TripayController();
-        $channels = $tripay->getPaymentChannels();
+        $products = session('checkouted_product');
+        $channel_pembayaran = ChannelPembayaran::first();
+
+        if (!$channel_pembayaran) {
+            $tripay = new TripayController();
+            $channels = $tripay->getPaymentChannels();
+
+            if (isset($channels['data'])) {
+                foreach ($channels['data'] as $channelData) {
+                    $channel_pembayaran = ChannelPembayaran::create([
+                        'name' => $channelData['name'],
+                        'channel_code' => $channelData['code'],
+                        'flat' => $channelData['total_fee']['flat'],
+                        'percent' => $channelData['total_fee']['percent'],
+                        'icon_url' => $channelData['icon_url'], 
+                    ]);
+                }
+            }
+        }
+
+        $channel_pembayaran = ChannelPembayaran::all();
         $users = Auth::user();
         $addresses = UserAddress::where('user_id', $users->id)->get();
-        $product = Product::where('id', $request->product_id)->first();
+        $product = Product::whereIn('id', $products)->get();
         $product_auction = Auctions::where('product_auction_id', $request->productauction_id)
             ->where('status', 1)->first();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
@@ -35,7 +55,12 @@ class CheckoutController extends Controller
             ->orderBy('created_at')
             ->get();
         $countcart = cart::where('user_id', auth()->id())->count();
-        return view('user.checkout', compact('users', 'addresses', 'product', 'channels', 'countFavorite', 'product_auction','carts','countcart'));
+        return view('user.checkout', compact('users', 'addresses', 'product', 'channel_pembayaran', 'countFavorite', 'product_auction', 'carts', 'countcart'));
+    }
+
+    public function processCheckout(Request $request){
+        session(['checkouted_product'=>$request->product_id]);
+        return redirect()->route('user.checkout');
     }
 
     /**

@@ -16,11 +16,15 @@ class UserStoreSeeder extends Seeder {
         Storage::disk('public')->put("uploads/thumbnails/logo.jpg", file_get_contents(public_path("asset-thrift/brand/adidas.jpg")));
         UserStore::create([
             "user_id" => 16,
-            "name" => "store_1",
-            "username" => "store_1",
-            "description" => "This is store 1",
-            "address" => "123 Main St",
+            "name" => "Dummy Shop",
+            "username" => "dummyshop35",
             "store_logo" => "uploads/thumbnails/logo.jpg",
+            "nic_owner" => "0099887766",
+            "address" => "123 Main St",
+            "description" => "This is store 1",
+            "open" => "  08:00:00",
+            "close" => "  20:00:00",
+            "status" => "online"
         ]);
     }
 }
