@@ -263,7 +263,8 @@
 
                                         <form action="{{ route('storecart', $isProduct->id) }}" method="POST">
                                             @csrf
-                                            <button type="submit" class="shop-btn" style="display: flex; align-items: center; gap: 10px; z-index:1">
+                                            <button type="submit" class="shop-btn"
+                                                style="display: flex; align-items: center; gap: 10px; z-index:1">
                                                 <span style="width: 20rem; align-items: center; justify-content: center;">
                                                     <i class="fas fa-shopping-cart"></i>
                                                     Masukkan Keranjang
@@ -274,7 +275,8 @@
                                     <div class="col" style="--bs-gutter-y: 0">
                                         <form action="" method="POST">
                                             @csrf
-                                            <button type="submit" class="shop-btn" style="display: flex; align-items: center; gap: 10px; z-index:1">
+                                            <button type="submit" class="shop-btn"
+                                                style="display: flex; align-items: center; gap: 10px; z-index:1">
                                                 <span style="width: 20rem; align-items: center; justify-content: center;">
                                                     <i class="fas fa-arrow-right"></i>
                                                     Beli Sekarang
@@ -341,7 +343,7 @@
                                 </div>
                                 <hr>
                                 <div class="row">
-                                    <div class="product-quantity mt-0"
+                                    <div class="product-quantity mt-0 justify-content-start"
                                         style="display: flex; align-items: center; gap: 10px; z-index:1">
                                         {{-- <a href="#" style="width :10px" class="shop-btn"
                                             style="display: flex; align-items: center; gap: 10px; z-index:1">
@@ -367,43 +369,43 @@
                                             )
                                                 ->where('status', 1)
                                                 ->first();
-
                                         @endphp
-                                        @if ($user)
-                                            @if ($existingAuction && $auctions->status === 1)
-                                                <form action="{{ route('user.checkout') }}" method="post">
-                                                    @csrf
-                                                    <div style="bottom:0;">
-                                                        <input type="hidden" value="{{ $isProductAuction->id }}" name="product_id">
-                                                        <button type="submit"  class="shop-btn">Beli sekarang</button>
-                                                    </div>
-                                                </form>
-                                            @elseif ($auctionproduct)
-                                                <button style="width :10px" class="shop-btn openModal"
-                                                    data-id="{{ $isProductAuction->id }}"
-                                                    style="display: flex; align-items: center; gap: 5px; z-index:1">
-                                                    <span
-                                                        style="width: 37rem; align-items:center; justify-content:center;">
-                                                        Lelang Berakhir</span>
-                                                </button>
-                                            @else
-                                                <button style="width :10px" class="shop-btn openModal"
-                                                    data-id="{{ $isProductAuction->id }}"
-                                                    style="display: flex; align-items: center; gap: 5px; z-index:1">
-                                                    <span
-                                                        style="width: 37rem; align-items:center; justify-content:center;">
+
+                                        <div>
+                                            @if ($user)
+                                                @if ($existingAuction && $auctions->status === 1)
+                                                    <form action="{{ route('user.checkout') }}" method="post">
+                                                        @csrf
+                                                        <div style="bottom:0;">
+                                                            <input type="hidden" value="{{ $isProductAuction->id }}"
+                                                                name="product_id">
+                                                            <button type="submit" class="shop-btn">Beli sekarang</button>
+                                                        </div>
+                                                    </form>
+                                                @elseif ($auctionproduct)
+                                                    <button class="shop-btn flex-grow-0 openModal"
+                                                        data-id="{{ $isProductAuction->id }}"
+                                                        style="display: flex; align-items: center; gap: 5px; z-index:1">
+                                                        Lelang Berakhir
+                                                    </button>
+                                                @else
+                                                    <button class="shop-btn flex-grow-0 openModal"
+                                                        data-id="{{ $isProductAuction->id }}"
+                                                        style="display: flex; align-items: center; gap: 5px; z-index:1">
                                                         <i class="fa-solid fa-plus"></i>
-                                                        Ikuti Lelang</span>
-                                                </button>
-                                            @endif
-                                        @else
-                                            <a href="{{ url('login') }}" style="width :10px" class="shop-btn openModal"
-                                                style="display: flex; align-items: center; gap: 5px; z-index:1">
-                                                <span style="width: 37rem; align-items:center; justify-content:center;">
+                                                        Ikuti Lelang
+                                                    </button>
+                                                @endif
+                                            @else
+                                                <a href="{{ url('login') }}" class="shop-btn flex-grow-0 openModal"
+                                                    style="display: flex; align-items: center; gap: 5px; z-index:1">
                                                     <i class="fa-solid fa-plus"></i>
-                                                    Ikuti Lelang</span>
-                                            </a>
-                                        @endif
+                                                    Ikuti Lelang
+                                                </a>
+                                            @endif
+                                        </div>
+
+
                                         <div id="reviewModal-{{ $isProductAuction->id }}" class="modal"
                                             style="display: none;">
                                             <div class="modal-content">
@@ -488,57 +490,60 @@
     </section>
     <br>
     <div class="container">
-        <div class="d-flex align-items-center justify-content-star py-3" style="position: relative;">
-            <p class="fs-2 mb-0">Bagikan ke:</p>
-            <span class="share-container share-buttons d-flex gap-3 ms-2" style="z-index:1;">
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($url) }}" target="_blank"
-                    class="social-buttons">
-                    <i class="fa-brands fa-square-facebook fa-lg" style="color: #1c3879"></i>
-                </a>
-                <a href="https://twitter.com/intent/tweet?url={{ urlencode($url) }}&text={{ urlencode($text) }}"
-                    target="_blank" class="social-buttons">
-                    <i class="fa-brands fa-square-x-twitter fa-lg" style="color: #1c3879"></i>
-                </a>
-                <a href="https://t.me/share/url?url={{ urlencode($url) }}&text={{ urlencode($text) }}" target="_blank"
-                    class="social-buttons">
-                    <i class="fa-brands fa-telegram fa-lg" style="color: #1c3879"></i>
-                </a>
-                <a href="https://api.whatsapp.com/send?text={{ urlencode($text . ' ' . $url) }}" target="_blank"
-                    class="social-buttons">
-                    <i class="fa-brands fa-whatsapp fa-lg" style="color: #1c3879"></i>
-                </a>
-            </span>
+        <div class="d-flex align-items-center gap-3 justify-content-star py-3" style="position: relative;">
+            <div class="d-flex gap-2">
+                <p class="fs-2 mb-0">Bagikan ke:</p>
+                <span class="share-container share-buttons d-flex gap-3 ms-2" style="z-index:1;">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($url) }}" target="_blank"
+                        class="social-buttons">
+                        <i class="fa-brands fa-square-facebook fa-lg" style="color: #1c3879"></i>
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url={{ urlencode($url) }}&text={{ urlencode($text) }}"
+                        target="_blank" class="social-buttons">
+                        <i class="fa-brands fa-square-x-twitter fa-lg" style="color: #1c3879"></i>
+                    </a>
+                    <a href="https://t.me/share/url?url={{ urlencode($url) }}&text={{ urlencode($text) }}"
+                        target="_blank" class="social-buttons">
+                        <i class="fa-brands fa-telegram fa-lg" style="color: #1c3879"></i>
+                    </a>
+                    <a href="https://api.whatsapp.com/send?text={{ urlencode($text . ' ' . $url) }}" target="_blank"
+                        class="social-buttons">
+                        <i class="fa-brands fa-whatsapp fa-lg" style="color: #1c3879"></i>
+                    </a>
+                </span>
+            </div>
             <div class="line" style="border-left: 1px solid #dcdcdd; height: 30px; margin-left: 10px;"></div>
-            <div class="share-icons" style="z-index:1; margin-left:40px;">
+            <div class="share-icons" style="z-index:1;">
                 @if ($isProduct)
-
-                <form action="{{ route('storesproduct', $isProduct->id) }}" method="POST">
-                    @csrf
-                    <button class="share-icon">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
-                                <path fill="#1c3879"
-                                d="m12 21l-1.45-1.3q-2.525-2.275-4.175-3.925T3.75 12.812T2.388 10.4T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.3 0 2.475.55T12 4.75q.85-1 2.025-1.55t2.475-.55q2.35 0 3.925 1.575T22 8.15q0 1.15-.387 2.25t-1.363 2.412t-2.625 2.963T13.45 19.7zm0-2.7q2.4-2.15 3.95-3.687t2.45-2.675t1.25-2.026T20 8.15q0-1.5-1-2.5t-2.5-1q-1.175 0-2.175.662T12.95 7h-1.9q-.375-1.025-1.375-1.687T7.5 4.65q-1.5 0-2.5 1t-1 2.5q0 .875.35 1.763t1.25 2.025t2.45 2.675T12 18.3m0-6.825" />
-                            </svg>
-                        </span>
-                    </button>
-                    <span style="margin-left:0.5px; font-size: 15px">Favorit</span>
-                    <span style="margin-left:0.5px; font-size: 15px">(3,8RB)</span>
-                </form>
+                    <form action="{{ route('storesproduct', $isProduct->id) }}" method="POST">
+                        @csrf
+                        <button class="share-icon">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#1c3879"
+                                        d="m12 21l-1.45-1.3q-2.525-2.275-4.175-3.925T3.75 12.812T2.388 10.4T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.3 0 2.475.55T12 4.75q.85-1 2.025-1.55t2.475-.55q2.35 0 3.925 1.575T22 8.15q0 1.15-.387 2.25t-1.363 2.412t-2.625 2.963T13.45 19.7zm0-2.7q2.4-2.15 3.95-3.687t2.45-2.675t1.25-2.026T20 8.15q0-1.5-1-2.5t-2.5-1q-1.175 0-2.175.662T12.95 7h-1.9q-.375-1.025-1.375-1.687T7.5 4.65q-1.5 0-2.5 1t-1 2.5q0 .875.35 1.763t1.25 2.025t2.45 2.675T12 18.3m0-6.825" />
+                                </svg>
+                            </span>
+                        </button>
+                        <span style="margin-left:0.5px; font-size: 15px">Favorit</span>
+                        <span style="margin-left:0.5px; font-size: 15px">(3,8RB)</span>
+                    </form>
                 @else
-                <form action="{{ route('storesproduct', $isProductAuction->id) }}" method="POST">
-                    @csrf
-                    <button class="share-icon">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
-                                <path fill="#1c3879"
-                                d="m12 21l-1.45-1.3q-2.525-2.275-4.175-3.925T3.75 12.812T2.388 10.4T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.3 0 2.475.55T12 4.75q.85-1 2.025-1.55t2.475-.55q2.35 0 3.925 1.575T22 8.15q0 1.15-.387 2.25t-1.363 2.412t-2.625 2.963T13.45 19.7zm0-2.7q2.4-2.15 3.95-3.687t2.45-2.675t1.25-2.026T20 8.15q0-1.5-1-2.5t-2.5-1q-1.175 0-2.175.662T12.95 7h-1.9q-.375-1.025-1.375-1.687T7.5 4.65q-1.5 0-2.5 1t-1 2.5q0 .875.35 1.763t1.25 2.025t2.45 2.675T12 18.3m0-6.825" />
-                            </svg>
-                        </span>
-                    </button>
-                    <span style="margin-left:0.5px; font-size: 15px">Favorit</span>
-                    <span style="margin-left:0.5px; font-size: 15px">(3,8RB)</span>
-                </form>
+                    <form action="{{ route('storesproduct', $isProductAuction->id) }}" method="POST">
+                        @csrf
+                        <button class="share-icon">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#1c3879"
+                                        d="m12 21l-1.45-1.3q-2.525-2.275-4.175-3.925T3.75 12.812T2.388 10.4T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.3 0 2.475.55T12 4.75q.85-1 2.025-1.55t2.475-.55q2.35 0 3.925 1.575T22 8.15q0 1.15-.387 2.25t-1.363 2.412t-2.625 2.963T13.45 19.7zm0-2.7q2.4-2.15 3.95-3.687t2.45-2.675t1.25-2.026T20 8.15q0-1.5-1-2.5t-2.5-1q-1.175 0-2.175.662T12.95 7h-1.9q-.375-1.025-1.375-1.687T7.5 4.65q-1.5 0-2.5 1t-1 2.5q0 .875.35 1.763t1.25 2.025t2.45 2.675T12 18.3m0-6.825" />
+                                </svg>
+                            </span>
+                        </button>
+                        <span style="margin-left:0.5px; font-size: 15px">Favorit</span>
+                        <span style="margin-left:0.5px; font-size: 15px">(3,8RB)</span>
+                    </form>
                 @endif
             </div>
         </div>
@@ -551,10 +556,10 @@
                     <div class="nav nav-tabs nav-item" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
                             data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
-                            aria-selected="true">Description</button>
+                            aria-selected="true">Deskripsi Produk</button>
                         <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review"
                             type="button" role="tab" aria-controls="nav-review"
-                            aria-selected="false">Reviews</button>
+                            aria-selected="false">Ulasan</button>
                     </div>
                 </nav>
                 <div class="tab-content tab-item" id="nav-tabContent">
@@ -698,9 +703,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    </section>
-                @endsection
+                </div>
+            </div>
+    </section>
+@endsection
 
 @section('script')
     <script src="{{ asset('additional-assets/jquery-3.7.1/jquery.min.js') }}"></script>
