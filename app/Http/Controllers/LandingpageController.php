@@ -169,7 +169,7 @@ class LandingpageController extends Controller {
         $sizes = $products->pluck('size')->map('strtolower')->unique();
 
         if ($request->ajax()) {
-            return view('components.infinite-scroll.product-regular', compact('products', 'colors', 'sizes'))->render();
+            return view('components.infinite-scroll.product-regular', compact('products', 'colors', 'sizes', 'search'))->render();
         }
 
         $brands = Brand::all();
@@ -194,7 +194,7 @@ class LandingpageController extends Controller {
         $sizes = $product_auction2->pluck('size')->map('strtolower')->unique();
 
         if ($request->ajax()) {
-            return view('components.infinite-scroll.product-auction', compact('product_auction', 'colors', 'sizes'))->render();
+            return view('components.infinite-scroll.product-auction', compact('product_auction', 'colors', 'sizes', 'search'))->render();
         }
 
         $brands = Brand::all();

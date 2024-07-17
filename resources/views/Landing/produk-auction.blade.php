@@ -377,7 +377,7 @@
 
       function loadPage(page) {
         $.ajax({
-            url: '?page=' + page,
+            url: '?page=' + page + '{{ isset($search) ? "&search=$search" : '' }}',
             type: 'get',
             beforeSend: function() {
               $('.loader').show();
@@ -386,7 +386,7 @@
           .done(function(data) {
             loading = false;
             const lastItem = $('#last-item');
-            lastItem.text(parseInt(lastItem.text()) + {{ $product_auction->lastItem() }});
+            lastItem.text(parseInt(lastItem.text()) + {{ $product_auction->lastItem() ?? 0 }});
             $('.loader').hide();
             if (data.html === "") {
               $('.loader').html("No more records found");
