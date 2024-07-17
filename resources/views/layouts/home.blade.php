@@ -107,7 +107,7 @@
           if (result.isConfirmed) {
             confirmed?.();
           } else {
-            canceled.?()
+            canceled?.()
             return false;
           }
         });
