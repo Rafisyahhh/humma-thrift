@@ -223,8 +223,10 @@
                             <img
                                 src="{{ asset($store->store_logo ? "storage/{$store->store_logo}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}" />
                         </div>
+                        @if(!$store->cuti)
                         <span
                             class="badge online-status bg-{{ Cache::has('user-is-online-' . $store->user_id) ? 'success' : 'danger' }}">&nbsp;</span>
+                        @endif
                     </div>
                     <div class="profile-content">
                         <div class="profile-name-wrapper">
@@ -245,13 +247,12 @@
                                 $now = \Carbon\Carbon::now();
                             @endphp
                             <p class="profile-description opacity-75 mt-3 mb-0">
-                                {{-- {{ $store->getStatusEnum()->value === 'online' }} --}}
-                                {{-- @if ($now->between($openInstance, $closeInstance) && $store->getStatusEnum()->value === 'online') --}}
-                                @if ($now->between($openInstance, $closeInstance) && Cache::has('user-is-online-' . $store->user_id))
-                                <span class="badge text-bg-success me-2">Buka</span>
+                                @if ($store->cuti)
+                                    <span class="badge text-bg-warning me-2">Cuti</span>
+                                @elseif($now->between($openInstance, $closeInstance) && Cache::has('user-is-online-' . $store->user_id))
+                                    <span class="badge text-bg-success me-2">Buka</span>
                                 @else
                                     <span class="badge text-bg-danger me-2">Tutup</span>
-                                    {{-- {{ dd('Open Instance: ' . $openInstance, 'Close Instance: ' . $closeInstance, 'Now: ' . $now, 'Status: ' . $store->getStatusEnum()->value) }} --}}
                                 @endif
                                 {{ $openInstance->format('H:i') }} - {{ $closeInstance->format('H:i') }}
                             </p>
@@ -279,12 +280,11 @@
                 </div>
             </div>
 
-            @if ($store->getStatusEnum()->value === 'holiday')
+            @if ($store->cuti)
                 <div class="alert alert-warning mt-3 alert-dismissible fade show" role="alert" style="font-size: 0.9rem;">
-                    <p>Toko kami saat ini sedang libur. Kami mohon maaf atas ketidaknyamanan ini. Toko akan buka kembali
+                    <p>Toko kami saat ini sedang Cuti. Kami mohon maaf atas ketidaknyamanan ini. Toko akan buka kembali
                         sesuai dengan jadwal yang telah ditentukan. Terima kasih atas pengertian Anda. Silakan cek kembali
                         nanti untuk informasi lebih lanjut.</p>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
 
@@ -327,21 +327,35 @@
                                             <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="product-img"
                                                 class="object-fit-cover">
                                             <div class="product-cart-items">
-                                                <a href="/user/wishlist" class="favourite cart-item">
-                                                    <span>
-                                                        <i class="fas fa-heart"></i>
-                                                    </span>
-                                                </a>
-                                                <a href="/user/wishlist" class="favourite cart-item">
-                                                    <span>
-                                                        <i class="fas fa-shopping-cart"></i>
-                                                    </span>
-                                                </a>
-                                                <a href="/user/keranjang" class="compaire cart-item">
+                                                @auth
+                                                    <form action="{{ route('storesproduct', $item->id) }}" method="POST">
+                                                        @csrf
+                                                        <button class="favourite cart-item">
+                                                            <span>
+                                                                <i class="fas fa-heart" style="font-size: 18px;"></i>
+                                                            </span>
+                                                        </button>
+                                                    </form>
+                                                    <form action="{{ route('storecart', $item->id) }}" method="POST">
+                                                        @csrf
+                                                        <button class="favourite cart-item">
+                                                            <span>
+                                                                <i class="fas fa-shopping-cart" style="font-size: 18px;"></i>
+                                                            </span>
+                                                        </button>
+                                                    </form>
+                                                <a href="#" class="compaire cart-item">
                                                     <span>
                                                         <i class="fas fa-share"></i>
                                                     </span>
                                                 </a>
+                                                @else
+                                                    <a href="{{ route('login') }}" class="favourite cart-item">
+                                                        <span>
+                                                            <i class="fas fa-heart"></i>
+                                                        </span>
+                                                    </a>
+                                                @endauth
                                             </div>
                                         </div>
                                         <div class="product-info">
@@ -382,16 +396,6 @@
                                             <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="product-img"
                                                 class="object-fit-cover">
                                             <div class="product-cart-items">
-                                                {{-- <a href="/user/wishlist" class="favourite cart-item">
-                                                    <span>
-                                                        <i class="fas fa-heart"></i>
-                                                    </span>
-                                                </a>
-                                                <a href="/user/wishlist" class="favourite cart-item">
-                                                    <span>
-                                                        <i class="fas fa-shopping-cart"></i>
-                                                    </span>
-                                                </a> --}}
                                                 <a href="/user/keranjang" class="compaire cart-item">
                                                     <span>
                                                         <i class="fas fa-share"></i>

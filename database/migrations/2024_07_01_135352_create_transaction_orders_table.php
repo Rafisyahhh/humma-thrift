@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('transaction_orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('product_id')->constrained();
+            // $table->foreignId('product_id')->constrained();
             $table->foreignId('user_address_id')->constrained();
             $table->bigInteger('total');
             $table->string('transaction_id');
