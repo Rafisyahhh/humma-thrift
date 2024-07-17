@@ -13,8 +13,9 @@ use App\Models\ProductCategory;
 use App\Notifications\Lelang;
 use App\Notifications\SellerLelang;
 use Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Request;
+use Illuminate\Support\Facades\Validator;
 
 class AuctionsController extends Controller
 {
@@ -55,13 +56,12 @@ class AuctionsController extends Controller
         $notifications = Auth::user()->notifications()->paginate(20);
         $countcart = cart::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
-        ->whereNotNull('product_id')
-        ->orderBy('created_at')
-        ->get();
+            ->whereNotNull('product_id')
+            ->orderBy('created_at')
+            ->get();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
 
-        return view('user.notification.notify-lelang', compact('notifications','countcart','carts','countFavorite'));
-
+        return view('user.notification.notify-lelang', compact('notifications', 'countcart', 'carts', 'countFavorite'));
     }
 
     public function notifyshow(string $notificationId)
@@ -72,16 +72,17 @@ class AuctionsController extends Controller
         $notifications = Auth::user()->notifications()->paginate(20);
         $countcart = cart::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
-        ->whereNotNull('product_id')
-        ->orderBy('created_at')
-        ->get();
+            ->whereNotNull('product_id')
+            ->orderBy('created_at')
+            ->get();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
 
 
-        return view('user.notification.show-lelang', compact('notifications','countcart','carts','countFavorite','notification'));
+        return view('user.notification.show-lelang', compact('notifications', 'countcart', 'carts', 'countFavorite', 'notification'));
     }
 
-    public function destroynotify($id) {
+    public function destroynotify($id)
+    {
         try {
             $notification = Auth::user()->notifications()->findOrFail($id);
             $notification->delete();
@@ -100,11 +101,23 @@ class AuctionsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreauctionsRequest $request)
+    public function store(Request $request)
     {
         try {
             $product = ProductAuction::findOrFail($request->product_id);
             $user = Auth::user();
+
+            # Cek dan validasikan kalau nominalnya gak sesuai rentang harga lelang
+            $auctionPrice = $request->auction_price;
+            $bidPriceStart = $product->bid_price_start;
+            $bidPriceEnd = $product->bid_price_end;
+            $errorMessage = 'Harga yang kamu tawarkan lebih atau kurang dari harga lelang yang ditetapkan!';
+
+            if ($auctionPrice <= $bidPriceStart || $auctionPrice >= $bidPriceEnd) {
+                return redirect()->back()->with('error', $errorMessage)->withErrors([
+                    'auction_price' => $errorMessage
+                ])->withInput();
+            }
 
             $auctions = Auctions::create([
                 'user_id' => $user->id,
@@ -113,6 +126,7 @@ class AuctionsController extends Controller
                 'status' => false,
                 'delivery_status' => 'selesaikan pesanan',
             ]);
+
             // Fetch the user store
             $userStore = $product->userStore;
 
@@ -176,7 +190,7 @@ class AuctionsController extends Controller
         $productAuction = ProductAuction::find($auctions->product_auction_id);
         $user = Auth::user();
 
-        return view('seller.produk', compact('auctions', 'user','productAuction'));
+        return view('seller.produk', compact('auctions', 'user', 'productAuction'));
     }
 
     /**
