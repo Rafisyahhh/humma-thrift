@@ -73,7 +73,7 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
 
     Route::prefix('notification')->controller(NotificationSellerController::class)->name('notification.')->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/{notificationId}', 'show')->name('show');
+        Route::post('/notifications/{notificationId}', 'show')->name('show');
         Route::get('/read-all', 'readAll')->name('readAll');
         Route::delete('{id}', 'destroy')->name('destroy');
     });
