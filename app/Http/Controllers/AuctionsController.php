@@ -98,6 +98,7 @@ class AuctionsController extends Controller
         Auth::user()->getAttribute('unreadNotifications')->markAsRead();
         return redirect()->route('user.notification.index');
     }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -119,25 +120,23 @@ class AuctionsController extends Controller
                 ])->withInput();
             }
 
+            # Buat record baru di tabel Auctions
             $auctions = Auctions::create([
                 'user_id' => $user->id,
                 'product_auction_id' => $product->id,
-                'auction_price' => $request->auction_price,
+                'auction_price' => $auctionPrice,
                 'status' => false,
                 'delivery_status' => 'selesaikan pesanan',
             ]);
 
-            // Fetch the user store
+            # Ambil data user store
             $userStore = $product->userStore;
 
             if ($userStore) {
-                //kutambah
                 flash()->info('Notification sent to UserStore: ' . $userStore->id);
-                // Ini yang aku tambahin
                 $userStore->user->notify(new SellerLelang($auctions));
                 Log::info('Notification sent to UserStore: ' . $userStore->id);
             } else {
-                //kutambah
                 flash()->error('UserStore not found for product: ' . $product->id);
                 Log::error('UserStore not found for product: ' . $product->id);
                 return redirect()->back()->with('success', 'Lelang berhasil ditambahkan tetapi notifikasi gagal dikirim: UserStore not found');
@@ -145,11 +144,13 @@ class AuctionsController extends Controller
 
             return redirect()->back()->with('success', 'Lelang berhasil ditambahkan');
         } catch (\Throwable $th) {
-            Log::error('Error in store method: ' . $th->getMessage());
+            Log::error('Error in store method: ' . $th->getMessage(), $th->getTrace());
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
+        } catch(\Exception $e) {
+            Log::error('Error in store method: ' . $e->getMessage(), $e->getTrace());
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
     }
-
 
     // In AuctionsController.php
     public function testNotification()
