@@ -327,21 +327,35 @@
                                             <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="product-img"
                                                 class="object-fit-cover">
                                             <div class="product-cart-items">
-                                                <a href="/user/wishlist" class="favourite cart-item">
-                                                    <span>
-                                                        <i class="fas fa-heart"></i>
-                                                    </span>
-                                                </a>
-                                                <a href="/user/wishlist" class="favourite cart-item">
-                                                    <span>
-                                                        <i class="fas fa-shopping-cart"></i>
-                                                    </span>
-                                                </a>
-                                                <a href="/user/keranjang" class="compaire cart-item">
+                                                @auth
+                                                    <form action="{{ route('storesproduct', $item->id) }}" method="POST">
+                                                        @csrf
+                                                        <button class="favourite cart-item">
+                                                            <span>
+                                                                <i class="fas fa-heart" style="font-size: 18px;"></i>
+                                                            </span>
+                                                        </button>
+                                                    </form>
+                                                    <form action="{{ route('storecart', $item->id) }}" method="POST">
+                                                        @csrf
+                                                        <button class="favourite cart-item">
+                                                            <span>
+                                                                <i class="fas fa-shopping-cart" style="font-size: 18px;"></i>
+                                                            </span>
+                                                        </button>
+                                                    </form>
+                                                <a href="#" class="compaire cart-item">
                                                     <span>
                                                         <i class="fas fa-share"></i>
                                                     </span>
                                                 </a>
+                                                @else
+                                                    <a href="{{ route('login') }}" class="favourite cart-item">
+                                                        <span>
+                                                            <i class="fas fa-heart"></i>
+                                                        </span>
+                                                    </a>
+                                                @endauth
                                             </div>
                                         </div>
                                         <div class="product-info">
