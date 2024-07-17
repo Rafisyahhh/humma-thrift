@@ -396,16 +396,6 @@
                                             <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="product-img"
                                                 class="object-fit-cover">
                                             <div class="product-cart-items">
-                                                {{-- <a href="/user/wishlist" class="favourite cart-item">
-                                                    <span>
-                                                        <i class="fas fa-heart"></i>
-                                                    </span>
-                                                </a>
-                                                <a href="/user/wishlist" class="favourite cart-item">
-                                                    <span>
-                                                        <i class="fas fa-shopping-cart"></i>
-                                                    </span>
-                                                </a> --}}
                                                 <a href="/user/keranjang" class="compaire cart-item">
                                                     <span>
                                                         <i class="fas fa-share"></i>
