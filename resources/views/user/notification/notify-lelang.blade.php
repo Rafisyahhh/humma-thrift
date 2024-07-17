@@ -33,6 +33,7 @@
                             <a class="list-group-item py-3 position-relative" style="top: 70%; text-align: left;" href="{{ route('user.notification.show', $notification->id) }}">
                                 <h6 class="mb-1 fw-bold" style="font-size: 14px;">{{ $notification->data['title'] }}</h6>
                                 <p class="mb-1 @if(!$notification->read_at) fw-bold @endif" style="font-size: 14px;">{{ Str::limit($notification->data['data'], 200) }}</p>
+                                <p class="mb-1" style="font-size: 14px;">Bid: {{ $notification->auction_price }}</p>
                                 <small class="text-muted @if(!$notification->read_at) fw-bold @endif" style="font-size: 11px;">{{ $notification->created_at->locale('id')->diffForHumans() }}</small>
 
                                 {{-- Penanda Kalau Udah Dibaca --}}

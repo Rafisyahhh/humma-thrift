@@ -33,6 +33,7 @@
     @else
       <title>{{ config('app.name') }}</title>
     @endif
+    <link rel="stylesheet" href="{{ asset('additional-assets/toastr-2.1.4/toastr.min.css') }}" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -112,6 +113,7 @@
         });
       }
     </script>
+    <script src="{{ asset('additional-assets/toastr-2.1.4/toastr.min.js') }}"></script>
 
     @stack('js')
     @yield('js')
