@@ -1,30 +1,53 @@
 @extends('layouts.home')
 @section('title', 'Brand')
 @section('style')
-    <style>
-        .top-selling-section .product-wrapper .product-img {
-            height: 25.7rem;
-            width: 25.7rem;
-            background: rgba(126, 163, 219, 0.4);
-        }
+  <style>
+    .top-selling-section .product-wrapper .product-img {
+      height: 25.7rem;
+      width: 25.7rem;
+      background: rgba(126, 163, 219, 0.4);
+    }
 
-        html:not(.no-js) [data-aos^="fade"][data-aos^="fade"].aos-animate {
-            opacity: 1;
-            -webkit-transform: none;
-            transform: none;
-            width: 28rem;
-            height: 35rem;
-        }
-    </style>
+    html:not(.no-js) [data-aos^="fade"][data-aos^="fade"].aos-animate {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+      width: 28rem;
+      height: 35rem;
+    }
+  </style>
+  <style>
+    .grid:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    .grid-sizer,
+    .grid-item {
+      width: 14.285714285714286%;
+    }
+
+    .grid-item {
+      float: left;
+      border: 2px solid #b6b5b4;
+    }
+
+    .grid-item img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+  </style>
 @endsection
 @section('content')
-    <section class="product top-selling">
-        <div class="container">
-            <div class="section-title">
-                <h5>Brand Produk</h5>
-            </div>
-            <div class="top-selling-section">
-                <div class="row g-5 mt-4">
+  <section class="product top-selling">
+    <div class="container">
+      <div class="section-title">
+        <h5>Brand Produk</h5>
+      </div>
+      <div class="top-selling-section">
+        {{-- <div class="row g-5 mt-4">
                     @foreach ($brands as $item)
                         <div class="col-lg-2 col-md-6">
                             <div class="product p-0"
@@ -40,7 +63,33 @@
                             </div>
                         </div>
                     @endforeach
-                </div>
+                </div> --}}
+
+        <div class="grid">
+          <div class="grid-sizer"></div>
+          @foreach ($brands as $item)
+            <div class="grid-item">
+              <img src="{{ asset("storage/{$item->logo}") }}" alt="img">
             </div>
-    </section>
+          @endforeach
+        </div>
+      </div>
+  </section>
 @endsection
+
+@push('js')
+  <script src="https://npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+  <script src="{{ asset('template-assets/front/assets/js/imagesloaded.pkgd.min.js') }}"></script>
+  <script>
+    var $grid = $('.grid').isotope({
+      itemSelector: '.grid-item',
+      percentPosition: true,
+      masonry: {
+        columnWidth: '.grid-sizer'
+      }
+    });
+    $grid.imagesLoaded().progress(function() {
+      $grid.isotope('layout');
+    });
+  </script>
+@endpush
