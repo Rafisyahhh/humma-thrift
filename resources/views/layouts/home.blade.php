@@ -94,7 +94,7 @@
     @yield('script')
 
     <script>
-      function confirmDeletion(msg, callback) {
+      function confirmDeletion(msg, confirmed, canceled) {
         Swal.fire({
           title: "Apa kamu yakin?",
           text: msg && "Anda tidak akan dapat mengembalikan ini!",
@@ -105,8 +105,9 @@
           confirmButtonText: "Ya, Hapus"
         }).then((result) => {
           if (result.isConfirmed) {
-            callback?.();
+            confirmed?.();
           } else {
+            canceled.?()
             return false;
           }
         });
