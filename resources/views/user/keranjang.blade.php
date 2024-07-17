@@ -24,10 +24,8 @@
                 <div class="cart-section wishlist-section">
                     <table style="border-spacing: 10px; width: 100%;">
                         <tbody>
-                            <tr class="table-row ticket-row"
-                                style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100rem;">
-                                <td class="table-wrapper wrapper-product"
-                                    style="display: flex; align-items: center; padding-top: 25px;">
+                            <tr class="table-row ticket-row" style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100rem;">
+                                <th class="table-wrapper wrapper-product" style="display: flex; align-items: center; padding-top: 25px;">
                                     <div class="form-check" style="display: flex; align-items: center;">
                                         <p style="flex: 0 0 3rem; text-align: left; margin-left: -1.70rem;">#</p>
                                         <p style="margin-right: 44.5rem; margin-left:3rem;">Produk</p>
@@ -35,9 +33,9 @@
                                         <p style="margin-right: 26rem;">Harga</p>
                                         <p>Aksi</p>
                                     </div>
-                                </td>
+                                </th>
                             </tr>
-                            {{-- x --}}
+
                             <tr class="table-row ticket-row" style="border:none; background-color: #ffffff;">
                                 <td style="height:10px;"></td>
                             </tr>
