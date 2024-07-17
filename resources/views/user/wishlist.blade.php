@@ -173,7 +173,7 @@
                                                     <li>
                                                         <form action="{{ route('destroyProduct.destroy', $item->id) }}"
                                                             method="POST"
-                                                            onsubmit="return confirmDeletion('Apakah anda yakin ingin menghapus produk ini dari daftar favorit?', event.preventDefault())">
+                                                            onsubmit="return confirmDeletion('Apakah anda yakin ingin menghapus produk ini dari daftar favorit?', { cancel: () => event.preventDefault() })">
                                                             @csrf
                                                             @method('DELETE')
                                                             <a role="button" type="submit" class="dropdown-item"
