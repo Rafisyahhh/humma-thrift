@@ -12,26 +12,24 @@ use App\Models\ProductAuction;
 use App\Models\ProductCategory;
 use App\Notifications\Lelang;
 use App\Notifications\SellerLelang;
+use App\Notifications\KalahLelang;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
-class AuctionsController extends Controller
-{
+class AuctionsController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
+    public function index() {
         $auctions = auctions::all();
         $user = Auth::user();
         $notifications = auth()->user()->notifications;
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         return view('Landing.produk-auction', compact('auctions', 'user', 'notifications', 'countFavorite'));
     }
-    public function notify()
-    {
+    public function notify() {
         $auctions = auctions::all();
         $user = Auth::user();
         $notifications = auth()->user()->notifications;
@@ -42,8 +40,7 @@ class AuctionsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
+    public function create() {
         // $product = ProductAuction::findOrFail($id);
         $auctions = auctions::all();
         $user = Auth::user();
@@ -51,8 +48,7 @@ class AuctionsController extends Controller
         return view('Landing.produk-auction', compact('auctions', 'user', 'countFavorite'));
     }
 
-    public function notifyuser()
-    {
+    public function notifyuser() {
         $notifications = Auth::user()->notifications()->paginate(20);
         $countcart = cart::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
@@ -64,8 +60,7 @@ class AuctionsController extends Controller
         return view('user.notification.notify-lelang', compact('notifications', 'countcart', 'carts', 'countFavorite'));
     }
 
-    public function notifyshow(string $notificationId)
-    {
+    public function notifyshow(string $notificationId) {
         $notification = Auth::user()->notifications()->findOrFail($notificationId);
         $notification->markAsRead();
 
@@ -81,8 +76,7 @@ class AuctionsController extends Controller
         return view('user.notification.show-lelang', compact('notifications', 'countcart', 'carts', 'countFavorite', 'notification'));
     }
 
-    public function destroynotify($id)
-    {
+    public function destroynotify($id) {
         try {
             $notification = Auth::user()->notifications()->findOrFail($id);
             $notification->delete();
@@ -93,8 +87,7 @@ class AuctionsController extends Controller
             return redirect()->route('user.notification.index')->with('error', 'Gagal menghapus notifikasi');
         }
     }
-    public function readAll()
-    {
+    public function readAll() {
         Auth::user()->getAttribute('unreadNotifications')->markAsRead();
         return redirect()->route('user.notification.index');
     }
@@ -102,8 +95,7 @@ class AuctionsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         try {
             $product = ProductAuction::findOrFail($request->product_id);
             $user = Auth::user();
@@ -146,15 +138,14 @@ class AuctionsController extends Controller
         } catch (\Throwable $th) {
             Log::error('Error in store method: ' . $th->getMessage(), $th->getTrace());
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Log::error('Error in store method: ' . $e->getMessage(), $e->getTrace());
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
     // In AuctionsController.php
-    public function testNotification()
-    {
+    public function testNotification() {
         try {
             $auction = Auctions::first(); // Assuming you have some auction data
             $productAuction = $auction->productAuction;
@@ -174,8 +165,7 @@ class AuctionsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function showSeller(auctions $auctions)
-    {
+    public function showSeller(auctions $auctions) {
         $auctions = Auctions::orderBy('created_at', 'asc')->orderBy('auction_price', 'desc')->get();
         $user = Auth::user();
 
@@ -185,8 +175,7 @@ class AuctionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function editlelang(auctions $auctions)
-    {
+    public function editlelang(auctions $auctions) {
         $auctions = Auctions::orderBy('created_at', 'asc')->orderBy('auction_price', 'desc')->get();
         $productAuction = ProductAuction::find($auctions->product_auction_id);
         $user = Auth::user();
@@ -225,9 +214,14 @@ class AuctionsController extends Controller
     //     }
 
     // }
-    public function updatelelang(UpdateauctionsRequest $request, auctions $auctions)
-    {
+    public function updatelelang(UpdateauctionsRequest $request, auctions $auctions) {
         try {
+            $auctions2 = $auctions->productAuction->auctions;
+            foreach ($auctions2 as $item) {
+                if ($item->user_id != $auctions->user_id) {
+                    $item->user->notify(new KalahLelang($auctions, $item->user));
+                }
+            }
             $dataToUpdate = [
                 'status' => $request->status == 1,
             ];
@@ -258,8 +252,7 @@ class AuctionsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(auctions $auctions)
-    {
+    public function destroy(auctions $auctions) {
         //
     }
 }
