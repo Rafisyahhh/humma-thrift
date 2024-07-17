@@ -126,7 +126,7 @@ class ProductSeeder extends Seeder {
                     "brand_id" => $data["brand_id"],
                     "title" => $data["title"],
                     "thumbnail" => $destinationPath,
-                    "price" => 150000,
+                    "price" => random_int(10_000, 1_500_000),
                     "size" => "XL",
                     "color" => $data["warna"],
                     "description" => "Loading...",

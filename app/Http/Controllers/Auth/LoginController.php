@@ -52,6 +52,7 @@ class LoginController extends Controller {
         $user->update([
             'last_login' => Carbon::now()
         ]);
+
         if ($user->hasRole('admin')) {
             return redirect()->intended('/admin');
         }

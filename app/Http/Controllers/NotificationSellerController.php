@@ -14,7 +14,7 @@ class NotificationSellerController extends Controller
      */
     public function index()
     {
-        $notifications = Auth::user()->notifications()->take(4)->paginate(20);
+        $notifications = Auth::user()->notifications()->orderBy('read_at', 'asc')->orderBy('created_at', 'desc')->get();
         $countcart = cart::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
         ->whereNotNull('product_id')
@@ -49,7 +49,7 @@ class NotificationSellerController extends Controller
         $notification = Auth::user()->notifications()->findOrFail($notificationId);
         $notification->markAsRead();
 
-        $notifications = Auth::user()->notifications()->paginate(20);
+        $notifications = Auth::user()->notifications()->orderBy('read_at', 'asc')->get();
         $countcart = cart::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
             ->whereNotNull('product_id')
@@ -60,7 +60,7 @@ class NotificationSellerController extends Controller
         // dd($notification);
         // dd(compact('notifications', 'countcart', 'carts', 'countFavorite', 'notification'));
 
-        return view('seller.notification.show', compact('notifications', 'countcart', 'carts', 'countFavorite', 'notification'));
+        return view('seller.notification.index', compact('notifications', 'countcart', 'carts', 'countFavorite', 'notification'));
 
     }
 

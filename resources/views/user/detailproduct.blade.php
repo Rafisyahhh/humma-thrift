@@ -273,8 +273,9 @@
                                         </form>
                                     </div>
                                     <div class="col" style="--bs-gutter-y: 0">
-                                        <form action="" method="POST">
+                                        <form action="{{ route('user.checkout') }}" method="POST">
                                             @csrf
+                                            <input type="hidden" value="{{ $isProduct->id }}" name="product_id">
                                             <button type="submit" class="shop-btn"
                                                 style="display: flex; align-items: center; gap: 10px; z-index:1">
                                                 <span style="width: 20rem; align-items: center; justify-content: center;">
@@ -320,9 +321,18 @@
                             <div class="product-info-content" data-aos="fade-left">
                                 <h5 style="z-index:1;position: relative;">{{ $isProductAuction->title }}</h5>
                                 <div class="price">
+                                    @php
+                                        $auction = App\Models\Auctions::where('status', 1)->where('product_auction_id', $isProductAuction->id)->first();
+                                    @endphp
+                                    @if ($auction)
+                                    <span class="new-price fs-1"
+                                    style="z-index:1">Rp{{ number_format($isProductAuction->price, null, null, '.') }}</span>
+
+                                    @else
                                     <span class="new-price fs-1"
                                         style="z-index:1">Rp{{ number_format($isProductAuction->bid_price_start, null, null, '.') }}
                                         - Rp{{ number_format($isProductAuction->bid_price_end, null, null, '.') }}</span>
+                                    @endif
                                 </div>
                                 <hr>
                                 <div class="row product-details">
@@ -391,7 +401,7 @@
                                                 @else
                                                     <button class="shop-btn flex-grow-0 openModal"
                                                         data-id="{{ $isProductAuction->id }}"
-                                                        style="display: flex; align-items: center; gap: 5px; z-index:1">
+                                                        style="display: flex; align-items: center; gap: 1rem; z-index:1">
                                                         <i class="fa-solid fa-plus"></i>
                                                         Ikuti Lelang
                                                     </button>
@@ -423,23 +433,23 @@
                                                             style="text-align: center; font-size :20px; font-weight:bold; margin-top: 2rem; margin-bottom:2rem;">
                                                             lelang sudah berakhir</p>
                                                     @else
-                                                        <h4 style="text-align: center;">Bid Lelang</h4>
+                                                        <h4 style="text-align: center;">Ikuti Lelang</h4>
                                                         <form id="auctionForm-{{ $isProductAuction->id }}" method="post"
                                                             action="{{ route('user.auctions.store') }}" class="mt-5">
                                                             @csrf
                                                             <input type="hidden" name="product_id"
                                                                 value="{{ $isProductAuction->id }}">
                                                             <label for="auction_price" class="form-label"
-                                                                style="font-size: 18px;">Bid Lelang :</label> <br>
+                                                                style="font-size: 18px;">Taruh Harga Lelangmu</label> <br>
                                                             <input type="number" name="auction_price"
                                                                 class="form-control @error('auction_price') is-invalid @enderror"
-                                                                placeholder="Masukkan Bid Lelang anda"
-                                                                style="font-size: 17px;">
+                                                                placeholder="Masukkan harga lelangmu, misal: 9500"
+                                                                style="font-size: 16px; padding: 1.25rem 1.5rem;" />
                                                             <p
                                                                 style="margin-top: 5px;margin-left:6px;font-size:12px;color: #7c7c7c;">
-                                                                Bid :
+                                                                Harga yang ditetapkan antara
                                                                 Rp{{ number_format($isProductAuction->bid_price_start, null, null, '.') }}
-                                                                -
+                                                                sampai
                                                                 Rp{{ number_format($isProductAuction->bid_price_end, null, null, '.') }}
                                                             </p>
                                                             @error('auction_price')
@@ -448,7 +458,7 @@
                                                                 </span>
                                                             @enderror
                                                             <button type="submit" class="shop-btn"
-                                                                style="margin-left: 22rem;">Kirim Bid Anda</button>
+                                                                style="margin-left: 22rem;">Ikuti Sekarang!</button>
                                                         </form>
                                                     @endif
                                                 @endif

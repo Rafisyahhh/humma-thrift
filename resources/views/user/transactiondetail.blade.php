@@ -23,19 +23,20 @@
                                     <hr />
                                     <div class="subtotal product-total">
                                         <ul class="product-list">
-                                            @foreach ($detail->order_items as $item)
+                                            @foreach ($order as $item)
                                                 <li>
                                                     <div class="d-flex gap-3">
-                                                        <img src="{{ $item->image_url }}" width="60" />
+                                                        <img src="{{ asset("storage/".$item->product->thumbnail) }}" width="60" />
                                                         <div class="mt-1">
-                                                            <a href="{{ route('store.product.detail', ['store' => $transaction_order->Product->userStore->username, 'product' => $transaction_order->Product->slug]) }}" class="wrapper-heading" style="font-size: 20px">
-                                                                {{ $item->name }}</a>
-                                                            <p class="paragraph">{{$transaction_order->Product->brand->title}}</p>
+                                                            <a href="{{ route('store.product.detail', ['store' => $item->product->userStore->username, 'product' => $item->product->slug]) }}"
+                                                                class="wrapper-heading" style="font-size: 20px">
+                                                                {{ $item->product->title }}</a>
+                                                            <p class="paragraph">{{ $item->product->brand->title }}</p>
                                                         </div>
                                                     </div>
                                                     <div class="price mt-3">
                                                         <h5 class="wrapper-heading" style="font-size: 20px">
-                                                            Rp{{ number_format($item->price, null, null, '.') }}
+                                                            Rp{{ number_format($item->product->price, null, null, '.') }}
                                                         </h5>
                                                     </div>
                                                 </li>
@@ -63,20 +64,25 @@
                                     <div class="subtotal product-total">
                                         <div class="row">
                                             <div class="col-md-6 ">
+                                                @php
+                                                    $firstOrder = $transaction_order->order->first();
+                                                    $userstore = $firstOrder->product->userstore;
+                                                @endphp
                                                 <p class="fw-bold" style="font-size: 17px; margin: 0"
                                                     id="selected-username">
-                                                    {{ $transaction_order->Product->userstore->name }} | {{ $transaction_order->Product->userstore->user->phone }}
+                                                    {{ $userstore->name }} |
+                                                    {{ $userstore->user->phone }}
                                                 </p>
-                                                <p style="font-size: 17px;"
-                                                    id="selected-address">{{$transaction_order->Product->userstore->address}}</p>
+                                                <p style="font-size: 17px;" id="selected-address">
+                                                    {{ $userstore->address }}</p>
                                             </div>
                                             <div class="col-md-6">
                                                 <p class="fw-bold" style="font-size: 17px; margin: 0"
                                                     id="selected-username">
-                                                    {{ $detail->customer_name }} | {{ $detail->customer_phone }}
+                                                    {{ $transaction_order->user->name }} | {{ $transaction_order->user->phone }}
                                                 </p>
-                                                <p style="font-size: 17px;"
-                                                    id="selected-address">{{$transaction_order->UserAddress->address}}</p>
+                                                <p style="font-size: 17px;" id="selected-address">
+                                                    {{ $transaction_order->UserAddress->address }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -105,7 +111,7 @@
                                         <h5 class="wrapper-heading fs-3">No Reference</h5>
                                         <h5 class="wrapper-heading fs-3">
                                             <div class="d-flex gap-3" id="selected-payment-method">
-                                                <p>#{{ $detail->reference }}</p>
+                                                <p>#{{ $transaction_order->reference_id }}</p>
                                             </div>
                                         </h5>
                                     </div>
@@ -147,25 +153,28 @@
                                 <div class="order-summery">
                                     <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                                         @foreach ($detail->instructions as $item)
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header">
-                                                <button class="accordion-button collapsed fs-3 fw-bold" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$loop->iteration}}"
-                                                    aria-expanded="false" aria-controls="flush-collapseOne">
-                                                    {{ $item->title }}
-                                                </button>
-                                            </h2>
-                                            <div id="flush-collapse{{$loop->iteration}}" class="accordion-collapse collapse"
-                                                data-bs-parent="#accordionFlushExample">
-                                                <div class="accordion-body">
-                                                    <ul>
-                                                        @foreach ($item->steps as $step)
-                                                            <li class="fs-4">{{$loop->iteration}}. {!! $step !!}</li>
-                                                        @endforeach
-                                                    </ul>
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed fs-3 fw-bold" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#flush-collapse{{ $loop->iteration }}"
+                                                        aria-expanded="false" aria-controls="flush-collapseOne">
+                                                        {{ $item->title }}
+                                                    </button>
+                                                </h2>
+                                                <div id="flush-collapse{{ $loop->iteration }}"
+                                                    class="accordion-collapse collapse"
+                                                    data-bs-parent="#accordionFlushExample">
+                                                    <div class="accordion-body">
+                                                        <ul>
+                                                            @foreach ($item->steps as $step)
+                                                                <li class="fs-4">{{ $loop->iteration }}.
+                                                                    {!! $step !!}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         @endforeach
                                     </div>
                                 </div>

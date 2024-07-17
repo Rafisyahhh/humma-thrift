@@ -73,7 +73,7 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
 
     Route::prefix('notification')->controller(NotificationSellerController::class)->name('notification.')->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/{notificationId}', 'show')->name('show');
+        Route::post('/notifications/{notificationId}', 'show')->name('show');
         Route::get('/read-all', 'readAll')->name('readAll');
         Route::delete('{id}', 'destroy')->name('destroy');
     });
@@ -90,7 +90,12 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
 Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(function () {
     Route::middleware(\App\Http\Middleware\NotSellerMiddleware::class)->group(function () {
         Route::get('/', [DashboardUserController::class, 'dashboard'])->name('userhome');
-        Route::post('checkout', [CheckoutController::class, 'index'])->name('checkout');
+
+        Route::controller(CheckoutController::class)->prefix('/checkout')->group(function() {
+            Route::get('/', 'index')->name('checkout');
+            Route::post('process', 'processCheckout')->name('checkout.process');
+        });
+
         Route::post('address/{id}', [UserAddressController::class, 'store'])->name('address.store');
         Route::put('edit/address/{user}/{address}', [UserAddressController::class, 'update'])->name('address.edit');
         Route::delete('delete/address/{address}', [UserAddressController::class, 'destroy'])->name('address.destroy');

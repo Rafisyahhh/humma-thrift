@@ -23,6 +23,8 @@ class CheckoutController extends Controller
      */
     public function index(Request $request)
     {
+        $products = session('checkouted_product');
+        $productAuction = session('checkouted_product_auction');
         $channel_pembayaran = ChannelPembayaran::first();
 
         if (!$channel_pembayaran) {
@@ -45,16 +47,37 @@ class CheckoutController extends Controller
         $channel_pembayaran = ChannelPembayaran::all();
         $users = Auth::user();
         $addresses = UserAddress::where('user_id', $users->id)->get();
-        $product = Product::where('id', $request->product_id)->first();
-        $product_auction = Auctions::where('product_auction_id', $request->productauction_id)
-            ->where('status', 1)->first();
+        $product = Product::whereIn('id', $products)->get();
+        // $product_auction = Auctions::whereIn('product_auction_id', $productAuction)
+        //     ->where('status', 1)->first();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
             ->whereNotNull('product_id')
             ->orderBy('created_at')
             ->get();
         $countcart = cart::where('user_id', auth()->id())->count();
-        return view('user.checkout', compact('users', 'addresses', 'product', 'channel_pembayaran', 'countFavorite', 'product_auction', 'carts', 'countcart'));
+
+        // dd($products, $product);
+
+        return view(
+            'user.checkout',
+            compact(
+                'users',
+                'addresses',
+                'product',
+                'channel_pembayaran',
+                'countFavorite',
+                // 'product_auction',
+                'carts',
+                'countcart'
+            )
+        );
+    }
+
+    public function processCheckout(Request $request)
+    {
+        session(['checkouted_product' => $request->product_id]);
+        return redirect()->route('user.checkout');
     }
 
     /**

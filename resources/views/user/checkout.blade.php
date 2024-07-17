@@ -99,7 +99,7 @@
         /* Light background color on hover */
     }
 
-    .radio-button-labels:checked ~ label {
+    .radio-button-labels:checked~label {
         border-color: #007bff;
         background-color: #f0f8ff;
         color: white;
@@ -187,23 +187,29 @@
             <div class="account-section billing-section" style="margin-top: 2.5rem">
                 <h5 class="wrapper-heading">Daftar Order</h5>
                 <div class="order-summery">
+
                     <hr />
+
                     <div class="subtotal product-total">
                         <ul class="product-list">
-                            <li>
-                                <div class="d-flex gap-3">
-                                    <img src="{{ asset("storage/$product->thumbnail") }}" class="mb-4" width="60" />
-                                    <div class="mt-1">
-                                        <h5 class="wrapper-heading" style="font-size: 20px">{{ $product->title }}</h5>
-                                        <p class="paragraph">{{ $product->brand->title }}</p>
+                            @foreach ($product as $item)
+                                <li>
+                                    <div class="d-flex gap-3">
+                                        <img src="{{ asset("storage/$item->thumbnail") }}" class="mb-4"
+                                            width="60" />
+                                        <div class="mt-1">
+                                            <h5 class="wrapper-heading" style="font-size: 20px">{{ $item->title }}
+                                            </h5>
+                                            <p class="paragraph">{{ $item->brand->title }}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="price mt-3">
-                                    <h5 class="wrapper-heading" style="font-size: 20px">
-                                        Rp{{ number_format($product->price, null, null, '.') }}
-                                    </h5>
-                                </div>
-                            </li>
+                                    <div class="price mt-3" data-price="{{ $item->price }}">
+                                        <h5 class="wrapper-heading" style="font-size: 20px">
+                                            Rp{{ number_format($item->price, null, null, '.') }}
+                                        </h5>
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -273,10 +279,8 @@
                                 <div class="col-lg-4 col-md-6 mb-3">
                                     <input type="radio" id="payment-method-{{ $loop->index }}" name="method"
                                         value="{{ $item->channel_code }}" class="custom-radio d-none" />
-                                    <input type="hidden" name="adminfeeFlat"
-                                        value="{{ $item->flat }}" />
-                                    <input type="hidden" name="adminfeePercent"
-                                        value="{{ $item->percent }}" />
+                                    <input type="hidden" name="adminfeeFlat" value="{{ $item->flat }}" />
+                                    <input type="hidden" name="adminfeePercent" value="{{ $item->percent }}" />
                                     <input type="hidden" name="paymentName" value="{{ $item->name }}" />
 
                                     <label for="payment-method-{{ $loop->index }}" class="radio-button-labels">
@@ -285,8 +289,9 @@
                                             <div class="text-center mt-2">
                                                 <p class="fs-3 fw-bold">{{ $item->name }}</p>
                                                 <p class="fs-5">
+                                                    {{-- @dd($product->sum('price')) --}}
                                                     @if ($item->flat == null)
-                                                        Rp{{ number_format($product->price * ($item->percent / 100), null, null, '.') }}
+                                                        Rp{{ number_format($product->sum('price') * ($item->percent / 100), null, null, '.') }}
                                                     @else
                                                         Rp{{ number_format($item->flat, null, null, '.') }}
                                                     @endif
@@ -324,11 +329,11 @@
                             @if ($product)
                                 <div class="col-md-6">
                                     <p class="fw-bold" style="font-size: 17px; margin: 0">
-                                        <b style="font-size: 17px">{{ $product->userstore->name }}</b> |
-                                        {{ $product->userstore->user->phone }}
+                                        <b style="font-size: 17px">{{ $product->first()->userstore->name }}</b> |
+                                        {{ $product->first()->userstore->user->phone }}
                                     </p>
                                     <p class="float-end" style="font-size: 17px; margin: 0">
-                                        {{ $product->userstore->address }}</p>
+                                        {{ $product->first()->userstore->address }}</p>
                                 </div>
                             @endif
                             <div class="col-md-6">
@@ -360,7 +365,7 @@
                     <div class="subtotal product-total">
                         <h5 class="wrapper-heading" style="font-size: 17px;">Total Harga</h5>
                         <h5 class="wrapper-heading" style="font-size: 17px;">
-                            {{ number_format($product->price, null, null, '.') }}
+                            {{ number_format($product->sum('price'), null, null, '.') }}
                         </h5>
                     </div>
                     <div class="subtotal product-total">
@@ -393,7 +398,7 @@
         <span class="step"></span>
         <span class="step"></span>
     </div>
-    <input type="hidden" name="product_id" value="{{ $product->id }}">
+    {{-- <input type="hidden" name="product_id" value="{{ $product->id }}"> --}}
 </form>
 {{-- Address Modal --}}
 <div id="addressModal" class="modal">
@@ -555,7 +560,7 @@
         // Event listener untuk setiap metode pembayaran
         paymentMethods.forEach(method => {
             method.addEventListener('change', function() {
-                const productPrice = {{ $product->price }};
+                const productPrice = {{ $product->sum('price') }};
 
                 // Dapatkan elemen hidden input yang berisi biaya admin terkait
                 const adminFeeFlatInput = this.nextElementSibling;
@@ -585,7 +590,7 @@
         });
 
         // Kalkulasi total awal tanpa biaya admin (asumsi default)
-        calculateTotal({{ $product->price }}, 0, 0);
+        calculateTotal({{ $product->sum('price') }}, 0, 0);
     });
 </script>
 <script>

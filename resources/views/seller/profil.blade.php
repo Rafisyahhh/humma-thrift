@@ -6,170 +6,255 @@
     <link href="{{ asset('additional-assets/summernote-0.8.20/summernote-lite.min.css') }}" rel="stylesheet" />
 @endsection
 
+@push('style')
+    <style>
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #ffca1b;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #ffca1b;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+@endpush
+
 @section('content')
     @include('components.show-errors')
 
     <section class="seller-application ">
         <div class="container">
-            <div class="seller-application-section-profil">
-                <div class="row ">
-                    @if ($store)
-                        <div class="col-lg-7">
-                            <div class="row gy-5">
-                                <div class="col-lg-12">
-                                    <div class="seller-information" data-aos="fade-right">
-                                        <h5 class="comment-title">Informasi Toko</h5>
-                                        <p class="paragraph">Isi formulir untuk melengkapi profil Toko Anda!</p>
-                                        <form action="{{ route('seller.profile.update', $store->id) }}" method="POST"
-                                            enctype="multipart/form-data">
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="review-form">
-                                                <div class="review-inner-form ">
-                                                    <div class="review-form-name">
-                                                        <label for="name" class="form-label">Nama
-                                                            Toko</label>
-                                                        <input type="text" id="name" name="name"
-                                                            class="form-control" placeholder="mis.Hilma Store"
-                                                            value="{{ old('name', $store->name) }}">
-                                                    </div>
+            @if ($store->cuti)
+                <div class="alert alert-warning mt-3 alert-dismissible fade show" role="alert" style="font-size: 0.9rem;">
+                    <p>Toko anda sedang dalam masa cuti! Silahkan nonaktifkan button cuti untuk aktif kembali!</p>
+                </div>
+            @endif
+            <form action="{{ route('seller.profile.update', $store->id) }}" method="POST"
+                enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                    <div class="seller-application-section-profil">
+                        <div class="row ">
+                            @if ($store)
+                                <div class="col-lg-7">
+                                    <div class="row gy-5">
+                                        <div class="col-lg-12">
+                                            <div class="seller-information" data-aos="fade-right">
+                                                <h5 class="comment-title">Informasi Toko</h5>
+                                                <p class="paragraph">Isi formulir untuk melengkapi profil Toko Anda!</p>
+                                                    <div class="review-form">
+                                                        <div class="review-inner-form ">
+                                                            <div class="review-form-name">
+                                                                <label for="name" class="form-label">Nama
+                                                                    Toko</label>
+                                                                <input type="text" id="name" name="name"
+                                                                    class="form-control" placeholder="mis.Hilma Store"
+                                                                    value="{{ old('name', $store->name) }}">
+                                                            </div>
 
-                                                    <div class="review-form-name">
-                                                        <label for="email" class="form-label">Surel</label>
-                                                        <input type="text" id="email" name="email"
-                                                            class="form-control" placeholder="mis.hilmaschaefer@gmail.com"
-                                                            value="{{ $store->user->email }}" disabled>
-                                                    </div>
+                                                            <div class="review-form-name">
+                                                                <label for="email" class="form-label">Surel</label>
+                                                                <input type="text" id="email" name="email"
+                                                                    class="form-control" placeholder="mis.hilmaschaefer@gmail.com"
+                                                                    value="{{ $store->user->email }}" disabled>
+                                                            </div>
 
-                                                    <div class="review-form-name">
-                                                        <label for="username" class="form-label">Username Toko</label>
-                                                        <input type="text" id="username" name="username"
-                                                            class="form-control" placeholder="mis: hummathrift"
-                                                            value="{{ old('username', $store->username) }}" />
-                                                        <span class="opacity-75 mt-2" style="color: red;">
-                                                            Isikan tanpa tanda "@"
-                                                        </span>
-                                                    </div>
+                                                            <div class="review-form-name">
+                                                                <label for="username" class="form-label">Username Toko</label>
+                                                                <input type="text" id="username" name="username"
+                                                                    class="form-control" placeholder="mis: hummathrift"
+                                                                    value="{{ old('username', $store->username) }}" />
+                                                                <span class="opacity-75 mt-2" style="color: red;">
+                                                                    Isikan tanpa tanda "@"
+                                                                </span>
+                                                            </div>
 
-                                                    <div class="review-form-name">
-                                                        <label for="phone" class="form-label">Telepon</label>
-                                                        <input type="number" id="phone" name="phone"
-                                                            class="form-control" placeholder="+88013**977957"
-                                                            value="{{ old('phone', $store->user->phone) }}">
-                                                    </div>
+                                                            <div class="review-form-name">
+                                                                <label for="phone" class="form-label">Telepon</label>
+                                                                <input type="number" id="phone" name="phone"
+                                                                    class="form-control" placeholder="+88013**977957"
+                                                                    value="{{ old('phone', $store->user->phone) }}">
+                                                            </div>
 
-                                                    <div class="review-form-name">
-                                                        <label for="address" class="form-label">Alamat</label>
-                                                        <textarea id="address" name="address" class="form-control" placeholder="Masukkan Alamat Anda">{{ old('address', $store->address) }}</textarea>
-                                                    </div>
+                                                            <div class="review-form-name">
+                                                                <label for="address" class="form-label">Alamat</label>
+                                                                <textarea id="address" name="address" class="form-control" placeholder="Masukkan Alamat Anda">{{ old('address', $store->address) }}</textarea>
+                                                            </div>
 
-                                                    <div class="review-form-name mt-4">
-                                                        <label for="address" class="form-label">Deskripsi</label>
-                                                        <textarea id="custom-summernote" name="description" class="custom-summernote"
-                                                            placeholder="Tambahkan Deskripsi Toko Anda" rows="7">{!! old('description', $store->description) !!}</textarea>
+                                                            <div class="review-form-name mt-4">
+                                                                <label for="address" class="form-label">Deskripsi</label>
+                                                                <textarea id="custom-summernote" name="description" class="custom-summernote"
+                                                                    placeholder="Tambahkan Deskripsi Toko Anda" rows="7">{!! old('description', $store->description) !!}</textarea>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="review-form-time">
+                                                                    <table>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <label for="open" class="form-label">Jam
+                                                                                    Buka</label>
+                                                                                <input type="time" id="open" name="open"
+                                                                                    class="form-control"
+                                                                                    value="{{ old('open', $store->open) }}">
+                                                                            </td>
+                                                                            <td class="ps-3">
+                                                                                <label for="close" class="form-label">Jam
+                                                                                    Tutup</label>
+                                                                                <input type="time" id="close" name="close"
+                                                                                    class="form-control"
+                                                                                    value="{{ old('close', $store->close) }}">
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="review-form-time">
-                                                            <table>
-                                                                <tr>
-                                                                    <td>
-                                                                        <label for="open" class="form-label">Jam
-                                                                            Buka</label>
-                                                                        <input type="time" id="open" name="open"
-                                                                            class="form-control"
-                                                                            value="{{ old('open', $store->open) }}">
-                                                                    </td>
-                                                                    <td class="ps-3">
-                                                                        <label for="close" class="form-label">Jam
-                                                                            Tutup</label>
-                                                                        <input type="time" id="close" name="close"
-                                                                            class="form-control"
-                                                                            value="{{ old('close', $store->close) }}">
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="img-upload-section" data-aos="fade-left">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="logo-wrapper">
+                                                    <h5 class="comment-title" style="margin-left: 80px;">Perbarui Logo</h5>
+                                                    <p class="paragraph" style="margin-left: 80px;">Profil minimal Ukuran 300x300.
+                                                    </p>
+                                                    <div class="logo-upload">
+                                                        <img src="{{ asset($store->store_logo ? 'storage/' . $store->store_logo : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
+                                                            alt="upload" class="upload-img" id="upload-img">
+                                                        <div class="input-item upload-input">
+                                                            <label for="input-file">
+                                                                <span>
+                                                                    <svg width="32" height="32" viewBox="0 0 32 32"
+                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M16.5147 11.5C17.7284 12.7137 18.9234 13.9087 20.1296 15.115C19.9798 15.2611 19.8187 15.4109 19.6651 15.5683C17.4699 17.7635 15.271 19.9587 13.0758 22.1539C12.9334 22.2962 12.7948 22.4386 12.6524 22.5735C12.6187 22.6034 12.5663 22.6296 12.5213 22.6296C11.3788 22.6334 10.2362 22.6297 9.09365 22.6334C9.01498 22.6334 9 22.6034 9 22.536C9 21.4009 9 20.2621 9.00375 19.1271C9.00375 19.0746 9.02997 19.0109 9.06368 18.9772C10.4123 17.6249 11.7609 16.2763 13.1095 14.9277C14.2295 13.8076 15.3459 12.6913 16.466 11.5712C16.4884 11.5487 16.4997 11.5187 16.5147 11.5Z"
+                                                                            fill="white"></path>
+                                                                        <path
+                                                                            d="M20.9499 14.2904C19.7436 13.0842 18.5449 11.8854 17.3499 10.6904C17.5634 10.4694 17.7844 10.2446 18.0054 10.0199C18.2639 9.76139 18.5261 9.50291 18.7884 9.24443C19.118 8.91852 19.5713 8.91852 19.8972 9.24443C20.7251 10.0611 21.5492 10.8815 22.3771 11.6981C22.6993 12.0165 22.7105 12.4698 22.3996 12.792C21.9238 13.2865 21.4443 13.7772 20.9686 14.2717C20.9648 14.2792 20.9536 14.2867 20.9499 14.2904Z"
+                                                                            fill="white"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </label>
+                                                            <input type="file" name="store_logo"
+                                                                accept="image/jpeg, image/jpg, image/png, image/webp"
+                                                                id="input-file">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="img-upload-section" data-aos="fade-left">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="logo-wrapper">
-                                            <h5 class="comment-title" style="margin-left: 80px;">Perbarui Logo</h5>
-                                            <p class="paragraph" style="margin-left: 80px;">Profil minimal Ukuran 300x300.
-                                            </p>
-                                            <div class="logo-upload">
-                                                <img src="{{ asset($store->store_logo ? 'storage/' . $store->store_logo : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
-                                                    alt="upload" class="upload-img" id="upload-img">
-                                                <div class="input-item upload-input">
-                                                    <label for="input-file">
-                                                        <span>
-                                                            <svg width="32" height="32" viewBox="0 0 32 32"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M16.5147 11.5C17.7284 12.7137 18.9234 13.9087 20.1296 15.115C19.9798 15.2611 19.8187 15.4109 19.6651 15.5683C17.4699 17.7635 15.271 19.9587 13.0758 22.1539C12.9334 22.2962 12.7948 22.4386 12.6524 22.5735C12.6187 22.6034 12.5663 22.6296 12.5213 22.6296C11.3788 22.6334 10.2362 22.6297 9.09365 22.6334C9.01498 22.6334 9 22.6034 9 22.536C9 21.4009 9 20.2621 9.00375 19.1271C9.00375 19.0746 9.02997 19.0109 9.06368 18.9772C10.4123 17.6249 11.7609 16.2763 13.1095 14.9277C14.2295 13.8076 15.3459 12.6913 16.466 11.5712C16.4884 11.5487 16.4997 11.5187 16.5147 11.5Z"
-                                                                    fill="white"></path>
-                                                                <path
-                                                                    d="M20.9499 14.2904C19.7436 13.0842 18.5449 11.8854 17.3499 10.6904C17.5634 10.4694 17.7844 10.2446 18.0054 10.0199C18.2639 9.76139 18.5261 9.50291 18.7884 9.24443C19.118 8.91852 19.5713 8.91852 19.8972 9.24443C20.7251 10.0611 21.5492 10.8815 22.3771 11.6981C22.6993 12.0165 22.7105 12.4698 22.3996 12.792C21.9238 13.2865 21.4443 13.7772 20.9686 14.2717C20.9648 14.2792 20.9536 14.2867 20.9499 14.2904Z"
-                                                                    fill="white"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </label>
-                                                    <input type="file" name="store_logo"
-                                                        accept="image/jpeg, image/jpg, image/png, image/webp"
-                                                        id="input-file">
+                                            <div class="col-lg-12">
+                                                <div class="logo-wrapper cover">
+                                                    <h5 class="comment-title" style="margin-left: 80px;">Perbarui Sampul</h5>
+                                                    <p class="paragraph" style="margin-left: 80px;">Sampul minimal Ukuran
+                                                        1170x920.</p>
+                                                    <div class="cover-upload logo-upload">
+                                                        <img src="{{ asset($store->store_cover ? "storage/{$store->store_cover}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
+                                                            alt="upload" class="cover-img" id="cover-img"
+                                                            style="margin-left: 80px;">
+                                                        <div class="input-item cover-input">
+                                                            <label for="cover-file">
+                                                                <span>
+                                                                    <svg width="32" height="32" viewBox="0 0 32 32"
+                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M16.5147 11.5C17.7284 12.7137 18.9234 13.9087 20.1296 15.115C19.9798 15.2611 19.8187 15.4109 19.6651 15.5683C17.4699 17.7635 15.271 19.9587 13.0758 22.1539C12.9334 22.2962 12.7948 22.4386 12.6524 22.5735C12.6187 22.6034 12.5663 22.6296 12.5213 22.6296C11.3788 22.6334 10.2362 22.6297 9.09365 22.6334C9.01498 22.6334 9 22.6034 9 22.536C9 21.4009 9 20.2621 9.00375 19.1271C9.00375 19.0746 9.02997 19.0109 9.06368 18.9772C10.4123 17.6249 11.7609 16.2763 13.1095 14.9277C14.2295 13.8076 15.3459 12.6913 16.466 11.5712C16.4884 11.5487 16.4997 11.5187 16.5147 11.5Z"
+                                                                            fill="white"></path>
+                                                                        <path
+                                                                            d="M20.9499 14.2904C19.7436 13.0842 18.5449 11.8854 17.3499 10.6904C17.5634 10.4694 17.7844 10.2446 18.0054 10.0199C18.2639 9.76139 18.5261 9.50291 18.7884 9.24443C19.118 8.91852 19.5713 8.91852 19.8972 9.24443C20.7251 10.0611 21.5492 10.8815 22.3771 11.6981C22.6993 12.0165 22.7105 12.4698 22.3996 12.792C21.9238 13.2865 21.4443 13.7772 20.9686 14.2717C20.9648 14.2792 20.9536 14.2867 20.9499 14.2904Z"
+                                                                            fill="white"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </label>
+                                                            <input type="file" name="store_cover"
+                                                                accept="image/jpeg, image/jpg, image/png, image/webp"
+                                                                id="cover-file">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="logo-wrapper cover">
-                                            <h5 class="comment-title" style="margin-left: 80px;">Perbarui Sampul</h5>
-                                            <p class="paragraph" style="margin-left: 80px;">Sampul minimal Ukuran
-                                                1170x920.</p>
-                                            <div class="cover-upload logo-upload">
-                                                <img src="{{ asset($store->store_cover ? "storage/{$store->store_cover}" : 'template-assets/front/assets/images/homepage-one/sallers-cover.png') }}"
-                                                    alt="upload" class="cover-img" id="cover-img"
-                                                    style="margin-left: 80px;">
-                                                <div class="input-item cover-input">
-                                                    <label for="cover-file">
-                                                        <span>
-                                                            <svg width="32" height="32" viewBox="0 0 32 32"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M16.5147 11.5C17.7284 12.7137 18.9234 13.9087 20.1296 15.115C19.9798 15.2611 19.8187 15.4109 19.6651 15.5683C17.4699 17.7635 15.271 19.9587 13.0758 22.1539C12.9334 22.2962 12.7948 22.4386 12.6524 22.5735C12.6187 22.6034 12.5663 22.6296 12.5213 22.6296C11.3788 22.6334 10.2362 22.6297 9.09365 22.6334C9.01498 22.6334 9 22.6034 9 22.536C9 21.4009 9 20.2621 9.00375 19.1271C9.00375 19.0746 9.02997 19.0109 9.06368 18.9772C10.4123 17.6249 11.7609 16.2763 13.1095 14.9277C14.2295 13.8076 15.3459 12.6913 16.466 11.5712C16.4884 11.5487 16.4997 11.5187 16.5147 11.5Z"
-                                                                    fill="white"></path>
-                                                                <path
-                                                                    d="M20.9499 14.2904C19.7436 13.0842 18.5449 11.8854 17.3499 10.6904C17.5634 10.4694 17.7844 10.2446 18.0054 10.0199C18.2639 9.76139 18.5261 9.50291 18.7884 9.24443C19.118 8.91852 19.5713 8.91852 19.8972 9.24443C20.7251 10.0611 21.5492 10.8815 22.3771 11.6981C22.6993 12.0165 22.7105 12.4698 22.3996 12.792C21.9238 13.2865 21.4443 13.7772 20.9686 14.2717C20.9648 14.2792 20.9536 14.2867 20.9499 14.2904Z"
-                                                                    fill="white"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </label>
-                                                    <input type="file" name="store_cover"
-                                                        accept="image/jpeg, image/jpg, image/png, image/webp"
-                                                        id="cover-file">
+                                            <div class="col-lg-12">
+                                                <div class="logo-wrapper cover">
+                                                    <div class="cover-upload logo-upload">
+                                                        <h5 class="comment-title mx-4">Mode Cuti</h5>
+                                                            <label class="switch">
+                                                                <input type="checkbox" name="cuti" value="{{ !$store->cuti }}" {{ $store->cuti?"checked":"" }}>
+                                                                <span class="slider round"></span>
+                                                            </label>
+                                                    </div>
+                                                    <p class="paragraph" style="margin-left: 80px; margin-top:20px;">Aktifkan mode
+                                                        cuti apabila anda ingin libur sementara</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="col-lg-12">
+                                    <div class="submit-btn">
+                                        <button type="submit" class="shop-btn update-btn">Perbarui Profil</button>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
-                        <div class="col-lg-12">
-                            <div class="submit-btn">
-                                <button type="submit" class="shop-btn update-btn">Perbarui Profil</button>
-                                </form>
-                            </div>
-                        </div>
-                    @endif
-                </div>
-            </div>
+                    </div>
+            </form>
         </div>
     </section>
 @endsection
@@ -202,5 +287,13 @@
                 }
             });
         });
+        </script>
+    <script>
+        $('input[name=cuti]').change(function() {
+            const form = $(this).closest('form')
+            form.append($('<input name="gif" value="cuti" hidden>'))
+            this.form.submit()
+            $('input[name=gif]').remove()
+        })
     </script>
 @endsection
