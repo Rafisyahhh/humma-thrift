@@ -138,7 +138,7 @@
                             <div class="col-lg-12">
                                 <div class="product-sorting-section" style="padding-bottom: unset; margin-bottom: unset">
                                     <div class="result">
-                                        <p>Menampilkan {{ $products->firstItem() }}–{{ $products->lastItem() }} dari
+                                        <p>Menampilkan {{ $products->firstItem() }}{{ $products->lastItem() }} dari
                                             {{ $products->total() }} hasil</p>
                                     </div>
                                 </div>
@@ -163,11 +163,14 @@
                                                             </span>
                                                         </button>
                                                     </form>
-                                                    <a href="/user/checkout" class="favourite cart-item">
-                                                        <span>
-                                                            <i class="fas fa-shopping-cart"></i>
-                                                        </span>
-                                                    </a>
+                                                    <form action="{{ route('storecart', $item->id) }}" method="POST">
+                                                        @csrf
+                                                        <button class="favourite cart-item">
+                                                            <span>
+                                                                <i class="fas fa-shopping-cart" style="font-size: 18px;"></i>
+                                                            </span>
+                                                        </button>
+                                                    </form>
                                                     <a href="#" class="compaire cart-item">
                                                         <span>
                                                             <i class="fas fa-share"></i>
