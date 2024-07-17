@@ -30,14 +30,16 @@
             <div class="product-detail-section">
                 <h5 class="mb-4">Data Transaksi
                     <div class="filter float-end">
-                        <form action="{{route('seller.transaction.detail.update', $code)}}" method="POST">
+                        <form action="{{ route('seller.transaction.detail.update', $code) }}" method="POST">
                             @csrf
                             <select class="form-select form-select-lg" aria-label="Default select example"
-                                style="width: 200px;border-color: #1c3879" name="status"
-                                onchange="this.form.submit()">
-                                <option value="dikemas" {{ $status->delivery_status == 'dikemas' ? 'selected' : '' }}>Dikemas</option>
-                                <option value="diantar" {{ $status->delivery_status == 'diantar' ? 'selected' : '' }}>Diantar</option>
-                                <option value="diterima" {{ $status->delivery_status == 'diterima' ? 'selected' : '' }}>Diterima</option>
+                                style="width: 200px;border-color: #1c3879" name="status" onchange="this.form.submit()">
+                                <option value="dikemas" {{ $status->delivery_status == 'dikemas' ? 'selected' : '' }}>
+                                    Dikemas</option>
+                                <option value="diantar" {{ $status->delivery_status == 'diantar' ? 'selected' : '' }}>
+                                    Diantar</option>
+                                <option value="diterima" {{ $status->delivery_status == 'diterima' ? 'selected' : '' }}>
+                                    Diterima</option>
                             </select>
                         </form>
                     </div>
@@ -80,56 +82,109 @@
                                 </td>
                             </tr>
                             @foreach ($transactions as $item)
-                                <tr class="table-row ticket-row">
-                                    <td class="table-wrapper">
-                                        <div class="table-wrapper-center">
-                                            <h5 class="heading">
-                                                {{ $item->created_at->format('d F Y') }}</h5>
-                                        </div>
-                                    </td>
-                                    <td class="table-wrapper">
-                                        <div class="table-wrapper-center">
-                                            <h5 class="heading">{{ $item->user->username }}</h5>
-                                        </div>
-                                    </td>
-                                    <td class="table-wrapper">
-                                        <div class="table-wrapper-center">
-                                            <h5 class="heading">{{ $item->user->email }}</h5>
-                                        </div>
-                                    </td>
-                                    <td class="table-wrapper wrapper-product">
-                                        <div class="wrapper">
-                                            <div class="wrapper-img">
-                                                <img src="{{ asset('storage/' . $item->Product->thumbnail) }}"
-                                                    alt="img" class="object-fit-cover" style="border-radius: 0%">
+                                @if ($item->product != null)
+                                    <tr class="table-row ticket-row">
+                                        <td class="table-wrapper">
+                                            <div class="table-wrapper-center">
+                                                <h5 class="heading">
+                                                    {{ $item->created_at->format('d F Y') }}</h5>
                                             </div>
-                                            <div class="wrapper-content">
-                                                <h5 class="heading">{{ $item->Product->title }}</h5>
+                                        </td>
+                                        <td class="table-wrapper">
+                                            <div class="table-wrapper-center">
+                                                <h5 class="heading">{{ $item->transaction_order->user->username }}</h5>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="table-wrapper">
-                                        <div class="table-wrapper-center">
-                                            <h5 class="heading">Rp.
-                                                {{ number_format($item->Product->price, null, null, '.') }}</h5>
-                                        </div>
-                                    </td>
-                                    <td class="table-wrapper">
-                                        <div class="table-wrapper-center">
-                                            @if ($item->status == 'UNPAID')
-                                                <h5 class="heading text-danger">Belum Bayar</h5>
-                                            @elseif ($item->status == 'PAID')
-                                                <h5 class="heading text-success">Pembayaran Berhasil</h5>
-                                            @elseif ($item->status == 'EXPIRED')
-                                                <h5 class="heading text-danger">Pembayaran Kadaluarsa</h5>
-                                            @elseif ($item->status == 'REFUND')
-                                                <h5 class="heading text-warning">Produk Dikembalikan</h5>
-                                            @elseif ($item->status == 'FAILED')
-                                                <h5 class="heading text-danger">Pembayaran Gagal</h5>
-                                            @endif
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td class="table-wrapper">
+                                            <div class="table-wrapper-center">
+                                                <h5 class="heading">{{ $item->transaction_order->user->email }}</h5>
+                                            </div>
+                                        </td>
+                                        <td class="table-wrapper wrapper-product">
+                                            <div class="wrapper">
+                                                <div class="wrapper-img">
+                                                    <img src="{{ asset('storage/' . $item->product->thumbnail) }}"
+                                                        alt="img" class="object-fit-cover" style="border-radius: 0%">
+                                                </div>
+                                                <div class="wrapper-content">
+                                                    <h5 class="heading">{{ $item->product->title }}</h5>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="table-wrapper">
+                                            <div class="table-wrapper-center">
+                                                <h5 class="heading">Rp.
+                                                    {{ number_format($item->product->price, null, null, '.') }}</h5>
+                                            </div>
+                                        </td>
+                                        <td class="table-wrapper">
+                                            <div class="table-wrapper-center">
+                                                @if ($item->transaction_order->status == 'UNPAID')
+                                                    <h5 class="heading text-danger">Belum Bayar</h5>
+                                                @elseif ($item->transaction_order->status == 'PAID')
+                                                    <h5 class="heading text-success">Pembayaran Berhasil</h5>
+                                                @elseif ($item->transaction_order->status == 'EXPIRED')
+                                                    <h5 class="heading text-danger">Pembayaran Kadaluarsa</h5>
+                                                @elseif ($item->transaction_order->status == 'REFUND')
+                                                    <h5 class="heading text-warning">Produk Dikembalikan</h5>
+                                                @elseif ($item->transaction_order->status == 'FAILED')
+                                                    <h5 class="heading text-danger">Pembayaran Gagal</h5>
+                                                @endif
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @elseif ($item->product_auction != null)
+                                    <tr class="table-row ticket-row">
+                                        <td class="table-wrapper">
+                                            <div class="table-wrapper-center">
+                                                <h5 class="heading">
+                                                    {{ $item->created_at->format('d F Y') }}</h5>
+                                            </div>
+                                        </td>
+                                        <td class="table-wrapper">
+                                            <div class="table-wrapper-center">
+                                                <h5 class="heading">{{ $item->transaction_order->user->username }}</h5>
+                                            </div>
+                                        </td>
+                                        <td class="table-wrapper">
+                                            <div class="table-wrapper-center">
+                                                <h5 class="heading">{{ $item->transaction_order->user->email }}</h5>
+                                            </div>
+                                        </td>
+                                        <td class="table-wrapper wrapper-product">
+                                            <div class="wrapper">
+                                                <div class="wrapper-img">
+                                                    <img src="{{ asset('storage/' . $item->product_auction->thumbnail) }}"
+                                                        alt="img" class="object-fit-cover" style="border-radius: 0%">
+                                                </div>
+                                                <div class="wrapper-content">
+                                                    <h5 class="heading">{{ $item->product_auction->title }}</h5>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="table-wrapper">
+                                            <div class="table-wrapper-center">
+                                                <h5 class="heading">Rp.
+                                                    {{ number_format($item->product_auction->price, null, null, '.') }}</h5>
+                                            </div>
+                                        </td>
+                                        <td class="table-wrapper">
+                                            <div class="table-wrapper-center">
+                                                @if ($item->transaction_order->status == 'UNPAID')
+                                                    <h5 class="heading text-danger">Belum Bayar</h5>
+                                                @elseif ($item->transaction_order->status == 'PAID')
+                                                    <h5 class="heading text-success">Pembayaran Berhasil</h5>
+                                                @elseif ($item->transaction_order->status == 'EXPIRED')
+                                                    <h5 class="heading text-danger">Pembayaran Kadaluarsa</h5>
+                                                @elseif ($item->transaction_order->status == 'REFUND')
+                                                    <h5 class="heading text-warning">Produk Dikembalikan</h5>
+                                                @elseif ($item->transaction_order->status == 'FAILED')
+                                                    <h5 class="heading text-danger">Pembayaran Gagal</h5>
+                                                @endif
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                             <tr class="table-row ticket-row">
                                 <td class="table-wrapper">
@@ -150,16 +205,8 @@
 
                                 <td class="table-wrapper">
                                     <div class="table-wrapper-center">
-                                        @php
-                                            $total = 0;
-                                        @endphp
-                                        @foreach ($transactions as $item)
-                                            @php
-                                                $total += $item->Product->price;
-                                            @endphp
-                                        @endforeach
                                         <h5 class="heading" style="color: red;">Rp.
-                                            {{ number_format($total, null, null, '.') }}</h5>
+                                            {{ number_format($transactions->sum('product.price'), null, null, '.') }}</h5>
                                     </div>
                                 </td>
                                 <td class="table-wrapper">

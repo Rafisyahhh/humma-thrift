@@ -24,22 +24,44 @@
                                     <div class="subtotal product-total">
                                         <ul class="product-list">
                                             @foreach ($order as $item)
-                                                <li>
-                                                    <div class="d-flex gap-3">
-                                                        <img src="{{ asset("storage/".$item->product->thumbnail) }}" width="60" />
-                                                        <div class="mt-1">
-                                                            <a href="{{ route('store.product.detail', ['store' => $item->product->userStore->username, 'product' => $item->product->slug]) }}"
-                                                                class="wrapper-heading" style="font-size: 20px">
-                                                                {{ $item->product->title }}</a>
-                                                            <p class="paragraph">{{ $item->product->brand->title }}</p>
+                                                @if ($item->product !== null)
+                                                    <li>
+                                                        <div class="d-flex gap-3">
+                                                            <img src="{{ asset('storage/' . $item->product->thumbnail) }}"
+                                                                width="60" />
+                                                            <div class="mt-1">
+                                                                <a href="{{ route('store.product.detail', ['store' => $item->product->userStore->username, 'product' => $item->product->slug]) }}"
+                                                                    class="wrapper-heading" style="font-size: 20px">
+                                                                    {{ $item->product->title }}</a>
+                                                                <p class="paragraph">{{ $item->product->brand->title }}</p>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="price mt-3">
-                                                        <h5 class="wrapper-heading" style="font-size: 20px">
-                                                            Rp{{ number_format($item->product->price, null, null, '.') }}
-                                                        </h5>
-                                                    </div>
-                                                </li>
+                                                        <div class="price mt-3">
+                                                            <h5 class="wrapper-heading" style="font-size: 20px">
+                                                                Rp{{ number_format($item->product->price, null, null, '.') }}
+                                                            </h5>
+                                                        </div>
+                                                    </li>
+                                                @elseif ($item->product_auction !== null)
+                                                    <li>
+                                                        <div class="d-flex gap-3">
+                                                            <img src="{{ asset('storage/' . $item->product_auction->thumbnail) }}"
+                                                                width="60" />
+                                                            <div class="mt-1">
+                                                                <a href="{{ route('store.product.detail', ['store' => $item->product_auction->userStore->username, 'product' => $item->product_auction->slug]) }}"
+                                                                    class="wrapper-heading" style="font-size: 20px">
+                                                                    {{ $item->product_auction->title }}</a>
+                                                                <p class="paragraph">
+                                                                    {{ $item->product_auction->brand->title }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="price mt-3">
+                                                            <h5 class="wrapper-heading" style="font-size: 20px">
+                                                                Rp{{ number_format($item->product_auction->price, null, null, '.') }}
+                                                            </h5>
+                                                        </div>
+                                                    </li>
+                                                @endif
                                             @endforeach
                                         </ul>
                                     </div>
@@ -66,7 +88,11 @@
                                             <div class="col-md-6 ">
                                                 @php
                                                     $firstOrder = $transaction_order->order->first();
-                                                    $userstore = $firstOrder->product->userstore;
+                                                    if ($firstOrder->product !== null) {
+                                                        $userstore = $firstOrder->product->userstore;
+                                                    } elseif ($firstOrder->product_auction !== null) {
+                                                        $userstore = $firstOrder->product_auction->userstore;
+                                                    }
                                                 @endphp
                                                 <p class="fw-bold" style="font-size: 17px; margin: 0"
                                                     id="selected-username">
@@ -79,7 +105,8 @@
                                             <div class="col-md-6">
                                                 <p class="fw-bold" style="font-size: 17px; margin: 0"
                                                     id="selected-username">
-                                                    {{ $transaction_order->user->name }} | {{ $transaction_order->user->phone }}
+                                                    {{ $transaction_order->user->name }} |
+                                                    {{ $transaction_order->user->phone }}
                                                 </p>
                                                 <p style="font-size: 17px;" id="selected-address">
                                                     {{ $transaction_order->UserAddress->address }}</p>

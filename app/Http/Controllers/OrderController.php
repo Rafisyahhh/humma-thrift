@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\UserAddress;
 use App\Models\cart;
 use App\Models\Favorite;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreOrderRequest;
@@ -21,7 +22,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $transaction = TransactionOrder::latest()->get();
+        $transaction = Order::latest()->get();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
             ->whereNotNull('product_id')
@@ -39,13 +40,13 @@ class OrderController extends Controller
     public function indexDetail($transaction)
     {
         $code = $transaction;
-        $status = TransactionOrder::where('transaction_id', $transaction)->first();
-        $transactions = TransactionOrder::where('transaction_id', $transaction)->get();
+        $status = TransactionOrder::where('id', $transaction)->first();
+        $transactions = Order::where('transaction_order_id', $transaction)->get();
         return view('seller.detailtransaction', compact('transactions', 'code', 'status'));
     }
     public function updatedetail(Request $request, $transaction)
     {
-        $transactions = TransactionOrder::where('transaction_id', $transaction)
+        $transactions = TransactionOrder::where('id', $transaction)
             ->update([
                 'delivery_status' => $request->status
             ]);
@@ -53,7 +54,7 @@ class OrderController extends Controller
     }
     public function updateOrder(Request $request, $transaction)
     {
-        $transactions = TransactionOrder::where('transaction_id', $transaction)
+        $transactions = TransactionOrder::where('id', $transaction)
             ->update([
                 'delivery_status' => $request->status
             ]);
