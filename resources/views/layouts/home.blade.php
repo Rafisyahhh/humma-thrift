@@ -105,12 +105,10 @@
           confirmButtonText: "Ya, Hapus"
         }).then((result) => {
           if (result.isConfirmed) {
-            callback.confirm && callback.confirm();
-          } else {
-            callback.cancel && callback.cancel();
-            return false;
-          }
+            callback?.();
+          } else {}
         });
+        return false;
       }
     </script>
 
