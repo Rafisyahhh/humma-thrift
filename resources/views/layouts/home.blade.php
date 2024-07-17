@@ -106,10 +106,9 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     callback?.();
-                } else {
-                    return false;
                 }
             });
+            return false;
         }
     </script>
 
