@@ -712,8 +712,10 @@
       }
       if (n == x.length - 1) {
         document.getElementById("nextBtn").innerHTML = "Bayar Sekarang";
+        $('.address-placeholder').hide();
       } else {
         document.getElementById("nextBtn").innerHTML = "Lanjutkan";
+        $('.address-placeholder').show();
       }
       // ... and run a function that displays the correct step indicator:
       fixStepIndicator(n);
