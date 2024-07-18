@@ -63,6 +63,8 @@
       rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.3.2/dist/flasher.min.js"></script>
 
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+
     <style>
       .header-right-dropdown>div {
         right: 0 !important;
@@ -104,8 +106,11 @@
     <!-- Vendors JS -->
     <script src="{{ asset('additional-assets/sweetalert2-11.12.0/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('additional-assets/toastr-2.1.4/toastr.min.js') }}"></script>
+    <script src="{{ asset('/path/to/isotope.pkgd.min.js') }}"></script>
+
 
     @stack('js')
+
 
 
     <script src="{{ asset('template-assets/front/assets/js/bootstrap_5.3.2.bundle.min.js') }}"></script>

@@ -146,6 +146,39 @@
         .custom-shape-divider-bottom-1720697255 .shape-fill {
             fill: #EEEEEE;
         }
+
+        .grid {
+            justify-content: center;
+        }
+
+        .grid:after {
+        content: '';
+        display: block;
+        clear: both;
+        }
+
+        .grid-sizer,
+        .grid-item {
+        width: 14.285714285714286%;
+        }
+
+        .grid-item {
+        flex-shrink:0;
+        aspect-ratio: 1 / 1;
+        float:left;
+        border: 2px solid #ffffff ;
+        /* margin: 0 5px 5px; */
+        background-color: #ffffff73;
+        margin: 0 5px 10px; /* Tambahkan margin jika perlu */
+        
+        }
+
+        .grid-item img {
+            border-radius: 5px;
+            display: block;
+            width: 100%;
+            max-width: 100%;
+        }
     </style>
 @endpush
 
@@ -186,7 +219,26 @@
                 <h5>KATEGORI PAKAIAN</h5>
                 <a href="product-sidebar.html" class="view">Lihat Semua</a>
             </div>
-            <div class="category-section">
+            <ul class="nav nav-underline mb-3"
+                style="display:flex; justify-content: center;">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+                        type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">All</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="lelang-tab" data-bs-toggle="tab" data-bs-target="#lelang-tab-pane"
+                        type="button" role="tab" aria-controls="lelang-tab-pane" aria-selected="false">Atasan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="ulasan-tab" data-bs-toggle="tab" data-bs-target="#ulasan-tab-pane"
+                        type="button" role="tab" aria-controls="ulasan-tab-pane" aria-selected="false">Bawahan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="ulasan-tab" data-bs-toggle="tab" data-bs-target="#ulasan-tab-pane"
+                        type="button" role="tab" aria-controls="ulasan-tab-pane" aria-selected="false">Longdress</a>
+                </li>
+            </ul>
+            {{-- <div class="category-section">
                 @foreach ($categories as $kategori)
                     <div class="product-wrapper p-0" data-aos="fade-right" data-aos-duration="100">
                         <div class="wrapper-img p-0">
@@ -198,7 +250,17 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
+            </div> --}}
+
+            <div class="grid mt-4 ">
+                <div class="grid-sizer"></div>
+                @foreach ($categories as $kategori)
+                  <div class="grid-item">
+                    <img src="{{ asset("storage/{$kategori->icon}") }}"
+                    style="width:125px;hieght:125px;border-radius:20px;" class="h-100 w-100">
+                  </div>
+                @endforeach
+              </div>
         </div>
     </section>
 
@@ -573,4 +635,16 @@
             if (!["A", "I"].includes(tagName)) window.location.href = $(this).data("route");
         });
     </script>
+    <script>
+        var $grid = $('.grid').isotope({
+          itemSelector: '.grid-item',
+          percentPosition: true,
+          masonry: {
+            columnWidth: '.grid-sizer'
+          }
+        });
+        $grid.imagesLoaded().progress(function() {
+          $grid.isotope('layout');
+        });
+      </script>
 @endpush
