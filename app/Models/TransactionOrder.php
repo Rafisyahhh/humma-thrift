@@ -9,22 +9,22 @@ class TransactionOrder extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    public function UserAddress() {
-        return $this->belongsTo( UserAddress::class);
-    }
-    public function Product()
+    public function UserAddress()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(UserAddress::class);
     }
-    public function user() {
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
-    public function userstore() {
+    public function userstore()
+    {
         return $this->belongsTo(UserStore::class);
     }
 
-    public function order() {
-        return $this->hasMany( Order::class);
+    public function order()
+    {
+        return $this->hasMany(Order::class);
     }
-
 }

@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Models\TransactionOrder;
 use App\Models\Product;
+use App\Models\ProductAuction;
+use App\Models\Order;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Model;
 
 class CallbackController extends Controller
 {
@@ -49,12 +52,11 @@ class CallbackController extends Controller
             $transaction = TransactionOrder::where('reference_id', $tripayReference)
                 ->where('status', '=', 'UNPAID')
                 ->first();
-            $product = Product::where('id', $transaction->product_id)->first();
 
             if (!$transaction) {
                 return Response::json([
                     'success' => false,
-                    'message' => 'No invoice found or already paid: ' . $transactionId,
+                    'message' => 'No invoice found or already paid',
                 ]);
             }
 
@@ -64,9 +66,12 @@ class CallbackController extends Controller
                         'status' => 'PAID',
                         'delivery_status' => 'dikemas'
                     ]);
-                    $product->update([
-                        'status' => 'sold'
-                    ]);
+
+
+                        $transaction->order()->get()->map(function(?Model $query) {
+                            $query->product()?->update(['status' => 'sold']);
+                            $query->product_auction()?->update(['status' => 'sold']);
+                        });
                     break;
 
                 case 'EXPIRED':
