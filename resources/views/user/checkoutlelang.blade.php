@@ -173,7 +173,7 @@
     }
 </style>
 @endpush @section('content')
-<form id="coForm" action="{{ route('user.transaction.store') }}" method="POST">
+<form id="coForm" action="{{ route('user.transaction.store.lelang') }}" method="POST">
     @csrf
     <section class="blog about-blog pb-4 pt-0">
         <div class="container">
@@ -182,7 +182,7 @@
             </div>
         </div>
     </section>
-    @if ($product)
+    @if ($product_auction)
         <div class="checkout-wrapper">
             <div class="account-section billing-section" style="margin-top: 2.5rem">
                 <h5 class="wrapper-heading">Daftar Order</h5>
@@ -190,7 +190,7 @@
                     <hr />
                     <div class="subtotal product-total">
                         <ul class="product-list">
-                            @foreach ($product as $item)
+                            @foreach ($product_auction as $item)
                                 <li>
                                     <div class="d-flex gap-3">
                                         <img src="{{ asset("storage/$item->thumbnail") }}" class="mb-4"
@@ -289,7 +289,7 @@
                                                 <p class="fs-5">
                                                     {{-- @dd($product->sum('price')) --}}
                                                     @if ($item->flat == null)
-                                                        Rp{{ number_format($product->sum('price') * ($item->percent / 100), null, null, '.') }}
+                                                        Rp{{ number_format($product_auction->sum('price') * ($item->percent / 100), null, null, '.') }}
                                                     @else
                                                         Rp{{ number_format($item->flat, null, null, '.') }}
                                                     @endif
@@ -324,14 +324,14 @@
                 <div class="order-summary mt-4">
                     <div class="subtotal product-total">
                         <div class="row">
-                            @if ($product)
+                            @if ($product_auction)
                                 <div class="col-md-6">
                                     <p class="fw-bold" style="font-size: 17px; margin: 0">
-                                        <b style="font-size: 17px">{{ $product->first()->userstore->name }}</b> |
-                                        {{ $product->first()->userstore->user->phone }}
+                                        <b style="font-size: 17px">{{ $product_auction->first()->userstore->name }}</b> |
+                                        {{ $product_auction->first()->userstore->user->phone }}
                                     </p>
                                     <p style="font-size: 17px; margin: 0">
-                                        {{ $product->first()->userstore->address }}</p>
+                                        {{ $product_auction->first()->userstore->address }}</p>
                                 </div>
                             @endif
                             <div class="col-md-6">
@@ -363,7 +363,7 @@
                     <div class="subtotal product-total">
                         <h5 class="wrapper-heading" style="font-size: 17px;">Total Harga</h5>
                         <h5 class="wrapper-heading" style="font-size: 17px;">
-                            {{ number_format($product->sum('price'), null, null, '.') }}
+                            {{ number_format($product_auction->sum('price'), null, null, '.') }}
                         </h5>
                     </div>
                     <div class="subtotal product-total">
@@ -558,7 +558,7 @@
         // Event listener untuk setiap metode pembayaran
         paymentMethods.forEach(method => {
             method.addEventListener('change', function() {
-                const productPrice = {{ $product->sum('price') }};
+                const productPrice = {{ $product_auction->sum('price') }};
 
                 // Dapatkan elemen hidden input yang berisi biaya admin terkait
                 const adminFeeFlatInput = this.nextElementSibling;
@@ -588,7 +588,7 @@
         });
 
         // Kalkulasi total awal tanpa biaya admin (asumsi default)
-        calculateTotal({{ $product->sum('price') }}, 0, 0);
+        calculateTotal({{ $product_auction->sum('price') }}, 0, 0);
     });
 </script>
 <script>

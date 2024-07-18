@@ -93,7 +93,9 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
 
         Route::controller(CheckoutController::class)->prefix('/checkout')->group(function() {
             Route::get('/', 'index')->name('checkout');
+            Route::get('/lelang', 'indexCoLelang')->name('checkout.lelang');
             Route::post('process', 'processCheckout')->name('checkout.process');
+            Route::post('process/auction', 'processCheckoutAuction')->name('checkout.process.auction');
         });
 
         Route::post('address/{id}', [UserAddressController::class, 'store'])->name('address.store');
@@ -128,6 +130,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
         # Payment Routes
         Route::prefix('payment')->group(function () {
             Route::post('transaction/store', [TransactionController::class, 'store'])->name('transaction.store');
+            Route::post('transaction/store/lelang', [TransactionController::class, 'storeLelang'])->name('transaction.store.lelang');
             Route::get('transaction/{reference}', [TransactionController::class, 'show'])->name('transaction.show');
         });
     });

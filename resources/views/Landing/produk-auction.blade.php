@@ -377,7 +377,7 @@
 
       function loadPage(page) {
         $.ajax({
-            url: '?page=' + page + '{{ isset($search) ? "&search=$search" : '' }}',
+            url: '?{{ isset($search) ? "search=$search" : '' }}&page=' + page,
             type: 'get',
             beforeSend: function() {
               $('.loader').show();

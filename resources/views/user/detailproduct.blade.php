@@ -273,9 +273,9 @@
                                         </form>
                                     </div>
                                     <div class="col" style="--bs-gutter-y: 0">
-                                        <form action="{{ route('user.checkout') }}" method="POST">
+                                        <form action="{{ route('user.checkout.process') }}" method="POST">
                                             @csrf
-                                            <input type="hidden" value="{{ $isProduct->id }}" name="product_id">
+                                            <input type="hidden" value="{{ $isProduct->id }}" name="product_id[]">
                                             <button type="submit" class="shop-btn"
                                                 style="display: flex; align-items: center; gap: 10px; z-index:1">
                                                 <span style="width: 20rem; align-items: center; justify-content: center;">
@@ -384,11 +384,11 @@
                                         <div>
                                             @if ($user)
                                                 @if ($existingAuction && $auctions->status === 1)
-                                                    <form action="{{ route('user.checkout') }}" method="post">
+                                                    <form action="{{ route('user.checkout.process.auction') }}" method="post">
                                                         @csrf
                                                         <div style="bottom:0;">
                                                             <input type="hidden" value="{{ $isProductAuction->id }}"
-                                                                name="product_id">
+                                                                name="product_auction_id[]">
                                                             <button type="submit" class="shop-btn">Beli sekarang</button>
                                                         </div>
                                                     </form>

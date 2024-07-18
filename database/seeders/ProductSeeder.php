@@ -126,12 +126,20 @@ class ProductSeeder extends Seeder {
                     "brand_id" => $data["brand_id"],
                     "title" => $data["title"],
                     "thumbnail" => $destinationPath,
-                    "price" => random_int(10_000, 1_500_000),
+                    "price" => $this->random_int_with_fixed_suffix(10_000, 1_500_000),
                     "size" => "XL",
                     "color" => $data["warna"],
                     "description" => "Loading...",
                 ]);
             }
         }
+    }
+    function random_int_with_fixed_suffix($min, $max, $suffix = 0) {
+        $min_adjusted = (int) ($min / 1000);
+        $max_adjusted = (int) ($max / 1000);
+
+        $random_number = random_int($min_adjusted, $max_adjusted);
+
+        return $random_number * 1000 + $suffix;
     }
 }

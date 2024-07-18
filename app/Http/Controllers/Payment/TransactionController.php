@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\TransactionOrder;
 use App\Models\UserAddress;
 use App\Notifications\NotificationUserCheckout;
+use App\Notifications\NotificationUserAuctionCheckout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -57,6 +58,52 @@ class TransactionController extends Controller
 
             # Session destroying
             cart::whereIn('id', $products)->delete();
+
+            # Redirect ke halaman transaksi
+            return redirect()->route('user.transaction.show', $transaction['reference']);
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage(), $th->getTrace());
+            return back()->with('error', $th->getMessage());
+        } catch (\Exception $e) {
+            Log::error($e->getMessage(), $e->getTrace());
+            return back()->with('error', $e->getMessage());
+        }
+    }
+    public function storeLelang(Request $request)
+    {
+        try {
+            $product_auction = session('checkouted_product_auction');
+            $method = $request->method;
+            $address = UserAddress::find($request->addressOption);
+            $product_auction = Product::whereIn('id', $product_auction)->get();
+            $tripay = new TripayController();
+            $transaction = $tripay->requestTransactionLelang($method, $product_auction);
+
+            if (isset($transaction->error)) {
+                return back()->withErrors(['error' => $transaction->error]);
+            }
+
+            # Buat Data Transaksi
+            $transactions = TransactionOrder::create([
+                'user_id' => auth()->id(),
+                'user_address_id' => $address->id,
+                'transaction_id' => $transaction['merchant_ref'],
+                'reference_id' => $transaction['reference'],
+                'total' => $transaction['amount'],
+                'delivery_status' => 'selesaikan pesanan',
+                'status' => $transaction['status'],
+            ]);
+
+            # Buat Data Daftar Order
+            $orders = $product_auction->map(function ($item) use ($transactions) {
+                return Order::create([
+                    'product_auction_id' => $item->id,
+                    'transaction_order_id' => $transactions->id
+                ]);
+            });
+
+            # Kirim Notifikasi
+            Auth::user()->notify(new NotificationUserAuctionCheckout($transactions, $orders));
 
             # Redirect ke halaman transaksi
             return redirect()->route('user.transaction.show', $transaction['reference']);

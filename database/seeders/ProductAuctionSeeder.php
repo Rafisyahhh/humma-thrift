@@ -118,7 +118,7 @@ class ProductAuctionSeeder extends Seeder {
         foreach ($listData as $data) {
             $sourcePath = $publicPath . $data["thumbnail"];
             $destinationPath = $uploadPath . $data["thumbnail"];
-            $priceStart = random_int(1_000, 1_000_000);
+            $priceStart = $this->random_int_with_fixed_suffix(5_000, 1_000_000);
 
             if (Storage::disk('public')->put($destinationPath, file_get_contents($sourcePath))) {
                 ProductAuction::create([
@@ -128,12 +128,20 @@ class ProductAuctionSeeder extends Seeder {
                     "title" => $data["title"],
                     "thumbnail" => $destinationPath,
                     "bid_price_start" => $priceStart,
-                    "bid_price_end" => random_int($priceStart, $priceStart + 500_000),
+                    "bid_price_end" => $this->random_int_with_fixed_suffix($priceStart, $priceStart + 500_000),
                     "size" => "XL",
                     "color" => $data["warna"],
                     "description" => "Loading...",
                 ]);
             }
         }
+    }
+    function random_int_with_fixed_suffix($min, $max, $suffix = 0) {
+        $min_adjusted = (int) ($min / 1000);
+        $max_adjusted = (int) ($max / 1000);
+
+        $random_number = random_int($min_adjusted, $max_adjusted);
+
+        return $random_number * 1000 + $suffix;
     }
 }
