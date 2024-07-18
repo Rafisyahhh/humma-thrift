@@ -19,7 +19,9 @@
     </head>
 @endsection
 @section('content')
-
+{{-- @php
+use App\Models\Order;
+@endphp --}}
     <section class="product-description">
         <div class="container">
             <div class="product-detail-section">
@@ -47,61 +49,70 @@
                                 <div class="profile-section">
                                     <div class="row g-5">
                                         @foreach ($transaction as $item)
-                                                <div class="col-lg-4 col-sm-6">
-                                                    <div class="product-wrapper" style="border: 1px solid; height: 17rem;">
-                                                        <div class="wrapper-content"
-                                                            style="position: relative; height:13rem;">
-                                                            <p class="paragraph mt-4 ms-4 fw-bold" style="font-size: 15px;">
-                                                                {{ $item->user->name }}</p>
-                                                            <p class="paragraph mt-4 ms-4 p-0" style="font-size: 15px;">
-                                                                Jumlah
-                                                                produk : {{ $item->order->count() }}
-                                                            </p>
+                                            <div class="col-lg-4 col-sm-6">
+                                                <div class="product-wrapper" style="border: 1px solid; height: 39rem;">
+                                                    <div class="wrapper-content" style="position: relative; height:13rem;">
 
-                                                            @php
-                                                                $statusClasses = [
-                                                                    'diterima' => 'badge  text-bg-primary text-light',
-                                                                    'selesai' => 'badge  text-bg-success text-light',
-                                                                    'dikemas' => 'badge  text-bg-warning text-light',
-                                                                    'diantar' => 'badge  text-bg-warning text-light',
-                                                                    'selesaikan pesanan' =>
-                                                                        'badge  text-bg-danger text-light',
-                                                                ];
-                                                            @endphp
+                                                        {{-- @if ($item->product) --}}
+                                                        @foreach ($orders[$item->id] as $ordr)
 
-                                                            <p class="paragraph ms-4 p-0" style="font-size: 15px;">Total
-                                                                Harga :
-                                                                {{ 'Rp. ' . number_format($item->total, 0, ',', '.') }}
-                                                            </p>
+                                                             @if ($ordr->product)
+                                                             <img src="{{ asset('storage/' . $ordr->product->thumbnail) }}"
+                                                             alt="img" class="object-fit-cover" style="border-radius: 0%; height:20rem; width:100%;">
+                                                             <p class="paragraph mt-4 ms-4 fw-bold">{{ $ordr->product->title }}</p>
+                                                        @endif
+                                                        @endforeach
 
-                                                            @if (isset($statusClasses[$item->delivery_status]))
-                                                                <div class="ps-3">
-                                                                    <div class="{{ $statusClasses[$item->delivery_status] }}"
-                                                                        style="font-size: 15px">
-                                                                        {{ $item->delivery_status }}
-                                                                    </div>
+
+                                                        <p class="paragraph mt-4 ms-4 fw-bold" style="font-size: 15px;">
+                                                            {{ $item->user->name }}</p>
+                                                        {{-- <p class="paragraph mt-4 ms-4 p-0" style="font-size: 15px;">
+                                                            Jumlah
+                                                            produk : {{ $item->order->count() }}
+                                                        </p> --}}
+
+                                                        @php
+                                                            $statusClasses = [
+                                                                'diterima' => 'badge  text-bg-primary text-light',
+                                                                'selesai' => 'badge  text-bg-success text-light',
+                                                                'dikemas' => 'badge  text-bg-warning text-light',
+                                                                'diantar' => 'badge  text-bg-warning text-light',
+                                                                'selesaikan pesanan' =>
+                                                                    'badge  text-bg-danger text-light',
+                                                            ];
+                                                        @endphp
+
+                                                        <p class="paragraph ms-4 p-0 mb-4" style="font-size: 15px;">
+                                                            {{ 'Rp. ' . number_format($item->total, 0, ',', '.') }}
+                                                        </p>
+
+                                                        @if (isset($statusClasses[$item->delivery_status]))
+                                                            <div class="ps-3">
+                                                                <div class="{{ $statusClasses[$item->delivery_status] }}"
+                                                                    style="font-size: 15px">
+                                                                    {{ $item->delivery_status }}
                                                                 </div>
-                                                            @endif
+                                                            </div>
+                                                        @endif
 
-                                                            <a
-                                                                href="{{ route('seller.transaction.detail', $item->id) }}">
-                                                                <span data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                    title="Detail Transaksi"
-                                                                    style="position: absolute; bottom: 10px; right: 10px; display: flex; justify-content: right; align-items: right; margin-bottom: 10px; border-radius: 50%; border:1px solid;">
-                                                                    <svg style="display: flex; justify-content: center; align-items:center;"
-                                                                        class="mt-1 me-1" xmlns="http://www.w3.org/2000/svg"
-                                                                        width="32" height="32" viewBox="0 0 24 24">
-                                                                        <path fill="currentColor"
-                                                                            d="m13.692 17.308l-.707-.72l4.088-4.088H5v-1h12.073l-4.088-4.088l.707-.72L19 12z" />
-                                                                    </svg>
-                                                                </span></a>
-                                                            <p class="bottom-left mt-4 ms-2"
-                                                                style="position: absolute; left: 10px; display: flex; justify-content: left; align-items: left;">
-                                                                {{ $item->created_at->format('d F Y') }}
-                                                            </p>
-                                                        </div>
+                                                        <a href="{{ route('seller.transaction.detail', $item->id) }}">
+                                                            <span data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                title="Detail Transaksi"
+                                                                style="position: absolute;  right: 10px; display: flex; justify-content: right; align-items: right; margin-bottom: 10px; border-radius: 50%; border:1px solid;">
+                                                                <svg style="display: flex; justify-content: center; align-items:center;"
+                                                                    class="mt-1 me-1" xmlns="http://www.w3.org/2000/svg"
+                                                                    width="32" height="32" viewBox="0 0 24 24">
+                                                                    <path fill="currentColor"
+                                                                        d="m13.692 17.308l-.707-.72l4.088-4.088H5v-1h12.073l-4.088-4.088l.707-.72L19 12z" />
+                                                                </svg>
+                                                            </span></a>
+                                                        <p class="bottom-left mt-4 ms-2"
+                                                            style="position: absolute; left: 10px; display: flex; justify-content: left; align-items: left;">
+                                                            {{ $item->created_at->format('d F Y') }}
+                                                        </p>
                                                     </div>
                                                 </div>
+                                            </div>
                                         @endforeach
                                     </div>
                                 </div>

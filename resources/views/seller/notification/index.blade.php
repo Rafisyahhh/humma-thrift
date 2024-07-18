@@ -20,15 +20,10 @@
         text-decoration: underline;
     }
     .card-notifications {
-        width: 100%;
-        max-width: 90rem;
+        max-width: 100%;
         height: auto;
-        overflow-y: auto; /* Enable vertical scrolling */
     }
-    .card-notifications .list-group {
-        max-height: 100%; /* Ensure the list-group takes full height of card */
-        overflow-y: auto; /* Enable vertical scrolling for the list-group */
-    }
+
 </style>
 @endsection
 
@@ -44,9 +39,9 @@
                     <span style="color: #d40000;">Baca Semua</span>
                 </a>
             </div>
-            <div class="row g-0" style="height:40rem;">
-                <div class="col-md-12 border-end">
-                    <div class="list-group list-group-flush" style="height:40rem;">
+            <div class="row g-0" style="height:50rem;">
+                <div class="col-md-12 border-end" style="overflow-y: auto;">
+                    <div class="list-group list-group-flush" >
                         @forelse ($notifications as $notification)
                             @php
                                 $data = $notification->data;
