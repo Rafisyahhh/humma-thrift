@@ -111,13 +111,13 @@
         });
         return false;
       }
-      $(document).on('click', 'button, [onclick], a, :radio, :checkbox, [tabindex]', function(e) {
-        let $this = $(this);
-        $this.prop('disabled', true);
-        setTimeout(function() {
-          $this.prop('disabled', false);
-        }, 250);
-      });
+      //   $(document).on('click', 'button, [onclick], a, :radio, :checkbox, [tabindex]', function(e) {
+      //     let $this = $(this);
+      //     $this.prop('disabled', true);
+      //     setTimeout(function() {
+      //       $this.prop('disabled', false);
+      //     }, 250);
+      //   });
     </script>
     <script src="{{ asset('additional-assets/toastr-2.1.4/toastr.min.js') }}"></script>
 
