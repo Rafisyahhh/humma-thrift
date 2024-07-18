@@ -243,7 +243,7 @@
       opacity: 8;
       border-radius: 0.5rem;
       padding: 2px 10px;
-      font-size: 1.2rem;
+      color: #f1f1f1 font-size: 1.2rem;
       font-family: Arial, Helvetica, sans-serif;
       font-weight: 500;
     }
@@ -300,8 +300,9 @@
                   <span class="placeholder bg-secondary" style="width: 6%;"></span>
                   <span class="placeholder bg-secondary" style="width: 16%;"></span>
                 </div>
-                <button class="btn btn-secondary p-1 rounded-1 position-absolute" style="right: 0; display: none;"
-                  id="changeAddressButton" onclick="changeTab(0)">Ganti
+                <button class="shop-btn p-1 rounded-1 position-absolute"
+                  style="right: 0; display: none; width: 10rem; font-size: 1.25rem;" id="changeAddressButton"
+                  onclick="changeTab(0)">Ganti
                   Alamat</button>
               </div>
             </div>
