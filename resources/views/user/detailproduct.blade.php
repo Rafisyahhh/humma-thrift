@@ -239,7 +239,7 @@
                                 </a> --}}
                                 <div class="price">
                                     <span class="new-price fs-1"
-                                        style="z-index:1">Rp.{{ number_format($isProduct->price, null, null, '.') }}</span>
+                                        style="z-index:1">@currency($isProduct->price)</span>
                                 </div>
                                 <hr>
                                 <div class="row product-details">
@@ -322,16 +322,18 @@
                                 <h5 style="z-index:1;position: relative;">{{ $isProductAuction->title }}</h5>
                                 <div class="price">
                                     @php
-                                        $auction = App\Models\Auctions::where('status', 1)->where('product_auction_id', $isProductAuction->id)->first();
+                                        $auction = App\Models\Auctions::where('status', 1)
+                                            ->where('product_auction_id', $isProductAuction->id)
+                                            ->first();
                                     @endphp
                                     @if ($auction)
-                                    <span class="new-price fs-1"
-                                    style="z-index:1">Rp{{ number_format($isProductAuction->price, null, null, '.') }}</span>
-
+                                        <span class="new-price fs-1"
+                                            style="z-index:1">@currency($isProductAuction->price)</span>
                                     @else
-                                    <span class="new-price fs-1"
-                                        style="z-index:1">Rp{{ number_format($isProductAuction->bid_price_start, null, null, '.') }}
-                                        - Rp{{ number_format($isProductAuction->bid_price_end, null, null, '.') }}</span>
+                                        <span class="new-price fs-1"
+                                            style="z-index:1">@currency($isProductAuction->bid_price_start)
+                                            -
+                                            @currency($isProductAuction->bid_price_end)</span>
                                     @endif
                                 </div>
                                 <hr>
@@ -384,7 +386,8 @@
                                         <div style="width: 70%" class="align-items-center">
                                             @if ($user)
                                                 @if ($existingAuction && $auctions->status === 1)
-                                                    <form action="{{ route('user.checkout.process.auction') }}" method="post">
+                                                    <form action="{{ route('user.checkout.process.auction') }}"
+                                                        method="post">
                                                         @csrf
                                                         <div style="bottom:0;">
                                                             <input type="hidden" value="{{ $isProductAuction->id }}"
@@ -429,10 +432,17 @@
                                                 @if ($user)
 
                                                     @if ($existingAuction)
-                                                        <p style="text-align: center; font-size :20px; font-weight:bold;">
+                                                        <p
+                                                            class="d-flex gap-3 align-items-baseline justify-content-center mb-3">
+                                                            <i class="fas fa-info-circle"
+                                                                style="font-size: 5em;color: #32c5ff;"></i></p>
+                                                        <p class="mb-2"
+                                                            style="text-align: center; font-size :20px; font-weight:bold;">
                                                             Anda sudah mengikuti lelang</p>
-                                                        <p style="text-align: center;">bid lelang anda :
-                                                            {{ $auctions->auction_price }}</p>
+                                                        <p style="text-align: center;" class="mb-5">Anda memasukkan
+                                                            nominal lelang sebesar
+                                                            @currency($auctions->auction_price)
+                                                        </p>
                                                     @elseif ($auctionproduct)
                                                         <p
                                                             style="text-align: center; font-size :20px; font-weight:bold; margin-top: 2rem; margin-bottom:2rem;">
@@ -453,9 +463,9 @@
                                                             <p
                                                                 style="margin-top: 5px;margin-left:6px;font-size:12px;color: #7c7c7c;">
                                                                 Harga yang ditetapkan antara
-                                                                Rp{{ number_format($isProductAuction->bid_price_start, null, null, '.') }}
+                                                                @currency($isProductAuction->bid_price_start)
                                                                 sampai
-                                                                Rp{{ number_format($isProductAuction->bid_price_end, null, null, '.') }}
+                                                                @currency($isProductAuction->bid_price_end)
                                                             </p>
                                                             @error('auction_price')
                                                                 <span class="invalid-feedback" role="alert">

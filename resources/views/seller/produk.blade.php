@@ -267,16 +267,20 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach ($favorites as $fav)
+                                                                @forelse ($favorites as $fav)
                                                                     @if ($fav->product_id == $item->id)
                                                                         <tr>
                                                                             <td>{{ $loop->iteration }}</td>
-                                                                            <td>{{ $fav->user->username }}</td>
+                                                                            <td>{{ $fav->user?->username }}</td>
                                                                             <td>{{ \Carbon\Carbon::parse($fav->created_at)->format('d M Y H:i') }}
                                                                             </td>
                                                                         </tr>
                                                                     @endif
-                                                                @endforeach
+                                                                @empty
+                                                                    <tr>
+                                                                        <td colspan="3">Tidak ada data</td>
+                                                                    </tr>
+                                                                @endforelse
                                                             </tbody>
                                                         </table>
                                                     </div>

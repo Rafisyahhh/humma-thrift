@@ -9,6 +9,7 @@ class TransactionOrder extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
     public function UserAddress()
     {
         return $this->belongsTo(UserAddress::class);
