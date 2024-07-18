@@ -70,7 +70,7 @@
           </div> <!-- sticky-top ends here -->
         </div>
         <div class="col-lg-9">
-          <div class="product-sidebar-section" data-aos="fade-up">
+          <div class="product-sidebar-section">
             <div class="row g-5" id="product-container">
               <div class="col-lg-12">
                 <div class="product-sorting-section" style="padding-bottom: unset; margin-bottom: unset">
@@ -80,9 +80,32 @@
                   </div>
                 </div>
               </div>
+              <div class="loaders row g-5">
+                @foreach ($products as $item)
+                  <div class="col-lg-4 col-sm-6 placeholder-glow">
+                    <div class="product-wrapper p-0">
+                      <div class="product-img">
+                        <div class="bg-body-secondary w-100" style="height: 300px;"></div>
+                      </div>
+                      <div class="product-info">
+                        <div class="product-description">
+                          <a class="placeholder disabled bg-secondary" aria-disabled="true" style="width: 150px"></a>
+                          <div class="price">
+                            <span class="placeholder bg-secondary" style="width: 75px"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-cart-btn" style="bottom:0;">
+                        <button class="product-btn placeholder disabled" aria-disabled="true"
+                          style="width: 100px"></button>
+                      </div>
+                    </div>
+                  </div>
+                @endforeach
+              </div>
 
             </div>
-            <div class="loader">Loading...</div>
+            {{-- <div class="loader">Loading...</div> --}}
           </div>
         </div>
       </div>
@@ -184,19 +207,19 @@
 
       function loadPage(page) {
         $.ajax({
-            url: '?page=' + page + '{{ isset($search) ? "&search=$search" : '' }}',
+            url: '?{{ isset($search) ? "search=$search" : '' }}&page=' + page,
             type: 'get',
             beforeSend: function() {
-              $('.loader').show();
+              $('.loaders').show();
             }
           })
           .done(function(data) {
             loading = false;
             const lastItem = $('#last-item');
             lastItem.text(parseInt(lastItem.text()) + {{ $products->lastItem() }});
-            $('.loader').hide();
+            $('.loaders').hide();
             if (data.html === "") {
-              $('.loader').html("No more records found");
+              $('.loaders').html("No more records found");
               return;
             }
             $("#product-container").append(data);

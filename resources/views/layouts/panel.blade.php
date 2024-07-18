@@ -129,7 +129,7 @@
       //       $(this).remove();
       //     });
       //   });
-      $(document).on('click', 'button, [onclick], a, :input, [tabindex]', function(e) {
+      $(document).on('click', 'button, [onclick], a, :radio, :checkbox, [tabindex]', function(e) {
         let $this = $(this);
         $this.prop('disabled', true);
         setTimeout(function() {
