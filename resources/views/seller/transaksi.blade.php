@@ -49,13 +49,19 @@ use App\Models\Order;
                                 <div class="profile-section">
                                     <div class="row g-5">
                                         @foreach ($transaction as $item)
-                                            @foreach ($orders[$item->id] as $ordr)
-                                                @if ($ordr->product)
+                                            {{-- @foreach ($orders[$item->id] as $ordr)
+                                                @if ($ordr->product) --}}
+                                                @php
+                                                $firstOrder = $orders[$item->id]->first();
+                                                $additionalProductsCount = $orders[$item->id]->count() - 1;
+
+                                            @endphp
+                                            @if ($firstOrder && $firstOrder->product)
                                                     {{-- @foreach ($transaction as $item)
                                         @if ($orders) --}}
                                                     <div class="col-lg-4 col-sm-6">
                                                         <div class="product-wrapper"
-                                                            style="border: 1px solid; height: 39rem;">
+                                                            style="border: 1px solid; height: 41rem;">
                                                             <div class="wrapper-content"
                                                                 style="position: relative; height:13rem;">
 
@@ -63,11 +69,16 @@ use App\Models\Order;
                                                                 {{-- @foreach ($orders[$item->id] as $ordr)
 
                                                              @if ($ordr->product) --}}
-                                                                <img src="{{ asset('storage/' . $ordr->product->thumbnail) }}"
+                                                                <img src="{{ asset('storage/' .$firstOrder->product->thumbnail) }}"
                                                                     alt="img" class="object-fit-cover"
                                                                     style="border-radius: 0%; height:20rem; width:100%;">
-                                                                <p class="paragraph mt-4 ms-4 fw-bold">
-                                                                    {{ $ordr->product->title }}</p>
+                                                                    @if ($additionalProductsCount === 0)
+                                                                    <p class="paragraph mt-4 ms-4 fw-bold mb-2">
+                                                                        {{ $firstOrder->product->title }}</p>
+                                                                    @else
+                                                                    <p class="paragraph mt-4 ms-4 fw-bold">
+                                                                        {{ $firstOrder->product->title }} dan {{ $additionalProductsCount }} produk lainnya</p>
+                                                                    @endif
                                                                 {{-- @endif
                                                         @endforeach --}}
 
@@ -131,7 +142,7 @@ use App\Models\Order;
                                                     </div>
                                                 @endif
                                             @endforeach
-                                        @endforeach
+                                        {{-- @endforeach --}}
 
                                     </div>
                                 </div>

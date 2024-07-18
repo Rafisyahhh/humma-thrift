@@ -81,7 +81,7 @@ class UserTransaksi extends Notification
 
         return [
             'title' => "Pesanan diterima",
-            'data' => "Pesanan Anda \"{$Product->title}\" telah diterima oleh seller.",
+            'data' => "Konfirmasi pesanan anda \"{$Product->title}\" jika anda telah menerimanya.",
             'url' => $url
         ];
 
