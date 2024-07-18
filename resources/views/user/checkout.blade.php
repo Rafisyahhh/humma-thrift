@@ -240,6 +240,7 @@
       right: 0;
       top: -0.5rem;
       background-color: lime;
+      opacity: 8;
       border-radius: 0.5rem;
       padding: 2px 10px;
       font-size: 1.2rem;
