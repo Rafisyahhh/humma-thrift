@@ -4,12 +4,12 @@
 :root,
 [data-bs-theme="light"] {
     --sa-white: black;
-    --loader-color: #1c3879;
+    --loader-color: #004cff;
 }
 [data-bs-theme="dark"] {
     color-scheme: dark;
     --sa-white: white;
-    --loader-color: #1c3879;
+    --loader-color: #004cff;
 }
 
 @keyframes btnAnimation {
@@ -5687,6 +5687,7 @@ a.shop-btn:hover {
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
+    font-size: 14px;
 }
 
 .product-cart-items span:hover {
