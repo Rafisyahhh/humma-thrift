@@ -12,11 +12,15 @@ class TransactionOrder extends Model
     public function UserAddress() {
         return $this->belongsTo( UserAddress::class);
     }
-    public function Product() {
-        return $this->belongsTo( Product::class);
+    public function Product()
+    {
+        return $this->belongsTo(Product::class);
     }
     public function user() {
-        return $this->belongsTo( User::class);
+        return $this->belongsTo(User::class);
+    }
+    public function userstore() {
+        return $this->belongsTo(UserStore::class);
     }
 
     public function order() {

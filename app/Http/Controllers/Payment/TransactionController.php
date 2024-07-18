@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\cart;
 use App\Models\Favorite;
 use App\Models\Order;
+use App\Models\ProductAuction;
 use App\Models\TransactionOrder;
 use App\Models\UserAddress;
 use App\Notifications\NotificationUserCheckout;
@@ -75,7 +76,7 @@ class TransactionController extends Controller
             $product_auction = session('checkouted_product_auction');
             $method = $request->method;
             $address = UserAddress::find($request->addressOption);
-            $product_auction = Product::whereIn('id', $product_auction)->get();
+            $product_auction = ProductAuction::whereIn('id', $product_auction)->get();
             $tripay = new TripayController();
             $transaction = $tripay->requestTransactionLelang($method, $product_auction);
 

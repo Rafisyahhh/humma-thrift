@@ -93,7 +93,7 @@ class CheckoutController extends Controller
         $channel_pembayaran = ChannelPembayaran::all();
         $users = Auth::user();
         $addresses = UserAddress::where('user_id', $users->id)->get();
-        $product_auction = Product::whereIn('id', $productAuction)->get();
+        $product_auction = ProductAuction::whereIn('id', $productAuction)->get();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
             ->whereNotNull('product_id')

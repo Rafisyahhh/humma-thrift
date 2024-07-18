@@ -24,7 +24,7 @@
                                     <div class="subtotal product-total">
                                         <ul class="product-list">
                                             @foreach ($order as $item)
-                                                @if ($item->product !== null)
+                                                @if ($item->product)
                                                     <li>
                                                         <div class="d-flex gap-3">
                                                             <img src="{{ asset('storage/' . $item->product->thumbnail) }}"
@@ -42,7 +42,7 @@
                                                             </h5>
                                                         </div>
                                                     </li>
-                                                @elseif ($item->product_auction !== null)
+                                                @elseif($item->product_auction)
                                                     <li>
                                                         <div class="d-flex gap-3">
                                                             <img src="{{ asset('storage/' . $item->product_auction->thumbnail) }}"
