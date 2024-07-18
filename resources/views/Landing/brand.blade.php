@@ -30,7 +30,7 @@
 
     .grid-item {
       float: left;
-      border: 2px solid #b6b5b4;
+      border: 2px solid #b6b5b4 transparent;
     }
 
     .grid-item img {
@@ -87,9 +87,11 @@
         columnWidth: '.grid-sizer'
       }
     });
-    $grid.imagesLoaded().progress(function() {
-      $grid.isotope('layout');
-    });
+    // $grid.imagesLoaded().progress(function() {
+    //   $grid.isotope('layout');
+    // });
+  </script>
+  <script>
     $(document).keydown(function(event) {
       if (event.key === 'Home') {
         $("#basics").show();
@@ -97,6 +99,13 @@
       } else if (event.key === 'PageUp') {
         $("#basics").hide();
         $("#notbasics").show();
+        var $grid = $('.grid').isotope({
+          itemSelector: '.grid-item',
+          percentPosition: true,
+          masonry: {
+            columnWidth: '.grid-sizer'
+          }
+        });
       }
     });
   </script>
