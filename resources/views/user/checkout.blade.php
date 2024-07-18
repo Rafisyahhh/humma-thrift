@@ -179,7 +179,7 @@
 
   <style>
     .address-container {
-      max-height: 26.7rem;
+      max-height: 28rem;
       overflow-y: auto;
     }
 
