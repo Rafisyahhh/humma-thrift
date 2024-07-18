@@ -14,7 +14,7 @@ class Order extends Model
         return $this->belongsTo(Product::class, 'product_id');
     }
     public function product_auction() {
-        return $this->belongsTo(Product::class, 'product_auction_id');
+        return $this->belongsTo(ProductAuction::class, 'product_auction_id');
     }
     public function transaction_order() {
         return $this->belongsTo(TransactionOrder::class, 'transaction_order_id');
