@@ -12,26 +12,25 @@
         }
     </style>
 @endsection
-
-
 @section('content')
     <div class="container">
         <div class="cart-section">
             <div class="wishlist">
-                {{-- <div>
-                    <h5 class="cart-heading mt-4 pt-4 mb-4">Keranjang</h5>
-                </div> --}}
                 <div class="cart-section wishlist-section">
                     <table style="border-spacing: 10px; width: 100%;">
                         <tbody>
-                            <tr class="table-row ticket-row" style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100rem;">
-                                <th class="table-wrapper wrapper-product" style="display: flex; align-items: center; padding-top: 25px;">
-                                    <div class="form-check" style="display: flex; align-items: center;">
-                                        <p style="flex: 0 0 3rem; text-align: left; margin-left: -1.70rem;">#</p>
-                                        <p style="margin-right: 44.5rem; margin-left:3rem;">Produk</p>
-                                        <p style="margin-right: 25rem;">Kategori</p>
-                                        <p style="margin-right: 26rem;">Harga</p>
-                                        <p>Aksi</p>
+                            <!-- Judul Tabel -->
+                            <tr class="table-row ticket-row"
+                                style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100%;">
+                                <th class="table-wrapper wrapper-product"
+                                    style="display: flex; align-items: center; padding-top: 25px;">
+                                    <div class="form-check"
+                                        style="display: flex; align-items: center; width: 100%; margin-left: -1rem;">
+                                        <p style="flex: 0 0 5rem; text-align: left; margin-left: 0;">#</p>
+                                        <p style="flex: 1 0 46.7rem; text-align: left; margin-left: 3rem;">Produk</p>
+                                        <p style="flex: 1 0 35rem;">Kategori</p>
+                                        <p style="flex: 1 0 30rem;">Harga</p>
+                                        <p style="flex: 0 0 5rem;">Aksi</p>
                                     </div>
                                 </th>
                             </tr>
@@ -40,66 +39,78 @@
                                 <td style="height:10px;"></td>
                             </tr>
 
+
                             @forelse ($cartStoreGroups as $storeItem)
+                                <!-- Header Toko -->
                                 <tr class="table-row ticket-row store-header"
-                                    style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100rem;">
+                                    style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100%;">
                                     <td class="table-wrapper wrapper-product" style="display: flex; align-items: center;">
-                                        <div class="form-check" style="display: flex; align-items: center;">
+                                        <div class="form-check"
+                                            style="display: flex; align-items: center; margin-left: 1rem;">
                                             <input class="form-check-input storeselectall" type="checkbox" value=""
                                                 id="storeselectall" data-store="{{ $storeItem['store']->id }}"
-                                                style="border-color: #215791; margin-right: 2rem;">
+                                                style="border-color: #215791; margin-right: 6rem;">
                                             <i class="fa-solid fa-store"
-                                                style="margin-right: 1rem; color: #215791; font-size: 2rem; margin-left:2rem;"></i>
-                                            <p style="font-weight: bold">{{ $storeItem['store']->name }}</p>
+                                                style="margin-right: 1rem; color: #215791; font-size: 2rem;"></i>
+                                            <p style="font-weight: bold; margin-left: 1rem;">{{ $storeItem['store']->name }}
+                                            </p>
                                         </div>
                                     </td>
                                 </tr>
 
+                                <!-- Form Produk -->
                                 <form action="{{ route('user.checkout.process') }}" id="products-form" method="post">
                                     @csrf
                                     @forelse ($storeItem['cartItems'] as $item)
                                         <tr class="table-row ticket-row product-list"
-                                            style="border: 1px solid #e6d5d593; width:100rem; margin-left:55">
+                                            style="border: 1px solid #e6d5d593; width: 100%;">
                                             <td class="table-wrapper wrapper-product">
                                                 <div class="wrapper"
-                                                    style="display: flex; align-items: center; width:122rem;">
-                                                    <div class="form-check" style="margin-right: 1rem;">
+                                                    style="display: flex; align-items: center; width: 100%; padding: 10px;">
+                                                    <div class="form-check" style="margin-right: 1rem; flex: 0 0 3rem;">
                                                         <input class="form-check-input" type="checkbox" name="product_id[]"
                                                             value="{{ $item->product_id }}" id="product-{{ $item->id }}"
                                                             data-price="{{ $item->product->price }}"
                                                             data-store="{{ $item->product->userStore->id }}"
                                                             style="border-color: #215791;">
                                                     </div>
-                                                    <div class="wrapper-img" style="margin-right: 1rem;"
+                                                    <div class="wrapper-img" style="margin-right: 1rem; flex: 0 0 100px;"
                                                         data-route="{{ route('store.product.detail', ['store' => $item->product->userStore->username, 'product' => $item->product->slug]) }}">
                                                         <img src="{{ asset('storage/' . $item->product->thumbnail) }}"
-                                                            alt="img">
+                                                            alt="img" style="width: 100%;">
                                                     </div>
                                                     <div class="wrapper-content"
-                                                        style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1;">
-                                                        <h5 class="heading" style="font-size: 18px; "
+                                                        style="flex: 1 0 20rem; display: flex; align-items: center;">
+                                                        <h5 class="heading"
+                                                            style="font-size: 18px; white-space: normal; overflow: hidden; text-overflow: ellipsis; margin-right: 2rem;"
                                                             data-route="{{ route('store.product.detail', ['store' => $item->product->userStore->username, 'product' => $item->product->slug]) }}">
                                                             {{ $item->product->title }}
                                                         </h5>
-                                                        <div
-                                                            style="display: flex; align-items: center; margin-left: 125px;">
-                                                            <p class="inner-text">
-                                                                {{ implode(', ', array_column($item->product->categories->toArray(), 'title')) }}
-                                                            </p>
-                                                        </div>
-                                                        <div
-                                                            style="display: flex; align-items: center; margin-inline-start: 10px;">
-                                                            <p>Rp</p>
-                                                            <p>{{ number_format($item->product->price, 0, ',', '.') }}</p>
-                                                        </div>
-                                                        <button type="button" class="deleteButton" data-form-target="deleteform-{{ $item->id }}"
-                                                            style="color: red; font-weight: bold; font-size: 13px; padding: 5px 20px; border-radius: 20px; margin-right: 0.1rem; text-decoration: underline;">
-                                                            Hapus</button>
+                                                    </div>
+                                                    <div
+                                                        style="flex: 1 0 15rem; display: flex; align-items: center; margin-right: 2rem;">
+                                                        <p class="inner-text">
+                                                            {{ implode(', ', array_column($item->product->categories->toArray(), 'title')) }}
+                                                        </p>
+                                                    </div>
+                                                    <div
+                                                        style="flex: 1 0 10rem; display: flex; align-items: center; margin-right: 2rem;">
+                                                        <p>Rp {{ number_format($item->product->price, 0, ',', '.') }}</p>
+                                                    </div>
+                                                    <div style="flex: 0 0 5rem;">
+                                                        <button type="button" class="deleteButton"
+                                                            data-form-target="deleteform-{{ $item->id }}"
+                                                            style="color: red; font-weight: bold; font-size: 13px; padding: 5px 20px; border-radius: 20px; text-decoration: underline;">
+                                                            Hapus
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
                                     @empty
+                                        <tr>
+                                            <td colspan="5">Tidak ada produk dalam keranjang.</td>
+                                        </tr>
                                     @endforelse
                                 </form>
                                 @foreach ($storeItem['cartItems'] as $item)
@@ -114,23 +125,23 @@
                                     <td class="cart-section wishlist-section" style="padding:2rem;">
                                         <div class="wrapper-content"
                                             style="display: flex; align-items: center; text-align: center; justify-content: center; flex-grow: 1; margin: 0 auto;">
-                                            <h5 class="heading" style="font-size: 18px;">Maaf Anda belum memasukkan
-                                                produk
+                                            <h5 class="heading" style="font-size: 18px;">Maaf Anda belum memasukkan produk
                                                 apapun</h5>
                                         </div>
                                     </td>
                                 </tr>
-                            @endif
+                            @endforelse
 
+                            <!-- Total -->
                             <tr class="table-row ticket-row"
-                                style="border: 1px solid #e6d5d593; background-color: #ffffff; width:130rem;">
+                                style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100%;">
                                 <td style="display: flex; justify-content: flex-end; align-items: center;">
                                     <div class="wrapper-content me-5"
                                         style="display: flex; justify-content: flex-end; align-items: center;">
                                         <p style="margin-right: 1rem;" class="total-product">Total 0 produk :</p>
                                         <p>
-                                        <h6 style="font-size: 18px; font-weight: bold;  color: red;" class="total-price">Rp
-                                            0 </h6>
+                                        <h6 style="font-size: 18px; font-weight: bold; color: red;" class="total-price">Rp 0
+                                        </h6>
                                         </p>
                                         <button class="shop-btn submitButton" type="button"
                                             style="margin-left: 1rem;">Checkout</button>
@@ -141,6 +152,8 @@
                     </table>
                 </div>
             </div>
+
+
             {{-- Detail --}}
             <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
                 style="height: 99%;">
@@ -221,52 +234,6 @@
         }) {
             if (!["A", "I"].includes(tagName)) window.location.href = $(this).data("route");
         });
-
-
-        // $('.storeselectall').click(function(e) {
-        //     const parentEl = $(this);
-        //     const storeId = parentEl.data('store');
-
-        //     // Mengatur status checkbox .storeselectall
-        //     const isChecked = parentEl.prop('checked');
-        //     $(`.product-list [type=checkbox][data-store=${storeId}]`).prop('checked', isChecked);
-
-        //     // Menghitung kembali total harga dan produk setelah perubahan
-        //     calculateTotal();
-        // });
-
-        // $('#cartSelectAll').click(function(e) {
-        //     const isChecked = $(this).prop('checked');
-        //     $(`[data-store]`).prop('checked', isChecked);
-
-        //     // Menghitung kembali total harga dan produk setelah perubahan
-        //     calculateTotal();
-        // });
-
-        // $('.product-list').find('[type=checkbox]').on('change', function() {
-        //     // Mengatur ulang status .storeselectall setelah checkbox dalam grup berubah
-        //     const storeId = $(this).data('store');
-        //     const parentSelectAll = $(`.storeselectall[data-store=${storeId}]`);
-        //     const checkboxes = $(`.product-list [type=checkbox][data-store=${storeId}]`);
-        //     const allChecked = checkboxes.length === checkboxes.filter(':checked').length;
-
-        //     parentSelectAll.prop('checked', allChecked);
-
-        //     // Menghitung kembali total harga dan produk setelah perubahan
-        //     calculateTotal();
-        // });
-
-        // $('.product-list [type=checkbox],.storeselectall').on('change', function() {
-        //     // Menghitung kembali total harga dan produk setelah perubahan
-        //     calculateTotal();
-
-        //     const findCheckboxes = $('.product-list,.storeselectall').find('[type=checkbox]').length;
-        //     const findChecked = $('.product-list,.storeselectall').find('[type=checkbox]:checked').length;
-
-        //     $('#cartSelectAll').prop('checked', findCheckboxes === findChecked);
-        // });
-
-
         $('.storeselectall').click(function(e) {
             const parentEl = $(this);
             const storeId = parentEl.data('store');
