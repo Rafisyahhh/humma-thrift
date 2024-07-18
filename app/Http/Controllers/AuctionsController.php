@@ -73,7 +73,7 @@ class AuctionsController extends Controller {
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
 
 
-        return view('user.notification.show-lelang', compact('notifications', 'countcart', 'carts', 'countFavorite', 'notification'));
+        return view('user.notification.notify-lelang', compact('notifications','countcart','carts','countFavorite','notification'));
     }
 
     public function destroynotify($id) {

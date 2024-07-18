@@ -67,7 +67,7 @@ class NotificationSellerController extends Controller
     public function readAll()
     {
         Auth::user()->getAttribute('unreadNotifications')->markAsRead();
-        return redirect()->route('user.notification.index');
+        return redirect()->route('seller.notification.index');
     }
     /**
      * Show the form for editing the specified resource.
