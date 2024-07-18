@@ -41,9 +41,14 @@ class OrderController extends Controller
         ->orderBy('transaction_order_id')
         ->get()
         ->groupBy('transaction_order_id');
+        $orderL = Order::with('product_auction')
+        ->orderBy('transaction_order_id')
+        ->get()
+        ->groupBy('transaction_order_id');
 
-        return view('seller.transaksi', compact('transaction','orders'));
+        return view('seller.transaksi', compact('transaction','orders','orderL'));
     }
+
     public function indexDetail($transaction)
     {
         $code = $transaction;

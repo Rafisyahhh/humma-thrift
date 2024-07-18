@@ -50,21 +50,40 @@ class UserTransaksi extends Notification
      */
     public function toArray(object $notifiable): array
     {
-        $Product = $this->transactions->Product ?? null;
+        // $Product = $this->transactions->Product ?? null;
+        // $userStore = $Product ? $Product->userStore : null;
+
+        // $url = $userStore ? route('store.product.detail', [
+        //     'store' => $userStore->username,
+        //     'product' => $Product->slug
+        // ]): route('user.userhome');
+
+
+        // return [
+        //     'title' => "Pesanan diterima",
+        //     'data' => "Pesanan Anda \"{$this->transactions->order->product->title}\" Telah Diterima oleh seller.",
+        //     'url' => $url
+        //         // 'store' => $this->TransactionOrder->Product->title,
+        //         // 'product' => $this->TransactionOrder->Product->slug
+        // ];
+
+
+        $order = $this->transactions->order()->first();
+
+        // Mengambil produk terkait (baik product atau product_auction)
+        $Product = $order->product ?? $order->product_auction;
         $userStore = $Product ? $Product->userStore : null;
 
         $url = $userStore ? route('store.product.detail', [
             'store' => $userStore->username,
             'product' => $Product->slug
-        ]): route('user.userhome');
-
+        ]) : route('user.userhome');
 
         return [
             'title' => "Pesanan diterima",
-            'data' => "Pesanan Anda Telah Diterima oleh seller.",
+            'data' => "Pesanan Anda \"{$Product->title}\" telah diterima oleh seller.",
             'url' => $url
-                // 'store' => $this->TransactionOrder->Product->title,
-                // 'product' => $this->TransactionOrder->Product->slug
         ];
+
     }
 }
