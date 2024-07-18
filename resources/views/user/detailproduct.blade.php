@@ -381,7 +381,7 @@
                                                 ->first();
                                         @endphp
 
-                                        <div>
+                                        <div style="width: 70%" class="align-items-center">
                                             @if ($user)
                                                 @if ($existingAuction && $auctions->status === 1)
                                                     <form action="{{ route('user.checkout.process.auction') }}" method="post">
@@ -389,28 +389,33 @@
                                                         <div style="bottom:0;">
                                                             <input type="hidden" value="{{ $isProductAuction->id }}"
                                                                 name="product_auction_id[]">
-                                                            <button type="submit" class="shop-btn">Beli sekarang</button>
+                                                            <button type="submit" class="shop-btn w-100"><span style="align-items:center; justify-content:center;">
+                                                                Beli sekarang</span></button>
                                                         </div>
                                                     </form>
                                                 @elseif ($auctionproduct)
-                                                    <button class="shop-btn flex-grow-0 openModal"
+                                                    <button class="shop-btn flex-grow-0 openModal w-100"
                                                         data-id="{{ $isProductAuction->id }}"
                                                         style="display: flex; align-items: center; gap: 5px; z-index:1">
+                                                        <span style="align-items:center; justify-content:center;">
                                                         Lelang Berakhir
+                                                        </span>
                                                     </button>
                                                 @else
                                                     <button class="shop-btn flex-grow-0 openModal"
                                                         data-id="{{ $isProductAuction->id }}"
-                                                        style="display: flex; align-items: center; gap: 1rem; z-index:1">
-                                                        <i class="fa-solid fa-plus"></i>
-                                                        Ikuti Lelang
+                                                        style="width: 100%; display: flex; align-items: center; gap: 1rem; z-index:1;">
+                                                        <span style="align-items:center; justify-content:center;"><i class="fa-solid fa-plus"></i>
+                                                            Ikuti Lelang</span>
                                                     </button>
                                                 @endif
                                             @else
-                                                <a href="{{ url('login') }}" class="shop-btn flex-grow-0 openModal"
+                                                <a href="{{ url('login') }}" class="shop-btn flex-grow-0 openModal w-100"
                                                     style="display: flex; align-items: center; gap: 5px; z-index:1">
+                                                    <span style="align-items:center; justify-content:center;">
                                                     <i class="fa-solid fa-plus"></i>
                                                     Ikuti Lelang
+                                                    </span>
                                                 </a>
                                             @endif
                                         </div>
