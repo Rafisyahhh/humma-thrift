@@ -146,7 +146,7 @@ class AuctionsController extends Controller
         } catch (\Throwable $th) {
             Log::error('Error in store method: ' . $th->getMessage(), $th->getTrace());
             return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Log::error('Error in store method: ' . $e->getMessage(), $e->getTrace());
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
