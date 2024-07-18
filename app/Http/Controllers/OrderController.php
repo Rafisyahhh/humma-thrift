@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\TransactionOrder;
+use App\Notifications\UserTransaksi;
+use DB;
 
 class OrderController extends Controller
 {
@@ -35,8 +37,18 @@ class OrderController extends Controller
     public function indexTransaction()
     {
         $transaction = TransactionOrder::latest()->get();
-        return view('seller.transaksi', compact('transaction'));
+        $orders = Order::with('product')
+        ->orderBy('transaction_order_id')
+        ->get()
+        ->groupBy('transaction_order_id');
+        $orderL = Order::with('product_auction')
+        ->orderBy('transaction_order_id')
+        ->get()
+        ->groupBy('transaction_order_id');
+
+        return view('seller.transaksi', compact('transaction','orders','orderL'));
     }
+
     public function indexDetail($transaction)
     {
         $code = $transaction;
@@ -46,10 +58,24 @@ class OrderController extends Controller
     }
     public function updatedetail(Request $request, $transaction)
     {
-        $transactions = TransactionOrder::where('id', $transaction)
-            ->update([
-                'delivery_status' => $request->status
-            ]);
+        // $transactions = TransactionOrder::where('id', $transaction)
+        //     ->update([
+        //         'delivery_status' => $request->status
+        //     ]);
+
+                // Ambil transaksi berdasarkan ID
+                $transactionOrder = TransactionOrder::where('id', $transaction)->first();
+
+                // Perbarui status pengiriman
+                $transactionOrder->delivery_status = $request->status;
+                $transactionOrder->save();
+
+                // Kirim notifikasi jika status pengiriman adalah 'diterima'
+                if ($request->status === 'diterima') {
+                    $transactionOrder->user->notify(new UserTransaksi($transactionOrder));
+                }
+
+
         return redirect()->back();
     }
     public function updateOrder(Request $request, $transaction)

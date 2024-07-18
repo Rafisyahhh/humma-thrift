@@ -1,4 +1,5 @@
 
+
 <?php
 
 use App\Http\Controllers\ApiControllers\UserApiController;
@@ -124,7 +125,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
         Route::get('location', [UserAddressController::class, 'index'])->name('location');
         Route::prefix('/notification')->controller(AuctionsController::class)->name('notification.')->group(function () {
             Route::get('/', 'notifyuser')->name('index');
-            Route::get('/{notificationId}', 'notifyshow')->name('show');
+            Route::post('/{notificationId}', 'notifyshow')->name('show');
             Route::get('/read-all', 'readAll')->name('readAll');
             Route::delete('{id}', 'destroynotify')->name('destroy');
         });

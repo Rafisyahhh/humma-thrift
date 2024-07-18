@@ -67,8 +67,8 @@
         <div class="grid" id="notbasics" style="display: none">
           <div class="grid-sizer"></div>
           @foreach ($brands as $item)
-            <div class="grid-item">
-              <img src="{{ asset("storage/{$item->logo}") }}" alt="img">
+            <div class="grid-item ratio" style="--bs-aspect-ratio: 90%;">
+              <img src="{{ asset("storage/{$item->logo}") }}" alt="img" class="object-fit-cover">
             </div>
           @endforeach
         </div>

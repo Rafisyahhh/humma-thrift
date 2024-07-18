@@ -129,6 +129,13 @@
       //       $(this).remove();
       //     });
       //   });
+      $(document).on('click', 'button, [onclick], a, :radio, :checkbox, [tabindex]', function(e) {
+        let $this = $(this);
+        $this.prop('disabled', true);
+        setTimeout(function() {
+          $this.prop('disabled', false);
+        }, 250);
+      });
     </script>
 
     @yield('script')

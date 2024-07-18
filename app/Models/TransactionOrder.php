@@ -15,10 +15,7 @@ class TransactionOrder extends Model
     {
         return $this->belongsTo(UserAddress::class);
     }
-    public function Product()
-    {
-        return $this->belongsTo(Product::class);
-    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

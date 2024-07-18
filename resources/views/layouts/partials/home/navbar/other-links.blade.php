@@ -27,7 +27,9 @@
   <div class="modal-main">
     <div class="wrapper-close-btn" onclick="modalAction('.search')"></div>
     <div class="wrapper-main">
-      <form class="search-section" id="global-search" onsubmit="handleFormSubmit(event)">
+      <form class="search-section"
+        action="{{ route('searchProductAuction') ? route('searchProductAuction') : route('searchProductRegular') }}"
+        id="global-search" onsubmit="handleFormSubmit(event)">
         <input type="search" placeholder="Telusuri produk..." name="search" id="search-input"
           value="{{ isset($search) ? $search : '' }}">
         <div class="divider" style="margin-right: 25rem;"></div>
@@ -89,6 +91,10 @@
   function toggleDropdown() {
     // Implement your dropdown toggle logic here if needed
   }
+
+  @if (Route::is('searchProductAuction'))
+    document.getElementById('dropbtn-text').innerText = 'Produk Lelang';
+  @endif
 
   function selectCategory(category) {
     selectedCategory = category;
