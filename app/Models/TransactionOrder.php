@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\TransactionStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,14 +19,13 @@ class TransactionOrder extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function userstore()
+    {
+        return $this->belongsTo(UserStore::class);
+    }
 
     public function order()
     {
         return $this->hasMany(Order::class);
-    }
-
-    public function getTransactionEnum()
-    {
-        return TransactionStatusEnum::from($this->getAttribute('status'));
     }
 }
