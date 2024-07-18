@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\ProductCategory;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -29,9 +30,14 @@ class AppServiceProvider extends ServiceProvider
         // Enable pagination with bootstrap 5
         Paginator::useBootstrapFive();
 
-        // Share data to all views
+        # Share data to all views
         if (Schema::hasTable('product_categories')) {
             View::share('productCategories', ProductCategory::all());
         }
+
+        # Give Custom Directive For Currency Format
+        Blade::directive('currency', function($expression) {
+            return "Rp<?php echo number_format($expression, 0, ',', '.'); ?>";
+        });
     }
 }

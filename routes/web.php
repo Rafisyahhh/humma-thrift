@@ -31,6 +31,7 @@ use App\Http\Controllers\{
     UserAddressController,
     UserStoreController,
     OrderController,
+    SellerTransactionController,
 };
 use App\Http\Controllers\Payment\CallbackController;
 
@@ -64,7 +65,7 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
     Route::get('/transaction', [OrderController::class, 'indexTransaction'])->name('transaction');
     Route::get('/transactiondetail/{transaction}', [OrderController::class, 'indexDetail'])->name('transaction.detail');
     Route::post('/transactiondetail/update/{transaction}', [OrderController::class, 'updateDetail'])->name('transaction.detail.update');
-    Route::view('/income', 'seller.penghasilan')->name('income');
+    Route::get('/income', [SellerTransactionController::class, 'index'])->name('income');
     // Route::view('/product', 'seller.produk')->name('product');
     Route::get('profil', [UserStoreController::class, 'show'])->name('profile');
     Route::put('/profile/{id}', [UserStoreController::class, 'update'])->name('profile.update');
