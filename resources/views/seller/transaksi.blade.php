@@ -73,7 +73,7 @@ use App\Models\Order;
                                                                     alt="img" class="object-fit-cover"
                                                                     style="border-radius: 0%; height:20rem; width:100%;">
                                                                     @if ($additionalProductsCount === 0)
-                                                                    <p class="paragraph mt-4 ms-4 fw-bold mb-2">
+                                                                    <p class="paragraph mt-4 ms-4 fw-bold" style="margin-bottom: 38px">
                                                                         {{ $firstOrder->product->title }}</p>
                                                                     @else
                                                                     <p class="paragraph mt-4 ms-4 fw-bold">
