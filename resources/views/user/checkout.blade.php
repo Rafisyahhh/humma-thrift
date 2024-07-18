@@ -202,10 +202,10 @@
     .address-item {
       position: relative;
       display: flex;
-      border: 2.5px solid black;
+      border: 2.5008px solid black;
       padding: 1rem;
-      margin-top: 0.25rem !important;
-      margin-bottom: 0.25rem !important;
+      margin-top: .25rem !important;
+      margin-bottom: .25rem !important;
     }
 
     .address-container input[type="radio"]:checked+.address-item {
@@ -217,7 +217,7 @@
     }
 
     .address-label {
-      border-radius: 0.5rem;
+      border-radius: .5rem;
       font-size: 17px;
       margin: 0;
     }
@@ -241,9 +241,10 @@
       top: -0.5rem;
       background-color: #007bff;
       opacity: 8;
-      border-radius: 0.5rem;
+      border-radius: .5rem;
       padding: 2px 10px;
-      color: #f1f1f1 font-size: 1.2rem;
+      color: #f1f1f1;
+      font-size: 1.2rem;
       font-family: Arial, Helvetica, sans-serif;
       font-weight: 500;
     }
@@ -290,7 +291,7 @@
             <hr />
             <div class="address-placeholder">
               <div class="address-item address-label" style="border: unset;">
-                <div class="address-wrapper w-100 placeholder-glow">
+                <div id="address-wrapper-head" class="address-wrapper w-100 placeholder-glow position-relative">
                   <p class="mb-1">
                     <b class="placeholder bg-secondary" style="width: 15%;"></b>
                     <b class="placeholder bg-secondary" style="width: 10%;"></b>
@@ -299,6 +300,10 @@
                   <span class="placeholder bg-secondary" style="width: 17%;"></span>
                   <span class="placeholder bg-secondary" style="width: 6%;"></span>
                   <span class="placeholder bg-secondary" style="width: 16%;"></span>
+                  <span id="noAddress" class="position-absolute top-50" style="left: 25%; display: none;">Kelihatanya kamu
+                    belum
+                    memilih alamat utama
+                    nih.</span>
                 </div>
                 <button class="shop-btn p-1 rounded-1 position-absolute"
                   style="right: 0; display: none; width: 10rem; font-size: 1.25rem;" id="changeAddressButton"
@@ -815,6 +820,10 @@
   <script>
     $(document).ready(function() {
       updateAddressPlaceholder();
+      setTimeout(() => {
+        $('#address-wrapper-head').attr("style", "background-color: rgba(210, 208, 208, 0.4);");
+        $('#address-wrapper-head #noAddress').show();
+      }, 3000);
     });
 
     function updateAddressPlaceholder() {
