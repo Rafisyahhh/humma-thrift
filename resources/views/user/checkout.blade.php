@@ -209,7 +209,7 @@
     }
 
     .address-container input[type="radio"]:checked+.address-item {
-      border-color: lime;
+      border-color: #007bff;
     }
 
     .address-container input[type="radio"]:checked+label .selected-label {
@@ -239,7 +239,7 @@
       position: absolute;
       right: 0;
       top: -0.5rem;
-      background-color: lime;
+      background-color: #007bff;
       opacity: 8;
       border-radius: 0.5rem;
       padding: 2px 10px;
