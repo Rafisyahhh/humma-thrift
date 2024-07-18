@@ -47,25 +47,24 @@
         <h5>Brand Produk</h5>
       </div>
       <div class="top-selling-section">
-        {{-- <div class="row g-5 mt-4">
-                    @foreach ($brands as $item)
-                        <div class="col-lg-2 col-md-6">
-                            <div class="product p-0"
-                                style="box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;border-radius: 20px;">
-                                <div class="wrapper-img p-0">
-                                    <a href="product-sidebar.html">
-                                        <div class="ratio ratio-1x1">
-                                            <img src="{{ asset("storage/{$item->logo}") }}" alt="img"
-                                                style="border-radius: 20px;" class="object-fit-cover w-100 h-100">
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div> --}}
+        <div class="row g-5 mt-4" id="basics">
+          @foreach ($brands as $item)
+            <div class="col-lg-2 col-md-6">
+              <div class="product p-0" style="box-shadow: rgb(18 106 195 / 20%) 0 8px 24px;border-radius: 20px;">
+                <div class="wrapper-img p-0">
+                  <a href="product-sidebar.html">
+                    <div class="ratio ratio-1x1">
+                      <img src="{{ asset("storage/{$item->logo}") }}" alt="img" style="border-radius: 20px;"
+                        class="object-fit-cover w-100 h-100">
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          @endforeach
+        </div>
 
-        <div class="grid">
+        <div class="grid" id="notbasics" style="display: none">
           <div class="grid-sizer"></div>
           @foreach ($brands as $item)
             <div class="grid-item">
@@ -90,6 +89,15 @@
     });
     $grid.imagesLoaded().progress(function() {
       $grid.isotope('layout');
+    });
+    $(document).keydown(function(event) {
+      if (event.key === 'Home') {
+        $("#basics").show();
+        $("#notbasics").hide();
+      } else if (event.key === 'PageUp') {
+        $("#basics").hide();
+        $("#notbasics").show();
+      }
     });
   </script>
 @endpush
