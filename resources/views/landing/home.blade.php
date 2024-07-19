@@ -196,11 +196,11 @@
                                 <div class="col-lg-2">
                                     <div class="position-absolute" data-aos="fade-up" style="top:35%;">
                                         <div class="wrapper-section">
-                                            <h5 class="wrapper-details" style="color:white;">
+                                            <h5 class="wrapper-details" style="color:#1c3879;">
                                                 {{ $even->subjudul }}
                                             </h5>
-                                            <h1 class="wrapper-details" style="color:white;">{{ $even->judul }}</h1>
-                                            <a href="product-sidebar.html" class="shop-btn mt-3">Belanja Sekarang</a>
+                                            <h1 class="wrapper-details" style="color:#1c3879;">{{ $even->judul }}</h1>
+                                            <a href="product-sidebar.html" class="shop-btn mt-3" style="color: #1c3879;">Belanja Sekarang</a>
                                         </div>
                                     </div>
                                 </div>
@@ -216,8 +216,8 @@
     <section class="product-category" style="z-index: 100;position: relative;">
         <div class="container">
             <div class="section-title">
-                <h5>KATEGORI PAKAIAN</h5>
-                <a href="product-sidebar.html" class="view">Lihat Semua</a>
+                <h5 style="color: #1c3879;">KATEGORI PAKAIAN</h5>
+                <a href="product-sidebar.html" class="view" style="color: #1c3879;">Lihat Semua</a>
             </div>
             <ul class="nav nav-underline mb-3"
                 style="display:flex; justify-content: center;">
@@ -284,8 +284,8 @@
         <section class="product arrival mt-5" style="z-index: 100;position: relative;">
             <div class="container">
                 <div class="section-title">
-                    <h5>TERBARU!</h5>
-                    <a href="{{ url('/product/regular') }}" class="view">Lihat Semua</a>
+                    <h5 style="color: #1c3879;">TERBARU!</h5>
+                    <a href="{{ url('/product/regular') }}" class="view" style="color: #1c3879;">Lihat Semua</a>
                 </div>
                 <div class="arrival-section">
                     <swiper-container slides-per-view="4" loop="true" navigation="true" space-between="30"

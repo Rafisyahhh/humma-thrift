@@ -112,12 +112,12 @@ class LandingpageController extends Controller {
 
     // Tambahkan metode regular
     public function productRegular(Request $request) {
-        $products = Product::where('status', 'active')->paginate(24);
+        $products = Product::where('status', 'active')->paginate(3);
         $colors = $products->pluck('color')->map('strtolower')->unique();
         $sizes = $products->pluck('size')->map('strtolower')->unique();
 
         if ($request->ajax()) {
-            return view('components.infinite-scroll.product-regular', compact('products', 'colors', 'sizes'))->render();
+            return view('Landing.components.product-regular', compact('products', 'colors', 'sizes'))->render();
         }
 
         $brands = Brand::all();
@@ -140,7 +140,7 @@ class LandingpageController extends Controller {
         $sizes = $product_auction->pluck('size')->map('strtolower')->unique();
 
         if ($request->ajax()) {
-            return view('components.infinite-scroll.product-auction', compact('product_auction', 'colors', 'sizes'))->render();
+            return view('Landing.components.product-auction', compact('product_auction', 'colors', 'sizes'))->render();
         }
 
         $brands = Brand::all();
@@ -169,7 +169,7 @@ class LandingpageController extends Controller {
         $sizes = $products->pluck('size')->map('strtolower')->unique();
 
         if ($request->ajax()) {
-            return view('components.infinite-scroll.product-regular', compact('products', 'colors', 'sizes', 'search'))->render();
+            return view('Landing.components.product-regular', compact('products', 'colors', 'sizes', 'search'))->render();
         }
 
         $brands = Brand::all();
@@ -194,7 +194,7 @@ class LandingpageController extends Controller {
         $sizes = $product_auction2->pluck('size')->map('strtolower')->unique();
 
         if ($request->ajax()) {
-            return view('components.infinite-scroll.product-auction', compact('product_auction', 'colors', 'sizes', 'search'))->render();
+            return view('Landing.components.product-auction', compact('product_auction', 'colors', 'sizes', 'search'))->render();
         }
 
         $brands = Brand::all();

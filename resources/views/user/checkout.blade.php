@@ -202,7 +202,7 @@
     .address-item {
       position: relative;
       display: flex;
-      border: 2.5008px solid black;
+      border: 2.5008px solid #d5d5d7;
       padding: 1rem;
       margin-top: .25rem !important;
       margin-bottom: .25rem !important;
@@ -274,13 +274,13 @@
                     <div class="d-flex gap-3">
                       <img src="{{ asset("storage/$item->thumbnail") }}" class="mb-4" width="60" />
                       <div class="mt-1">
-                        <h5 class="wrapper-heading" style="font-size: 20px">{{ $item->title }}
+                        <h5 class="wrapper-heading" style="font-size: 20px; color: #1c3879;">{{ $item->title }}
                         </h5>
                         <p class="paragraph">{{ $item->brand->title }}</p>
                       </div>
                     </div>
                     <div class="price mt-3" data-price="{{ $item->price }}">
-                      <h5 class="wrapper-heading" style="font-size: 20px">
+                      <h5 class="wrapper-heading" style="font-size: 20px; color: #1c3879;">
                         Rp{{ number_format($item->price, null, null, '.') }}
                       </h5>
                     </div>
@@ -301,9 +301,7 @@
                   <span class="placeholder bg-secondary" style="width: 6%;"></span>
                   <span class="placeholder bg-secondary" style="width: 16%;"></span>
                   <span id="noAddress" class="position-absolute top-50" style="left: 25%; display: none;">Kelihatanya kamu
-                    belum
-                    memilih alamat utama
-                    nih.</span>
+                    belum memilih alamat utama nih.</span>
                 </div>
                 <button class="shop-btn p-1 rounded-1 position-absolute"
                   style="right: 0; display: none; width: 10rem; font-size: 1.25rem;" id="changeAddressButton"
@@ -329,7 +327,7 @@
               Tambah Alamat Baru
             </button>
           </div>
-          <p class="fs-5">*pilih alamat yang sesuai dengan alamat anda</p>
+          <p class="fs-5" style="color: red;">*Pilih alamat yang sesuai dengan alamat anda</p>
           <hr />
           <p style="font-size: 1.9rem">Alamat</p>
           <div class="order-summary">
@@ -820,10 +818,10 @@
   <script>
     $(document).ready(function() {
       updateAddressPlaceholder();
-      setTimeout(() => {
-        $('#address-wrapper-head').attr("style", "background-color: rgba(210, 208, 208, 0.4);");
-        $('#address-wrapper-head #noAddress').show();
-      }, 3000);
+    //   setTimeout(() => {
+    //     $('#address-wrapper-head').attr("style", "background-color: rgba(210, 208, 208, 0.4);");
+    //     $('#address-wrapper-head #noAddress').show();
+    //   }, 3000);
     });
 
     function updateAddressPlaceholder() {
