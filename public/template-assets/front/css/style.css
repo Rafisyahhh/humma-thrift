@@ -5758,7 +5758,7 @@ a.shop-btn:hover {
     overflow: hidden;
 }
 
-.loader {
+.circle-loader {
     color: var(-loader-color);
     font-size: 90px;
     text-indent: -9999em;
