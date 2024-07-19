@@ -170,7 +170,7 @@
         /* margin: 0 5px 5px; */
         background-color: #ffffff73;
         margin: 0 5px 10px; /* Tambahkan margin jika perlu */
-        
+
         }
 
         .grid-item img {
@@ -353,10 +353,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <form action="{{ route('user.checkout') }}" method="post">
+                                    <form action="{{ route('user.checkout.process') }}" method="post">
                                         @csrf
                                         <div class="product-cart-btn" style="bottom:0;">
-                                            <input type="hidden" value="{{ $item->id }}" name="product_id">
+                                            <input type="hidden" value="{{ $item->id }}" name="product_id[]">
                                             <button type="submit" class="product-btn">Beli sekarang</button>
                                         </div>
                                     </form>
