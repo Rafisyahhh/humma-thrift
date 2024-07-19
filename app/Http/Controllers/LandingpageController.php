@@ -112,14 +112,38 @@ class LandingpageController extends Controller {
 
     // Tambahkan metode regular
     public function productRegular(Request $request) {
-        $products = Product::where('status', 'active')->paginate(3);
+        $products = Product::where('status', 'active');
         $colors = $products->pluck('color')->map('strtolower')->unique();
         $sizes = $products->pluck('size')->map('strtolower')->unique();
 
         if ($request->ajax()) {
-            return view('Landing.components.product-regular', compact('products', 'colors', 'sizes'))->render();
+            if (isset($request->categories)) {
+                $products = $products->whereHas('categories', function ($q) use ($request) {
+                    $q->whereIn('slug', explode(',', $request->categories));
+                });
+            }
+            if (isset($request->brands)) {
+                $products = $products->whereHas('brand', function ($q) use ($request) {
+                    $q->whereIn('slug', explode(',', $request->brands));
+                });
+            }
+            if (isset($request->colors)) {
+                $products = $products->whereIn('color', explode(',', $request->colors));
+            }
+            if (isset($request->sizes)) {
+                $products = $products->whereIn('size', explode(',', $request->sizes));
+            }
+            if (isset($request->price)) {
+                $products = $products->where('price', '>=', explode('-', $request->price)[0])->where('price', '<=', explode('-', $request->price)[1]);
+            }
+            $products = $products->paginate(24);
+            if ($products->currentPage() > $products->lastPage()) {
+                return response()->json(['lastPage' => true]);
+            }
+            return view('Landing.components.product-regular', compact('products'))->render();
         }
 
+        $products = $products->paginate(24);
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
@@ -134,15 +158,42 @@ class LandingpageController extends Controller {
 
     // Tambahkan metode auction
     public function productAuction(Request $request) {
-        $product_auction = ProductAuction::where('status', 'active')->paginate(24);
+        $product_auction = ProductAuction::where('status', 'active');
 
         $colors = $product_auction->pluck('color')->map('strtolower')->unique();
         $sizes = $product_auction->pluck('size')->map('strtolower')->unique();
 
         if ($request->ajax()) {
-            return view('Landing.components.product-auction', compact('product_auction', 'colors', 'sizes'))->render();
+            if (isset($request->categories)) {
+                $product_auction = $product_auction->whereHas('categories', function ($q) use ($request) {
+                    $q->whereIn('slug', explode(',', $request->categories));
+                });
+            }
+            if (isset($request->brands)) {
+                $product_auction = $product_auction->whereHas('brand', function ($q) use ($request) {
+                    $q->whereIn('slug', explode(',', $request->brands));
+                });
+            }
+            if (isset($request->colors)) {
+                $product_auction = $product_auction->whereIn('color', explode(',', $request->colors));
+            }
+            if (isset($request->sizes)) {
+                $product_auction = $product_auction->whereIn('size', explode(',', $request->sizes));
+            }
+            if (isset($request->priceStart)) {
+                $product_auction = $product_auction->where('bid_price_start', '>=', explode('-', $request->priceStart)[0])->where('bid_price_start', '<=', explode('-', $request->priceStart)[1]);
+            }
+            if (isset($request->priceEnd)) {
+                $product_auction = $product_auction->where('bid_price_end', '>=', explode('-', $request->priceEnd)[0])->where('bid_price_end', '<=', explode('-', $request->priceEnd)[1]);
+            }
+            $product_auction = $product_auction->paginate(24);
+            if ($product_auction->currentPage() > $product_auction->lastPage()) {
+                return response()->json(['lastPage' => true]);
+            }
+            return view('Landing.components.product-auction', compact('product_auction'))->render();
         }
 
+        $product_auction = $product_auction->paginate(24);
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $countcart = cart::where('user_id', auth()->id())->count();
@@ -163,14 +214,39 @@ class LandingpageController extends Controller {
 
     public function searchProductRegular(Request $request) {
         $search = $request->search;
-        $products = Product::where('status', 'active')->where('title', 'like', "%$search%")->paginate(24);
+        $products = Product::where('status', 'active')->where('title', 'like', "%$search%");
 
         $colors = $products->pluck('color')->map('strtolower')->unique();
         $sizes = $products->pluck('size')->map('strtolower')->unique();
 
         if ($request->ajax()) {
-            return view('Landing.components.product-regular', compact('products', 'colors', 'sizes', 'search'))->render();
+            if (isset($request->categories)) {
+                $products = $products->whereHas('categories', function ($q) use ($request) {
+                    $q->whereIn('slug', explode(',', $request->categories));
+                });
+            }
+            if (isset($request->brands)) {
+                $products = $products->whereHas('brand', function ($q) use ($request) {
+                    $q->whereIn('slug', explode(',', $request->brands));
+                });
+            }
+            if (isset($request->colors)) {
+                $products = $products->whereIn('color', explode(',', $request->colors));
+            }
+            if (isset($request->sizes)) {
+                $products = $products->whereIn('size', explode(',', $request->sizes));
+            }
+            if (isset($request->price)) {
+                $products = $products->where('price', '>=', explode('-', $request->price)[0])->where('price', '<=', explode('-', $request->price)[1]);
+            }
+            $products = $products->paginate(24);
+            if ($products->currentPage() > $products->lastPage()) {
+                return response()->json(['lastPage' => true]);
+            }
+            return view('Landing.components.product-regular', compact('products'))->render();
         }
+
+        $products = $products->paginate(24);
 
         $brands = Brand::all();
         $categories = ProductCategory::all();
@@ -187,15 +263,43 @@ class LandingpageController extends Controller {
 
     public function searchProductAuction(Request $request) {
         $search = $request->search;
-        $product_auction = ProductAuction::where('status', 'active')->where('title', 'like', "%$search%")->paginate(24);
+        $product_auction = ProductAuction::where('status', 'active')->where('title', 'like', "%$search%");
         $product_auction2 = ProductAuction::all();
 
         $colors = $product_auction2->pluck('color')->map('strtolower')->unique();
         $sizes = $product_auction2->pluck('size')->map('strtolower')->unique();
 
         if ($request->ajax()) {
-            return view('Landing.components.product-auction', compact('product_auction', 'colors', 'sizes', 'search'))->render();
+            if (isset($request->categories)) {
+                $product_auction = $product_auction->whereHas('categories', function ($q) use ($request) {
+                    $q->whereIn('slug', explode(',', $request->categories));
+                });
+            }
+            if (isset($request->brands)) {
+                $product_auction = $product_auction->whereHas('brand', function ($q) use ($request) {
+                    $q->whereIn('slug', explode(',', $request->brands));
+                });
+            }
+            if (isset($request->colors)) {
+                $product_auction = $product_auction->whereIn('color', explode(',', $request->colors));
+            }
+            if (isset($request->sizes)) {
+                $product_auction = $product_auction->whereIn('size', explode(',', $request->sizes));
+            }
+            if (isset($request->priceStart)) {
+                $product_auction = $product_auction->where('bid_price_start', '>=', explode('-', $request->priceStart)[0])->where('bid_price_start', '<=', explode('-', $request->priceStart)[1]);
+            }
+            if (isset($request->priceEnd)) {
+                $product_auction = $product_auction->where('bid_price_end', '>=', explode('-', $request->priceEnd)[0])->where('bid_price_end', '<=', explode('-', $request->priceEnd)[1]);
+            }
+            $product_auction = $product_auction->paginate(24);
+            if ($product_auction->currentPage() > $product_auction->lastPage()) {
+                return response()->json(['lastPage' => true]);
+            }
+            return view('Landing.components.product-auction', compact('product_auction'))->render();
         }
+
+        $product_auction = $product_auction->paginate(24);
 
         $brands = Brand::all();
         $categories = ProductCategory::all();
