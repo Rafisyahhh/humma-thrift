@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TransactionOrder extends Model
 {
     use HasFactory;
+
     protected $guarded = ['id'];
 
     public function UserAddress()

@@ -2,26 +2,27 @@
 
 namespace App\Notifications;
 
+use App\Models\Order;
+use App\Models\TransactionOrder;
 use Illuminate\Bus\Queueable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Collection;
 
-class NotificationUserCheckout extends Notification
+class UserInvoiceProductPaidNotification extends Notification
 {
     use Queueable;
 
-    private Model $transaction;
-    private Collection $orders;
+    private Order|Collection|null $order;
+    private TransactionOrder $transaction;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(Model $transaction, Collection $orders)
+    public function __construct(TransactionOrder $transaction)
     {
         $this->transaction = $transaction;
-        $this->orders = $orders;
+        $this->order = $transaction->order;
     }
 
     /**
@@ -39,13 +40,13 @@ class NotificationUserCheckout extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $urlTransaction = route('user.transaction.show', $this->transaction->reference_id);
-        $orders = $this->orders;
         $transaction = $this->transaction;
+        $orders = $this->order;
+        $urlTransaction = route('user.transaction.show', $this->transaction->reference_id);
 
         return (new MailMessage)
-            ->subject('Segera Selesaikan Pembayaranmu!')
-            ->markdown('mail.invoice.unpaid', compact('notifiable', 'urlTransaction', 'orders', 'transaction'));
+            ->subject("Tagihan Anda Sudah Dibayarkan")
+            ->markdown('mail.invoice.paid', compact('transaction', 'orders', 'notifiable', 'urlTransaction'));
     }
 
     /**
@@ -56,9 +57,9 @@ class NotificationUserCheckout extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'title' => 'Segera Bayar Yuk!',
+            'title' => 'Tagihanmu Udah Dibayar!',
             'url' => route('user.transaction.show', $this->transaction->id),
-            'data' => 'Kamu baru saja checkout beberapa barang. Yuk segera lakukan pembayaran biar segera diantar ke alamatmu.',
+            'data' => "Kamu baru saja membayarkan tagihan dengan #{$this->transaction->id}.",
         ];
     }
 }

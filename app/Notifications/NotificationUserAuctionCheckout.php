@@ -44,7 +44,9 @@ class NotificationUserAuctionCheckout extends Notification
         $orders = $this->orders;
         $transaction = $this->transaction;
 
-        return (new MailMessage)->markdown('mail.invoice-auction.unpaid', compact('notifiable', 'urlTransaction', 'orders', 'transaction'));
+        return (new MailMessage)
+            ->subject('Segera Selesaikan Pembayaranmu!')
+            ->markdown('mail.invoice-auction.unpaid', compact('notifiable', 'urlTransaction', 'orders', 'transaction'));
     }
 
     /**

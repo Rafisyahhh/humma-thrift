@@ -26,16 +26,9 @@ class CartController extends Controller
             ->get();
 
         // Group cart items by the product's user_store_id
-        $cartStoreGroups = $carts->groupBy(function ($cartItem) {
-            return $cartItem->product->store_id;
-        })->map(function ($items, $storeId) {
-            // Get the store for the current group
+        $cartStoreGroups = $carts->groupBy('product.store_id')->map(function ($cartItems, $storeId) {
             $store = UserStore::find($storeId);
-            // dd($items);
-            return [
-                'store' => $store,
-                'cartItems' => $items
-            ];
+            return compact('store', 'cartItems');
         });
 
         // Fetch all related data in one go
@@ -56,31 +49,12 @@ class CartController extends Controller
     {
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function storecart(Product $Product)
-    // {
-    //     // dd($Product);
-    //     $dataproduct['product_id'] = $Product->id;
-    //     $dataproduct['user_id'] = auth()->id();
-
-    //     $keranjang = cart::where('product_id', $Product->id);
-
-    //     if($keranjang->exists()) {
-    //         return redirect()->back()->with('error', "Produknya udah ada di keranjang nih...");
-    //     }
-
-    //     cart::create($dataproduct);
-
-    //     return redirect()->back()->with('success', 'Keranjang created successfully.');
-    // }
-    public function storecart(Product $Product)
+    public function storecart(Product $product)
     {
-        $dataproduct['product_id'] = $Product->id;
+        $dataproduct['product_id'] = $product->id;
         $dataproduct['user_id'] = auth()->id();
 
-        $keranjang = Cart::where('product_id', $Product->id)
+        $keranjang = Cart::where('product_id', $product->id)
             ->where('user_id', $dataproduct['user_id'])
             ->first();
 
@@ -90,7 +64,7 @@ class CartController extends Controller
 
         Cart::create($dataproduct);
 
-        $Product->userStore->user->notify(new UserCart($Product));
+        $product->userStore->user->notify(new UserCart($product));
 
         return redirect()->back()->with('success', 'Keranjang berhasil dibuat.');
     }
