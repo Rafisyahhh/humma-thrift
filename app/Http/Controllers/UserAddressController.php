@@ -129,19 +129,11 @@ class UserAddressController extends Controller
         return  redirect()->back()->with('success', 'Sukses menghapus alamat');
     }
 
-    public function main(UserAddress $userAddress, $addressId)
+    public function main(UserAddress $address)
     {
 
-        // Set semua status menjadi 0
-        UserAddress::query()->update(['status' => 1]);
-
-        // Temukan user address berdasarkan ID
-        $userAddress = UserAddress::find($addressId);
-
-        if ($userAddress) {
-            // Update status dari user address yang ditemukan
-            $userAddress->update(['status' => !$userAddress->status]);
-        }
+        UserAddress::query()->update(['status' => 0]);
+        $address->update(['status' => !$address->status]);
 
         return redirect()->back()->with('success','Alamat menjadi alamat utama');
     }
