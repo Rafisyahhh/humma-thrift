@@ -255,7 +255,11 @@
                 @else
                   <span class="badge text-bg-danger me-2">Tutup</span>
                 @endif
-                {{ $openInstance->format('H:i') }} - {{ $closeInstance->format('H:i') }}
+
+                @if (!$store->cuti)
+                    {{ $openInstance->format('H:i') }} - {{ $closeInstance->format('H:i') }}
+                @endif
+
               </p>
 
               <span class="location mt-5">{!! $store->description !!}</span>
