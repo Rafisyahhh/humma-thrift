@@ -133,7 +133,7 @@ class UserAddressController extends Controller
     {
 
         // Set semua status menjadi 0
-        UserAddress::query()->update(['status' => 0]);
+        UserAddress::query()->update(['status' => 1]);
 
         // Temukan user address berdasarkan ID
         $userAddress = UserAddress::find($addressId);
