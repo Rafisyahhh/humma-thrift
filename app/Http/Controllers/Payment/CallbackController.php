@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Response;
 use App\Models\TransactionOrder;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Notifications\SellerInvoiceProductPaidNotification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 
@@ -80,7 +81,8 @@ class CallbackController extends Controller
                             $query->product()?->update(['status' => 'sold']);
                             $query->product_auction()?->update(['status' => 'sold']);
 
-                            User::find($query->transaction_order->user_id)->notify(new UserInvoiceProductPaidNotification($query->transaction_order));
+                            $query->transaction_order->user()->notify(new UserInvoiceProductPaidNotification($query->transaction_order));
+                            $query->transaction_order->userstore->user()->notify(new SellerInvoiceProductPaidNotification($query->transaction_order));
                         });
                         break;
 
