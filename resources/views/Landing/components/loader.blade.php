@@ -1,5 +1,5 @@
-@foreach ($lists as $item)
-  <div class="col-lg-4 col-sm-6 placeholder-glow loader">
+@foreach (['', '', ''] as $item)
+  <div class="col-lg-4 col-sm-6 placeholder-glow" isLoader>
     <div class="product-wrapper p-0">
       <div class="product-img">
         <div class="bg-body-secondary w-100" style="height: 300px;"></div>

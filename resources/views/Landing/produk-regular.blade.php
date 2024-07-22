@@ -18,9 +18,8 @@
                   </div>
                 </div>
               </div>
-              @include('Landing.components.loader', ['lists' => $products])
+              @include('Landing.components.loader')
             </div>
-            {{-- <div class="loader">Loading...</div> --}}
           </div>
         </div>
       </div>
@@ -31,8 +30,17 @@
 @push('script')
   <script>
     $(document).ready(function() {
-      function updateFilters() {
-        const filters = ['categories', 'brands', 'colors', 'sizes'];
+      const url = new URL(window.location.href);
+      window.scrollTo(0, 0);
+      let updateTimeout;
+      let page = 0;
+      let loading = true;
+      let lastPage = false;
+      const filters = ['categories', 'brands', 'colors', 'sizes', 'price'];
+      const maxPrice = +('{{ $products->pluck('price')->max() }}');
+      const loader = $('[isLoader]');
+
+      const getCheckedFilters = () => {
         const checked = {};
 
         filters.forEach(filter => {
@@ -41,109 +49,127 @@
           }).get();
         });
 
-        const priceRange = $('#price-slider')[0].noUiSlider.get().map(value => Number(value));
+        if ($('#price-slider').length > 0) {
+          const priceRange = $('#price-slider')[0].noUiSlider.get().map(value => Number(value));
+          checked['price'] = (priceRange[0] <= 0 && priceRange[1] >= maxPrice) ? [] : [
+            `${priceRange[0]}-${priceRange[1]}`
+          ];
+        } else {
+          checked['price'] = [];
+        }
 
-        $('[data-brand][data-categories][data-color][data-size][data-price]').each(function() {
-          const data = $(this).data();
-          const matches = filters.every(filter => {
-            const key = filter === 'categories' ? 'categories' : filter.slice(0, -1);
-            return checked[filter].length === 0 || checked[filter].some(item => data[
-              key].includes(item));
-          }) && data.price >= priceRange[0] && data.price <= priceRange[1];
+        return checked;
+      };
 
-          $(this).toggle(matches);
-        });
+      const updateFilters = () => {
+        clearInterval(updateTimeout);
+        updateTimeout = setTimeout(() => {
+          page = 1;
+          lastPage = false;
+          const checked = getCheckedFilters();
 
-        filters.forEach(filter => {
-          const count = checked[filter].length;
-          const selector =
-            `#${filter === 'categories' ? 'categories' : filter.slice(0, -1)}Count`;
-          $(selector).toggle(count > 0).text(count);
-        });
-      }
+          filters.forEach(filter => {
+            const count = checked[filter].length;
+            if (count > 0) {
+              url.searchParams.set(filter, checked[filter].join(','));
+            } else {
+              url.searchParams.delete(filter);
+            }
+            $(`#${filter}Count`).toggle(count > 0).text(count);
+          });
 
-      function initPriceSlider() {
-        const maxPrice = +'{{ $products->pluck('price')->max() }}';
+          window.history.replaceState(null, null, url);
+
+          $.ajax({
+            url: url.toString(),
+            type: 'GET',
+            success: function(data) {
+              loading = false;
+              $('[isProduct],[isLoader]').remove();
+              $('#product-container').append(data);
+            },
+            error: function() {
+              loading = false;
+              console.error('Failed to update filters.');
+            }
+          });
+        }, 500);
+      };
+
+      const initPriceSlider = () => {
         if ($("#price-slider").length > 0) {
-          var tooltipSlider = document.getElementById("price-slider");
+          const tooltipSlider = document.getElementById("price-slider");
 
           noUiSlider.create(tooltipSlider, {
-            start: [0, maxPrice],
+            start: [{{ explode('-', request()->price ?? '0')[0] }},
+              {{ explode('-', request()->price ?? '0-' . $products->pluck('price')->max())[1] }}
+            ],
             connect: true,
             format: {
-              from: function(value) {
-                return Number(value);
-              },
-              to: function(value) {
-                return Math.round(value);
-              },
+              from: Number,
+              to: Math.round
             },
             step: 500,
             range: {
               min: 0,
-              max: maxPrice,
-            },
+              max: maxPrice
+            }
           });
 
-          var formatValues = [
+          const formatValues = [
             $("#slider-margin-value-min"),
             $("#slider-margin-value-max")
           ];
 
-          tooltipSlider.noUiSlider.on("update", function(values) {
+          tooltipSlider.noUiSlider.on("update", (values) => {
             formatValues[0].text("Harga: Rp" + values[0]);
             formatValues[1].text("Rp" + values[1]);
             updateFilters();
             $('#priceCount').toggle(values[0] > 0 || values[1] < maxPrice).text(1);
           });
         }
-      }
+      };
 
-      function loadPage(page) {
+      const loadPage = () => {
         $.ajax({
-            url: '?{{ isset($search) ? "search=$search" : '' }}&page=' + page,
-            type: 'get',
-            beforeSend: function() {
-              // $('.loader').show();
-            }
-          })
-          .done(function(data) {
+          url: url.toString() + (url.search ? '&' : '?') + 'page=' + page,
+          type: 'GET',
+          beforeSend: function() {
+            $("#product-container").append(loader);
+          },
+          success: function(data) {
             loading = false;
-            const lastItem = $('#last-item');
-            lastItem.text(parseInt(lastItem.text()) + {{ $products->lastItem() }});
-            if (data.html === "") {
-              $('.loader').html("No more records found");
+            $('[isLoader]').remove();
+            if (data.lastPage) {
+              lastPage = true;
+              $("#product-container").append(`
+                <div class="col" style="align-self: center;" isProduct>
+                  <h3 class="text-center">Produk Habis</h3>
+                  <p class="text-center">Maaf ya, sepertinya tidak ada lagi produk yang tersedia.</p>
+                </div>
+              `);
               return;
             }
             $("#product-container").append(data);
-            $('.loader').remove();
-            setTimeout(() => {
-              updateFilters();
-            }, 500);
-          })
-          .fail(function() {
+          },
+          error: function() {
             loading = false;
             console.error('No response from server');
-          });
-      }
+          }
+        });
+      };
 
       initPriceSlider();
+
       $('input:checkbox[name="categories[]"], input:checkbox[name="brands[]"], input:checkbox[name="colors[]"], input:checkbox[name="sizes[]"]')
         .on('change', updateFilters);
 
-      var loader = $('.loader');
-      var page = 1;
-      var lastPage = {{ $products->lastPage() }};
-      var loading = true;
-      loadPage(page)
-
       $(window).on("scroll", function() {
-        if (loading || page >= lastPage) return;
+        if (loading || lastPage) return;
         if ($(window).scrollTop() + $(window).height() >= $(document).height() - 450) {
           loading = true;
           page++;
-          $("#product-container").append(loader);
-          loadPage(page)
+          loadPage();
         }
       });
     });

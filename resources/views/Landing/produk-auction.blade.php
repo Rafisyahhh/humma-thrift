@@ -66,10 +66,8 @@
                       dari {{ $product_auction->total() ?? 0 }} hasil</p>
                   </div>
                 </div>
-
-                @include('Landing.components.loader', ['lists' => $product_auction])
               </div>
-              {{-- <div class="loader">Loading...</div> --}}
+              @include('Landing.components.loader')
             </div>
           </div>
         </div>
@@ -131,6 +129,189 @@
 
 @push('script')
   <script>
+    $(document).ready(function() {
+      const url = new URL(window.location.href);
+      window.scrollTo(0, 0);
+      let updateTimeout;
+      let page = 0;
+      let loading = true;
+      let lastPage = false;
+      const filters = ['categories', 'brands', 'colors', 'sizes', 'priceStart', 'priceEnd'];
+      const maxPriceStart = +('{{ $product_auction->pluck('bid_price_start')->max() }}');
+      const maxPriceEnd = +('{{ $product_auction->pluck('bid_price_end')->max() }}');
+      const loader = $('[isLoader]');
+
+      const getCheckedFilters = () => {
+        const checked = {};
+
+        filters.forEach(filter => {
+          checked[filter] = $(`input:checkbox[name="${filter}[]"]:checked`).map(function() {
+            return this.value;
+          }).get();
+        });
+
+        if ($("#price-slider").length > 0 && $("#price-slider-2").length > 0) {
+          const priceStartRange = $('#price-slider')[0].noUiSlider.get().map(value => Number(value));
+          const priceEndRange = $('#price-slider-2')[0].noUiSlider.get().map(value => Number(value));
+          checked['priceStart'] = (priceStartRange[0] <= 0 && priceStartRange[1] >= maxPriceStart) ? [] : [
+            `${priceStartRange[0]}-${priceStartRange[1]}`
+          ];
+          checked['priceEnd'] = (priceEndRange[0] <= 0 && priceEndRange[1] >= maxPriceEnd) ? [] : [
+            `${priceEndRange[0]}-${priceEndRange[1]}`
+          ];
+        } else {
+          checked['priceStart'] = [];
+          checked['priceEnd'] = [];
+        }
+
+        return checked;
+      };
+
+      const updateFilters = () => {
+        clearInterval(updateTimeout);
+        updateTimeout = setTimeout(() => {
+          page = 1;
+          lastPage = false;
+          const checked = getCheckedFilters();
+
+          filters.forEach(filter => {
+            const count = checked[filter].length;
+            if (count > 0) {
+              url.searchParams.set(filter, checked[filter].join(','));
+            } else {
+              url.searchParams.delete(filter);
+            }
+            $(`#${filter}Count`).toggle(count > 0).text(count);
+            if (["priceStart", "priceEnd"].includes(checked[filter])) {
+              $(`#priceCount`).text(1);
+            }
+          });
+
+          window.history.replaceState(null, null, url);
+
+          $.ajax({
+            url: url.toString(),
+            type: 'GET',
+            success: function(data) {
+              loading = false;
+              $('[isProduct],[isLoader]').remove();
+              $('#product-container').append(data);
+            },
+            error: function() {
+              loading = false;
+              console.error('Failed to update filters.');
+            }
+          });
+        }, 500);
+      };
+
+      const initPriceSlider = () => {
+        if ($("#price-slider").length > 0 && $("#price-slider-2").length > 0) {
+          var sliderPriceStart = document.getElementById("price-slider");
+          var sliderPriceEnd = document.getElementById("price-slider-2");
+
+          noUiSlider.create(sliderPriceStart, {
+            start: [0, maxPriceStart],
+            connect: true,
+            format: {
+              from: function(value) {
+                return Number(value);
+              },
+              to: function(value) {
+                return Math.round(value);
+              },
+            },
+            step: 500,
+            range: {
+              min: 0,
+              max: maxPriceStart,
+            },
+          });
+          noUiSlider.create(sliderPriceEnd, {
+            start: [0, maxPriceEnd],
+            connect: true,
+            format: {
+              from: function(value) {
+                return Number(value);
+              },
+              to: function(value) {
+                return Math.round(value);
+              },
+            },
+            step: 500,
+            range: {
+              min: 0,
+              max: maxPriceEnd,
+            },
+          });
+
+          const formatValues = [
+            $("#slider-margin-value-min"),
+            $("#slider-margin-value-max"),
+            $("#slider-margin-value-min-2"),
+            $("#slider-margin-value-max-2")
+          ];
+
+          sliderPriceStart.noUiSlider.on("update", (values) => {
+            formatValues[0].text("Harga: Rp" + values[0]);
+            formatValues[1].text("Rp" + values[1]);
+            updateFilters();
+            $('#priceCount').toggle(values[0] > 0 || values[1] < maxPriceStart).text(1);
+          });
+          sliderPriceEnd.noUiSlider.on("update", (values) => {
+            formatValues[2].text("Harga: Rp" + values[0]);
+            formatValues[3].text("Rp" + values[1]);
+            updateFilters();
+            $('#priceCount').toggle(values[0] > 0 || values[1] < maxPriceEnd).text(1);
+          });
+        }
+      };
+
+      const loadPage = () => {
+        $.ajax({
+          url: url.toString() + (url.search ? '&' : '?') + 'page=' + page,
+          type: 'GET',
+          beforeSend: function() {
+            $("#product-container").append(loader);
+          },
+          success: function(data) {
+            loading = false;
+            $('[isLoader]').remove();
+            if (data.lastPage) {
+              lastPage = true;
+              $("#product-container").append(`
+              <div class="col" style="align-self: center;" isProduct>
+                <h3 class="text-center">Produk Habis</h3>
+                <p class="text-center">Maaf ya, sepertinya tidak ada lagi produk yang tersedia.</p>
+              </div>
+            `);
+              return;
+            }
+            $("#product-container").append(data);
+          },
+          error: function() {
+            loading = false;
+            console.error('No response from server');
+          }
+        });
+      };
+
+      initPriceSlider();
+
+      $('input:checkbox[name="categories[]"], input:checkbox[name="brands[]"], input:checkbox[name="colors[]"], input:checkbox[name="sizes[]"]')
+        .on('change', updateFilters);
+
+      $(window).on("scroll", function() {
+        if (loading || lastPage) return;
+        if ($(window).scrollTop() + $(window).height() >= $(document).height() - 450) {
+          loading = true;
+          page++;
+          loadPage();
+        }
+      });
+    });
+  </script>
+  {{-- <script>
     $(document).ready(function() {
       function updateFilters(price = []) {
         const filters = ['categories', 'brands', 'colors', 'sizes'];
@@ -273,6 +454,5 @@
           });
       }
     });
-  </script>
+  </script> --}}
 @endpush
-{{-- page-link --}}

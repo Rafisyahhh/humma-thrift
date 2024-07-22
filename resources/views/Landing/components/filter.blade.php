@@ -14,21 +14,21 @@
         <button class="nav-link position-relative" id="profile-tab" data-bs-toggle="tab" data-bs-target="#brand-tab"
           type="button" role="tab" aria-controls="brand-tab" aria-selected="false">Brand
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info"
-            style="display: none;" id="brandCount">0</span>
+            style="display: none;" id="brandsCount">0</span>
         </button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link position-relative" id="contact-tab" data-bs-toggle="tab" data-bs-target="#color-tab"
           type="button" role="tab" aria-controls="color-tab" aria-selected="false">Warna
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info"
-            style="display: none;" id="colorCount">0</span>
+            style="display: none;" id="colorsCount">0</span>
         </button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link position-relative" id="contact-tab" data-bs-toggle="tab" data-bs-target="#size-tab"
           type="button" role="tab" aria-controls="size-tab" aria-selected="false">Ukuran
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info"
-            style="display: none;" id="sizeCount">0</span>
+            style="display: none;" id="sizesCount">0</span>
         </button>
       </li>
       <li class="nav-item" role="presentation">
@@ -47,7 +47,8 @@
           <ul class="sidebar-list">
             @foreach ($categories as $item)
               <li>
-                <input type="checkbox" id="{{ $item->id }}" name="categories[]" value="{{ $item->title }}" />
+                <input type="checkbox" id="{{ $item->id }}" name="categories[]" value="{{ $item->slug }}"
+                  @checked(in_array($item->slug, explode(',', request()->categories))) />
                 <label for="{{ $item->id }}">{{ $item->title }}</label>
               </li>
             @endforeach
@@ -60,7 +61,8 @@
           <ul class="sidebar-list">
             @foreach ($brands as $item)
               <li>
-                <input type="checkbox" id="brands-{{ $item->id }}" name="brands[]" value="{{ $item->title }}" />
+                <input type="checkbox" id="brands-{{ $item->id }}" name="brands[]" value="{{ $item->title }}"
+                  @checked(in_array($item->slug, explode(',', request()->brands))) />
                 <label for="brands-{{ $item->id }}">{{ $item->title }}</label>
               </li>
             @endforeach
@@ -73,7 +75,8 @@
           <ul class="sidebar-list">
             @foreach ($colors as $item)
               <li>
-                <input type="checkbox" id="{{ $item }}" name="colors[]" value="{{ $item }}" />
+                <input type="checkbox" id="{{ $item }}" name="colors[]" value="{{ $item }}"
+                  @checked(in_array($item, explode(',', request()->colors))) />
                 <label for="{{ $item }}" class="text-capitalize">{{ $item }}</label>
               </li>
             @endforeach
@@ -86,7 +89,8 @@
           <ul class="sidebar-list">
             @foreach ($sizes as $item)
               <li>
-                <input type="checkbox" id="{{ $item }}" name="sizes[]" value="{{ $item }}" />
+                <input type="checkbox" id="{{ $item }}" name="sizes[]" value="{{ $item }}"
+                  @checked(in_array($item, explode(',', request()->sizes))) />
                 <label for="{{ $item }}" class="text-capitalize">{{ $item }}</label>
               </li>
             @endforeach

@@ -102,6 +102,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
 
         Route::post('address/{id}', [UserAddressController::class, 'store'])->name('address.store');
         Route::put('edit/address/{user}/{address}', [UserAddressController::class, 'update'])->name('address.edit');
+        Route::put('main/address/{address}', [UserAddressController::class, 'main'])->name('address.main');
         Route::delete('delete/address/{address}', [UserAddressController::class, 'destroy'])->name('address.destroy');
         Route::view('about', 'user.tentang')->name('about');
         Route::get('brand', [LandingpageController::class, 'brand'])->name('brand');
