@@ -477,8 +477,15 @@
             </div>
         </div>
 
-        <div style="overflow: auto">
-            <div style="float: right">
+        <div class="d-flex justify-content-between align-items-center">
+            <!-- Circles which indicates the steps of the form: -->
+            <div style="text-align: center;">
+                <span class="step" onclick="changeTab(0)"></span>
+                <span class="step" onclick="changeTab(1)"></span>
+                <span class="step" onclick="changeTab(2)"></span>
+            </div>
+
+            <div class="ms-auto">
                 <button type="button" id="prevBtn" class="shop-btn" onclick="nextPrev(-1)">
                     Kembali
                 </button>
@@ -487,14 +494,6 @@
                 </button>
             </div>
         </div>
-
-        <!-- Circles which indicates the steps of the form: -->
-        <div style="text-align: center; margin-top: 40px">
-            <span class="step" onclick="changeTab(0)"></span>
-            <span class="step" onclick="changeTab(1)"></span>
-            <span class="step" onclick="changeTab(2)"></span>
-        </div>
-        {{-- <input type="hidden" name="product_id" value="{{ $product->id }}"> --}}
     </form>
     {{-- Address Modal --}}
     <div id="addressModal" class="modal">
