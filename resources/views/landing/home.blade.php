@@ -204,7 +204,7 @@
                                             </h5>
                                             <h1 class="wrapper-details" style="color:#1c3879;">{{ $even->judul }}</h1>
                                             <a href="{{ url('/product/regular') }}" class="shop-btn mt-3"
-                                                style="color: #1c3879;">Belanja Sekarang</a>
+                                                ">Belanja Sekarang</a>
                                         </div>
                                     </div>
                                 </div>
