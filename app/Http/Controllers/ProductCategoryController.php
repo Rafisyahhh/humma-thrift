@@ -25,8 +25,10 @@ class ProductCategoryController extends Controller {
 
         // $productCategories = $this->productCategories->when($hasRequestSearch, fn ($query) => $query->where("title", 'LIKE', "%{$search}%"))
         //     ->paginate(5);
+        $category = ProductCategory::all();
 
-        return view('admin.productcategory'/*, compact('productCategories')*/);
+
+        return view('admin.productcategory', compact('category'));
     }
 
     /**

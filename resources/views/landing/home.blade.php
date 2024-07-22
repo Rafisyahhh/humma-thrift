@@ -160,16 +160,18 @@
         .grid-sizer,
         .grid-item {
             width: 14.285714285714286%;
+            margin-left: 20px;
         }
 
         .grid-item {
-            flex-shrink: 0;
+            /* flex-shrink: 0; */
             aspect-ratio: 1 / 1;
             float: left;
             border: 2px solid #ffffff;
             /* margin: 0 5px 5px; */
             background-color: #ffffff73;
-            margin: 0 5px 10px;
+            /* margin-left:1px !important;
+                margin-right: 1px !important; */
             /* Tambahkan margin jika perlu */
 
         }
@@ -201,7 +203,7 @@
                                                 {{ $even->subjudul }}
                                             </h5>
                                             <h1 class="wrapper-details" style="color:#1c3879;">{{ $even->judul }}</h1>
-                                            <a href="product-sidebar.html" class="shop-btn mt-3"
+                                            <a href="{{ url('/product/regular') }}" class="shop-btn mt-3"
                                                 style="color: #1c3879;">Belanja Sekarang</a>
                                         </div>
                                     </div>
@@ -223,20 +225,18 @@
             </div>
             <ul class="nav nav-underline mb-3" style="display:flex; justify-content: center;">
                 <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+                    <a class="filter nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
                         type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">All</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="lelang-tab" data-bs-toggle="tab" data-bs-target="#lelang-tab-pane"
-                        type="button" role="tab" aria-controls="lelang-tab-pane" aria-selected="false">Atasan</a>
+                    <a class="filter nav-link" id="atasan-tab" data-bs-toggle="tab" data-bs-target="#lelang-tab-pane"
+                        type="button" role="tab" aria-controls="lelang-tab-pane" aria-selected="false"
+                        data-filter=".atasan">Atasan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="ulasan-tab" data-bs-toggle="tab" data-bs-target="#ulasan-tab-pane"
-                        type="button" role="tab" aria-controls="ulasan-tab-pane" aria-selected="false">Bawahan</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="ulasan-tab" data-bs-toggle="tab" data-bs-target="#ulasan-tab-pane"
-                        type="button" role="tab" aria-controls="ulasan-tab-pane" aria-selected="false">Longdress</a>
+                    <a class="filter nav-link" id="ulasan-tab" data-bs-toggle="tab" data-bs-target="#ulasan-tab-pane"
+                        type="button" role="tab" aria-controls="ulasan-tab-pane" aria-selected="false"
+                        data-filter=".bawahan">Bawahan</a>
                 </li>
             </ul>
             {{-- <div class="category-section">
@@ -253,10 +253,10 @@
                 @endforeach
             </div> --}}
 
-            <div class="grid mt-4 ">
+            <div class="grid mt-4">
                 <div class="grid-sizer"></div>
                 @foreach ($categories as $kategori)
-                    <div class="grid-item">
+                    <div class="grid-item {{ $kategori->type }}">
                         <img src="{{ asset("storage/{$kategori->icon}") }}"
                             style="width:125px;hieght:125px;border-radius:20px;" class="h-100 w-100">
                     </div>
@@ -602,6 +602,8 @@
 
 @push('script')
     <script src="{{ asset('additional-assets/swiper-11/swiper-element.min.js') }}"></script>
+
+    <script src="https://npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
 @endpush
 
 @push('js')
@@ -658,8 +660,30 @@
                 columnWidth: '.grid-sizer'
             }
         });
-        $grid.imagesLoaded().progress(function() {
-            $grid.isotope('layout');
+        // $grid.imagesLoaded().progress(function() {
+        //     $grid.isotope('layout');
+        // });
+        // var filterFns = {
+        //     // show if number is greater than 50
+        //     numberGreaterThan50: function() {
+        //         var number = $(this).find('.number').text();
+        //         return parseInt(number, 10) > 50;
+        //     },
+        //     // show if name ends with -ium
+        //     ium: function() {
+        //         var name = $(this).find('.name').text();
+        //         return name.match(/ium$/);
+        //     }
+        // };
+        $('.filter').click(function() {
+            console.log("tfvtvvv");
+            var filterValue = $(this).data('filter');
+            // use filterFn if matches value
+            filterValue = filterValue;
+            $grid.isotope({
+                filter: filterValue
+            });
         });
+        // change is-checked class on buttons
     </script>
 @endpush

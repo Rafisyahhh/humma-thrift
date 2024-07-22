@@ -24,7 +24,8 @@ class UpdateProductCategoryRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'icon' => 'nullable|file|mimes:jpeg,png,jpg|max:2048'
+            'icon' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
+            'type' => 'required'
         ];
     }
 
@@ -36,6 +37,7 @@ class UpdateProductCategoryRequest extends FormRequest
             'icon.image' => 'Masukan harus berupa Logo',
             'icon.mimes' => 'Logo harus berupa file jpeg,png,jpg',
             'icon.max' => 'Ukuran Logo harus kurang 2MB',
+            'type.required' => 'type harus ada',
         ];
     }
 }

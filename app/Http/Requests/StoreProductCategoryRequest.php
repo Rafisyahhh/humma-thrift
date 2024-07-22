@@ -23,7 +23,8 @@ class StoreProductCategoryRequest extends FormRequest
     {
         return [
             'title' => 'required|unique:product_categories,title',
-            'icon' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            'icon' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'type' => 'required'
         ];
     }
 
@@ -36,6 +37,7 @@ class StoreProductCategoryRequest extends FormRequest
             'icon.image' => 'Masukan harus berupa Icon',
             'icon.mimes' => 'Icon harus berupa file jpeg,png,jpg',
             'icon.max' => 'Ukuran Logo harus kurang 2MB',
+            'type' => 'type kategori harus ada'
         ];
     }
 }
