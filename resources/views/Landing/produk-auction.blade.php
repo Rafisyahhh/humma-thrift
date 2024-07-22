@@ -54,135 +54,7 @@
   <section class="product product-sidebar footer-padding">
     <div class="container">
       <div class="row g-5">
-        <div class="col-lg-3 pt-5 h-100">
-          <div class="sticky-top" style="top: 80px;"> <!-- Set top to adjust sticky behavior -->
-            <ul class="nav nav-pills justify-content-around sidebar gap-3 bg-body-secondary p-3" id="myTab"
-              role="tablist" style="border-top-left-radius: 2rem; border-top-right-radius: 2rem;">
-              <li class="nav-item" role="presentation">
-                <button class="nav-link active position-relative" id="home-tab" data-bs-toggle="tab"
-                  data-bs-target="#category-tab" type="button" role="tab" aria-controls="category-tab"
-                  aria-selected="true">Kategori
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info"
-                    style="display: none;" id="categoriesCount">0</span>
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link position-relative" id="profile-tab" data-bs-toggle="tab"
-                  data-bs-target="#brand-tab" type="button" role="tab" aria-controls="brand-tab"
-                  aria-selected="false">Brand
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info"
-                    style="display: none;" id="brandCount">0</span>
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link position-relative" id="contact-tab" data-bs-toggle="tab"
-                  data-bs-target="#color-tab" type="button" role="tab" aria-controls="color-tab"
-                  aria-selected="false">Warna
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info"
-                    style="display: none;" id="colorCount">0</span>
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link position-relative" id="contact-tab" data-bs-toggle="tab"
-                  data-bs-target="#size-tab" type="button" role="tab" aria-controls="size-tab"
-                  aria-selected="false">Ukuran
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info"
-                    style="display: none;" id="sizeCount">0</span>
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link position-relative" id="contact-tab" data-bs-toggle="tab"
-                  data-bs-target="#price-tab" type="button" role="tab" aria-controls="price-tab"
-                  aria-selected="false">Harga
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info"
-                    style="display: none;" id="priceCount">0</span>
-                </button>
-              </li>
-            </ul>
-            <div class="tab-content sidebar-section bg-body-tertiary" id="myTabContent"
-              style="border-top-left-radius: unset; border-top-right-radius: unset">
-              <div class="tab-pane fade show active sidebar-wrapper" id="category-tab" role="tabpanel"
-                aria-labelledby="category-tab" tabindex="0">
-                <div class="sidebar-item">
-                  <ul class="sidebar-list">
-                    @foreach ($categories as $item)
-                      <li>
-                        <input type="checkbox" id="{{ $item->id }}" name="categories[]" value="{{ $item->title }}" />
-                        <label for="{{ $item->id }}">{{ $item->title }}</label>
-                      </li>
-                    @endforeach
-                  </ul>
-                </div>
-              </div>
-              <div class="tab-pane fade sidebar-wrapper" id="brand-tab" role="tabpanel" aria-labelledby="brand-tab"
-                tabindex="0">
-                <div class="sidebar-item">
-                  <ul class="sidebar-list">
-                    @foreach ($brands as $item)
-                      <li>
-                        <input type="checkbox" id="brands-{{ $item->id }}" name="brands[]"
-                          value="{{ $item->title }}" />
-                        <label for="brands-{{ $item->id }}">{{ $item->title }}</label>
-                      </li>
-                    @endforeach
-                  </ul>
-                </div>
-              </div>
-              <div class="tab-pane fade sidebar-wrapper" id="color-tab" role="tabpanel" aria-labelledby="color-tab"
-                tabindex="0">
-                <div class="sidebar-item">
-                  <ul class="sidebar-list">
-                    @foreach ($colors as $item)
-                      <li>
-                        <input type="checkbox" id="{{ $item }}" name="colors[]" value="{{ $item }}" />
-                        <label for="{{ $item }}" class="text-capitalize">{{ $item }}</label>
-                      </li>
-                    @endforeach
-                  </ul>
-                </div>
-              </div>
-              <div class="tab-pane fade sidebar-wrapper" id="size-tab" role="tabpanel" aria-labelledby="size-tab"
-                tabindex="0">
-                <div class="sidebar-item">
-                  <ul class="sidebar-list">
-                    @foreach ($sizes as $item)
-                      <li>
-                        <input type="checkbox" id="{{ $item }}" name="sizes[]"
-                          value="{{ $item }}" />
-                        <label for="{{ $item }}" class="text-capitalize">{{ $item }}</label>
-                      </li>
-                    @endforeach
-                  </ul>
-                </div>
-              </div>
-              <div class="tab-pane fade sidebar-wrapper sidebar-range" id="price-tab" role="tabpanel"
-                aria-labelledby="price-tab" tabindex="0">
-                <h5 class="wrapper-heading">Harga Awal</h5>
-                <div class="price-slide range-slider">
-                  <div class="price">
-                    <div class="range-slider style-1">
-                      <div id="price-slider" class="slider-range mb-3"></div>
-                      <span class="example-val" id="slider-margin-value-min"></span>
-                      <span>-</span>
-                      <span class="example-val" id="slider-margin-value-max"></span>
-                    </div>
-                  </div>
-                </div>
-                <h5 class="wrapper-heading mt-4">Harga Akhir</h5>
-                <div class="price-slide range-slider">
-                  <div class="price">
-                    <div class="range-slider style-1">
-                      <div id="price-slider-2" class="slider-range mb-3"></div>
-                      <span class="example-val" id="slider-margin-value-min-2"></span>
-                      <span>-</span>
-                      <span class="example-val" id="slider-margin-value-max-2"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> <!-- sticky-top ends here -->
-        </div>
+        @include('Landing.components.filter', ['isAuction' => true])
         <div class="col-lg-9">
           <div class="product-sidebar-section" data-aos="fade-up">
             <div class="row g-5" id="product-container">
@@ -194,31 +66,8 @@
                       dari {{ $product_auction->total() ?? 0 }} hasil</p>
                   </div>
                 </div>
-                <div class="loaders row g-5">
-                  @foreach ($product_auction as $item)
-                    <div class="col-lg-4 col-sm-6 placeholder-glow">
-                      <div class="product-wrapper p-0">
-                        <div class="product-img">
-                          <div class="bg-body-secondary w-100" style="height: 300px;"></div>
-                        </div>
-                        <div class="product-info">
-                          <div class="product-description">
-                            <a class="placeholder disabled bg-secondary" aria-disabled="true" style="width: 150px"></a>
-                            <div class="price">
-                              <span class="placeholder bg-secondary" style="width: 75px"></span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="product-cart-btn" style="bottom:0;">
-                          <button class="product-btn placeholder disabled" aria-disabled="true"
-                            style="width: 100px"></button>
-                        </div>
-                      </div>
-                    </div>
-                  @endforeach
-                </div>
               </div>
-              {{-- <div class="loader">Loading...</div> --}}
+              @include('Landing.components.loader')
             </div>
           </div>
         </div>
@@ -280,6 +129,189 @@
 
 @push('script')
   <script>
+    $(document).ready(function() {
+      const url = new URL(window.location.href);
+      window.scrollTo(0, 0);
+      let updateTimeout;
+      let page = 0;
+      let loading = true;
+      let lastPage = false;
+      const filters = ['categories', 'brands', 'colors', 'sizes', 'priceStart', 'priceEnd'];
+      const maxPriceStart = +('{{ $product_auction->pluck('bid_price_start')->max() }}');
+      const maxPriceEnd = +('{{ $product_auction->pluck('bid_price_end')->max() }}');
+      const loader = $('[isLoader]');
+
+      const getCheckedFilters = () => {
+        const checked = {};
+
+        filters.forEach(filter => {
+          checked[filter] = $(`input:checkbox[name="${filter}[]"]:checked`).map(function() {
+            return this.value;
+          }).get();
+        });
+
+        if ($("#price-slider").length > 0 && $("#price-slider-2").length > 0) {
+          const priceStartRange = $('#price-slider')[0].noUiSlider.get().map(value => Number(value));
+          const priceEndRange = $('#price-slider-2')[0].noUiSlider.get().map(value => Number(value));
+          checked['priceStart'] = (priceStartRange[0] <= 0 && priceStartRange[1] >= maxPriceStart) ? [] : [
+            `${priceStartRange[0]}-${priceStartRange[1]}`
+          ];
+          checked['priceEnd'] = (priceEndRange[0] <= 0 && priceEndRange[1] >= maxPriceEnd) ? [] : [
+            `${priceEndRange[0]}-${priceEndRange[1]}`
+          ];
+        } else {
+          checked['priceStart'] = [];
+          checked['priceEnd'] = [];
+        }
+
+        return checked;
+      };
+
+      const updateFilters = () => {
+        clearInterval(updateTimeout);
+        updateTimeout = setTimeout(() => {
+          page = 1;
+          lastPage = false;
+          const checked = getCheckedFilters();
+
+          filters.forEach(filter => {
+            const count = checked[filter].length;
+            if (count > 0) {
+              url.searchParams.set(filter, checked[filter].join(','));
+            } else {
+              url.searchParams.delete(filter);
+            }
+            $(`#${filter}Count`).toggle(count > 0).text(count);
+            if (["priceStart", "priceEnd"].includes(checked[filter])) {
+              $(`#priceCount`).text(1);
+            }
+          });
+
+          window.history.replaceState(null, null, url);
+
+          $.ajax({
+            url: url.toString(),
+            type: 'GET',
+            success: function(data) {
+              loading = false;
+              $('[isProduct],[isLoader]').remove();
+              $('#product-container').append(data);
+            },
+            error: function() {
+              loading = false;
+              console.error('Failed to update filters.');
+            }
+          });
+        }, 500);
+      };
+
+      const initPriceSlider = () => {
+        if ($("#price-slider").length > 0 && $("#price-slider-2").length > 0) {
+          var sliderPriceStart = document.getElementById("price-slider");
+          var sliderPriceEnd = document.getElementById("price-slider-2");
+
+          noUiSlider.create(sliderPriceStart, {
+            start: [0, maxPriceStart],
+            connect: true,
+            format: {
+              from: function(value) {
+                return Number(value);
+              },
+              to: function(value) {
+                return Math.round(value);
+              },
+            },
+            step: 500,
+            range: {
+              min: 0,
+              max: maxPriceStart,
+            },
+          });
+          noUiSlider.create(sliderPriceEnd, {
+            start: [0, maxPriceEnd],
+            connect: true,
+            format: {
+              from: function(value) {
+                return Number(value);
+              },
+              to: function(value) {
+                return Math.round(value);
+              },
+            },
+            step: 500,
+            range: {
+              min: 0,
+              max: maxPriceEnd,
+            },
+          });
+
+          const formatValues = [
+            $("#slider-margin-value-min"),
+            $("#slider-margin-value-max"),
+            $("#slider-margin-value-min-2"),
+            $("#slider-margin-value-max-2")
+          ];
+
+          sliderPriceStart.noUiSlider.on("update", (values) => {
+            formatValues[0].text("Harga: Rp" + values[0]);
+            formatValues[1].text("Rp" + values[1]);
+            updateFilters();
+            $('#priceCount').toggle(values[0] > 0 || values[1] < maxPriceStart).text(1);
+          });
+          sliderPriceEnd.noUiSlider.on("update", (values) => {
+            formatValues[2].text("Harga: Rp" + values[0]);
+            formatValues[3].text("Rp" + values[1]);
+            updateFilters();
+            $('#priceCount').toggle(values[0] > 0 || values[1] < maxPriceEnd).text(1);
+          });
+        }
+      };
+
+      const loadPage = () => {
+        $.ajax({
+          url: url.toString() + (url.search ? '&' : '?') + 'page=' + page,
+          type: 'GET',
+          beforeSend: function() {
+            $("#product-container").append(loader);
+          },
+          success: function(data) {
+            loading = false;
+            $('[isLoader]').remove();
+            if (data.lastPage) {
+              lastPage = true;
+              $("#product-container").append(`
+              <div class="col" style="align-self: center;" isProduct>
+                <h3 class="text-center">Produk Habis</h3>
+                <p class="text-center">Maaf ya, sepertinya tidak ada lagi produk yang tersedia.</p>
+              </div>
+            `);
+              return;
+            }
+            $("#product-container").append(data);
+          },
+          error: function() {
+            loading = false;
+            console.error('No response from server');
+          }
+        });
+      };
+
+      initPriceSlider();
+
+      $('input:checkbox[name="categories[]"], input:checkbox[name="brands[]"], input:checkbox[name="colors[]"], input:checkbox[name="sizes[]"]')
+        .on('change', updateFilters);
+
+      $(window).on("scroll", function() {
+        if (loading || lastPage) return;
+        if ($(window).scrollTop() + $(window).height() >= $(document).height() - 450) {
+          loading = true;
+          page++;
+          loadPage();
+        }
+      });
+    });
+  </script>
+  {{-- <script>
     $(document).ready(function() {
       function updateFilters(price = []) {
         const filters = ['categories', 'brands', 'colors', 'sizes'];
@@ -402,16 +434,16 @@
             url: '?{{ isset($search) ? "search=$search" : '' }}&page=' + page,
             type: 'get',
             beforeSend: function() {
-              $('.loaders').show();
+              $('.loader').show();
             }
           })
           .done(function(data) {
             loading = false;
             const lastItem = $('#last-item');
             lastItem.text(parseInt(lastItem.text()) + {{ $product_auction->lastItem() ?? 0 }});
-            $('.loaders').hide();
+            $('.loader').hide();
             if (data.html === "") {
-              $('.loaders').html("No more records found");
+              $('.loader').html("No more records found");
               return;
             }
             $("#product-container").append(data);
@@ -422,6 +454,5 @@
           });
       }
     });
-  </script>
+  </script> --}}
 @endpush
-{{-- page-link --}}

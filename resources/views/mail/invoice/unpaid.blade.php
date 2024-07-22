@@ -13,7 +13,7 @@ segera melakukan pembayaran agar pesananmu bisa segera kami proses dan kirim ke 
 |:-------|:------|
 | Nomor Tagihan | {{ $transaction->reference_id }} |
 | Tanggal Terbit | {{ now()->locale('id')->isoFormat('D MMMM YYYY') }} |
-| Total Harga | Rp{{ number_format($transaction->total, 0, ',', '.') }} |
+| Total Harga | @currency($transaction->total) |
 </x-mail::table>
 
 ## Dan berikut adalah detail barang yang dipesan:

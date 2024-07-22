@@ -19,14 +19,15 @@ class UserAddressController extends Controller
     public function index()
     {
         $users = Auth::user();
-        $addresses = UserAddress::orderBy('status', 'desc')->get();
-        $carts = cart::where('user_id', auth()->id())
+    $addresses = UserAddress::where('user_id', auth()->id())->orderBy('status', 'desc')->get();
+    $carts = Cart::where('user_id', auth()->id())
         ->whereNotNull('product_id')
         ->orderBy('created_at')
         ->get();
-        $countcart = cart::where('user_id',auth()->id())->count();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        return view('user.location', compact('countcart','carts','countFavorite', 'addresses','users'));
+    $countcart = Cart::where('user_id', auth()->id())->count();
+    $countFavorite = Favorite::where('user_id', auth()->id())->count();
+
+    return view('user.location', compact('countcart', 'carts', 'countFavorite', 'addresses', 'users'));
     }
 
     /**
@@ -96,7 +97,6 @@ class UserAddressController extends Controller
                 'address_update' => 'nullable',
             ]);
 
-            if (isset ($validatedData['address_update'])){
                  // Find the address by ID regardless of its status
                 $userAddress = UserAddress::findOrFail($addressId);
 
@@ -105,15 +105,7 @@ class UserAddressController extends Controller
                     'address' => $validatedData['address_update'],
                 ]);
 
-            }else{
 
-
-                $userAddress = UserAddress::all()->toQuery()->update(['status' => 0]);
-                $userAddress = UserAddress::find($addressId);
-
-                $userAddress->update(['status' => !$userAddress->status]);
-
-            }
             //    dd( $userAddress->status);
 
 
@@ -174,5 +166,15 @@ public function delete($id = null)
         }
 
         return redirect('trash')->with('status', 'Alamat Berhasil Dihapus Permanent');
+    }
+
+
+    public function main(UserAddress $address)
+    {
+
+        UserAddress::query()->update(['status' => 0]);
+        $address->update(['status' => !$address->status]);
+
+        return redirect()->back()->with('success','Alamat menjadi alamat utama');
     }
 }

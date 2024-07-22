@@ -184,7 +184,7 @@
                 <div class="order-summery">
                     <div class="subtotal product-total">
                         <div class="mx-5" style="width: 77.5rem;">
-                            @foreach ($addresses as $address)
+                            @foreach ($addresses as $address )
                                 <div class="radio-container" style="margin-bottom: 10px; width: 77.5rem;">
                                     <label for="option1" class="radio-label"
                                         style="display: flex; flex-direction: column; width: 77.5rem;">
@@ -222,7 +222,7 @@
                                                     </div>
                                                 </div>
 
-                                                <form method="POST" action="{{route('user.address.edit', ['user' => auth()->user()->id, 'address' => $address->id]) }}">
+                                                <form method="POST" action="{{route('user.address.main', ['user' => auth()->user()->id, 'address' => $address->id]) }}">
                                                     @csrf
                                                     @method('PUT')
                                                     <label class="switch">

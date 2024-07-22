@@ -1,10 +1,9 @@
 <x-mail::message>
-# Halo {{ $notifiable->name }}, Segera Selesaikan Pembayaranmu!
+# Halo {{ $notifiable->name }}, tagihanmu sudah dibayar!
 
 Hai, {{ $notifiable->name }}!
 
-Terima kasih telah berbelanja di toko kami. Kamu baru saja melakukan checkout beberapa barang. Jangan lupa untuk
-segera melakukan pembayaran agar pesananmu bisa segera kami proses dan kirim ke alamatmu.
+Terima kasih telah berbelanja di toko kami. Kamu baru saja membayar tagihan yang sebelumnya sudah kamu bayar.
 
 ## Berikut adalah detail pesananmu:
 
@@ -12,7 +11,7 @@ segera melakukan pembayaran agar pesananmu bisa segera kami proses dan kirim ke 
 | Detail | Nilai |
 |:-------|:------|
 | Nomor Tagihan | {{ $transaction->reference_id }} |
-| Tanggal Terbit | {{ now()->locale('id')->isoFormat('D MMMM YYYY') }} |
+| Tanggal Terbit | {{ $transaction->created_at->locale('id')->isoFormat('D MMMM YYYY') }} |
 | Total Harga | @currency($transaction->total) |
 </x-mail::table>
 
@@ -22,7 +21,11 @@ segera melakukan pembayaran agar pesananmu bisa segera kami proses dan kirim ke 
 | Nama Produk  | Jumlah Barang |
 |:-------------|:--------------|
 @foreach ($orders as $order)
+@if($order->product)
+| {{ $order->product->title }} | x1 |
+@else
 | {{ $order->product_auction->title }} | x1 |
+@endif
 @endforeach
 </x-mail::table>
 
