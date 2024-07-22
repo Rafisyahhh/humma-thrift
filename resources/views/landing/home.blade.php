@@ -152,24 +152,25 @@
         }
 
         .grid:after {
-        content: '';
-        display: block;
-        clear: both;
+            content: '';
+            display: block;
+            clear: both;
         }
 
         .grid-sizer,
         .grid-item {
-        width: 14.285714285714286%;
+            width: 14.285714285714286%;
         }
 
         .grid-item {
-        flex-shrink:0;
-        aspect-ratio: 1 / 1;
-        float:left;
-        border: 2px solid #ffffff ;
-        /* margin: 0 5px 5px; */
-        background-color: #ffffff73;
-        margin: 0 5px 10px; /* Tambahkan margin jika perlu */
+            flex-shrink: 0;
+            aspect-ratio: 1 / 1;
+            float: left;
+            border: 2px solid #ffffff;
+            /* margin: 0 5px 5px; */
+            background-color: #ffffff73;
+            margin: 0 5px 10px;
+            /* Tambahkan margin jika perlu */
 
         }
 
@@ -200,7 +201,8 @@
                                                 {{ $even->subjudul }}
                                             </h5>
                                             <h1 class="wrapper-details" style="color:#1c3879;">{{ $even->judul }}</h1>
-                                            <a href="product-sidebar.html" class="shop-btn mt-3" style="color: #1c3879;">Belanja Sekarang</a>
+                                            <a href="product-sidebar.html" class="shop-btn mt-3"
+                                                style="color: #1c3879;">Belanja Sekarang</a>
                                         </div>
                                     </div>
                                 </div>
@@ -219,8 +221,7 @@
                 <h5 style="color: #1c3879;">KATEGORI PAKAIAN</h5>
                 <a href="product-sidebar.html" class="view" style="color: #1c3879;">Lihat Semua</a>
             </div>
-            <ul class="nav nav-underline mb-3"
-                style="display:flex; justify-content: center;">
+            <ul class="nav nav-underline mb-3" style="display:flex; justify-content: center;">
                 <li class="nav-item">
                     <a class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
                         type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">All</a>
@@ -255,12 +256,12 @@
             <div class="grid mt-4 ">
                 <div class="grid-sizer"></div>
                 @foreach ($categories as $kategori)
-                  <div class="grid-item">
-                    <img src="{{ asset("storage/{$kategori->icon}") }}"
-                    style="width:125px;hieght:125px;border-radius:20px;" class="h-100 w-100">
-                  </div>
+                    <div class="grid-item">
+                        <img src="{{ asset("storage/{$kategori->icon}") }}"
+                            style="width:125px;hieght:125px;border-radius:20px;" class="h-100 w-100">
+                    </div>
                 @endforeach
-              </div>
+            </div>
         </div>
     </section>
 
@@ -344,11 +345,11 @@
                                     <div class="product-info">
                                         <div class="product-description">
                                             <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
-                                                class="product-details" style="font-size: 2rem"> {{ $item->title }}
+                                                class="product-details" style="font-size: 1.85rem"> {{ $item->title }}
                                             </a>
                                             <div class="price">
                                                 <span class="new-price"
-                                                    style="font-size: 1.8rem">Rp{{ number_format($item->price, null, null, '.') }}
+                                                    style="font-size: 1.70rem">Rp{{ number_format($item->price, null, null, '.') }}
                                                 </span>
                                             </div>
                                         </div>
@@ -430,17 +431,31 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="product-info">
                                         <div class="product-description">
-                                            <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
-                                                class="product-details" style="font-size: 2rem">{{ $item->title }}
-                                            </a>
-                                            <div class="price">
-                                                <span class="new-price"
-                                                    style="font-size: 1.8rem">Rp{{ number_format($item->bid_price_start, null, null, '.') }}
-                                                    - Rp{{ number_format($item->bid_price_end, null, null, '.') }}
-                                                </span>
-                                            </div>
+                                             {{-- STORE --}}
+                                           <tr class="table-row ticket-row store-header"
+                                                style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100%;">
+                                                <td class="table-wrapper wrapper-product"
+                                                    style="display: flex; align-items: center;">
+                                                    <div class="form-check"
+                                                        style="display: flex; align-items: center; margin-left: 1rem;">
+                                                        <i class="fa-solid fa-store"
+                                                            style="margin-left: -3rem; color: #215791; font-size: 1.75rem;"></i>
+                                                        <a href="{{ route('store.profile', ['store' => $item->userStore->username]) }}"
+                                                            style="font-weight: bold; margin-left: 1rem; font-size: 1.55rem; color: gray;">{{ $item->userStore->name }}</a>
+                                                    </div>
+                                                </td><br>
+                                                <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
+                                                    class="product-details" style="font-size: 1.85rem">{{ $item->title }}
+                                                </a>
+                                                <div class="price">
+                                                    <span class="new-price"
+                                                        style="font-size: 1.70rem">Rp{{ number_format($item->bid_price_start, null, null, '.') }}
+                                                        - Rp{{ number_format($item->bid_price_end, null, null, '.') }}
+                                                    </span>
+                                                </div>
                                         </div>
                                     </div>
 
@@ -637,14 +652,14 @@
     </script>
     <script>
         var $grid = $('.grid').isotope({
-          itemSelector: '.grid-item',
-          percentPosition: true,
-          masonry: {
-            columnWidth: '.grid-sizer'
-          }
+            itemSelector: '.grid-item',
+            percentPosition: true,
+            masonry: {
+                columnWidth: '.grid-sizer'
+            }
         });
         $grid.imagesLoaded().progress(function() {
-          $grid.isotope('layout');
+            $grid.isotope('layout');
         });
-      </script>
+    </script>
 @endpush

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();
-
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -27,6 +27,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('user_addresses', function (Blueprint $table) {
+            $table->dropSoftDelete();
+        });
         Schema::dropIfExists('user_addresses');
     }
 };

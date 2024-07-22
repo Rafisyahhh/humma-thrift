@@ -103,6 +103,10 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
         Route::post('address/{id}', [UserAddressController::class, 'store'])->name('address.store');
         Route::put('edit/address/{user}/{address}', [UserAddressController::class, 'update'])->name('address.edit');
         Route::delete('delete/address/{address}', [UserAddressController::class, 'destroy'])->name('address.destroy');
+        # Soft delete Address
+        Route::get('/address/restore/{id}', [UserAddressController::class, 'restore'])->name('address.restore');
+        Route::get('/address/delete/{id}', [UserAddressController::class, 'delete'])->name('address.delete');
+
         Route::view('about', 'user.tentang')->name('about');
         Route::get('brand', [LandingpageController::class, 'brand'])->name('brand');
         Route::view('detail', 'user.detail')->name('detail');

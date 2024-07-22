@@ -137,4 +137,42 @@ class UserAddressController extends Controller
         return  redirect()->back()->with('success', 'Sukses menghapus alamat');
     }
 
+
+
+
+    public function trash()
+    {
+        $userAddress = UserAddress::onlyTrashed()->get();
+        return view('user.checkout', compact('userAddress'));
+    }
+
+
+// RESTORE ADDRESS
+    public function restore($id = null)
+    {
+        if($id != null){
+            $userAddress = UserAddress::onlyTrashed()
+            ->where('id', $id)
+            ->restore();
+        }else{
+            $userAddress = UserAddress::onlyTrashed()->restore();
+        }
+
+        return redirect()->back()->with('status', 'Alamat berhasil dipulihkan');
+    }
+
+
+// DELETE PERMANENT ADDRESS
+public function delete($id = null)
+    {
+        if($id != null ){
+            $userAddress = UserAddress::onlyTrashed()
+            ->where('id', $id)
+            ->forceDelete();
+        } else {
+            $userAddress = UserAddress::onlyTrashed()->forceDelete();
+        }
+
+        return redirect('trash')->with('status', 'Alamat Berhasil Dihapus Permanent');
+    }
 }
