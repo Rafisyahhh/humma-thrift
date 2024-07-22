@@ -345,6 +345,21 @@
                     <div class="address-list">
                         @foreach ($addresses as $address)
                             <div class="address-item-wrap">
+
+                                {{-- INI YA CAKKK TADI CODE SENG TAK KOMEN IKI CUMAN GAE PERCOBAAN --}}
+
+
+
+                                {{-- <form id="deleteForm{{ $address->id }}" action="{{ route('user.address.destroy', $address->id) }}" method="post" style="display: inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                    style="color: #1c3879; background: none; border: none; padding: 0; cursor: pointer; margin-right: 110px;">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                                                                    <path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z"/>
+                                                                </svg>
+                                                            </button>
+                                                        </form> --}}
                                 <input type="radio" name="addressOption" id="option{{ $address->id }}"
                                     value="{{ $address->id }}" class="d-none" @checked($address->status) />
                                 <label class="address-item-listlabel" for="option{{ $address->id }}">

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Log;
 class CallbackController extends Controller
 {
     // Isi dengan private key anda
-    protected string $privateKey;
+    protected ?string $privateKey;
 
     public function __construct()
     {
