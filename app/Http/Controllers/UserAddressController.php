@@ -165,7 +165,7 @@ public function delete($id = null)
             $userAddress = UserAddress::onlyTrashed()->forceDelete();
         }
 
-        return redirect('trash')->with('status', 'Alamat Berhasil Dihapus Permanent');
+        return redirect('user.checkout')->with('status', 'Alamat Berhasil Dihapus Permanent');
     }
 
 
