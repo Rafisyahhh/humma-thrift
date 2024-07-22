@@ -55,11 +55,6 @@
             cursor: pointer;
         }
 
-        .d-flex {
-            display: flex;
-            align-items: center;
-        }
-
         .m-0 {
             margin: 0;
         }
@@ -564,7 +559,6 @@
 @endsection
 @push('script')
     {{-- script modal tambah address --}}
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Get the modal element
