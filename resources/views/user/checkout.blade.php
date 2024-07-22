@@ -268,9 +268,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background:rgba(0, 92, 190, 0.1);
+            background: rgba(0, 92, 190, 0.1);
             border-radius: .5rem;
-            color:rgba(0, 92, 190)
+            color: rgba(0, 92, 190)
         }
     </style>
 @endpush
@@ -347,9 +347,25 @@
                             <div class="address-item-wrap">
                                 <input type="radio" name="addressOption" id="option{{ $address->id }}"
                                     value="{{ $address->id }}" class="d-none" @checked($address->status) />
+
                                 <label class="address-item-listlabel" for="option{{ $address->id }}">
+
+
                                     <div class="address-item-list-content">
+
                                         <div class="title">
+                                            <form action="" method="post" class="d-inline">
+                                                {{-- @csrf --}}
+                                                {{-- @method('DELETE') --}}
+                                                <button type="submit"
+                                                    style="color: #1c3879; background: none; border: none; padding: 0; cursor: pointer; margin-right: 110px;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                                                        viewBox="0 0 24 24">
+                                                        <path fill="currentColor"
+                                                            d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
+                                                    </svg>
+                                                </button>
+                                            </form>
                                             {{ $users->name }}
                                             @if ($users->phone)
                                                 | {{ $users->phone }}
@@ -787,7 +803,8 @@
             const selectedAddress = $('#selected-address');
 
             radioButtons.on('change', function() {
-                const selectedTitleAddress = $(this).parent('.address-item-wrap').find('.title').text().trim();
+                const selectedTitleAddress = $(this).parent('.address-item-wrap').find('.title').text()
+                    .trim();
                 const selectedDescAddress = $(this).parent('.address-item-wrap').find('p').text().trim();
 
                 selectedUsername.text(selectedTitleAddress);
