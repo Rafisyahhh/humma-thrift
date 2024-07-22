@@ -60,22 +60,6 @@
   </div>
 </div>
 
-
-@auth
-  @can('user')
-    <div class="header-favourite">
-      <a href="{{ route('user.wishlist') }}" class="cart-item">
-        <span style="position: relative;">
-          <i class="fas fa-heart"></i>
-          @if ($countFavorite)
-            <span class="wishlist-count">{{ $countFavorite }}</span>
-          @endif
-        </span>
-      </a>
-    </div>
-  @endcan
-@endauth
-
 <script>
   function selectCategory(category) {
     document.getElementById('dropbtn').innerText = category;
