@@ -22,6 +22,7 @@
                         <th class="text-start">NO.</th>
                         <th class="text-start">NAMA KATEGORI</th>
                         <th class="text-start">GAMBAR KATEGORI</th>
+                        <th class="text-start">TYPE</th>
                         <th class="text-center">AKSI</th>
                     </tr>
                 </thead>
@@ -109,6 +110,19 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="type" class="form-label">Tipe</label>
+                                <select name="type" id="type" class="form-select" placeholder="Masukkan tipe kategori">
+                                    <option value=""></option>
+                                    <option value="atasan"> Atasan </option>
+                                    <option value="bawahan"> Bawahan</option>
+                                </select>
+                                @error('type')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror          
                         </div>
                         <div class="pt-2 d-flex gap-3 justify-content-end">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
@@ -208,6 +222,21 @@
                                 </span>
                             @enderror
                         </div>
+
+                        <div class="mb-3">
+                            <label for="type" class="form-label">Tipe</label>
+                                <select name="type" id="type" class="form-select" placeholder="Masukkan tipe kategori">
+                                    <option value=""></option>
+                                    <option value="atasan"> Atasan </option>
+                                    <option value="bawahan"> Bawahan</option>
+                                </select>
+                                @error('type')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror          
+                        </div>
+                        
                         <div class="pt-2 d-flex gap-3 justify-content-end">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn"
@@ -277,12 +306,16 @@
                 {
                     data: 'title',
                 },
+                
                 {
                     data: 'icon',
                     orderable: false,
                     searchable: false,
                     render: (data, type) =>
                         `<img src="{{ asset('storage/') }}/${data}" class="rounded-3" height="96px">`
+                },
+                {
+                    data: 'type',
                 },
                 {
                     data: 'id',
