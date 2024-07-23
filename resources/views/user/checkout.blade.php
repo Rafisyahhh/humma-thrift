@@ -6,24 +6,16 @@
     <style>
         .custom-button {
             background-color: #007bff;
-            /* Warna latar belakang biru */
             color: white;
-            /* Warna teks putih */
             border: none;
-            /* Menghilangkan border default */
             padding: 10px 20px;
-            /* Padding */
             font-size: 16px;
-            /* Ukuran font */
             border-radius: 4px;
-            /* Membuat sudut tombol melengkung */
             transition: background-color 0.3s;
-            /* Animasi transisi */
         }
 
         .custom-button:hover {
             background-color: #0056b3;
-            /* Warna latar belakang lebih gelap saat hover */
         }
 
         .modal {
@@ -62,40 +54,27 @@
         .radio-container {
             display: flex;
             justify-content: center;
-            /* Centers horizontally */
             align-items: center;
-            /* Centers vertically */
             height: 100%;
-            /* Ensure the container takes the full height */
         }
 
         .radio-button-labels {
             position: relative;
-            /* Position relative to enable pseudo-element */
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* Centers elements inside the label horizontally */
             justify-content: center;
-            /* Centers elements inside the label vertically */
             text-align: center;
             padding: 20px;
-            /* Add padding for better spacing */
             border: 2px solid transparent;
-            /* Default border */
             border-radius: 10px;
-            /* Rounded corners */
             transition: border-color 0.3s ease, background-color 0.3s ease;
-            /* Smooth transition for hover effect */
             cursor: pointer;
-            /* Change cursor to pointer for better UX */
         }
 
         .radio-button-labels:hover {
             border-color: #007bff;
-            /* Change border color on hover */
             background-color: #f0f8ff;
-            /* Light background color on hover */
         }
 
         .radio-button-labels:checked~label {
@@ -122,7 +101,6 @@
         }
     </style>
     <style>
-        /* Style the form */
         #coForm {
             background-color: #ffffff;
             margin: 50px auto;
@@ -130,7 +108,6 @@
             min-width: 300px;
         }
 
-        /* Style the input fields */
         input {
             padding: 10px;
             width: 4%;
@@ -139,17 +116,14 @@
             border: 1px solid #aaaaaa;
         }
 
-        /* Mark input boxes that gets an error on validation: */
         input.invalid {
             background-color: #ffdddd;
         }
 
-        /* Hide all steps by default: */
         .tab {
             display: none;
         }
 
-        /* Make circles that indicate the steps of the form: */
         .step {
             height: 15px;
             width: 15px;
@@ -161,12 +135,10 @@
             opacity: 0.5;
         }
 
-        /* Mark the active step: */
         .step.active {
             opacity: 1;
         }
 
-        /* Mark the steps that are finished and valid: */
         .step.finish {
             background-color: #1c3879;
         }
