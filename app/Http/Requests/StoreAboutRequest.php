@@ -22,21 +22,21 @@ class StoreAboutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'description' => 'required'
+            // 'title' => 'required',
+            // 'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            // 'description' => 'required'
         ];
     }
 
     public function messages(): array
     {
         return [
-            'title.required' => 'judul Wajib Diisi',
-            'image.required' => 'gambar Wajib Diisi',
-            'image.image' => 'Masukan harus berupa gambar',
-            'image.mimes' => 'gambar harus berupa file jpeg,png,jpg',
-            'image.max' => 'Ukuran gambar harus kurang 2MB',
-            'description.required' => 'Deskripsi Wajib Diisi',
+            // 'title.required' => 'judul Wajib Diisi',
+            // 'image.required' => 'gambar Wajib Diisi',
+            // 'image.image' => 'Masukan harus berupa gambar',
+            // 'image.mimes' => 'gambar harus berupa file jpeg,png,jpg',
+            // 'image.max' => 'Ukuran gambar harus kurang 2MB',
+            // 'description.required' => 'Deskripsi Wajib Diisi',
         ];
     }
 }

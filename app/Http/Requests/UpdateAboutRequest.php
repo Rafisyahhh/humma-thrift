@@ -20,7 +20,7 @@ class UpdateAboutRequest extends FormRequest {
     public function rules(): array {
         return [
             'title' => 'required',
-            'image_update' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'description' => 'required'
         ];
     }
@@ -28,9 +28,9 @@ class UpdateAboutRequest extends FormRequest {
         return [
             'title.required' => 'judul wajib diisi',
             'description.required' => 'Description Wajib Diisi',
-            'images_update.image' => 'Masukan harus berupa gambar',
-            'images_update.mimes' => 'gambar harus berupa file jpeg,png,jpg',
-            'images_update.max' => 'Ukuran gambar harus kurang 2MB',
+            'images.image' => 'Masukan harus berupa gambar',
+            'images.mimes' => 'gambar harus berupa file jpeg,png,jpg',
+            'images.max' => 'Ukuran gambar harus kurang 2MB',
         ];
     }
 }

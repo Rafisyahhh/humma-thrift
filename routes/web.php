@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     AboutUsController,
+    AdminController,
     AuctionsController,
     UserController,
     BrandController,
@@ -73,12 +74,12 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
     Route::resource('product', ProductController::class);
     Route::resource('productauction', ProductAuctionController::class);
 
-    Route::prefix('notification')->controller(NotificationSellerController::class)->name('notification.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/notifications/{notificationId}', 'show')->name('show');
-        Route::get('/read-all', 'readAll')->name('readAll');
-        Route::delete('{id}', 'destroy')->name('destroy');
-    });
+        Route::prefix('notification')->controller(NotificationSellerController::class)->name('notification.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/notifications/{notificationId}', 'show')->name('show');
+            Route::get('/read-all', 'readAll')->name('readAll');
+            Route::delete('{id}', 'destroy')->name('destroy');
+        });
 
     // Show seller product auction
     Route::get('auction/seller/{id}', [AuctionsController::class, 'showSeller'])->name('auction.showSeller');
@@ -180,7 +181,7 @@ Route::get('/home', RedirectUserController::class)->name('home');
 
 # Admin Routes
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function () {
-    Route::view('/', 'admin.index')->name('index');
+    Route::get('/',[AdminController::class, 'index'])->name('index');
     Route::resource('about', AboutUsController::class);
     Route::resource('brand', BrandController::class);
     Route::resource('product-category', ProductCategoryController::class);

@@ -151,8 +151,8 @@ class AboutUsController extends Controller {
             'description' => $request->input('description'),
         ];
 
-        if ($request->hasFile('image_update')) {
-            $image = $request->file('image_update');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
             $path = $image->store('about', 'public');
             $dataToUpdate['image'] = $path;
         }

@@ -28,6 +28,7 @@ class HistoryController extends Controller {
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
 
         $NumberFormatter = number_format(1_000, 0, '', '.');
+
         $transaction = [
             [
                 'id' => 1,

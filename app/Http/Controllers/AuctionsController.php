@@ -49,13 +49,14 @@ class AuctionsController extends Controller {
     }
 
     public function notifyuser() {
-        $notifications = Auth::user()->notifications()->paginate(20);
+        $notifications = Auth::user()->notifications()->orderBy('read_at', 'asc')->orderBy('created_at', 'desc')->whereNull('read_at')->take(10)->get();
         $countcart = cart::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
             ->whereNotNull('product_id')
             ->orderBy('created_at')
             ->get();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
+
 
         return view('user.notification.notify-lelang', compact('notifications', 'countcart', 'carts', 'countFavorite'));
     }
@@ -64,7 +65,7 @@ class AuctionsController extends Controller {
         $notification = Auth::user()->notifications()->findOrFail($notificationId);
         $notification->markAsRead();
 
-        $notifications = Auth::user()->notifications()->paginate(20);
+        $notifications = Auth::user()->notifications()->orderBy('read_at', 'asc')->orderBy('created_at', 'desc')->whereNull('read_at')->take(10)->get();
         $countcart = cart::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
             ->whereNotNull('product_id')
@@ -72,6 +73,7 @@ class AuctionsController extends Controller {
             ->get();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
 
+        session()->flash('success', 'Notification read successfully');
 
         return view('user.notification.notify-lelang', compact('notifications','countcart','carts','countFavorite','notification'));
     }
@@ -89,7 +91,7 @@ class AuctionsController extends Controller {
     }
     public function readAll() {
         Auth::user()->getAttribute('unreadNotifications')->markAsRead();
-        return redirect()->route('user.notification.index');
+        return redirect()->route('user.notification.index')->with('success', 'Sukses tandai baca');
     }
 
     /**

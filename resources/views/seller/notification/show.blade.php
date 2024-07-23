@@ -69,14 +69,14 @@
                                     {{-- <a class="btn btn-danger"
                                         href="{{ route('seller.notification.destroy', $notification->id) }}"><i
                                             class="fas fa-trash"></i></a> --}}
-                                            <form action="{{ route('seller.notification.destroy', $notification->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">
-                                                    <i
-                                                    class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
+                                                {{-- <form action="{{ route('seller.notification.destroy', $notification->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i
+                                                        class="fas fa-trash"></i>
+                                                    </button>
+                                                </form> --}}
                                     {{-- <a class="btn btn-primary" --}}
                                         {{-- href="{{ route('admin.notification.unread', $notification->id) }}"> --}}
                                         {{-- <iclass="fas fa-envelope-open"></i> --}}
