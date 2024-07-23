@@ -186,42 +186,14 @@ class AuctionsController extends Controller {
     /**
      * Update the specified resource in storage.
      */
-    // public function updatelelang(UpdateauctionsRequest $request, auctions $auctions)
-    // {
-    //     try {
-    //         $dataToUpdate = [
-    //             'status' => $request->input('status') == 1,
-    //         ];
-
-    //         $auctions->update($dataToUpdate);
-
-    //         if ($auctions->status) {
-    //             $auctions->user->notify(new Lelang($auctions));
-    //         }
-    //         $productAuction = ProductAuction::find($auctions->product_auction_id);
-
-    //         if ($productAuction) {
-    //             $productAuction->auction_price = $request->input('price');
-    //             $productAuction->save();
-    //         } else {
-    //             throw new \Exception('Product Auction not found');
-    //         }
-
-    //         return redirect()->route('seller.product.index')->with('success', 'Lelang berhasil dipilih');
-    //     }catch (\Throwable $th) {
-    //         Log::error('Error in updatelelang method: ' . $th->getMessage());
-    //         return redirect()->route('seller.product.index')->withInput()->withErrors(['error' => 'Terjadi kesalahan: ' . $th->getMessage()]);
-    //     }
-
-    // }
     public function updatelelang(UpdateauctionsRequest $request, auctions $auctions) {
         try {
-            $auctions2 = $auctions->productAuction->auctions;
-            foreach ($auctions2 as $item) {
-                if ($item->user_id != $auctions->user_id) {
-                    $item->user->notify(new KalahLelang($auctions, $item->user));
-                }
-            }
+            // $auctions2 = $auctions->productAuction->auctions;
+            // foreach ($auctions2 as $item) {
+            //     if ($item->user_id != $auctions->user_id) {
+            //         $item->user->notify(new KalahLelang($auctions, $item->user));
+            //     }
+            // }
             $dataToUpdate = [
                 'status' => $request->status == 1,
             ];
