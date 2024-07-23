@@ -51,18 +51,19 @@
                             <div class="form-check" style="display: flex; align-items: center; margin-left: 1rem;">
                                 <i class="fa-solid fa-store"
                                     style="margin-left: -3rem; color: #215791; font-size: 1.75rem;"></i>
-                                    <a href="{{ route('store.profile', ['store' => $item->userStore->username]) }}"
-                                        style="font-weight: bold; margin-left: 1rem; font-size: 1.55rem; color: gray;">{{ $item->userStore->name }}</a>
+                                <a href="{{ route('store.profile', ['store' => $item->userStore->username]) }}"
+                                    style="font-weight: bold; margin-left: 1rem; font-size: 1.55rem; color: gray;">{{ $item->userStore->name }}</a>
                             </div>
                         </td><br>
-                        <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
-                            class="product-details">{{ $item->title }}
-                        </a>
-                        <div class="price">
-                            <span class="new-price">Rp{{ number_format($item->bid_price_start, null, null, '.') }}
-                                -
-                                Rp{{ number_format($item->bid_price_end, null, null, '.') }}</span>
-                        </div>
+                    </tr>
+                    <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
+                        class="product-details">{{ $item->title }}
+                    </a>
+                    <div class="price">
+                        <span class="new-price">Rp{{ number_format($item->bid_price_start, null, null, '.') }}
+                            -
+                            Rp{{ number_format($item->bid_price_end, null, null, '.') }}</span>
+                    </div>
                 </div>
             </div>
 
@@ -139,10 +140,10 @@
         </div>
     </div>
 @empty
-  <div class="col-lg-12" isProduct>
-    <h5 class="text-center" style="color: #a5a3ae">Produk Lelang Masih Kosong</h5>
-    <p class="text-center" style="color: #a5a3ae">Maaf ya, kami masih belum menambahkan produknya. Tapi
-      dalam
-      waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
-  </div>
+    <div class="col-lg-12" isProduct>
+        <h5 class="text-center" style="color: #a5a3ae">Produk Lelang Masih Kosong</h5>
+        <p class="text-center" style="color: #a5a3ae">Maaf ya, kami masih belum menambahkan produknya. Tapi
+            dalam
+            waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
+    </div>
 @endforelse
