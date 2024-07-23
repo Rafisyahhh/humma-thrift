@@ -1,8 +1,7 @@
-
-
 <?php
 
 use App\Http\Controllers\ApiControllers\UserApiController;
+use App\Http\Controllers\HeaderController;
 use App\Http\Controllers\Payment\TransactionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -207,3 +206,9 @@ Route::prefix('@{store:username}')->controller(StoreProfileController::class)->g
 
 #callback
 Route::post('callback', [CallbackController::class, 'handle'])->name('callback');
+
+Route::prefix('header')->name('header.')->group(function () {
+    Route::get('cart', [HeaderController::class, 'cart'])->name('cart');
+    Route::get('notification', [HeaderController::class, 'notification'])->name('notification');
+    Route::get('wishlist', [HeaderController::class, 'wishlist'])->name('wishlist');
+});

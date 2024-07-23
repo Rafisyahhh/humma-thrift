@@ -56,6 +56,10 @@
 
     <link href="{{ asset('additional-assets/summernote-0.8.20/summernote.min.css') }}" rel="stylesheet" />
 
+    <link href="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.3.2/dist/flasher.min.css" type="text/css"
+      rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.3.2/dist/flasher.min.js"></script>
+
     <style>
       .header-right-dropdown>div {
         right: 0 !important;
@@ -111,6 +115,12 @@
         });
         return false;
       }
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+      });
       //   $(document).on('click', 'button, [onclick], a, :radio, :checkbox, [tabindex]', function(e) {
       //     let $this = $(this);
       //     $this.prop('disabled', true);

@@ -4,22 +4,24 @@
             <div class="product-img">
                 <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover">
                 <div class="product-cart-items">
-                    <form action="{{ route('storesproduct', $item->id) }}" method="POST">
+                    <form action="{{ route('storesproduct', $item->id) }}" method="POST"
+                        onsubmit="ajaxSubmit(event, this, () => { updatePartials.wishlist() })">
                         @csrf
                         <button class="favourite cart-item">
-                            <span>
-                                <i class="fas fa-heart"></i>
-                            </span>
+                          <span>
+                            <i class="fas fa-heart"></i>
+                          </span>
                         </button>
-                    </form>
-                    <form action="{{ route('storecart', $item->id) }}" method="POST">
+                      </form>
+                      <form action="{{ route('storecart', $item->id) }}" method="POST"
+                        onsubmit="ajaxSubmit(event, this, () => { updatePartials.cart() })">
                         @csrf
                         <button class="favourite cart-item">
-                            <span>
-                                <i class="fas fa-shopping-cart" style="font-size: 18px;"></i>
-                            </span>
+                          <span>
+                            <i class="fas fa-shopping-cart" style="font-size: 18px;"></i>
+                          </span>
                         </button>
-                    </form>
+                      </form>
                     <a href="#" class="compaire cart-item">
                         <span>
                             <i class="fas fa-share"></i>
