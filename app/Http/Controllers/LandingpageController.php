@@ -22,16 +22,6 @@ class LandingpageController extends Controller {
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $product = Product::where('status', 'active')->get();
-        $favorites = Favorite::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
         $product_auction = ProductAuction::all();
 
         return view('landing.home', compact(
@@ -39,11 +29,7 @@ class LandingpageController extends Controller {
             'brands',
             'categories',
             'product',
-            'favorites',
             'product_auction',
-            'countFavorite',
-            'countcart',
-            'carts'
         ));
     }
 
@@ -250,14 +236,8 @@ class LandingpageController extends Controller {
 
         $brands = Brand::all();
         $categories = ProductCategory::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
 
-        return view('Landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search', 'colors', 'sizes'));
+        return view('Landing.produk-regular', compact('products', 'brands', 'categories', 'search', 'colors', 'sizes'));
     }
 
 

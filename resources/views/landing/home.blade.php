@@ -171,7 +171,7 @@
             /* margin: 0 5px 5px; */
             background-color: #ffffff73;
             /* margin-left:1px !important;
-                margin-right: 1px !important; */
+                            margin-right: 1px !important; */
             /* Tambahkan margin jika perlu */
 
         }
@@ -203,19 +203,18 @@
                                                 {{ $even->subjudul }}
                                             </h5>
                                             <h1 class="wrapper-details" style="color:#1c3879;">{{ $even->judul }}</h1>
-                                            <a href="{{ url('/product/regular') }}" class="shop-btn mt-3"
-                                                ">Belanja Sekarang</a>
+                                            <a href="{{ url('/product/regular') }}" class="shop-btn mt-3" ">Belanja Sekarang</a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                        @endforeach
                             </div>
-                        </div>
+                        <div class="swiper-pagination"></div>
                     </div>
-                @endforeach
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </section>
+        </section>
 
     <section class="product-category" style="z-index: 100;position: relative;">
         <div class="container">
@@ -344,6 +343,20 @@
                                     </div>
                                     <div class="product-info">
                                         <div class="product-description">
+                                            {{-- STORE --}}
+                                            <tr class="table-row ticket-row store-header"
+                                                style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100%;">
+                                                <td class="table-wrapper wrapper-product"
+                                                    style="display: flex; align-items: center;">
+                                                    <div class="form-check"
+                                                        style="display: flex; align-items: center; margin-left: 1rem;">
+                                                        <i class="fa-solid fa-store"
+                                                            style="margin-left: -3rem; color: #215791; font-size: 1.75rem;"></i>
+                                                        <a href="{{ route('store.profile', ['store' => $item->userStore->username]) }}"
+                                                            style="font-weight: bold; margin-left: 1rem; font-size: 1.55rem; color: gray;">{{ $item->userStore->name }}</a>
+                                                    </div>
+                                                </td><br>
+                                            </tr>
                                             <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
                                                 class="product-details" style="font-size: 1.85rem"> {{ $item->title }}
                                             </a>
@@ -434,8 +447,8 @@
 
                                     <div class="product-info">
                                         <div class="product-description">
-                                             {{-- STORE --}}
-                                           <tr class="table-row ticket-row store-header"
+                                            {{-- STORE --}}
+                                            <tr class="table-row ticket-row store-header"
                                                 style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100%;">
                                                 <td class="table-wrapper wrapper-product"
                                                     style="display: flex; align-items: center;">
@@ -447,15 +460,16 @@
                                                             style="font-weight: bold; margin-left: 1rem; font-size: 1.55rem; color: gray;">{{ $item->userStore->name }}</a>
                                                     </div>
                                                 </td><br>
-                                                <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
-                                                    class="product-details" style="font-size: 1.85rem">{{ $item->title }}
-                                                </a>
-                                                <div class="price">
-                                                    <span class="new-price"
-                                                        style="font-size: 1.70rem">Rp{{ number_format($item->bid_price_start, null, null, '.') }}
-                                                        - Rp{{ number_format($item->bid_price_end, null, null, '.') }}
-                                                    </span>
-                                                </div>
+                                            </tr>
+                                            <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
+                                                class="product-details" style="font-size: 1.85rem">{{ $item->title }}
+                                            </a>
+                                            <div class="price">
+                                                <span class="new-price"
+                                                    style="font-size: 1.70rem">Rp{{ number_format($item->bid_price_start, null, null, '.') }}
+                                                    - Rp{{ number_format($item->bid_price_end, null, null, '.') }}
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -643,7 +657,7 @@
             }
         });
     </script>
-    <script>
+    {{-- <script>
         $("[data-route]").click(function({
             target: {
                 tagName
@@ -651,7 +665,7 @@
         }) {
             if (!["A", "I"].includes(tagName)) window.location.href = $(this).data("route");
         });
-    </script>
+    </script> --}}
     <script>
         var $grid = $('.grid').isotope({
             itemSelector: '.grid-item',

@@ -56,10 +56,19 @@
 
     <link href="{{ asset('additional-assets/summernote-0.8.20/summernote.min.css') }}" rel="stylesheet" />
 
+    <link href="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.3.2/dist/flasher.min.css" type="text/css"
+      rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.3.2/dist/flasher.min.js"></script>
+
     <style>
       .header-right-dropdown>div {
         right: 0 !important;
         left: unset !important;
+      }
+
+      .submitLoading {
+        pointer-events: none !important;
+        filter: brightness(0.5) !important;
       }
     </style>
 
@@ -111,6 +120,12 @@
         });
         return false;
       }
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+      });
       //   $(document).on('click', 'button, [onclick], a, :radio, :checkbox, [tabindex]', function(e) {
       //     let $this = $(this);
       //     $this.prop('disabled', true);
@@ -118,6 +133,32 @@
       //       $this.prop('disabled', false);
       //     }, 250);
       //   });
+      $("form[action*='product/storesproduct'], form[action*='product/storecart']").submit(function(e) {
+        e.preventDefault();
+        const form = $(this);
+        console.log(form);
+        const product = form.closest('swiper-slide, [isProduct]');
+        product.addClass('submitLoading');
+        $.ajax({
+          url: form.attr('action'),
+          type: "POST",
+          success: function(response) {
+            product.removeClass('submitLoading');
+            if (response.error) {
+              flasher.error(response.error);
+              return false;
+            } else {
+              flasher.success(response.success);
+            }
+            if (response.cart) {
+              updatePartials.cart();
+            } else {
+              updatePartials.wishlist();
+            }
+          }
+        });
+        return false;
+      });
     </script>
     <script src="{{ asset('additional-assets/toastr-2.1.4/toastr.min.js') }}"></script>
 

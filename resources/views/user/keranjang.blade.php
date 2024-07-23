@@ -25,11 +25,11 @@
                                 <th class="table-wrapper wrapper-product"
                                     style="display: flex; align-items: center; padding-top: 25px;">
                                     <div class="form-check"
-                                        style="display: flex; align-items: center; width: 100%; margin-left: -1rem;">
-                                        <p style="flex: 0 0 5rem; text-align: left; margin-left: 0;">#</p>
-                                        <p style="flex: 1 0 46.7rem; text-align: left; margin-left: 3rem;">Produk</p>
+                                        style="display: flex; align-items: center; width: 100%; margin-right: -1.6rem;">
+                                        <p style="flex: 0 0 5rem; text-align: left; margin-right: 2 rem;">#</p>
+                                        <p style="flex: 1 0 46.7rem; text-align: left; margin-left: 2 rem;">Produk</p>
                                         <p style="flex: 1 0 35rem;">Kategori</p>
-                                        <p style="flex: 1 0 30rem;">Harga</p>
+                                        <p style="flex: 1 0 33.5rem;">Harga</p>
                                         <p style="flex: 0 0 5rem;">Aksi</p>
                                     </div>
                                 </th>

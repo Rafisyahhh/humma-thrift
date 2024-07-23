@@ -2,6 +2,15 @@
 
 @section('title', 'Product')
 
+@push('style')
+  <style>
+    .submitLoading {
+      pointer-events: none !important;
+      filter: brightness(0.5);
+    }
+  </style>
+@endpush
+
 @section('content')
   <section class="product product-sidebar footer-padding">
     <div class="container">
@@ -79,6 +88,7 @@
           });
 
           window.history.replaceState(null, null, url);
+          $('[isProduct]').addClass('submitLoading');
 
           $.ajax({
             url: url.toString(),
@@ -90,6 +100,7 @@
             },
             error: function() {
               loading = false;
+              $('[isProduct]').removeClass('submitLoading');
               console.error('Failed to update filters.');
             }
           });
@@ -173,5 +184,26 @@
         }
       });
     });
+  </script>
+  <script>
+    function ajaxSubmit(e, $this, callback) {
+      e.preventDefault();
+      const form = $($this);
+      const product = form.closest('[isProduct]');
+      product.addClass('submitLoading');
+      $.ajax({
+        url: form.attr('action'),
+        type: "POST",
+        success: function(response) {
+          if (response.error) {
+            flasher.error(response.error);
+          } else {
+            flasher.success(response.success);
+          }
+          product.removeClass('submitLoading');
+          callback();
+        }
+      });
+    };
   </script>
 @endpush

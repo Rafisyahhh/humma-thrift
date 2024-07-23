@@ -33,6 +33,11 @@ class TransactionOrder extends Model
      */
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'paid_at' => 'datetime',
+        'expired_at' => 'datetime',
+    ];
+
     /**
      * Get the user address associated with the transaction order.
      *

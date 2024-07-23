@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\cart;
 use App\Models\Favorite;
+use App\Models\TransactionOrder;
 use App\Models\User;
 use Carbon\Carbon;
 use Faker\Provider\bn_BD\Company;
@@ -15,83 +16,15 @@ class HistoryController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $carts = cart::where('user_id', auth()->id())
-        ->whereNotNull('product_id')
-        ->orderBy('created_at')
-        ->get();
-        $countcart = cart::where('user_id', auth()->id())->count();
-        $favorites = Favorite::where('user_id', auth()->id())
-        ->whereNotNull('product_id')
-        ->orderBy('created_at')
-        ->get();
+        $transactions = TransactionOrder::where('user_id', auth()->id())->where('delivery_status', 'selesai')->get();
 
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-
-        $NumberFormatter = number_format(1_000, 0, '', '.');
-
-        $transaction = [
-            [
-                'id' => 1,
-                'created_at' => '18-03-2024',
-                'updated_at' => '18-03-2024',
-                'user_id' => 17,
-                'order_id' => 2,
-                'total' => 1_000_000,
-                'transaction_id' => 'String',
-                'reference_id' => 'String',
-                'status' => 'PAID',
-                'user' => User::find(17),
-                'order' => [
-                    'id' => 2,
-                    'created_at' => '18-03-2024',
-                    'updated_at' => '18-03-2024',
-                    'product_id' => 1,
-                    'status' => 'diterima',
-                    'product' => [
-                        'id' => 1,
-                        'created_at' => '18-03-2024',
-                        'updated_at' => '18-03-2024',
-                        'title' => 'Classic Design Skart',
-                        'price' => 100_000,
-                        'cover_image' => 'template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp'
-                    ]
-                ]
-            ],
-            [
-                'id' => 2,
-                'created_at' => '18-01-2024',
-                'updated_at' => '18-03-2024',
-                'user_id' => 17,
-                'order_id' => 2,
-                'total' => 1_000_000,
-                'transaction_id' => 'String',
-                'reference_id' => 'String',
-                'status' => 'PAID',
-                'user' => User::find(17),
-                'order' => [
-                    'id' => 2,
-                    'created_at' => '18-03-2024',
-                    'updated_at' => '18-03-2024',
-                    'product_id' => 1,
-                    'status' => 'diterima',
-                    'product' => [
-                        'id' => 1,
-                        'created_at' => '18-03-2024',
-                        'updated_at' => '18-03-2024',
-                        'title' => 'Classic Design Skart',
-                        'price' => 100_000,
-                        'cover_image' => 'template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp'
-                    ]
-                ]
-            ]
-        ];
         // foreach ($transaction as &$key) {
         //     $key['date_diff_format'] = $this->formatTanggal($key['created_at']);
         //     $key['date_format'] = Carbon::parse($key['created_at'])->format('d F Y');
         // $key['price_format'] = str_replace(',00', '', number_format(1_000, 0, '', '.'));
         // }
         // unset($key);
-        return view('user.history', compact('transaction','carts','countcart','countFavorite'));
+        return view('user.history', compact('transactions'));
     }
 
     /**
