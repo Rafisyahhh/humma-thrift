@@ -26,7 +26,7 @@
       background-color: #ffffff;
       /* border: 1px solid #ffffff; */
       /* border-radius: 0.25rem;
-                                                padding: 0.5rem 0; */
+    padding: 0.5rem 0; */
     }
 
     .dropdown-menu .dropdown-item {
@@ -164,7 +164,7 @@
                       <div class="dropdown position-absolute" style="right: 0; top: 0;">
                         <a class="wishlist-link" href="#" role="button" id="wishlistDropdown"
                           data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="fas fa-ellipsis-h" style="color: #1c3879; font-size: 35px;"></i>
+                          <i class="fas fa-ellipsis-h" style="color: #1c3879; font-size: 30px;"></i>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="wishlistDropdown">
                           <li>
@@ -183,7 +183,7 @@
                     </div>
                     <div class="product-info">
                       <div class="product-description">
-                        <a href="" class="product-details" style="font-size: 2rem">{{ $item->product->title }}
+                        <a href="" class="product-details" style="font-size: 1.85rem">{{ $item->product->title }}
                         </a>
                         <div class="price">
                           <span class="new-price"

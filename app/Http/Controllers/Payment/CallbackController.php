@@ -2,94 +2,113 @@
 
 namespace App\Http\Controllers\Payment;
 
+use App\Notifications\UserInvoiceProductPaidNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Models\TransactionOrder;
-use App\Models\Product;
-use App\Models\ProductAuction;
-use App\Models\Order;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Notifications\SellerInvoiceProductPaidNotification;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class CallbackController extends Controller
 {
     // Isi dengan private key anda
-    protected $privateKey = 'MJX8G-Xiznc-oQ36k-Es0Gy-DCI1j';
+    protected ?string $privateKey;
+
+    public function __construct()
+    {
+        $this->privateKey = config('tripay.private_key');
+    }
 
     public function handle(Request $request)
     {
-        $callbackSignature = $request->server('HTTP_X_CALLBACK_SIGNATURE');
-        $json = $request->getContent();
-        $signature = hash_hmac('sha256', $json, $this->privateKey);
+        try {
 
-        if ($signature !== (string) $callbackSignature) {
-            return Response::json([
-                'success' => false,
-                'message' => 'Invalid signature',
-            ]);
-        }
+            $callbackSignature = $request->server('HTTP_X_CALLBACK_SIGNATURE');
+            $json = $request->getContent();
+            $signature = hash_hmac('sha256', $json, $this->privateKey);
 
-        if ('payment_status' !== (string) $request->server('HTTP_X_CALLBACK_EVENT')) {
-            return Response::json([
-                'success' => false,
-                'message' => 'Unrecognized callback event, no action was taken',
-            ]);
-        }
-
-        $data = json_decode($json);
-
-        if (JSON_ERROR_NONE !== json_last_error()) {
-            return Response::json([
-                'success' => false,
-                'message' => 'Invalid data sent by tripay',
-            ]);
-        }
-        $transactionId = $data->merchant_ref;
-        $tripayReference = $data->reference;
-        $status = strtoupper((string) $data->status);
-
-        if ($data->is_closed_payment === 1) {
-            $transaction = TransactionOrder::where('reference_id', $tripayReference)
-                ->where('status', '=', 'UNPAID')
-                ->first();
-
-            if (!$transaction) {
+            if ($signature !== (string) $callbackSignature) {
                 return Response::json([
                     'success' => false,
-                    'message' => 'No invoice found or already paid',
+                    'message' => 'Invalid signature',
                 ]);
             }
 
-            switch ($status) {
-                case 'PAID':
-                    $transaction->update([
-                        'status' => 'PAID',
-                        'delivery_status' => 'dikemas'
-                    ]);
-
-
-                        $transaction->order()->get()->map(function(?Model $query) {
-                            $query->product()?->update(['status' => 'sold']);
-                            $query->product_auction()?->update(['status' => 'sold']);
-                        });
-                    break;
-
-                case 'EXPIRED':
-                    $transaction->update(['status' => 'EXPIRED']);
-                    break;
-
-                case 'FAILED':
-                    $transaction->update(['status' => 'FAILED']);
-                    break;
-
-                default:
-                    return Response::json([
-                        'success' => false,
-                        'message' => 'Unrecognized payment status',
-                    ]);
+            if ('payment_status' !== (string) $request->server('HTTP_X_CALLBACK_EVENT')) {
+                return Response::json([
+                    'success' => false,
+                    'message' => 'Unrecognized callback event, no action was taken',
+                ]);
             }
 
-            return Response::json(['success' => true]);
+            $data = json_decode($json);
+
+            if (JSON_ERROR_NONE !== json_last_error()) {
+                return Response::json([
+                    'success' => false,
+                    'message' => 'Invalid data sent by tripay',
+                ]);
+            }
+
+            $tripayReference = $data->reference;
+            $status = strtoupper((string) $data->status);
+
+            if ($data->is_closed_payment === 1) {
+                $transaction = TransactionOrder::where('reference_id', $tripayReference)
+                    ->where('status', '=', 'UNPAID')
+                    ->first();
+
+                if (!$transaction) {
+                    return Response::json([
+                        'success' => false,
+                        'message' => 'No invoice found or already paid',
+                    ]);
+                }
+
+                switch ($status) {
+                    case 'PAID':
+                        # Set status paid
+                        $transaction->update([
+                            'status' => 'PAID',
+                            'delivery_status' => 'dikemas'
+                        ]);
+
+                        # Set status sold out and send the notification
+                        $transaction->order()->get()->map(function (?Model $query) {
+                            $query->product()?->update(['status' => 'sold']);
+                            $query->product_auction()?->update(['status' => 'sold']);
+
+                            $query->transaction_order->user()->notify(new UserInvoiceProductPaidNotification($query->transaction_order));
+                            $query->transaction_order->userstore->user()->notify(new SellerInvoiceProductPaidNotification($query->transaction_order));
+                        });
+                        break;
+
+                    case 'EXPIRED':
+                        $transaction->update(['status' => 'EXPIRED']);
+                        break;
+
+                    case 'FAILED':
+                        $transaction->update(['status' => 'FAILED']);
+                        break;
+
+                    default:
+                        return Response::json([
+                            'success' => false,
+                            'message' => 'Unrecognized payment status',
+                        ]);
+                }
+
+                return response()->json(['success' => true]);
+            }
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage(), $th->getTrace());
+            return response()->json(['success' => false, 'error' => true, 'message' => 'Ada kesalahan di dalam sistem']);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage(), $e->getTrace());
+            return response()->json(['success' => false, 'error' => true, 'message' => 'Ada kesalahan di dalam sistem']);
         }
     }
 }

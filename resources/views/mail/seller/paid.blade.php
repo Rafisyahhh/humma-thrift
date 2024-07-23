@@ -1,12 +1,11 @@
 <x-mail::message>
-# Halo {{ $notifiable->name }}, Segera Selesaikan Pembayaranmu!
+# Halo {{ $notifiable->name }}, Ada barang yang harus dianter nih. Yuk segera anter ke pelanggan biar cepet dapet bintang 5 nya.
 
 Hai, {{ $notifiable->name }}!
 
-Terima kasih telah berbelanja di toko kami. Kamu baru saja melakukan checkout beberapa barang. Jangan lupa untuk
-segera melakukan pembayaran agar pesananmu bisa segera kami proses dan kirim ke alamatmu.
+Ada pesanan yang udah dibayar sama user, tapi statusnya belum dikirim. Yuk segera kirim ke pelanggan biar cepet dapet cuan dan bintang 5 nya.
 
-## Berikut adalah detail pesananmu:
+## Berikut adalah detail pesanannya:
 
 <x-mail::table>
 | Detail | Nilai |
@@ -22,7 +21,7 @@ segera melakukan pembayaran agar pesananmu bisa segera kami proses dan kirim ke 
 | Nama Produk  | Jumlah Barang |
 |:-------------|:--------------|
 @foreach ($orders as $order)
-| {{ $order->product_auction->title }} | x1 |
+| {{ $order->product->title }} | x1 |
 @endforeach
 </x-mail::table>
 

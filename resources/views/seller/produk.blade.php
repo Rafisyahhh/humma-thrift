@@ -474,11 +474,7 @@
                     </div>
                 @endif
             @endforeach
-        </div>
-        <div class="align-items-center" style="margin-top: 40px;margin-bottom: 30px;">
-            <h5 class="text-center mb-0 border-bottom border-dark" style="color: #767979">Sudah Terjual</h5>
-        </div>
-        <div class="cart-section wishlist-section row gy-5">
+            {{-- sold out --}}
             @foreach ($products as $item)
                 @if ($item->status == 'sold')
                     <div class="col-lg-4 col-sm-6">
@@ -776,6 +772,11 @@
                 @endif
             @endforeach
         </div>
+        @if ($products == null && $product_auctions == null)
+        <div class="align-items-center" style="margin-top: 40px;margin-bottom: 30px;">
+            <h5 class="text-center mb-0 border-bottom border-dark" style="color: #767979">Belum Ada Produk yang diTambahkan</h5>
+        </div>
+        @endif
     </div>
 
 

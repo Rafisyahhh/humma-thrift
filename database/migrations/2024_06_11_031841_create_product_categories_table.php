@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title')->unique();
             $table->string('icon');
             $table->string('slug')->nullable();
+            $table->enum('type',['atasan','bawahan'])->nullable();
             $table->timestamps();
         });
     }

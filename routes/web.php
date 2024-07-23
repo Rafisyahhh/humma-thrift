@@ -1,8 +1,7 @@
-
-
 <?php
 
 use App\Http\Controllers\ApiControllers\UserApiController;
+use App\Http\Controllers\HeaderController;
 use App\Http\Controllers\Payment\TransactionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -103,7 +102,12 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
         Route::get('reviewstore', [HistoryController::class, 'reviewstore'])->name('reviews');
         Route::post('address/{id}', [UserAddressController::class, 'store'])->name('address.store');
         Route::put('edit/address/{user}/{address}', [UserAddressController::class, 'update'])->name('address.edit');
+        Route::put('main/address/{address}', [UserAddressController::class, 'main'])->name('address.main');
         Route::delete('delete/address/{address}', [UserAddressController::class, 'destroy'])->name('address.destroy');
+        # Soft delete Address
+        Route::get('/address/restore/{id}', [UserAddressController::class, 'restore'])->name('address.restore');
+        Route::get('/address/delete/{id}', [UserAddressController::class, 'delete'])->name('address.delete');
+
         Route::view('about', 'user.tentang')->name('about');
         Route::get('brand', [LandingpageController::class, 'brand'])->name('brand');
         Route::view('detail', 'user.detail')->name('detail');
@@ -203,3 +207,9 @@ Route::prefix('@{store:username}')->controller(StoreProfileController::class)->g
 
 #callback
 Route::post('callback', [CallbackController::class, 'handle'])->name('callback');
+
+Route::prefix('header')->name('header.')->group(function () {
+    Route::get('cart', [HeaderController::class, 'cart'])->name('cart');
+    Route::get('notification', [HeaderController::class, 'notification'])->name('notification');
+    Route::get('wishlist', [HeaderController::class, 'wishlist'])->name('wishlist');
+});
