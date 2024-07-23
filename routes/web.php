@@ -100,6 +100,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
             Route::post('process/auction', 'processCheckoutAuction')->name('checkout.process.auction');
         });
 
+        Route::get('reviewstore', [HistoryController::class, 'reviewstore'])->name('reviews');
         Route::post('address/{id}', [UserAddressController::class, 'store'])->name('address.store');
         Route::put('edit/address/{user}/{address}', [UserAddressController::class, 'update'])->name('address.edit');
         Route::delete('delete/address/{address}', [UserAddressController::class, 'destroy'])->name('address.destroy');
