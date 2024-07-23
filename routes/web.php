@@ -92,7 +92,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::middleware(\App\Http\Middleware\NotSellerMiddleware::class)->group(function () {
         Route::get('/', [DashboardUserController::class, 'dashboard'])->name('userhome');
 
-        Route::controller(CheckoutController::class)->prefix('/checkout')->group(function() {
+        Route::controller(CheckoutController::class)->prefix('/checkout')->group(function () {
             Route::get('/', 'index')->name('checkout');
             Route::get('/lelang', 'indexCoLelang')->name('checkout.lelang');
             Route::post('process', 'processCheckout')->name('checkout.process');
@@ -173,7 +173,7 @@ Route::post('/productAuction/storesproductAuction/{productAuction}', [FavoriteCo
 Route::delete('/destroyAuction/{destroyAuction}', [FavoriteController::class, 'destroyAuction'])->name('destroyAuction.destroy');
 
 Route::post('/product/storecart/{product}', [CartController::class, 'storecart'])->name('storecart');
-Route::delete('/product/storecart/{cart}', [CartController::class, 'deletecart'])->name('deletecart');
+Route::delete('/product/deletecart/{cart}', [CartController::class, 'deletecart'])->name('deletecart');
 
 # Home Redirect
 Route::get('/home', RedirectUserController::class)->name('home');

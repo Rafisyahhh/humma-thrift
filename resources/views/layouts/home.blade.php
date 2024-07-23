@@ -65,6 +65,11 @@
         right: 0 !important;
         left: unset !important;
       }
+
+      .submitLoading {
+        pointer-events: none !important;
+        filter: brightness(0.5) !important;
+      }
     </style>
 
     @stack('link')
@@ -128,6 +133,32 @@
       //       $this.prop('disabled', false);
       //     }, 250);
       //   });
+      $("form[action*='product/storesproduct'], form[action*='product/storecart']").submit(function(e) {
+        e.preventDefault();
+        const form = $(this);
+        console.log(form);
+        const product = form.closest('swiper-slide, [isProduct]');
+        product.addClass('submitLoading');
+        $.ajax({
+          url: form.attr('action'),
+          type: "POST",
+          success: function(response) {
+            product.removeClass('submitLoading');
+            if (response.error) {
+              flasher.error(response.error);
+              return false;
+            } else {
+              flasher.success(response.success);
+            }
+            if (response.cart) {
+              updatePartials.cart();
+            } else {
+              updatePartials.wishlist();
+            }
+          }
+        });
+        return false;
+      });
     </script>
     <script src="{{ asset('additional-assets/toastr-2.1.4/toastr.min.js') }}"></script>
 
