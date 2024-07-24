@@ -301,12 +301,15 @@ class LandingpageController extends Controller {
 
     public function productSearch(Request $request){
         $products = Product::where('status', 'active');
-        $colors = $products->pluck('color')->map('strtolower')->unique();
-        $sizes = $products->pluck('size')->map('strtolower')->unique();
+        $product_auction = ProductAuction::where('status', 'active');
+
+        $colors = $products->pluck('color')->map('strtolower')->unique() + $product_auction->pluck('color')->map('strtolower')->unique();
+        $sizes = $products->pluck('size')->map('strtolower')->unique() + $product_auction->pluck('size')->map('strtolower')->unique();
 
         if ($request->ajax()) {
             if (isset($request->search)) {
                 $products = $products->where('title', 'like', "%$request->search%");
+                $product_auction = $product_auction->where('title', 'like', "%$request->search%");
             }
             if (isset($request->categories)) {
                 $products = $products->whereHas('categories', function ($q) use ($request) {
