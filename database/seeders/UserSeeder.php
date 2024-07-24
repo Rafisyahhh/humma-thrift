@@ -21,23 +21,28 @@ class UserSeeder extends Seeder {
 
         $teamAccount = [
             [
-                'name' => 'SyauqiAli',
+                'username' => 'Syauqi Ali',
+                'name' => 'Ahmad Syauqi Ali Syahbana',
                 'email' => 'sauqi2019@gmail.com'
             ],
             [
+                'username' => 'Cak Adi',
                 'name' => 'Amir Zuhdi Wibowo',
                 'email' => 'cakadi190@gmail.com'
             ],
             [
+                'username' => 'Cinta',
                 'name' => 'Cinta Adenia',
                 'email' => 'ccintaadenia06@gmail.com'
             ],
             [
+                'username' => 'Syahfaa',
                 'name' => 'Ananda Syahfaa',
                 'email' => 'anandasyahfa8@gmail.com'
             ],
             [
-                'name' => 'NASYA ASRIVA PUTRI ARTAMA',
+                'username' => 'Nasya',
+                'name' => 'Nasya Asriva Putri Artama',
                 'email' => 'asrivanasya0@gmail.com'
             ],
         ];

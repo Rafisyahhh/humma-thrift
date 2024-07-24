@@ -23,10 +23,9 @@ class StoreProfileController extends Controller {
             ->where('store_id', $store->id)
             ->get();
         $isProductAuction = ProductAuction::where('store_id', $store->id)->get();
-        $reviews = Ulasan::whereHas('product', function ($q) use ($store) {
-            $q->whereIn('slug', explode(',', $request->categories));
+        $reviews = Ulasan::whereHas('product', function ($query) use ($store) {
+            $query->where('store_id', $store->id);
         })->get();
-        dd();
 
         return view('store.index', compact('store', 'isProduct', 'isProductAuction', 'time', 'reviews'));
     }

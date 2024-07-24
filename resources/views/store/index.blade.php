@@ -436,10 +436,10 @@
         </div>
         <div class="tab-pane fade mt-5" id="ulasan-tab-pane" role="tabpanel" aria-labelledby="ulasan-tab"
           tabindex="0">
-          <ul class="list-group list-group-flush">
+          <ul class="list-group list-group-flush" style="height: unset;">
             @forelse ($reviews as $item)
               <li class="list-group-item d-flex mt-5 rounded pt-3 w-100"
-                style="height: 20rem; background-color: rgba(202, 202, 202, 0.2);">
+                style="height: 20rem; background-color: rgba(202, 202, 202, 0.2); position: unset; transform: translateY(-25%)">
                 <div style="width: 30rem;">
                   <img src="https://placehold.co/400" class="img-fluid rounded mb-2 float-start"
                     style="width: 7.5rem" />
@@ -462,17 +462,12 @@
                             @foreach (['1', '2', '3', '4', '5'] as $rating)
                               <option value="{{ $rating }}" @selected($rating == $item->star)></option>
                             @endforeach
-                            {{-- <option value="1">Buruk</option>
-                            <option value="2">Cukup</option>
-                            <option value="3">Baik</option>
-                            <option value="4" selected>Sangat Baik</option>
-                            <option value="5">Luar Biasa</option> --}}
                           </select>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <p class="border-top pt-2 text-start" style="min-height: 5rem">Aku lupa aku siapa</p>
+                  <p class="border-top pt-2 text-start" style="min-height: 5rem">{{ $item->comment }}</p>
                 </div>
               </li>
             @empty
