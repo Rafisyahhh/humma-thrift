@@ -103,6 +103,9 @@ class LandingpageController extends Controller {
         $sizes = $products->pluck('size')->map('strtolower')->unique();
 
         if ($request->ajax()) {
+            if (isset($request->search)) {
+                $products = $products->where('title', 'like', "%$request->search%");
+            }
             if (isset($request->categories)) {
                 $products = $products->whereHas('categories', function ($q) use ($request) {
                     $q->whereIn('slug', explode(',', $request->categories));
@@ -121,6 +124,11 @@ class LandingpageController extends Controller {
             }
             if (isset($request->price)) {
                 $products = $products->where('price', '>=', explode('-', $request->price)[0])->where('price', '<=', explode('-', $request->price)[1]);
+            }
+            if (isset($request->sortBy)) {
+                if ($request->sortBy == '') {
+                    $products = $products->where('price', '>=', explode('-', $request->price)[0])->where('price', '<=', explode('-', $request->price)[1]);
+                }
             }
             $products = $products->paginate(24);
             if ($products->currentPage() > $products->lastPage()) {
