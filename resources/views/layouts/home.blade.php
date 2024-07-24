@@ -160,7 +160,7 @@
             if (response.cart) {
               updatePartials.cart();
             } else {
-
+              onUpdateWishlist?.(response);
               updatePartials.wishlist();
             }
           }

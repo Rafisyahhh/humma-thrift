@@ -533,10 +533,13 @@
             {{-- @foreach ($isProduct as $item) --}}
 
             <span style="margin-left:0.5px; font-size: 15px">Favorit</span>
-            @if ($countFavoriteProduct)
 
-            <span style="margin-left:0.5px; font-size: 15px">        ({{ $countFavoriteProduct}})            </span>
-            @endif
+            <span style="margin-left:0.5px; font-size: 15px" countFavorite="{!! $countFavoriteProduct !!}">
+              @if ($countFavoriteProduct)
+                ({!! $countFavoriteProduct !!})
+              @endif
+            </span>
+
             {{-- @endforeach --}}
 
           </form>
@@ -715,7 +718,12 @@
   </section>
 @endsection
 
-@section('script')
+@push('script')
   <script src="{{ asset('additional-assets/jquery-3.7.1/jquery.min.js') }}"></script>
   <script src="{{ asset('js/share.js') }}"></script>
-@endsection
+  <script>
+    function onUpdateWishlist() {
+      $('[countFavorite]').text(`(${parseInt($('[countFavorite]').attr('countFavorite'))+1})`)
+    }
+  </script>
+@endpush
