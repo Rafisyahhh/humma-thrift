@@ -272,7 +272,7 @@
 @endpush
 
 @push('js')
-  <script>
+<script>
     function submitForm(radioBtn, value) {
       // radioBtn.closest('input.d-none')[0].val(value);
       $(radioBtn.closest('form')).find('input.d-none').val(value)

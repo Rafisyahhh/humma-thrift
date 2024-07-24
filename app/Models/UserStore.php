@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserStore extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
+    protected $table = "user_stores";
     protected $guarded = ['id'];
 
     /**

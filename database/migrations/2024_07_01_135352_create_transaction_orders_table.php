@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('reference_id');
             $table->enum('delivery_status',['selesaikan pesanan','dikemas','diantar','diterima','selesai'])->default('selesaikan pesanan');
             $table->enum('status',['UNPAID','PAID','REFUND','EXPIRED','FAILED']);
+            $table->string('payment_method');
+            $table->string('total_harga');
+            $table->string('biaya_admin');
             $table->timestamps();
         });
     }
