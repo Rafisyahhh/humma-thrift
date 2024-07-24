@@ -144,7 +144,6 @@
       $("form[action*='product/storesproduct'], form[action*='product/storecart']").submit(function(e) {
         e.preventDefault();
         const form = $(this);
-        console.log(form);
         const product = form.closest('swiper-slide, [isProduct]');
         product.addClass('submitLoading');
         $.ajax({
@@ -161,6 +160,7 @@
             if (response.cart) {
               updatePartials.cart();
             } else {
+
               updatePartials.wishlist();
             }
           }

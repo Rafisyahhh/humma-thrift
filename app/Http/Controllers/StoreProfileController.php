@@ -51,13 +51,9 @@ class StoreProfileController extends Controller {
             $query->where('store_id', $store->id);
         })->get();
 
-        $countFavoriteProduct = Favorite::select('product_id', \DB::raw('count(*) as total'))
-            ->groupBy('product_id')
-            ->pluck('total', 'product_id');
+        $countFavoriteProduct = Favorite::select('product_id')->count();
 
-        $countFavoriteAuction = Favorite::select('product_auction_id', \DB::raw('count(*) as total'))
-            ->groupBy('product_auction_id')
-            ->pluck('total', 'product_auction_id');
+        $countFavoriteAuction = Favorite::select('product_auction_id')->count();
 
         return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction', 'user', 'carts', 'countcart', 'countFavorite', 'ulasan', 'countFavoriteProduct', 'countFavoriteAuction'));
     }

@@ -45,7 +45,7 @@
       let page = 0;
       let loading = true;
       let lastPage = false;
-      const filters = ['categories', 'brands', 'colors', 'sizes', 'price'];
+      const filters = ['categories', 'brands', 'colors', 'sizes', 'price', 'type'];
       const maxPrice = +('{{ $products->pluck('price')->max() }}');
       const loader = $('[isLoader]');
 
@@ -172,7 +172,7 @@
 
       initPriceSlider();
 
-      $('input:checkbox[name="categories[]"], input:checkbox[name="brands[]"], input:checkbox[name="colors[]"], input:checkbox[name="sizes[]"]')
+      $('input:checkbox[name="categories[]"], input:checkbox[name="brands[]"], input:checkbox[name="colors[]"], input:checkbox[name="sizes[]"], input:checkbox[name="type[]"]')
         .on('change', updateFilters);
 
       $(window).on("scroll", function() {

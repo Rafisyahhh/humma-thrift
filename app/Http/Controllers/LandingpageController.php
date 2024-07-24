@@ -300,58 +300,93 @@ class LandingpageController extends Controller {
     }
 
     public function productSearch(Request $request) {
-        $products = Product::where('status', 'active')->where('title', 'like', "%$request->search%");
-        $product_auction = ProductAuction::where('status', 'active')->where('title', 'like', "%$request->search%");
+        $search = $request->search;
+        $products = Product::where('status', 'active')->where('title', 'like', "%$search%");
+        $product_auction = ProductAuction::where('status', 'active')->where('title', 'like', "%$search%");
 
         $colors = $products->pluck('color')->concat($product_auction->pluck('color'))->map('strtolower')->unique();
         $sizes = $products->pluck('size')->concat($product_auction->pluck('size'))->map('strtolower')->unique();
 
         if ($request->ajax()) {
-            if (isset($request->search)) {
-                $products = $products->where('title', 'like', "%$request->search%");
-                $product_auction = $product_auction->where('title', 'like', "%$request->search%");
-            }
-            if (isset($request->categories)) {
-                $products = $products->whereHas('categories', function ($q) use ($request) {
-                    $q->whereIn('slug', explode(',', $request->categories));
-                });
-                $product_auction = $product_auction->whereHas('categories', function ($q) use ($request) {
-                    $q->whereIn('slug', explode(',', $request->categories));
-                });
-            }
-            if (isset($request->brands)) {
-                $products = $products->whereHas('brand', function ($q) use ($request) {
-                    $q->whereIn('slug', explode(',', $request->brands));
-                });
-                $product_auction = $product_auction->whereHas('brand', function ($q) use ($request) {
-                    $q->whereIn('slug', explode(',', $request->brands));
-                });
-            }
-            if (isset($request->colors)) {
-                $products = $products->whereIn('color', explode(',', $request->colors));
-                $product_auction = $product_auction->whereIn('color', explode(',', $request->colors));
-            }
-            if (isset($request->sizes)) {
-                $products = $products->whereIn('size', explode(',', $request->sizes));
-                $product_auction = $product_auction->whereIn('size', explode(',', $request->sizes));
-            }
-            if (isset($request->price)) {
-                $products = $products->where('price', '>=', explode('-', $request->price)[0])->where('price', '<=', explode('-', $request->price)[1]);
-                $product_auction = $product_auction->where('price', '>=', explode('-', $request->price)[0])->where('price', '<=', explode('-', $request->price)[1]);
-            }
-            if (isset($request->sortBy)) {
-                if ($request->sortBy == 'asc') {
-                    $products = $products->sortBy('created_at');
-                } elseif ($request->sortBy == 'desc') {
-                    $products = $products->sortByDesc('created_at');
+            $productResults = null;
+            $productAuctionResults = null;
 
+            if (isset($request->type)) {
+                $types = explode(',', $request->type);
+                if (in_array('reguler', $types)) {
+                    $productResults = $products;
                 }
+                if (in_array('auction', $types)) {
+                    $productAuctionResults = $product_auction;
+                }
+            } else {
+                $productResults = $products;
+                $productAuctionResults = $product_auction;
             }
-            $products = $products->paginate(24);
-            $product_auction = $product_auction->paginate(24);
-            if (($products->currentPage() > $products->lastPage()) || ($product_auction->currentPage() > $product_auction->lastPage())) {
+
+            // Apply filters to products and product auctions if they are set
+            if ($productResults) {
+                if (isset($request->categories)) {
+                    $productResults = $productResults->whereHas('categories', function ($q) use ($request) {
+                        $q->whereIn('slug', explode(',', $request->categories));
+                    });
+                }
+                if (isset($request->brands)) {
+                    $productResults = $productResults->whereHas('brand', function ($q) use ($request) {
+                        $q->whereIn('slug', explode(',', $request->brands));
+                    });
+                }
+                if (isset($request->colors)) {
+                    $productResults = $productResults->whereIn('color', explode(',', $request->colors));
+                }
+                if (isset($request->sizes)) {
+                    $productResults = $productResults->whereIn('size', explode(',', $request->sizes));
+                }
+                if (isset($request->price)) {
+                    $priceRange = explode('-', $request->price);
+                    $productResults = $productResults->whereBetween('price', [$priceRange[0], $priceRange[1]]);
+                }
+                if (isset($request->sortBy)) {
+                    $sortBy = $request->sortBy == 'asc' ? 'asc' : 'desc';
+                    $productResults = $productResults->orderBy('created_at', $sortBy);
+                }
+                $productResults = $productResults->paginate(24);
+            }
+
+            if ($productAuctionResults) {
+                if (isset($request->categories)) {
+                    $productAuctionResults = $productAuctionResults->whereHas('categories', function ($q) use ($request) {
+                        $q->whereIn('slug', explode(',', $request->categories));
+                    });
+                }
+                if (isset($request->brands)) {
+                    $productAuctionResults = $productAuctionResults->whereHas('brand', function ($q) use ($request) {
+                        $q->whereIn('slug', explode(',', $request->brands));
+                    });
+                }
+                if (isset($request->colors)) {
+                    $productAuctionResults = $productAuctionResults->whereIn('color', explode(',', $request->colors));
+                }
+                if (isset($request->sizes)) {
+                    $productAuctionResults = $productAuctionResults->whereIn('size', explode(',', $request->sizes));
+                }
+                if (isset($request->price)) {
+                    $priceRange = explode('-', $request->price);
+                    $productAuctionResults = $productAuctionResults->whereBetween('price', [$priceRange[0], $priceRange[1]]);
+                }
+                if (isset($request->sortBy)) {
+                    $sortBy = $request->sortBy == 'asc' ? 'asc' : 'desc';
+                    $productAuctionResults = $productAuctionResults->orderBy('created_at', $sortBy);
+                }
+                $productAuctionResults = $productAuctionResults->paginate(24);
+            }
+
+            if (($productResults && $productResults->currentPage() > $productResults->lastPage()) || ($productAuctionResults && $productAuctionResults->currentPage() > $productAuctionResults->lastPage())) {
                 return response()->json(['lastPage' => true]);
             }
+
+            $products = $productResults ?? [];
+            $product_auction = $productAuctionResults ?? [];
             return view('Landing.components.products', compact('products', 'product_auction'))->render();
         }
 

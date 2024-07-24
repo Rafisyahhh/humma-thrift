@@ -15,7 +15,7 @@
           <button class="nav-link position-relative" id="home-tab" data-bs-toggle="tab" data-bs-target="#tipe-tab"
             type="button" role="tab" aria-controls="type-tab">Tipe
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info"
-              style="display: none;" id="tipeCount">0</span>
+              style="display: none;" id="typeCount">0</span>
           </button>
         </li>
       @endif
@@ -70,11 +70,11 @@
           <div class="sidebar-item">
             <ul class="sidebar-list">
               <li>
-                <input type="checkbox" id="reguler" name="producType" value="reguler">
+                <input type="checkbox" id="reguler" name="type[]" value="reguler">
                 <label for="reguler">Reguler</label>
               </li>
               <li>
-                <input type="checkbox" id="auction" name="producType" value="auction">
+                <input type="checkbox" id="auction" name="type[]" value="auction">
                 <label for="auction">Lelang</label>
               </li>
             </ul>
