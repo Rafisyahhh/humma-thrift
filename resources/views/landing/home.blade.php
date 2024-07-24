@@ -171,9 +171,10 @@
             /* margin: 0 5px 5px; */
             background-color: #ffffff73;
             /* margin-left:1px !important;
-                            margin-right: 1px !important; */
+                                margin-right: 1px !important; */
             /* Tambahkan margin jika perlu */
         }
+
         .grid-item img {
             border-radius: 5px;
             display: block;
@@ -226,19 +227,19 @@
                                             </h5>
                                             <h1 class="wrapper-details" style="color:#1c3879;">{{ $even->judul }}</h1>
                                             <a href="{{ url('/product/regular') }}" class="shop-btn mt-3" ">Belanja Sekarang</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                        @endforeach
-                            </div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-        </section>
+     @endforeach
+                                        </div>
+                                        <div class="swiper-pagination"></div>
+                                    </div>
+    </section>
 
-    <section class="product-category" style="z-index: 100;position: relative;">
+    <section class="product-category" style="z-index: 5;position: relative;">
         <div class="container">
             <div class="section-title">
                 <h5 style="color: #1c3879;">KATEGORI PAKAIAN</h5>
@@ -277,14 +278,14 @@
             <div class="grid mt-4">
                 <div class="grid-sizer"></div>
                 @foreach ($categories as $kategori)
-                    <div class="grid-item {{ $kategori->type }}" data-route="{{ url("/product/regular?categories=$kategori->slug") }}" >
+                    <div class="grid-item {{ $kategori->type }}"
+                        data-route="{{ url("/product/regular?categories=$kategori->slug") }}">
                         <div class="blok">
-                            <h5 style="color:#1C3879; font-size:30px; margin-top:40%;"> {{$kategori->slug}}</h5>
+                            <h5 style="color:#1C3879; font-size:30px; margin-top:40%;"> {{ $kategori->slug }}</h5>
                         </div>
                         <img src="{{ asset("storage/{$kategori->icon}") }}"
                             style="width:125px;hieght:125px;border-radius:20px;" class="h-100 w-100">
                     </div>
-
                 @endforeach
             </div>
         </div>
@@ -304,7 +305,7 @@
             </div>
         </div>
 
-        <section class="product arrival mt-5 " style="z-index: 100;position: relative; ">
+        <section class="product arrival mt-5 " style="z-index: 5;position: relative; ">
             <div class="container">
                 <div class="section-title">
                     <h5 style="color: #1c3879;">TERBARU!</h5>
@@ -417,8 +418,8 @@
                         @foreach ($product_auction as $item)
                             <swiper-slide id="cardButton"
                                 data-route="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}">
-                                <div class="product-wrapper" style="z-index: 11; height:47rem !important" data-aos="fade-right"
-                                    data-aos-duration="100">
+                                <div class="product-wrapper" style="z-index: 11; height:47rem !important"
+                                    data-aos="fade-right" data-aos-duration="100">
                                     <div class="product-img">
                                         <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img"
                                             class="object-fit-cover">
@@ -538,49 +539,57 @@
                                     @endif
                                 </div>
                             </swiper-slide>
-                            <div id="reviewModal-{{ $item->id }}" class="modal" style="display: none;">
-                                <div class="modal-content">
-                                    <button class="close" style="float: right; text-align: end;">&times;</button>
-                                    @if ($user)
-                                        @if ($existingAuction)
-                                            <p style="text-align: center; font-size :20px; font-weight:bold;">Anda sudah
-                                                mengikuti lelang</p>
-                                            <p style="text-align: center;">bid lelang anda :
-                                                {{ $auctions->auction_price }}</p>
-                                        @elseif ($auctionproduct)
-                                            <p
-                                                style="text-align: center; font-size :20px; font-weight:bold; margin-top: 2rem; margin-bottom:2rem;">
-                                                lelang sudah berakhir</p>
-                                        @else
-                                            <h4 style="text-align: center;">Bid Lelang</h4>
-                                            <form id="auctionForm-{{ $item->id }}" method="post"
-                                                action="{{ route('user.auctions.store') }}" class="mt-5">
-                                                @csrf
-                                                <input type="hidden" name="product_id" value="{{ $item->id }}">
-                                                <label for="auction_price" class="form-label"
-                                                    style="font-size: 18px;">Bid Lelang :</label>
-                                                <br>
-                                                <input type="number" name="auction_price"
-                                                    class="form-control @error('auction_price') is-invalid @enderror"
-                                                    placeholder="Masukkan Bid Lelang anda" style="font-size: 17px;">
-                                                <p style="margin-top: 5px;margin-left:6px;font-size:12px;color: #7c7c7c;">
-                                                    Bid : Rp{{ number_format($item->bid_price_start, null, null, '.') }}
-                                                    -
-                                                    Rp{{ number_format($item->bid_price_end, null, null, '.') }}</p>
-                                                @error('auction_price')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                                <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim
-                                                    Bid Anda</button>
-                                            </form>
-                                        @endif
-                                    @endif
-                                </div>
-                            </div>
                         @endforeach
                     </swiper-container>
+                    @foreach ($product_auction as $item)
+                        <div id="reviewModal-{{ $item->id }}" class="modal" style="display: none; z-index:999;">
+                            <div class="modal-content">
+                                <button class="close" style="float: right; text-align: end;">&times;</button>
+                                @if ($user)
+                                    @if ($existingAuction)
+                                        <p style="text-align: center; font-size :20px; font-weight:bold;">Anda sudah
+                                            mengikuti lelang</p>
+                                        <p style="text-align: center;">bid lelang anda :
+                                            {{ $auctions->auction_price }}</p>
+                                    @elseif ($auctionproduct)
+                                        <p
+                                            style="text-align: center; font-size :20px; font-weight:bold; margin-top: 2rem; margin-bottom:2rem;">
+                                            lelang sudah berakhir</p>
+                                    @else
+                                        <h4 style="text-align: center;">Bid Lelang</h4>
+                                        <form id="auctionForm-{{ $item->id }}" method="post"
+                                            action="{{ route('user.auctions.store') }}" class="mt-5">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $item->id }}">
+                                            <label for="auction_price" class="form-label" style="font-size: 18px;">Bid
+                                                Lelang :</label>
+                                            <br>
+                                            <input type="number" name="auction_price"
+                                                class="form-control @error('auction_price') is-invalid @enderror"
+                                                placeholder="Masukkan Bid Lelang anda" style="font-size: 17px;">
+                                            <p style="margin-top: 5px;margin-left:6px;font-size:12px;color: #7c7c7c;">
+                                                Bid : Rp{{ number_format($item->bid_price_start, null, null, '.') }}
+                                                -
+                                                Rp{{ number_format($item->bid_price_end, null, null, '.') }}</p>
+                                            @error('auction_price')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim
+                                                Bid Anda</button>
+                                        </form>
+                                    @endif
+                                @endif
+                            </div>
+                        </div>
+                        <div id="shareModal-{{ $item->id }}" class="modal" style="display: none; z-index:999;">
+                            <div class="modal-content">
+                                <button class="close" style="float: right; text-align: end;">&times;</button>
+                                
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -600,9 +609,9 @@
         </div>
     </div>
 
-    <section class="product brand" style="position: relative; z-index: 100;background: #eee;">
-        <div class="container pb-5 mb-5" style="z-index: 101;">
-            <div class="section-title pt-5" style="position: relative; z-index: 102;">
+    <section class="product brand" style="position: relative; z-index: 3;background: #eee;">
+        <div class="container pb-5 mb-5" style="z-index: 4;">
+            <div class="section-title pt-5" style="position: relative; z-index: 5;">
                 <h5>BRAND PRODUK</h5>
                 <a href="/brand" class="view">Lihat Semua</a>
             </div>
