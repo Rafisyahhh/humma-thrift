@@ -89,7 +89,7 @@ a span {
 }
 p {
     font-size: 15px;
-    color: #1a1919;
+    color: #000000;
     font-weight: 400;
     font-family: inter, sans-serif;
     margin-bottom: 0;
@@ -5262,7 +5262,7 @@ table .ticket-row:hover {
     gap: 2rem;
     height: auto;
     padding: 2.6rem;
-    background-color: rgba(41, 72, 146, 0.3);
+    background-color: #1c3879;
     border: none;
     box-shadow: none;
 }
@@ -5276,7 +5276,7 @@ table .ticket-row:hover {
 }
 .user-dashboard .nav-content .profile-section .product-wrapper .paragraph {
     font-size: 2rem;
-    color: #232532;
+    color: #fff;
 }
 .user-dashboard .nav-content .profile-section .product-wrapper .heading {
     font-size: 4rem;
@@ -5295,7 +5295,7 @@ table .ticket-row:hover {
     justify-content: space-between;
     gap: 0;
     padding: 4rem;
-    background: rgba(41, 72, 146, 0.3);
+    background: #1c3879;
     border-radius: 0.5rem;
 }
 .user-dashboard .nav-content .profile-section .info-section .heading {
@@ -5873,3 +5873,13 @@ a.shop-btn:hover {
         transform: rotate(360deg);
     }
 }
+
+
+.white-text {
+    color: #ffffff;
+    }
+
+.info-text {
+    font-size: 1.6rem;
+    color: #ffffff;
+    }
