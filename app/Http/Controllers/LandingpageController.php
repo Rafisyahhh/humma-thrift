@@ -126,8 +126,11 @@ class LandingpageController extends Controller {
                 $products = $products->where('price', '>=', explode('-', $request->price)[0])->where('price', '<=', explode('-', $request->price)[1]);
             }
             if (isset($request->sortBy)) {
-                if ($request->sortBy == '') {
-                    $products = $products->where('price', '>=', explode('-', $request->price)[0])->where('price', '<=', explode('-', $request->price)[1]);
+                if ($request->sortBy == 'asc') {
+                    $products = $products->sortBy('created_at');
+                } elseif ($request->sortBy == 'desc') {
+                    $products = $products->sortByDesc('created_at');
+
                 }
             }
             $products = $products->paginate(24);
