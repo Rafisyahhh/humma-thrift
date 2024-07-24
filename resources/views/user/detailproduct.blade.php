@@ -606,6 +606,8 @@
                         <div class="product-review-section" data-aos="fade-up">
                             <h5 class="intro-heading">Reviews</h5>
                             <div class="review-wrapper">
+                                @foreach ($ulasan as $item)
+
                                 <div class="wrapper">
                                     <div class="wrapper-aurthor">
                                         <div class="wrapper-info">
@@ -639,20 +641,17 @@
                                                         fill="#FFA800" />
                                                 </svg>
                                             </span>
-                                            <span>(5.0)</span>
+                                            <span>{{ $item->star }}</span>
                                         </div>
                                     </div>
 
                                     <div class="wrapper-description">
-                                        <p class="wrapper-details">Lorem Ipsum is simply dummy text of the printing
-                                            and
-                                            typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                                            text ever since the redi 1500s, when an unknown printer took a galley of
-                                            type and scrambled it to make a type specimen book. It has survived not only
-                                            five centuries but also the on leap into electronic typesetting, remaining
+                                        <p class="wrapper-details">{{ $item->comment }}
                                         </p>
                                     </div>
                                 </div>
+                                @endforeach
+
                             </div>
                         </div>
                     </div>

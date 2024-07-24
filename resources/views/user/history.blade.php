@@ -203,64 +203,59 @@
             </tbody>
           </table>
         </div>
+
         <div id="reviewModal" class="modal">
-          <div class="modal-content">
-            <button class="close" style="float: right; text-align: end;">&times;</button>
-            <h4 style="text-align: center;">Nilai Produk dan Toko</h4>
-            <hr>
-            <td class="table-wrapper wrapper-product">
-              <div class="row-rating mt-4">
-                <div class="wrapper-img">
-                  <img src="{{ asset("storage/{$item->order->first()->product->thumbnail}") }}" alt="img"
-                    style="height: 15rem; width: 15rem; border: 1px solid rgba(126, 163, 219, 0.40); border-radius: 8px;">
-                </div>
-                <div class="wrapper-content mx-5">
-                  <h5 class="heading">{{ $item->order->first()->product->title }}</h5>
-                  <p class="paragraph">
-                    Rp{{ number_format($item->order->first()->product->price, 0, '', '.') }}</p>
-                </div>
-              </div>
-            </td>
-
-            <form class="mt-5">
+            <div class="modal-content">
+              <button class="close" style="float: right; text-align: end;">&times;</button>
+              <h4 style="text-align: center;">Nilai Produk dan Toko</h4>
               <hr>
-              <div class="row-rating">
-                <label for="produk-rating" class="form-label mb-2" style="font-size: 19px;">Penilaian Produk
-                </label>
-                <div class="rating" style="margin-left: 100px;">
-                  {{-- <input type="radio" id="produk-star1" name="produk-rating" value="1" /><label
-                                        for="produk-star1" title="Buruk">&#9733;</label>
-                                    <input type="radio" id="produk-star2" name="produk-rating" value="2" /><label
-                                        for="produk-star2" title="Cukup">&#9733;</label>
-                                    <input type="radio" id="produk-star3" name="produk-rating" value="3" /><label
-                                        for="produk-star3" title="Baik">&#9733;</label>
-                                    <input type="radio" id="produk-star4" name="produk-rating" value="4" /><label
-                                        for="produk-star4" title="Sangat Baik">&#9733;</label>
-                                    <input type="radio" id="produk-star5" name="produk-rating" value="5" /><label
-                                        for="produk-star5" title="Luar Biasa">&#9733;</label> --}}
-                  <select class="star-rating" name="product_rating"
-                    data-options="{&quot;clearable&quot;:false, &quot;tooltip&quot;:false}">
-                    <option value="">Pilih penilaian</option>
-                    <option value="5">Luar Biasa</option>
-                    <option value="4">Sangat Baik</option>
-                    <option value="3">Baik</option>
-                    <option value="2">Cukup</option>
-                    <option value="1">Buruk</option>
-                  </select>
+              <td class="table-wrapper wrapper-product">
+                <div class="row-rating mt-4">
+                  <div class="wrapper-img">
+                    <img src="{{ asset("storage/{$item->order->first()->product->thumbnail}") }}" alt="img"
+                      style="height: 15rem; width: 15rem; border: 1px solid rgba(126, 163, 219, 0.40); border-radius: 8px;">
+                  </div>
+                  <div class="wrapper-content mx-5">
+                    <h5 class="heading">{{ $item->order->first()->product->title }}</h5>
+                    <p class="paragraph">
+                      Rp{{ number_format($item->order->first()->product->price, 0, '', '.') }}</p>
+                  </div>
                 </div>
-              </div>
-              <label for="ulasan" class="form-label" style="font-size: 18px;">Beri Ulasan :</label> <br>
-              <textarea id="deskripsi" name="ulasan" class="form-control" placeholder="Masukkan ulasan" rows="7"
-                style="font-size: 17px;"></textarea>
+              </td>
 
-              <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim Ulasan</button>
-            </form>
+              <form action="{{ route('user.ulasan') }}" method="post" class="mt-5">
+                @csrf
+                <hr>
+                <div class="row-rating">
+                  <label for="produk-rating" class="form-label mb-2" style="font-size: 19px;">Penilaian Produk
+                  </label>
+                  <div class="rating" style="margin-left: 100px;">
+                    <select class="star-rating" name="star"
+                      data-options="{&quot;clearable&quot;:false, &quot;tooltip&quot;:false}">
+                      <option value="">Pilih penilaian</option>
+                      <option value="5">Luar Biasa</option>
+                      <option value="4">Sangat Baik</option>
+                      <option value="3">Baik</option>
+                      <option value="2">Cukup</option>
+                      <option value="1">Buruk</option>
+                    </select>
+                  </div>
+                </div>
+                <label for="ulasan" class="form-label" style="font-size: 18px;">Beri Ulasan :</label> <br>
+                <textarea id="deskripsi" name="comment" class="form-control" placeholder="Masukkan ulasan" rows="7"
+                  style="font-size: 17px;"></textarea>
+                  <input type="hidden" name="product_id" value="{{ $item->order->first()->product->id }}">
 
+                <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim Ulasan</button>
+              </form>
+
+            </div>
           </div>
-        </div>
       @empty
       @endforelse
 
     </div>
   </div>
+
+
 @endsection

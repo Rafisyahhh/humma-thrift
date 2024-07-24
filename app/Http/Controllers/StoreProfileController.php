@@ -8,6 +8,7 @@ use App\Models\cart;
 use App\Models\UserStore;
 use App\Models\Product;
 use App\Models\ProductAuction;
+use App\Models\Ulasan;
 use Auth;
 use Illuminate\Http\Request;
 use Jorenvh\Share\ShareFacade as Share;
@@ -54,8 +55,8 @@ class StoreProfileController extends Controller
         $countcart = cart::where('user_id',auth()->id())->count();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $user = Auth::user();
-
-        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction','user','carts','countcart', 'countFavorite'));
+        $ulasan = Ulasan::all();
+        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction','user','carts','countcart', 'countFavorite','ulasan'));
     }
 
     public function showStore()
