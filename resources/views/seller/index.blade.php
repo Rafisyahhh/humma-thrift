@@ -38,7 +38,7 @@
         <div class="tab-content nav-content" id="v-pills-tabContent" style="flex: 1 0%;">
             <div class="user-profile">
                 <div class="user-title">
-                    <h5 class="heading" style="font-size: 35px">PROFIL ANDA</h5>
+                    <h5 class="heading" style="font-size: 3rem">PROFIL ANDA</h5>
                 </div>
                 <div class="profile-section">
                     <div class="row g-5 summary-icons">
@@ -118,31 +118,32 @@
                         <div class="col-lg-12">
                             <div class="info-section">
                                 <div class="seller-info">
-                                    <h5 class="heading">Informasi pribadi</h5>
+                                    <h5 class="heading" style="color: white;">Informasi pribadi</h5>
                                     <div class="info-list">
                                         <div class="info-title">
-                                            <p>Nama: <strong style="font-size: 1.6rem">{{ auth()->user()->name }}</strong></p>
-                                            <p>Email: <strong style="font-size: 1.6rem">{{auth()->user()->email}}</strong></p>
-                                            <p>No Telepon: <strong style="font-size: 1.6rem">+{{auth()->user()->phone}}</strong></p>
-                                                @foreach ($address as $stores )
-                                                    @if ($stores->status)
-                                                    <p>Alamat: <strong style="font-size: 1.6rem">{{ $stores->address }}</strong></p>
-                                                @endif
+                                            <p class="white-text">Nama: <strong class="info-text">{{ auth()->user()->name }}</strong></p>
+                                            <p class="white-text">Email: <strong class="info-text">{{ auth()->user()->email }}</strong></p>
+                                            <p class="white-text">No Telepon: <strong class="info-text">+{{ auth()->user()->phone }}</strong></p>
+                                            @foreach ($address as $stores)
+                                              @if ($stores->status)
+                                                <p class="white-text">Alamat: <strong class="info-text">{{ $stores->address }}</strong></p>
+                                              @endif
                                             @endforeach
-                                        </div>
+                                          </div>
+
                                     </div>
                                 </div>
                                 <div class="devider"></div>
                                 <div class="shop-info">
-                                    <h5 class="heading">Informasi Toko</h5>
+                                    <h5 class="heading" style="color: white;">Informasi Toko</h5>
                                     <div class="info-list">
                                         <div class="info-title">
                                             @foreach ($store as $store)
                                                 @if ($store->user_id == auth()->id())
-                                                    <p>Nama: <strong style="font-size: 1.6rem">{{$store->name}}</strong></p>
-                                                    <p>Email: <strong style="font-size: 1.6rem">{{$store->user->email}}</strong></p>
-                                                    <p>No Telepon: <strong style="font-size: 1.6rem">+{{$store->user->phone}}</strong></p>
-                                                    <p>Alamat: <strong style="font-size: 1.6rem">{{$store->address}}</strong></p>
+                                                    <p class="white-text">Nama: <strong class="info-text">{{$store->name}}</strong></p>
+                                                    <p class="white-text">Email: <strong class="info-text">{{$store->user->email}}</strong></p>
+                                                    <p class="white-text">No Telepon: <strong class="info-text">+{{$store->user->phone}}</strong></p>
+                                                    <p class="white-text">Alamat: <strong class="info-text">{{$store->address}}</strong></p>
                                                 @endif
                                             @endforeach
                                         </div>
