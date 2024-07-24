@@ -50,7 +50,16 @@ class StoreProfileController extends Controller {
         $ulasan = Ulasan::whereHas('product', function ($query) use ($store) {
             $query->where('store_id', $store->id);
         })->get();
-        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction', 'user', 'carts', 'countcart', 'countFavorite', 'ulasan'));
+
+        $countFavoriteProduct = Favorite::select('product_id', \DB::raw('count(*) as total'))
+            ->groupBy('product_id')
+            ->pluck('total', 'product_id');
+
+        $countFavoriteAuction = Favorite::select('product_auction_id', \DB::raw('count(*) as total'))
+            ->groupBy('product_auction_id')
+            ->pluck('total', 'product_auction_id');
+
+        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction', 'user', 'carts', 'countcart', 'countFavorite', 'ulasan', 'countFavoriteProduct', 'countFavoriteAuction'));
     }
 
     public function showStore() {
