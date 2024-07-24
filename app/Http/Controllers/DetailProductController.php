@@ -10,22 +10,18 @@ use App\Models\ProductAuction;
 use App\Models\ProductCategory;
 use Jorenvh\Share\ShareFacade as Share; // Gunakan full namespace
 
-class DetailProductController extends Controller
-{
-    public function showProduct()
-    {
+class DetailProductController extends Controller {
+    public function showProduct() {
         $brands = Brand::all();
         $categories = ProductCategory::all();
         $product = Product::all();
         $product_auction = ProductAuction::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
 
         return view('user.shop', compact(
             'brands',
             'categories',
             'product',
             'product_auction',
-            'countFavorite'
         ));
     }
 }
