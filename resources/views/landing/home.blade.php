@@ -384,7 +384,7 @@
             @foreach ($product_auction as $item)
               <swiper-slide id="cardButton"
                 data-route="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}">
-                <div class="product-wrapper" style="z-index: 11;" data-aos="fade-right" data-aos-duration="100">
+                <div class="product-wrapper" style="z-index: 11; height: 47rem !important" data-aos="fade-right" data-aos-duration="100">
                   <div class="product-img">
                     <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover">
                     <div class="product-cart-items">
