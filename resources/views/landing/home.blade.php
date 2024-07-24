@@ -171,8 +171,16 @@
             /* margin: 0 5px 5px; */
             background-color: #ffffff73;
             /* margin-left:1px !important;
-                                                margin-right: 1px !important; */
+                                                                margin-right: 1px !important; */
             /* Tambahkan margin jika perlu */
+        }
+
+        .grid-item img {
+            border-radius: 5px;
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            transition: top 0.5s ease-in-out, opacity 0.5s ease-in-out;
         }
 
         .grid-item img {
@@ -209,7 +217,7 @@
 @endpush
 
 @section('content')
-    <section id="hero" class="hero" style="position: relative;">
+    <section id="hero" class="hero" style="position: relative;z-index: 5;">
         <div class="swiper hero-swiper">
             <div class="swiper-wrapper hero-wrapper">
                 @foreach ($event as $key => $even)
@@ -227,12 +235,12 @@
                                             </h5>
                                             <h1 class="wrapper-details" style="color:#1c3879;">{{ $even->judul }}</h1>
                                             <a href="{{ url('/product/regular') }}" class="shop-btn mt-3" ">Belanja Sekarang</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
      @endforeach
                                         </div>
                                         <div class="swiper-pagination"></div>
@@ -279,7 +287,7 @@
                 <div class="grid-sizer"></div>
                 @foreach ($categories as $kategori)
                     <div class="grid-item {{ $kategori->type }}"
-                        data-route="{{ url("/product/regular?categories=$kategori->slug") }}">
+                        data-route="{{ url("/product?categories=$kategori->slug") }}">
                         <div class="blok">
                             <h5 style="color:#1C3879; font-size:30px; margin-top:40%;"> {{ $kategori->slug }}</h5>
                         </div>
@@ -309,7 +317,8 @@
             <div class="container">
                 <div class="section-title">
                     <h5 style="color: #1c3879;">TERBARU!</h5>
-                    <a href="{{ url('/product/regular') }}" class="view" style="color: #1c3879;">Lihat Semua</a>
+                    <a href="{{ url('/product/regular') }}" class="view" style="color: #1c3879;">Lihat
+                        Semua</a>
                 </div>
                 <div class="arrival-section">
                     <swiper-container slides-per-view="4" loop="true" navigation="true" space-between="30"
@@ -339,7 +348,8 @@
                                                             </span>
                                                         </button>
                                                     </form>
-                                                    <a data-id="{{ $item->id }}" class="compare item-cart openShareModal">
+                                                    <a data-id="{{ $item->id }}"
+                                                        class="compare item-cart openShareModal">
                                                         <span>
                                                             <i class="fas fa-share"></i>
                                                         </span>
@@ -381,7 +391,8 @@
                                                 </td><br>
                                             </tr>
                                             <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
-                                                class="product-details" style="font-size: 1.85rem"> {{ $item->title }}
+                                                class="product-details" style="font-size: 1.85rem">
+                                                {{ $item->title }}
                                             </a>
                                             <div class="price">
                                                 <span class="new-price"
@@ -443,16 +454,16 @@
 
         <section class="product flash-sale mt-5">
             <div class="container pb-5 mb-5">
-                <div class="section-title" style="position: relative; z-index: 11;">
+                <div class="section-title" style="position: relative; z-index: 3;">
                     <h5>SESI LELANG</h5>
                     <a href="{{ url('/product/auction') }}" class="view">Lihat Semua</a>
                 </div>
-                <div class="flash-sale-section" style="position: relative; z-index: 11;">
+                <div class="flash-sale-section" style="position: relative; z-index: 4;">
                     <swiper-container slides-per-view="4" loop="true" navigation="true" space-between="30"
                         autoplay-delay="10000" autoplay-disable-on-interaction="false">
                         @foreach ($product_auction as $item)
                             <swiper-slide id="cardButton">
-                                <div class="product-wrapper" style="z-index: 11; height:47rem !important"
+                                <div class="product-wrapper" style="z-index: 5; height:47rem !important"
                                     data-aos="fade-right" data-aos-duration="100">
                                     <div class="product-img">
                                         <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img"
@@ -477,7 +488,8 @@
                                                             </span>
                                                         </button>
                                                     </form> --}}
-                                                    <a data-id="{{ $item->id }}" class="compare item-cart openShareModal">
+                                                    <a data-id="{{ $item->id }}"
+                                                        class="compare item-cart openShareModal">
                                                         <span>
                                                             <i class="fas fa-share"></i>
                                                         </span>
@@ -552,7 +564,8 @@
                                                 @csrf
                                                 <div class="product-cart-btn" style="bottom:0;">
                                                     <input type="hidden" value="{{ $item->id }}" name="product_id">
-                                                    <button type="submit" class="product-btn">Beli sekarang</button>
+                                                    <button type="submit" class="product-btn">Beli
+                                                        sekarang</button>
                                                 </div>
                                             </form>
                                         @elseif ($auctionproduct)
@@ -583,7 +596,8 @@
                                 <button class="close" style="float: right; text-align: end;">&times;</button>
                                 @if ($user)
                                     @if ($existingAuction)
-                                        <p style="text-align: center; font-size :20px; font-weight:bold;">Anda sudah
+                                        <p style="text-align: center; font-size :20px; font-weight:bold;">Anda
+                                            sudah
                                             mengikuti lelang</p>
                                         <p style="text-align: center;">bid lelang anda :
                                             {{ $auctions->auction_price }}</p>
@@ -604,7 +618,8 @@
                                                 class="form-control @error('auction_price') is-invalid @enderror"
                                                 placeholder="Masukkan Bid Lelang anda" style="font-size: 17px;">
                                             <p style="margin-top: 5px;margin-left:6px;font-size:12px;color: #7c7c7c;">
-                                                Bid : Rp{{ number_format($item->bid_price_start, null, null, '.') }}
+                                                Bid :
+                                                Rp{{ number_format($item->bid_price_start, null, null, '.') }}
                                                 -
                                                 Rp{{ number_format($item->bid_price_end, null, null, '.') }}</p>
                                             @error('auction_price')
@@ -717,48 +732,48 @@
 @endpush
 
 @push('js')
-<script>
-    function openModal(modal) {
-        $(modal).show();
-    }
+    <script>
+        function openModal(modal) {
+            $(modal).show();
+        }
 
-    function closeModal(modal) {
-        $(modal).hide();
-    }
+        function closeModal(modal) {
+            $(modal).hide();
+        }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.openAuctionModal').forEach(function(btn) {
-            btn.onclick = function() {
-                var productId = btn.getAttribute('data-id');
-                var modal = document.getElementById('reviewModal-' + productId);
-                modal.style.display = 'flex';
-            }
-        });
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.openAuctionModal').forEach(function(btn) {
+                btn.onclick = function() {
+                    var productId = btn.getAttribute('data-id');
+                    var modal = document.getElementById('reviewModal-' + productId);
+                    modal.style.display = 'flex';
+                }
+            });
 
-        document.querySelectorAll('.openShareModal').forEach(function(btn) {
-            btn.onclick = function() {
-                var productId = btn.getAttribute('data-id');
-                var modal = document.getElementById('shareModal-' + productId);
-                modal.style.display = 'flex';
-            }
-        });
+            document.querySelectorAll('.openShareModal').forEach(function(btn) {
+                btn.onclick = function() {
+                    var productId = btn.getAttribute('data-id');
+                    var modal = document.getElementById('shareModal-' + productId);
+                    modal.style.display = 'flex';
+                }
+            });
 
-        document.querySelectorAll('.close').forEach(function(span) {
-            span.onclick = function() {
-                var modal = span.closest('.modal');
-                modal.style.display = 'none';
-            }
-        });
-
-        window.onclick = function(event) {
-            document.querySelectorAll('.modal').forEach(function(modal) {
-                if (event.target == modal) {
+            document.querySelectorAll('.close').forEach(function(span) {
+                span.onclick = function() {
+                    var modal = span.closest('.modal');
                     modal.style.display = 'none';
                 }
             });
-        }
-    });
-</script>
+
+            window.onclick = function(event) {
+                document.querySelectorAll('.modal').forEach(function(modal) {
+                    if (event.target == modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
 
     {{-- <script>
         $("[data-route]").click(function({

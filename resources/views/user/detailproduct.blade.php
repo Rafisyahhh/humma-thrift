@@ -592,7 +592,7 @@
                         </div>
                         <div class="author-details">
                           <h5>{{ $item->user->name }}</h5>
-                          <p>{{ Carbon\Carbon::parse($item->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}</p>
+                          <p>{{ $item->created_at }}</p>
                         </div>
                       </div>
                       <div class="ratings">
