@@ -276,12 +276,9 @@
                     </path>
                 </svg>
             </div>
-
-            <div class="circle-shape"></div>
-            <div class="circle-shape"></div>
         </div>
 
-        <section class="product arrival mt-5" style="z-index: 100;position: relative;">
+        <section class="product arrival mt-5 " style="z-index: 100;position: relative; ">
             <div class="container">
                 <div class="section-title">
                     <h5 style="color: #1c3879;">TERBARU!</h5>
