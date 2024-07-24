@@ -118,11 +118,11 @@ class ProductAuctionSeeder extends Seeder {
         $uploadPath = "uploads/thumbnails/";
         $faker = Faker::create();
 
-        $listData->transform(function(array $item) use ($publicPath, $faker, $uploadPath) {
+        $listData->transform(function (array $item) use ($publicPath, $faker, $uploadPath) {
             $item = collect($item);
             $sourcePath = $publicPath . $item["thumbnail"];
             $destinationPath = $uploadPath . $item["thumbnail"];
-            $priceStart = $faker->numberBetween(250000, 5000000);
+            $priceStart = $this->random_int_with_fixed_suffix(5_000, 1_000_000);
 
             if (File::exists($sourcePath) && Storage::disk('public')->put($destinationPath, File::get($sourcePath))) {
                 return $item->put("price", null)
@@ -131,9 +131,17 @@ class ProductAuctionSeeder extends Seeder {
                     ->put('size', 'XL')
                     ->put('description', $faker->sentence())
                     ->put('bid_price_start', $priceStart)
-                    ->put('bid_price_end', $faker->numberBetween($priceStart, $priceStart + 500000))
+                    ->put('bid_price_end', $this->random_int_with_fixed_suffix($priceStart, $priceStart + 500_000))
                     ->put("thumbnail", $uploadPath . $item["thumbnail"]);
             }
         })->each(fn(Collection $data) => ProductAuction::create($data->toArray()));
+    }
+    function random_int_with_fixed_suffix($min, $max, $suffix = 0) {
+        $min_adjusted = (int) ($min / 1000);
+        $max_adjusted = (int) ($max / 1000);
+
+        $random_number = random_int($min_adjusted, $max_adjusted);
+
+        return $random_number * 1000 + $suffix;
     }
 }
