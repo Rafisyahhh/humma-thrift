@@ -530,8 +530,15 @@
                 </svg>
               </span>
             </button>
+            {{-- @foreach ($isProduct as $item) --}}
+
             <span style="margin-left:0.5px; font-size: 15px">Favorit</span>
-            <span style="margin-left:0.5px; font-size: 15px">(3,8RB)</span>
+            @if ($countFavoriteProduct)
+
+            <span style="margin-left:0.5px; font-size: 15px">        ({{ $countFavoriteProduct}})            </span>
+            @endif
+            {{-- @endforeach --}}
+
           </form>
         @else
           <form action="{{ route('storesproduct', $isProductAuction->id) }}" method="POST">
