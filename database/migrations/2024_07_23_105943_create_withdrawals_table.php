@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('user_store_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->bigInteger('amount');
-            // $table->enum('status', Withdrawal::getWithdrawalStatusEnum()->toArray())->default(WithdrawalStatusEnum::PENDING->value);
+            $table->enum('status', Withdrawal::getWithdrawalStatusEnum()->toArray())->default(WithdrawalStatusEnum::PENDING->value);
         });
     }
 
