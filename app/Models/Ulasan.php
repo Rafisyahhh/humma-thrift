@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use App\Casts\HistoryTanggalCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ulasan extends Model
-{
+class Ulasan extends Model {
     use HasFactory;
 
     protected $fillable = [
@@ -16,13 +16,15 @@ class Ulasan extends Model
         'comment',
     ];
 
-    public function product()
-    {
+    protected $casts = [
+        'created_at' => HistoryTanggalCast::class,
+    ];
+
+    public function product() {
         return $this->belongsTo(Product::class);
     }
 
-    public function user()
-    {
+    public function user() {
 
         return $this->belongsTo(User::class);
     }

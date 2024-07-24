@@ -270,14 +270,14 @@
                 <div class="profile-icon" style="color: #1c3879">
                   <i class="fas fa-box"></i>
                 </div>
-                <div class="profile-title">50+</div>
+                <div class="profile-title">{{ count($isProduct) + count($isProductAuction) }}</div>
                 <div class="profile-subtitle">Produk</div>
               </div>
               <div class="profile-info-detail-content">
                 <div class="profile-icon">
                   <i class="fas fa-star" style="color: #ffbb28"></i>
                 </div>
-                <div class="profile-title">4.87 / 5.0</div>
+                <div class="profile-title">{!! $store->getAverageRating() !!}/5.0</div>
                 <div class="profile-subtitle">Ulasan Toko</div>
               </div>
             </div>
@@ -441,15 +441,17 @@
               <li class="list-group-item d-flex mt-5 rounded pt-3 w-100"
                 style="height: 20rem; background-color: rgba(202, 202, 202, 0.2); position: unset; transform: translateY(-25%)">
                 <div style="width: 30rem;">
-                  <img src="https://placehold.co/400" class="img-fluid rounded mb-2 float-start"
-                    style="width: 7.5rem" />
+                  <img src="{{ asset("storage/{$item->product->thumbnail}") }}"
+                    class="img-fluid rounded mb-2 float-start" style="width: 7.5rem" />
                   <div class="h-50"></div>
                   <h5 class="text-start">{{ $item->product->title }}</h5>
                   <p class="text-start">Warna: {{ $item->product->color }}</p>
                 </div>
                 <div class="w-100">
                   <div class="d-flex position-relative mb-4">
-                    <img src="https://placehold.co/400" class="img-fluid" style="width: 6rem; border-radius: 50%" />
+                    <img
+                      src="{{ asset(isset($item->user->avatar) ? "storage/{$item->user->avatar}" : 'template-assets/front/assets/images/homepage-one/aurthor-img-1.webp') }}"
+                      class="img-fluid" style="width: 6rem; border-radius: 50%" />
                     <div class="ms-3 w-100">
                       <div class="d-flex position-relative">
                         <h5>{{ $item->user->name }}</h5>

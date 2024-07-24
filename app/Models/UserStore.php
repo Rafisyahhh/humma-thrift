@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class UserStore extends Model
-{
+class UserStore extends Model {
     use HasFactory;
     use SoftDeletes;
 
@@ -23,8 +22,7 @@ class UserStore extends Model
      *
      * @return void
      */
-    public static function boot()
-    {
+    public static function boot() {
         parent::boot();
 
         # Auto Creating Username
@@ -34,7 +32,7 @@ class UserStore extends Model
 
         # Auto Creating Username When Update if There Hasn't Have A Username
         self::updating(function ($model) {
-            if(!$model->username) {
+            if (!$model->username) {
                 $model->setAttribute('username', self::generateUniqueUsername($model->name));
             }
         });
@@ -45,9 +43,19 @@ class UserStore extends Model
      *
      * @return BelongsTo
      */
-    public function user()
-    {
+    public function user() {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function products() {
+        return $this->hasMany(Product::class);
+    }
+    public function productAuctions() {
+        return $this->hasMany(ProductAuction::class);
+    }
+
+    public function ulasan() {
+        return $this->hasManyThrough(Ulasan::class, Product::class, 'store_id', 'product_id', 'id', 'id');
     }
 
     /**
@@ -56,8 +64,7 @@ class UserStore extends Model
      * @param  string  $name
      * @return string
      */
-    protected static function generateUniqueUsername($name)
-    {
+    protected static function generateUniqueUsername($name) {
         $baseUsername = Str::slug($name, '');
         $username = $baseUsername . rand(10, 99);
 
@@ -73,8 +80,7 @@ class UserStore extends Model
      *
      * @return string
      */
-    public function avatar()
-    {
+    public function avatar() {
         return asset("storage/{$this->getAttribute('store_logo')}");
     }
 
@@ -83,8 +89,7 @@ class UserStore extends Model
      *
      * @return string
      */
-    public function cover()
-    {
+    public function cover() {
         return asset("storage/{$this->getAttribute('store_logo')}");
     }
 
@@ -93,8 +98,7 @@ class UserStore extends Model
      *
      * @return Collection
      */
-    public static function getStoreStatusEnums(): Collection
-    {
+    public static function getStoreStatusEnums(): Collection {
         return collect(StoreStatusEnum::cases())->pluck('value');
     }
 
@@ -103,8 +107,28 @@ class UserStore extends Model
      *
      * @return StoreStatusEnum
      */
-    public function getStatusEnum(): StoreStatusEnum
-    {
+    public function getStatusEnum(): StoreStatusEnum {
         return StoreStatusEnum::from($this->status);
     }
+
+    public function getAverageRating() {
+        $reviews = $this->ulasan;
+
+        $a = $reviews->where('star', 1)->count();
+        $b = $reviews->where('star', 2)->count();
+        $c = $reviews->where('star', 3)->count();
+        $d = $reviews->where('star', 4)->count();
+        $e = $reviews->where('star', 5)->count();
+
+        $R = $a + $b + $c + $d + $e;
+
+        if ($R === 0) {
+            return number_format(0, 1);
+        }
+
+        $average = (1 * $a + 2 * $b + 3 * $c + 4 * $d + 5 * $e) / $R;
+
+        return number_format($average, 1);
+    }
+
 }
