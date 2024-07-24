@@ -353,7 +353,7 @@
                                                 <div class="text-center">
                                                     <p class="fs-3 fw-bold">{{ $item->name }}</p>
                                                     <p class="fs-5">
-                                                        @currency($item->flat == null ? $product->sum('price') : $item->flat)
+                                                        @currency($item->flat == null ? $item->percent/100*$product->sum('price') : $item->flat)
                                                     </p>
                                                 </div>
                                             </div>

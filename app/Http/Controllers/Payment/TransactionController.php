@@ -46,6 +46,9 @@ class TransactionController extends Controller
                 'paid_at' => null,
                 'delivery_status' => 'selesaikan pesanan',
                 'status' => $transaction['status'],
+                'total_harga' => $transaction['amount_received'],
+                'biaya_admin' => $transaction['total_fee'],
+                'payment_method' => $transaction['payment_name']
             ]);
 
             # Buat Data Daftar Order
@@ -96,6 +99,9 @@ class TransactionController extends Controller
                 'total' => $transaction['amount'],
                 'delivery_status' => 'selesaikan pesanan',
                 'status' => $transaction['status'],
+                'total_harga' => $transaction['amount_received'],
+                'biaya_admin' => $transaction['total_fee'],
+                'payment_method' => $transaction['payment_name']
             ]);
 
             # Buat Data Daftar Order

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     AboutUsController,
+    AdminTransactionController,
     AdminController,
     AuctionsController,
     UserController,
@@ -33,6 +34,7 @@ use App\Http\Controllers\{
     UserStoreController,
     OrderController,
     SellerTransactionController,
+    StoreController,
 };
 use App\Http\Controllers\Payment\CallbackController;
 
@@ -188,6 +190,8 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::resource('user', UserController::class);
     Route::resource('event', EventController::class);
     Route::resource('produk', ProductAdminController::class);
+    Route::resource('store', StoreController::class);
+    Route::resource('transaction', AdminTransactionController::class);
 
     Route::prefix('/notification')->controller(NotificationController::class)->name('notification.')->group(function () {
         Route::get('/', 'index')->name('index');

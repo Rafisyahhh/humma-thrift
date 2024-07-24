@@ -30,8 +30,8 @@
             </a>
         </li>
 
-        <li class="menu-item {{ request()->routeIs('/admin') ? 'active' : '' }}">
-            <a href="{{ url('/admin') }}" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('admin.store.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.store.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-building"></i>
                 <div>Toko</div>
             </a>
@@ -56,8 +56,8 @@
                 <div>Produk</div>
             </a>
         </li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('admin.transaction.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.transaction.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-wallet"></i>
                 <div>Transaksi</div>
             </a>

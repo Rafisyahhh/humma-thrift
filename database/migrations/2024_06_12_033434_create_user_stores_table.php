@@ -30,6 +30,7 @@ return new class extends Migration {
             $table->time('close')->nullable();
             $table->enum('status', UserStore::getStoreStatusEnums()->toArray())->nullable();
             $table->boolean('cuti')->default(false);
+            $table->softDeletes();
         });
     }
 
@@ -37,6 +38,9 @@ return new class extends Migration {
      * Reverse the migrations.
      */
     public function down(): void {
+        Schema::table('user_stores', function (Blueprint $table) {
+            $table->dropSoftDelete();
+        });
         Schema::dropIfExists('user_stores');
     }
 };

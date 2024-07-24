@@ -8,7 +8,7 @@
                             <img src="{{ asset('images/brands/png/logo-whitexxxhdpi.png') }}" height="36px" alt="logo">
                         </div>
                         <div class="footer-link order-link">
-                            <p style="font-size: 1.5rem">HUMMATHRIFT sebuah platform yang menyediakan berbagai macam produk fashion, mulai dari pakaian, sepatu, aksesori, hingga barang-barang vintage yang unik dan sulit ditemukan.</p>
+                            <p style="font-size: 1.5rem"><strong style="font-size: 1.60rem;">HUMMATHRIFT</strong> sebuah platform yang menyediakan berbagai macam produk fashion, mulai dari pakaian, sepatu, aksesori, hingga barang-barang vintage yang unik dan sulit ditemukan.</p>
                         </div>
                     </div>
                 </div>
@@ -19,11 +19,11 @@
                         </h4>
                         <div class="footer-link about-link">
                             <ul>
-                                <li><a href="/">Home</a></li>
-                                <li><a href="">Produk</a></li>
-                                <li><a href="/brand">Brand</a></li>
-                                <li><a href="/stores">Toko</a></li>
-                                <li><a href="/about-us">Tentang Kami</a></li>
+                                <li><a href="{{ url('/') }}">Home</a></li>
+                                <li><a href="{{ url('/product/regular') }}">Produk</a></li>
+                                <li><a href="{{ url('/product/auction') }}">Produk Lelang</a></li>
+                                <li><a href="{{ url('/stores') }}">Toko</a></li>
+                                <li><a href="{{ url('/about-us') }}">Tentang Kami</a></li>
                             </ul>
                         </div>
                     </div>
@@ -35,10 +35,10 @@
                         </h4>
                         <div class="footer-link useful-link">
                             <ul>
-                                <li><a href="about.html">Profil</a></li>
-                                <li><a href="privacy.html">Keranjang</a></li>
-                                <li><a href="terms.html">Favorite</a></li>
-                                <li><a href="product-sidebar.html">Pesanan</a></li>
+                                <li><a href="{{ url('/user/profile') }}">Profil</a></li>
+                                <li><a href="{{ url('/user/cart') }}">Keranjang</a></li>
+                                <li><a href="{{ url('/user/wishlist') }}">Favorite</a></li>
+                                <li><a href="{{ url('/user/order') }}">Pesanan</a></li>
                             </ul>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                                     </span>
                                 </div>
                                 <div class="details">
-                                    <h4 class="footer-heading">No telepon   :</h4>
+                                    <h4 class="footer-heading">No telepon :</h4>
                                     <p>+62 8519216603</p>
                                 </div>
                             </div>

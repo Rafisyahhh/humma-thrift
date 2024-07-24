@@ -64,10 +64,12 @@
         this.wishlist();
       }
     }
+    @auth
     updatePartials.all();
 
     setInterval(() => {
       updatePartials.notification();
     }, 60_000);
+    @endauth
   </script>
 @endpush

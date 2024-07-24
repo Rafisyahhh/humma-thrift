@@ -56,9 +56,9 @@
 
     <link href="{{ asset('additional-assets/summernote-0.8.20/summernote.min.css') }}" rel="stylesheet" />
 
-    <link href="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.3.2/dist/flasher.min.css" type="text/css"
-      rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.3.2/dist/flasher.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('vendor/flasher/flasher.min.css') }}">
+
+    <script src="{{ asset('vendor/flasher/flasher.min.js') }}"></script>
 
     <style>
       .header-right-dropdown>div {
