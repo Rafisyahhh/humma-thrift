@@ -121,6 +121,14 @@
         return false;
       }
 
+      $("[data-route]").click(function({
+        target: {
+          tagName
+        }
+      }) {
+        if (!["A", "I"].includes(tagName)) window.location.href = $(this).data("route");
+      });
+
       $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': '{{ csrf_token() }}'

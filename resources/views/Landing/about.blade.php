@@ -30,7 +30,7 @@
                                     {{ $about->title }}
                                 </h3>
                                 <p class="about-info"
-                                    style="font-family: 'Roboto', serif; font-size: 20px !important; word-wrap: break-word; width: 150%; max-width: 70rem;  text-align: justify;">
+                                    style="font-size: 20px !important; word-wrap: break-word; width: 150%; max-width: 70rem;  text-align: justify;">
                                     {{ $about->description }}
                                 </p>
                             </div>

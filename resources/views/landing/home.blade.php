@@ -171,9 +171,8 @@
       /* margin: 0 5px 5px; */
       background-color: #ffffff73;
       /* margin-left:1px !important;
-                                    margin-right: 1px !important; */
+                              margin-right: 1px !important; */
       /* Tambahkan margin jika perlu */
-
     }
 
     .grid-item img {
@@ -181,6 +180,30 @@
       display: block;
       width: 100%;
       max-width: 100%;
+      transition: top 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    }
+
+    .blok {
+      background-color: #ffffffb2;
+      border-radius: 6px;
+      padding: 10px;
+      width: 100%;
+      height: 100%;
+      word-wrap: break-word;
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.5s ease-in-out, top 0.5s ease-in-out;
+    }
+
+    .grid-item:hover .blok {
+      top: 50%;
+      visibility: visible;
+      opacity: 1;
     }
   </style>
 @endpush
@@ -192,7 +215,8 @@
         @foreach ($event as $key => $even)
           <div id="slide{{ $key }}" class="swiper-slide hero-slider-one "
             style="background-image: url('{{ asset("storage/{$even->foto}") }}');">
-            <div class="hero-slider-one" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"></div>
+            <div class="hero-slider-one" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+            </div>
             <div class="container custom-margin-bottom">
               <div class="row custom-margin-bottom">
                 <div class="col-lg-2">
@@ -203,14 +227,15 @@
                       </h5>
                       <h1 class="wrapper-details" style="color:#1c3879;">{{ $even->judul }}</h1>
                       <a href="{{ url('/product/regular') }}" class="shop-btn mt-3" ">Belanja Sekarang</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
    @endforeach
                     </div>
+                    <div class="swiper-pagination"></div>
                   </div>
   </section>
 
@@ -240,7 +265,7 @@
                         <div class="wrapper-img p-0">
                             <img src="{{ asset("storage/{$kategori->icon}") }}"
                                 style="width:125px;hieght:125px;border-radius:20px;" class="h-100">
-                        </div>
+                        </div> 
                         <div class="wrapper-info">
                             <a href="" class="wrapper-details">{{ $kategori->title }}</a>
                         </div>
@@ -251,7 +276,10 @@
       <div class="grid mt-4">
         <div class="grid-sizer"></div>
         @foreach ($categories as $kategori)
-          <div class="grid-item {{ $kategori->type }}">
+          <div class="grid-item {{ $kategori->type }}" data-route="{{ url("/product?categories=$kategori->slug") }}">
+            <div class="blok">
+              <h5 style="color:#1C3879; font-size:30px; margin-top:40%;"> {{ $kategori->slug }}</h5>
+            </div>
             <img src="{{ asset("storage/{$kategori->icon}") }}" style="width:125px;hieght:125px;border-radius:20px;"
               class="h-100 w-100">
           </div>
@@ -281,8 +309,8 @@
           <a href="{{ url('/product/regular') }}" class="view" style="color: #1c3879;">Lihat Semua</a>
         </div>
         <div class="arrival-section">
-          <swiper-container slides-per-view="4" loop="true" navigation="true" space-between="30" autoplay-delay="10000"
-            autoplay-disable-on-interaction="false">
+          <swiper-container slides-per-view="4" loop="true" navigation="true" space-between="30"
+            autoplay-delay="10000" autoplay-disable-on-interaction="false">
             @foreach ($product as $item)
               <swiper-slide id="cardButton"
                 data-route="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}">
