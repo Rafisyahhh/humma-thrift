@@ -132,14 +132,8 @@ class LandingpageController extends Controller {
         $products = $products->paginate(24);
         $brands = Brand::all();
         $categories = ProductCategory::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
 
-        return view('Landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'colors', 'sizes'));
+        return view('Landing.produk-regular', compact('products', 'brands', 'categories', 'colors', 'sizes'));
     }
 
     // Tambahkan metode auction
