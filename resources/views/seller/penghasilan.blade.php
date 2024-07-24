@@ -235,12 +235,12 @@
         <div class="heading">
             <h5>Data Transaksi</h5>
 
-            <div class="form-group">
-                <input type="date" id="date-range" class="form-control" style="font-size: 1rem" />
-                <input type="text" id="trx-id" class="form-control" placeholder="Misal: TRX-00001"
+            <form action="{{ url()->current() }}" class="form-group">
+                <input type="date" id="date-range" class="form-control" name="date" value="{{ old('date', request()->get('date')) }}" style="font-size: 1rem" />
+                <input type="text" id="trx-id" name="trx" class="form-control" value="{{ old('trx', request()->get('trx')) }}" placeholder="Misal: TRX-00001"
                     style="font-size: 1rem" />
-                <button class="btn btn-primary">Cari</button>
-            </div>
+                <button class="btn btn-primary" type="submit">Cari</button>
+            </form>
         </div>
 
         <div class="table-view">
@@ -253,20 +253,22 @@
 
             @forelse ($transactions as $transaction)
                 <div class="table-body">
-                    <div class="table-item">
+                    <div class="table-item flex-column d-flex">
                         <a
-                            href="{{ route('seller.transaction.detail', $transaction->reference_id) }}">{{ $transaction->reference_id }}</a>
+                            href="{{ route('seller.transaction.detail', $transaction->id) }}">{{ $transaction->transaction_id }}</a>
                         <span class="text-muted">@currency($transaction->total)</span>
                     </div>
-                    <div class="table-item">{{ $transaction->reference_id }}</div>
-                    <div class="table-item">{{ $transaction->reference_id }}</div>
+                    <div class="table-item">{{ $transaction->expired_at->locale('id')->isoFormat('D MMMM YYYY') }}</div>
+                    <div class="table-item">
+                        {{ $transaction->paid_at ? $transaction->paid_at->locale('id')->isoFormat('D MMMM YYYY') : '-' }}
+                    </div>
                     <div class="table-item">
                         <span
                             class="badge bg-{{ $transaction->getTransactionEnum()->color() }}">{{ $transaction->getTransactionEnum()->label() }}</span>
                     </div>
                 </div>
             @empty
-                <div class="table-item d-flex justify-items-center">Tidak ada data</div>
+                <div class="table-item d-flex justify-content-center w-100" style="text-align: center;font-size: 14px;">Tidak ada data</div>
             @endforelse
 
             {{ $transactions->links() }}

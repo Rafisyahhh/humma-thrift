@@ -1,14 +1,14 @@
-
-
 <?php
 
 use App\Http\Controllers\ApiControllers\UserApiController;
+use App\Http\Controllers\HeaderController;
 use App\Http\Controllers\Payment\TransactionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     AboutUsController,
     AdminTransactionController,
+    AdminController,
     AuctionsController,
     UserController,
     BrandController,
@@ -75,12 +75,12 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
     Route::resource('product', ProductController::class);
     Route::resource('productauction', ProductAuctionController::class);
 
-    Route::prefix('notification')->controller(NotificationSellerController::class)->name('notification.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/notifications/{notificationId}', 'show')->name('show');
-        Route::get('/read-all', 'readAll')->name('readAll');
-        Route::delete('{id}', 'destroy')->name('destroy');
-    });
+        Route::prefix('notification')->controller(NotificationSellerController::class)->name('notification.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/notifications/{notificationId}', 'show')->name('show');
+            Route::get('/read-all', 'readAll')->name('readAll');
+            Route::delete('{id}', 'destroy')->name('destroy');
+        });
 
     // Show seller product auction
     Route::get('auction/seller/{id}', [AuctionsController::class, 'showSeller'])->name('auction.showSeller');
@@ -95,13 +95,14 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     Route::middleware(\App\Http\Middleware\NotSellerMiddleware::class)->group(function () {
         Route::get('/', [DashboardUserController::class, 'dashboard'])->name('userhome');
 
-        Route::controller(CheckoutController::class)->prefix('/checkout')->group(function() {
+        Route::controller(CheckoutController::class)->prefix('/checkout')->group(function () {
             Route::get('/', 'index')->name('checkout');
             Route::get('/lelang', 'indexCoLelang')->name('checkout.lelang');
             Route::post('process', 'processCheckout')->name('checkout.process');
             Route::post('process/auction', 'processCheckoutAuction')->name('checkout.process.auction');
         });
 
+        Route::get('reviewstore', [HistoryController::class, 'reviewstore'])->name('reviews');
         Route::post('address/{id}', [UserAddressController::class, 'store'])->name('address.store');
         Route::put('edit/address/{user}/{address}', [UserAddressController::class, 'update'])->name('address.edit');
         Route::put('main/address/{address}', [UserAddressController::class, 'main'])->name('address.main');
@@ -175,14 +176,14 @@ Route::post('/productAuction/storesproductAuction/{productAuction}', [FavoriteCo
 Route::delete('/destroyAuction/{destroyAuction}', [FavoriteController::class, 'destroyAuction'])->name('destroyAuction.destroy');
 
 Route::post('/product/storecart/{product}', [CartController::class, 'storecart'])->name('storecart');
-Route::delete('/product/storecart/{cart}', [CartController::class, 'deletecart'])->name('deletecart');
+Route::delete('/product/deletecart/{cart}', [CartController::class, 'deletecart'])->name('deletecart');
 
 # Home Redirect
 Route::get('/home', RedirectUserController::class)->name('home');
 
 # Admin Routes
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function () {
-    Route::view('/', 'admin.index')->name('index');
+    Route::get('/',[AdminController::class, 'index'])->name('index');
     Route::resource('about', AboutUsController::class);
     Route::resource('brand', BrandController::class);
     Route::resource('product-category', ProductCategoryController::class);
@@ -211,3 +212,9 @@ Route::prefix('@{store:username}')->controller(StoreProfileController::class)->g
 
 #callback
 Route::post('callback', [CallbackController::class, 'handle'])->name('callback');
+
+Route::prefix('header')->name('header.')->group(function () {
+    Route::get('cart', [HeaderController::class, 'cart'])->name('cart');
+    Route::get('notification', [HeaderController::class, 'notification'])->name('notification');
+    Route::get('wishlist', [HeaderController::class, 'wishlist'])->name('wishlist');
+});

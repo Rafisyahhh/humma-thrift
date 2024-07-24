@@ -49,13 +49,14 @@ class AuctionsController extends Controller {
     }
 
     public function notifyuser() {
-        $notifications = Auth::user()->notifications()->paginate(20);
+        $notifications = Auth::user()->notifications()->orderBy('read_at', 'asc')->orderBy('created_at', 'desc')->whereNull('read_at')->take(10)->get();
         $countcart = cart::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
             ->whereNotNull('product_id')
             ->orderBy('created_at')
             ->get();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
+
 
         return view('user.notification.notify-lelang', compact('notifications', 'countcart', 'carts', 'countFavorite'));
     }
@@ -64,7 +65,7 @@ class AuctionsController extends Controller {
         $notification = Auth::user()->notifications()->findOrFail($notificationId);
         $notification->markAsRead();
 
-        $notifications = Auth::user()->notifications()->paginate(20);
+        $notifications = Auth::user()->notifications()->orderBy('read_at', 'asc')->orderBy('created_at', 'desc')->whereNull('read_at')->take(10)->get();
         $countcart = cart::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
             ->whereNotNull('product_id')
@@ -72,6 +73,7 @@ class AuctionsController extends Controller {
             ->get();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
 
+        session()->flash('success', 'Notification read successfully');
 
         return view('user.notification.notify-lelang', compact('notifications','countcart','carts','countFavorite','notification'));
     }
@@ -89,7 +91,7 @@ class AuctionsController extends Controller {
     }
     public function readAll() {
         Auth::user()->getAttribute('unreadNotifications')->markAsRead();
-        return redirect()->route('user.notification.index');
+        return redirect()->route('user.notification.index')->with('success', 'Sukses tandai baca');
     }
 
     /**
@@ -186,42 +188,14 @@ class AuctionsController extends Controller {
     /**
      * Update the specified resource in storage.
      */
-    // public function updatelelang(UpdateauctionsRequest $request, auctions $auctions)
-    // {
-    //     try {
-    //         $dataToUpdate = [
-    //             'status' => $request->input('status') == 1,
-    //         ];
-
-    //         $auctions->update($dataToUpdate);
-
-    //         if ($auctions->status) {
-    //             $auctions->user->notify(new Lelang($auctions));
-    //         }
-    //         $productAuction = ProductAuction::find($auctions->product_auction_id);
-
-    //         if ($productAuction) {
-    //             $productAuction->auction_price = $request->input('price');
-    //             $productAuction->save();
-    //         } else {
-    //             throw new \Exception('Product Auction not found');
-    //         }
-
-    //         return redirect()->route('seller.product.index')->with('success', 'Lelang berhasil dipilih');
-    //     }catch (\Throwable $th) {
-    //         Log::error('Error in updatelelang method: ' . $th->getMessage());
-    //         return redirect()->route('seller.product.index')->withInput()->withErrors(['error' => 'Terjadi kesalahan: ' . $th->getMessage()]);
-    //     }
-
-    // }
     public function updatelelang(UpdateauctionsRequest $request, auctions $auctions) {
         try {
-            $auctions2 = $auctions->productAuction->auctions;
-            foreach ($auctions2 as $item) {
-                if ($item->user_id != $auctions->user_id) {
-                    $item->user->notify(new KalahLelang($auctions, $item->user));
-                }
-            }
+            // $auctions2 = $auctions->productAuction->auctions;
+            // foreach ($auctions2 as $item) {
+            //     if ($item->user_id != $auctions->user_id) {
+            //         $item->user->notify(new KalahLelang($auctions, $item->user));
+            //     }
+            // }
             $dataToUpdate = [
                 'status' => $request->status == 1,
             ];

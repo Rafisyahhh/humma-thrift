@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('transaction_orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            // $table->foreignId('product_id')->constrained();
             $table->foreignId('user_address_id')->constrained();
             $table->bigInteger('total');
             $table->string('transaction_id');
             $table->string('reference_id');
+            $table->timestamp('expired_at')->nullable();
+            $table->timestamp('paid_at')->nullable();
             $table->enum('delivery_status',['selesaikan pesanan','dikemas','diantar','diterima','selesai'])->default('selesaikan pesanan');
             $table->enum('status',['UNPAID','PAID','REFUND','EXPIRED','FAILED']);
             $table->string('payment_method');

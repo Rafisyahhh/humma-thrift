@@ -11,13 +11,11 @@ use App\Models\UserStore;
 use App\Notifications\UserCart;
 use Illuminate\Http\Request;
 
-class CartController extends Controller
-{
+class CartController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
+    public function index() {
         // Fetch cart items with related products in one query
         $carts = cart::where('user_id', auth()->id())
             ->with('product')
@@ -45,12 +43,10 @@ class CartController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
+    public function create() {
     }
 
-    public function storecart(Product $product)
-    {
+    public function storecart(Request $r, Product $product) {
         $dataproduct['product_id'] = $product->id;
         $dataproduct['user_id'] = auth()->id();
 
@@ -59,6 +55,10 @@ class CartController extends Controller
             ->first();
 
         if ($keranjang) {
+            if ($r->ajax()) {
+                return response()->json(['error' => "Produknya udah ada di keranjang nih...", "cart" => true]);
+            }
+
             return redirect()->back()->with('error', "Produknya udah ada di keranjang nih...");
         }
 
@@ -66,11 +66,15 @@ class CartController extends Controller
 
         $product->userStore->user->notify(new UserCart($product));
 
-        return redirect()->back()->with('success', 'Keranjang berhasil dibuat.');
+
+        if ($r->ajax()) {
+            return response()->json(['success' => 'Keranjang berhasil dibuat.', "cart" => true]);
+        }
+
+        return redirect()->back()->with('success', 'Keranjang berhasil dibuat...');
     }
 
-    public function cart($id)
-    {
+    public function cart($id) {
         $keranjang = cart::find($id);
         $keranjang->is_cart = !$keranjang->is_cart;
         $keranjang->save();
@@ -81,32 +85,28 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(cart $cart)
-    {
+    public function show(cart $cart) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(cart $cart)
-    {
+    public function edit(cart $cart) {
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, cart $cart)
-    {
+    public function update(Request $request, cart $cart) {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function deletecart(cart $cart)
-    {
+    public function deletecart(cart $cart) {
         //
         $cart->delete();
         return redirect()->back()->with('success', 'Sukses menghapus produk');

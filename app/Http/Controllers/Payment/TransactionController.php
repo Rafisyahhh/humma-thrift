@@ -42,6 +42,8 @@ class TransactionController extends Controller
                 'transaction_id' => $transaction['merchant_ref'],
                 'reference_id' => $transaction['reference'],
                 'total' => $transaction['amount'],
+                'expired_at' => now()->addDays(1),
+                'paid_at' => null,
                 'delivery_status' => 'selesaikan pesanan',
                 'status' => $transaction['status'],
                 'total_harga' => $transaction['amount_received'],
@@ -73,6 +75,7 @@ class TransactionController extends Controller
             return back()->with('error', $e->getMessage());
         }
     }
+
     public function storeLelang(Request $request)
     {
         try {

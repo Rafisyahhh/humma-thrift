@@ -6,24 +6,16 @@
     <style>
         .custom-button {
             background-color: #007bff;
-            /* Warna latar belakang biru */
             color: white;
-            /* Warna teks putih */
             border: none;
-            /* Menghilangkan border default */
             padding: 10px 20px;
-            /* Padding */
             font-size: 16px;
-            /* Ukuran font */
             border-radius: 4px;
-            /* Membuat sudut tombol melengkung */
             transition: background-color 0.3s;
-            /* Animasi transisi */
         }
 
         .custom-button:hover {
             background-color: #0056b3;
-            /* Warna latar belakang lebih gelap saat hover */
         }
 
         .modal {
@@ -55,11 +47,6 @@
             cursor: pointer;
         }
 
-        .d-flex {
-            display: flex;
-            align-items: center;
-        }
-
         .m-0 {
             margin: 0;
         }
@@ -67,40 +54,27 @@
         .radio-container {
             display: flex;
             justify-content: center;
-            /* Centers horizontally */
             align-items: center;
-            /* Centers vertically */
             height: 100%;
-            /* Ensure the container takes the full height */
         }
 
         .radio-button-labels {
             position: relative;
-            /* Position relative to enable pseudo-element */
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* Centers elements inside the label horizontally */
             justify-content: center;
-            /* Centers elements inside the label vertically */
             text-align: center;
             padding: 20px;
-            /* Add padding for better spacing */
             border: 2px solid transparent;
-            /* Default border */
             border-radius: 10px;
-            /* Rounded corners */
             transition: border-color 0.3s ease, background-color 0.3s ease;
-            /* Smooth transition for hover effect */
             cursor: pointer;
-            /* Change cursor to pointer for better UX */
         }
 
         .radio-button-labels:hover {
             border-color: #007bff;
-            /* Change border color on hover */
             background-color: #f0f8ff;
-            /* Light background color on hover */
         }
 
         .radio-button-labels:checked~label {
@@ -127,7 +101,6 @@
         }
     </style>
     <style>
-        /* Style the form */
         #coForm {
             background-color: #ffffff;
             margin: 50px auto;
@@ -135,7 +108,6 @@
             min-width: 300px;
         }
 
-        /* Style the input fields */
         input {
             padding: 10px;
             width: 4%;
@@ -144,17 +116,14 @@
             border: 1px solid #aaaaaa;
         }
 
-        /* Mark input boxes that gets an error on validation: */
         input.invalid {
             background-color: #ffdddd;
         }
 
-        /* Hide all steps by default: */
         .tab {
             display: none;
         }
 
-        /* Make circles that indicate the steps of the form: */
         .step {
             height: 15px;
             width: 15px;
@@ -166,12 +135,10 @@
             opacity: 0.5;
         }
 
-        /* Mark the active step: */
         .step.active {
             opacity: 1;
         }
 
-        /* Mark the steps that are finished and valid: */
         .step.finish {
             background-color: #1c3879;
         }
@@ -345,21 +312,6 @@
                     <div class="address-list">
                         @foreach ($addresses as $address)
                             <div class="address-item-wrap">
-
-                                {{-- INI YA CAKKK TADI CODE SENG TAK KOMEN IKI CUMAN GAE PERCOBAAN --}}
-
-
-
-                                {{-- <form id="deleteForm{{ $address->id }}" action="{{ route('user.address.destroy', $address->id) }}" method="post" style="display: inline;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                    style="color: #1c3879; background: none; border: none; padding: 0; cursor: pointer; margin-right: 110px;">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
-                                                                    <path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z"/>
-                                                                </svg>
-                                                            </button>
-                                                        </form> --}}
                                 <input type="radio" name="addressOption" id="option{{ $address->id }}"
                                     value="{{ $address->id }}" class="d-none" @checked($address->status) />
                                 <label class="address-item-listlabel" for="option{{ $address->id }}">
@@ -492,8 +444,15 @@
             </div>
         </div>
 
-        <div style="overflow: auto">
-            <div style="float: right">
+        <div class="d-flex justify-content-between align-items-center">
+            <!-- Circles which indicates the steps of the form: -->
+            <div style="text-align: center;">
+                <span class="step" onclick="changeTab(0)"></span>
+                <span class="step" onclick="changeTab(1)"></span>
+                <span class="step" onclick="changeTab(2)"></span>
+            </div>
+
+            <div class="ms-auto">
                 <button type="button" id="prevBtn" class="shop-btn" onclick="nextPrev(-1)">
                     Kembali
                 </button>
@@ -502,14 +461,6 @@
                 </button>
             </div>
         </div>
-
-        <!-- Circles which indicates the steps of the form: -->
-        <div style="text-align: center; margin-top: 40px">
-            <span class="step" onclick="changeTab(0)"></span>
-            <span class="step" onclick="changeTab(1)"></span>
-            <span class="step" onclick="changeTab(2)"></span>
-        </div>
-        {{-- <input type="hidden" name="product_id" value="{{ $product->id }}"> --}}
     </form>
     {{-- Address Modal --}}
     <div id="addressModal" class="modal">
@@ -580,7 +531,6 @@
 @endsection
 @push('script')
     {{-- script modal tambah address --}}
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Get the modal element

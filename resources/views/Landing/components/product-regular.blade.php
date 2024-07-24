@@ -12,7 +12,8 @@
               </span>
             </button>
           </form>
-          <form action="{{ route('storecart', $item->id) }}" method="POST">
+          <form action="{{ route('storecart', $item->id) }}" method="POST"
+            onsubmit="ajaxSubmit(event, this, () => { updatePartials.cart() })">
             @csrf
             <button class="favourite cart-item">
               <span>
@@ -29,6 +30,17 @@
       </div>
       <div class="product-info">
         <div class="product-description">
+          {{-- STORE --}}
+          <tr class="table-row ticket-row store-header"
+            style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100%;">
+            <td class="table-wrapper wrapper-product" style="display: flex; align-items: center;">
+              <div class="form-check" style="display: flex; align-items: center; margin-left: 1rem;">
+                <i class="fa-solid fa-store" style="margin-left: -3rem; color: #215791; font-size: 1.75rem;"></i>
+                <a href="{{ route('store.profile', ['store' => $item->userStore->username]) }}"
+                  style="font-weight: bold; margin-left: 1rem; font-size: 1.55rem; color: gray;">{{ $item->userStore->name }}</a>
+              </div>
+            </td><br>
+          </tr>
           <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
             class="product-details">{{ $item->title }}
           </a>

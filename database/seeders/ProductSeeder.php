@@ -134,6 +134,7 @@ class ProductSeeder extends Seeder {
             }
         }
     }
+    
     function random_int_with_fixed_suffix($min, $max, $suffix = 0) {
         $min_adjusted = (int) ($min / 1000);
         $max_adjusted = (int) ($max / 1000);
