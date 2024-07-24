@@ -171,7 +171,7 @@
             /* margin: 0 5px 5px; */
             background-color: #ffffff73;
             /* margin-left:1px !important;
-                                margin-right: 1px !important; */
+                                                margin-right: 1px !important; */
             /* Tambahkan margin jika perlu */
         }
 
@@ -227,12 +227,12 @@
                                             </h5>
                                             <h1 class="wrapper-details" style="color:#1c3879;">{{ $even->judul }}</h1>
                                             <a href="{{ url('/product/regular') }}" class="shop-btn mt-3" ">Belanja Sekarang</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
      @endforeach
                                         </div>
                                         <div class="swiper-pagination"></div>
@@ -315,8 +315,7 @@
                     <swiper-container slides-per-view="4" loop="true" navigation="true" space-between="30"
                         autoplay-delay="10000" autoplay-disable-on-interaction="false">
                         @foreach ($product as $item)
-                            <swiper-slide id="cardButton"
-                                data-route="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}">
+                            <swiper-slide id="cardButton">
                                 <div class="product-wrapper" data-aos="fade-up">
                                     <div class="product-img">
                                         <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img"
@@ -340,9 +339,9 @@
                                                             </span>
                                                         </button>
                                                     </form>
-                                                    <a href="#" class="compaire cart-item">
+                                                    <a data-id="{{ $item->id }}" class="compare item-cart openShareModal">
                                                         <span>
-                                                            <i class="fas fa-share" style="font-size: 19px;"></i>
+                                                            <i class="fas fa-share"></i>
                                                         </span>
                                                     </a>
                                                 @else
@@ -402,6 +401,42 @@
                             </swiper-slide>
                         @endforeach
                     </swiper-container>
+                    @foreach ($product as $item)
+                        <div id="shareModal-{{ $item->id }}" class="modal" style="display: none; z-index:999;">
+                            <div class="modal-content">
+                                <button class="close" style="float: right; text-align: end;"
+                                    onclick="closeModal2('#shareModal-{{ $item->id }}')">&times;</button>
+                                <div class="align-items-center gap-3 justify-content-center py-3"
+                                    style="position: relative;">
+                                    <p class="fs-2 mb-0 text-center fw-bold">Bagikan ke:</p>
+                                    <div class="d-flex gap-2 align-items-center justify-content-center mt-2">
+                                        <span class="share-container share-buttons d-flex gap-3 ms-2" style="z-index:1;">
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
+                                                target="_blank" class="social-buttons">
+                                                <i class="fa-brands fa-square-facebook"
+                                                    style="color: #1c3879;font-size:4rem"></i>
+                                            </a>
+                                            <a href="https://twitter.com/intent/tweet?url={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}&text={{ $item->title }}"
+                                                target="_blank" class="social-buttons">
+                                                <i class="fa-brands fa-square-x-twitter"
+                                                    style="color: #1c3879;font-size:4rem"></i>
+                                            </a>
+                                            <a href="https://t.me/share/url?url={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}&text={{ $item->title }}"
+                                                target="_blank" class="social-buttons">
+                                                <i class="fa-brands fa-telegram"
+                                                    style="color: #1c3879;font-size:4rem"></i>
+                                            </a>
+                                            <a href="https://api.whatsapp.com/send?text={{ $item->title . ' ' . route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
+                                                target="_blank" class="social-buttons">
+                                                <i class="fa-brands fa-whatsapp"
+                                                    style="color: #1c3879;font-size:4rem"></i>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -416,8 +451,7 @@
                     <swiper-container slides-per-view="4" loop="true" navigation="true" space-between="30"
                         autoplay-delay="10000" autoplay-disable-on-interaction="false">
                         @foreach ($product_auction as $item)
-                            <swiper-slide id="cardButton"
-                                data-route="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}">
+                            <swiper-slide id="cardButton">
                                 <div class="product-wrapper" style="z-index: 11; height:47rem !important"
                                     data-aos="fade-right" data-aos-duration="100">
                                     <div class="product-img">
@@ -443,9 +477,9 @@
                                                             </span>
                                                         </button>
                                                     </form> --}}
-                                                    <a href="#" class="compaire cart-item">
+                                                    <a data-id="{{ $item->id }}" class="compare item-cart openShareModal">
                                                         <span>
-                                                            <i class="fas fa-share" style="font-size: 19px;"></i>
+                                                            <i class="fas fa-share"></i>
                                                         </span>
                                                     </a>
                                                 @else
@@ -523,13 +557,15 @@
                                             </form>
                                         @elseif ($auctionproduct)
                                             <div class="product-cart-btn">
-                                                <a data-id="{{ $item->id }}" class="product-btn openModal">Lelang
-                                                    Berakhir</a>
+                                                <a data-id="{{ $item->id }}" class="product-btn openAuctionModal">
+                                                    Lelang Berakhir
+                                                </a>
                                             </div>
                                         @else
                                             <div class="product-cart-btn">
-                                                <a data-id="{{ $item->id }}" class="product-btn openModal">Ikuti
-                                                    Lelang</a>
+                                                <a data-id="{{ $item->id }}" class="product-btn openAuctionModal">
+                                                    Ikuti Lelang
+                                                </a>
                                             </div>
                                         @endif
                                     @else
@@ -585,8 +621,36 @@
                         </div>
                         <div id="shareModal-{{ $item->id }}" class="modal" style="display: none; z-index:999;">
                             <div class="modal-content">
-                                <button class="close" style="float: right; text-align: end;">&times;</button>
-                                
+                                <button class="close" style="float: right; text-align: end;"
+                                    onclick="closeModal2('#shareModal-{{ $item->id }}')">&times;</button>
+                                <div class="align-items-center gap-3 justify-content-center py-3"
+                                    style="position: relative;">
+                                    <p class="fs-2 mb-0 text-center fw-bold">Bagikan ke:</p>
+                                    <div class="d-flex gap-2 align-items-center justify-content-center mt-2">
+                                        <span class="share-container share-buttons d-flex gap-3 ms-2" style="z-index:1;">
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
+                                                target="_blank" class="social-buttons">
+                                                <i class="fa-brands fa-square-facebook"
+                                                    style="color: #1c3879;font-size:4rem"></i>
+                                            </a>
+                                            <a href="https://twitter.com/intent/tweet?url={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}&text={{ $item->title }}"
+                                                target="_blank" class="social-buttons">
+                                                <i class="fa-brands fa-square-x-twitter"
+                                                    style="color: #1c3879;font-size:4rem"></i>
+                                            </a>
+                                            <a href="https://t.me/share/url?url={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}&text={{ $item->title }}"
+                                                target="_blank" class="social-buttons">
+                                                <i class="fa-brands fa-telegram"
+                                                    style="color: #1c3879;font-size:4rem"></i>
+                                            </a>
+                                            <a href="https://api.whatsapp.com/send?text={{ $item->title . ' ' . route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
+                                                target="_blank" class="social-buttons">
+                                                <i class="fa-brands fa-whatsapp"
+                                                    style="color: #1c3879;font-size:4rem"></i>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     @endforeach
@@ -653,42 +717,49 @@
 @endpush
 
 @push('js')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var modals = document.querySelectorAll('.modal');
-            var btns = document.querySelectorAll('.openModal');
-            var spans = document.querySelectorAll('.close');
+<script>
+    function openModal(modal) {
+        $(modal).show();
+    }
 
-            btns.forEach(function(btn, index) {
-                btn.onclick = function() {
-                    var productId = btn.getAttribute('data-id');
-                    var modal = document.getElementById('reviewModal-' + productId);
-                    var auctionForm = document.getElementById('auctionForm-' + productId);
+    function closeModal(modal) {
+        $(modal).hide();
+    }
 
-                    if (auctionForm) {
-                        auctionForm.querySelector('input[name="product_id"]').value = productId;
-                    }
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.openAuctionModal').forEach(function(btn) {
+            btn.onclick = function() {
+                var productId = btn.getAttribute('data-id');
+                var modal = document.getElementById('reviewModal-' + productId);
+                modal.style.display = 'flex';
+            }
+        });
 
-                    modal.style.display = 'flex';
-                }
-            });
+        document.querySelectorAll('.openShareModal').forEach(function(btn) {
+            btn.onclick = function() {
+                var productId = btn.getAttribute('data-id');
+                var modal = document.getElementById('shareModal-' + productId);
+                modal.style.display = 'flex';
+            }
+        });
 
-            spans.forEach(function(span, index) {
-                span.onclick = function() {
-                    var modal = span.closest('.modal');
+        document.querySelectorAll('.close').forEach(function(span) {
+            span.onclick = function() {
+                var modal = span.closest('.modal');
+                modal.style.display = 'none';
+            }
+        });
+
+        window.onclick = function(event) {
+            document.querySelectorAll('.modal').forEach(function(modal) {
+                if (event.target == modal) {
                     modal.style.display = 'none';
                 }
             });
+        }
+    });
+</script>
 
-            window.onclick = function(event) {
-                modals.forEach(function(modal) {
-                    if (event.target == modal) {
-                        modal.style.display = 'none';
-                    }
-                });
-            }
-        });
-    </script>
     {{-- <script>
         $("[data-route]").click(function({
             target: {
