@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('reference_id');
             $table->timestamp('expired_at')->nullable();
             $table->timestamp('paid_at')->nullable();
-            $table->enum('delivery_status',['selesaikan pesanan','dikemas','diantar','diterima','selesai'])->default('selesaikan pesanan');
+            $table->enum('delivery_status', ['selesaikan pesanan','dikemas','diantar','diterima','selesai'])->default('selesaikan pesanan');
             $table->enum('status',['UNPAID','PAID','REFUND','EXPIRED','FAILED']);
             $table->string('payment_method');
             $table->string('total_harga');

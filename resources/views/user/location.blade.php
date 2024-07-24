@@ -55,11 +55,6 @@
             cursor: pointer;
         }
 
-        .d-flex {
-            display: flex;
-            align-items: center;
-        }
-
         .m-0 {
             margin: 0;
         }
