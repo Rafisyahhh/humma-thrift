@@ -657,7 +657,7 @@
             }
         });
     </script>
-    <script>
+    {{-- <script>
         $("[data-route]").click(function({
             target: {
                 tagName
@@ -665,7 +665,7 @@
         }) {
             if (!["A", "I"].includes(tagName)) window.location.href = $(this).data("route");
         });
-    </script>
+    </script> --}}
     <script>
         var $grid = $('.grid').isotope({
             itemSelector: '.grid-item',

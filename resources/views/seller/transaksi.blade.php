@@ -19,7 +19,7 @@
     </head>
 @endsection
 @section('content')
-    {{-- @php
+{{-- @php
 use App\Models\Order;
 @endphp --}}
     <section class="product-description">
