@@ -11,6 +11,14 @@
         </button>
       </li>
       <li class="nav-item" role="presentation">
+        <button class="nav-link position-relative" id="home-tab" data-bs-toggle="tab"
+          data-bs-target="#tipe-tab" type="button" role="tab" aria-controls="type-tab"
+          aria-selected="false">Tipe
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info"
+            style="display: none;" id="categoriesCount">0</span>
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
         <button class="nav-link position-relative" id="profile-tab" data-bs-toggle="tab" data-bs-target="#brand-tab"
           type="button" role="tab" aria-controls="brand-tab" aria-selected="false">Brand
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info"
@@ -52,6 +60,21 @@
                 <label for="{{ $item->id }}">{{ $item->title }}</label>
               </li>
             @endforeach
+          </ul>
+        </div>
+      </div>
+      <div class="tab-pane fade sidebar-wrapper" id="tipe-tab" role="tabpanel"
+        aria-labelledby="category-tab" tabindex="0">
+        <div class="sidebar-item">
+          <ul class="sidebar-list">
+              <li>
+                <input type="checkbox" id="" name="" value="">
+                <label for="">Reguler</label>
+              </li>
+              <li>
+                <input type="checkbox" id="" name="" value="">
+                <label for="">Lelang</label>
+              </li>
           </ul>
         </div>
       </div>
