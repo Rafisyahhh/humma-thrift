@@ -103,6 +103,9 @@ class LandingpageController extends Controller {
         $sizes = $products->pluck('size')->map('strtolower')->unique();
 
         if ($request->ajax()) {
+            if (isset($request->search)) {
+                $products = $products->where('title', 'like', "%$request->search%");
+            }
             if (isset($request->categories)) {
                 $products = $products->whereHas('categories', function ($q) use ($request) {
                     $q->whereIn('slug', explode(',', $request->categories));
@@ -122,6 +125,11 @@ class LandingpageController extends Controller {
             if (isset($request->price)) {
                 $products = $products->where('price', '>=', explode('-', $request->price)[0])->where('price', '<=', explode('-', $request->price)[1]);
             }
+            if (isset($request->sortBy)) {
+                if ($request->sortBy == '') {
+                    $products = $products->where('price', '>=', explode('-', $request->price)[0])->where('price', '<=', explode('-', $request->price)[1]);
+                }
+            }
             $products = $products->paginate(24);
             if ($products->currentPage() > $products->lastPage()) {
                 return response()->json(['lastPage' => true]);
@@ -132,14 +140,8 @@ class LandingpageController extends Controller {
         $products = $products->paginate(24);
         $brands = Brand::all();
         $categories = ProductCategory::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
 
-        return view('Landing.produk-regular', compact('products', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'colors', 'sizes'));
+        return view('Landing.produk-regular', compact('products', 'brands', 'categories', 'colors', 'sizes'));
     }
 
     // Tambahkan metode auction
