@@ -77,14 +77,26 @@
 @endsection
 
 @section('script')
-
   <script>
+    function openModal(modal, callback) {
+      $(modal).modal('show');
+      callback?.($(modal));
+    }
+
+    function openModal2(modal, callback) {
+      $(modal).show();
+      callback?.($(modal));
+    }
+
+    function closeModal2(modal) {
+      $(modal).hide();
+    }
     document.addEventListener('DOMContentLoaded', function() {
       var modals = document.querySelectorAll('.modal');
       var btns = document.querySelectorAll('.openModal');
       var spans = document.querySelectorAll('.close');
 
-      btns.forEach(function(btn, index) {
+      document.querySelectorAll('.openModal').forEach(function(btn, index) {
         btn.onclick = function() {
           var productId = btn.getAttribute('data-id');
           var modal = document.getElementById('reviewModal-' + productId);
@@ -98,7 +110,7 @@
         }
       });
 
-      spans.forEach(function(span, index) {
+      document.querySelectorAll('.close').forEach(function(span, index) {
         span.onclick = function() {
           var modal = span.closest('.modal');
           modal.style.display = 'none';
@@ -106,7 +118,7 @@
       });
 
       window.onclick = function(event) {
-        modals.forEach(function(modal) {
+        document.querySelectorAll('.modal').forEach(function(modal) {
           if (event.target == modal) {
             modal.style.display = 'none';
           }
