@@ -165,7 +165,7 @@
 @endpush
 
 @section('content')
-    <section id="chart-graphic">
+    <section id="chart-graphic" class="mb-5">
         <div class="d-flex justify-content-between">
             <h5 class="heading">Data Penjualanku</h5>
             <ul class="nav nav-tabs" id="incomeData" role="tablist">
@@ -236,8 +236,10 @@
             <h5>Data Transaksi</h5>
 
             <form action="{{ url()->current() }}" class="form-group">
-                <input type="date" id="date-range" class="form-control" name="date" value="{{ old('date', request()->get('date')) }}" style="font-size: 1rem" />
-                <input type="text" id="trx-id" name="trx" class="form-control" value="{{ old('trx', request()->get('trx')) }}" placeholder="Misal: TRX-00001"
+                <input type="date" id="date-range" class="form-control" name="date"
+                    value="{{ old('date', request()->get('date')) }}" style="font-size: 1rem" />
+                <input type="text" id="trx-id" name="trx" class="form-control"
+                    value="{{ old('trx', request()->get('trx')) }}" placeholder="Misal: TRX-00001"
                     style="font-size: 1rem" />
                 <button class="btn btn-primary" type="submit">Cari</button>
             </form>
@@ -268,7 +270,8 @@
                     </div>
                 </div>
             @empty
-                <div class="table-item d-flex justify-content-center w-100" style="text-align: center;font-size: 14px;">Tidak ada data</div>
+                <div class="table-item d-flex justify-content-center w-100" style="text-align: center;font-size: 14px;">
+                    Tidak ada data</div>
             @endforelse
 
             {{ $transactions->links() }}
@@ -280,134 +283,172 @@
     <script src="{{ asset('additional-assets/chart.js-4.4.3/chart.umd.js') }}"></script>
 
     <script>
-        $(document).ready(function() {
-            // Create gradient for daily sales chart
-            const ctxHarian = document.getElementById('penjualan-harian').getContext('2d');
-            const gradientKotorHarian = ctxHarian.createLinearGradient(0, 0, 0, 250);
-            gradientKotorHarian.addColorStop(0, 'rgba(255, 0, 0, 0.25)');
-            gradientKotorHarian.addColorStop(1, 'rgba(255, 0, 0, 0.0)');
+        const ctxBulanan = document.getElementById('penjualan-bulanan').getContext('2d');
+        const gradientBulanan = ctxBulanan.createLinearGradient(0, 0, 0, 250);
+        gradientBulanan.addColorStop(0, 'rgba(25, 56, 121, 0.25)');
+        gradientBulanan.addColorStop(1, 'rgba(25, 56, 121, 0.0)');
 
-            const gradientBersihHarian = ctxHarian.createLinearGradient(0, 0, 0, 300);
-            gradientBersihHarian.addColorStop(0, 'rgba(126, 163, 219, 0.225');
-            gradientBersihHarian.addColorStop(1, 'rgba(126, 163, 219, 0.0)');
+        var labels = [
+            @foreach ($months as $month)
+                '{{ $month }}',
+            @endforeach
+        ];
 
-            // Create gradient for monthly sales chart
-            const ctxBulanan = document.getElementById('penjualan-bulanan').getContext('2d');
-            const gradientBulanan = ctxBulanan.createLinearGradient(0, 0, 0, 250);
-            gradientBulanan.addColorStop(0, 'rgba(126, 163, 219, 0.25)');
-            gradientBulanan.addColorStop(1, 'rgba(126, 163, 219, 0.0)');
+        const dataBulanan = {
+            labels: labels,
+            datasets: [{
+                label: 'Penghasilan Kotor per Bulan',
+                data: @json($monthlySalesData),
+                backgroundColor: gradientBulanan,
+                borderColor: 'rgba(25, 56, 121, 1)',
+                borderWidth: 3,
+                borderCapStyle: 'round',
+                borderJoinStyle: 'round',
+                pointBackgroundColor: 'rgba(25, 56, 121, 1)',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                pointHoverBackgroundColor: 'rgba(25, 56, 121, 1)',
+                pointHoverBorderColor: '#fff',
+                pointHoverBorderWidth: 2,
+                fill: true
+            }]
+        };
 
-            const dataHarian = {
-                labels: @json($data['hari']),
-                datasets: [{
-                        label: 'Penghasilan Kotor per Hari',
-                        data: @json($data['penghasilan_kotor']),
-                        backgroundColor: gradientKotorHarian,
-                        borderColor: 'rgba(255, 0, 0, 1)',
-                        borderWidth: 3,
-                        borderCapStyle: 'round',
-                        borderJoinStyle: 'round',
-                        pointBackgroundColor: 'rgba(255, 0, 0, 1)',
-                        pointBorderColor: '#fff',
-                        pointBorderWidth: 2,
-                        pointRadius: 5,
-                        pointHoverRadius: 7,
-                        pointHoverBackgroundColor: 'rgba(255, 0, 0, 1)',
-                        pointHoverBorderColor: '#fff',
-                        pointHoverBorderWidth: 2,
-                        fill: true
-                    },
-                    {
-                        label: 'Penghasilan Bersih per Hari',
-                        data: @json($data['penghasilan_bersih']),
-                        backgroundColor: gradientBersihHarian,
-                        borderColor: 'rgba(28, 56, 121, 1)',
-                        borderWidth: 3,
-                        borderCapStyle: 'round',
-                        borderJoinStyle: 'round',
-                        pointBackgroundColor: 'rgba(28, 56, 121, 1)',
-                        pointBorderColor: '#fff',
-                        pointBorderWidth: 2,
-                        pointRadius: 5,
-                        pointHoverRadius: 7,
-                        pointHoverBackgroundColor: 'rgba(28, 56, 121, 1)',
-                        pointHoverBorderColor: '#fff',
-                        pointHoverBorderWidth: 2,
-                        fill: true
-                    }
-                ]
-            };
-
-            const dataBulanan = {
-                labels: @json($data['bulan']),
-                datasets: [{
-                    label: 'Penjualan per Bulan',
-                    data: @json($data['penjualan_bulan']),
-                    backgroundColor: gradientBulanan,
-                    borderColor: 'rgba(28, 56, 121, 1)',
-                    borderWidth: 3,
-                    borderCapStyle: 'round',
-                    borderJoinStyle: 'round',
-                    pointBackgroundColor: 'rgba(28, 56, 121, 1)',
-                    pointBorderColor: '#fff',
-                    pointBorderWidth: 2,
-                    pointRadius: 5,
-                    pointHoverRadius: 7,
-                    pointHoverBackgroundColor: 'rgba(28, 56, 121, 1)',
-                    pointHoverBorderColor: '#fff',
-                    pointHoverBorderWidth: 2,
-                    fill: true
-                }]
-            };
-
-            const options = {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            display: false
-                        },
-                        ticks: {
-                            display: false
-                        },
-                        border: {
-                            display: false
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        },
-                        ticks: {
-                            display: false
-                        },
-                        border: {
-                            display: false
-                        }
-                    }
-                },
-                responsive: true,
-                plugins: {
-                    legend: {
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
                         display: false
                     },
-                    tooltip: {
-                        enabled: true
+                    ticks: {
+                        display: false
+                    },
+                    border: {
+                        display: false
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        display: false
+                    },
+                    border: {
+                        display: false
                     }
                 }
-            };
+            },
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true
+                }
+            }
+        };
 
-            new Chart($('#penjualan-harian'), {
-                type: 'line',
-                data: dataHarian,
-                options: options
-            });
+        new Chart(ctxBulanan, {
+            type: 'line',
+            data: dataBulanan,
+            options: options
+        });
+    </script>
 
-            new Chart($('#penjualan-bulanan'), {
-                type: 'line',
-                data: dataBulanan,
-                options: options
-            });
+    @php
+        $currentDate = new DateTime();
+        $currentMonth = $currentDate->format('m');
+        $daysInMonth = $currentDate->format('t');
+        $dates = [];
+        for ($i = 1; $i <= $daysInMonth; $i++) {
+            $dates[] = $currentDate->format('Y-m-') . str_pad($i, 2, '0', STR_PAD_LEFT);
+        }
+    @endphp
+
+    <script>
+        const ctxHarian = document.getElementById('penjualan-harian').getContext('2d');
+        const gradientKotorHarian = ctxHarian.createLinearGradient(0, 0, 0, 250);
+        gradientKotorHarian.addColorStop(0, 'rgba(25, 56, 121, 0.25)');
+        gradientKotorHarian.addColorStop(1, 'rgba(25, 56, 121, 0.0)');
+
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth() + 1;
+        const daysInMonth = new Date(currentDate.getFullYear(), currentMonth, 0).getDate();
+
+        var labels = [
+            @foreach ($dates as $date)
+                '{{ $date }}',
+            @endforeach
+        ];
+
+        const dataHarian = {
+            labels: labels,
+            datasets: [{
+                label: 'Penghasilan Kotor per Hari',
+                data: @json($dailySales->toArray()),
+                backgroundColor: gradientKotorHarian,
+                borderColor: 'rgba(25, 56, 121, 1)',
+                borderWidth: 3,
+                borderCapStyle: 'round',
+                borderJoinStyle: 'round',
+                pointBackgroundColor: 'rgba(25, 56, 121, 1)',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                pointHoverBackgroundColor: 'rgba(25, 56, 121, 1)',
+                pointHoverBorderColor: '#fff',
+                pointHoverBorderWidth: 2,
+                fill: true
+            }]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        display: false
+                    },
+                    border: {
+                        display: false
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        display: false
+                    },
+                    border: {
+                        display: false
+                    }
+                }
+            },
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true
+                }
+            }
+        };
+
+        new Chart(ctxHarian, {
+            type: 'line',
+            data: dataHarian,
+            options: options
         });
     </script>
 @endsection
