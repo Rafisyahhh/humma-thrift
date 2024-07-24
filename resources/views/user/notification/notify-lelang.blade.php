@@ -27,8 +27,6 @@
             height: auto;
         }
     </style>
-@endsection
-
 @section('content')
     <div class="row justify-content-center h-100">
         <div class="col-md-12 h-100">
@@ -41,7 +39,7 @@
                         <span style="color: #d40000;">Baca Semua</span>
                     </a>
                 </div>
-                <div class="row g-0 h-100" style="max-height:82rem; ">
+                <div class="row g-0 h-100" style="max-height:82rem; margin-top:25px;">
                     <div class="col-md-12 border-end list-group list-group-flush h-100 mt-5">
 
                         @forelse ($notifications as $notification)
