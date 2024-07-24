@@ -298,4 +298,56 @@ class LandingpageController extends Controller {
 
         return view('Landing.produk-auction', compact('product_auction', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search', 'colors', 'sizes'));
     }
+
+    public function productSearch(Request $request){
+        $products = Product::where('status', 'active');
+        $product_auction = ProductAuction::where('status', 'active');
+
+        $colors = $products->pluck('color')->map('strtolower')->unique() + $product_auction->pluck('color')->map('strtolower')->unique();
+        $sizes = $products->pluck('size')->map('strtolower')->unique() + $product_auction->pluck('size')->map('strtolower')->unique();
+
+        if ($request->ajax()) {
+            if (isset($request->search)) {
+                $products = $products->where('title', 'like', "%$request->search%");
+                $product_auction = $product_auction->where('title', 'like', "%$request->search%");
+            }
+            if (isset($request->categories)) {
+                $products = $products->whereHas('categories', function ($q) use ($request) {
+                    $q->whereIn('slug', explode(',', $request->categories));
+                });
+            }
+            if (isset($request->brands)) {
+                $products = $products->whereHas('brand', function ($q) use ($request) {
+                    $q->whereIn('slug', explode(',', $request->brands));
+                });
+            }
+            if (isset($request->colors)) {
+                $products = $products->whereIn('color', explode(',', $request->colors));
+            }
+            if (isset($request->sizes)) {
+                $products = $products->whereIn('size', explode(',', $request->sizes));
+            }
+            if (isset($request->price)) {
+                $products = $products->where('price', '>=', explode('-', $request->price)[0])->where('price', '<=', explode('-', $request->price)[1]);
+            }
+            if (isset($request->sortBy)) {
+                if ($request->sortBy == 'asc') {
+                    $products = $products->sortBy('created_at');
+                } elseif ($request->sortBy == 'desc') {
+                    $products = $products->sortByDesc('created_at');
+
+                }
+            }
+            $products = $products->paginate(24);
+            if ($products->currentPage() > $products->lastPage()) {
+                return response()->json(['lastPage' => true]);
+            }
+            return view('Landing.components.product-regular', compact('products'))->render();
+        }
+
+        $products = $products->paginate(24);
+        $brands = Brand::all();
+        $categories = ProductCategory::all();   
+        return view('Landing.allProduct', compact('products', 'brands', 'categories', 'colors', 'sizes'));
+    }
 }
