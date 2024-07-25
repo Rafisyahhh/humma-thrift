@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\HistoryRequest;
 use App\Models\cart;
 use App\Models\Favorite;
 use App\Models\TransactionOrder;
@@ -39,22 +40,33 @@ class HistoryController extends Controller {
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {
+    // public function store(Request $request) {
 
-        $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'star' => 'required|integer|between:1,5',
-            'comment' => 'required|string|max:1000',
-        ]);
+    //     $request->validate([
+    //         'product_id' => 'required|exists:products,id',
+    //         'star' => 'required|integer|between:1,5',
+    //         'comment' => 'required|string|max:1000',
+    //     ]);
 
+    //     $review = new Ulasan();
+    //     $review->user_id = Auth::user()->id;
+    //     $review->product_id = $request->product_id;
+    //     $review->star = $request->star;
+    //     $review->comment = $request->comment;
+    //     $review->save();
+    //     return redirect()->back()->with('success', 'Ulasan Anda berhasil dibuat');
+    // }
+    public function store(HistoryRequest $request) {
         $review = new Ulasan();
         $review->user_id = Auth::user()->id;
         $review->product_id = $request->product_id;
         $review->star = $request->star;
         $review->comment = $request->comment;
         $review->save();
+
         return redirect()->back()->with('success', 'Ulasan Anda berhasil dibuat');
     }
+
 
     /**
      * Display the specified resource.
