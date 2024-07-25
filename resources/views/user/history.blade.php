@@ -199,6 +199,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            @if(!$item->order->first()->product->ulasan)
                             <tr class="table-row ticket-row">
                                 <td class="table-wrapper wrapper-product">
                                     <div class="wrapper">
@@ -210,6 +211,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
