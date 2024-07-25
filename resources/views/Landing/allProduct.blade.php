@@ -22,8 +22,8 @@
               <div class="col-lg-12">
                 <div class="product-sorting-section" style="padding-bottom: unset; margin-bottom: unset">
                   <div class="result">
-                    <p>Menampilkan {{ $products->firstItem() }}–{{ $products->lastItem() }} dari
-                      {{ $products->total() }} hasil</p>
+                    <p>Menampilkan 0–1 dari
+                      2 hasil</p>
                   </div>
                 </div>
               </div>
@@ -113,8 +113,8 @@
           const tooltipSlider = document.getElementById("price-slider");
 
           noUiSlider.create(tooltipSlider, {
-            start: [{{ explode('-', request()->price ?? '0')[0] }},
-              {{ explode('-', request()->price ?? '0-' . $products->pluck('price')->max())[1] }}
+            start: [{{ explode('-', request()->price ?? '0')[0] ?? 0 }},
+              {{ explode('-', request()->price ?? '0-' . $maxPrice)[1] ?? 1000 }}
             ],
             connect: true,
             format: {
