@@ -70,11 +70,11 @@
           <div class="sidebar-item">
             <ul class="sidebar-list">
               <li>
-                <input type="checkbox" id="reguler" name="type[]" value="reguler">
+                <input type="checkbox" id="reguler" name="type[]" value="reguler" @checked(count($products) > 0)>
                 <label for="reguler">Reguler</label>
               </li>
               <li>
-                <input type="checkbox" id="auction" name="type[]" value="auction">
+                <input type="checkbox" id="auction" name="type[]" value="auction" @checked(count($product_auction) > 0)>
                 <label for="auction">Lelang</label>
               </li>
             </ul>
