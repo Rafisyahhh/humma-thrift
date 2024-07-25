@@ -63,7 +63,7 @@ class TransactionController extends Controller
             Auth::user()->notify(new NotificationUserCheckout($transactions, $orders));
 
             # Session destroying
-            cart::whereIn('id', $products)->delete();
+            cart::whereIn('product_id', $products)->delete();
 
             # Redirect ke halaman transaksi
             return redirect()->route('user.transaction.show', $transaction['reference']);
