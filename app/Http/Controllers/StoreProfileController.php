@@ -12,6 +12,8 @@ use App\Models\Ulasan;
 use Auth;
 use Illuminate\Http\Request;
 use Jorenvh\Share\ShareFacade as Share;
+use Illuminate\Support\Facades\DB;
+
 
 class StoreProfileController extends Controller {
     /**
@@ -40,21 +42,28 @@ class StoreProfileController extends Controller {
     public function productDetail(UserStore $store, string $slug) {
         $isProduct = Product::where('slug', $slug)->first();
         $isProductAuction = ProductAuction::where('slug', $slug)->first();
-        $carts = cart::where('user_id', auth()->id())
+        $carts = Cart::where('user_id', auth()->id())
             ->whereNotNull('product_id')
             ->orderBy('created_at')
             ->get();
-        $countcart = cart::where('user_id', auth()->id())->count();
+        $countcart = Cart::where('user_id', auth()->id())->count();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $user = Auth::user();
         $ulasan = Ulasan::where('product_id', $isProduct->id)->get();
 
-        $countFavoriteProduct = Favorite::select('product_id')->count();
+        // Menghitung jumlah favorit per produk
+        $countFavoriteProduct = Favorite::select('product_id', DB::raw('count(*) as total'))
+            ->groupBy('product_id')
+            ->get();
 
-        $countFavoriteAuction = Favorite::select('product_auction_id')->count();
+        // Menghitung jumlah favorit per lelang produk
+        $countFavoriteAuction = Favorite::select('product_auction_id', DB::raw('count(*) as total'))
+            ->groupBy('product_auction_id')
+            ->get();
 
         return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction', 'user', 'carts', 'countcart', 'countFavorite', 'ulasan', 'countFavoriteProduct', 'countFavoriteAuction'));
     }
+
 
     public function showStore() {
         $store = UserStore::all();
