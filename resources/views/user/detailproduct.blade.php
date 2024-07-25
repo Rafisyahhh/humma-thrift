@@ -546,7 +546,7 @@
         @else
           <form action="{{ route('storesproduct', $isProductAuction->id) }}" method="POST">
             @csrf
-            <button class="share-icon">
+            {{-- <button class="share-icon">
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                   <path fill="#1c3879"
@@ -556,7 +556,7 @@
             </button>
             <span style="margin-left:0.5px; font-size: 15px">Favorit</span>
             <span style="margin-left:0.5px; font-size: 15px">(3,8RB)</span>
-          </form>
+          </form> --}}
         @endif
       </div>
     </div>
