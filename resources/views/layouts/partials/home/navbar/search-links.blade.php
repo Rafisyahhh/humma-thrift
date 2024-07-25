@@ -14,7 +14,7 @@
   }
 </style>
 
-<style>
+{{-- <style>
   .dropdown-menu {
     overflow: hidden;
   }
@@ -34,7 +34,7 @@
     font-weight: bold;
     color: #007bff;
   }
-</style>
+</style> --}}
 
 <div class="header-search">
   <div onclick="modalAction('.search')" class="anywhere-away"></div>
@@ -64,28 +64,28 @@
                         </div>
                     </div>
                 </div> --}}
-        <a role="button" class="shop-btn" onclick="document.getElementById('global-search').submit()"><i
-            class="fas fa-search"></i></a>
+        <a role="button" class="shop-btn" onclick="document.getElementById('global-search').submit()"
+          id="searchSubmitButton"><i class="fas fa-search"></i></a>
       </form>
     </div>
   </div>
 </div>
 
-<script>
+{{-- <script>
   function selectCategory(category) {
     document.getElementById('dropbtn').innerText = category;
   }
 
   // Close the dropdown if the user clicks outside of it
   window.onclick = function(event) {}
-</script>
+</script> --}}
 
 <script>
-  let selectedCategory = 'Produk';
+  // let selectedCategory = 'Produk';
 
-  @if (Route::is('searchProductAuction'))
-    document.getElementById('dropbtn-text').innerText = 'Produk Lelang';
-  @endif
+  // @if (Route::is('searchProductAuction'))
+  // document.getElementById('dropbtn-text').innerText = 'Produk Lelang';
+  // @endif
 
   //   function selectCategory(category) {
   //     selectedCategory = category;
@@ -100,6 +100,6 @@
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    form.submit();
+    $('#global-search').submit();
   }
 </script>
