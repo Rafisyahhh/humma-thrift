@@ -217,3 +217,11 @@ Route::prefix('header')->name('header.')->group(function () {
     Route::get('notification', [HeaderController::class, 'notification'])->name('notification');
     Route::get('wishlist', [HeaderController::class, 'wishlist'])->name('wishlist');
 });
+
+Route::get('debug', function() {
+    $transaction = \App\Models\TransactionOrder::find(1);
+
+    // \App\Models\User::find($transaction->user_id)->notify(new \App\Notifications\UserInvoiceProductPaidNotification($transaction));
+    \App\Models\User::find($transaction->order()->first()->product->user_id)->notify(new \App\Notifications\SellerInvoiceProductPaidNotification($transaction));
+    // dd($transaction->order()->first()->product->user_id);
+});

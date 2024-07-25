@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Faker\Provider\bn_BD\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use NumberFormatter;
 
 class HistoryController extends Controller {
@@ -37,32 +38,23 @@ class HistoryController extends Controller {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(Request $request) {
+    public function store(Request $request) {
+        $validate = Validator::make($request->all(), [
+            'product_id' => 'required|exists:products,id',
+            'star' => 'required|integer|between:1,5',
+            'comment' => 'required|string|max:1000',
+        ]);
 
-    //     $request->validate([
-    //         'product_id' => 'required|exists:products,id',
-    //         'star' => 'required|integer|between:1,5',
-    //         'comment' => 'required|string|max:1000',
-    //     ]);
+        if($validate->fails()) {
+            return redirect()->back()->with('error', "Harap isikan kolom masukan dengan benar!")
+                ->withErrors($validate->errors())
+                ->withInput($request->input());
+        }
 
-    //     $review = new Ulasan();
-    //     $review->user_id = Auth::user()->id;
-    //     $review->product_id = $request->product_id;
-    //     $review->star = $request->star;
-    //     $review->comment = $request->comment;
-    //     $review->save();
-    //     return redirect()->back()->with('success', 'Ulasan Anda berhasil dibuat');
-    // }
-    public function store(HistoryRequest $request) {
-        $review = new Ulasan();
-        $review->user_id = Auth::user()->id;
-        $review->product_id = $request->product_id;
-        $review->star = $request->star;
-        $review->comment = $request->comment;
-        $review->save();
+        $data = collect($validate->validated());
+        $data->put('user_id', Auth::id());
+
+        Ulasan::create($data->toArray());
 
         return redirect()->back()->with('success', 'Ulasan Anda berhasil dibuat');
     }

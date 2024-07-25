@@ -146,25 +146,25 @@
                                         <h5 class="wrapper-heading" style="font-size: 17px;">Bayar Menggunakan</h5>
                                         <h5 class="wrapper-heading" style="font-size: 17px;">
                                             <div class="d-flex gap-3" id="selected-payment-method">
-                                                <p>{{ $detail->payment_name }}</p>
+                                                <p>{{ $detail?->payment_name }}</p>
                                             </div>
                                         </h5>
                                     </div>
                                     <div class="subtotal product-total">
                                         <h5 class="wrapper-heading" style="font-size: 17px;">Total Harga</h5>
                                         <h5 class="wrapper-heading" style="font-size: 17px;">
-                                            Rp.{{ number_format($detail->amount_received, null, null, '.') }}
+                                            Rp.{{ number_format($detail?->amount_received, null, null, '.') }}
                                         </h5>
                                     </div>
                                     <div class="subtotal product-total">
                                         <h5 class="wrapper-heading" style="font-size: 17px;">Biaya Admin</h5>
                                         <h5 class="wrapper-heading" style="font-size: 17px;" id="admin-fee">
-                                            Rp.{{ number_format($detail->total_fee, null, null, '.') }}</h5>
+                                            Rp.{{ number_format($detail?->total_fee, null, null, '.') }}</h5>
                                     </div>
                                     <div class="subtotal total">
                                         <h5 class="wrapper-heading">Total Belanja</h5>
                                         <h5 class="wrapper-heading price" id="total-belanja">
-                                            Rp.{{ number_format($detail->amount, null, null, '.') }}</h5>
+                                            Rp.{{ number_format($detail?->amount, null, null, '.') }}</h5>
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
                                 </h5>
                                 <div class="order-summery">
                                     <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
-                                        @foreach ($detail->instructions as $item)
+                                        @foreach ($detail?->instructions as $item)
                                             <div class="accordion-item">
                                                 <h2 class="accordion-header">
                                                     <button class="accordion-button collapsed fs-3 fw-bold" type="button"

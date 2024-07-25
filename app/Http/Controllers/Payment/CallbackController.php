@@ -80,10 +80,10 @@ class CallbackController extends Controller
                         $transaction->order()->get()->map(function (?Model $query) {
                             $query->product()?->update(['status' => 'sold']);
                             $query->product_auction()?->update(['status' => 'sold']);
-
-                            $query->transaction_order->user()->notify(new UserInvoiceProductPaidNotification($query->transaction_order));
-                            $query->transaction_order->userstore->user()->notify(new SellerInvoiceProductPaidNotification($query->transaction_order));
                         });
+
+                        User::find($transaction->user_id)->notify(new UserInvoiceProductPaidNotification($transaction));
+                        User::find($transaction->order()->first()->product->user_id)->notify(new SellerInvoiceProductPaidNotification($transaction));
                         break;
 
                     case 'EXPIRED':
