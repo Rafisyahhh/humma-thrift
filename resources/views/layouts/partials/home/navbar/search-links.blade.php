@@ -44,7 +44,7 @@
       <form class="search-section" action="{{ route('searchProduct') }}" id="global-search"
         onsubmit="handleFormSubmit(event)">
         <input type="search" placeholder="Telusuri produk..." name="search" id="search-input"
-          value="{{ $commandSearch ? '' : request()->search }}">
+          value="{{ $search }}">
         {{-- <div class="divider" style="margin-right: 25rem;"></div>
                 <div class="dropdown" style="position: absolute; right: 6.5rem; top: 0;">
                     <a class="search-select d-flex align-items-center gap-2" href="#" role="button"

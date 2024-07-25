@@ -416,6 +416,6 @@ class LandingpageController extends Controller {
         }
         $brands = Brand::all();
         $categories = ProductCategory::all();
-        return view('Landing.allProduct', compact('products', 'product_auction', 'brands', 'categories', 'colors', 'sizes', 'maxPrice', 'commandSearch'));
+        return view('Landing.allProduct', compact('products', 'product_auction', 'brands', 'categories', 'colors', 'sizes', 'maxPrice', 'search'));
     }
 }
