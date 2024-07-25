@@ -47,9 +47,7 @@ class StoreProfileController extends Controller {
         $countcart = cart::where('user_id', auth()->id())->count();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $user = Auth::user();
-        $ulasan = Ulasan::whereHas('product', function ($query) use ($store) {
-            $query->where('store_id', $store->id);
-        })->get();
+        $ulasan = Ulasan::where('product_id', $isProduct->id)->get();
 
         $countFavoriteProduct = Favorite::select('product_id')->count();
 
