@@ -17,26 +17,32 @@ class ProductCategorySeeder extends Seeder {
             [
                 "title" => "Hoodie",
                 "thumbnail" => "hoodie.png",
+                "type" => "atasan",
             ],
             [
                 "title" => "Jacket",
                 "thumbnail" => "jacket.png",
+                "type" => "atasan",
             ],
             [
                 "title" => "Longpants",
                 "thumbnail" => "longpants.png",
+                "type" => "bawahan",
             ],
             [
                 "title" => "Poloo",
                 "thumbnail" => "poloo.png",
+                "type" => "atasan",
             ],
             [
                 "title" => "Shortpants",
                 "thumbnail" => "shortpants.png",
+                "type" => "bawahan",
             ],
             [
                 "title" => "Tshirt",
                 "thumbnail" => "tshirt.png",
+                "type" => "atasan",
             ],
         ];
 

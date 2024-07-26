@@ -47,6 +47,12 @@
     </style>
 
     <style>
+        #reviewModal {
+            z-index: 1030 !important;
+        }
+    </style>
+
+    <style>
         .row-rating {
             display: flex;
             align-items: center;
@@ -156,6 +162,8 @@
 
 @section('content')
     <div class="wishlist">
+        @include('components.show-errors')
+
         <div class="cart-content">
             <h5 class="cart-heading mb-3">Riwayat Transaksi</h5>
         </div>
@@ -175,7 +183,8 @@
                                         <div class="wrapper-content">
                                             <h5 class="heading">{{ $item->order->first()->product->title }}</h5>
                                             <p class="paragraph">
-                                                Rp{{ number_format($item->order->first()->product->price, 0, '', '.') }}</p>
+                                                @currency($item->order->first()->product->price)
+                                            </p>
                                         </div>
                                     </div>
                                 </td>
@@ -185,11 +194,12 @@
                                             {{ App\Http\Controllers\HistoryController::formatTanggal($item->created_at) }}
                                         </h5>
                                         <p class="paragraph opacity-75 pt-1">
-                                            {{ Carbon\Carbon::parse($item->created_at)->format('d F Y') }}
+                                            {{ Carbon\Carbon::parse($item->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}
                                         </p>
                                     </div>
                                 </td>
                             </tr>
+                            @if(!$item->order->first()->product->ulasan)
                             <tr class="table-row ticket-row">
                                 <td class="table-wrapper wrapper-product">
                                     <div class="wrapper">
@@ -201,6 +211,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -220,15 +231,18 @@
                                 <div class="wrapper-content mx-5">
                                     <h5 class="heading">{{ $item->order->first()->product->title }}</h5>
                                     <p class="paragraph">
-                                        Rp{{ number_format($item->order->first()->product->price, 0, '', '.') }}</p>
+                                        @currency($item->order->first()->product->price)
+                                    </p>
                                 </div>
                             </div>
                         </td>
-                            <form action="{{ route('user.ulasan') }}" method="post" class="mt-5">
-                                @csrf
-                                <hr>
-                                <div class="row-rating">
-                                    <label for="produk-rating" class="form-label mb-2" style="font-size: 19px;">Penilaian
+                        <form action="{{ route('user.ulasan') }}" method="post" class="mt-5">
+                            @csrf
+                            <hr>
+
+                            <div class="mb-3">
+                                <div class="row-rating mb-0 align-items-center gap-3">
+                                    <label for="produk-rating" class="form-label mb-0" style="font-size: 19px;">Penilaian
                                         Produk </label>
                                     {{-- <label for="star">Pilih penilaian:</label> --}}
                                     <select class="star-rating form-control @error('star') is-invalid @enderror"
@@ -242,25 +256,27 @@
                                         <option value="2">Cukup</option>
                                         <option value="1">Buruk</option>
                                     </select>
-                                    @error('star')
-                                        <p class="feedback" role="alert"><strong>{{ $message }}</strong></p>
-                                    @enderror
                                 </div>
 
-                                <div>
-                                    <label for="comment" class="form-label" style="font-size: 18px;">Beri Ulasan :</label>
-                                    <br>
-                                    <textarea id="comment" name="comment" class="form-control @error('comment') is-invalid @enderror"
-                                        placeholder="Masukkan ulasan" rows="7" style="font-size: 17px;"></textarea>
-                                    @error('comment')
-                                        <p class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></p>
-                                    @enderror
-                                </div>
+                                @error('star')
+                                    <p class="text-danger" role="alert"><strong>{{ $message }}</strong></p>
+                                @enderror
+                            </div>
 
-                                <input type="hidden" name="product_id" value="{{ $item->order->first()->product->id }}">
+                            <div>
+                                <label for="comment" class="form-label" style="font-size: 18px;">Beri Ulasan :</label>
+                                <br>
+                                <textarea id="comment" name="comment" class="form-control @error('comment') is-invalid @enderror"
+                                    placeholder="Masukkan ulasan" rows="7" style="font-size: 17px;"></textarea>
+                                @error('comment')
+                                    <p class="text-danger" role="alert"><strong>{{ $message }}</strong></p>
+                                @enderror
+                            </div>
 
-                                <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim Ulasan</button>
-                            </form>
+                            <input type="hidden" name="product_id" value="{{ $item->order->first()->product->id }}">
+
+                            <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim Ulasan</button>
+                        </form>
                     </div>
                 </div>
             @empty

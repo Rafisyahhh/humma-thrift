@@ -40,13 +40,16 @@
 
         .product-details table {
             width: 100%;
-            border-collapse: collapse; /* Menghilangkan jarak antar sel */
+            border-collapse: collapse;
+            /* Menghilangkan jarak antar sel */
         }
 
-        .product-details th, .product-details td {
+        .product-details th,
+        .product-details td {
             text-align: left;
             padding: 10px;
-            color: rgba(0, 0, 0, 0.4); /* Warna teks abu-abu */
+            color: rgba(0, 0, 0, 0.4);
+            /* Warna teks abu-abu */
         }
 
         .product-details th {
@@ -56,18 +59,33 @@
 
         .product-details .inner-text {
             font-size: 18px;
-            color: rgba(0, 0, 0, 0.7); /* Warna teks sedikit lebih gelap untuk kontras */
+            color: rgba(0, 0, 0, 0.7);
+            /* Warna teks sedikit lebih gelap untuk kontras */
         }
 
         .table-wrapper-center .table-heading {
-        color: white; /* Sets text color to white */
+            color: white;
+            /* Sets text color to white */
         }
     </style>
 @endpush
 
 @php
     $data = [
-        'bulan' => ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+        'bulan' => [
+            'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember',
+        ],
         'pengeluaran' => [20000, 35000, 40000, 30000, 45000, 60000, 50000, 70000, 20000, 20000, 30000, 40000],
     ];
 @endphp
@@ -77,29 +95,29 @@
         <h5 class="mb-4">Dasbor</h5>
 
         <div class="row gy-4 gx-4 mb-4">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <a href="javascript:void(0)" class="card card-summary card-body">
                     <div class="icon-wrapper">
                         <i class="fas fa-wallet"></i>
                     </div>
                     <div>
-                        <h5>30</h5>
+                        <h5>{{ $countUnpaid }}</h5>
                         <p class="mb-0">Harus Dibayar</p>
                     </div>
                 </a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <a href="javascript:void(0)" class="card card-summary card-body">
                     <div class="icon-wrapper">
-                        <i class="fas fa-truck"></i>
+                        <i class="fa-solid fa-check-to-slot"></i>
                     </div>
                     <div>
-                        <h5>27</h5>
-                        <p class="mb-0">Pesanan Dikirim</p>
+                        <h5>{{ $countDelivery }}</h5>
+                        <p class="mb-0">Pesanan Selesai</p>
                     </div>
                 </a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <a href="javascript:void(0)" class="card card-summary card-body">
                     <div class="icon-wrapper">
                         <i class="fas fa-heart"></i>
@@ -110,15 +128,26 @@
                     </div>
                 </a>
             </div>
+            <div class="col-md-3">
+                <a href="javascript:void(0)" class="card card-summary card-body">
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+                    <div>
+                        <h5>{{ $countcart }}</h5>
+                        <p class="mb-0">Keranjang</p>
+                    </div>
+                </a>
+            </div>
         </div>
 
         {{-- @dd(!auth()->user()->hasVerifiedEmail()) --}}
-        @if(!auth()->user()->hasVerifiedEmail())
-        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size: 0.9rem;">
-            <p>Akun anda belum terverifikasi. Silahkan verifikasikan akun anda dari tautan yang sudah kami kirim ke
-                surel anda.</p> <button type="button" class="btn-close" data-bs-dismiss="alert"
-                aria-label="Close"></button>
-        </div>
+        @if (!auth()->user()->hasVerifiedEmail())
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="font-size: 0.9rem;">
+                <p>Akun anda belum terverifikasi. Silahkan verifikasikan akun anda dari tautan yang sudah kami kirim ke
+                    surel anda.</p> <button type="button" class="btn-close" data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+            </div>
         @endif
     </section>
 
@@ -145,91 +174,209 @@
                         </td>
                         <td class="table-wrapper">
                             <div class="table-wrapper-center">
-                                <h5 class="table-heading">TOTAL</h5>
-                            </div>
-                        </td>
-                        <td class="table-wrapper">
-                            <div class="table-wrapper-center">
                                 <h5 class="table-heading">DETAIL ORDER</h5>
                             </div>
                         </td>
                     </tr>
 
-
-                    <tr class="table-row ticket-row">
-                        <td class="table-wrapper wrapper-product" style="width: 35%; " >
-                            <div class="wrapper">
-                                <div class="wrapper-img">
-                                    <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
-                                        alt="img">
-                                </div>
-                                <div class="wrapper-content">
-                                    <h5 class="heading">Classic Design Skart</h5>
-                                    <p style="color: #636363">Dress</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="table-wrapper">
-                            <div class="table-wrapper-center">
-                                <h5 class="heading">$20.00</h5>
-                            </div>
-                        </td>
-                        <td class="table-wrapper">
-                            <div class="table-wrapper-center">
-                                <h5 class="heading">Dikemas</h5>
-                            </div>
-                        </td>
-                        <td class="table-wrapper wrapper-total">
-                            <div class="table-wrapper-center">
-                                <h5 class="heading">$40.00</h5>
-                            </div>
-                        </td>
-                        <td class="table-wrapper">
-                            <div class="table-wrapper-center">
-                                <div class="wrapper-btn">
-                                    <button type="button" class="shop-btn" data-bs-toggle="modal"
-                                        data-bs-target="#detailModal">
-                                        Detail
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
+                    @foreach ($transaction as $item)
+                        @if ($item->transaction_order->user_id == auth()->user()->id && $item->transaction_order->delivery_status !== 'selesai')
+                            @if ($item->product !== null)
+                                <tr class="table-row ticket-row">
+                                    <td class="table-wrapper wrapper-product" style="width: 35%; ">
+                                        <div class="wrapper">
+                                            <div class="wrapper-img">
+                                                <img src="{{ asset('storage/' . $item->product->thumbnail) }}" alt="img">
+                                            </div>
+                                            <div class="wrapper-content">
+                                                <h5 class="heading">{{ $item->product->title }}</h5>
+                                                <p style="color: #636363">{{ $item->product->brand->title }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="table-wrapper">
+                                        <div class="table-wrapper-center">
+                                            <h5 class="heading">Rp.
+                                                {{ number_format($item->product->price, null, null, '.') }}</h5>
+                                        </div>
+                                    </td>
+                                    <td class="table-wrapper">
+                                        <div class="table-wrapper-center">
+                                            @if ($item->transaction_order->delivery_status == 'diterima')
+                                                <form
+                                                    action="{{ route('user.order.update', $item->transaction_order->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="status" value="selesai">
+                                                    <div class="table-wrapper-center">
+                                                        <button type="submit" class="shop-btn m-0"
+                                                            style="font-size: 15px;">
+                                                            Konfirmasi telah diterima
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            @elseif($item->transaction_order->delivery_status == 'selesai')
+                                                <div class="table-wrapper-center">
+                                                    <span class="badge text-bg-success">
+                                                        <h5 class="heading text-light">
+                                                            {{ $item->transaction_order->delivery_status }}</h5>
+                                                    </span>
+                                                </div>
+                                            @elseif($item->transaction_order->delivery_status == 'dikemas')
+                                                <div class="table-wrapper-center">
+                                                    <span class="badge text-bg-warning">
+                                                        <h5 class="heading text-light">
+                                                            {{ $item->transaction_order->delivery_status }}</h5>
+                                                    </span>
+                                                </div>
+                                            @elseif($item->transaction_order->delivery_status == 'diantar')
+                                                <div class="table-wrapper-center">
+                                                    <span class="badge text-bg-warning">
+                                                        <h5 class="heading text-light">
+                                                            {{ $item->transaction_order->delivery_status }}</h5>
+                                                    </span>
+                                                </div>
+                                            @elseif($item->transaction_order->delivery_status == 'selesaikan pesanan')
+                                                <div class="table-wrapper-center">
+                                                    <span class="badge text-bg-danger">
+                                                        <h5 class="heading text-light">
+                                                            {{ $item->transaction_order->delivery_status }}</h5>
+                                                    </span>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </td>
+                                    <td class="table-wrapper">
+                                        <div class="table-wrapper-center">
+                                            <div class="wrapper-btn">
+                                                <a href="{{ route('user.transaction.show', ['reference' => $item->transaction_order->reference_id]) }}"
+                                                    class="shop-btn">
+                                                    Detail
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @elseif ($item->product_auction !== null)
+                                <tr class="table-row ticket-row">
+                                    <td class="table-wrapper wrapper-product" style="width: 35%; ">
+                                        <div class="wrapper">
+                                            <div class="wrapper-img">
+                                                <img src="{{ asset('storage/' . $item->product_auction->thumbnail) }}"
+                                                    alt="img">
+                                            </div>
+                                            <div class="wrapper-content">
+                                                <h5 class="heading">{{ $item->product_auction->title }}</h5>
+                                                <p style="color: #636363">{{ $item->product_auction->brand->title }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="table-wrapper" style="text-align:center;">
+                                        <p style="color: #989797; font-size: 14px">Rp.
+                                            {{ number_format($item->product_auction->bid_price_start, null, null, '.') }}
+                                            - Rp.
+                                            {{ number_format($item->product_auction->bid_price_end, null, null, '.') }}
+                                        </p>
+                                        <p class="heading">Rp.
+                                            {{ number_format($item->product_auction->price, null, null, '.') }}
+                                        </p>
+                                    </td>
+                                    <td class="table-wrapper">
+                                        <div class="table-wrapper-center">
+                                            @if ($item->transaction_order->delivery_status == 'diterima')
+                                                <form
+                                                    action="{{ route('user.order.update', $item->transaction_order->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="status" value="selesai">
+                                                    <div class="table-wrapper-center">
+                                                        <button type="submit" class="shop-btn m-0"
+                                                            style="font-size: 15px;">
+                                                            Konfirmasi telah diterima
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            @elseif($item->transaction_order->delivery_status == 'selesai')
+                                                <div class="table-wrapper-center">
+                                                    <span class="badge text-bg-success">
+                                                        <h5 class="heading text-light">
+                                                            {{ $item->transaction_order->delivery_status }}</h5>
+                                                    </span>
+                                                </div>
+                                            @elseif($item->transaction_order->delivery_status == 'dikemas')
+                                                <div class="table-wrapper-center">
+                                                    <span class="badge text-bg-warning">
+                                                        <h5 class="heading text-light">
+                                                            {{ $item->transaction_order->delivery_status }}</h5>
+                                                    </span>
+                                                </div>
+                                            @elseif($item->transaction_order->delivery_status == 'diantar')
+                                                <div class="table-wrapper-center">
+                                                    <span class="badge text-bg-warning">
+                                                        <h5 class="heading text-light">
+                                                            {{ $item->transaction_order->delivery_status }}</h5>
+                                                    </span>
+                                                </div>
+                                            @elseif($item->transaction_order->delivery_status == 'selesaikan pesanan')
+                                                <div class="table-wrapper-center">
+                                                    <span class="badge text-bg-danger">
+                                                        <h5 class="heading text-light">
+                                                            {{ $item->transaction_order->delivery_status }}</h5>
+                                                    </span>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </td>
+                                    <td class="table-wrapper">
+                                        <div class="table-wrapper-center">
+                                            <div class="wrapper-btn">
+                                                <a href="{{ route('user.transaction.show', ['reference' => $item->transaction_order->reference_id]) }}"
+                                                    class="shop-btn">
+                                                    Detail
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endif
+                    @endforeach
                 </tbody>
             </table>
-                 {{-- Detail --}}
-                <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="height: 99%;">
-                 <div class="modal-dialog" style="margin-left: auto;">
-                     <div class="login-section account-section p-0">
-                         <div class="review-form m-0" style="height: 80%; width: 95rem;">
-                             <div class="text-end mb-4">
-                                 <div class="close-btn">
-                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                         aria-label="Close"></button>
-                                 </div>
-                             </div>
-                             <section class="product product-info" style="width:85rem; height:60%;">
-                                 <div class="row ">
-                                     <div class="col-md-6">
-                                         <div class="product-info-img" data-aos="fade-right">
-                                             <div class="swiper product-top" style="height:50rem;">
-                                                 <div class="swiper-wrapper">
-                                                     <div class="swiper-slide slider-top-img">
-                                                         <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
-                                                             alt="img">
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="col-md-6">
-                                         <div class="product-info-content" data-aos="fade-left">
-                                             <h5>Classic Design Skart</h5>
-                                             <div class="price">
-                                                 <span class="new-price">Rp.100.000,00 - 200.000,00</span>
-                                             </div>
-                                             <hr>
-                                             <div class="product-details">
+            {{-- Detail --}}
+            <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true" style="height: 99%;">
+                <div class="modal-dialog" style="margin-left: auto;">
+                    <div class="login-section account-section p-0">
+                        <div class="review-form m-0" style="height: 80%; width: 95rem;">
+                            <div class="text-end mb-4">
+                                <div class="close-btn">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                            </div>
+                            <section class="product product-info" style="width:85rem; height:60%;">
+                                <div class="row ">
+                                    <div class="col-md-6">
+                                        <div class="product-info-img" data-aos="fade-right">
+                                            <div class="swiper product-top" style="height:50rem;">
+                                                <div class="swiper-wrapper">
+                                                    <div class="swiper-slide slider-top-img">
+                                                        <img src="{{ asset('template-assets/front/assets/images/homepage-one/product-img/product-img-1.webp') }}"
+                                                            alt="img">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="product-info-content" data-aos="fade-left">
+                                            <h5>Classic Design Skart</h5>
+                                            <div class="price">
+                                                <span class="new-price">Rp.100.000,00 - 200.000,00</span>
+                                            </div>
+                                            <hr>
+                                            <div class="product-details">
                                                 <table>
                                                     <tr>
                                                         <th>Kategori</th>
@@ -240,7 +387,7 @@
                                                         <td><span class="inner-text">Adidas</span></td>
                                                     </tr>
                                                     <tr>
-                                                    <th>Ukuran</th>
+                                                        <th>Ukuran</th>
                                                         <td><span class="inner-text">XL</span></td>
                                                     </tr>
                                                     <tr>
@@ -248,28 +395,32 @@
                                                         <td><span class="inner-text">2</span></td>
                                                     </tr>
                                                     <tr>
-                                                        <th colspan="2"><span class="inner-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet cumque perferendis libero nesciunt minima odio autem ratione quia, eligendi temporibus!</span></th>
+                                                        <th colspan="2"><span class="inner-text">Lorem ipsum dolor sit
+                                                                amet consectetur adipisicing elit. Eveniet cumque
+                                                                perferendis libero nesciunt minima odio autem ratione quia,
+                                                                eligendi temporibus!</span></th>
                                                     </tr>
                                                     <tr>
                                                         <td style="font-size: 2rem">Status</td>
-                                                        <td style="justify-content:right; align-items:right;"><span class="inner-status">
-                                                            Diterima</span></td>
+                                                        <td style="justify-content:right; align-items:right;"><span
+                                                                class="inner-status">
+                                                                Diterima</span></td>
                                                         </td>
                                                     </tr>
                                                 </table>
-                                             </div>
-                                             <hr>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </section>
-                         </div>
-                     </div>
-                 </div>
-             </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-    <section style="margin-top: 50px;"                                                      >
+    <section style="margin-top: 50px;">
         <div class="container">
             <div>
                 <div>
@@ -280,7 +431,7 @@
                 </div>
             </div>
         </div>
-     </section>
+    </section>
 @endsection
 
 @section('script')

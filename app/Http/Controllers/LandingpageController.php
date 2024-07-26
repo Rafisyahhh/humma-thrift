@@ -15,6 +15,7 @@ use App\Models\ProductCategoryPivot;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class LandingpageController extends Controller {
     public function index() {
@@ -300,19 +301,30 @@ class LandingpageController extends Controller {
     }
 
     public function productSearch(Request $request) {
+        $allRequest = $request->all();
         $search = $request->search;
+        if (Str::startsWith(strtolower($search), ['/product', '/products', '/produk'])) {
+            $search = Str::replaceMatches('(^[^\s]+)', '', $search);
+            $allRequest['type'] = 'reguler';
+            $commandSearch = true;
+        } elseif (Str::startsWith(strtolower($search), ['/auction', '/auctions', '/lelang'])) {
+            $search = Str::replaceMatches('(^[^\s]+)', '', $search);
+            $allRequest['type'] = 'auction';
+            $commandSearch = true;
+        }
         $products = Product::where('status', 'active')->where('title', 'like', "%$search%");
         $product_auction = ProductAuction::where('status', 'active')->where('title', 'like', "%$search%");
 
         $colors = $products->pluck('color')->concat($product_auction->pluck('color'))->map('strtolower')->unique();
         $sizes = $products->pluck('size')->concat($product_auction->pluck('size'))->map('strtolower')->unique();
+        $maxPrice = $products->pluck('price')->concat($product_auction->pluck('bid_price_end'))->max() ?? 0;
 
         if ($request->ajax()) {
             $productResults = null;
             $productAuctionResults = null;
 
-            if (isset($request->type)) {
-                $types = explode(',', $request->type);
+            if (isset($allRequest['type'])) {
+                $types = explode(',', $allRequest['type']);
                 if (in_array('reguler', $types)) {
                     $productResults = $products;
                 }
@@ -390,10 +402,20 @@ class LandingpageController extends Controller {
             return view('Landing.components.products', compact('products', 'product_auction'))->render();
         }
 
-        $products = $products->paginate(24);
-        $product_auction = $product_auction->paginate(24);
+        $products = $products->paginate(24) ?? [];
+        $product_auction = $product_auction->paginate(24) ?? [];
+
+        if (isset($allRequest['type'])) {
+            $types = explode(',', $allRequest['type']);
+            if (in_array('reguler', $types)) {
+                $product_auction = collect([]);
+            }
+            if (in_array('auction', $types)) {
+                $products = collect([]);
+            }
+        }
         $brands = Brand::all();
         $categories = ProductCategory::all();
-        return view('Landing.allProduct', compact('products', 'product_auction', 'brands', 'categories', 'colors', 'sizes'));
+        return view('Landing.allProduct', compact('products', 'product_auction', 'brands', 'categories', 'colors', 'sizes', 'maxPrice', 'search'));
     }
 }

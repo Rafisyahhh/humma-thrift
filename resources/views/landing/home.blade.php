@@ -20,7 +20,7 @@
             width: 100%;
             position: absolute;
             margin-top: -10rem;
-            z-index: 3;
+            z-index: 1;
         }
 
         .shape-wrapper .circle-shape {
@@ -171,7 +171,7 @@
             /* margin: 0 5px 5px; */
             background-color: #ffffff73;
             /* margin-left:1px !important;
-                                                                margin-right: 1px !important; */
+                                                                    margin-right: 1px !important; */
             /* Tambahkan margin jika perlu */
         }
 
@@ -217,7 +217,7 @@
 @endpush
 
 @section('content')
-    <section id="hero" class="hero" style="position: relative;z-index: 5;">
+    <section id="hero" class="hero" style="position: relative;z-index: 3;">
         <div class="swiper hero-swiper">
             <div class="swiper-wrapper hero-wrapper">
                 @foreach ($event as $key => $even)
@@ -235,19 +235,19 @@
                                             </h5>
                                             <h1 class="wrapper-details" style="color:#1c3879;">{{ $even->judul }}</h1>
                                             <a href="{{ url('/product/regular') }}" class="shop-btn mt-3" ">Belanja Sekarang</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
      @endforeach
                                         </div>
                                         <div class="swiper-pagination"></div>
                                     </div>
     </section>
 
-    <section class="product-category" style="z-index: 5;position: relative;">
+    <section class="product-category" style="z-index: 2;position: relative;">
         <div class="container">
             <div class="section-title">
                 <h5 style="color: #1c3879;">KATEGORI PAKAIAN</h5>
@@ -313,7 +313,7 @@
             </div>
         </div>
 
-        <section class="product arrival mt-5 " style="z-index: 5;position: relative; ">
+        <section class="product arrival mt-5 " style="z-index: 3;position: relative; ">
             <div class="container">
                 <div class="section-title">
                     <h5 style="color: #1c3879;">TERBARU!</h5>
@@ -454,16 +454,16 @@
 
         <section class="product flash-sale mt-5">
             <div class="container pb-5 mb-5">
-                <div class="section-title" style="position: relative; z-index: 3;">
+                <div class="section-title" style="position: relative; z-index: 2;">
                     <h5>SESI LELANG</h5>
                     <a href="{{ url('/product/auction') }}" class="view">Lihat Semua</a>
                 </div>
-                <div class="flash-sale-section" style="position: relative; z-index: 4;">
+                <div class="flash-sale-section" style="position: relative; z-index: 2;">
                     <swiper-container slides-per-view="4" loop="true" navigation="true" space-between="30"
                         autoplay-delay="10000" autoplay-disable-on-interaction="false">
                         @foreach ($product_auction as $item)
                             <swiper-slide id="cardButton">
-                                <div class="product-wrapper" style="z-index: 5; height:47rem !important"
+                                <div class="product-wrapper" style="z-index: 2; height:47rem !important"
                                     data-aos="fade-right" data-aos-duration="100">
                                     <div class="product-img">
                                         <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img"
@@ -590,88 +590,83 @@
                             </swiper-slide>
                         @endforeach
                     </swiper-container>
-                    @foreach ($product_auction as $item)
-                        <div id="reviewModal-{{ $item->id }}" class="modal" style="display: none; z-index:999;">
-                            <div class="modal-content">
-                                <button class="close" style="float: right; text-align: end;">&times;</button>
-                                @if ($user)
-                                    @if ($existingAuction)
-                                        <p style="text-align: center; font-size :20px; font-weight:bold;">Anda
-                                            sudah
-                                            mengikuti lelang</p>
-                                        <p style="text-align: center;">bid lelang anda :
-                                            {{ $auctions->auction_price }}</p>
-                                    @elseif ($auctionproduct)
-                                        <p
-                                            style="text-align: center; font-size :20px; font-weight:bold; margin-top: 2rem; margin-bottom:2rem;">
-                                            lelang sudah berakhir</p>
-                                    @else
-                                        <h4 style="text-align: center;">Bid Lelang</h4>
-                                        <form id="auctionForm-{{ $item->id }}" method="post"
-                                            action="{{ route('user.auctions.store') }}" class="mt-5">
-                                            @csrf
-                                            <input type="hidden" name="product_id" value="{{ $item->id }}">
-                                            <label for="auction_price" class="form-label" style="font-size: 18px;">Bid
-                                                Lelang :</label>
-                                            <br>
-                                            <input type="number" name="auction_price"
-                                                class="form-control @error('auction_price') is-invalid @enderror"
-                                                placeholder="Masukkan Bid Lelang anda" style="font-size: 17px;">
-                                            <p style="margin-top: 5px;margin-left:6px;font-size:12px;color: #7c7c7c;">
-                                                Bid :
-                                                Rp{{ number_format($item->bid_price_start, null, null, '.') }}
-                                                -
-                                                Rp{{ number_format($item->bid_price_end, null, null, '.') }}</p>
-                                            @error('auction_price')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                            <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim
-                                                Bid Anda</button>
-                                        </form>
-                                    @endif
-                                @endif
-                            </div>
-                        </div>
-                        <div id="shareModal-{{ $item->id }}" class="modal" style="display: none; z-index:999;">
-                            <div class="modal-content">
-                                <button class="close" style="float: right; text-align: end;"
-                                    onclick="closeModal2('#shareModal-{{ $item->id }}')">&times;</button>
-                                <div class="align-items-center gap-3 justify-content-center py-3"
-                                    style="position: relative;">
-                                    <p class="fs-2 mb-0 text-center fw-bold">Bagikan ke:</p>
-                                    <div class="d-flex gap-2 align-items-center justify-content-center mt-2">
-                                        <span class="share-container share-buttons d-flex gap-3 ms-2" style="z-index:1;">
-                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
-                                                target="_blank" class="social-buttons">
-                                                <i class="fa-brands fa-square-facebook"
-                                                    style="color: #1c3879;font-size:4rem"></i>
-                                            </a>
-                                            <a href="https://twitter.com/intent/tweet?url={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}&text={{ $item->title }}"
-                                                target="_blank" class="social-buttons">
-                                                <i class="fa-brands fa-square-x-twitter"
-                                                    style="color: #1c3879;font-size:4rem"></i>
-                                            </a>
-                                            <a href="https://t.me/share/url?url={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}&text={{ $item->title }}"
-                                                target="_blank" class="social-buttons">
-                                                <i class="fa-brands fa-telegram"
-                                                    style="color: #1c3879;font-size:4rem"></i>
-                                            </a>
-                                            <a href="https://api.whatsapp.com/send?text={{ $item->title . ' ' . route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
-                                                target="_blank" class="social-buttons">
-                                                <i class="fa-brands fa-whatsapp"
-                                                    style="color: #1c3879;font-size:4rem"></i>
-                                            </a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
                 </div>
             </div>
         </section>
+        @foreach ($product_auction as $item)
+            <div id="reviewModal-{{ $item->id }}" class="modal" style="display: none; z-index:999;">
+                <div class="modal-content">
+                    <button class="close" style="float: right; text-align: end;">&times;</button>
+                    @if ($user)
+                        @if ($existingAuction)
+                            <p style="text-align: center; font-size :20px; font-weight:bold;">Anda
+                                sudah
+                                mengikuti lelang</p>
+                            <p style="text-align: center;">bid lelang anda :
+                                {{ $auctions->auction_price }}</p>
+                        @elseif ($auctionproduct)
+                            <p
+                                style="text-align: center; font-size :20px; font-weight:bold; margin-top: 2rem; margin-bottom:2rem;">
+                                lelang sudah berakhir</p>
+                        @else
+                            <h4 style="text-align: center;">Bid Lelang</h4>
+                            <form id="auctionForm-{{ $item->id }}" method="post"
+                                action="{{ route('user.auctions.store') }}" class="mt-5">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $item->id }}">
+                                <label for="auction_price" class="form-label" style="font-size: 18px;">Bid
+                                    Lelang :</label>
+                                <br>
+                                <input type="number" name="auction_price"
+                                    class="form-control @error('auction_price') is-invalid @enderror"
+                                    placeholder="Masukkan Bid Lelang anda" style="font-size: 17px;">
+                                <p style="margin-top: 5px;margin-left:6px;font-size:12px;color: #7c7c7c;">
+                                    Bid :
+                                    Rp{{ number_format($item->bid_price_start, null, null, '.') }}
+                                    -
+                                    Rp{{ number_format($item->bid_price_end, null, null, '.') }}</p>
+                                @error('auction_price')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim
+                                    Bid Anda</button>
+                            </form>
+                        @endif
+                    @endif
+                </div>
+            </div>
+            <div id="shareModal-{{ $item->id }}" class="modal" style="display: none; z-index:999;">
+                <div class="modal-content">
+                    <button class="close" style="float: right; text-align: end;"
+                        onclick="closeModal2('#shareModal-{{ $item->id }}')">&times;</button>
+                    <div class="align-items-center gap-3 justify-content-center py-3" style="position: relative;">
+                        <p class="fs-2 mb-0 text-center fw-bold">Bagikan ke:</p>
+                        <div class="d-flex gap-2 align-items-center justify-content-center mt-2">
+                            <span class="share-container share-buttons d-flex gap-3 ms-2" style="z-index:1;">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
+                                    target="_blank" class="social-buttons">
+                                    <i class="fa-brands fa-square-facebook" style="color: #1c3879;font-size:4rem"></i>
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?url={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}&text={{ $item->title }}"
+                                    target="_blank" class="social-buttons">
+                                    <i class="fa-brands fa-square-x-twitter" style="color: #1c3879;font-size:4rem"></i>
+                                </a>
+                                <a href="https://t.me/share/url?url={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}&text={{ $item->title }}"
+                                    target="_blank" class="social-buttons">
+                                    <i class="fa-brands fa-telegram" style="color: #1c3879;font-size:4rem"></i>
+                                </a>
+                                <a href="https://api.whatsapp.com/send?text={{ $item->title . ' ' . route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
+                                    target="_blank" class="social-buttons">
+                                    <i class="fa-brands fa-whatsapp" style="color: #1c3879;font-size:4rem"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
         <div class="custom-shape-divider-bottom-1720697255">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
                 preserveAspectRatio="none">
@@ -688,9 +683,9 @@
         </div>
     </div>
 
-    <section class="product brand" style="position: relative; z-index: 3;background: #eee;">
-        <div class="container pb-5 mb-5" style="z-index: 4;">
-            <div class="section-title pt-5" style="position: relative; z-index: 5;">
+    <section class="product brand" style="position: relative; z-index: 2;background: #eee;">
+        <div class="container pb-5 mb-5" style="z-index: 2;">
+            <div class="section-title pt-5" style="position: relative; z-index: 2;">
                 <h5>BRAND PRODUK</h5>
                 <a href="/brand" class="view">Lihat Semua</a>
             </div>

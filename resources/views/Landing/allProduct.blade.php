@@ -22,8 +22,8 @@
               <div class="col-lg-12">
                 <div class="product-sorting-section" style="padding-bottom: unset; margin-bottom: unset">
                   <div class="result">
-                    <p>Menampilkan {{ $products->firstItem() }}–{{ $products->lastItem() }} dari
-                      {{ $products->total() }} hasil</p>
+                    <p>Menampilkan 0–1 dari
+                      2 hasil</p>
                   </div>
                 </div>
               </div>
@@ -48,6 +48,7 @@
       const filters = ['categories', 'brands', 'colors', 'sizes', 'price', 'type'];
       const maxPrice = +('{{ $products->pluck('price')->max() }}');
       const loader = $('[isLoader]');
+      const searchInput = $('input#search-input');
 
       const getCheckedFilters = () => {
         const checked = {};
@@ -112,8 +113,8 @@
           const tooltipSlider = document.getElementById("price-slider");
 
           noUiSlider.create(tooltipSlider, {
-            start: [{{ explode('-', request()->price ?? '0')[0] }},
-              {{ explode('-', request()->price ?? '0-' . $products->pluck('price')->max())[1] }}
+            start: [{{ explode('-', request()->price ?? '0')[0] ?? 0 }},
+              {{ explode('-', request()->price ?? '0-' . $maxPrice)[1] ?? 1000 }}
             ],
             connect: true,
             format: {
@@ -170,10 +171,42 @@
         });
       };
 
+      const searchPage = () => {
+        url.searchParams.set('search', searchInput.val());
+        window.history.replaceState(null, null, url);
+        clearInterval(updateTimeout);
+        updateTimeout = setTimeout(() => {
+          page = 1;
+          lastPage = false;
+
+          $('[isProduct]').addClass('submitLoading');
+
+          $.ajax({
+            url: url.toString(),
+            type: 'GET',
+            success: function(data) {
+              loading = false;
+              $('[isProduct],[isLoader]').remove();
+              $('#product-container').append(data);
+            },
+            error: function() {
+              loading = false;
+              $('[isProduct]').removeClass('submitLoading');
+              console.error('Failed to update filters.');
+            }
+          });
+        }, 750);
+      };
+
       initPriceSlider();
 
       $('input:checkbox[name="categories[]"], input:checkbox[name="brands[]"], input:checkbox[name="colors[]"], input:checkbox[name="sizes[]"], input:checkbox[name="type[]"]')
         .on('change', updateFilters);
+      $('input#search-input').keyup(searchPage);
+      $('#searchSubmitButton').click(function(e) {
+        e.preventDefault();
+        searchPage();
+      });
 
       $(window).on("scroll", function() {
         if (loading || lastPage) return;

@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('ulasans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('product_id')->constrained();
+            $table->foreignId('product_id')->nullable()->constrained();
+            $table->foreignId('product_auction_id')->nullable()->constrained();
             $table->integer('star');
             $table->string('comment');
             $table->timestamps();
