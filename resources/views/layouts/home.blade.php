@@ -150,7 +150,6 @@
           url: form.attr('action'),
           type: "POST",
           cache: true,
-          timeout: 3000,
           success: function(response) {
             product.removeClass('submitLoading');
             if (response.error) {
