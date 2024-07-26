@@ -64,12 +64,13 @@ class CartController extends Controller {
 
         Cart::create($dataproduct);
 
-        $product->userStore->user->notify(new UserCart($product));
-
-
         if ($r->ajax()) {
             return response()->json(['success' => 'Keranjang berhasil dibuat.', "cart" => true]);
         }
+
+        $product->userStore->user->notify(new UserCart($product));
+
+
 
         return redirect()->back()->with('success', 'Keranjang berhasil dibuat...');
     }
