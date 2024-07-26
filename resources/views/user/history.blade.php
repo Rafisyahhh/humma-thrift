@@ -282,10 +282,12 @@
             @empty
             {{-- <tr class="table-row ticket-row" style="height:12px;">
                 <td colspan="6" class="text-center no-data-message" > --}}
-                    <div class="d">
-                    <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 200px; height: 200px;">
-                    <p>Tidak ada data</p>
-                </div>
+                        <div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+                            <div class="text-center">
+                                <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 200px; height: 200px;">
+                                <p>Tidak ada data</p>
+                            </div>
+                        </div>
                 {{-- </td>
             </tr> --}}
             @endforelse
