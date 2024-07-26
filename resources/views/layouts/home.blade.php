@@ -141,7 +141,6 @@
       //       $this.prop('disabled', false);
       //     }, 250);
       //   });
-      let onUpdateWishlist = () => {};
       $("form[action*='product/storesproduct'], form[action*='product/storecart']").submit(function(e) {
         e.preventDefault();
         const form = $(this);
@@ -150,6 +149,8 @@
         $.ajax({
           url: form.attr('action'),
           type: "POST",
+          cache: true,
+          timeout: 3000,
           success: function(response) {
             product.removeClass('submitLoading');
             if (response.error) {
@@ -162,7 +163,7 @@
               updatePartials.cart();
             } else {
               updatePartials.wishlist();
-              onUpdateWishlist(response);
+              onUpdateWishlist && onUpdateWishlist?.(response);
             }
           }
         });

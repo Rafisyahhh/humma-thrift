@@ -33,37 +33,40 @@
 
 @push('js')
   <script>
-    const updatePartials = {
-      cart: () => {
-        $.ajax({
-          url: "{{ route('header.cart') }}",
+    const updatePartials = (() => {
+      const ajaxRequest = (url, target) => {
+        return $.ajax({
+          url: url,
+          cache: true,
           success: function(response) {
-            $('#cart-header').html(response)
+            $(target).html(response);
+          },
+          error: function(xhr, status, error) {
+            console.error(`Error fetching ${url}: ${status} ${error}`);
           }
         });
-      },
-      notification: () => {
-        $.ajax({
-          url: "{{ route('header.notification') }}",
-          success: function(response) {
-            $('#notification-header').html(response)
-          }
-        });
-      },
-      wishlist: () => {
-        $.ajax({
-          url: "{{ route('header.wishlist') }}",
-          success: function(response) {
-            $('#wishlist-header').html(response)
-          }
-        });
-      },
-      all: function() {
-        this.cart();
-        this.notification();
-        this.wishlist();
-      }
-    }
+      };
+
+      const routes = {
+        cart: "{{ route('header.cart') }}",
+        notification: "{{ route('header.notification') }}",
+        wishlist: "{{ route('header.wishlist') }}"
+      };
+
+      return {
+        cart: () => ajaxRequest(routes.cart, '#cart-header'),
+        notification: () => ajaxRequest(routes.notification, '#notification-header'),
+        wishlist: () => ajaxRequest(routes.wishlist, '#wishlist-header'),
+        all: function() {
+          Promise.all([
+            this.cart(),
+            this.notification(),
+            this.wishlist()
+          ]).catch(error => console.error('Error updating partials:', error));
+        }
+      };
+    })();
+
     @auth
     updatePartials.all();
 
