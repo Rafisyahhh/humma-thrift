@@ -46,7 +46,7 @@ class CartController extends Controller {
     public function create() {
     }
 
-    public function storecart(Request $r, Product $product) {
+    public function storecart(Request $request, Product $product) {
         $dataproduct['product_id'] = $product->id;
         $dataproduct['user_id'] = auth()->id();
 
@@ -55,8 +55,8 @@ class CartController extends Controller {
             ->first();
 
         if ($keranjang) {
-            if ($r->ajax()) {
-                return response()->json(['error' => "Produknya udah ada di keranjang nih...", "cart" => true]);
+            if ($request->ajax()) {
+                return response()->json(['error' => "Produknya udah ada di keranjang nih..."]);
             }
 
             return redirect()->back()->with('error', "Produknya udah ada di keranjang nih...");
@@ -64,8 +64,13 @@ class CartController extends Controller {
 
         Cart::create($dataproduct);
 
-        if ($r->ajax()) {
-            return response()->json(['success' => 'Keranjang berhasil dibuat.', "cart" => true]);
+        if ($request->ajax()) {
+            $carts = cart::where('user_id', auth()->id())->with('product')->orderBy('created_at')->get();
+            return response()->json([
+                'success' => 'Keranjang berhasil dibuat.',
+                'type' => 'cart',
+                'data' => $carts
+            ]);
         }
 
         $product->userStore->user->notify(new UserCart($product));

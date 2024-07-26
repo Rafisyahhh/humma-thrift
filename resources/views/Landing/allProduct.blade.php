@@ -2,15 +2,6 @@
 
 @section('title', 'Product')
 
-@push('style')
-  <style>
-    .submitLoading {
-      pointer-events: none !important;
-      filter: brightness(0.5);
-    }
-  </style>
-@endpush
-
 @section('content')
   <section class="product product-sidebar footer-padding">
     <div class="container">
@@ -97,7 +88,7 @@
           success: function(data) {
             loading = false;
             $('[isProduct],[isLoader]').remove();
-            $('#product-container').html(data);
+            $('#product-container').append(data);
           },
           error: function() {
             loading = false;
@@ -182,7 +173,7 @@
           success: function(data) {
             loading = false;
             $('[isProduct],[isLoader]').remove();
-            $('#product-container').html(data);
+            $('#product-container').append(data);
           },
           error: function() {
             loading = false;
@@ -222,7 +213,7 @@
     });
   </script>
   <script>
-    function ajaxSubmit(e, $this, callback) {
+    function ajaxSubmit(e, $this) {
       e.preventDefault();
       const form = $($this);
       const product = form.closest('[isProduct]');
@@ -232,13 +223,13 @@
         type: "POST",
         cache: true,
         success: function(response) {
+          product.removeClass('submitLoading');
           if (response.error) {
             flasher.error(response.error);
           } else {
             flasher.success(response.success);
           }
-          product.removeClass('submitLoading');
-          callback();
+          window.globalVarProxy[response.type] = response.data;
         }
       });
     };

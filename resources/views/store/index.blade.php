@@ -373,7 +373,7 @@
                       </div>
                     </div>
                     <div class="product-cart-btn">
-                      <a href="/user/keranjang" class="product-btn">Beli Sekarang</a>
+                      <a href="{{ route('user.checkout') }}" class="product-btn">Beli Sekarang</a>
                     </div>
                   </div>
                 </div>

@@ -10,21 +10,18 @@
         @includeWhen(!request()->routeIs(['register', 'login']), 'layouts.partials.home.navbar.search-links')
         @if (auth()->check() &&
                 auth()->user()->getUserRoleInstance()->value !== 'admin' &&
-                !request()->routeIs(['register', 'login']))
-          @if (!auth()->user()->store)
-            <div id="cart-header"></div>
-            <div id="wishlist-header"></div>
-          @endif
-          <div id="notification-header"></div>
+                !request()->routeIs(['register', 'login']) &&
+                !auth()->user()->store)
+          @include('layouts.partials.home.navbar.cart-links')
+          @include('layouts.partials.home.navbar.wishlist-links')
         @endif
-        {{-- @includeWhen(auth()->check() && auth()->user()->getUserRoleInstance()->value !== 'admin' && !auth()->user()->store && !request()->routeIs(['register', 'login']), 'layouts.partials.home.navbar.cart-links') --}}
-        {{-- @includeWhen(auth()->check() &&
+        @includeWhen(auth()->check() &&
                 auth()->user()->getUserRoleInstance()->value !== 'admin' &&
                 !auth()->user()->store &&
                 !request()->routeIs(['register', 'login']),
-            'layouts.partials.home.navbar.notify-links') --}}
-        {{-- @includeWhen(auth()->check() && auth()->user()->store && !request()->routeIs(['register', 'login']),
-        'layouts.partials.home.navbar.notifyseller-links') --}}
+            'layouts.partials.home.navbar.notify-links')
+        @includeWhen(auth()->check() && auth()->user()->store && !request()->routeIs(['register', 'login']),
+            'layouts.partials.home.navbar.notifyseller-links')
         @include('layouts.partials.home.navbar.login-links')
       </div>
     </div>
@@ -39,7 +36,7 @@
           url: url,
           cache: true,
           success: function(response) {
-            $(target).html(response);
+            window.globalVarProxy[target] = response;
           },
           error: function(xhr, status, error) {
             console.error(`Error fetching ${url}: ${status} ${error}`);
@@ -54,14 +51,14 @@
       };
 
       return {
-        cart: () => ajaxRequest(routes.cart, '#cart-header'),
-        notification: () => ajaxRequest(routes.notification, '#notification-header'),
-        wishlist: () => ajaxRequest(routes.wishlist, '#wishlist-header'),
+        wishlist: () => ajaxRequest(routes.wishlist, 'wishlist'),
+        cart: () => ajaxRequest(routes.cart, 'cart'),
+        // notification: () => ajaxRequest(routes.notification, '#notification-header'),
         all: function() {
           Promise.all([
+            this.wishlist(),
             this.cart(),
-            this.notification(),
-            this.wishlist()
+            // this.notification(),
           ]).catch(error => console.error('Error updating partials:', error));
         }
       };
@@ -70,9 +67,49 @@
     @auth
     updatePartials.all();
 
-    setInterval(() => {
-      updatePartials.notification();
-    }, 60_000);
+    // setInterval(() => {
+    //   updatePartials.notification();
+    // }, 60_000);
     @endauth
+  </script>
+  <script>
+    window.wishlist = null;
+
+    window.globalVarProxy = new Proxy(window, {
+      set(target, property, value) {
+        if (property === 'wishlist' && value > 0) {
+          $('#favorite-wrapper .wishlist-count').removeClass('d-none');
+          $('#favorite-wrapper .wishlist-count').text(value);
+        }
+        if (property === 'cart' && value.length > 0) {
+          $('.header-cart .cart-count').removeClass('d-none');
+          $('.header-cart .cart-count').text(value.length);
+          $('.header-cart .cart-submenu #cart-wrapper').html(pushCartItem(value));
+        }
+        target[property] = value;
+        return true;
+      }
+    });
+
+    function pushCartItem(value) {
+      return value.map(({
+        product
+      }) => `
+        <div class="wrapper">
+          <div class="wrapper-item">
+            <div class="wrapper-img" style="margin-right: 1rem;">
+              <img src="{{ asset('storage/') }}/${product.thumbnail}" alt="img">
+            </div>
+            <div class="wrapper-content">
+              <h5 class="heading" style="font-size: 18px; ">${ product.title } </h5>
+              <div style="display: flex; align-items: center; margin-left: 0px;">
+                <p>Rp</p>
+                <p>${ product.price.toLocaleString('id-ID', {maximumFractionDigits:0}) }</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `);
+    }
   </script>
 @endpush

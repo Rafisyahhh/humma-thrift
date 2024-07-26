@@ -251,7 +251,6 @@
         <div class="container">
             <div class="section-title">
                 <h5 style="color: #1c3879;">KATEGORI PAKAIAN</h5>
-                <a href="product-sidebar.html" class="view" style="color: #1c3879;">Lihat Semua</a>
             </div>
             <ul class="nav nav-underline mb-3" style="display:flex; justify-content: center;">
                 <li class="nav-item">
@@ -687,7 +686,6 @@
         <div class="container pb-5 mb-5" style="z-index: 2;">
             <div class="section-title pt-5" style="position: relative; z-index: 2;">
                 <h5>BRAND PRODUK</h5>
-                <a href="/brand" class="view">Lihat Semua</a>
             </div>
             <swiper-container slides-per-view="6" loop="true" navigation="false" space-between="30"
                 autoplay-delay="1000" autoplay-disable-on-interaction="false">
