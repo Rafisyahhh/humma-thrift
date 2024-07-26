@@ -203,7 +203,7 @@
       $('input:checkbox[name="categories[]"], input:checkbox[name="brands[]"], input:checkbox[name="colors[]"], input:checkbox[name="sizes[]"], input:checkbox[name="type[]"]')
         .on('change', updateFilters);
       $('input#search-input').keyup(searchPage);
-      $('#searchSubmitButton').click(function(e) {
+      $('form#global-search').submit(function(e) {
         e.preventDefault();
         searchPage();
       });
