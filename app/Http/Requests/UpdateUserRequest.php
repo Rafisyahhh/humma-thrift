@@ -27,7 +27,7 @@ class UpdateUserRequest extends FormRequest
             'phone' => 'required|string|max:15',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'pbirth' => 'required|string|max:255',
-            'dbirth' => 'required|date',
+            'dbirth' => 'required|date|before:-17 years',
         ];
     }
 
@@ -42,7 +42,8 @@ class UpdateUserRequest extends FormRequest
             'avatar.max' => 'Ukuran avatar maksimal 2MB',
             'pbirth.required' => 'Tempat lahir wajib diisi',
             'dbirth.required' => 'Tanggal lahir wajib diisi',
-            'dbirth.date' => 'Tanggal lahir harus berupa tanggal yang valid',
+            'dbirth.date' => 'Tanggal lahir harus berupa tanggal',
+            'dbirth.before' => 'Tanggal lahir harus menunjukan usia diatas 17 tahun',
         ];
     }
 }
