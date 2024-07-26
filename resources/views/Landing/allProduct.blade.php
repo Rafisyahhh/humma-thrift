@@ -114,7 +114,7 @@
 
           noUiSlider.create(tooltipSlider, {
             start: [{{ explode('-', request()->price ?? '0')[0] ?? 0 }},
-              {{ explode('-', request()->price ?? '0-' . $maxPrice)[1] ?? 1000 }}
+              {{ explode('-', request()->price ?? '0-' . $maxPrice)[1] }}
             ],
             connect: true,
             format: {

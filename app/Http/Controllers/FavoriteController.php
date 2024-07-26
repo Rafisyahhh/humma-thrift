@@ -29,27 +29,27 @@ class FavoriteController extends Controller {
     }
 
 
-    public function storesproduct(Request $r, Product $product) {
+    public function storesproduct(Request $request, Product $product) {
         $dataproduct['product_id'] = $product->id;
         $dataproduct['user_id'] = auth()->id();
 
         $favorite = Favorite::where('product_id', $product->id)->where('user_id', auth()->id());
 
         if ($favorite->exists()) {
-            if ($r->ajax()) {
+            if ($request->ajax()) {
                 return response()->json(['error' => "Produknya udah ada di favorit nih..."]);
             }
             return redirect()->back()->with('error', "Produknya udah ada di favorit nih...");
         }
         Favorite::create($dataproduct);
 
+        if ($request->ajax()) {
+            return response()->json(['success' => 'Favorite berhasil ditambahkan.']);
+        }
+
         $product->load('user'); // Ensure the user relationship is loaded
         $product->userStore->user->notify(new UserFavorite($product));
 
-
-        if ($r->ajax()) {
-            return response()->json(['success' => 'Favorite berhasil ditambahkan.']);
-        }
         return redirect()->back()->with('success', 'Favorite berhasil ditambahkan.');
     }
 

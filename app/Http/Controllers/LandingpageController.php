@@ -317,7 +317,7 @@ class LandingpageController extends Controller {
 
         $colors = $products->pluck('color')->concat($product_auction->pluck('color'))->map('strtolower')->unique();
         $sizes = $products->pluck('size')->concat($product_auction->pluck('size'))->map('strtolower')->unique();
-        $maxPrice = $products->pluck('price')->concat($product_auction->pluck('bid_price_end'))->max() ?? 0;
+        $maxPrice = $products->pluck('price')->concat($product_auction->pluck('bid_price_end'))->max() ?? 1000;
 
         if ($request->ajax()) {
             $productResults = null;
