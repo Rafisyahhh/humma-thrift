@@ -125,8 +125,12 @@
                                     <td class="cart-section wishlist-section" style="padding:2rem;">
                                         <div class="wrapper-content"
                                             style="display: flex; align-items: center; text-align: center; justify-content: center; flex-grow: 1; margin: 0 auto;">
-                                            <h5 class="heading" style="font-size: 18px;">Maaf Anda belum memasukkan produk
-                                                apapun</h5>
+                                            <div class="col-lg-12 d-flex flex-column align-items-center">
+                                                <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 150px; height: 150px;">
+                                                <h5 class="text-center" style="color: #000000">Produk Masih Kosong</h5>
+                                                <p class="text-center" style="color: #000000">Maaf, anda masih belum
+                                                    menambahkan daftar keranjang.</p>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -155,8 +159,8 @@
 
 
             {{-- Detail --}}
-            <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-                style="height: 99%;">
+            <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true" style="height: 99%;">
                 <div class="modal-dialog" style="margin-left: auto;">
                     <div class="login-section account-section p-0">
                         <div class="review-form m-0" style="height: 80%; width: 95rem;">

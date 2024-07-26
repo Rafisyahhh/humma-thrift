@@ -39,7 +39,13 @@
           </div>
         </div>
         @empty
-        <li class="list-group-item list-group-item-action" style="font-size: 1.5rem;">keranjang masih kosong</li>
+        {{-- <li class="list-group-item list-group-item-action" style="font-size: 1.5rem;">keranjang masih kosong</li>
+        <tr class="table-row ticket-row" style="height:12px;"> --}}
+            <div colspan="6" class="list-group-item list-group-item-action">
+                <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 110px; height: 110px;">
+                <p>Keranjang masih kosong</p>
+            </div>
+        {{-- </tr> --}}
         @endforelse
     </div>
     <div class="cart-wrapper-section">

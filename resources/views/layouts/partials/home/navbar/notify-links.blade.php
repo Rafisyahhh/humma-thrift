@@ -134,7 +134,10 @@
                     </div>
                 </a>
             @empty
-                <li class="list-group-item list-group-item-action" style="font-size: 1.5rem;">Tidak ada notifikasi</li>
+            <div colspan="6" class="list-group-item list-group-item-action">
+                <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 110px; height: 110px;">
+                <p>Tidak ada notifikasi</p>
+            </div>
             @endforelse
         </div>
         <div class="cart-wrapper-section">
