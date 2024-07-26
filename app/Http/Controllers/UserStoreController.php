@@ -13,6 +13,8 @@ use App\Http\Requests\StoreUserStoreRequest;
 use App\Http\Requests\UpdateUserStoreRequest;
 use App\Models\Product;
 use App\Models\ProductAuction;
+use App\Models\TransactionOrder;
+use Illuminate\Support\Facades\DB;
 
 class UserStoreController extends Controller
 {
@@ -27,11 +29,88 @@ class UserStoreController extends Controller
             $user = User::all();
             $count = Product::where('user_id', auth()->id())->count();
             $count += ProductAuction::where('user_id', auth()->id())->count();
+
+            $userId = Auth::id();
+
+            $transactionsbulan = TransactionOrder::select(DB::raw("MONTH(paid_at) as month"), DB::raw("SUM(total_harga) as total"))
+            ->join('orders', 'transaction_orders.id', '=', 'orders.transaction_order_id')
+            // ->join('products', 'orders.product_id', '=', 'products.id')
+            // ->where('products.user_id', $userId)
+            ->leftJoin('products', 'orders.product_id', '=', 'products.id')
+            ->leftJoin('product_auctions', 'orders.product_auction_id', '=', 'product_auctions.id')
+            ->where(function($query) use ($userId) {
+                $query->where('products.user_id', $userId)
+                      ->orWhere('product_auctions.user_id', $userId);
+            })
+            ->whereYear('paid_at', date('Y'))
+                ->groupBy(DB::raw("MONTH(paid_at)"))
+                ->orderBy(DB::raw("MONTH(paid_at)"))
+                ->get();
+
+            $months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+
+            $datas = array_fill(0, 12, 0); // Initialize data array with zeroes
+            foreach ($transactionsbulan as $transaction) {
+                $datas[$transaction->month - 1] = $transaction->total;
+            }
+
+            // Ambil data transaksi per hari untuk bulan ini
+            // $transactions = TransactionOrder::select(DB::raw("DAYOFWEEK(paid_at) as day_of_week"), DB::raw("SUM(total) as total"))
+            // ->whereYear('paid_at', date('Y'))
+            // ->whereMonth('paid_at', date('m')) // Mengambil data untuk bulan ini
+            // ->groupBy(DB::raw("DAYOFWEEK(paid_at)"))
+            // ->orderBy(DB::raw("DAYOFWEEK(paid_at)"))
+            // ->get();
+
+
+            // $days = [
+            //     'Minggu','Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'
+            // ];
+
+
+            // $data = array_fill(0, 7, 0); // Inisialisasi array data dengan nol
+            // foreach ($transactions as $transaction) {
+            //     $data[$transaction->day_of_week - 1] = $transaction->total;
+            // }
+
+
+            $transactions = TransactionOrder::select(DB::raw("DAYOFWEEK(paid_at) as day_of_week"), DB::raw("SUM(total_harga) as total"))
+            ->join('orders', 'transaction_orders.id', '=', 'orders.transaction_order_id')
+            // ->join('products', 'orders.product_id', '=', 'products.id')
+            // ->where('products.user_id', $userId)
+            ->leftJoin('products', 'orders.product_id', '=', 'products.id')
+            ->leftJoin('product_auctions', 'orders.product_auction_id', '=', 'product_auctions.id')
+            ->where(function($query) use ($userId) {
+                $query->where('products.user_id', $userId)
+                      ->orWhere('product_auctions.user_id', $userId);
+            })
+            ->whereYear('paid_at', date('Y'))
+            ->whereMonth('paid_at', date('m')) // Mengambil data untuk bulan ini
+            ->groupBy(DB::raw("DAYOFWEEK(paid_at)"))
+            ->orderBy(DB::raw("DAYOFWEEK(paid_at)"))
+            ->get();
+
+        $days = [
+            'Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'
+        ];
+
+        $grossData = array_fill(0, 7, 0); // Inisialisasi array data penghasilan kotor dengan nol
+        $netData = array_fill(0, 7, 0); // Inisialisasi array data penghasilan bersih dengan nol
+
+        foreach ($transactions as $transaction) {
+            $grossData[$transaction->day_of_week - 1] = $transaction->total;
+            $netData[$transaction->day_of_week - 1] = $transaction->total * 0.95; // Hitung penghasilan bersih (95% dari total)
+        }
+
+
         } else {
             return redirect()->route('login')->with('error', 'Anda harus masuk untuk melihat informasi toko.');
         }
 
-        return view('seller.index', compact('store', 'address', 'user', 'count'));
+        return view('seller.index', compact('store', 'address', 'user', 'count','grossData','netData','days','transactions','transactionsbulan','months','datas'));
     }
 
     /**
@@ -75,13 +154,13 @@ class UserStoreController extends Controller
         // dd($request->all());
         if(isset($request->gif)) {
             $id->update(['cuti'=>!$id->cuti]);
-            if($request->cuti){      
+            if($request->cuti){
                 return redirect()->back()->with("warning","Anda memasuki masa Cuti");
             }else{
                 return redirect()->back()->with("success","Anda tidak dalam masa Cuti");
 
             }
-            
+
         }
 
         $data = collect($request->validated());

@@ -40,9 +40,8 @@
   <div onclick="modalAction('.search')" class="anywhere-away"></div>
   <div class="modal-main">
     <div class="wrapper-close-btn" onclick="modalAction('.search')"></div>
-    <div class="wrapper-main">
-      <form class="search-section" action="{{ route('searchProduct') }}" id="global-search"
-        onsubmit="handleFormSubmit(event)">
+    <div class="wrapper-main" style="width: 50rem;">
+      <form class="search-section" action="{{ route('searchProduct') }}" id="global-search">
         <input type="search" placeholder="Telusuri produk..." name="search" id="search-input"
           @isset($search)
               value="{{ $search }}"
@@ -66,6 +65,7 @@
                         </div>
                     </div>
                 </div> --}}
+        <button type="submit" class="d-none"></button>
         <a role="button" class="shop-btn" onclick="document.getElementById('global-search').submit()"
           id="searchSubmitButton"><i class="fas fa-search"></i></a>
       </form>

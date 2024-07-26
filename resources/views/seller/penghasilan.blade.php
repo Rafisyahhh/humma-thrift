@@ -18,7 +18,7 @@
             border-bottom: 0;
             gap: .5rem;
         }
-
+ 
         #incomeData li {
             border: none;
             padding: 0;
