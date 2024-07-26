@@ -52,16 +52,11 @@ class StoreProfileController extends Controller {
         $ulasan = Ulasan::where('product_id', $isProduct->id)->get();
 
         // Menghitung jumlah favorit per produk
-        $countFavoriteProduct = Favorite::whereHas('product', function ($query) use ($store) {
-            $query->where('store_id', $store->id);
+        $countFavoriteProduct = Favorite::whereHas('product', function ($query) use ($isProduct) {
+            $query->where('id', $isProduct->id);
         })->count();
 
-        // Menghitung jumlah favorit per lelang produk
-        $countFavoriteAuction = Favorite::whereHas('product', function ($query) use ($store) {
-            $query->where('store_id', $store->id);
-        })->count();
-
-        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction', 'user', 'carts', 'countcart', 'countFavorite', 'ulasan', 'countFavoriteProduct', 'countFavoriteAuction'));
+        return view('user.detailproduct', compact('store', 'isProduct', 'isProductAuction', 'user', 'carts', 'countcart', 'countFavorite', 'ulasan', 'countFavoriteProduct'));
     }
 
 

@@ -141,6 +141,7 @@
       //       $this.prop('disabled', false);
       //     }, 250);
       //   });
+      let onUpdateWishlist = () => {};
       $("form[action*='product/storesproduct'], form[action*='product/storecart']").submit(function(e) {
         e.preventDefault();
         const form = $(this);
@@ -160,8 +161,8 @@
             if (response.cart) {
               updatePartials.cart();
             } else {
-              onUpdateWishlist?.(response);
               updatePartials.wishlist();
+              onUpdateWishlist(response);
             }
           }
         });

@@ -57,6 +57,7 @@ class ProductCategorySeeder extends Seeder {
                 ProductCategory::create([
                     "title" => $data["title"],
                     "icon" => $destinationPath,
+                    "type" => $data["type"],
                 ]);
             }
         }

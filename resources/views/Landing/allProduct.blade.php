@@ -114,7 +114,7 @@
 
           noUiSlider.create(tooltipSlider, {
             start: [{{ explode('-', request()->price ?? '0')[0] ?? 0 }},
-              {{ explode('-', request()->price ?? '0-' . $maxPrice)[1] ?? 1000 }}
+              {{ explode('-', request()->price ?? '0-' . $maxPrice)[1] }}
             ],
             connect: true,
             format: {
@@ -203,7 +203,7 @@
       $('input:checkbox[name="categories[]"], input:checkbox[name="brands[]"], input:checkbox[name="colors[]"], input:checkbox[name="sizes[]"], input:checkbox[name="type[]"]')
         .on('change', updateFilters);
       $('input#search-input').keyup(searchPage);
-      $('#searchSubmitButton').click(function(e) {
+      $('form#global-search').submit(function(e) {
         e.preventDefault();
         searchPage();
       });

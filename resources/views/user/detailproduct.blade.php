@@ -722,8 +722,8 @@
   <script src="{{ asset('additional-assets/jquery-3.7.1/jquery.min.js') }}"></script>
   <script src="{{ asset('js/share.js') }}"></script>
   <script>
-    function onUpdateWishlist() {
-      $('[countFavorite]').text((${parseInt($('[countFavorite]').attr('countFavorite'))+1}))
+    onUpdateWishlist = () => {
+      $('[countFavorite]').text(`(${parseInt($('[countFavorite]').attr('countFavorite'))+1})`)
     }
   </script>
 @endpush
