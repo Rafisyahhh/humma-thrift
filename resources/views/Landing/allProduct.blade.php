@@ -41,10 +41,12 @@
     $(document).ready(function() {
       const url = new URL(window.location.href);
       window.scrollTo(0, 0);
+
       let updateTimeout;
       let page = 0;
       let loading = true;
       let lastPage = false;
+
       const filters = ['categories', 'brands', 'colors', 'sizes', 'price', 'type'];
       const maxPrice = +('{{ $products->pluck('price')->max() }}');
       const loader = $('[isLoader]');
@@ -52,7 +54,6 @@
 
       const getCheckedFilters = () => {
         const checked = {};
-
         filters.forEach(filter => {
           checked[filter] = $(`input:checkbox[name="${filter}[]"]:checked`).map(function() {
             return this.value;
@@ -60,62 +61,58 @@
         });
 
         if ($('#price-slider').length > 0) {
-          const priceRange = $('#price-slider')[0].noUiSlider.get().map(value => Number(value));
-          checked['price'] = (priceRange[0] <= 0 && priceRange[1] >= maxPrice) ? [] : [
+          const priceRange = $('#price-slider')[0].noUiSlider.get().map(Number);
+          checked.price = (priceRange[0] <= 0 && priceRange[1] >= maxPrice) ? [] : [
             `${priceRange[0]}-${priceRange[1]}`
           ];
         } else {
-          checked['price'] = [];
+          checked.price = [];
         }
 
         return checked;
       };
 
-      const updateFilters = () => {
-        clearInterval(updateTimeout);
-        updateTimeout = setTimeout(() => {
-          page = 1;
-          lastPage = false;
-          const checked = getCheckedFilters();
+      const updateFilters = debounce(() => {
+        page = 1;
+        lastPage = false;
+        const checked = getCheckedFilters();
 
-          filters.forEach(filter => {
-            const count = checked[filter].length;
-            if (count > 0) {
-              url.searchParams.set(filter, checked[filter].join(','));
-            } else {
-              url.searchParams.delete(filter);
-            }
-            $(`#${filter}Count`).toggle(count > 0).text(count);
-          });
+        filters.forEach(filter => {
+          const count = checked[filter].length;
+          if (count > 0) {
+            url.searchParams.set(filter, checked[filter].join(','));
+          } else {
+            url.searchParams.delete(filter);
+          }
+          $(`#${filter}Count`).toggle(count > 0).text(count);
+        });
 
-          window.history.replaceState(null, null, url);
-          $('[isProduct]').addClass('submitLoading');
+        window.history.replaceState(null, null, url);
+        $('[isProduct]').addClass('submitLoading');
 
-          $.ajax({
-            url: url.toString(),
-            type: 'GET',
-            success: function(data) {
-              loading = false;
-              $('[isProduct],[isLoader]').remove();
-              $('#product-container').append(data);
-            },
-            error: function() {
-              loading = false;
-              $('[isProduct]').removeClass('submitLoading');
-              console.error('Failed to update filters.');
-            }
-          });
-        }, 500);
-      };
+        $.ajax({
+          url: url.toString(),
+          type: 'GET',
+          cache: true,
+          success: function(data) {
+            loading = false;
+            $('[isProduct],[isLoader]').remove();
+            $('#product-container').html(data);
+          },
+          error: function() {
+            loading = false;
+            $('[isProduct]').removeClass('submitLoading');
+            console.error('Failed to update filters.');
+          }
+        });
+      }, 500);
 
       const initPriceSlider = () => {
         if ($("#price-slider").length > 0) {
           const tooltipSlider = document.getElementById("price-slider");
-
           noUiSlider.create(tooltipSlider, {
-            start: [{{ explode('-', request()->price ?? '0')[0] ?? 0 }},
-              {{ explode('-', request()->price ?? '0-' . $maxPrice)[1] }}
-            ],
+            start: [Number('{{ explode('-', request()->price ?? '0')[0] ?? 0 }}'), Number(
+              '{{ explode('-', request()->price ?? '0-' . $maxPrice)[1] }}')],
             connect: true,
             format: {
               from: Number,
@@ -128,10 +125,7 @@
             }
           });
 
-          const formatValues = [
-            $("#slider-margin-value-min"),
-            $("#slider-margin-value-max")
-          ];
+          const formatValues = [$("#slider-margin-value-min"), $("#slider-margin-value-max")];
 
           tooltipSlider.noUiSlider.on("update", (values) => {
             formatValues[0].text("Harga: Rp" + values[0]);
@@ -144,8 +138,9 @@
 
       const loadPage = () => {
         $.ajax({
-          url: url.toString() + (url.search ? '&' : '?') + 'page=' + page,
+          url: `${url.toString()}${url.search ? '&' : '?'}page=${page}`,
           type: 'GET',
+          cache: true,
           beforeSend: function() {
             $("#product-container").append(loader);
           },
@@ -155,11 +150,11 @@
             if (data.lastPage) {
               lastPage = true;
               $("#product-container").append(`
-                <div class="col" style="align-self: center;" isProduct>
-                  <h3 class="text-center">Produk Habis</h3>
-                  <p class="text-center">Maaf ya, sepertinya tidak ada lagi produk yang tersedia.</p>
-                </div>
-              `);
+            <div class="col" style="align-self: center;" isProduct>
+              <h3 class="text-center">Produk Habis</h3>
+              <p class="text-center">Maaf ya, sepertinya tidak ada lagi produk yang tersedia.</p>
+            </div>
+          `);
               return;
             }
             $("#product-container").append(data);
@@ -171,38 +166,36 @@
         });
       };
 
-      const searchPage = () => {
+      const searchPage = debounce(() => {
         url.searchParams.set('search', searchInput.val());
         window.history.replaceState(null, null, url);
-        clearInterval(updateTimeout);
-        updateTimeout = setTimeout(() => {
-          page = 1;
-          lastPage = false;
 
-          $('[isProduct]').addClass('submitLoading');
+        page = 1;
+        lastPage = false;
 
-          $.ajax({
-            url: url.toString(),
-            type: 'GET',
-            success: function(data) {
-              loading = false;
-              $('[isProduct],[isLoader]').remove();
-              $('#product-container').append(data);
-            },
-            error: function() {
-              loading = false;
-              $('[isProduct]').removeClass('submitLoading');
-              console.error('Failed to update filters.');
-            }
-          });
-        }, 750);
-      };
+        $('[isProduct]').addClass('submitLoading');
+
+        $.ajax({
+          url: url.toString(),
+          type: 'GET',
+          cache: true,
+          success: function(data) {
+            loading = false;
+            $('[isProduct],[isLoader]').remove();
+            $('#product-container').html(data);
+          },
+          error: function() {
+            loading = false;
+            $('[isProduct]').removeClass('submitLoading');
+            console.error('Failed to update filters.');
+          }
+        });
+      }, 750);
 
       initPriceSlider();
 
-      $('input:checkbox[name="categories[]"], input:checkbox[name="brands[]"], input:checkbox[name="colors[]"], input:checkbox[name="sizes[]"], input:checkbox[name="type[]"]')
-        .on('change', updateFilters);
-      $('input#search-input').keyup(searchPage);
+      $('input:checkbox').on('change', updateFilters);
+      searchInput.keyup(searchPage);
       $('form#global-search').submit(function(e) {
         e.preventDefault();
         searchPage();
@@ -216,6 +209,16 @@
           loadPage();
         }
       });
+
+      function debounce(func, wait) {
+        let timeout;
+        return function() {
+          const context = this,
+            args = arguments;
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(context, args), wait);
+        };
+      }
     });
   </script>
   <script>
@@ -227,6 +230,7 @@
       $.ajax({
         url: form.attr('action'),
         type: "POST",
+        cache: true,
         success: function(response) {
           if (response.error) {
             flasher.error(response.error);
