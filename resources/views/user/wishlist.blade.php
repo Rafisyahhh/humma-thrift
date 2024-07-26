@@ -26,7 +26,7 @@
             background-color: #ffffff;
             /* border: 1px solid #ffffff; */
             /* border-radius: 0.25rem;
-        padding: 0.5rem 0; */
+            padding: 0.5rem 0; */
         }
 
         .dropdown-menu .dropdown-item {
@@ -139,14 +139,12 @@
                                                 <div class="dropdown">
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"
                                                         style="width: 20rem; text-align: center; font-size: 16px;">
-                                                        <li><a class="dropdown-item" href="#"
-                                                                style="font-size: 16px;">Terbaru Disimpan</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('user.wishlist', ['sortOrder' => 'newest']) }}"  onclick="applyFilter('newest', event)" style="font-size: 16px;">
+                                                                Terbaru Disimpan</a></li>
                                                         <hr>
-                                                        <li><a class="dropdown-item" href="#"
-                                                                style="font-size: 16px;">Terlama Disimpan</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('user.wishlist', ['sortOrder' => 'oldest']) }}"  onclick="applyFilter('oldest', event)" style="font-size: 16px;">
+                                                                Terlama Disimpan</a></li>
                                                         <hr>
-                                                        <li><a class="dropdown-item" href="#"
-                                                                style="font-size: 16px;">Ulasan Terbanyak</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -156,13 +154,16 @@
                             </div>
 
                             <div class="result mb-6">
-                                @if($countFavorite > 0)
-                                  <p><strong style="font-size: 1.5rem">({{ $countFavorite }})</strong><span> Barang</span></p>
+                                @if ($countFavorite > 0)
+                                    <p><strong style="font-size: 1.5rem">({{ $countFavorite }})</strong><span> Barang</span>
+                                    </p>
                                 @else
-                                  <p><strong style="font-size: 1.5rem">Tidak ada data</strong></p>
+                                    <p><strong style="font-size: 1.5rem">Tidak ada barang</strong></p>
                                 @endif
-                              </div>
-                            @forelse ($product_favorite as $item)
+                            </div>
+
+                            <div id="produk" class="row g-5">
+                                {{-- @forelse ($product_favorite as $item)
                                 <div class="col-lg-3 col-sm-6">
                                     <div class="product-wrapper" data-aos="fade-up">
                                         <div class="product-img position-relative">
@@ -193,7 +194,8 @@
                                         </div>
                                         <div class="product-info">
                                             <div class="product-description">
-                                                <a href="" class="product-details"
+                                                <a href="{{ route('store.product.detail', ['store' => $item->product->userStore->username, 'product' => $item->product->slug]) }}"
+                                                    class="product-details"
                                                     style="font-size: 1.85rem">{{ $item->product->title }}
                                                 </a>
                                                 <div class="price">
@@ -223,7 +225,8 @@
                                     <p class="text-center" style="color: #000000">Maaf, anda masih belum menambahkan daftar
                                         favorit.</p>
                                 </div>
-                            @endforelse
+                            @endforelse --}}
+                        </div>
 
                             {{-- <hr>
               <h4>Lelang</h4>
@@ -282,4 +285,30 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('script')
+
+<script>
+    applyFilter('newest')
+function applyFilter(value, e = null) {
+    if (e !== null) {
+        e.preventDefault()
+
+    }
+  $.ajax({
+    url: '{{ route('user.wishlist') }}',
+    type: 'GET',
+    data: { filter: value },
+    success: function(data) {
+      $('#produk').html(data); // Memperbarui konten area dengan hasil filter
+    },
+    error: function() {
+      alert('Terjadi kesalahan saat memfilter konten.');
+    }
+  });
+}
+
+</script>
+
 @endsection

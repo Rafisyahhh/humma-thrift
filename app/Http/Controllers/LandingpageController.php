@@ -17,8 +17,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
-class LandingpageController extends Controller {
-    public function index() {
+class LandingpageController extends Controller
+{
+    public function index()
+    {
         $event = Event::all();
         $brands = Brand::all();
         $categories = ProductCategory::all();
@@ -34,7 +36,8 @@ class LandingpageController extends Controller {
         ));
     }
 
-    public function brand() {
+    public function brand()
+    {
         $brands = Brand::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $countcart = cart::where('user_id', auth()->id())->count();
@@ -55,7 +58,8 @@ class LandingpageController extends Controller {
     // }
 
 
-    public function store() {
+    public function store()
+    {
         $store = UserStore::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $countcart = cart::where('user_id', auth()->id())->count();
@@ -67,24 +71,46 @@ class LandingpageController extends Controller {
         return view('landing.toko', compact('store', 'carts', 'countcart', 'countFavorite'));
     }
 
-    public function wishlist() {
+    public function wishlist(Request $request)
+    {
         $categories = ProductCategory::all();
         $brands = Brand::all();
         $product = Product::all();
         $favorite = Favorite::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $product_auction = Favorite::whereNotNull('product_auction_id')->where('user_id', auth()->id())->get();
-        $product_favorite = Favorite::whereNotNull('product_id')->where('user_id', auth()->id())->get();
+        $product_favorite = Favorite::whereNotNull('product_id')->where('user_id', auth()->id());
+
+        if ($request->ajax()) {
+            if (isset($request->filter)) {
+                if ($request->filter == 'newest') {
+                    $product_favorite = $product_favorite->orderBy('created_at');
+                } elseif ($request->filter == 'oldest') {
+                    $product_favorite = $product_favorite->orderByDesc('created_at');
+                }
+            }
+            $product_favorite = $product_favorite->paginate(24);
+            if ($product_favorite->currentPage() > $product_favorite->lastPage()) {
+                return response()->json(['lastPage' => true]);
+            }
+
+            
+            return view('Landing.components.wishlist-product', compact('product_favorite'))->render();
+        }
+
         $countcart = cart::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())
             ->whereNotNull('product_id')
             ->orderBy('created_at')
             ->get();
 
-        return view('user.wishlist', compact('categories', 'brands', 'product', 'favorite', 'product_auction', 'product_favorite', 'carts', 'countcart', 'countFavorite'));
+        $product_favorite = $product_favorite->get();
+
+        return view('user.wishlist', compact('categories', 'brands', 'product', 'favorite', 'countFavorite', 'product_auction', 'product_favorite', 'countcart', 'carts'));
     }
 
-    public function cart() {
+    public function cart()
+    {
         $cart = cart::all();
         $product_category_pivots = ProductCategoryPivot::all();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
@@ -98,7 +124,8 @@ class LandingpageController extends Controller {
     }
 
     // Tambahkan metode regular
-    public function productRegular(Request $request) {
+    public function productRegular(Request $request)
+    {
         $products = Product::where('status', 'active');
         $colors = $products->pluck('color')->map('strtolower')->unique();
         $sizes = $products->pluck('size')->map('strtolower')->unique();
@@ -131,7 +158,6 @@ class LandingpageController extends Controller {
                     $products = $products->sortBy('created_at');
                 } elseif ($request->sortBy == 'desc') {
                     $products = $products->sortByDesc('created_at');
-
                 }
             }
             $products = $products->paginate(24);
@@ -149,7 +175,8 @@ class LandingpageController extends Controller {
     }
 
     // Tambahkan metode auction
-    public function productAuction(Request $request) {
+    public function productAuction(Request $request)
+    {
         $product_auction = ProductAuction::where('status', 'active');
 
         $colors = $product_auction->pluck('color')->map('strtolower')->unique();
@@ -182,6 +209,7 @@ class LandingpageController extends Controller {
             if ($product_auction->currentPage() > $product_auction->lastPage()) {
                 return response()->json(['lastPage' => true]);
             }
+
             return view('Landing.components.product-auction', compact('product_auction'))->render();
         }
 
@@ -203,11 +231,10 @@ class LandingpageController extends Controller {
     }
 
 
-
-    public function searchProductRegular(Request $request) {
+    public function searchProductRegular(Request $request)
+    {
         $search = $request->search;
         $products = Product::where('status', 'active')->where('title', 'like', "%$search%");
-
         $colors = $products->pluck('color')->map('strtolower')->unique();
         $sizes = $products->pluck('size')->map('strtolower')->unique();
 
@@ -235,11 +262,11 @@ class LandingpageController extends Controller {
             if ($products->currentPage() > $products->lastPage()) {
                 return response()->json(['lastPage' => true]);
             }
+
             return view('Landing.components.product-regular', compact('products'))->render();
         }
 
         $products = $products->paginate(24);
-
         $brands = Brand::all();
         $categories = ProductCategory::all();
 
@@ -247,7 +274,8 @@ class LandingpageController extends Controller {
     }
 
 
-    public function searchProductAuction(Request $request) {
+    public function searchProductAuction(Request $request)
+    {
         $search = $request->search;
         $product_auction = ProductAuction::where('status', 'active')->where('title', 'like', "%$search%");
         $product_auction2 = ProductAuction::all();
@@ -282,6 +310,7 @@ class LandingpageController extends Controller {
             if ($product_auction->currentPage() > $product_auction->lastPage()) {
                 return response()->json(['lastPage' => true]);
             }
+
             return view('Landing.components.product-auction', compact('product_auction'))->render();
         }
 
@@ -300,7 +329,8 @@ class LandingpageController extends Controller {
         return view('Landing.produk-auction', compact('product_auction', 'brands', 'categories', 'countcart', 'carts', 'countFavorite', 'search', 'colors', 'sizes'));
     }
 
-    public function productSearch(Request $request) {
+    public function productSearch(Request $request)
+    {
         $allRequest = $request->all();
         $search = $request->search;
         if (Str::startsWith(strtolower($search), ['/product', '/products', '/produk'])) {
@@ -399,6 +429,7 @@ class LandingpageController extends Controller {
 
             $products = $productResults ?? [];
             $product_auction = $productAuctionResults ?? [];
+
             return view('Landing.components.products', compact('products', 'product_auction'))->render();
         }
 
@@ -416,6 +447,7 @@ class LandingpageController extends Controller {
         }
         $brands = Brand::all();
         $categories = ProductCategory::all();
+
         return view('Landing.allProduct', compact('products', 'product_auction', 'brands', 'categories', 'colors', 'sizes', 'maxPrice', 'search'));
     }
 }
