@@ -1,4 +1,4 @@
-@php
+{{-- @php
     $data = [
         'hari' => ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
         'penghasilan_kotor' => [20000, 35000, 40000, 30000, 45000, 60000, 50000],
@@ -6,7 +6,7 @@
         'bulan' => ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli'],
         'penjualan_bulan' => [1000000, 800000, 200000, 350000, 800000, 1100000, 3000000],
     ];
-@endphp
+@endphp --}}
 
 @extends('layouts.panel')
 
@@ -164,8 +164,11 @@
                     <div class="mb-3">
                         <h5 class="heading">Data Penjualan/Hari</h5>
                     </div>
-                    <div class="profile-section">
+                    {{-- <div class="profile-section">
                         <canvas id="penjualan-harian" height="200"></canvas>
+                    </div> --}}
+                    <div id="totalRevenueChart" class="profile-section">
+                        <canvas id="revenueChart"></canvas>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -173,18 +176,84 @@
                         <h5 class="heading">Data Penjualan/Bulan</h5>
                     </div>
                     <div class="profile-section">
-                        <canvas id="penjualan-bulanan" height="200"></canvas>
+                        <canvas id="bulanan" height="200"></canvas>
                     </div>
                 </div>
             </div>
         </div>
+
+
     </section>
 @endsection
 
 @section('script')
     <script src="{{ asset('additional-assets/chart.js-4.4.3/chart.umd.js') }}"></script>
 
+
+<script>
+    var labels = @json($days);
+    var grossData = @json($grossData);
+    var netData = @json($netData);
+
+    var ctx = document.getElementById('revenueChart').getContext('2d');
+    var revenueChart = new Chart(ctx, {
+        type: 'line', // Jenis chart
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Penghasilan Kotor per Hari',
+                    data: grossData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Penghasilan Bersih per Hari',
+                    data: netData,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
     <script>
+        var labels = @json($months);
+        var data = @json($datas);
+
+        var ctx = document.getElementById('bulanan').getContext('2d');
+        var bulanan = new Chart(ctx, {
+            type: 'line', // Jenis chart
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Penghasilan kotor per bulan',
+                    data: data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+    {{-- <script>
         $(document).ready(function() {
             const dataHarian = {
                 labels: @json($data['hari']),
@@ -252,5 +321,5 @@
                 options: options
             });
         });
-    </script>
+    </script> --}}
 @endsection
