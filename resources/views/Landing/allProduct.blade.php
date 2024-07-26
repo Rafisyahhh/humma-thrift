@@ -39,7 +39,7 @@
       let lastPage = false;
 
       const filters = ['categories', 'brands', 'colors', 'sizes', 'price', 'type'];
-      const maxPrice = +('{{ $products->pluck('price')->max() }}');
+      const maxPrice = +('{{ $maxPrice }}');
       const loader = $('[isLoader]');
       const searchInput = $('input#search-input');
 
