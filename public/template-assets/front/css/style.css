@@ -5874,12 +5874,25 @@ a.shop-btn:hover {
     }
 }
 
-
 .white-text {
     color: #ffffff;
-    }
+}
 
 .info-text {
     font-size: 1.6rem;
     color: #ffffff;
-    }
+}
+
+[class^="header-"] [class$="-count"] {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 50%;
+    padding: 1px 6px;
+    font-size: 0.75em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

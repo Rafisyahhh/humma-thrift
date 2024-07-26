@@ -1,52 +1,17 @@
-
 <div class="header-cart header-right-dropdown">
   <a href="{{ route('user.cart') }}" class="cart-item">
-    <span style="position: relative; display: inline-block;">
+    <span style="position: relative;">
       <i class="fas fa-shopping-cart" style="font-size: 1.5em position: relative;"></i>
-      @if (count($carts) > 0)
-        <span
-          style="
-                position: absolute;
-                top: -10px; /* Adjust as needed */
-                right: -10px; /* Adjust as needed */
-                background-color: #dc3545;
-                color: white;
-                border-radius: 50%;
-                padding:1px 6px; /* Adjust as needed */
-                font-size: 0.75em; /* Adjust as needed */
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            ">{{ count($carts) }}</span>
-      @endif
+      <span class="cart-count d-none">0</span>
     </span>
   </a>
   <div class="cart-submenu">
-    <div class="cart-wrapper-item">
-      @forelse ($carts as $item)
-        <div class="wrapper">
-          <div class="wrapper-item">
-            <div class="wrapper-img" style="margin-right: 1rem;">
-              <img src="{{ asset('storage/' . $item->product->thumbnail) }}" alt="img">
-            </div>
-            <div class="wrapper-content">
-              <h5 class="heading" style="font-size: 18px; ">{{ $item->product->title }} </h5>
-              <div style="display: flex; align-items: center; margin-left: 0px;">
-                <p>Rp</p>
-                <p>{{ number_format($item->product->price, 0, ',', '.') }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        @empty
-        {{-- <li class="list-group-item list-group-item-action" style="font-size: 1.5rem;">keranjang masih kosong</li>
-        <tr class="table-row ticket-row" style="height:12px;"> --}}
-            <div colspan="6" class="list-group-item list-group-item-action">
-                <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 110px; height: 110px;">
-                <p>Keranjang masih kosong</p>
-            </div>
-        {{-- </tr> --}}
-        @endforelse
+    <div class="cart-wrapper-item" id="cart-wrapper">
+      {{-- Codenya ada di navbar.blade.php di dalam function pushCartItem() --}}
+      <div colspan="6" class="list-group-item list-group-item-action">
+        <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 110px; height: 110px;">
+        <p>Keranjang masih kosong</p>
+      </div>
     </div>
     <div class="cart-wrapper-section">
       <div class="wrapper-line"></div>

@@ -44,7 +44,12 @@ class FavoriteController extends Controller {
         Favorite::create($dataproduct);
 
         if ($request->ajax()) {
-            return response()->json(['success' => 'Favorite berhasil ditambahkan.']);
+            $countFavorite = Favorite::where('user_id', auth()->id())->count();
+            return response()->json([
+                'success' => 'Favorite berhasil ditambahkan.',
+                'type' => 'wishlist',
+                'data' => $countFavorite
+            ]);
         }
 
         $product->load('user'); // Ensure the user relationship is loaded

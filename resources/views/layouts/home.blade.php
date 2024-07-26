@@ -158,17 +158,13 @@
             } else {
               flasher.success(response.success);
             }
-            if (response.cart) {
-              updatePartials.cart();
-            } else {
-              updatePartials.wishlist();
-              onUpdateWishlist && onUpdateWishlist?.(response);
-            }
+            window.globalVarProxy[response.type] = response.data;
           }
         });
         return false;
       });
     </script>
+
     <script src="{{ asset('additional-assets/toastr-2.1.4/toastr.min.js') }}"></script>
 
     @stack('js')
