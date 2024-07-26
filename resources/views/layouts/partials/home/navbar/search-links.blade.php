@@ -41,8 +41,7 @@
   <div class="modal-main">
     <div class="wrapper-close-btn" onclick="modalAction('.search')"></div>
     <div class="wrapper-main">
-      <form class="search-section" action="{{ route('searchProduct') }}" id="global-search"
-        onsubmit="handleFormSubmit(event)">
+      <form class="search-section" action="{{ route('searchProduct') }}" id="global-search">
         <input type="search" placeholder="Telusuri produk..." name="search" id="search-input"
           @isset($search)
               value="{{ $search }}"
