@@ -751,9 +751,15 @@
             const selectedUsername = $('#selected-username');
             const selectedAddress = $('#selected-address');
 
+            updateAddress($('input[name="addressOption"]:checked'))
+
             radioButtons.on('change', function() {
-                const selectedTitleAddress = $(this).parent('.address-item-wrap').find('.title').text().trim();
-                const selectedDescAddress = $(this).parent('.address-item-wrap').find('p').text().trim();
+                updateAddress(this);
+            });
+
+            function updateAddress(e) {
+                const selectedTitleAddress = $(e).parent('.address-item-wrap').find('.title').text().trim();
+                const selectedDescAddress = $(e).parent('.address-item-wrap').find('p').text().trim();
 
                 selectedUsername.text(selectedTitleAddress);
                 selectedAddress.text(selectedDescAddress);
@@ -762,26 +768,8 @@
                     <p class="title fw-bold fs-4">${selectedTitleAddress}</p>
                     <p>${selectedDescAddress}</p>
                 `);
-            });
+            }
         });
     </script>
 
-    <script>
-        $(document).ready(function() {
-            updateAddressPlaceholder();
-            setTimeout(() => {
-                $('#address-wrapper-head').attr("style", "background-color: rgba(210, 208, 208, 0.4);");
-                $('#address-wrapper-head #noAddress').show();
-            }, 3000);
-        });
-
-        function updateAddressPlaceholder() {
-            const element = $('input[type=radio][name=addressOption]:checked+label');
-            const address = element.find('.address-wrapper').html()
-            $('.address-placeholder').find('.address-wrapper').html(address);
-        }
-        $('input[type=radio][name=addressOption]').change(function(e) {
-            updateAddressPlaceholder()
-        });
-    </script>
 @endpush
