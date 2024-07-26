@@ -2,10 +2,9 @@
 @include('Landing.components.product-auction', ['doNotShowEmptyProduct' => true])
 
 @if (count($products) + count($product_auction) <= 0)
-  <div class="col-lg-12" isProduct>
-    <h5 class="text-center" style="color: #a5a3ae">Tidak ada Produk</h5>
-    <p class="text-center" style="color: #a5a3ae">Maaf ya, kami masih belum menambahkan produknya. Tapi
-      dalam
-      waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
+  <div class="col-lg-12 d-flex flex-column align-items-center">
+    <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 200px; height: 200px;">
+    <h5 class="text-center" style="color: #000000">Produk Masih Kosong</h5>
+    <p class="text-center" style="color: #000000">Maaf, produk belum ada.</p>
   </div>
 @endif

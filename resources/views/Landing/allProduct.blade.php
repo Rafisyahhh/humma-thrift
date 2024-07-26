@@ -141,10 +141,13 @@
             if (data.lastPage) {
               lastPage = true;
               $("#product-container").append(`
-            <div class="col" style="align-self: center;" isProduct>
-              <h3 class="text-center">Produk Habis</h3>
-              <p class="text-center">Maaf ya, sepertinya tidak ada lagi produk yang tersedia.</p>
-            </div>
+             <div class="col-lg-12 d-flex flex-column align-items-center">
+                                    <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong"
+                                        style="width: 200px; height: 200px;">
+                                    <h5 class="text-center" style="color: #000000">Produk Masih Kosong</h5>
+                                    <p class="text-center" style="color: #000000">Maaf, anda masih belum menambahkan daftar
+                                        favorit.</p>
+                                </div>
           `);
               return;
             }
