@@ -179,7 +179,7 @@
                 layout: {
                     topStart: $(`<h5 class="card-header">Daftar Toko</h5>`),
                     topEnd: $(`<div class="input-group">
-              <input class="form-control mt-3 me-4" placeholder="Cari User&hellip;" id="searchInput" />
+              <input class="form-control mt-3 me-4" placeholder="Cari Store&hellip;" id="searchInput" />
             </div>`),
                     bottomStart: {
                         info: {

@@ -46,7 +46,7 @@
                         <span style="color: #d40000;">Baca Semua</span>
                     </a>
                 </div>
-                <div class="row g-0 h-100" style="max-height:82rem; ">
+                <div class="row g-0 h-100" style="max-height:82rem;">
                     <div class="col-md-12 border-end list-group list-group-flush h-100 mt-5">
                         {{-- <div class="list-group list-group-flush"> --}}
                         @forelse ($notifications as $notification)

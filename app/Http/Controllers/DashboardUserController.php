@@ -7,7 +7,10 @@ use App\Models\cart;
 use App\Models\Event;
 use App\Models\Favorite;
 use App\Models\ProductCategory;
+use App\Models\TransactionOrder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class DashboardUserController
@@ -36,9 +39,29 @@ class DashboardUserController extends Controller
         ->get();
 
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
+
+        $transactionsbulan = TransactionOrder::select(DB::raw("MONTH(paid_at) as month"), DB::raw("SUM(total) as total"))
+        ->whereYear('paid_at', date('Y'))
+        ->where('user_id', Auth::id())
+        ->groupBy(DB::raw("MONTH(paid_at)"))
+        ->orderBy(DB::raw("MONTH(paid_at)"))
+        ->get();
+
+        $months = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+
+        $datas = array_fill(0, 12, 0); // Initialize data array with zeroes
+        foreach ($transactionsbulan as $transaction) {
+            $datas[$transaction->month - 1] = $transaction->total;
+        }
+
         return view('user.user', compact(
             'countcart',
             'carts',
+            'months',
+            'datas',
             'favorites',
             'countFavorite'
         ));

@@ -286,7 +286,35 @@
 @section('script')
     <script src="{{ asset('additional-assets/chart.js-4.4.3/chart.umd.js') }}"></script>
 
+
+
     <script>
+        var labels = @json($months);
+        var data = @json($datas);
+
+        var ctx = document.getElementById('pengeluaran').getContext('2d');
+        var pengeluaran = new Chart(ctx, {
+            type: 'line', // Jenis chart
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Pengeluaran per bulan',
+                    data: data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    {{-- <script>
         $(document).ready(function() {
             const dataBulanan = {
                 labels: @json($data['bulan']),
@@ -328,5 +356,5 @@
                 options: options
             });
         });
-    </script>
+    </script> --}}
 @endsection

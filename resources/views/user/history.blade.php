@@ -243,7 +243,7 @@
                                         <option value="1">Buruk</option>
                                     </select>
                                     @error('star')
-                                        <p class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></p>
+                                        <p class="feedback" role="alert"><strong>{{ $message }}</strong></p>
                                     @enderror
                                 </div>
 
