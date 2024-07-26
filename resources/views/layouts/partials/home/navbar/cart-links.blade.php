@@ -1,3 +1,4 @@
+
 <div class="header-cart header-right-dropdown">
   <a href="{{ route('user.cart') }}" class="cart-item">
     <span style="position: relative; display: inline-block;">
@@ -37,8 +38,9 @@
             </div>
           </div>
         </div>
-      @empty
-      @endforelse
+        @empty
+        <li class="list-group-item list-group-item-action" style="font-size: 1.5rem;">keranjang masih kosong</li>
+        @endforelse
     </div>
     <div class="cart-wrapper-section">
       <div class="wrapper-line"></div>

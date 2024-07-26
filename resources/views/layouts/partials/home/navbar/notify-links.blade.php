@@ -134,7 +134,7 @@
                     </div>
                 </a>
             @empty
-                <li class="list-group-item list-group-item-action">Tidak ada notifikasi</li>
+                <li class="list-group-item list-group-item-action" style="font-size: 1.5rem;">Tidak ada notifikasi</li>
             @endforelse
         </div>
         <div class="cart-wrapper-section">
