@@ -179,7 +179,7 @@
                         </td>
                     </tr>
 
-                    @foreach ($transaction as $item)
+                    @forelse ($transaction as $item)
                         @if ($item->transaction_order->user_id == auth()->user()->id && $item->transaction_order->delivery_status !== 'selesai')
                             @if ($item->product !== null)
                                 <tr class="table-row ticket-row">
@@ -340,7 +340,14 @@
                                 </tr>
                             @endif
                         @endif
-                    @endforeach
+                    @empty
+                    <tr class="table-row ticket-row" style="height:12px;">
+                        <td colspan="6" class="text-center no-data-message" >
+                            <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 200px; height: 200px;">
+                            <p>Tidak ada data</p>
+                        </td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
             {{-- Detail --}}
