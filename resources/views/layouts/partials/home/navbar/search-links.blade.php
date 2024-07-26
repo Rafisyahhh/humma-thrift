@@ -66,6 +66,7 @@
                         </div>
                     </div>
                 </div> --}}
+        <button type="submit" class="d-none"></button>
         <a role="button" class="shop-btn" onclick="document.getElementById('global-search').submit()"
           id="searchSubmitButton"><i class="fas fa-search"></i></a>
       </form>
