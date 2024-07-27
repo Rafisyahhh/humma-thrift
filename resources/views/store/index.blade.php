@@ -206,6 +206,47 @@
       border: .5rem solid #fff;
       border-radius: 50%;
     }
+
+    .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 100%;
+            max-width: 60rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
   </style>
 @endpush
 
@@ -347,11 +388,12 @@
                               </span>
                             </button>
                           </form>
-                          <a href="#" class="compaire cart-item">
+                          <a data-id="{{ $item->id }}"
+                            class="compare item-cart openShareModal">
                             <span>
-                              <i class="fas fa-share"></i>
+                                <i class="fas fa-share"></i>
                             </span>
-                          </a>
+                        </a>
                         @else
                           <a href="{{ route('login') }}" class="favourite cart-item">
                             <span>
@@ -377,6 +419,35 @@
                     </div>
                   </div>
                 </div>
+                <div id="shareModal-{{ $item->id }}" class="modal" style="display: none; z-index:999;">
+                    <div class="modal-content">
+                        <button class="close" style="float: right; text-align: end;"
+                            onclick="closeModal2('#shareModal-{{ $item->id }}')">&times;</button>
+                        <div class="align-items-center gap-3 justify-content-center py-3" style="position: relative;">
+                            <p class="fs-2 mb-0 text-center fw-bold">Bagikan ke:</p>
+                            <div class="d-flex gap-2 align-items-center justify-content-center mt-2">
+                                <span class="share-container share-buttons d-flex gap-3 ms-2" style="z-index:1;">
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
+                                        target="_blank" class="social-buttons">
+                                        <i class="fa-brands fa-square-facebook" style="color: #1c3879;font-size:4rem"></i>
+                                    </a>
+                                    <a href="https://twitter.com/intent/tweet?url={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}&text={{ $item->title }}"
+                                        target="_blank" class="social-buttons">
+                                        <i class="fa-brands fa-square-x-twitter" style="color: #1c3879;font-size:4rem"></i>
+                                    </a>
+                                    <a href="https://t.me/share/url?url={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}&text={{ $item->title }}"
+                                        target="_blank" class="social-buttons">
+                                        <i class="fa-brands fa-telegram" style="color: #1c3879;font-size:4rem"></i>
+                                    </a>
+                                    <a href="https://api.whatsapp.com/send?text={{ $item->title . ' ' . route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
+                                        target="_blank" class="social-buttons">
+                                        <i class="fa-brands fa-whatsapp" style="color: #1c3879;font-size:4rem"></i>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
               @empty
                 <div class="col-lg-12">
                   <h5 class="text-center" style="color: #a5a3ae">Produk Masih Kosong</h5>
@@ -398,10 +469,11 @@
                       <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="product-img"
                         class="object-fit-cover">
                       <div class="product-cart-items">
-                        <a href="/user/keranjang" class="compaire cart-item">
-                          <span>
-                            <i class="fas fa-share"></i>
-                          </span>
+                        <a data-id="{{ $item->id }}auction"
+                            class="compare item-cart openShareModal">
+                            <span>
+                                <i class="fas fa-share"></i>
+                            </span>
                         </a>
                       </div>
                     </div>
@@ -422,6 +494,35 @@
                     </div>
                   </div>
                 </div>
+                <div id="shareModal-{{ $item->id }}auction" class="modal" style="display: none; z-index:999;">
+                    <div class="modal-content">
+                        <button class="close" style="float: right; text-align: end;"
+                            onclick="closeModal2('#shareModal-{{ $item->id }}')">&times;</button>
+                        <div class="align-items-center gap-3 justify-content-center py-3" style="position: relative;">
+                            <p class="fs-2 mb-0 text-center fw-bold">Bagikan ke:</p>
+                            <div class="d-flex gap-2 align-items-center justify-content-center mt-2">
+                                <span class="share-container share-buttons d-flex gap-3 ms-2" style="z-index:1;">
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
+                                        target="_blank" class="social-buttons">
+                                        <i class="fa-brands fa-square-facebook" style="color: #1c3879;font-size:4rem"></i>
+                                    </a>
+                                    <a href="https://twitter.com/intent/tweet?url={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}&text={{ $item->title }}"
+                                        target="_blank" class="social-buttons">
+                                        <i class="fa-brands fa-square-x-twitter" style="color: #1c3879;font-size:4rem"></i>
+                                    </a>
+                                    <a href="https://t.me/share/url?url={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}&text={{ $item->title }}"
+                                        target="_blank" class="social-buttons">
+                                        <i class="fa-brands fa-telegram" style="color: #1c3879;font-size:4rem"></i>
+                                    </a>
+                                    <a href="https://api.whatsapp.com/send?text={{ $item->title . ' ' . route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
+                                        target="_blank" class="social-buttons">
+                                        <i class="fa-brands fa-whatsapp" style="color: #1c3879;font-size:4rem"></i>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
               @empty
                 <div class="col-lg-12">
                   <h3 class="text-center">Produk Lelang Masih Kosong</h3>
@@ -434,6 +535,7 @@
             </div>
           </div>
         </div>
+        
         <div class="tab-pane fade mt-5" id="ulasan-tab-pane" role="tabpanel" aria-labelledby="ulasan-tab"
           tabindex="0">
           <ul class="list-group list-group-flush" style="height: unset;">
@@ -472,6 +574,7 @@
                   <p class="border-top pt-2 text-start" style="min-height: 5rem">{{ $item->comment }}</p>
                 </div>
               </li>
+              
             @empty
             @endforelse
           </ul>
@@ -479,6 +582,7 @@
       </div>
     </div>
   </section>
+  
 @endsection
 
 @push('script')
@@ -488,4 +592,46 @@
   <script>
     var stars = new StarRating('.star-rating');
   </script>
+  <script>
+    function openModal(modal) {
+        $(modal).show();
+    }
+
+    function closeModal(modal) {
+        $(modal).hide();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.openAuctionModal').forEach(function(btn) {
+            btn.onclick = function() {
+                var productId = btn.getAttribute('data-id');
+                var modal = document.getElementById('reviewModal-' + productId);
+                modal.style.display = 'flex';
+            }
+        });
+
+        document.querySelectorAll('.openShareModal').forEach(function(btn) {
+            btn.onclick = function() {
+                var productId = btn.getAttribute('data-id');
+                var modal = document.getElementById('shareModal-' + productId);
+                modal.style.display = 'flex';
+            }
+        });
+
+        document.querySelectorAll('.close').forEach(function(span) {
+            span.onclick = function() {
+                var modal = span.closest('.modal');
+                modal.style.display = 'none';
+            }
+        });
+
+        window.onclick = function(event) {
+            document.querySelectorAll('.modal').forEach(function(modal) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+    });
+</script>
 @endpush
