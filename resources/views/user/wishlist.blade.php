@@ -229,56 +229,56 @@
                         </div>
 
                             {{-- <hr>
-              <h4>Lelang</h4>
-              @forelse ($product_auction as $item)
-                <div class="col-lg-3 col-sm-6">
-                  <div class="product-wrapper" data-aos="fade-up">
-                    <div class="product-img position-relative">
-                      <img src="{{ asset('storage/' . $item->productAuction->thumbnail) }}" alt="product-img"
-                        class="object-fit-cover">
-                      <div class="dropdown position-absolute" style="top: 0; right: 0;">
-                        <a class="wishlist-link" href="#" role="button" id="wishlistDropdown"
-                          data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="fas fa-ellipsis-h"></i>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="wishlistDropdown">
-                          <li>
-                            <form action="{{ route('destroyAuction.destroy', $item->id) }}" method="POST"
-                              onsubmit="return confirmDeletion('Apakah anda yakin ingin menghapus produk ini dari daftar favorit?', event.preventDefault())">
-                              @csrf
-                              @method('DELETE')
-                              <a role="button" type="submit" class="dropdown-item"
-                                onclick="$(this).closest('form').submit()" style="color: red;">Hapus Favorit</a>
-                            </form>
-                          </li>
-                          <hr>
-                          <li><a class="dropdown-item" href="#">Batal</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="product-info">
-                      <div class="product-description">
-                        <a href="" class="product-details"
-                          style="font-size: 2rem">{{ $item->productAuction->title }}
-                        </a>
-                        <div class="price">
-                          <span class="new-price"
-                            style="font-size: 1.8rem">Rp{{ number_format($item->productAuction->bid_price_start, null, null, '.') }}
-                            - Rp{{ number_format($item->productAuction->bid_price_end, null, null, '.') }}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="product-cart-btn mb-4">
-                    </div>
-                  </div>
-                </div>
-              @empty
-                <div class="col-lg-12">
-                  <h5 class="text-center" style="color: #a5a3ae">Produk Lelang Masih Kosong</h5>
-                  <p class="text-center" style="color: #a5a3ae">Maaf, anda masih belum menambahkan daftar favorit.</p>
-                </div>
-              @endforelse --}}
+                            <h4>Lelang</h4>
+                            @forelse ($product_auction as $item)
+                                <div class="col-lg-3 col-sm-6">
+                                <div class="product-wrapper" data-aos="fade-up">
+                                    <div class="product-img position-relative">
+                                    <img src="{{ asset('storage/' . $item->productAuction->thumbnail) }}" alt="product-img"
+                                        class="object-fit-cover">
+                                    <div class="dropdown position-absolute" style="top: 0; right: 0;">
+                                        <a class="wishlist-link" href="#" role="button" id="wishlistDropdown"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="wishlistDropdown">
+                                        <li>
+                                            <form action="{{ route('destroyAuction.destroy', $item->id) }}" method="POST"
+                                            onsubmit="return confirmDeletion('Apakah anda yakin ingin menghapus produk ini dari daftar favorit?', event.preventDefault())">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a role="button" type="submit" class="dropdown-item"
+                                                onclick="$(this).closest('form').submit()" style="color: red;">Hapus Favorit</a>
+                                            </form>
+                                        </li>
+                                        <hr>
+                                        <li><a class="dropdown-item" href="#">Batal</a></li>
+                                        </ul>
+                                    </div>
+                                    </div>
+                                    <div class="product-info">
+                                    <div class="product-description">
+                                        <a href="" class="product-details"
+                                        style="font-size: 2rem">{{ $item->productAuction->title }}
+                                        </a>
+                                        <div class="price">
+                                        <span class="new-price"
+                                            style="font-size: 1.8rem">Rp{{ number_format($item->productAuction->bid_price_start, null, null, '.') }}
+                                            - Rp{{ number_format($item->productAuction->bid_price_end, null, null, '.') }}
+                                        </span>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="product-cart-btn mb-4">
+                                    </div>
+                                </div>
+                                </div>
+                            @empty
+                                <div class="col-lg-12">
+                                <h5 class="text-center" style="color: #a5a3ae">Produk Lelang Masih Kosong</h5>
+                                <p class="text-center" style="color: #a5a3ae">Maaf, anda masih belum menambahkan daftar favorit.</p>
+                                </div>
+                            @endforelse --}}
                         </div>
                     </div>
                 </div>

@@ -127,9 +127,9 @@
                                             style="display: flex; align-items: center; text-align: center; justify-content: center; flex-grow: 1; margin: 0 auto;">
                                             <div class="col-lg-12 d-flex flex-column align-items-center">
                                                 <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 150px; height: 150px;">
-                                                <h5 class="text-center" style="color: #000000">Produk Masih Kosong</h5>
+                                                <h5 class="text-center" style="color: #000000">Upss..</h5>
                                                 <p class="text-center" style="color: #000000">Maaf, anda masih belum
-                                                    menambahkan daftar keranjang.</p>
+                                                    menambahkan daftar keranjang</p>
                                             </div>
                                         </div>
                                     </td>
