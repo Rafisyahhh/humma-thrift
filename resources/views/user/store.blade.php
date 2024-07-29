@@ -1,5 +1,14 @@
 @extends('layouts.home')
-
+@push('style')
+<style>
+    .truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>
+@endpush
 @section('title', 'Daftar Toko')
 
 @section('content')
@@ -12,17 +21,17 @@
                 <div class="row g-5 pb-5 mb-3">
                     @foreach ($store as $item)
                     <div class="col-lg-4 col-md-6">
-                        <div class="product-wrapper" data-aos="fade-right">
-                            <div class="product-img" style="background-color: white">
+                        <div class="product-wrapper" data-aos="fade-right" style="height: 17rem">
+                            <div class="product-img" style="background-color: white; height:7rem; width: 7rem; ">
                                 <img src="{{asset('storage/'.$item->store_logo)}}" alt="product-img" style="border-radius: 10%" class="object-fit-cover">
                             </div>
                             <div class="product-info">
                                 <div class="product-description">
                                     <a class="product-details" style="font-size: 2rem">{{ $item->name }}
                                     </a>
-                                    <div class="price">
-                                        <span class="new-price" style="font-size: 1.8rem">{{$item->address}}</span>
-                                    </div>
+                                </div>
+                                <div class=" price ">
+                                    <span class="new-price truncate" style="font-size: 1.5rem">{{$item->address}}</span>
                                 </div>
                             </div>
                             <div class="product-cart-btn" style="bottom: 0;">
