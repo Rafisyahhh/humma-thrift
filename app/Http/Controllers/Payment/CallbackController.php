@@ -73,7 +73,8 @@ class CallbackController extends Controller
                         # Set status paid
                         $transaction->update([
                             'status' => 'PAID',
-                            'delivery_status' => 'dikemas'
+                            'delivery_status' => 'dikemas',
+                            'paid_at' => now(),
                         ]);
 
                         # Set status sold out and send the notification
