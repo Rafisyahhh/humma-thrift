@@ -51,6 +51,9 @@ class UserStoreController extends Controller
                 'January', 'February', 'March', 'April', 'May', 'June',
                 'July', 'August', 'September', 'October', 'November', 'December'
             ];
+            $countnewOrder = TransactionOrder::where('delivery_status','selesaikan pembayaran')->count();
+            $countendOrder = TransactionOrder::where('delivery_status','selesai')->count();
+            $countProduct = Product::where('id', auth()->id())->count();
 
             $datas = array_fill(0, 12, 0); // Initialize data array with zeroes
             foreach ($transactionsbulan as $transaction) {
@@ -110,7 +113,7 @@ class UserStoreController extends Controller
             return redirect()->route('login')->with('error', 'Anda harus masuk untuk melihat informasi toko.');
         }
 
-        return view('seller.index', compact('store', 'address', 'user', 'count','grossData','netData','days','transactions','transactionsbulan','months','datas'));
+        return view('seller.index', compact('store', 'address', 'user', 'count','grossData','netData','days','transactions','transactionsbulan','months','datas','countnewOrder','countendOrder','countProduct'));
     }
 
     /**

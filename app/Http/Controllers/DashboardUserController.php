@@ -38,7 +38,7 @@ class DashboardUserController extends Controller
         ->whereNotNull('product_id')
         ->orderBy('created_at')
         ->get();
-        $transaction = Order::latest()->get();
+        $order = Order::latest()->get();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
 
         $transactionsbulan = TransactionOrder::select(DB::raw("MONTH(paid_at) as month"), DB::raw("SUM(total) as total"))
@@ -63,7 +63,7 @@ class DashboardUserController extends Controller
             'carts',
             'countcart',
             'favorites',
-            'transaction',
+            'order',
             'countFavorite',
             'transactionsbulan',
             'months',

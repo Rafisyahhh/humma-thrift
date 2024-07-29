@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="wrapper-content">
                                     <p class="paragraph">Pesanan baru</p>
-                                    <h3 class="mb-0 paragraph">656</h3>
+                                    <h3 class="mb-0 paragraph">{{$countnewOrder}}</h3>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                                 </div>
                                 <div class="wrapper-content">
                                     <p class="paragraph">Pengiriman Selesai</p>
-                                    <h3 class="mb-0 paragraph">99783</h3>
+                                    <h3 class="mb-0 paragraph">{{$countendOrder}}</h3>
                                 </div>
                             </div>
                         </div>
@@ -110,42 +110,59 @@
                                 </div>
                                 <div class="wrapper-content">
                                     <p class="paragraph">Jumlah Produk</p>
-                                    <h3 class="mb-0 paragraph">{{ $count }}</h3>
+                                    <h3 class="mb-0 paragraph">{{ $countProduct }}</h3>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-lg-12">
                             <div class="info-section">
-                                <div class="seller-info">
-                                    <h5 class="heading" style="color: white;">Informasi pribadi</h5>
-                                    <div class="info-list">
-                                        <div class="info-title">
-                                            <p class="white-text">Nama: <strong class="info-text">{{ auth()->user()->name }}</strong></p>
-                                            <p class="white-text">Email: <strong class="info-text">{{ auth()->user()->email }}</strong></p>
-                                            <p class="white-text">No Telepon: <strong class="info-text">+{{ auth()->user()->phone }}</strong></p>
-                                            @foreach ($address as $stores)
-                                              @if ($stores->status)
-                                                <p class="white-text">Alamat: <strong class="info-text">{{ $stores->address }}</strong></p>
-                                              @endif
-                                            @endforeach
-                                          </div>
-
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="seller-info">
+                                            <h5 class="heading" style="color: white;">Informasi pribadi</h5>
+                                            <div class="info-list">
+                                                <div class="info-title">
+                                                    <p class="white-text">Nama: <strong
+                                                            class="info-text">{{ auth()->user()->name }}</strong></p>
+                                                    <p class="white-text">Email: <strong
+                                                            class="info-text">{{ auth()->user()->email }}</strong></p>
+                                                    <p class="white-text">No Telepon: <strong
+                                                            class="info-text">+{{ auth()->user()->phone }}</strong></p>
+                                                    @foreach ($address as $stores)
+                                                        @if ($stores->status)
+                                                            <p class="white-text">Alamat: <strong
+                                                                    class="info-text">{{ $stores->address }}</strong></p>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="devider"></div>
-                                <div class="shop-info">
-                                    <h5 class="heading" style="color: white;">Informasi Toko</h5>
-                                    <div class="info-list">
-                                        <div class="info-title">
-                                            @foreach ($store as $store)
-                                                @if ($store->user_id == auth()->id())
-                                                    <p class="white-text">Nama: <strong class="info-text">{{$store->name}}</strong></p>
-                                                    <p class="white-text">Email: <strong class="info-text">{{$store->user->email}}</strong></p>
-                                                    <p class="white-text">No Telepon: <strong class="info-text">+{{$store->user->phone}}</strong></p>
-                                                    <p class="white-text">Alamat: <strong class="info-text">{{$store->address}}</strong></p>
-                                                @endif
-                                            @endforeach
+                                    <div class="col-lg-1">
+                                        <div class="devider"></div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="shop-info">
+                                            <h5 class="heading" style="color: white;">Informasi Toko</h5>
+                                            <div class="info-list">
+                                                <div class="info-title">
+                                                    @foreach ($store as $store)
+                                                        @if ($store->user_id == auth()->id())
+                                                            <p class="white-text">Nama: <strong
+                                                                    class="info-text">{{ $store->name }}</strong></p>
+                                                            <p class="white-text">Email: <strong
+                                                                    class="info-text">{{ $store->user->email }}</strong>
+                                                            </p>
+                                                            <p class="white-text">No Telepon: <strong
+                                                                    class="info-text">+{{ $store->user->phone }}</strong>
+                                                            </p>
+                                                            <p class="white-text">Alamat: <strong
+                                                                    class="info-text">{{ $store->address }}</strong></p>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -190,42 +207,41 @@
     <script src="{{ asset('additional-assets/chart.js-4.4.3/chart.umd.js') }}"></script>
 
 
-<script>
-    var labels = @json($days);
-    var grossData = @json($grossData);
-    var netData = @json($netData);
+    <script>
+        var labels = @json($days);
+        var grossData = @json($grossData);
+        var netData = @json($netData);
 
-    var ctx = document.getElementById('revenueChart').getContext('2d');
-    var revenueChart = new Chart(ctx, {
-        type: 'line', // Jenis chart
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    label: 'Penghasilan Kotor per Hari',
-                    data: grossData,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Penghasilan Bersih per Hari',
-                    data: netData,
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }
-            ]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+        var ctx = document.getElementById('revenueChart').getContext('2d');
+        var revenueChart = new Chart(ctx, {
+            type: 'line', // Jenis chart
+            data: {
+                labels: labels,
+                datasets: [{
+                        label: 'Penghasilan Kotor per Hari',
+                        data: grossData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Penghasilan Bersih per Hari',
+                        data: netData,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
-</script>
+        });
+    </script>
     <script>
         var labels = @json($months);
         var data = @json($datas);

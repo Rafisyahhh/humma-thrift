@@ -178,9 +178,8 @@
                             </div>
                         </td>
                     </tr>
-
-                    @forelse ($transaction as $item)
-                        @if ($item->transaction_order->user_id == auth()->user()->id && $item->transaction_order->delivery_status !== 'selesai')
+                    @forelse ($order as $item)
+                        @if ($item->transaction_order->user_id == auth()->user()->id && $item->transaction_order->delivery_status != 'selesai')
                             @if ($item->product !== null)
                                 <tr class="table-row ticket-row">
                                     <td class="table-wrapper wrapper-product" style="width: 35%; ">
@@ -355,7 +354,6 @@
                             </tr>
                         @endif
                     @empty
-
                     <tr class="table-row ticket-row" style="height:12px;">
                         <td colspan="6" class="text-center no-data-message" >
                             <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 200px; height: 200px;">
