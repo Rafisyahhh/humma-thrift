@@ -27,7 +27,7 @@
         ],
         [
             'title' => 'Penarikan Dana',
-            'route' => 'seller.income',
+            'route' => 'seller.withdraw.index',
             'icon' => 'wallet',
             'role' => 'seller',
         ],

@@ -18,7 +18,7 @@
             border-bottom: 0;
             gap: .5rem;
         }
- 
+
         #incomeData li {
             border: none;
             padding: 0;
@@ -209,7 +209,7 @@
             <div class="col-md-4">
                 <div class="card custom-card">
                     <div class="custom-card-icon">
-                        <i class="fas fa-box"></i>
+                        <i class="fas fa-coins"></i>
                     </div>
                     <div class="custom-card-content">
                         <div class="mb-0">Transaksi Bersih</div>
@@ -224,7 +224,7 @@
                     </div>
                     <div class="custom-card-content">
                         <div class="mb-0">Saldo Saya</div>
-                        <div class="mb-0">@currency($netIncome)</div>
+                        <div class="mb-0">@currency($accountBalance)</div>
                     </div>
                 </div>
             </div>

@@ -35,6 +35,7 @@ use App\Http\Controllers\{
     OrderController,
     SellerTransactionController,
     StoreController,
+    WithdrawalController,
 };
 use App\Http\Controllers\Payment\CallbackController;
 
@@ -88,6 +89,13 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
     // Edit and Update routes for auctions
     Route::get('auction/{auctions}/edit', [AuctionsController::class, 'editlelang'])->name('auction.editlelang');
     Route::put('auction/{auctions}', [AuctionsController::class, 'updatelelang'])->name('auction.updatelelang');
+
+    Route::prefix('/withdraw')->controller(WithdrawalController::class)->group(function() {
+        Route::get('/', 'indexUser')->name('withdraw.index');
+        Route::get('issue', 'createUser')->name('withdraw.create');
+        Route::get('{withdrawal:transaction_id}', 'detailUser')->name('withdraw.detail');
+        Route::post('issue', 'issueUser')->name('withdraw.issue');
+    });
 });
 
 # User Routes
@@ -209,19 +217,11 @@ Route::prefix('@{store:username}')->controller(StoreProfileController::class)->g
     Route::get('{product:slug}', 'productDetail')->name('store.product.detail');
 });
 
-#callback
+# Callback
 Route::post('callback', [CallbackController::class, 'handle'])->name('callback');
 
 Route::prefix('header')->name('header.')->group(function () {
     Route::get('cart', [HeaderController::class, 'cart'])->name('cart');
     Route::get('notification', [HeaderController::class, 'notification'])->name('notification');
     Route::get('wishlist', [HeaderController::class, 'wishlist'])->name('wishlist');
-});
-
-Route::get('debug', function() {
-    $transaction = \App\Models\TransactionOrder::find(1);
-
-    // \App\Models\User::find($transaction->user_id)->notify(new \App\Notifications\UserInvoiceProductPaidNotification($transaction));
-    \App\Models\User::find($transaction->order()->first()->product->user_id)->notify(new \App\Notifications\SellerInvoiceProductPaidNotification($transaction));
-    // dd($transaction->order()->first()->product->user_id);
 });
