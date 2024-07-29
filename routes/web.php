@@ -92,6 +92,9 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
 
     Route::prefix('/withdraw')->controller(WithdrawalController::class)->group(function() {
         Route::get('/', 'indexUser')->name('withdraw.index');
+        Route::get('issue', 'createUser')->name('withdraw.create');
+        Route::get('{withdrawal:transaction_id}', 'detailUser')->name('withdraw.detail');
+        Route::post('issue', 'issueUser')->name('withdraw.issue');
     });
 });
 
