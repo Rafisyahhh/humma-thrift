@@ -39,6 +39,9 @@ class ProductAuction extends Model {
         return $this->belongsTo(User::class);
     }
 
+    public function order() {
+        return $this->hasMany(Order::class);
+    }
     public function gallery() {
         return $this->hasMany(ProductGallery::class);
     }
