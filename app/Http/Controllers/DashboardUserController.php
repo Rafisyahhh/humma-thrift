@@ -60,15 +60,16 @@ class DashboardUserController extends Controller
         $countUnpaid = TransactionOrder::where('status','UNPAID')->count();
         $countDelivery = TransactionOrder::where('delivery_status','selesai')->count();
         return view('user.user', compact(
-            'countcart',
             'carts',
+            'countcart',
+            'favorites',
+            'transaction',
+            'countFavorite',
+            'transactionsbulan',
             'months',
             'datas',
-            'favorites',
-            'countFavorite',
             'countUnpaid',
             'countDelivery',
-            'transaction'
         ));
 
     }
