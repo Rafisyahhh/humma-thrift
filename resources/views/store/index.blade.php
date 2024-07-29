@@ -606,8 +606,13 @@
                                     </p>
                                 </div>
                             </li>
-
                         @empty
+                                <div class="col-lg-12 d-flex flex-column align-items-center">
+                                    <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong"
+                                        style="width: 200px; height: 200px;">
+                                    <h5 class="text-center" style="color: #000000">Upss..</h5>
+                                    <p class="text-center" style="color: #000000">Maaf, saat ini masih belum ada ulasan</p>
+                                </div>
                         @endforelse
                     </ul>
                 </div>
