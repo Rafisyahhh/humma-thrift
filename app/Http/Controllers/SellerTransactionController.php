@@ -26,7 +26,7 @@ class SellerTransactionController extends Controller
         $userStoreId = Auth::user()->getAttribute('store')->id;
         $trxSearch = $request->get('trx');
         $dateSearch = $request->get('date');
-        $storeId = Auth::user()->store->id;
+        $storeId = Auth::user()->getAttribute('store')->id;
 
         $transactionsQuery = $this->transactions->latest()
             ->whereHas('order.product', function ($query) use ($userStoreId) {
@@ -44,7 +44,7 @@ class SellerTransactionController extends Controller
         $transactions = $transactionsQuery->paginate(12);
 
         $transactionTotal = $transactionsQuery->where('status', 'PAID')->sum('total');
-        $netIncome = $transactions->sum(fn(Model $query) => $query->total - ($query->total * 0.1));
+        $netIncome = $transactions->sum(fn(Model $query) => !$query->where('status', 'PAID')->where('delivery_status', 'sukses')->doesntExist() ? $query->total - ($query->total * 0.1) : 0);
 
         // Showing the order chart
         $lastOfMonth = Carbon::now()->endOfMonth();

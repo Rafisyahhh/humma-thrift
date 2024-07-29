@@ -5,62 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Withdrawal;
 use App\Http\Requests\StoreWithdrawalRequest;
 use App\Http\Requests\UpdateWithdrawalRequest;
+use Illuminate\Http\Request;
 
 class WithdrawalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function indexUser(Request $request)
     {
-        //
-    }
+        $user = $request->user();
+        $withdrawals = Withdrawal::where('user_id', $user->id)->latest()->paginate(10);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreWithdrawalRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Withdrawal $withdrawal)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Withdrawal $withdrawal)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateWithdrawalRequest $request, Withdrawal $withdrawal)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Withdrawal $withdrawal)
-    {
-        //
+        return view('withdrawals.index', compact('withdrawals'));
     }
 }
