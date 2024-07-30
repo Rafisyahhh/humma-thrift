@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\HistoryRequest;
 use App\Models\cart;
 use App\Models\Favorite;
+use App\Models\Product;
 use App\Models\TransactionOrder;
 use App\Models\Ulasan;
 use App\Models\User;
@@ -14,21 +15,34 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use NumberFormatter;
-
 class HistoryController extends Controller {
     /**
      * Display a listing of the resource.
      */
     public function index() {
-        $transactions = TransactionOrder::where('user_id', auth()->id())->where('delivery_status', 'selesai')->get();
+        $transactions = TransactionOrder::where('user_id', auth()->id())
+                                    ->where('delivery_status', 'selesai')
+                                    ->with('order') // Eager load orders relationship
+                                        ->get();
 
-        // foreach ($transaction as &$key) {
-        //     $key['date_diff_format'] = $this->formatTanggal($key['created_at']);
-        //     $key['date_format'] = Carbon::parse($key['created_at'])->format('d F Y');
-        // $key['price_format'] = str_replace(',00', '', number_format(1_000, 0, '', '.'));
-        // }
-        // unset($key);
-        return view('user.history', compact('transactions'));
+    $user = Auth::user();
+
+    // Create an associative array to store review status for each product
+    $reviewedProducts = [];
+
+    foreach ($transactions as $transaction) {
+        foreach ($transaction->order as $order) {
+            // Check if the user has already reviewed the product
+            $hasReviewed = Ulasan::where('user_id', $user->id)
+                                 ->where('product_id', $order->product_id)
+                                 ->exists();
+            $reviewedProducts[$order->product_id] = $hasReviewed;
+        }
+    }
+    // Debug output
+    // dd($reviewedProducts);
+
+    return view('user.history', compact('transactions', 'reviewedProducts'));
     }
 
     /**
@@ -39,13 +53,14 @@ class HistoryController extends Controller {
     }
 
     public function store(Request $request) {
+
         $validate = Validator::make($request->all(), [
             'product_id' => 'required|exists:products,id',
             'star' => 'required|integer|between:1,5',
             'comment' => 'required|string|max:1000',
         ]);
 
-        if($validate->fails()) {
+        if ($validate->fails()) {
             return redirect()->back()->with('error', "Harap isikan kolom masukan dengan benar!")
                 ->withErrors($validate->errors())
                 ->withInput($request->input());
@@ -59,20 +74,28 @@ class HistoryController extends Controller {
         return redirect()->back()->with('success', 'Ulasan Anda berhasil dibuat');
     }
 
-
     /**
      * Display the specified resource.
      */
-    public function show(string $id) {
-        //
+    public function showProduct($productId)
+    {
+        $product = Product::findOrFail($productId);
+        $user = Auth::user();
+
+        // Check if the user has already reviewed the product
+        $hasReviewed = Ulasan::where('product_id', $productId)
+                             ->where('user_id', $user->id)
+                             ->exists();
+
+        return view('product.show', compact('product', 'hasReviewed'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) {
-        //
-    }
+    // public function edit(string $id) {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
