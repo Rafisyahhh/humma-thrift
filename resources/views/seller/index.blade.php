@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="wrapper-content">
                                     <p class="paragraph">Saldo Anda</p>
-                                    <h3 class="mb-0 paragraph">Rp 1.000.000</h3>
+                                    <h3 class="mb-0 paragraph">@currency($accountBalance)</h3>
                                 </div>
                             </div>
                         </div>
