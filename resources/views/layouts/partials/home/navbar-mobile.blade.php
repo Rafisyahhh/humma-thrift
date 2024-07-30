@@ -1,4 +1,4 @@
-<nav class="mobile-menu d-block d-lg-none">
+{{-- <nav class="mobile-menu d-block d-lg-none">
   <div class="mobile-menu-header d-flex justify-content-between align-items-center">
     <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
       aria-controls="offcanvasWithBothOptions">
@@ -11,7 +11,7 @@
       </span>
     </button>
     <a href="index.html" class="mobile-header-logo">
-      <img src="{{ asset('template-assets/front/assets/images/logos/logo.webp') }}" alt="logo">
+      <img src="{{ asset('images/brands/png/logo-color-lightxxxhdpi.png') }}" alt="logo" height="36px">
     </a>
     <a href="cart.html" class="header-cart cart-item">
       <span>
@@ -385,4 +385,4 @@
       </div>
     </div>
   </div>
-</nav>
+</nav> --}}

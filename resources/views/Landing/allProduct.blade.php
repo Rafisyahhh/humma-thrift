@@ -13,8 +13,7 @@
               <div class="col-lg-12">
                 <div class="product-sorting-section" style="padding-bottom: unset; margin-bottom: unset">
                   <div class="result">
-                    <p>Menampilkan <span id="awal"></span> dari
-                      <span id="akhir"></span> hasil
+                    <p>Menampilkan <span id="total"></span> hasil
                     </p>
                   </div>
                 </div>
@@ -90,6 +89,7 @@
             loading = false;
             $('[isProduct],[isLoader]').remove();
             $('#product-container').append(data);
+            $('#total').text($('[isProduct]').length);
           },
           error: function() {
             loading = false;
@@ -142,16 +142,17 @@
             if (data.lastPage) {
               lastPage = true;
               $("#product-container").append(`
-             <div class="col-lg-12 d-flex flex-column align-items-center">
-                                    <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong"
-                                        style="width: 200px; height: 200px;">
-                                    <h5 class="text-center" style="color: #000000">Upss.. </h5>
-                                    <p class="text-center" style="color: #000000">Maaf, sudah tidak ada produk lainnya</p>
-                                </div>
+             <div class="col-lg-12 d-flex flex-column align-items-center" isLoader>
+              <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong"
+                  style="width: 200px; height: 200px;">
+              <h5 class="text-center" style="color: #000000">Upss.. </h5>
+              <p class="text-center" style="color: #000000">Maaf, sudah tidak ada produk lainnya</p>
+             </div>
           `);
               return;
             }
             $("#product-container").append(data);
+            $('#total').text($('[isProduct]').length);
           },
           error: function() {
             loading = false;
@@ -177,6 +178,7 @@
             loading = false;
             $('[isProduct],[isLoader]').remove();
             $('#product-container').append(data);
+            $('#total').text($('[isProduct]').length);
           },
           error: function() {
             loading = false;
@@ -236,5 +238,34 @@
         }
       });
     };
+  </script>
+  <script>
+    $(document).ready(function() {
+      var $filter = $('#filter');
+      var stickyTop = $filter.offset().top;
+
+      $(window).on('scroll', function() {
+        if (!window.matchMedia("(max-width: 992px)").matches) {
+          var filterWidth = $filter.width();
+          requestAnimationFrame(function() {
+            var windowTop = $(window).scrollTop();
+
+            if (stickyTop < windowTop) {
+              $filter.css({
+                position: 'fixed',
+                top: '25px',
+                width: filterWidth
+              });
+            } else {
+              $filter.css({
+                position: 'relative',
+                top: '',
+                width: ''
+              });
+            }
+          });
+        }
+      });
+    });
   </script>
 @endpush

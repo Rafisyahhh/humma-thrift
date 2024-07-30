@@ -1,3 +1,19 @@
+
+<style>
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        margin-top: 0.5rem;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown-menu:hover {
+        display: block;
+    }
+</style>
+
     @forelse ($product_favorite as $item)
     <div class="col-lg-3 col-sm-6">
         <div class="product-wrapper" data-aos="fade-up">
@@ -21,11 +37,10 @@
                                     onclick="$(this).closest('form').submit()" style="color: red;">Hapus Favorit</a>
                             </form>
                         </li>
-                        <hr>
-                        <li><a class="dropdown-item" href="#">Batal</a></li>
                     </ul>
                 </div>
             </div>
+
             <div class="product-info">
                 <div class="product-description">
                     {{-- STORE --}}
@@ -71,3 +86,4 @@
         <p class="text-center" style="color: #000000">Maaf, anda masih belum menambahkan daftar favorit</p>
     </div>
 @endforelse
+
