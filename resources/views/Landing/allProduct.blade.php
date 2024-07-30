@@ -90,6 +90,7 @@
             $('[isProduct],[isLoader]').remove();
             $('#product-container').append(data);
             $('#total').text($('[isProduct]').length);
+            window.scrollTo(0, 0);
           },
           error: function() {
             loading = false;
