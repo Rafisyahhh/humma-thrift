@@ -114,7 +114,7 @@
                             <option value="diantar" {{ request('delivery_status') == 'diantar' ? 'selected' : '' }}>Diantar</option>
                             <option value="diterima" {{ request('delivery_status') == 'diterima' ? 'selected' : '' }}>Diterima</option>
                             <option value="selesai" {{ request('delivery_status') == 'selesai' ? 'selected' : '' }}>Selesai</option>
-                        </select>
+                        </select>   
                     </div>
 
 
