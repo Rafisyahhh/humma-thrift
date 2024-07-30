@@ -139,8 +139,7 @@
                 <div class="modal-content">
                     <button class="close" style="float: right; text-align: end;"
                         onclick="closeModal2('#shareModal-{{ $item->id }}')">&times;</button>
-                    <div class="align-items-center gap-3 justify-content-center py-3"
-                        style="position: relative;">
+                    <div class="align-items-center gap-3 justify-content-center py-3" style="position: relative;">
                         <p class="fs-2 mb-0 text-center fw-bold">Bagikan ke:</p>
                         <div class="d-flex gap-2 align-items-center justify-content-center mt-2">
                             <span class="share-container share-buttons d-flex gap-3 ms-2" style="z-index:1;">
@@ -150,7 +149,8 @@
                                 </a>
                                 <a href="https://twitter.com/intent/tweet?url={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}&text={{ $item->title }}"
                                     target="_blank" class="social-buttons">
-                                    <i class="fa-brands fa-square-x-twitter" style="color: #1c3879;font-size:4rem"></i>
+                                    <i class="fa-brands fa-square-x-twitter"
+                                        style="color: #1c3879;font-size:4rem"></i>
                                 </a>
                                 <a href="https://t.me/share/url?url={{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}&text={{ $item->title }}"
                                     target="_blank" class="social-buttons">
@@ -168,12 +168,19 @@
         </div>
     </div>
 @empty
-  @if (!isset($doNotShowEmptyProduct))
-    <div class="col-lg-12" isProduct>
+    @if (!isset($doNotShowEmptyProduct))
+        <div class="col-lg-12 d-flex flex-column align-items-center" isProduct>
+            <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong"
+                style="width: 200px; height: 200px;">
+            <h5 class="text-center" style="color: #000000">Upss..</h5>
+            <p class="text-center" style="color: #000000">Maaf ya, kami masih belum menambahkan produknya. Tapi
+                dalam waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
+        </div>
+        {{-- <div class="col-lg-12" isProduct>
       <h5 class="text-center" style="color: #a5a3ae">Produk Lelang Masih Kosong</h5>
       <p class="text-center" style="color: #a5a3ae">Maaf ya, kami masih belum menambahkan produknya. Tapi
         dalam
         waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
-    </div>
-  @endif
+    </div> --}}
+    @endif
 @endforelse
