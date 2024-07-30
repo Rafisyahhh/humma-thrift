@@ -13,8 +13,9 @@
               <div class="col-lg-12">
                 <div class="product-sorting-section" style="padding-bottom: unset; margin-bottom: unset">
                   <div class="result">
-                    <p>Menampilkan 0–1 dari
-                      2 hasil</p>
+                    <p>Menampilkan <span id="awal"></span> dari
+                      <span id="akhir"></span> hasil
+                    </p>
                   </div>
                 </div>
               </div>
