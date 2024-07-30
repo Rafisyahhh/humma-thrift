@@ -83,7 +83,7 @@
 <div class="nav justify-content-start h-100 d-none d-md-none d-lg-flex nav-item nav-pills w-100 flex-shrink-0 me-3"
     id="v-pills-tab" role="tablist" aria-orientation="vertical">
     @foreach ($sidebarItems as $item)
-        @if (request()->routeIs("{$item['role']}.*"))
+        @if (request()->routeIs("{$item['role']}.*") || (request()->routeIs("searchProduct") && $item->role == "seller"))
             <a href="{{ route($item['route']) }}"
                 class="nav-link {{ request()->routeIs($item['route']) ? 'active' : '' }}">
                 <span>
