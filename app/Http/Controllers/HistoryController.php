@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\HistoryRequest;
 use App\Models\cart;
 use App\Models\Favorite;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\TransactionOrder;
 use App\Models\Ulasan;
@@ -20,29 +21,12 @@ class HistoryController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $transactions = TransactionOrder::where('user_id', auth()->id())
-                                    ->where('delivery_status', 'selesai')
-                                    ->with('order') // Eager load orders relationship
-                                        ->get();
+        $orders = Order::whereHas('transaction_order', function ($query) {
+            $query->where('user_id', auth()->id())
+                  ->where('delivery_status', 'selesai');
+        })->get();
 
-    $user = Auth::user();
-
-    // Create an associative array to store review status for each product
-    $reviewedProducts = [];
-
-    foreach ($transactions as $transaction) {
-        foreach ($transaction->order as $order) {
-            // Check if the user has already reviewed the product
-            $hasReviewed = Ulasan::where('user_id', $user->id)
-                                 ->where('product_id', $order->product_id)
-                                 ->exists();
-            $reviewedProducts[$order->product_id] = $hasReviewed;
-        }
-    }
-    // Debug output
-    // dd($reviewedProducts);
-
-    return view('user.history', compact('transactions', 'reviewedProducts'));
+        return view('user.history', compact('orders'));
     }
 
     /**

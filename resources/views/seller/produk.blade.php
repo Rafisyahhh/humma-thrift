@@ -1045,7 +1045,7 @@
                 </td>
                 <td class="table-wrapper">
                   <div class="table-wrapper-center">
-                    <h5 class="heading">{{ $item->auction_price }}</h5>
+                    <h5 class="heading">Rp. {{ number_format($item->auction_price, null, null, '.') }}</h5>
                   </div>
                 </td>
 

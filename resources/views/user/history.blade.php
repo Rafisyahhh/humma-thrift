@@ -18,7 +18,11 @@
 
             btns.forEach(function(btn, index) {
                 btn.onclick = function() {
-                    modals[index].style.display = 'flex';
+                    let getModalId = btn.getAttribute('data-id');
+                    let modal = document.getElementById(getModalId);
+
+                    modal.style.display = 'flex';
+                    modal.style.zIndex = 1000;
                 }
             });
 
@@ -169,7 +173,7 @@
         </div>
         <div class="cart-section wishlist-section">
 
-            @forelse ($transactions as $transaction)
+            @forelse ($orders as $order)
                 <div class="card mb-5">
                     <table>
                         <tbody>
@@ -177,13 +181,13 @@
                                 <td class="table-wrapper wrapper-product">
                                     <div class="wrapper">
                                         <div class="wrapper-img">
-                                            <img src="{{ asset("storage/{$transaction->order->first()->product->thumbnail}") }}"
+                                            <img src="{{ asset("storage/{$order->product->thumbnail}") }}"
                                                 alt="img">
                                         </div>
                                         <div class="wrapper-content">
-                                            <h5 class="heading">{{ $transaction->order->first()->product->title }}</h5>
+                                            <h5 class="heading">{{ $order->product->title }}</h5>
                                             <p class="paragraph">
-                                                @currency($transaction->order->first()->product->price)
+                                                @currency($order->product->price)
                                             </p>
                                         </div>
                                     </div>
@@ -191,47 +195,37 @@
                                 <td class="table-wrapper">
                                     <div class="wrapper-content me-5" style="float: right; text-align: end;">
                                         <h5 class="heading">
-                                            {{ App\Http\Controllers\HistoryController::formatTanggal($transaction->created_at) }}
+                                            {{ App\Http\Controllers\HistoryController::formatTanggal($order->created_at) }}
                                         </h5>
                                         <p class="paragraph opacity-75 pt-1">
-                                            {{ Carbon\Carbon::parse($transaction->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}
+                                            {{ Carbon\Carbon::parse($order->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}
                                         </p>
                                     </div>
                                 </td>
                             </tr>
-                            {{-- @if(!$item->order->first()->product->ulasan) --}}
+
                             <tr class="table-row ticket-row">
                                 <td class="table-wrapper wrapper-product">
                                     <div class="wrapper">
                                     </div>
                                 </td>
-                                @foreach($transaction->order as $order)
 
-            <td>
-                <div class="wrapper-content me-5" style="float: right; text-align: end;">
-                    {{-- Debug output --}}
-
-                    @if(!isset($reviewedProducts[$order->product_id]) || !$reviewedProducts[$order->product_id])
-                        <button class="shop-btn openModal" data-id="{{ $order->product_id }}">Beri Nilai</button>
-                    @endif
-                </div>
-            </td>
-                                @endforeach
-
-                                {{-- <td>
-                                    <div class="wrapper-content me-5" style="float: right; text-align: end;">
-                                        @if(!in_array($item->product_id, $ratedProductIds))
-                                            <button class="shop-btn openModal" data-id="{{ $item->product_id }}">Beri Nilai</button>
-                                        @endif
-                                    </div>
-                                </td> --}}
+                                @if (!$order->product()->whereHas('ulasan', function ($query) {
+                                    $query->where('user_id', Auth::user()->id);
+                                })->exists())
+                                    <td>
+                                        <div class="wrapper-content me-5" style="float: right; text-align: end;">
+                                            <button class="shop-btn openModal" data-id="reviewModal-{{ $order->id }}">Beri
+                                                Nilai</button>
+                                        </div>
+                                    </td>
+                                @endif
                             </tr>
-                            {{-- @endif --}}
                         </tbody>
                     </table>
                 </div>
 
-                <div id="reviewModal" class="modal">
+                <div id="reviewModal-{{ $order->id }}" class="modal">
                     <div class="modal-content">
                         <button class="close" style="float: right; text-align: end;">&times;</button>
                         <h4 style="text-align: center;">Nilai Produk dan Toko</h4>
@@ -239,14 +233,14 @@
                         <td class="table-wrapper wrapper-product">
                             <div class="row-rating mt-4">
                                 <div class="wrapper-img">
-                                    <img src="{{ asset("storage/{$transaction->order->first()->product->thumbnail}") }}"
+                                    <img src="{{ asset("storage/{$order->product->thumbnail}") }}"
                                         alt="img"
                                         style="height: 15rem; width: 15rem; border: 1px solid rgba(126, 163, 219, 0.40); border-radius: 8px;">
                                 </div>
                                 <div class="wrapper-content mx-5">
-                                    <h5 class="heading">{{ $transaction->order->first()->product->title }}</h5>
+                                    <h5 class="heading">{{ $order->product->title }}</h5>
                                     <p class="paragraph">
-                                        @currency($transaction->order->first()->product->price)
+                                        @currency($order->product->price)
                                     </p>
                                 </div>
                             </div>
@@ -288,21 +282,24 @@
                                 @enderror
                             </div>
 
-                            <input type="hidden" name="product_id" value="{{ $transaction->order->first()->product->id }}">
+                            <input type="hidden" name="product_id"
+                                value="{{ $order->product->id }}">
 
                             <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim Ulasan</button>
                         </form>
                     </div>
                 </div>
-                @empty
-            {{-- <tr class="table-row ticket-row" style="height:12px;">
+                {{-- @endforeach --}}
+            @empty
+                {{-- <tr class="table-row ticket-row" style="height:12px;">
                 <td colspan="6" class="text-center no-data-message" > --}}
-                        <div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
-                            <div class="text-center">
-                                <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 200px; height: 200px;">
-                                <p>Tidak ada data</p>
-                            </div>
-                        </div>
+                <div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+                    <div class="text-center">
+                        <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong"
+                            style="width: 200px; height: 200px;">
+                        <p>Tidak ada data</p>
+                    </div>
+                </div>
                 {{-- </td>
             </tr> --}}
             @endforelse

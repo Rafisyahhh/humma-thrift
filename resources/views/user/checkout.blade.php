@@ -1,6 +1,7 @@
 @extends('layouts.home')
 
 @section('title', 'Checkout')
+@include('components.sweetalert')
 
 @push('style')
     <style>
