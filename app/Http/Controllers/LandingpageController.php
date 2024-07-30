@@ -94,7 +94,7 @@ class LandingpageController extends Controller
                 return response()->json(['lastPage' => true]);
             }
 
-            
+            // dd($product_favorite);
             return view('Landing.components.wishlist-product', compact('product_favorite'))->render();
         }
 
