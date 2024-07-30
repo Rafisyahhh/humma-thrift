@@ -1,5 +1,5 @@
 <div class="col-lg-3 pt-5 h-100">
-  <div class="" style="top: 80px;">
+  <div class="" style="top: 80px;" id="filter">
     <ul class="nav nav-pills justify-content-around sidebar gap-3 bg-body-secondary p-3" id="myTab" role="tablist"
       style="border-top-left-radius: 2rem; border-top-right-radius: 2rem;">
       <li class="nav-item" role="presentation">
