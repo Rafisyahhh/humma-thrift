@@ -14,14 +14,19 @@ class ProductController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index() {
+    public function index(Request $request) {
         $product_category_pivots = ProductCategoryPivot::all();
-        $products = Product::where("store_id", Auth::user()->store()->first()->id)->get();
-        $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get();
+
+        if ($request->search) {
+            $products = Product::where("store_id", Auth::user()->store()->first()->id)->where('title', 'like', "%$request->search%")->get();
+            $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id)->where('title', 'like', "%$request->search%")->get();
+        } else {
+            $products = Product::where("store_id", Auth::user()->store()->first()->id)->get();
+            $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get();
+        }
+
         $auctions = Auctions::orderBy('auction_price', 'desc')->orderBy('created_at', 'asc')->get();
-        // $countFavorite = Favorite::groupBy('product_id')->count();
-        // $countLFavorite = Favorite::groupBy('product_auction_id')->count();
-        // $countCart = cart::groupBy('product_id')->count();
+
         $countFavorite = Favorite::select('product_id', \DB::raw('count(*) as total'))
             ->groupBy('product_id')
             ->pluck('total', 'product_id');
@@ -37,7 +42,7 @@ class ProductController extends Controller {
         $favorites = Favorite::all();
         $carts = cart::all();
 
-        return view('seller.produk', compact('auctions', 'product_category_pivots', 'products', 'product_auctions', 'countFavorite','countLFavorite', 'countCart', 'favorites','carts'));
+        return view('seller.produk', compact('auctions', 'product_category_pivots', 'products', 'product_auctions', 'countFavorite', 'countLFavorite', 'countCart', 'favorites', 'carts'));
     }
 
     /**
@@ -119,8 +124,8 @@ class ProductController extends Controller {
         $products = Product::where("store_id", Auth::user()->store()->first()->id)->get();
         $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get();
         $auctions = Auctions::orderBy('created_at', 'asc')->orderBy('auction_price', 'desc')->get();
-        $countFavorite = Favorite::where('store_id',  Auth::user()->store()->first()->id)->where('product_id', $products->id);
-        $countLFavorite = Favorite::where('store_id',  Auth::user()->store()->first()->id)->where('product_auction_id', $product_auctions->id);
+        $countFavorite = Favorite::where('store_id', Auth::user()->store()->first()->id)->where('product_id', $products->id);
+        $countLFavorite = Favorite::where('store_id', Auth::user()->store()->first()->id)->where('product_auction_id', $product_auctions->id);
 
         return view('seller.produk', compact('auctions', 'product_category_pivots', 'products', 'product_auctions', 'countLFavorite', 'countFavorite'));
     }
