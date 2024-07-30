@@ -20,13 +20,29 @@ class HistoryController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $transactions = TransactionOrder::where('user_id', auth()->id())->where('delivery_status', 'selesai')->get();
-        $userId = auth()->id();
-        $ratedProductIds = Ulasan::where('user_id', $userId)
-                                  ->pluck('product_id')
-                                  ->toArray();
+        $transactions = TransactionOrder::where('user_id', auth()->id())
+                                    ->where('delivery_status', 'selesai')
+                                    ->with('order') // Eager load orders relationship
+                                        ->get();
 
-        return view('user.history', compact('transactions', 'userId', 'ratedProductIds'));
+    $user = Auth::user();
+
+    // Create an associative array to store review status for each product
+    $reviewedProducts = [];
+
+    foreach ($transactions as $transaction) {
+        foreach ($transaction->order as $order) {
+            // Check if the user has already reviewed the product
+            $hasReviewed = Ulasan::where('user_id', $user->id)
+                                 ->where('product_id', $order->product_id)
+                                 ->exists();
+            $reviewedProducts[$order->product_id] = $hasReviewed;
+        }
+    }
+    // Debug output
+    // dd($reviewedProducts);
+
+    return view('user.history', compact('transactions', 'reviewedProducts'));
     }
 
     /**
@@ -37,6 +53,7 @@ class HistoryController extends Controller {
     }
 
     public function store(Request $request) {
+
         $validate = Validator::make($request->all(), [
             'product_id' => 'required|exists:products,id',
             'star' => 'required|integer|between:1,5',
@@ -60,16 +77,18 @@ class HistoryController extends Controller {
     /**
      * Display the specified resource.
      */
-    public function show(string $id) {
-        $products = Product::all();
-        $userId = auth()->id();
-        $ratedProductIds = Ulasan::where('user_id', $userId)
-                                  ->pluck('product_id')
-                                  ->toArray();
+    public function showProduct($productId)
+    {
+        $product = Product::findOrFail($productId);
+        $user = Auth::user();
 
-        return view('user.history', compact('products', 'ratedProductIds'));
+        // Check if the user has already reviewed the product
+        $hasReviewed = Ulasan::where('product_id', $productId)
+                             ->where('user_id', $user->id)
+                             ->exists();
+
+        return view('product.show', compact('product', 'hasReviewed'));
     }
-
 
     /**
      * Show the form for editing the specified resource.

@@ -6,6 +6,8 @@
 
     <head>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+
+
     </head>
 @endsection
 
@@ -14,8 +16,8 @@
         <div class="container">
             <div class="about-section">
                 @foreach ($aboutUs as $about)
-                    <div class="row align-items-center gy-5" style="padding: 0 3rem;">
-                        <div class="col-lg-5">
+                    <div class="row align-items-center gy-5" style="padding: 0 3rem; justify-content:center; diplay:flex;">
+                        <div class="col-lg-4">
                             <div class="about-img" data-aos="fade-right">
                                 <div class="ratio ratio-1x1">
                                     <img src="{{ asset("storage/{$about->image}") }}" alt="img"
@@ -42,7 +44,7 @@
     </section>
 
 
-    <section class="about-feedback product">
+    {{-- <section class="about-feedback product">
         <div class="container p-0">
             <div class="position-relative px-5">
                 <div class="swiper about-swiper">
@@ -369,7 +371,7 @@
                 <div class="swiper-pagination"></div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <section class="about-service product ">
         <div class="container">
             <div class="about-service-section">
