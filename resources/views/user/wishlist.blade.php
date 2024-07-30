@@ -64,10 +64,10 @@
                                 <div class="product-sorting-section p-0">
                                     <h4 class="wrapper-heading">Semua Favorit</h4> <br><br>
                                     <div class="result ms-auto me-4">
-                                        <h6 style="font-size: 1.5rem;">Urutkan</h6>
+                                        <h6 style="font-size: 1.50rem; height: 12px;">Urutkan</h6>
                                     </div>
-                                    <div class="btn-group mt-12">
-                                        <select id="sortSelect" class="form-select" style="width: 18rem; font-size: 15px;"
+                                    <div class="filter mt-12">
+                                        <select id="sortSelect" class="form-select form-select-lg" style="width: 17rem; font-size: 14px; border: 2px solid #1c3879;"
                                             onchange="applyFilter(this.value)">
                                             <option value="newest"
                                                 {{ request()->get('sortOrder') == 'newest' ? 'selected' : '' }}>Terbaru
