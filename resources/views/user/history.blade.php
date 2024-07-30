@@ -207,7 +207,9 @@
                                 </td>
                                 <td>
                                     <div class="wrapper-content me-5" style="float: right; text-align: end;">
-                                        <button class="shop-btn openModal" data-id="{{ $item->id }}">Beri Nilai</button>
+                                        @if(!in_array($item->product_id, $ratedProductIds))
+                                            <button class="shop-btn openModal" data-id="{{ $item->product_id }}">Beri Nilai</button>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>
