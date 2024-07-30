@@ -171,7 +171,7 @@
       /* margin: 0 5px 5px; */
       background-color: #ffffff73;
       /* margin-left:1px !important;
-                                                                                                                      margin-right: 1px !important; */
+                                                                                                                        margin-right: 1px !important; */
       /* Tambahkan margin jika perlu */
     }
 
@@ -235,12 +235,12 @@
                       </h5>
                       <h1 class="wrapper-details" style="color:#1c3879;">{{ $even->judul }}</h1>
                       <a href="{{ url('/product/regular') }}" class="shop-btn mt-3" ">Belanja Sekarang</a>
-                                                                                                  </div>
-                                                                                              </div>
-                                                                                          </div>
-                                                                                      </div>
-                                                                                  </div>
-                                                                              </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
    @endforeach
                     </div>
                     <div class="swiper-pagination"></div>
@@ -747,7 +747,7 @@
 @push('script')
   <script src="{{ asset('additional-assets/swiper-11/swiper-element.min.js') }}"></script>
 
-  <script src="https://npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+  <script src="{{ asset('additional-assets/isotope/isotope.js') }}"></script>
 @endpush
 
 @push('js')
