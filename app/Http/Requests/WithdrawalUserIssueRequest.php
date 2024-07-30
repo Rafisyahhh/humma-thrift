@@ -41,7 +41,7 @@ class WithdrawalUserIssueRequest extends FormRequest
                 $accountBalance = $netIncome - $withdrawalTotal;
 
                 if ((int) $value > $accountBalance) {
-                    $fail('The withdrawal amount exceeds the available account balance.');
+                    $fail('Jumlah penarikan melebihi saldo akun yang tersedia.');
                 }
             }]
         ];

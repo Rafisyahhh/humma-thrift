@@ -343,11 +343,11 @@ class LandingpageController extends Controller
             $commandSearch = true;
         }
         $products = Product::where('status', 'active')->where('title', 'like', "%$search%");
-        $product_auction = ProductAuction::where('status', 'active')->where('title', 'like', "%$search%");
+        $product_auctions = ProductAuction::where('status', 'active')->where('title', 'like', "%$search%");
 
-        $colors = $products->pluck('color')->concat($product_auction->pluck('color'))->map('strtolower')->unique();
-        $sizes = $products->pluck('size')->concat($product_auction->pluck('size'))->map('strtolower')->unique();
-        $maxPrice = $products->pluck('price')->concat($product_auction->pluck('bid_price_end'))->max() ?? 1000;
+        $colors = $products->pluck('color')->concat($product_auctions->pluck('color'))->map('strtolower')->unique();
+        $sizes = $products->pluck('size')->concat($product_auctions->pluck('size'))->map('strtolower')->unique();
+        $maxPrice = $products->pluck('price')->concat($product_auctions->pluck('bid_price_end'))->max() ?? 1000;
 
         if ($request->ajax()) {
             $productResults = null;
@@ -359,11 +359,11 @@ class LandingpageController extends Controller
                     $productResults = $products;
                 }
                 if (in_array('auction', $types)) {
-                    $productAuctionResults = $product_auction;
+                    $productAuctionResults = $product_auctions;
                 }
             } else {
                 $productResults = $products;
-                $productAuctionResults = $product_auction;
+                $productAuctionResults = $product_auctions;
             }
 
             // Apply filters to products and product auctions if they are set
@@ -435,7 +435,7 @@ class LandingpageController extends Controller
         }
 
         $products = $products->paginate(24) ?? [];
-        $product_auction = $product_auction->paginate(24) ?? [];
+        $product_auction = $product_auctions->paginate(24) ?? [];
 
         if (isset($allRequest['type'])) {
             $types = explode(',', $allRequest['type']);
@@ -449,6 +449,11 @@ class LandingpageController extends Controller
         $brands = Brand::all();
         $categories = ProductCategory::all();
 
-        return view('Landing.allProduct', compact('products', 'product_auction', 'brands', 'categories', 'colors', 'sizes', 'maxPrice', 'search'));
-    }
+        if (auth()->user()->store) {
+            return view('seller.produk', compact('products', 'product_auctions', 'brands', 'categories', 'colors', 'sizes', 'maxPrice', 'search'));
+          } else {
+          return view('Landing.allProduct', compact('products', 'product_auction', 'brands', 'categories', 'colors', 'sizes', 'maxPrice','search'));
+          }
+        }
 }
+
