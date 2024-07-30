@@ -1,8 +1,5 @@
 @extends('layouts.panel')
 
-@section('title', 'Detail')
-@extends('layouts.panel')
-
 @section('title', 'Tarik Dana')
 
 @push('style')
