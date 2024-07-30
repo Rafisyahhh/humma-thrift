@@ -26,6 +26,8 @@ class WithdrawalUserIssueRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'bank_id' => 'required|exists:banks,id',
+            'bank_number' => 'required|string',
             'amount' => ['required', 'numeric', 'min:1', function($attribute, $value, $fail) {
                 $user = Auth::user();
                 $storeId = $user->getAttribute('store')->id;

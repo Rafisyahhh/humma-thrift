@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder {
             ProductSeeder::class,
             ProductAuctionSeeder::class,
             ProductGallerySeeder::class,
-            ProductCategoryPivotSeeder::class
+            ProductCategoryPivotSeeder::class,
+            BankSeeder::class
         ]);
     }
 }

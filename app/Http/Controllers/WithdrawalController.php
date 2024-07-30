@@ -7,6 +7,7 @@ use App\Models\Withdrawal;
 use App\Http\Requests\StoreWithdrawalRequest;
 use App\Http\Requests\UpdateWithdrawalRequest;
 use App\Http\Requests\WithdrawalUserIssueRequest;
+use App\Models\Bank;
 use App\Models\TransactionOrder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -15,11 +16,13 @@ use Str;
 
 class WithdrawalController extends Controller
 {
+    private Bank $_banks;
     private Withdrawal $_withdrawal;
     private TransactionOrder $_transaction;
 
-    public function __construct(Withdrawal $withdrawal, TransactionOrder $transaction)
+    public function __construct(Bank $bank, Withdrawal $withdrawal, TransactionOrder $transaction)
     {
+        $this->_banks = $bank;
         $this->_withdrawal = $withdrawal;
         $this->_transaction = $transaction;
     }
@@ -35,6 +38,7 @@ class WithdrawalController extends Controller
     public function createUser(Request $request)
     {
         $user = $request->user();
+        $banks = $this->_banks->all();
 
         $netIncome = $this->_transaction
             ->where('status', 'PAID')
@@ -57,7 +61,7 @@ class WithdrawalController extends Controller
             abort(403, "Kamu masih ada transaksi yang masih belum dicairkan");
         }
 
-        return view('seller.withdrawals-create', compact('accountBalance'));
+        return view('seller.withdrawals-create', compact('accountBalance', 'banks'));
     }
 
     public function detailUser(Withdrawal $withdrawal)
