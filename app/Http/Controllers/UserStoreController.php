@@ -11,25 +11,73 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreUserStoreRequest;
 use App\Http\Requests\UpdateUserStoreRequest;
+use App\Enums\WithdrawalStatusEnum;
 use App\Models\Product;
 use App\Models\ProductAuction;
+use App\Models\Withdrawal;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\TransactionOrder;
 use Illuminate\Support\Facades\DB;
 
 class UserStoreController extends Controller
 {
+    private TransactionOrder $_transactions;
+    private Withdrawal $_withdrawal;
+
+    public function __construct(TransactionOrder $transactions, Withdrawal $withdrawal)
+    {
+        $this->_transactions = $transactions;
+        $this->_withdrawal = $withdrawal;
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $user = Auth::user();
+        $userStoreId = $user->store->id;
+        $trxSearch = $request->get('trx');
+        $dateSearch = $request->get('date');
+        $currentDate = now();
+
+        // Use eager loading to reduce the number of queries
+        $transactionsQuery = $this->_transactions->with(['order.product.userstore'])
+            ->latest()
+            ->whereHas('order.product', function ($query) use ($userStoreId) {
+                $query->where('store_id', $userStoreId);
+            })
+            ->when($trxSearch, function (Builder $query) use ($trxSearch) {
+                $query->where('transaction_id', 'like', '%' . $trxSearch . '%')
+                    ->orWhere('reference_id', 'like', '%' . $trxSearch . '%');
+            })
+            ->when($dateSearch, function (Builder $query) use ($dateSearch) {
+                $query->whereDate('created_at', $dateSearch);
+            });
+
+        $transactionData = $transactionsQuery->get();
+        $transactions = $transactionsQuery->paginate(12);
+
+        $transactionTotal = $transactionsQuery->where('status', 'PAID')->sum('total');
+
+        // More efficient net income calculation
+        $netIncome = $transactionData->filter(function ($query) {
+            return $query->status === 'PAID' && $query->delivery_status === 'selesai';
+        })->sum(function ($query) {
+            return $query->total * 0.9; // 0.9 is equivalent to 90% after deducting 10%
+        });
+
+        $withdrawalTotal = $this->_withdrawal
+            ->where('status', WithdrawalStatusEnum::COMPLETED)
+            ->where('user_id', $user->id)
+            ->sum('amount');
+
+        $accountBalance = $netIncome - $withdrawalTotal;
         if (Auth::check()) {
             $store = UserStore::all();
             $address = UserAddress::all();
             $user = User::all();
             $count = Product::where('user_id', auth()->id())->count();
             $count += ProductAuction::where('user_id', auth()->id())->count();
-
             $userId = Auth::id();
 
             $transactionsbulan = TransactionOrder::select(DB::raw("MONTH(paid_at) as month"), DB::raw("SUM(total_harga) as total"))
@@ -113,7 +161,7 @@ class UserStoreController extends Controller
             return redirect()->route('login')->with('error', 'Anda harus masuk untuk melihat informasi toko.');
         }
 
-        return view('seller.index', compact('store', 'address', 'user', 'count','grossData','netData','days','transactions','transactionsbulan','months','datas','countnewOrder','countendOrder','countProduct'));
+        return view('seller.index', compact('store', 'address', 'user', 'count','grossData','netData','days','transactions','transactionsbulan','months','datas','countnewOrder','countendOrder','countProduct','accountBalance'));
     }
 
     /**
