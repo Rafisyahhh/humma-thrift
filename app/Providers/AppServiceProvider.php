@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\ProductCategory;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
@@ -39,5 +40,11 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('currency', function($expression) {
             return "Rp<?php echo number_format($expression, 0, ',', '.'); ?>";
         });
+
+        # Adding Alias
+        $loader = AliasLoader::getInstance();
+
+        $loader->alias('Bank', \App\Models\Bank::class);
+        $loader->alias('WithdrawalStatusEnum', \App\Enums\WithdrawalStatusEnum::class);
     }
 }

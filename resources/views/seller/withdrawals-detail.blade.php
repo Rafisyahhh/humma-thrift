@@ -102,6 +102,45 @@
             color: #444;
         }
     </style>
+
+    <style>
+        h3 {
+            font-size: 17.5px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .items {
+            display: flex;
+            width: 100%;
+            flex-direction: row;
+            gap: 1rem;
+        }
+
+        .item {
+            background-color: #ffffff;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            flex-basis: calc(33.333% - 1rem);
+            box-sizing: border-box;
+            margin-bottom: 8px;
+        }
+
+        .item h4 {
+            font-size: 21px;
+            font-weight: 500;
+            color: #333333;
+            margin-bottom: 0.5rem;
+        }
+
+        .item p.mb-0 {
+            margin-bottom: 0;
+            color: #666666;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -109,6 +148,47 @@
         <div class="d-flex flex-column mb-4 justify-content-between">
             <h5 class="mb-3">Detail #{{ $withdrawal->transaction_id }}</h5>
             <a href="{{ route('seller.withdraw.index') }}"><i class="fas fa-arrow-left me-2"></i>Kembali</a>
+        </div>
+
+        <div class="mb-3">
+            <h3>Data Penarikan</h3>
+            <div class="items">
+                <div class="item">
+                    <h4>@currency($withdrawal->amount)</h4>
+                    <p class="mb-0">Nominal Penarikan</p>
+                </div>
+
+                <div class="item">
+                    <h4 class="bg-{{ $withdrawal->status->color() }} p-2 px-3 text-white rounded"
+                        style="width: max-content">{{ $withdrawal->status->label() }}</h4>
+                    <p class="mb-0">Status</p>
+                </div>
+
+                <div class="item">
+                    <h4>{{ $withdrawal->created_at->locale('id')->isoFormat('D MMMM YYYY') }}</h4>
+                    <p class="mb-0">Tanggal Diajukan</p>
+                </div>
+            </div>
+            <div class="items">
+                <div class="item">
+                    <h4>{{ $withdrawal->bank->shortname }}</h4>
+                    <p class="mb-0">Provider Bank</p>
+                </div>
+
+                <div class="item">
+                    <h4>{{ $withdrawal->bank_number }}</h4>
+                    <p class="mb-0">Nomor Rekening</p>
+                </div>
+
+                <div class="item">
+                    @if($withdrawal->status === WithdrawalStatusEnum::COMPLETED)
+                        <h4>{{ $withdrawal->updated_at->locale('id')->isoFormat('D MMMM YYYY') }}</h4>
+                        <p class="mb-0">Tanggal Transfer</p>
+                    @else
+                        <h4>-</h4>
+                    @endif
+                </div>
+            </div>
         </div>
     </section>
 @endsection

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('transaction_id')->nullable();
             $table->timestamp('finished_at')->useCurrent()->nullable();
-            $table->string('bank_name');
+            $table->foreignId('bank_id')->constrained();
             $table->string('bank_number');
             $table->foreignId('user_store_id')->constrained();
             $table->foreignId('user_id')->constrained();

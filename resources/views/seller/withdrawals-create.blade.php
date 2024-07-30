@@ -135,6 +135,26 @@
             </div>
         </div>
 
+        <hr>
+
+        <div class="form-group mb-3">
+            <label for="bank_id" style="font-size: 14px">Bank</label>
+            <select name="bank_id" style="font-size: 14px; padding: 1rem 1.5rem;" id="bank_id" class="form-control">
+                <option value="">Pilih Bank</option>
+                @foreach ($banks as $bank)
+                    <option value="{{ $bank->id }}" {{ old('bank_id') == $bank->id ? 'selected' : '' }}>
+                        {{ $bank->name }} (Bank {{ $bank->shortname }})
+                    </option>
+                @endforeach
+            </select>
+
+            @error('bank_id')
+                <span class="text-danger" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+
         <div class="form-group mb-3">
             <label for="bank_number" style="font-size: 14px">Nomor Rekening</label>
             <input type="number" style="font-size: 14px; padding: 1rem 1.5rem;" placeholder="Masukkan rekening bank anda"

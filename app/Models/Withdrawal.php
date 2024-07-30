@@ -79,4 +79,14 @@ class Withdrawal extends Model
     {
         return $this->belongsTo(UserStore::class);
     }
+
+    /**
+     * Get the bank that owns the withdrawal.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class);
+    }
 }
