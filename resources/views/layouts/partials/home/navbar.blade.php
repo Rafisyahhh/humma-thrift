@@ -1,4 +1,4 @@
-<div class="header-center-section d-none d-lg-block bg-white" id="navbar" style="z-index: 1;">
+<div class="header-center-section d-none d-lg-block bg-white">
   <div class="container">
     <div class="header-center">
       <div class="logo">
@@ -125,7 +125,7 @@
           if (stickyTop < windowTop) {
             $filter.css({
               position: 'fixed',
-              top: '',
+              top: '0',
               width: filterWidth
             });
           } else {

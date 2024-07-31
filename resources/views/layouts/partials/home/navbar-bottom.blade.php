@@ -3,7 +3,7 @@
   $store = $user?->store;
 @endphp
 
-<div class="header-bottom d-lg-block d-none">
+<div class="header-bottom d-lg-block d-none" id="navbar" style="z-index: 1;">
   <div class="container">
     <div class="header-nav">
       <div class="category-menu-section position-relative">
