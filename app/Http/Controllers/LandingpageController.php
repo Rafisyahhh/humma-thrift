@@ -323,7 +323,7 @@ class LandingpageController extends Controller {
             $product_auction = $productAuctionResults ?? [];
 
 
-            return view('Landing.components.products', compact('products', 'product_auction'))->render();
+            return view('Landing.components.products', compact('products', 'product_auction'));
         }
 
         $products = $products->paginate(24) ?? [];

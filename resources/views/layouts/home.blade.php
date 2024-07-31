@@ -79,7 +79,7 @@
     @yield('style')
   </head>
 
-  <body>
+  <body onunload="Opener.location.reload ()">
     @include('layouts.partials.home.header')
 
     @yield('content')

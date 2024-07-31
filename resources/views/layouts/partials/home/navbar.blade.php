@@ -1,4 +1,4 @@
-<div class="header-center-section d-none d-lg-block">
+<div class="header-center-section d-none d-lg-block bg-white" id="navbar" style="z-index: 1;">
   <div class="container">
     <div class="header-center">
       <div class="logo">
@@ -111,5 +111,32 @@
         </div>
       `);
     }
+  </script>
+  <script>
+    $(document).ready(function() {
+      var $filter = $('#navbar');
+      var stickyTop = $filter.offset().top;
+
+      $(window).on('scroll', function() {
+        var filterWidth = $filter.width();
+        requestAnimationFrame(function() {
+          var windowTop = $(window).scrollTop();
+
+          if (stickyTop < windowTop) {
+            $filter.css({
+              position: 'fixed',
+              top: '',
+              width: filterWidth
+            });
+          } else {
+            $filter.css({
+              position: 'relative',
+              top: '',
+              width: ''
+            });
+          }
+        });
+      });
+    });
   </script>
 @endpush

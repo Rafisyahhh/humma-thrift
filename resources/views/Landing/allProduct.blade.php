@@ -78,7 +78,7 @@
           $(`#${filter}Count`).toggle(count > 0).text(count);
         });
 
-        window.history.replaceState(null, null, url);
+        window.history.replaceState(null, '', url);
         $('[isProduct]').addClass('submitLoading');
 
         $.ajax({
@@ -164,7 +164,7 @@
 
       const searchPage = debounce(() => {
         url.searchParams.set('search', searchInput.val());
-        window.history.replaceState(null, null, url);
+        window.history.pushState(null, '', url);
 
         page = 1;
         lastPage = false;
@@ -239,34 +239,5 @@
         }
       });
     };
-  </script>
-  <script>
-    $(document).ready(function() {
-      var $filter = $('#filter');
-      var stickyTop = $filter.offset().top;
-
-      $(window).on('scroll', function() {
-        if (!window.matchMedia("(max-width: 992px)").matches) {
-          var filterWidth = $filter.width();
-          requestAnimationFrame(function() {
-            var windowTop = $(window).scrollTop();
-
-            if (stickyTop < windowTop) {
-              $filter.css({
-                position: 'fixed',
-                top: '25px',
-                width: filterWidth
-              });
-            } else {
-              $filter.css({
-                position: 'relative',
-                top: '',
-                width: ''
-              });
-            }
-          });
-        }
-      });
-    });
   </script>
 @endpush

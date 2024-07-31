@@ -164,3 +164,48 @@
     </div>
   </div> <!-- sticky-top ends here -->
 </div>
+
+@push('js')
+  <script>
+    $(document).ready(function() {
+      var $filter = $('#filter');
+      var stickyTop = $filter.offset().top;
+      var $footer = $('#footer'); // Ganti selector ini dengan selector footer yang tepat
+
+      $(window).on('scroll', function() {
+        if (!window.matchMedia("(max-width: 992px)").matches) {
+          var filterWidth = $filter.width();
+          var footerTop = $footer.offset().top;
+          requestAnimationFrame(function() {
+            var windowTop = $(window).scrollTop();
+            var filterHeight = $filter.outerHeight();
+
+            if (stickyTop < windowTop) {
+              var newTop = windowTop + filterHeight + 125; // Menghitung posisi top elemen
+
+              if (newTop < footerTop) {
+                $filter.css({
+                  position: 'fixed',
+                  top: '125px',
+                  width: filterWidth
+                });
+              } else {
+                $filter.css({
+                  position: 'absolute',
+                  top: footerTop - filterHeight - 50,
+                  width: filterWidth
+                });
+              }
+            } else {
+              $filter.css({
+                position: 'relative',
+                top: '',
+                width: ''
+              });
+            }
+          });
+        }
+      });
+    });
+  </script>
+@endpush
