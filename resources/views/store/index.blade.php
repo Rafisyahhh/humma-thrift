@@ -601,6 +601,7 @@
                                                                     fill="#f6f6f6" />
                                                             </svg>
                                                         </span>
+                                                        {{-- STORE --}}
                                                         {{-- <div class="mt-2 position-absolute" style="top:0; right: 45px;">
                                                             <tr class="table-row ticket-row store-header"
                                                                 style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100%;">
@@ -722,44 +723,3 @@
         });
     </script>
 @endpush
-
-
-
-
-{{--
-                            <li class="list-group-item d-flex mt-5 rounded pt-3 w-100"
-                                style="height: 20rem; background-color: rgba(202, 202, 202, 0.2); position: unset; transform: translateY(-25%)">
-                                <div style="width: 30rem;">
-                                    <img src="{{ asset("storage/{$item->product->thumbnail}") }}"
-                                        class="img-fluid rounded mb-2 float-start" style="width: 7.5rem" />
-                                    <div class="h-50"></div>
-                                    <h5 class="text-start">{{ $item->product->title }}</h5>
-                                    <p class="text-start">Warna: {{ $item->product->color }}</p>
-                                </div>
-                                <div class="w-100">
-                                    <div class="d-flex position-relative mb-4">
-                                        <img src="{{ asset(isset($item->user->avatar) ? "storage/{$item->user->avatar}" : 'template-assets/front/assets/images/homepage-one/aurthor-img-1.webp') }}"
-                                            class="img-fluid" style="width: 6rem; border-radius: 50%" />
-                                        <div class="ms-3 w-100">
-                                            <div class="d-flex position-relative">
-                                                <h5>{{ $item->user->name }}</h5>
-                                                <p class="position-absolute opacity-75" style="right: 0;">
-                                                    {{ $item->created_at }}</p>
-                                            </div>
-                                            <div class="row-rating">
-                                                <div class="rating">
-                                                    <select class="star-rating" name="product_rating"
-                                                        data-options="{&quot;clearable&quot;:false, &quot;tooltip&quot;:false}">
-                                                        @foreach (['1', '2', '3', '4', '5'] as $rating)
-                                                            <option value="{{ $rating }}"
-                                                                @selected($rating == $item->star)></option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p class="border-top pt-2 text-start" style="min-height: 5rem">{{ $item->comment }}
-                                    </p>
-                                </div>
-                            </li> --}}
