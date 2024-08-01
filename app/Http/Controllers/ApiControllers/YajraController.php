@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ApiControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\AboutUs;
+use App\Models\Withdrawal;
 use Illuminate\Http\Request;
 use App\Models\{
     User,
@@ -20,11 +21,9 @@ use App\Models\{
 use Carbon\Carbon;
 use Yajra\DataTables\Facades\DataTables;
 
-class YajraController extends Controller
-{
+class YajraController extends Controller {
     //
-    public function users(Request $request)
-    {
+    public function users(Request $request) {
         if ($request->ajax()) {
             $data = User::all();
             return DataTables::of($data)->editColumn('name', function (User $user) {
@@ -44,29 +43,25 @@ class YajraController extends Controller
             })->rawColumns(['name', 'role', 'status'])->make(true);
         }
     }
-    public function brands(Request $request)
-    {
+    public function brands(Request $request) {
         if ($request->ajax()) {
             $data = Brand::all();
             return DataTables::of($data)->addIndexColumn()->make(true);
         }
     }
-    public function categories(Request $request)
-    {
+    public function categories(Request $request) {
         if ($request->ajax()) {
             $data = ProductCategory::all();
             return DataTables::of($data)->addIndexColumn()->make(true);
         }
     }
-    public function events(Request $request)
-    {
+    public function events(Request $request) {
         if ($request->ajax()) {
             $data = event::all();
             return DataTables::of($data)->addIndexColumn()->make(true);
         }
     }
-    public function products(Request $request)
-    {
+    public function products(Request $request) {
         if ($request->ajax()) {
             $products = Product::with(['categories', 'userstore', 'brand'])->get();
             $productAuctions = ProductAuction::with(['categories', 'userstore', 'brand'])->get();
@@ -85,15 +80,13 @@ class YajraController extends Controller
         }
     }
 
-    public function abouts(Request $request)
-    {
+    public function abouts(Request $request) {
         if ($request->ajax()) {
             $data = AboutUs::all();
             return DataTables::of($data)->addIndexColumn()->make(true);
         }
     }
-    public function stores(Request $request)
-    {
+    public function stores(Request $request) {
         if ($request->ajax()) {
             $data = UserStore::with(['user'])->get();
             return DataTables::of($data)->editColumn('name', function (UserStore $store) {
@@ -111,10 +104,9 @@ class YajraController extends Controller
             })->rawColumns(['name', 'address', 'status'])->make(true);
         }
     }
-    public function transactions(Request $request)
-    {
+    public function transactions(Request $request) {
         if ($request->ajax()) {
-            $transaction = TransactionOrder::with(['user','userstore'])->latest()->get();
+            $transaction = TransactionOrder::with(['user', 'userstore'])->latest()->get();
             $orders = Order::with('product')
                 ->orderBy('transaction_order_id')
                 ->get()
@@ -156,16 +148,18 @@ class YajraController extends Controller
                 $firstOrder = $orders[$transaction->id]->first();
                 $additionalProductsCount = $orders[$transaction->id]->count() - 1;
                 $productTitle = $firstOrder->product_id ? $firstOrder->product->title : $firstOrder->product_auction->title;
-                return $productTitle = $productTitle . ($additionalProductsCount ? ' dan ' . $additionalProductsCount . ' produk lainnya' : '');;
+                return $productTitle = $productTitle . ($additionalProductsCount ? ' dan ' . $additionalProductsCount . ' produk lainnya' : '');
+                ;
             })->addColumn('image', function (TransactionOrder $transaction) use ($orders) {
                 $firstOrder = $orders[$transaction->id]->first();
-                return $image = $firstOrder->product_id ? $firstOrder->product->thumbnail : $firstOrder->product_auction->thumbnail;;
+                return $image = $firstOrder->product_id ? $firstOrder->product->thumbnail : $firstOrder->product_auction->thumbnail;
+                ;
             })->addIndexColumn()->rawColumns(['order'])->make(true);
         }
     }
-    public function incomes(Request $request){
+    public function incomes(Request $request) {
         if ($request->ajax()) {
-            $data = TransactionOrder::with(['user','userstore'])->latest()->get();
+            $data = TransactionOrder::with(['user', 'userstore'])->latest()->get();
 
             return DataTables::of($data)
                 ->addColumn('name', function (TransactionOrder $transactionOrder) {
@@ -174,7 +168,7 @@ class YajraController extends Controller
             <span class=\"text-muted\">" . number_format($transactionOrder->total, 0, ',', '.') . "</span>
           </div>";
                 })->editColumn('expired_at', function (TransactionOrder $transactionOrder) {
-                    return  $transactionOrder->expired_at->locale('id')->isoFormat('D MMMM YYYY');
+                    return $transactionOrder->expired_at->locale('id')->isoFormat('D MMMM YYYY');
                 })->editColumn('paid_at', function (TransactionOrder $transactionOrder) {
                     return $transactionOrder->paid_at ? $transactionOrder->paid_at->locale('id')->isoFormat('D MMMM YYYY') : '-';
                 })->addColumn('store', function (TransactionOrder $transactionOrder) {
@@ -184,6 +178,15 @@ class YajraController extends Controller
                 })
                 ->addIndexColumn()
                 ->rawColumns(['name'])
+                ->make(true);
+        }
+    }
+
+    public function withdrawal(Request $request) {
+        if ($request->ajax()) {
+            $data = Withdrawal::with(['user', 'store', 'bank'])->latest()->get();
+
+            return DataTables::of($data)
                 ->make(true);
         }
     }

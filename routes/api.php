@@ -36,4 +36,5 @@ Route::prefix('yajra')->name('yajra.')->group(function () {
     Route::get('/store', [YajraController::class, 'stores'])->name("stores");
     Route::get('/transaction', [YajraController::class, 'transactions'])->name("transactions");
     Route::get('/income', [YajraController::class, 'incomes'])->name("incomes");
+    Route::get('/withdrawal', [YajraController::class, 'withdrawal'])->name("withdrawal");
 });
