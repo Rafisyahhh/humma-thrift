@@ -30,13 +30,6 @@
       </a>
     </li>
 
-    <li class="menu-item {{ request()->routeIs('admin.withdraw.*') ? 'active' : '' }}">
-      <a href="{{ route('admin.withdraw.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-home"></i>
-        <div>Penarikan</div>
-      </a>
-    </li>
-
     <li class="menu-item {{ request()->routeIs('admin.store.*') ? 'active' : '' }}">
       <a href="{{ route('admin.store.index') }}" class="menu-link">
         <i class="menu-icon tf-icons ti ti-building"></i>
@@ -75,6 +68,14 @@
         <div>Penghasilan</div>
       </a>
     </li>
+
+    <li class="menu-item {{ request()->routeIs('admin.withdraw.*') ? 'active' : '' }}">
+      <a href="{{ route('admin.withdraw.index') }}" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-home"></i>
+        <div>Penarikan</div>
+      </a>
+    </li>
+
     <li class="menu-item {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
       <a href="{{ route('admin.user.index') }}" class="menu-link">
         <i class="menu-icon tf-icons ti ti-users"></i>
