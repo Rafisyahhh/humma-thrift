@@ -99,8 +99,8 @@ class UserStoreController extends Controller
                 'January', 'February', 'March', 'April', 'May', 'June',
                 'July', 'August', 'September', 'October', 'November', 'December'
             ];
-            $countnewOrder = TransactionOrder::where('delivery_status','selesaikan pembayaran')->count();
-            $countendOrder = TransactionOrder::where('delivery_status','selesai')->count();
+            $countnewOrder = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status','selesaikan pembayaran')->count();
+            $countendOrder = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status','selesai')->count();
             $countProduct = Product::where('id', auth()->id())->count();
 
             $datas = array_fill(0, 12, 0); // Initialize data array with zeroes

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Transaksi')
+@section('title', 'Penghasilan')
 
 @push('style')
     <style>
@@ -91,21 +91,90 @@
 
 @section('content')
     <!-- Bootstrap Table with Header - Light -->
+    <section>
+        <div class="d-flex justify-content-between">
+            <h5 class="card-header">Data Penghasilan</h5>
+            <ul class="ms-auto nav nav-pills d-none d-md-flex mt-3 me-3" id="incomeData" role="tablist">
+                <li class="nav-item">
+                    <button class="nav-link active" type="button" id="daily-income-tab" data-bs-toggle="tab"
+                        data-bs-target="#daily-income" type="button" role="tab" aria-controls="daily-income"
+                        aria-selected="true">Harian</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" type="button" id="monthly-income-tab" data-bs-toggle="tab"
+                        data-bs-target="#monthly-income" type="button" role="tab" aria-controls="monthly-income"
+                        aria-selected="false">Bulanan</button>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content mt-5" id="myTabContent">
+            <div class="tab-pane fade show active" id="daily-income" role="tabpanel" aria-labelledby="daily-income-tab">
+                <div class="monthly-income-section">
+                    <canvas id="penjualan-harian" width="400" height="100"></canvas>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="monthly-income" role="tabpanel" aria-labelledby="monthly-income-tab">
+                <div class="monthly-income-section">
+                    <canvas id="penjualan-bulanan" width="400" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="income">
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <div class="card card-border-shadow-primary">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-2 pb-1">
+                            <div class="avatar me-2">
+                                <span class="avatar-initial rounded bg-label-primary"><i class="fas fa-box"></i></span>
+                            </div>
+                            <h4 class="ms-1 mb-0">@currency($transactionTotal)</h4>
+                            <p class="ms-3 mb-0">Total Transaksi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-border-shadow-primary">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-2 pb-1">
+                            <div class="avatar me-2">
+                                <span class="avatar-initial rounded bg-label-primary"><i class="fas fa-coins"></i></span>
+                            </div>
+                            <h4 class="ms-1 mb-0">@currency($netIncome)</h4>
+                            <p class="ms-3 mb-0">Transaksi Bersih</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-border-shadow-primary">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-2 pb-1">
+                            <div class="avatar me-2">
+                                <span class="avatar-initial rounded bg-label-primary"><i class="fas fa-wallet"></i></span>
+                            </div>
+                            <h4 class="ms-1 mb-0">@currency($accountBalance)</h4>
+                            <p class="ms-3 mb-0">Saldo Admin</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <div class="card">
-        <h5 class="card-header">Daftar Transaksi</h5>
-
         <div class="table-responsive text-nowrap">
             <table class="table yajra-datatable w-100">
                 <thead class="table-light">
                     <tr>
-                        <th class="text-start">NO.</th>
-                        <th class="text-start">PRODUK</th>
-                        <th class="text-start">PEMBELI</th>
-                        <th class="text-start">TOKO</th>
-                        <th class="text-start">HARGA</th>
-                        <th class="text-center">STATUS PENGIRIMAN</th>
-                        <th class="text-center">STATUS</th>
-                        <th class="text-center">DETAIL</th>
+                        <th class="text-start">#</th>
+                        <th class="text-start">No Transaksi</th>
+                        <th class="text-start">Pembeli</th>
+                        <th class="text-start">Penjual</th>
+                        <th class="text-start">Tanggal Kadaluarsa</th>
+                        <th class="text-start">Tanggal Di Bayar</th>
+                        <th class="text-start">Status</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0"></tbody>
@@ -189,7 +258,7 @@
       </div>
     </div>
   @endforeach --}}
-    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="review-form m-0">
@@ -249,12 +318,14 @@
                                             </tr>
                                             <tr>
                                                 <th>Status Pengiriman</th>
-                                                <td><span class="inner-text" style="color: red" data-row="delivery_status"></span>
+                                                <td><span class="inner-text" style="color: red"
+                                                        data-row="delivery_status"></span>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>Status Pembayaran</th>
-                                                <td><span class="inner-status" style="color: red" data-row="status"></span>
+                                                <td><span class="inner-status" style="color: red"
+                                                        data-row="status"></span>
                                                 </td>
                                             </tr>
                                         </table>
@@ -266,7 +337,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 
 @push('scripts')
@@ -311,19 +382,14 @@
             },
             options: {
                 layout: {
-                    topStart: $(`<ul class="ms-4 nav nav-pills d-none d-md-flex">
-            <li class="nav-item">
-              <a class="nav-link active" type="button" id="order-all">Semua Tipe</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" type="button" id="order-user">Produk</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" type="button" id="order-seller"">Lelang</a>
-            </li>
-          </ul>`),
-                    topEnd: $(`<div class="input-group">
-              <input class="form-control me-4" placeholder="Cari Produk&hellip;" id="searchInput" />
+                    topStart: $(`<h5 class="card-header">Data Penghasilan</h5>`),
+                    topEnd: $(`<div class="d-flex">
+                    <div class="input-group">
+              <input class="form-control mt-3 me-4" placeholder="Cari Store&hellip;" id="searchInput" type="date"/>
+            </div>
+            <div class="input-group">
+              <input class="form-control mt-3 me-4" placeholder="Cari Transaksi&hellip;" id="searchInput" />
+            </div>
             </div>`),
                     bottomStart: {
                         info: {
@@ -332,7 +398,7 @@
                     },
                 }
             },
-            ajax: "{{ route('yajra.transactions') }}",
+            ajax: "{{ route('yajra.incomes') }}",
             columns: [{
                     data: 'DT_RowIndex',
                     orderable: false,
@@ -340,7 +406,7 @@
                     width: "5%"
                 },
                 {
-                    data: 'order',
+                    data: 'name',
                 },
                 {
                     data: 'user.name',
@@ -349,21 +415,10 @@
                     data: 'store',
                 },
                 {
-                    data: 'total',
+                    data: 'expired_at',
                 },
                 {
-                    data: 'delivery_status',
-                    render: (data, __, row) => {
-                        console.log(row);
-                        const badge = {
-                            'selesaikan pesanan': `<span class="badge text-bg-danger">Selesaikan Pesanan</span>`,
-                            'dikemas': `<span class="badge text-bg-warning">Di Kemas</span>`,
-                            'diantar': `<span class="badge text-bg-warning">Di Antar</span>`,
-                            'diterima': `<span class="badge text-bg-warning">Di Terima</span>`,
-                            'selesai': `<span class="badge text-bg-success">Selesai</span>`,
-                        }[data];
-                        return badge || data;
-                    }
+                    data: 'paid_at',
                 },
                 {
                     data: 'status',
@@ -374,7 +429,7 @@
                             'EXPIRED': `<span class="badge text-bg-danger">Pembayaran Kadaluarsa</span>`,
                             'REFUND': `<span class="badge text-bg-warning">Produk Dikembalikan</span>`,
                             'FAILED': `<span class="badge text-bg-danger">Pembayaran Gagal</span>`,
-                        }[data];
+                        } [data];
                         return badge || data;
                     }
                 },
@@ -404,24 +459,11 @@
                 //     return status;
                 //   }
                 // },
-                {
-                    data: 'id',
-                    className: 'text-center',
-                    orderable: false,
-                    searchable: false,
-                    render: (data, _, row) => {
-                        return `<button class="btn" type="button" id="detail">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M12 16q1.875 0 3.188-1.312T16.5 11.5t-1.312-3.187T12 7T8.813 8.313T7.5 11.5t1.313 3.188T12 16m0-1.8q-1.125 0-1.912-.788T9.3 11.5t.788-1.912T12 8.8t1.913.788t.787 1.912t-.787 1.913T12 14.2m0 4.8q-3.35 0-6.113-1.8t-4.362-4.75q-.125-.225-.187-.462t-.063-.488t.063-.488t.187-.462q1.6-2.95 4.363-4.75T12 4t6.113 1.8t4.362 4.75q.125.225.188.463t.062.487t-.062.488t-.188.462q-1.6 2.95-4.362 4.75T12 19" />
-            </svg>
-          </button>`
-                    }
-                },
-                {
-                    data: 'type',
-                    searchable: true,
-                    visible: false
-                },
+                // {
+                //     data: 'type',
+                //     searchable: true,
+                //     visible: false
+                // },
             ]
         });
 
@@ -479,6 +521,212 @@
                 const searchTerm = $('#searchInput').val().trim();
                 table.search(searchTerm).draw();
             }, 750);
+        });
+    </script>
+    <script src="{{ asset('additional-assets/chart.js-4.4.3/chart.umd.js') }}"></script>
+
+    <script>
+        const ctxBulanan = document.getElementById('penjualan-bulanan').getContext('2d');
+        const gradientBulanan = ctxBulanan.createLinearGradient(0, 0, 0, 250);
+        gradientBulanan.addColorStop(0, 'rgba(25, 56, 121, 0.25)');
+        gradientBulanan.addColorStop(1, 'rgba(25, 56, 121, 0.0)');
+
+        var labels = [
+            @foreach ($months as $month)
+                '{{ $month }}',
+            @endforeach
+        ];
+
+        const dataBulanan = {
+            labels: labels,
+            datasets: [{
+                    label: 'Penghasilan Kotor per Bulan',
+                    data: @json($monthlyGrossSales),
+                    backgroundColor: gradientBulanan,
+                    borderColor: 'rgba(25, 56, 121, 1)',
+                    borderWidth: 3,
+                    borderCapStyle: 'round',
+                    borderJoinStyle: 'round',
+                    pointBackgroundColor: 'rgba(25, 56, 121, 1)',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointHoverBackgroundColor: 'rgba(25, 56, 121, 1)',
+                    pointHoverBorderColor: '#fff',
+                    pointHoverBorderWidth: 2,
+                    fill: true
+                },
+                {
+                    label: 'Penghasilan Bersih per Bulan',
+                    data: @json($monthlyNetIncome),
+                    backgroundColor: 'rgba(25, 255, 0, 0.25)',
+                    borderColor: 'rgba(25, 255, 0, 1)',
+                    borderWidth: 3,
+                    borderCapStyle: 'round',
+                    borderJoinStyle: 'round',
+                    pointBackgroundColor: 'rgba(25, 255, 0, 1)',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointHoverBackgroundColor: 'rgba(25, 255, 0, 1)',
+                    pointHoverBorderColor: '#fff',
+                    pointHoverBorderWidth: 2,
+                    fill: true
+                }
+            ]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        display: false
+                    },
+                    border: {
+                        display: false
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        display: false
+                    },
+                    border: {
+                        display: false
+                    }
+                }
+            },
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true
+                },
+                tooltip: {
+                    enabled: true
+                }
+            }
+        };
+
+        new Chart(ctxBulanan, {
+            type: 'line',
+            data: dataBulanan,
+            options: options
+        });
+    </script>
+
+    @php
+        $currentDate = new DateTime();
+        $currentMonth = $currentDate->format('m');
+        $daysInMonth = $currentDate->format('t');
+        $dates = [];
+        for ($i = 1; $i <= $daysInMonth; $i++) {
+            $dates[] = $currentDate->format('Y-m-') . str_pad($i, 2, '0', STR_PAD_LEFT);
+        }
+    @endphp
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctxHarian = document.getElementById('penjualan-harian').getContext('2d');
+            const gradientHarian = ctxHarian.createLinearGradient(0, 0, 0, 250);
+            gradientHarian.addColorStop(0, 'rgba(25, 56, 121, 0.25)');
+            gradientHarian.addColorStop(1, 'rgba(25, 56, 121, 0.0)');
+
+            var labels = [
+                @foreach ($dates as $date)
+                    '{{ $date }}',
+                @endforeach
+            ];
+
+            const dataHarian = {
+                labels: labels,
+                datasets: [{
+                        label: 'Penghasilan Kotor per Hari',
+                        data: @json($dailyGrossSales),
+                        backgroundColor: gradientHarian,
+                        borderColor: 'rgba(25, 56, 121, 1)',
+                        borderWidth: 3,
+                        borderCapStyle: 'round',
+                        borderJoinStyle: 'round',
+                        pointBackgroundColor: 'rgba(25, 56, 121, 1)',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        pointHoverBackgroundColor: 'rgba(25, 56, 121, 1)',
+                        pointHoverBorderColor: '#fff',
+                        pointHoverBorderWidth: 2,
+                        fill: true
+                    },
+                    {
+                        label: 'Penghasilan Bersih per Hari',
+                        data: @json($dailySales),
+                        backgroundColor: 'rgba(25, 255, 0, 0.25)',
+                        borderColor: 'rgba(25, 255, 0, 1)',
+                        borderWidth: 3,
+                        borderCapStyle: 'round',
+                        borderJoinStyle: 'round',
+                        pointBackgroundColor: 'rgba(25, 255, 0, 1)',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        pointHoverBackgroundColor: 'rgba(25, 255, 0, 1)',
+                        pointHoverBorderColor: '#fff',
+                        pointHoverBorderWidth: 2,
+                        fill: true
+                    }
+                ]
+            };
+
+            var options = {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        display: false
+                    },
+                    border: {
+                        display: false
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        display: false
+                    },
+                    border: {
+                        display: false
+                    }
+                }
+            },
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true
+                },
+                tooltip: {
+                    enabled: true
+                }
+            }
+        };
+
+            new Chart(ctxHarian, {
+                type: 'line',
+                data: dataHarian,
+                options: options
+            });
         });
     </script>
 @endpush

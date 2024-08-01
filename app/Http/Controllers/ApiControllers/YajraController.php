@@ -163,4 +163,28 @@ class YajraController extends Controller
             })->addIndexColumn()->rawColumns(['order'])->make(true);
         }
     }
+    public function incomes(Request $request){
+        if ($request->ajax()) {
+            $data = TransactionOrder::with(['user','userstore'])->latest()->get();
+
+            return DataTables::of($data)
+                ->addColumn('name', function (TransactionOrder $transactionOrder) {
+                    return "<div class=\"table-item flex-column d-flex\">
+            <a href=\"" . route('seller.transaction.detail', $transactionOrder->id) . "\">" . $transactionOrder->transaction_id . "</a>
+            <span class=\"text-muted\">" . number_format($transactionOrder->total, 0, ',', '.') . "</span>
+          </div>";
+                })->editColumn('expired_at', function (TransactionOrder $transactionOrder) {
+                    return  $transactionOrder->expired_at->locale('id')->isoFormat('D MMMM YYYY');
+                })->editColumn('paid_at', function (TransactionOrder $transactionOrder) {
+                    return $transactionOrder->paid_at ? $transactionOrder->paid_at->locale('id')->isoFormat('D MMMM YYYY') : '-';
+                })->addColumn('store', function (TransactionOrder $transactionOrder) {
+                    $firstOrder = $transactionOrder->order->first();
+                    $storeName = $firstOrder->product->userstore->name;
+                    return $storeName;
+                })
+                ->addIndexColumn()
+                ->rawColumns(['name'])
+                ->make(true);
+        }
+    }
 }

@@ -62,6 +62,12 @@
                 <div>Transaksi</div>
             </a>
         </li>
+        <li class="menu-item {{ request()->routeIs('admin.income.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.income.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-chart-arrows-vertical"></i>
+                <div>Penghasilan</div>
+            </a>
+        </li>
         <li class="menu-item {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
             <a href="{{ route('admin.user.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-users"></i>
