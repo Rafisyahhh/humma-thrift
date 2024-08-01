@@ -56,6 +56,7 @@ class AdminIncomeController extends Controller
         $lastOfMonth = Carbon::now()->endOfMonth();
         $rawDailySales = $this->_transactions
             ->where('status', 'PAID')
+            ->where('delivery_status', 'selesai')
             ->selectRaw('DATE(created_at) as date, SUM(total) as total')
             ->whereMonth('created_at', $currentDate->month)
             ->groupByRaw('DATE(created_at)')
@@ -64,23 +65,36 @@ class AdminIncomeController extends Controller
         $dailySales = collect(range(1, (int) $lastOfMonth->format('d')))->map(function ($day) use ($rawDailySales, $currentDate) {
             $salesDate = $currentDate->format('Y-m-') . str_pad($day, 2, '0', STR_PAD_LEFT);
             $sales = $rawDailySales->firstWhere('date', $salesDate);
-            return $sales ? $sales->total : 0;
+            return $sales ? $sales->total * 0.1 : 0; // 10% dari setiap transaksi
+        });
+
+        $dailyGrossSales = $rawDailySales->map(function ($sales) {
+            return $sales->total;
         });
 
         // Grafik bulanan
-        $months = collect(range(1, 12))->map(fn ($month) => $currentDate->format('Y-') . str_pad($month, 2, '0', STR_PAD_LEFT))->toArray();
+        $months = collect(range(1, 12))->map(function ($month) use ($currentDate) {
+            return $currentDate->format('Y-') . str_pad($month, 2, '0', STR_PAD_LEFT);
+        })->toArray();
 
         $monthlySales = $this->_transactions
             ->where('status', 'PAID')
+            ->where('delivery_status', 'selesai')
             ->selectRaw('MONTH(created_at) as month, SUM(total) as total')
             ->whereYear('created_at', $currentDate->year)
             ->groupBy(\DB::raw('MONTH(created_at)'))
             ->get()
             ->keyBy('month');
 
-        $monthlySalesData = collect(range(1, 12))->map(fn ($month) => $monthlySales->get($month)->total ?? 0)->toArray();
+        $monthlyNetIncome = collect(range(1, 12))->map(function ($month) use ($monthlySales) {
+            return $monthlySales->get($month, ['total' => 0])['total'] * 0.1; // 10% dari setiap transaksi
+        })->toArray();
 
-        return view('admin.income', compact('transactions', 'transactionTotal', 'netIncome', 'dailySales', 'months', 'monthlySalesData', 'accountBalance'));
+        $monthlyGrossSales = collect(range(1, 12))->map(function ($month) use ($monthlySales) {
+            return $monthlySales->get($month, ['total' => 0])['total'];
+        })->toArray();
+
+        return view('admin.income', compact('transactions', 'transactionTotal', 'netIncome','monthlyNetIncome', 'dailySales', 'dailyGrossSales','months', 'monthlyGrossSales', 'accountBalance'));
     }
 
     /**
