@@ -123,12 +123,6 @@
           var windowTop = $(window).scrollTop();
 
           if (stickyTop < windowTop) {
-            $filter.find('span.list-text').css({
-              'color': 'blue'
-            });
-            $filter.find('span.dropdown-icon').css({
-              'background-color': 'blue'
-            });
             $filter.css({
               position: 'fixed',
               top: '0',
