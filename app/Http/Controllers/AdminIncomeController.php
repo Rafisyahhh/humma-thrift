@@ -52,8 +52,8 @@ class AdminIncomeController extends Controller
 
         $accountBalance = $netIncome - $withdrawalTotal;
 
-        // Menampilkan grafik pesanan
-        $lastOfMonth = Carbon::now()->endOfMonth();
+        $currentDate = Carbon::now();
+        $lastOfMonth = $currentDate->endOfMonth();
         $rawDailySales = $this->_transactions
             ->where('status', 'PAID')
             ->where('delivery_status', 'selesai')
@@ -68,8 +68,10 @@ class AdminIncomeController extends Controller
             return $sales ? $sales->total * 0.1 : 0; // 10% dari setiap transaksi
         });
 
-        $dailyGrossSales = $rawDailySales->map(function ($sales) {
-            return $sales->total;
+        $dailyGrossSales = collect(range(1, (int) $lastOfMonth->format('d')))->map(function ($day) use ($rawDailySales, $currentDate) {
+            $salesDate = $currentDate->format('Y-m-') . str_pad($day, 2, '0', STR_PAD_LEFT);
+            $sales = $rawDailySales->firstWhere('date', $salesDate);
+            return $sales ? $sales->total : 0;
         });
 
         // Grafik bulanan
@@ -94,7 +96,7 @@ class AdminIncomeController extends Controller
             return $monthlySales->get($month, ['total' => 0])['total'];
         })->toArray();
 
-        return view('admin.income', compact('transactions', 'transactionTotal', 'netIncome','monthlyNetIncome', 'dailySales', 'dailyGrossSales','months', 'monthlyGrossSales', 'accountBalance'));
+        return view('admin.income', compact('transactions', 'transactionTotal', 'netIncome', 'monthlyNetIncome', 'dailySales', 'dailyGrossSales', 'months', 'monthlyGrossSales', 'accountBalance'));
     }
 
     /**

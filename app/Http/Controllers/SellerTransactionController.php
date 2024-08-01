@@ -70,10 +70,11 @@ class SellerTransactionController extends Controller
         $lastOfMonth = Carbon::now()->endOfMonth();
         $rawDailySales = $this->_transactions
             ->where('status', 'PAID')
+            ->where('delivery_status', 'selesai')
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
-            ->selectRaw('DATE(created_at) as date, SUM(total) as total')
+            ->selectRaw('DATE(created_at) as date, SUM(total) * 0.9 as total') // 0.9 is equivalent to 90% after deducting 10%
             ->whereMonth('created_at', $currentDate->month)
             ->groupByRaw('DATE(created_at)')
             ->get();
@@ -84,15 +85,33 @@ class SellerTransactionController extends Controller
             return $sales ? $sales->total : 0;
         });
 
+        $rawDailyGross = $this->_transactions
+            ->where('status', 'PAID')
+            ->where('delivery_status', 'selesai')
+            ->whereHas('order.product', function ($query) use ($userStoreId) {
+                $query->where('store_id', $userStoreId);
+            })
+            ->selectRaw('DATE(created_at) as date, SUM(total) as total') // 0.9 is equivalent to 90% after deducting 10%
+            ->whereMonth('created_at', $currentDate->month)
+            ->groupByRaw('DATE(created_at)')
+            ->get();
+
+        $dailyGross = collect(range(1, (int) $lastOfMonth->format('d')))->map(function ($day) use ($rawDailyGross, $currentDate) {
+            $salesDate = $currentDate->format('Y-m-') . str_pad($day, 2, '0', STR_PAD_LEFT);
+            $sales = $rawDailyGross->firstWhere('date', $salesDate);
+            return $sales ? $sales->total : 0;
+        });
+
         // Monthly chart
         $months = collect(range(1, 12))->map(fn($month) => $currentDate->format('Y-') . str_pad($month, 2, '0', STR_PAD_LEFT))->toArray();
 
         $monthlySales = $this->_transactions
             ->where('status', 'PAID')
+            ->where('delivery_status', 'selesai')
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
-            ->selectRaw('MONTH(created_at) as month, SUM(total) as total')
+            ->selectRaw('MONTH(created_at) as month, SUM(total) * 0.9 as total') // 0.9 is equivalent to 90% after deducting 10%
             ->whereYear('created_at', $currentDate->year)
             ->groupBy(\DB::raw('MONTH(created_at)'))
             ->get()
@@ -100,6 +119,20 @@ class SellerTransactionController extends Controller
 
         $monthlySalesData = collect(range(1, 12))->map(fn($month) => $monthlySales->get($month)->total ?? 0)->toArray();
 
-        return view('seller.penghasilan', compact('transactions', 'transactionTotal', 'netIncome', 'dailySales', 'months', 'monthlySalesData', 'accountBalance'));
+        $monthlyGross = $this->_transactions
+            ->where('status', 'PAID')
+            ->where('delivery_status', 'selesai')
+            ->whereHas('order.product', function ($query) use ($userStoreId) {
+                $query->where('store_id', $userStoreId);
+            })
+            ->selectRaw('MONTH(created_at) as month, SUM(total) as total') // 0.9 is equivalent to 90% after deducting 10%
+            ->whereYear('created_at', $currentDate->year)
+            ->groupBy(\DB::raw('MONTH(created_at)'))
+            ->get()
+            ->keyBy('month');
+
+        $monthlyGrossData = collect(range(1, 12))->map(fn($month) => $monthlyGross->get($month)->total ?? 0)->toArray();
+
+        return view('seller.penghasilan', compact('transactions', 'transactionTotal', 'netIncome', 'dailySales','dailyGross', 'months', 'monthlySalesData','monthlyGrossData', 'accountBalance'));
     }
 }
