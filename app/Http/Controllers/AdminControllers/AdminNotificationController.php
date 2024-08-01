@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminControllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 
-class NotificationController extends Controller
-{
+class AdminNotificationController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
+    public function index() {
         $notifications = Auth::user()->notifications()->paginate(20);
         return view('admin.notification.index', compact('notifications'));
     }
@@ -19,8 +18,7 @@ class NotificationController extends Controller
     /**
      * Display the notification
      */
-    public function show(string $notificationId)
-    {
+    public function show(string $notificationId) {
         Auth::user()->notifications()->find($notificationId)->markAsRead();
 
         $notifications = Auth::user()->notifications()->paginate(20);
@@ -32,20 +30,17 @@ class NotificationController extends Controller
      *
      * @return void
      */
-    public function readAll()
-    {
+    public function readAll() {
         Auth::user()->getAttribute('unreadNotifications')->markAsRead();
         return redirect()->route('admin.notification.index');
     }
 
-    public function unread(string $notification)
-    {
+    public function unread(string $notification) {
         Auth::user()->notifications()->find($notification)->markAsUnread();
         return redirect()->route('admin.notification.index');
     }
 
-    public function read(string $notification)
-    {
+    public function read(string $notification) {
         Auth::user()->notifications()->find($notification)->markAsRead();
         return redirect()->route('admin.notification.index');
     }
@@ -53,8 +48,7 @@ class NotificationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Notification $notification)
-    {
+    public function destroy(Notification $notification) {
         try {
             $notification->delete();
             return redirect()->route('admin.notification.index')->with('success', 'Berhasil menghapus notifikasi');

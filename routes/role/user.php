@@ -35,15 +35,13 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     # Soft delete Address
     Route::get('/address/restore/{id}', [UserAddressController::class, 'restore'])->name('address.restore');
     Route::get('/address/delete/{id}', [UserAddressController::class, 'delete'])->name('address.delete');
-
-    Route::view('about', 'user.tentang')->name('about');
-    Route::get('brand', [LandingpageController::class, 'brand'])->name('brand');
     Route::view('detail', 'user.detail')->name('detail');
     Route::get('profile', [UserController::class, 'show'])->name('profile');
     Route::post('profile/{id}', [UserController::class, 'update'])->name('profile.update');
     Route::get('order', [OrderController::class, 'index'])->name('order');
     Route::post('orderupdate/{transaction}', [OrderController::class, 'updateOrder'])->name('order.update');
     Route::get('cart', [CartController::class, 'index'])->name('cart');
+
     Route::get('wishlist', [LandingpageController::class, 'wishlist'])->name('wishlist');
     Route::get('shop', [DetailProductController::class, 'showProduct'])->name('shop');
     Route::get('store', [StoreProfileController::class, 'showStore'])->name('store');

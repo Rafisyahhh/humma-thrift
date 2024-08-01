@@ -13,7 +13,7 @@ Route::get('/home', RedirectUserController::class)->name('home');
 Route::get('brand', [LandingpageController::class, 'brand']);
 Route::get('stores', [StoreProfileController::class, 'showStore'])->name('store');
 Route::view('detail', 'landing.detail');
-Route::get('about-us', [AboutUsController::class, 'landingpage']);
+Route::get('about-us', [LandingpageController::class, 'aboutUs']);
 Route::view('news', 'landing.detailNews');
 Route::view('/regstrasi', 'afterregister');
 
