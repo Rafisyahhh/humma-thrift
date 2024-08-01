@@ -132,12 +132,14 @@
             $filter.css({
               position: 'fixed',
               top: '0',
-              width: filterWidth
+              width: filterWidth,
             });
           } else {
-            $filter.find('span.list-text').attr('style', '');
-            $filter.find('span.dropdown-icon').attr('style', '');
-            $filter.attr('style', '');
+            $filter.css({
+              position: 'relative',
+              top: '',
+              width: '',
+            });
           }
         });
       });
