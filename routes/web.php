@@ -10,6 +10,7 @@ use App\Http\Controllers\{
     AdminTransactionController,
     AdminIncomeController,
     AdminController,
+    AdminWithdrawController,
     AuctionsController,
     UserController,
     BrandController,
@@ -77,12 +78,12 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
     Route::resource('product', ProductController::class);
     Route::resource('productauction', ProductAuctionController::class);
 
-        Route::prefix('notification')->controller(NotificationSellerController::class)->name('notification.')->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::post('/notifications/{notificationId}', 'show')->name('show');
-            Route::get('/read-all', 'readAll')->name('readAll');
-            Route::delete('{id}', 'destroy')->name('destroy');
-        });
+    Route::prefix('notification')->controller(NotificationSellerController::class)->name('notification.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/notifications/{notificationId}', 'show')->name('show');
+        Route::get('/read-all', 'readAll')->name('readAll');
+        Route::delete('{id}', 'destroy')->name('destroy');
+    });
 
     // Show seller product auction
     Route::get('auction/seller/{id}', [AuctionsController::class, 'showSeller'])->name('auction.showSeller');
@@ -91,7 +92,7 @@ Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(
     Route::get('auction/{auctions}/edit', [AuctionsController::class, 'editlelang'])->name('auction.editlelang');
     Route::put('auction/{auctions}', [AuctionsController::class, 'updatelelang'])->name('auction.updatelelang');
 
-    Route::prefix('/withdraw')->controller(WithdrawalController::class)->group(function() {
+    Route::prefix('/withdraw')->controller(WithdrawalController::class)->group(function () {
         Route::get('/', 'indexUser')->name('withdraw.index');
         Route::get('issue', 'createUser')->name('withdraw.create');
         Route::get('{withdrawal:transaction_id}', 'detailUser')->name('withdraw.detail');
@@ -191,7 +192,7 @@ Route::get('/home', RedirectUserController::class)->name('home');
 
 # Admin Routes
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function () {
-    Route::get('/',[AdminController::class, 'index'])->name('index');
+    Route::get('/', [AdminController::class, 'index'])->name('index');
     Route::resource('about', AboutUsController::class);
     Route::resource('brand', BrandController::class);
     Route::resource('product-category', ProductCategoryController::class);
@@ -201,6 +202,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::resource('store', StoreController::class);
     Route::resource('transaction', AdminTransactionController::class);
     Route::resource('income', AdminIncomeController::class);
+    Route::resource('withdraw', AdminWithdrawController::class);
 
     Route::prefix('/notification')->controller(NotificationController::class)->name('notification.')->group(function () {
         Route::get('/', 'index')->name('index');
