@@ -386,3 +386,100 @@
     </div>
   </div>
 </nav> --}}
+
+<style>
+  :root {
+    --m3-label-medium-prominent-font-family: "Roboto", Helvetica;
+    --m3-label-medium-prominent-font-weight: 600;
+    --m3-label-medium-prominent-font-size: 12px;
+    --m3-label-medium-prominent-letter-spacing: 0.5px;
+    --m3-label-medium-prominent-line-height: 16px;
+    --m3-label-medium-prominent-font-style: normal;
+    --m3-label-medium-font-family: "Roboto", Helvetica;
+    --m3-label-medium-font-weight: 500;
+    --m3-label-medium-font-size: 12px;
+    --m3-label-medium-letter-spacing: 0.5px;
+    --m3-label-medium-line-height: 16px;
+    --m3-label-medium-font-style: normal;
+    --m3-schemes-surface-container: rgba(243, 237, 247, 1);
+    --m3-schemes-on-surface: rgba(29, 27, 32, 1);
+    --m3-schemes-on-surface-variant: rgba(73, 69, 79, 1);
+  }
+
+
+  .navigation-bar {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 0px 8px;
+    position: relative;
+    background-color: var(--m3-schemes-surface-container);
+    width: 100%;
+    min-width: 412px;
+    min-height: 80px;
+  }
+
+  .navigation-bar .div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px 0px 16px;
+    position: relative;
+    flex: 1;
+    flex-grow: 1;
+  }
+
+  .navigation-bar .icon-container {
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .navigation-bar .label-text {
+    position: relative;
+    align-self: stretch;
+    font-family: var(--m3-label-medium-prominent-font-family);
+    font-weight: var(--m3-label-medium-prominent-font-weight);
+    color: var(--m3-schemes-on-surface);
+    font-size: var(--m3-label-medium-prominent-font-size);
+    text-align: center;
+    letter-spacing: var(--m3-label-medium-prominent-letter-spacing);
+    line-height: var(--m3-label-medium-prominent-line-height);
+    font-style: var(--m3-label-medium-prominent-font-style);
+  }
+
+  .navigation-bar .img {
+    position: relative;
+    width: 64px;
+    flex: 0 0 auto;
+  }
+
+  .navigation-bar .text-wrapper {
+    position: relative;
+    align-self: stretch;
+    font-family: var(--m3-label-medium-font-family);
+    font-weight: var(--m3-label-medium-font-weight);
+    color: var(--m3-schemes-on-surface-variant);
+    font-size: var(--m3-label-medium-font-size);
+    text-align: center;
+    letter-spacing: var(--m3-label-medium-letter-spacing);
+    line-height: var(--m3-label-medium-line-height);
+    font-style: var(--m3-label-medium-font-style);
+  }
+</style>
+
+<nav class="navigation-bar d-lg-none">
+  <div class="div">
+    <img class="icon-container" src="img/icon-container-2.svg" />
+    <div class="label-text">Home</div>
+  </div>
+  <div class="div">
+    <img class="img" src="img/image.svg" />
+    <div class="text-wrapper">Notifikasi</div>
+  </div>
+  <div class="div">
+    <img class="img" src="img/icon-container.svg" />
+    <div class="text-wrapper">Profil</div>
+  </div>
+</nav>

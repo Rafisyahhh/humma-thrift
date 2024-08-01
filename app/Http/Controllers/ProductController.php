@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{auctions, Product, Brand, cart, Favorite, ProductAuction, ProductCategory, ProductCategoryPivot, ProductGallery};
+use App\Models\{auctions, Product, Brand, cart, Favorite, ProductAuction, ProductCategory, ProductCategoryPivot, ProductGallery, UserStore};
 use App\Http\Requests\{StoreProductRequest, UpdateProductRequest};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +59,10 @@ class ProductController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(StoreProductRequest $request) {
+        // dd(auth()->id(), UserStore::where('user_id', auth()->id())->whereNotNull(['name', 'username', 'store_logo', 'store_cover', 'address', 'description'])->exists());
+        if (!UserStore::where('user_id', auth()->id())->whereNotNull(['name', 'nic_photo', 'store_logo', 'store_cover', 'address', 'description'])->exists()) {
+            return redirect()->back()->withErrors(['user' => 'user_error']);
+        }
         $data = $request->validated();
         $data['thumbnail'] = $this->storeFile($request->file('thumbnail'), 'uploads/thumbnails');
         $data['user_id'] = Auth::id();

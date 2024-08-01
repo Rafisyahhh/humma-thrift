@@ -84,6 +84,12 @@
   {{-- @if ($errors->any())
     {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif --}}
+  @if ($errors->has('user'))
+    <div class="alert alert-danger" role="alert">
+      Maaf, informasi anda kurang lengkap. Tolong isi semua informasi yang dibutuhkan di <a href="{{ route('home') }}"
+        class="alert-link" style="font-size: unset">Profil</a> anda
+    </div>
+  @endif
   <div class="justify-content-center">
     <form action="{{ isset($is_edit) ? route('seller.product.update', $product->id) : route('seller.product.store') }}"
       id="formDropzone" method="post" enctype="multipart/form-data">
