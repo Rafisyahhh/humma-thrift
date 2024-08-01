@@ -176,8 +176,8 @@
             left: 0;
         }
 
-        .row-rating .gl-star-rating--stars[class*=" s"]>span {
-            background-size: unset;
+        .gl-star-rating--stars[class*=" s"]>span {
+            background-size: 78% !important;
         }
 
         .badge {
@@ -246,6 +246,19 @@
             color: black;
             text-decoration: none;
             cursor: pointer;
+        }
+
+
+        .circular-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            overflow: hidden;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            object-fit: cover;
+            object-position: center;
         }
     </style>
 @endpush
@@ -569,51 +582,88 @@
                 <div class="tab-pane fade mt-5" id="ulasan-tab-pane" role="tabpanel" aria-labelledby="ulasan-tab"
                     tabindex="0">
                     <ul class="list-group list-group-flush" style="height: unset;">
-                        @forelse ($reviews as $item)
-                            <li class="list-group-item d-flex mt-5 rounded pt-3 w-100"
-                                style="height: 20rem; background-color: rgba(202, 202, 202, 0.2); position: unset; transform: translateY(-25%)">
-                                <div style="width: 30rem;">
-                                    <img src="{{ asset("storage/{$item->product->thumbnail}") }}"
-                                        class="img-fluid rounded mb-2 float-start" style="width: 7.5rem" />
-                                    <div class="h-50"></div>
-                                    <h5 class="text-start">{{ $item->product->title }}</h5>
-                                    <p class="text-start">Warna: {{ $item->product->color }}</p>
-                                </div>
-                                <div class="w-100">
-                                    <div class="d-flex position-relative mb-4">
-                                        <img src="{{ asset(isset($item->user->avatar) ? "storage/{$item->user->avatar}" : 'template-assets/front/assets/images/homepage-one/aurthor-img-1.webp') }}"
-                                            class="img-fluid" style="width: 6rem; border-radius: 50%" />
-                                        <div class="ms-3 w-100">
-                                            <div class="d-flex position-relative">
-                                                <h5>{{ $item->user->name }}</h5>
-                                                <p class="position-absolute opacity-75" style="right: 0;">
-                                                    {{ $item->created_at }}</p>
-                                            </div>
-                                            <div class="row-rating">
-                                                <div class="rating">
-                                                    <select class="star-rating" name="product_rating"
-                                                        data-options="{&quot;clearable&quot;:false, &quot;tooltip&quot;:false}">
-                                                        @foreach (['1', '2', '3', '4', '5'] as $rating)
-                                                            <option value="{{ $rating }}"
-                                                                @selected($rating == $item->star)></option>
-                                                        @endforeach
-                                                    </select>
+                        <section class="about-feedback product ">
+                            <div class="container p-0">
+                                <div class="position-relative px-5">
+                                    <div class="swiper about-swiper">
+                                        <div class="swiper-wrapper d-flex flex-row">
+                                            @forelse ($reviews as $item)
+                                                <div class="swiper-slide testimonial-wrapper">
+                                                    <div class="blockquote w-100">
+                                                        <span class="d-flex flex-row position-relative">
+                                                            <svg width="38" height="30" viewBox="0 0 38 30"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M7.82644 11.9446C8.29006 9.03034 11.9328 5.91742 14.7808 5.85119C14.9795 5.85119 15.1782 5.78496 15.3107 5.65249C15.4431 5.58626 15.5756 5.52003 15.6418 5.32133C16.6353 3.46683 16.1055 2.00972 14.4497 0.817536C12.5289 -0.573341 9.48225 0.817536 7.9589 2.07595C4.11743 5.2551 0.20973 10.7523 0.408427 15.9847C-0.253896 19.4951 -0.121431 23.2703 0.872052 26.3832C1.53437 28.3702 3.45511 29.3636 5.44208 29.4961C7.42905 29.6287 11.5354 30.2247 13.3237 29.0326C15.112 27.8403 15.2445 25.5222 15.4431 23.5353C15.6418 21.3496 16.2379 17.2431 14.3834 15.5211C12.5289 13.8653 7.23035 15.6536 7.82644 11.9446Z"
+                                                                    fill="#f6f6f6" />
+                                                                <path
+                                                                    d="M29.683 11.9446C30.1466 9.03034 33.7893 5.91742 36.6374 5.85119C36.8361 5.85119 37.0348 5.78496 37.1673 5.65249C37.2998 5.58626 37.4322 5.52003 37.4985 5.32133C38.492 3.46683 37.9622 2.00972 36.3064 0.817536C34.3856 -0.573341 31.3389 0.817536 29.8155 2.07595C25.974 5.2551 22.0663 10.7524 22.265 15.9847C21.6027 19.4951 21.7351 23.2703 22.7285 26.3832C23.3908 28.3702 25.3116 29.3636 27.2987 29.4961C29.2856 29.6287 33.392 30.2247 35.1803 29.0326C36.9685 27.8403 37.101 25.5222 37.2997 23.5353C37.4984 21.3496 38.0945 17.2431 36.24 15.5211C34.3855 13.8653 29.0207 15.6536 29.683 11.9446Z"
+                                                                    fill="#f6f6f6" />
+                                                            </svg>
+                                                        </span>
+                                                        {{-- <div class="mt-2 position-absolute" style="top:0; right: 45px;">
+                                                            <tr class="table-row ticket-row store-header"
+                                                                style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100%;">
+                                                                <td class="table-wrapper wrapper-product"
+                                                                    style="display: flex; align-items: center;">
+                                                                    <div class="form-check"
+                                                                        style="display: flex; align-items: center; margin-left: 1rem;">
+                                                                        <i class="fa-solid fa-store"
+                                                                            style="margin-left: -3rem; color: #215791; font-size: 1.75rem;"></i>
+                                                                        <a href="{{ route('store.profile', ['store' => $item->product->userStore->username]) }}"
+                                                                            style="font-weight: bold; margin-left: 1rem; font-size: 1.55rem; color: gray;">{{ $item->product->userStore->name }}</a>
+                                                                    </div>
+                                                                </td><br>
+                                                            </tr>
+                                                        </div> --}}
+                                                    </div>
+                                                    <div style="width: 30rem; margin-bottom: 30px; ">
+                                                        <img src="{{ asset("storage/{$item->product->thumbnail}") }}"
+                                                            class="img-fluid rounded float-start me-5"
+                                                            style="width: 7.5rem; margin-top:50px;" />
+                                                        <div class="h-50"></div>
+                                                        <h5 class="text-start">{{ $item->product->title }}</h5>
+                                                        <p class="text-start">Warna: {{ $item->product->color }}</p>
+                                                    </div>
+                                                    <p class="testimonial-details">{{ $item->comment }}
+                                                    </p>
+                                                    <div class="ratings d-flex gap-2 align-items-center">
+                                                        <select class="star-rating" name="product_rating"
+                                                            data-options="{&quot;clearable&quot;:false, &quot;tooltip&quot;:false}">
+                                                            @foreach (['1', '2', '3', '4', '5'] as $rating)
+                                                                <option value="{{ $rating }}"
+                                                                    @selected($rating == $item->star)></option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="divider"></div>
+                                                    <div class="testimonial-info">
+                                                        <div class="testimonial-img">
+                                                            <img class="circular-image img-fluid fit-center"
+                                                                src="{{ asset(isset($item->user->avatar) ? "storage/{$item->user->avatar}" : 'template-assets/front/assets/images/homepage-one/aurthor-img-1.webp') }}">
+                                                        </div>
+
+                                                        <div class="testimonial-info-details">
+                                                            <h5 class="testimonial-name">{{ $item->user->name }}</h5>
+                                                            <p class="testimonial-title">{{ $item->created_at }}</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            @empty
+                                                <div class="col-lg-12 d-flex flex-column align-items-center">
+                                                    <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong"
+                                                        style="width: 200px; height: 200px;">
+                                                    <h5 class="text-center" style="color: #000000">Upss..</h5>
+                                                    <p class="text-center" style="color: #000000">Maaf, saat ini masih
+                                                        belum ada ulasan</p>
+                                                </div>
+                                            @endforelse
                                         </div>
                                     </div>
-                                    <p class="border-top pt-2 text-start" style="min-height: 5rem">{{ $item->comment }}
-                                    </p>
+                                    <div class="swiper-pagination"></div>
                                 </div>
-                            </li>
-                        @empty
-                                <div class="col-lg-12 d-flex flex-column align-items-center">
-                                    <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong"
-                                        style="width: 200px; height: 200px;">
-                                    <h5 class="text-center" style="color: #000000">Upss..</h5>
-                                    <p class="text-center" style="color: #000000">Maaf, saat ini masih belum ada ulasan</p>
-                                </div>
-                        @endforelse
+                            </div>
+                        </section>
                     </ul>
                 </div>
             </div>
@@ -672,3 +722,44 @@
         });
     </script>
 @endpush
+
+
+
+
+{{--
+                            <li class="list-group-item d-flex mt-5 rounded pt-3 w-100"
+                                style="height: 20rem; background-color: rgba(202, 202, 202, 0.2); position: unset; transform: translateY(-25%)">
+                                <div style="width: 30rem;">
+                                    <img src="{{ asset("storage/{$item->product->thumbnail}") }}"
+                                        class="img-fluid rounded mb-2 float-start" style="width: 7.5rem" />
+                                    <div class="h-50"></div>
+                                    <h5 class="text-start">{{ $item->product->title }}</h5>
+                                    <p class="text-start">Warna: {{ $item->product->color }}</p>
+                                </div>
+                                <div class="w-100">
+                                    <div class="d-flex position-relative mb-4">
+                                        <img src="{{ asset(isset($item->user->avatar) ? "storage/{$item->user->avatar}" : 'template-assets/front/assets/images/homepage-one/aurthor-img-1.webp') }}"
+                                            class="img-fluid" style="width: 6rem; border-radius: 50%" />
+                                        <div class="ms-3 w-100">
+                                            <div class="d-flex position-relative">
+                                                <h5>{{ $item->user->name }}</h5>
+                                                <p class="position-absolute opacity-75" style="right: 0;">
+                                                    {{ $item->created_at }}</p>
+                                            </div>
+                                            <div class="row-rating">
+                                                <div class="rating">
+                                                    <select class="star-rating" name="product_rating"
+                                                        data-options="{&quot;clearable&quot;:false, &quot;tooltip&quot;:false}">
+                                                        @foreach (['1', '2', '3', '4', '5'] as $rating)
+                                                            <option value="{{ $rating }}"
+                                                                @selected($rating == $item->star)></option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="border-top pt-2 text-start" style="min-height: 5rem">{{ $item->comment }}
+                                    </p>
+                                </div>
+                            </li> --}}
