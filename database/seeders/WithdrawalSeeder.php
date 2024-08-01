@@ -19,7 +19,7 @@ class WithdrawalSeeder extends Seeder {
                 'user_id' => 16,
                 'user_store_id' => 1,
                 'bank_id' => random_int(0, 107),
-                'bank_number' => 7974258162899519,
+                'bank_number' => random_int(100000000000, 999999999999),
                 'amount' => $this->random_int_with_fixed_suffix(50_000, 5_000_000),
                 'transaction_id' => Str::upper("WTH-{" . Str::random(16) . "}"),
             ]);
