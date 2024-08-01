@@ -57,8 +57,8 @@ class DashboardUserController extends Controller
         foreach ($transactionsbulan as $transaction) {
             $datas[$transaction->month - 1] = $transaction->total;
         }
-        $countUnpaid = TransactionOrder::where('status','UNPAID')->count();
-        $countDelivery = TransactionOrder::where('delivery_status','selesai')->count();
+        $countUnpaid = TransactionOrder::where('user_id', auth()->user()->id)->where('status','UNPAID')->count();
+        $countDelivery = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status','selesai')->count();
         return view('user.user', compact(
             'carts',
             'countcart',
