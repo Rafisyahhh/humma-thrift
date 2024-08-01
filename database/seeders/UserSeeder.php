@@ -16,8 +16,13 @@ class UserSeeder extends Seeder {
             'email' => 'admin@humma-thrift.com',
         ]);
 
-        User::factory(5)->withRole('admin')->create();
+        User::factory(4)->withRole('admin')->create();
         User::factory(10)->withRole('user')->create();
+
+        User::factory()->withRole('user')->create([
+            'name' => 'Toko Ajaib',
+            'email' => 'shop1@humma-thrift.com',
+        ]);
 
         $teamAccount = [
             [
