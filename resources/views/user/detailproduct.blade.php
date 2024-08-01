@@ -908,6 +908,9 @@
                                                 </div>
                                             </div>
                                         @empty
+                                        <div class="col-lg-12 d-flex flex-column align-items-center">
+                                            <p class="text-center" style="color: #8b8989">Maaf, tidak ada produk serupa untuk produk reguler.</p>
+                                        </div>
                                         @endforelse
                                     @endif
                                     @if ($similarProductAuction)
@@ -1119,6 +1122,9 @@
                                             </div>
                                             {{-- end lelang modal --}}
                                         @empty
+                                        <div class="col-lg-12 d-flex flex-column align-items-center">
+                                            <p class="text-center" style="color: #8b8989">Maaf, tidak ada produk serupa untuk sesi lelang.</p>
+                                        </div>
                                         @endforelse
                                     @endif
                                 </div>
