@@ -123,17 +123,21 @@
           var windowTop = $(window).scrollTop();
 
           if (stickyTop < windowTop) {
+            $filter.find('span.list-text').css({
+              'color': 'blue'
+            });
+            $filter.find('span.dropdown-icon').css({
+              'background-color': 'blue'
+            });
             $filter.css({
               position: 'fixed',
               top: '0',
               width: filterWidth
             });
           } else {
-            $filter.css({
-              position: 'relative',
-              top: '',
-              width: ''
-            });
+            $filter.find('span.list-text').attr('style', '');
+            $filter.find('span.dropdown-icon').attr('style', '');
+            $filter.attr('style', '');
           }
         });
       });
