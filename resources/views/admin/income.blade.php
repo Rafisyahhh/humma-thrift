@@ -560,17 +560,17 @@
                 {
                     label: 'Penghasilan Bersih per Bulan',
                     data: @json($monthlyNetIncome),
-                    backgroundColor: 'rgba(25, 255, 0, 0.25)',
-                    borderColor: 'rgba(25, 255, 0, 1)',
+                    backgroundColor: 'rgb(222, 255, 249)',
+                    borderColor: 'rgb(136, 215, 219)',
                     borderWidth: 3,
                     borderCapStyle: 'round',
                     borderJoinStyle: 'round',
-                    pointBackgroundColor: 'rgba(25, 255, 0, 1)',
+                    pointBackgroundColor: 'rgb(136, 215, 219)',
                     pointBorderColor: '#fff',
                     pointBorderWidth: 2,
                     pointRadius: 5,
                     pointHoverRadius: 7,
-                    pointHoverBackgroundColor: 'rgba(25, 255, 0, 1)',
+                    pointHoverBackgroundColor: 'rgb(136, 215, 219)',
                     pointHoverBorderColor: '#fff',
                     pointHoverBorderWidth: 2,
                     fill: true
@@ -652,8 +652,6 @@
                         backgroundColor: gradientHarian,
                         borderColor: 'rgba(25, 56, 121, 1)',
                         borderWidth: 3,
-                        borderCapStyle: 'round',
-                        borderJoinStyle: 'round',
                         pointBackgroundColor: 'rgba(25, 56, 121, 1)',
                         pointBorderColor: '#fff',
                         pointBorderWidth: 2,
@@ -662,65 +660,65 @@
                         pointHoverBackgroundColor: 'rgba(25, 56, 121, 1)',
                         pointHoverBorderColor: '#fff',
                         pointHoverBorderWidth: 2,
-                        fill: true
+                        fill: false, // Tidak mengisi area di bawah garis
+                        tension: 0.1 // Garis lurus
                     },
                     {
                         label: 'Penghasilan Bersih per Hari',
                         data: @json($dailySales),
-                        backgroundColor: 'rgba(25, 255, 0, 0.25)',
-                        borderColor: 'rgba(25, 255, 0, 1)',
+                        backgroundColor: 'rgb(222, 255, 249)',
+                        borderColor: 'rgb(136, 215, 219)',
                         borderWidth: 3,
-                        borderCapStyle: 'round',
-                        borderJoinStyle: 'round',
-                        pointBackgroundColor: 'rgba(25, 255, 0, 1)',
+                        pointBackgroundColor: 'rgb(136, 215, 219)',
                         pointBorderColor: '#fff',
                         pointBorderWidth: 2,
                         pointRadius: 5,
                         pointHoverRadius: 7,
-                        pointHoverBackgroundColor: 'rgba(25, 255, 0, 1)',
+                        pointHoverBackgroundColor: 'rgb(136, 215, 219)',
                         pointHoverBorderColor: '#fff',
                         pointHoverBorderWidth: 2,
-                        fill: true
+                        fill: true,
+                        tension: 0.1 // Garis lurus
                     }
                 ]
             };
 
             var options = {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        display: false
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            display: false
+                        },
+                        border: {
+                            display: false
+                        }
                     },
-                    ticks: {
-                        display: false
-                    },
-                    border: {
-                        display: false
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            display: false
+                        },
+                        border: {
+                            display: false
+                        }
                     }
                 },
-                x: {
-                    grid: {
-                        display: false
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true
                     },
-                    ticks: {
-                        display: false
-                    },
-                    border: {
-                        display: false
+                    tooltip: {
+                        enabled: true
                     }
                 }
-            },
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true
-                },
-                tooltip: {
-                    enabled: true
-                }
-            }
-        };
+            };
 
             new Chart(ctxHarian, {
                 type: 'line',
@@ -729,4 +727,5 @@
             });
         });
     </script>
+
 @endpush
