@@ -126,13 +126,13 @@
             $filter.css({
               position: 'fixed',
               top: '0',
-              width: filterWidth
+              width: filterWidth,
             });
           } else {
             $filter.css({
               position: 'relative',
               top: '',
-              width: ''
+              width: '',
             });
           }
         });
