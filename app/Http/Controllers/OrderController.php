@@ -23,109 +23,43 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function index(Request $request)
-    // {
-    //     $transaction = Order::latest()->get();
-    //     $countFavorite = Favorite::where('user_id', auth()->id())->count();
-    //     $carts = cart::where('user_id', auth()->id())
-    //         ->whereNotNull('product_id')
-    //         ->orderBy('created_at')
-    //         ->get();
-    //     $countcart = cart::where('user_id', auth()->id())->count();
-    //     if ($request->ajax()) {
-
-    //     }
-    //     // $deliveryStatus = $request->input('delivery_status');
-    //     // $query = Order::latest();
-    //     // if ($deliveryStatus) {
-    //     //     $query->whereHas('transaction_order', function ($q) use ($deliveryStatus) {
-    //     //         $q->where('delivery_status', $deliveryStatus);
-    //     //     });
-    //     // }
-    //     // $transaction = $query->get();
-
-    //     return view('user.order', compact('carts', 'countcart', 'countFavorite', 'transaction'));
-    // }
-
-    // benar 1
-    // public function index(Request $request)
-    // {
-    //     $countFavorite = Favorite::where('user_id', auth()->id())->count();
-    //     $carts = Cart::where('user_id', auth()->id())
-    //         ->whereNotNull('product_id')
-    //         ->orderBy('created_at')
-    //         ->get();
-    //     $countcart = Cart::where('user_id', auth()->id())->count();
-
-    //     if ($request->ajax()) {
-    //         $deliveryStatus = $request->input('delivery_status');
-    //         $auctionStatus = $request->input('auction_status');
-
-    //         $query = Order::latest();
-    //         if ($deliveryStatus) {
-    //             $query->whereHas('transaction_order', function ($q) use ($deliveryStatus) {
-    //                 $q->where('delivery_status', $deliveryStatus);
-    //             });
-    //         }
-    //         if ($auctionStatus) {
-    //             $query->whereHas('product_auction', function ($q) use ($auctionStatus) {
-    //                 $q->where('auction_status', $auctionStatus);
-    //             });
-    //         }
-    //         $transaction = $query->get();
-
-    //         // Render the partial view with the filtered transactions
-    //         return view('user.filter', compact('transaction'))->render();
-    //     }
-
-    //     $transaction = Order::latest()->get();
-
-    //     return view('user.order', compact('carts', 'countcart', 'countFavorite', 'transaction'));
-    // }
-
-
     public function index(Request $request)
-{
-    $countFavorite = Favorite::where('user_id', auth()->id())->count();
-    $carts = Cart::where('user_id', auth()->id())
-        ->whereNotNull('product_id')
-        ->orderBy('created_at')
-        ->get();
-    $countcart = Cart::where('user_id', auth()->id())->count();
+    {
+        $countFavorite = Favorite::where('user_id', auth()->id())->count();
+        $carts = Cart::where('user_id', auth()->id())
+            ->whereNotNull('product_id')
+            ->orderBy('created_at')
+            ->get();
+        $countcart = Cart::where('user_id', auth()->id())->count();
 
-    $deliveryStatus = $request->input('delivery_status');
+        $deliveryStatus = $request->input('delivery_status');
 
-    if ($request->ajax()) {
-        $queryOrders = Order::latest();
-        $queryAuctions = Order::latest();
+        if ($request->ajax()) {
+            $queryOrders = Order::latest();
+            $queryAuctions = Order::latest();
 
-        if ($deliveryStatus) {
             $queryOrders->whereHas('transaction_order', function ($q) use ($deliveryStatus) {
-                $q->where('delivery_status', $deliveryStatus);
+                $q->where('user_id', Auth::user()->id)->where('delivery_status', $deliveryStatus);
             });
 
             $queryAuctions->whereHas('transaction_order', function ($q) use ($deliveryStatus) {
-                $q->where('delivery_status', $deliveryStatus);
+                $q->where('user_id', Auth::user()->id)->where('delivery_status', $deliveryStatus);
             });
+
+            $orders = $queryOrders->get();
+            $auctions = $queryAuctions->get();
+
+            return response()->json([
+                'orderHTML' => view('user.filter', compact('orders'))->render(),
+                'auctionHTML' => view('user.filterauctions', compact('auctions'))->render(),
+            ]);
         }
 
-        $orders = $queryOrders->get();
-        $auctions = $queryAuctions->get();
+        $orders = Order::latest()->get();
+        $auctions = Order::latest()->get();
 
-        // Render the partial views with the filtered data
-        return response()->json([
-            'orderHTML' => view('user.filter', compact('orders'))->render(),
-            'auctionHTML' => view('user.filterauctions', compact('auctions'))->render(),
-        ]);
+        return view('user.order', compact('carts', 'countcart', 'countFavorite', 'orders', 'auctions'));
     }
-
-    $orders = Order::latest()->get();
-    $auctions = Order::latest()->get();
-
-    return view('user.order', compact('carts', 'countcart', 'countFavorite', 'orders', 'auctions'));
-}
-
-
 
 
     public function indexTransaction()
