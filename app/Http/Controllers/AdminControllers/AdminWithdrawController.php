@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Withdrawal;
 use Illuminate\Http\Request;
 
 class AdminWithdrawController extends Controller {
@@ -46,7 +47,20 @@ class AdminWithdrawController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id) {
-        //
+        $request->validate([
+            'status' => 'required|in:processed,complete',
+        ], [
+            'status.required' => 'Kolom STATUS wajib diisi.',
+        ]);
+
+        $withdraw = Withdrawal::find($id);
+        // dd($withdraw);
+
+        if ($withdraw) {
+            $withdraw->status = $request->status;
+            $withdraw->save();
+        }
+        return redirect()->back()->with('success', 'Status penarikan berhasil diperbarui.');
     }
 
     /**
