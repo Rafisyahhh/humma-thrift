@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Withdrawal;
+use App\Notifications\CustomMessageNotification;
 use Illuminate\Http\Request;
 
 class AdminWithdrawController extends Controller {
@@ -59,7 +60,25 @@ class AdminWithdrawController extends Controller {
             $withdraw->status = $request->status;
             $withdraw->save();
             if ($request->status == "complete") {
-
+                $withdraw->user()->notify(new CustomMessageNotification([
+                    "title" => "Penarikan anda diterima",
+                    "message" => "Halo {$withdraw->user()->name}, Penarikan anda dengan jumlah $withdraw->amount telah dikirim ke Bank {$withdraw->bank()->name} dengan No. Rekening $withdraw->bank_number",
+                    "action" => route('seller.withdraw.index')
+                ], [
+                    "subject" => "Penarikan anda diterima",
+                    "greeting" => "Halo {$withdraw->user()->name}, Penarikan anda dengan jumlah $withdraw->amount telah dikirim ke Bank {$withdraw->bank()->name} dengan No. Rekening $withdraw->bank_number",
+                    "line" => "Terima penarikan!."
+                ]));
+            } elseif ($request->status == "failed") {
+                $withdraw->user()->notify(new CustomMessageNotification([
+                    "title" => "Terjadi kesalahan dengan penarikan anda",
+                    "message" => $request->input('message'),
+                    "action" => route('seller.withdraw.index')
+                ], [
+                    "subject" => "Terjadi kesalahan dengan penarikan anda",
+                    "greeting" => $request->input('message'),
+                    "line" => "Tarik ulang?."
+                ]));
             }
             return redirect()->back()->with('success', 'Status penarikan berhasil diperbarui.');
         }

@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class CustomAdminMessageNotification extends Notification {
+class CustomMessageNotification extends Notification {
     use Queueable;
 
     public $normalMessage;
