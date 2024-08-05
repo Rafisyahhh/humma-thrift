@@ -162,7 +162,8 @@
     const moneyFormat = new Intl.NumberFormat('id', {
       style: 'currency',
       currency: 'IDR',
-      maximumSignificantDigits: 1
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
     });
     const {
       table
@@ -232,9 +233,9 @@
       const {
         id
       } = table.row($(this).closest("tr")).data();
-      $(`#${idModal}-modal`).find("form").attr("action", editUrl?.replace(":id:", id));
+      $(`#${this.attr("modal")}-modal`).find("form").attr("action", editUrl?.replace(":id:", id));
 
-      $(`#${idModal}-modal`).modal('show');
+      $(`#${this.attr("modal")}-modal`).modal('show');
     });
   </script>
 @endpush
