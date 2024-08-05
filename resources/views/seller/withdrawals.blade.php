@@ -21,7 +21,7 @@
         }
 
         .table-header {
-            background-color: #343a40;
+            background-color: #1c3879;
             color: #fff;
             font-weight: bold;
             border-radius: .5rem;
