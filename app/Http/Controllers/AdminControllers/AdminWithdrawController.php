@@ -48,7 +48,7 @@ class AdminWithdrawController extends Controller {
      */
     public function update(Request $request, string $id) {
         $request->validate([
-            'status' => 'required|in:processed,complete',
+            'status' => 'required|in:failed,processed,complete',
         ], [
             'status.required' => 'Kolom STATUS wajib diisi.',
         ]);
