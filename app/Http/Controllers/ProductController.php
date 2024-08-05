@@ -60,7 +60,7 @@ class ProductController extends Controller {
      */
     public function store(StoreProductRequest $request) {
         // dd(auth()->id(), UserStore::where('user_id', auth()->id())->whereNotNull(['name', 'username', 'store_logo', 'store_cover', 'address', 'description'])->exists());
-        if (!UserStore::where('user_id', auth()->id())->whereNotNull(['name', 'nic_photo', 'store_logo', 'store_cover', 'address', 'description'])->exists()) {
+        if (!UserStore::where('user_id', auth()->id())->whereNotNull(['name', 'nic_owner', 'store_logo', 'store_cover', 'address', 'description'])->exists()) {
             return redirect()->back()->withErrors(['user' => 'user_error']);
         }
         $data = $request->validated();

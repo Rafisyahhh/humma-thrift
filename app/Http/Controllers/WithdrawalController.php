@@ -85,11 +85,11 @@ class WithdrawalController extends Controller {
             foreach ($listAdmin as $admin) {
                 $admin->notify(new CustomAdminMessageNotification([
                     "subject" => "Seorang Seller ingin menarik",
-                    "greeting" => "Halo $admin->name, Seorang seller bernama {$user->name} ingin menarik Saldo sebesar {$this->_withdrawal->where('status', WithdrawalStatusEnum::COMPLETED)->where('user_id', $user->id)->sum('amount')}",
+                    "greeting" => "Halo $admin->name, Seorang seller bernama {$user->name} ingin menarik Saldo sebesar {$data->amount}",
                     "line" => "Terima penarikan!."
                 ], [
                     "title" => "Seorang Seller ingin menarik",
-                    "message" => "Halo $admin->name, Seorang seller bernama {$user->name} ingin menarik Saldo sebesar {$this->_withdrawal->where('status', WithdrawalStatusEnum::COMPLETED)->where('user_id', $user->id)->sum('amount')}",
+                    "message" => "Halo $admin->name, Seorang seller bernama {$user->name} ingin menarik Saldo sebesar {$data->amount}",
                     "action" => route('admin.withdraw.index')
                 ]));
             }
