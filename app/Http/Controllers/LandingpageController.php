@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AboutUs;
 use App\Models\auctions;
 use App\Models\Brand;
 use App\Models\cart;
@@ -46,25 +47,18 @@ class LandingpageController extends Controller {
         return view('landing.brand', compact('brands', 'countFavorite', 'carts', 'countcart'));
     }
 
-    // public function product(){
-    //     $products = Product::all();
-    //     $brands = Brand::all();
-    //     $categories = ProductCategory::all();
-    //     $product_auction = ProductAuction::all();
-    //     return view('landing.produk', compact('products','brands','categories','product_auction'));
-    // }
+
+    public function aboutUs() {
+        $aboutUs = AboutUs::all();
+
+        return view('landing.about', compact('aboutUs'));
+    }
 
 
     public function store() {
         $store = UserStore::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
 
-        return view('landing.toko', compact('store', 'carts', 'countcart', 'countFavorite'));
+        return view('landing.toko', compact('store'));
     }
 
     public function wishlist(Request $request) {
@@ -107,14 +101,8 @@ class LandingpageController extends Controller {
     public function cart() {
         $cart = cart::all();
         $product_category_pivots = ProductCategoryPivot::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id', auth()->id())->count();
-        $carts = cart::where('user_id', auth()->id())
-            ->whereNotNull('product_id')
-            ->orderBy('created_at')
-            ->get();
 
-        return view('user.keranjang', compact('cart', 'product_category_pivots', 'carts', 'countcart', 'countFavorite'));
+        return view('user.keranjang', compact('cart', 'product_category_pivots'));
     }
 
     // Tambahkan metode regular

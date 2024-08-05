@@ -17,12 +17,13 @@ class DatabaseSeeder extends Seeder {
             BrandSeeder::class,
             AboutSeeder::class,
             EventSeeder::class,
+            BankSeeder::class,
             UserStoreSeeder::class,
             ProductSeeder::class,
             ProductAuctionSeeder::class,
             ProductGallerySeeder::class,
             ProductCategoryPivotSeeder::class,
-            BankSeeder::class
+            // WithdrawalSeeder::class,
         ]);
     }
 }

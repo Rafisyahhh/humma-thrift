@@ -70,7 +70,7 @@
     </style>
 @endpush
 
-@php
+{{-- @php
     $data = [
         'bulan' => [
             'Januari',
@@ -88,7 +88,7 @@
         ],
         'pengeluaran' => [20000, 35000, 40000, 30000, 45000, 60000, 50000, 70000, 20000, 20000, 30000, 40000],
     ];
-@endphp
+@endphp --}}
 
 @section('content')
     <section id="quick-links" class=" pb-4 mb-4 border-bottom">
@@ -465,7 +465,66 @@
 
 
 
+
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctxBulanan = document.getElementById('pengeluaran').getContext('2d');
+            const gradientBulanan = ctxBulanan.createLinearGradient(0, 0, 0, 250);
+            gradientBulanan.addColorStop(0, 'rgba(25, 56, 121, 0.25)');
+            gradientBulanan.addColorStop(1, 'rgba(25, 56, 121, 0.0)');
+
+            const monthlyLabels = @json($months);
+            const monthlyGrossSales = @json($monthlyGrossData);
+
+            const dataBulanan = {
+                labels: monthlyLabels,
+                datasets: [{
+                        label: 'Pengeluaran Kotor per Bulan',
+                        data: monthlyGrossSales,
+                        backgroundColor: gradientBulanan,
+                        borderColor: 'rgba(25, 56, 121, 1)',
+                        borderWidth: 3,
+                        fill: true
+                    }
+
+                ]
+            };
+
+            const monthlyOptions = {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true
+                    },
+                    tooltip: {
+                        enabled: true
+                    }
+                }
+            };
+
+            new Chart(ctxBulanan, {
+                type: 'line',
+                data: dataBulanan,
+                options: monthlyOptions
+            });
+        });
+    </script>
+
+
+    {{-- <script>
         var labels = @json($months);
         var data = @json($datas);
 
@@ -490,7 +549,8 @@
                 }
             }
         });
-    </script>
+    </script> --}}
+
     {{-- <script>
         $(document).ready(function() {
             const dataBulanan = {

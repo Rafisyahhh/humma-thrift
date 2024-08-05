@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminControllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAboutRequest;
 use App\Http\Requests\UpdateAboutRequest;
 use App\Models\AboutUs;
-use App\Models\cart;
-use App\Models\Favorite;
 use Illuminate\Support\Facades\File;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class AboutUsController extends Controller {
+class AdminAboutUsController extends Controller {
     /**
      * Display a listing of the resource.
      */
@@ -19,30 +17,6 @@ class AboutUsController extends Controller {
         $aboutUs = AboutUs::all();
 
         return view('admin.about', compact('aboutUs'));
-    }
-
-    public function user() {
-        $aboutUs = AboutUs::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id',auth()->id())->count();
-        $carts = cart::where('user_id', auth()->id())
-                        ->whereNotNull('product_id')
-                        ->orderBy('created_at')
-                        ->get();
-
-        return view('user.tentang', compact('aboutUs', 'countFavorite', 'countcart', 'carts'));
-    }
-
-    public function landingpage() {
-        $aboutUs = AboutUs::all();
-        $countFavorite = Favorite::where('user_id', auth()->id())->count();
-        $countcart = cart::where('user_id',auth()->id())->count();
-        $carts = cart::where('user_id', auth()->id())
-                        ->whereNotNull('product_id')
-                        ->orderBy('created_at')
-                        ->get();
-
-        return view('landing.about', compact('aboutUs', 'countFavorite', 'countcart', 'carts'));
     }
 
     /**

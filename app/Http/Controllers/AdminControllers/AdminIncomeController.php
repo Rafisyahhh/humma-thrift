@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminControllers;
 
+use App\Http\Controllers\Controller;
 use App\Enums\WithdrawalStatusEnum;
 use App\Models\TransactionOrder;
 use App\Models\Withdrawal;
@@ -11,21 +12,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-class AdminIncomeController extends Controller
-{
+class AdminIncomeController extends Controller {
     private TransactionOrder $_transactions;
     private Withdrawal $_withdrawal;
 
-    public function __construct(TransactionOrder $transactions, Withdrawal $withdrawal)
-    {
+    public function __construct(TransactionOrder $transactions, Withdrawal $withdrawal) {
         $this->_transactions = $transactions;
         $this->_withdrawal = $withdrawal;
     }
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $user = Auth::user();
         $currentDate = now();
 
@@ -52,8 +50,8 @@ class AdminIncomeController extends Controller
 
         $accountBalance = $netIncome - $withdrawalTotal;
 
-        // Menampilkan grafik pesanan
-        $lastOfMonth = Carbon::now()->endOfMonth();
+        $currentDate = Carbon::now();
+        $lastOfMonth = $currentDate->endOfMonth();
         $rawDailySales = $this->_transactions
             ->where('status', 'PAID')
             ->where('delivery_status', 'selesai')
@@ -68,8 +66,10 @@ class AdminIncomeController extends Controller
             return $sales ? $sales->total * 0.1 : 0; // 10% dari setiap transaksi
         });
 
-        $dailyGrossSales = $rawDailySales->map(function ($sales) {
-            return $sales->total;
+        $dailyGrossSales = collect(range(1, (int) $lastOfMonth->format('d')))->map(function ($day) use ($rawDailySales, $currentDate) {
+            $salesDate = $currentDate->format('Y-m-') . str_pad($day, 2, '0', STR_PAD_LEFT);
+            $sales = $rawDailySales->firstWhere('date', $salesDate);
+            return $sales ? $sales->total : 0;
         });
 
         // Grafik bulanan
@@ -94,54 +94,48 @@ class AdminIncomeController extends Controller
             return $monthlySales->get($month, ['total' => 0])['total'];
         })->toArray();
 
-        return view('admin.income', compact('transactions', 'transactionTotal', 'netIncome','monthlyNetIncome', 'dailySales', 'dailyGrossSales','months', 'monthlyGrossSales', 'accountBalance'));
+        return view('admin.income', compact('transactions', 'transactionTotal', 'netIncome', 'monthlyNetIncome', 'dailySales', 'dailyGrossSales', 'months', 'monthlyGrossSales', 'accountBalance'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
+    public function show(string $id) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
+    public function edit(string $id) {
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
+    public function update(Request $request, string $id) {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
+    public function destroy(string $id) {
         //
     }
 }

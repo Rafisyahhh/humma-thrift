@@ -212,7 +212,7 @@
 
                                 @if (!$order->product()->whereHas('ulasan', function ($query) {
                                     $query->where('user_id', Auth::user()->id);
-                                })->exists())
+                                })->exists()) 
                                     <td>
                                         <div class="wrapper-content me-5" style="float: right; text-align: end;">
                                             <button class="shop-btn openModal" data-id="reviewModal-{{ $order->id }}">Beri

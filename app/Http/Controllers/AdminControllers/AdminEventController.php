@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminControllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 
-class EventController extends Controller {
+class AdminEventController extends Controller {
     /**
      * Display a listing of the resource.
      */

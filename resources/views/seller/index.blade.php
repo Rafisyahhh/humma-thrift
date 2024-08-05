@@ -117,7 +117,7 @@
 
                         <div class="col-lg-12">
                             <div class="info-section">
-                                <div class="row">
+                                <div class="row w-100">
                                     <div class="col-lg-6">
                                         <div class="seller-info">
                                             <h5 class="heading" style="color: white;">Informasi pribadi</h5>
@@ -206,8 +206,7 @@
 @section('script')
     <script src="{{ asset('additional-assets/chart.js-4.4.3/chart.umd.js') }}"></script>
 
-
-    <script>
+    {{-- <script>
         var labels = @json($days);
         var grossData = @json($grossData);
         var netData = @json($netData);
@@ -266,6 +265,209 @@
                     }
                 }
             }
+        });
+    </script> --}}
+
+    <script>
+        const ctxBulanan = document.getElementById('bulanan').getContext('2d');
+        const gradientBulanan = ctxBulanan.createLinearGradient(0, 0, 0, 250);
+        gradientBulanan.addColorStop(0, 'rgba(25, 56, 121, 0.25)');
+        gradientBulanan.addColorStop(1, 'rgba(25, 56, 121, 0.0)');
+
+        var labels = [
+            @foreach ($months as $month)
+                '{{ $month }}',
+            @endforeach
+        ];
+
+        const dataBulanan = {
+            labels: labels,
+            datasets: [{
+                    label: 'Penghasilan Kotor per Bulan',
+                    data: @json($monthlyGrossData),
+                    backgroundColor: gradientBulanan,
+                    borderColor: 'rgba(25, 56, 121, 1)',
+                    borderWidth: 3,
+                    borderCapStyle: 'round',
+                    borderJoinStyle: 'round',
+                    pointBackgroundColor: 'rgba(25, 56, 121, 1)',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointHoverBackgroundColor: 'rgba(25, 56, 121, 1)',
+                    pointHoverBorderColor: '#fff',
+                    pointHoverBorderWidth: 2,
+                    fill: true
+                },
+                {
+                    label: 'Penghasilan Bersih per Bulan',
+                    data: @json($monthlySalesData),
+                    backgroundColor: 'rgb(222, 255, 249)',
+                    borderColor: 'rgb(136, 215, 219)',
+                    borderWidth: 3,
+                    borderCapStyle: 'round',
+                    borderJoinStyle: 'round',
+                    pointBackgroundColor: 'rgb(136, 215, 219)',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointHoverBackgroundColor: 'rgb(136, 215, 219)',
+                    pointHoverBorderColor: '#fff',
+                    pointHoverBorderWidth: 2,
+                    fill: true
+                }
+            ]
+        };
+
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        display: false
+                    },
+                    border: {
+                        display: false
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        display: false
+                    },
+                    border: {
+                        display: false
+                    }
+                }
+            },
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true
+                },
+                tooltip: {
+                    enabled: true
+                }
+            }
+        };
+
+        new Chart(ctxBulanan, {
+            type: 'line',
+            data: dataBulanan,
+            options: options
+        });
+    </script>
+
+    @php
+        $currentDate = new DateTime();
+        $currentMonth = $currentDate->format('m');
+        $daysInMonth = $currentDate->format('t');
+        $dates = [];
+        for ($i = 1; $i <= $daysInMonth; $i++) {
+            $dates[] = $currentDate->format('Y-m-') . str_pad($i, 2, '0', STR_PAD_LEFT);
+        }
+    @endphp
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctxHarian = document.getElementById('revenueChart').getContext('2d');
+            const gradientHarian = ctxHarian.createLinearGradient(0, 0, 0, 250);
+            gradientHarian.addColorStop(0, 'rgba(25, 56, 121, 0.25)');
+            gradientHarian.addColorStop(1, 'rgba(25, 56, 121, 0.0)');
+
+            var labels = [
+                @foreach ($dates as $date)
+                    '{{ $date }}',
+                @endforeach
+            ];
+
+            const dataHarian = {
+                labels: labels,
+                datasets: [{
+                        label: 'Penghasilan Kotor per Hari',
+                        data: @json($dailyGross),
+                        backgroundColor: gradientHarian,
+                        borderColor: 'rgba(25, 56, 121, 1)',
+                        borderWidth: 3,
+                        pointBackgroundColor: 'rgba(25, 56, 121, 1)',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        pointHoverBackgroundColor: 'rgba(25, 56, 121, 1)',
+                        pointHoverBorderColor: '#fff',
+                        pointHoverBorderWidth: 2,
+                        fill: false, // Tidak mengisi area di bawah garis
+                        tension: 0.1 // Garis lurus
+                    },
+                    {
+                        label: 'Penghasilan Bersih per Hari',
+                        data: @json($dailySales),
+                        backgroundColor: 'rgb(222, 255, 249)',
+                        borderColor: 'rgb(136, 215, 219)',
+                        borderWidth: 3,
+                        pointBackgroundColor: 'rgb(136, 215, 219)',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        pointHoverBackgroundColor: 'rgb(136, 215, 219)',
+                        pointHoverBorderColor: '#fff',
+                        pointHoverBorderWidth: 2,
+                        fill: true,
+                        tension: 0.1 // Garis lurus
+                    }
+                ]
+            };
+
+            var options = {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            display: false
+                        },
+                        border: {
+                            display: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            display: false
+                        },
+                        border: {
+                            display: false
+                        }
+                    }
+                },
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true
+                    },
+                    tooltip: {
+                        enabled: true
+                    }
+                }
+            };
+
+            new Chart(ctxHarian, {
+                type: 'line',
+                data: dataHarian,
+                options: options
+            });
         });
     </script>
 

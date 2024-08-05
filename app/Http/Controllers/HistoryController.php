@@ -66,7 +66,6 @@ class HistoryController extends Controller {
         $product = Product::findOrFail($productId);
         $user = Auth::user();
 
-        // Check if the user has already reviewed the product
         $hasReviewed = Ulasan::where('product_id', $productId)
                              ->where('user_id', $user->id)
                              ->exists();
@@ -77,9 +76,9 @@ class HistoryController extends Controller {
     /**
      * Show the form for editing the specified resource.
      */
-    // public function edit(string $id) {
-    //     //
-    // }
+    public function edit(string $id) {
+        //
+    }
 
     /**
      * Update the specified resource in storage.
