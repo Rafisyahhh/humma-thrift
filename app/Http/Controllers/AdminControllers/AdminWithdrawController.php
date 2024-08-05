@@ -60,8 +60,17 @@ class AdminWithdrawController extends Controller {
             $withdraw->status = $request->status;
             $withdraw->save();
             if ($request->status == "complete") {
+                $request->validate([
+                    'image' => 'required',
+                ], [
+                    'image.required' => 'Kolom Bukti wajib diisi.',
+                ]);
+                if ($request->hasFile('image')) {
+                    $data['image'] = $request->file('image')->store('image', 'public');
+                }
                 $withdraw->user()->notify(new CustomMessageNotification([
                     "title" => "Penarikan anda diterima",
+                    "image" => $data['image'],
                     "message" => "Halo {$withdraw->user()->name}, Penarikan anda dengan jumlah $withdraw->amount telah dikirim ke Bank {$withdraw->bank()->name} dengan No. Rekening $withdraw->bank_number",
                     "action" => route('seller.withdraw.index')
                 ], [

@@ -49,10 +49,14 @@ class CustomMessageNotification extends Notification {
      * @return array<string, mixed>
      */
     public function toArray(object $notifiable): array {
-        return [
+        $message = [
             'title' => $this->normalMessage['title'],
             'message' => $this->normalMessage['message'],
             'action' => $this->normalMessage['action']
         ];
+        if ($this->normalMessage['title']) {
+            $message['image'] = $this->normalMessage['title'];
+        }
+        return $message;
     }
 }
