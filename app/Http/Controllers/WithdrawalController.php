@@ -10,6 +10,7 @@ use App\Http\Requests\WithdrawalUserIssueRequest;
 use App\Models\Bank;
 use App\Models\TransactionOrder;
 use App\Models\User;
+use App\Notifications\CustomMessageNotification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Log;
@@ -68,20 +69,28 @@ class WithdrawalController extends Controller {
     public function issueUser(WithdrawalUserIssueRequest $request) {
         try {
             $data = collect($request->validated());
+            $user = $request->user();
 
             $transactionID = Str::random(16);
 
-            $data->put('user_id', $request->user()->id);
-            $data->put('user_store_id', $request->user()->store->id);
+            $data->put('user_id', $user->id);
+            $data->put('user_store_id', $user->store->id);
             $data->put('status', WithdrawalStatusEnum::PENDING);
             $data->put('transaction_id', Str::upper("WTH-{$transactionID}"));
 
             $this->_withdrawal->create($data->toArray());
 
-            $users = User::where("role");
-            foreach ($users as $user) {
-                // $user->notify(new WithdrawalNotification($data));
-                dd($user->getUserRoleInstance());
+            $listAdmin = User::role("admin")->get();
+            foreach ($listAdmin as $admin) {
+                $admin->notify(new CustomMessageNotification([
+                    "subject" => "Seorang Seller ingin menarik",
+                    "greeting" => "Halo $admin->name, Seorang seller bernama {$user->name} ingin menarik Saldo sebesar {$this->_withdrawal->where('status', WithdrawalStatusEnum::COMPLETED)->where('user_id', $user->id)->sum('amount')}",
+                    "line" => "Terima penarikan!."
+                ], [
+                    "data" => "Seorang Seller ingin menarik",
+                    "title" => "Halo $admin->name, Seorang seller bernama {$user->name} ingin menarik Saldo sebesar {$this->_withdrawal->where('status', WithdrawalStatusEnum::COMPLETED)->where('user_id', $user->id)->sum('amount')}",
+                    "url" => route('admin.withdraw.index')
+                ]));
             }
 
             return redirect()->route('seller.withdraw.index')->with('success', 'Berhasil mengajukan pencairan dana.');

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\Withdrawal;
 use Illuminate\Http\Request;
 
@@ -13,11 +12,6 @@ class AdminWithdrawController extends Controller {
      */
     public function index() {
         //
-        $users = User::where("role");
-        foreach ($users as $user) {
-            // $user->notify(new WithdrawalNotification($data));
-            dd($user->getUserRoleInstance());
-        }
         return view('admin.withdraw');
     }
 

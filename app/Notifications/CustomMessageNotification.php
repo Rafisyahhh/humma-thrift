@@ -19,7 +19,7 @@ class CustomMessageNotification extends Notification {
     /**
      * Create a new notification instance.
      */
-    public function __construct($normalMessage, $mailMessage) {
+    public function __construct(array $normalMessage, array $mailMessage) {
         $this->normalMessage = $normalMessage;
         $this->mailMessage = $mailMessage;
     }
@@ -51,7 +51,6 @@ class CustomMessageNotification extends Notification {
     public function toArray(object $notifiable): array {
         return [
             'data' => $this->mailMessage['data'],
-            'image' => $this->mailMessage['image'],
             'title' => $this->mailMessage['title'],
             'url' => $this->mailMessage['url']
         ];
