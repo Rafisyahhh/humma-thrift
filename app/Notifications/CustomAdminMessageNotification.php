@@ -50,9 +50,9 @@ class CustomAdminMessageNotification extends Notification {
      */
     public function toArray(object $notifiable): array {
         return [
-            'message' => $this->mailMessage['data'],
             'title' => $this->mailMessage['title'],
-            'action' => $this->mailMessage['url']
+            'message' => $this->mailMessage['message'],
+            'action' => $this->mailMessage['action']
         ];
     }
 }
