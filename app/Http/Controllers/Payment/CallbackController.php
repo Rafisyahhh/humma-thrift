@@ -43,6 +43,7 @@ class CallbackController extends Controller
                     'message' => 'Unrecognized callback event, no action was taken',
                 ]);
             }
+            
 
             $data = json_decode($json);
 
