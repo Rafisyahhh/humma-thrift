@@ -9,34 +9,32 @@ use App\Http\Requests\UpdateWithdrawalRequest;
 use App\Http\Requests\WithdrawalUserIssueRequest;
 use App\Models\Bank;
 use App\Models\TransactionOrder;
+use App\Models\User;
+use App\Notifications\CustomMessageNotification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Log;
 use Str;
 
-class WithdrawalController extends Controller
-{
+class WithdrawalController extends Controller {
     private Bank $_banks;
     private Withdrawal $_withdrawal;
     private TransactionOrder $_transaction;
 
-    public function __construct(Bank $bank, Withdrawal $withdrawal, TransactionOrder $transaction)
-    {
+    public function __construct(Bank $bank, Withdrawal $withdrawal, TransactionOrder $transaction) {
         $this->_banks = $bank;
         $this->_withdrawal = $withdrawal;
         $this->_transaction = $transaction;
     }
 
-    public function indexUser(Request $request)
-    {
+    public function indexUser(Request $request) {
         $user = $request->user();
         $withdrawals = $this->_withdrawal->where('user_id', $user->id)->latest()->paginate(10);
 
         return view('seller.withdrawals', compact('withdrawals'));
     }
 
-    public function createUser(Request $request)
-    {
+    public function createUser(Request $request) {
         $user = $request->user();
         $banks = $this->_banks->all();
 
@@ -64,24 +62,36 @@ class WithdrawalController extends Controller
         return view('seller.withdrawals-create', compact('accountBalance', 'banks'));
     }
 
-    public function detailUser(Withdrawal $withdrawal)
-    {
+    public function detailUser(Withdrawal $withdrawal) {
         return view('seller.withdrawals-detail', compact('withdrawal'));
     }
 
-    public function issueUser(WithdrawalUserIssueRequest $request)
-    {
+    public function issueUser(WithdrawalUserIssueRequest $request) {
         try {
             $data = collect($request->validated());
+            $user = $request->user();
 
             $transactionID = Str::random(16);
 
-            $data->put('user_id', $request->user()->id);
-            $data->put('user_store_id', $request->user()->store->id);
+            $data->put('user_id', $user->id);
+            $data->put('user_store_id', $user->store->id);
             $data->put('status', WithdrawalStatusEnum::PENDING);
             $data->put('transaction_id', Str::upper("WTH-{$transactionID}"));
 
             $this->_withdrawal->create($data->toArray());
+
+            $listAdmin = User::role("admin")->get();
+            foreach ($listAdmin as $admin) {
+                $admin->notify(new CustomMessageNotification([
+                    "subject" => "Seorang Seller ingin menarik",
+                    "greeting" => "Halo $admin->name, Seorang seller bernama {$user->name} ingin menarik Saldo sebesar {$this->_withdrawal->where('status', WithdrawalStatusEnum::COMPLETED)->where('user_id', $user->id)->sum('amount')}",
+                    "line" => "Terima penarikan!."
+                ], [
+                    "data" => "Seorang Seller ingin menarik",
+                    "title" => "Halo $admin->name, Seorang seller bernama {$user->name} ingin menarik Saldo sebesar {$this->_withdrawal->where('status', WithdrawalStatusEnum::COMPLETED)->where('user_id', $user->id)->sum('amount')}",
+                    "url" => route('admin.withdraw.index')
+                ]));
+            }
 
             return redirect()->route('seller.withdraw.index')->with('success', 'Berhasil mengajukan pencairan dana.');
         } catch (\Throwable $th) {

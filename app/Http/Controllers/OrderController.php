@@ -37,13 +37,18 @@ class OrderController extends Controller
         if ($request->ajax()) {
             $queryOrders = Order::latest();
             $queryAuctions = Order::latest();
-
-            $queryOrders->whereHas('transaction_order', function ($q) use ($deliveryStatus) {
-                $q->where('user_id', Auth::user()->id)->where('delivery_status', $deliveryStatus);
+            $queryOrders = Order::latest()->whereHas('transaction_order', function ($q) use ($deliveryStatus) {
+                $q->where('user_id', Auth::user()->id);
+                if (!empty($deliveryStatus)) {
+                    $q->where('delivery_status', $deliveryStatus);
+                }
             });
 
-            $queryAuctions->whereHas('transaction_order', function ($q) use ($deliveryStatus) {
-                $q->where('user_id', Auth::user()->id)->where('delivery_status', $deliveryStatus);
+            $queryAuctions = Order::latest()->whereHas('transaction_order', function ($q) use ($deliveryStatus) {
+                $q->where('user_id', Auth::user()->id)->where('product_auction_id','!=',null);
+                if (!empty($deliveryStatus)) {
+                    $q->where('delivery_status', $deliveryStatus);
+                }
             });
 
             $orders = $queryOrders->get();

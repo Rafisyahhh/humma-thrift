@@ -71,18 +71,63 @@
             @csrf
             @method('PUT')
             <input class="d-none" value="" name="status" />
-            <li><a class="dropdown-item btn btn-sm btn-danger text-white" role="button"
-                onclick="submitForm(this, 'failed')">Failed</a></li>
             <li><a class="dropdown-item btn btn-sm btn-warning text-white" role="button"
                 onclick="submitForm(this, 'processed')">Process</a></li>
-            <li><a class="dropdown-item btn btn-sm btn-success text-white" role="button"
-                onclick="submitForm(this, 'complete')">Complete</a></li>
           </form>
+        </ul>
+      </div>
+      <div class="dropdown dropstart" statusProcessDropdown>
+        <button type="button" class="badge bg-label-dark me-1 border-0 editStatus" style="background: none;"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="ti ti-dots-vertical"></i>
+        </button>
+        <ul class="dropdown-menu p-0">
+          <li><a class="dropdown-item btn btn-sm btn-danger text-white" role="button" modal="failed">Failed</a></li>
+          <li><a class="dropdown-item btn btn-sm btn-success text-white" role="button" modal="complete">Complete</a></li>
         </ul>
       </div>
 
     </div>
 
+  </div>
+
+  <div id="failed-modal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post">
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="complete-modal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post">
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
   </div>
   <!-- Bootstrap Table with Header - Light -->
 @endsection
@@ -110,6 +155,7 @@
     const completeButton = $('[completeButton]');
     const failedButton = $('[failedButton]');
     const statusDropdown = $('[statusDropdown]');
+    const statusProcessDropdown = $('[statusProcessDropdown]');
 
     const dateTimeFormat = new Intl.DateTimeFormat('id', {
       weekday: 'long',
@@ -120,7 +166,8 @@
     const moneyFormat = new Intl.NumberFormat('id', {
       style: 'currency',
       currency: 'IDR',
-      maximumSignificantDigits: 1
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
     });
     const {
       table
@@ -132,7 +179,7 @@
           bottomStart: null,
         },
         order: [
-          [2, 'desc']
+          [5, 'asc']
         ]
       },
       ajax: "{{ route('yajra.withdrawal') }}",
@@ -154,9 +201,8 @@
           render: (data) => moneyFormat.format(data)
         },
         {
-          data: 'id',
+          data: 'status_order',
           className: 'text-center',
-          orderable: false,
           searchable: false,
           render: (data, _, row) => {
             const button = {
@@ -165,18 +211,36 @@
               complete: completeButton[0].outerHTML,
               failed: failedButton[0].outerHTML
             };
-            let tableStatusDropdown = statusDropdown;
-            tableStatusDropdown.find('form').attr('action', statusDropdown.find('form').attr(
-              'action').replace(':id:', data));
-            console.log(tableStatusDropdown[0].outerHTML);
+            let showEdit = true;
+            if (["complete", "failed"].includes(row.status)) {
+              showEdit = false;
+            }
+
+            let tableStatusDropdown;
+            if (row.status === "pending") {
+              tableStatusDropdown = statusDropdown.clone();
+              tableStatusDropdown.find('form').attr('action', statusDropdown.find('form').attr(
+                'action').replace(':id:', row.id));
+            } else {
+              tableStatusDropdown = statusProcessDropdown.clone();
+            }
             tableStatusDropdown = tableStatusDropdown[0].outerHTML;
-            return `<div class="d-flex gap-2 float-end">${button[row.status] + tableStatusDropdown}</div>`;
+            return `<div class="d-flex gap-2 float-end">${button[row.status] + (showEdit ? tableStatusDropdown : "<div style='width: 50px;'></div>")}</div>`;
           }
         }
       ]
     });
     table.on("click", "button.editStatus", function() {
       $(this).dropdown('toggle');
+    });
+    table.on("click", "[modal]", function() {
+      const {
+        id
+      } = table.row($(this).closest("tr")).data();
+      const $this = $(`#${$(this).attr("modal")}-modal`);
+      const $form = $this.find("form");
+      $form.attr("action", $form.attr('action').replace(":id:", id));
+      $this.modal('show');
     });
   </script>
 @endpush

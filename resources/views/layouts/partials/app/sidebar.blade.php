@@ -68,13 +68,13 @@
         <div>Penghasilan</div>
       </a>
     </li>
-    
+
     <li class="menu-item {{ request()->routeIs('admin.withdraw.*') ? 'active' : '' }}">
         <a href="{{ route('admin.withdraw.index') }}" class="menu-link">
-            <i class="menu-icon tf-icons fas fa-money-bill-wave"></i>
+            <i class="menu-icon tf-icons ti ti-cash-banknote"></i>
             <div>Penarikan</div>
         </a>
-    </li>    
+    </li>
 
     <li class="menu-item {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
       <a href="{{ route('admin.user.index') }}" class="menu-link">

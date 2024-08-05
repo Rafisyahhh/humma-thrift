@@ -19,7 +19,7 @@ class CustomMessageNotification extends Notification {
     /**
      * Create a new notification instance.
      */
-    public function __construct($normalMessage, $mailMessage) {
+    public function __construct(array $normalMessage, array $mailMessage) {
         $this->normalMessage = $normalMessage;
         $this->mailMessage = $mailMessage;
     }
@@ -50,13 +50,9 @@ class CustomMessageNotification extends Notification {
      */
     public function toArray(object $notifiable): array {
         return [
-            'data' => $this->normalMessage['data'],
-            'image' => $this->auctions->productAuction->thumbnail,
-            'title' => 'Anda Menang Lelang',
-            'url' => route('store.product.detail', [
-                'store' => $this->auctions->productAuction->userStore->username,
-                'product' => $this->auctions->productAuction->slug
-            ])
+            'data' => $this->mailMessage['data'],
+            'title' => $this->mailMessage['title'],
+            'url' => $this->mailMessage['url']
         ];
     }
 }

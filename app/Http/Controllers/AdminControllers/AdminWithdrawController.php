@@ -48,19 +48,21 @@ class AdminWithdrawController extends Controller {
      */
     public function update(Request $request, string $id) {
         $request->validate([
-            'status' => 'required|in:processed,complete',
+            'status' => 'required|in:failed,processed,complete',
         ], [
             'status.required' => 'Kolom STATUS wajib diisi.',
         ]);
 
         $withdraw = Withdrawal::find($id);
-        // dd($withdraw);
 
         if ($withdraw) {
             $withdraw->status = $request->status;
             $withdraw->save();
+            return redirect()->back()->with('success', 'Status penarikan berhasil diperbarui.');
         }
-        return redirect()->back()->with('success', 'Status penarikan berhasil diperbarui.');
+
+
+        return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui data.');
     }
 
     /**
