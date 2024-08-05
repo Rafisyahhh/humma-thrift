@@ -187,6 +187,15 @@ class YajraController extends Controller {
             $data = Withdrawal::with(['user', 'store', 'bank'])->latest()->get();
 
             return DataTables::of($data)
+                ->addColumn('status_order', function (Withdrawal $withdrawal) {
+                    $order = [
+                        "pending" => 1,
+                        "processed" => 0,
+                        "failed" => 2,
+                        "complete" => 3
+                    ];
+                    return $order[$withdrawal->status->value];
+                })
                 ->make(true);
         }
     }

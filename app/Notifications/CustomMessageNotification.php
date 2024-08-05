@@ -50,13 +50,10 @@ class CustomMessageNotification extends Notification {
      */
     public function toArray(object $notifiable): array {
         return [
-            'data' => $this->normalMessage['data'],
-            'image' => $this->auctions->productAuction->thumbnail,
-            'title' => 'Anda Menang Lelang',
-            'url' => route('store.product.detail', [
-                'store' => $this->auctions->productAuction->userStore->username,
-                'product' => $this->auctions->productAuction->slug
-            ])
+            'data' => $this->mailMessage['data'],
+            'image' => $this->mailMessage['image'],
+            'title' => $this->mailMessage['title'],
+            'url' => $this->mailMessage['url']
         ];
     }
 }

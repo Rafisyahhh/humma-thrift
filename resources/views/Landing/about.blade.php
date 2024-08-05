@@ -43,8 +43,7 @@
         </div>
     </section>
 
-
-    <section class="about-feedback product">
+    {{-- <section class="about-feedback product">
         <div class="container p-0">
             <div class="position-relative px-5">
                 <div class="swiper about-swiper">
@@ -109,7 +108,8 @@
                 <div class="swiper-pagination"></div>
             </div>
         </div>
-    </section>
+    </section> --}}
+
     <section class="about-service product ">
         <div class="container">
             <div class="about-service-section">
