@@ -347,7 +347,6 @@
                                         <input type="hidden" name="adminfeeFlat" value="{{ $item->flat }}" />
                                         <input type="hidden" name="adminfeePercent" value="{{ $item->percent }}" />
                                         <input type="hidden" name="paymentName" value="{{ $item->name }}" />
-
                                         <label for="payment-method-{{ $loop->index }}" class="radio-button-labels">
                                             <div class="d-flex flex-column align-items-center mt-3">
                                                 <img src="{{ $item->icon_url }}" height="45" />

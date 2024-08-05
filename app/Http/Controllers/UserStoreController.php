@@ -38,8 +38,8 @@ class UserStoreController extends Controller
     {
         $countnewOrder = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status','selesaikan pembayaran')->count();
         $countendOrder = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status','selesai')->count();
-        $countProduct = Product::where('id', auth()->id())->count();
-
+        $countProduct = Product::where('user_id', auth()->id())->count() +
+            ProductAuction::where('user_id', auth()->id())->count();
         $store = UserStore::all();
         $address = UserAddress::all();
         $count = Product::where('user_id', auth()->id())->count();
