@@ -10,6 +10,7 @@ use App\Http\Requests\WithdrawalUserIssueRequest;
 use App\Models\Bank;
 use App\Models\TransactionOrder;
 use App\Models\User;
+use App\Notifications\CustomAdminMessageNotification;
 use App\Notifications\CustomMessageNotification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -82,14 +83,14 @@ class WithdrawalController extends Controller {
 
             $listAdmin = User::role("admin")->get();
             foreach ($listAdmin as $admin) {
-                $admin->notify(new CustomMessageNotification([
+                $admin->notify(new CustomAdminMessageNotification([
                     "subject" => "Seorang Seller ingin menarik",
                     "greeting" => "Halo $admin->name, Seorang seller bernama {$user->name} ingin menarik Saldo sebesar {$this->_withdrawal->where('status', WithdrawalStatusEnum::COMPLETED)->where('user_id', $user->id)->sum('amount')}",
                     "line" => "Terima penarikan!."
                 ], [
-                    "data" => "Seorang Seller ingin menarik",
-                    "title" => "Halo $admin->name, Seorang seller bernama {$user->name} ingin menarik Saldo sebesar {$this->_withdrawal->where('status', WithdrawalStatusEnum::COMPLETED)->where('user_id', $user->id)->sum('amount')}",
-                    "url" => route('admin.withdraw.index')
+                    "title" => "Seorang Seller ingin menarik",
+                    "message" => "Halo $admin->name, Seorang seller bernama {$user->name} ingin menarik Saldo sebesar {$this->_withdrawal->where('status', WithdrawalStatusEnum::COMPLETED)->where('user_id', $user->id)->sum('amount')}",
+                    "action" => route('admin.withdraw.index')
                 ]));
             }
 

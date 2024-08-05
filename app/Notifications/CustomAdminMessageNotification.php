@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class CustomMessageNotification extends Notification {
+class CustomAdminMessageNotification extends Notification {
     use Queueable;
 
     public $normalMessage;
@@ -30,7 +30,7 @@ class CustomMessageNotification extends Notification {
      * @return array<int, string>
      */
     public function via(object $notifiable): array {
-        return ['database'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -50,9 +50,9 @@ class CustomMessageNotification extends Notification {
      */
     public function toArray(object $notifiable): array {
         return [
-            'data' => $this->mailMessage['data'],
+            'message' => $this->mailMessage['data'],
             'title' => $this->mailMessage['title'],
-            'url' => $this->mailMessage['url']
+            'action' => $this->mailMessage['url']
         ];
     }
 }

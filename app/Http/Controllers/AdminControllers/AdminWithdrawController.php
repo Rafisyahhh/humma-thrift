@@ -58,6 +58,9 @@ class AdminWithdrawController extends Controller {
         if ($withdraw) {
             $withdraw->status = $request->status;
             $withdraw->save();
+            if ($request->status == "complete") {
+
+            }
             return redirect()->back()->with('success', 'Status penarikan berhasil diperbarui.');
         }
 
