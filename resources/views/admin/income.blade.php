@@ -631,6 +631,7 @@
             $dates[] = $currentDate->format('Y-m-') . str_pad($i, 2, '0', STR_PAD_LEFT);
         }
     @endphp
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const ctxHarian = document.getElementById('penjualan-harian').getContext('2d');

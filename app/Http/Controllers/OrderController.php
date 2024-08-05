@@ -112,7 +112,6 @@ class OrderController extends Controller
         $orders = $queryOrders->get();
         $auctions = $queryAuctions->get();
 
-        // Render the partial views with the filtered data
         return response()->json([
             'orderHTML' => view('user.filter', compact('orders'))->render(),
             'auctionHTML' => view('user.filterauctions', compact('auctions'))->render(),

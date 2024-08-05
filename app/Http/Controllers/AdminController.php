@@ -2,46 +2,127 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\WithdrawalStatusEnum;
 use App\Models\Product;
 use App\Models\ProductAuction;
 use App\Models\TransactionOrder;
 use App\Models\User;
 use App\Models\UserStore;
+use App\Models\Withdrawal;
+use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
 
+    private TransactionOrder $_transactions;
+    private Withdrawal $_withdrawal;
+
+    public function __construct(TransactionOrder $transactions, Withdrawal $withdrawal)
+    {
+        $this->_transactions = $transactions;
+        $this->_withdrawal = $withdrawal;
+    }
     /**
      * Display a listing of the resource.
      */
-        public function index()
-        {
-            $countproduct = Product::count();
-            $countproductauction = ProductAuction::count();
-            $countseller = UserStore::count();
-            $countuser = User::count();
+    public function index()
+    {
+        $countproduct = Product::count();
+        $countproductauction = ProductAuction::count();
+        $countseller = UserStore::count();
+        $countuser = User::count();
 
-            $transactions = TransactionOrder::select(DB::raw("MONTH(paid_at) as month"), DB::raw("SUM(total_harga * 0.15) as total"))
-                ->groupBy(DB::raw('MONTH(paid_at)'))
-                ->get();
+        // $transactions = TransactionOrder::select(DB::raw("DAYOFWEEK(paid_at) as day_of_week"), DB::raw("SUM(total_harga * 0.05) as total"))
+        //     ->groupBy(DB::raw('DAYOFWEEK(paid_at)'))
+        //     ->get();
 
-            $months = [
-                'January', 'February', 'March', 'April', 'May', 'June',
-                'July', 'August', 'September', 'October', 'November', 'December'
-            ];
+        // $months = [
+        //     'January', 'February', 'March', 'April', 'May', 'June',
+        //     'July', 'August', 'September', 'October', 'November', 'December'
+        // ];
 
-            $data = array_fill(0, 12, 0); // Initialize data array with zeroes
-            $totalBalance = 0;
-            foreach ($transactions as $transaction) {
-                $data[$transaction->month - 1] = $transaction->total;
-                $totalBalance += $transaction->total; // Sum up the total balance
+        // $data = array_fill(0, 12, 0);
+        // $totalBalance = 0;
 
-            }
+        // foreach ($transactions as $transaction) {
+        //     $data[$transaction->month - 1] = $transaction->total;
+        //     $totalBalance += $transaction->total;
+        // }
 
-            return view('admin.index', compact('countproduct', 'countproductauction', 'countseller', 'countuser', 'months', 'data','totalBalance'));
-        }
+        $user = Auth::user();
+        $currentDate = now();
+
+        $transactionsQuery = $this->_transactions->with(['order.product.userstore'])
+            ->latest();
+
+        $transactionData = $transactionsQuery->get();
+        $transactions = $transactionsQuery->paginate(12);
+
+        $transactionTotal = $transactionsQuery->where('status', 'PAID')->sum('total');
+
+        // Hitung pendapatan bersih (10% dari setiap transaksi)
+        $netIncome = $transactionData->filter(function ($query) {
+            return $query->status === 'PAID' && $query->delivery_status === 'selesai';
+        })->sum(function ($query) {
+            return $query->total * 0.1; // 10% dari setiap transaksi
+        });
+
+        $withdrawalTotal = $this->_withdrawal
+            ->where('status', WithdrawalStatusEnum::COMPLETED)
+            ->where('user_id', $user->id)
+            ->sum('amount');
+
+        $accountBalance = $netIncome - $withdrawalTotal;
+
+        $currentDate = Carbon::now();
+        $lastOfMonth = $currentDate->endOfMonth();
+        $rawDailySales = $this->_transactions
+            ->where('status', 'PAID')
+            ->where('delivery_status', 'selesai')
+            ->selectRaw('DATE(created_at) as date, SUM(total) as total')
+            ->whereMonth('created_at', $currentDate->month)
+            ->groupByRaw('DATE(created_at)')
+            ->get();
+
+        $dailySales = collect(range(1, (int) $lastOfMonth->format('d')))->map(function ($day) use ($rawDailySales, $currentDate) {
+            $salesDate = $currentDate->format('Y-m-') . str_pad($day, 2, '0', STR_PAD_LEFT);
+            $sales = $rawDailySales->firstWhere('date', $salesDate);
+            return $sales ? $sales->total * 0.1 : 0; // 10% dari setiap transaksi
+        });
+
+        $dailyGrossSales = collect(range(1, (int) $lastOfMonth->format('d')))->map(function ($day) use ($rawDailySales, $currentDate) {
+            $salesDate = $currentDate->format('Y-m-') . str_pad($day, 2, '0', STR_PAD_LEFT);
+            $sales = $rawDailySales->firstWhere('date', $salesDate);
+            return $sales ? $sales->total : 0;
+        });
+
+        // Grafik bulanan
+        $months = collect(range(1, 12))->map(function ($month) use ($currentDate) {
+            return $currentDate->format('Y-') . str_pad($month, 2, '0', STR_PAD_LEFT);
+        })->toArray();
+
+        $monthlySales = $this->_transactions
+            ->where('status', 'PAID')
+            ->where('delivery_status', 'selesai')
+            ->selectRaw('MONTH(created_at) as month, SUM(total) as total')
+            ->whereYear('created_at', $currentDate->year)
+            ->groupBy(\DB::raw('MONTH(created_at)'))
+            ->get()
+            ->keyBy('month');
+
+        $monthlyNetIncome = collect(range(1, 12))->map(function ($month) use ($monthlySales) {
+            return $monthlySales->get($month, ['total' => 0])['total'] * 0.1; // 10% dari setiap transaksi
+        })->toArray();
+
+        $monthlyGrossSales = collect(range(1, 12))->map(function ($month) use ($monthlySales) {
+            return $monthlySales->get($month, ['total' => 0])['total'];
+        })->toArray();
+
+        return view('admin.index', compact('countproduct', 'countproductauction', 'countseller', 'countuser', 'months','transactions', 'transactionTotal', 'netIncome', 'monthlyNetIncome', 'dailySales', 'dailyGrossSales', 'monthlyGrossSales', 'accountBalance'));
+    }
 
 
     /**

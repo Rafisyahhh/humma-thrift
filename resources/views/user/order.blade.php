@@ -114,7 +114,7 @@
                             <option value="diantar" {{ request('delivery_status') == 'diantar' ? 'selected' : '' }}>Diantar</option>
                             <option value="diterima" {{ request('delivery_status') == 'diterima' ? 'selected' : '' }}>Diterima</option>
                             <option value="selesai" {{ request('delivery_status') == 'selesai' ? 'selected' : '' }}>Selesai</option>
-                        </select>   
+                        </select>
                     </div>
 
 
@@ -144,7 +144,7 @@
 
 @section('script')
 
-<script>
+{{-- <script>
     function applyFilter(value, e = null) {
         if (e !== null) {
             e.preventDefault();
@@ -170,8 +170,41 @@
             applyFilter(this.value);
         });
     });
+</script> --}}
+
+
+<script>
+    function applyFilter(value, e = null) {
+    if (e !== null) {
+        e.preventDefault();
+    }
+
+    // // Show loading indicator
+    // $('#orderproduk').html('<p>Loading...</p>');
+    // $('#auctionproduk').html('<p>Loading...</p>');
+
+    $.ajax({
+        url: '{{ route('user.order') }}',
+        type: 'GET',
+        data: { delivery_status: value },
+        success: function(data) {
+            $('#orderproduk').html(data.orderHTML);
+            $('#auctionproduk').html(data.auctionHTML);
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX Error:', status, error);
+            alert('Terjadi kesalahan saat memfilter konten. Silakan coba lagi nanti.');
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const selectElement = document.querySelector('select[name="delivery_status"]');
+    selectElement.addEventListener('change', function() {
+        applyFilter(this.value);
+    });
+});
+
 </script>
-
-
 
 @endsection

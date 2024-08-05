@@ -17,6 +17,8 @@ use App\Models\ProductAuction;
 use App\Models\Withdrawal;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\TransactionOrder;
+use DateTime;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class UserStoreController extends Controller
@@ -34,6 +36,15 @@ class UserStoreController extends Controller
      */
     public function index(Request $request)
     {
+        $countnewOrder = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status','selesaikan pembayaran')->count();
+        $countendOrder = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status','selesai')->count();
+        $countProduct = Product::where('id', auth()->id())->count();
+
+        $store = UserStore::all();
+        $address = UserAddress::all();
+        $count = Product::where('user_id', auth()->id())->count();
+        $count += ProductAuction::where('user_id', auth()->id())->count();
+        $userId = Auth::id();
         $user = Auth::user();
         $userStoreId = $user->store->id;
         $trxSearch = $request->get('trx');
@@ -72,96 +83,75 @@ class UserStoreController extends Controller
             ->sum('amount');
 
         $accountBalance = $netIncome - $withdrawalTotal;
-        if (Auth::check()) {
-            $store = UserStore::all();
-            $address = UserAddress::all();
-            $user = User::all();
-            $count = Product::where('user_id', auth()->id())->count();
-            $count += ProductAuction::where('user_id', auth()->id())->count();
-            $userId = Auth::id();
 
-            $transactionsbulan = TransactionOrder::select(DB::raw("MONTH(paid_at) as month"), DB::raw("SUM(total_harga) as total"))
-            ->join('orders', 'transaction_orders.id', '=', 'orders.transaction_order_id')
-            // ->join('products', 'orders.product_id', '=', 'products.id')
-            // ->where('products.user_id', $userId)
-            ->leftJoin('products', 'orders.product_id', '=', 'products.id')
-            ->leftJoin('product_auctions', 'orders.product_auction_id', '=', 'product_auctions.id')
-            ->where(function($query) use ($userId) {
-                $query->where('products.user_id', $userId)
-                      ->orWhere('product_auctions.user_id', $userId);
+        // Showing the order chart
+        $lastOfMonth = Carbon::now()->endOfMonth();
+        $rawDailySales = $this->_transactions
+            ->where('status', 'PAID')
+            ->where('delivery_status', 'selesai')
+            ->whereHas('order.product', function ($query) use ($userStoreId) {
+                $query->where('store_id', $userStoreId);
             })
-            ->whereYear('paid_at', date('Y'))
-                ->groupBy(DB::raw("MONTH(paid_at)"))
-                ->orderBy(DB::raw("MONTH(paid_at)"))
-                ->get();
-
-            $months = [
-                'January', 'February', 'March', 'April', 'May', 'June',
-                'July', 'August', 'September', 'October', 'November', 'December'
-            ];
-            $countnewOrder = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status','selesaikan pembayaran')->count();
-            $countendOrder = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status','selesai')->count();
-            $countProduct = Product::where('id', auth()->id())->count();
-
-            $datas = array_fill(0, 12, 0); // Initialize data array with zeroes
-            foreach ($transactionsbulan as $transaction) {
-                $datas[$transaction->month - 1] = $transaction->total;
-            }
-
-            // Ambil data transaksi per hari untuk bulan ini
-            // $transactions = TransactionOrder::select(DB::raw("DAYOFWEEK(paid_at) as day_of_week"), DB::raw("SUM(total) as total"))
-            // ->whereYear('paid_at', date('Y'))
-            // ->whereMonth('paid_at', date('m')) // Mengambil data untuk bulan ini
-            // ->groupBy(DB::raw("DAYOFWEEK(paid_at)"))
-            // ->orderBy(DB::raw("DAYOFWEEK(paid_at)"))
-            // ->get();
-
-
-            // $days = [
-            //     'Minggu','Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'
-            // ];
-
-
-            // $data = array_fill(0, 7, 0); // Inisialisasi array data dengan nol
-            // foreach ($transactions as $transaction) {
-            //     $data[$transaction->day_of_week - 1] = $transaction->total;
-            // }
-
-
-            $transactions = TransactionOrder::select(DB::raw("DAYOFWEEK(paid_at) as day_of_week"), DB::raw("SUM(total_harga) as total"))
-            ->join('orders', 'transaction_orders.id', '=', 'orders.transaction_order_id')
-            // ->join('products', 'orders.product_id', '=', 'products.id')
-            // ->where('products.user_id', $userId)
-            ->leftJoin('products', 'orders.product_id', '=', 'products.id')
-            ->leftJoin('product_auctions', 'orders.product_auction_id', '=', 'product_auctions.id')
-            ->where(function($query) use ($userId) {
-                $query->where('products.user_id', $userId)
-                      ->orWhere('product_auctions.user_id', $userId);
-            })
-            ->whereYear('paid_at', date('Y'))
-            ->whereMonth('paid_at', date('m')) // Mengambil data untuk bulan ini
-            ->groupBy(DB::raw("DAYOFWEEK(paid_at)"))
-            ->orderBy(DB::raw("DAYOFWEEK(paid_at)"))
+            ->selectRaw('DATE(created_at) as date, SUM(total) * 0.9 as total') // 0.9 is equivalent to 90% after deducting 10%
+            ->whereMonth('created_at', $currentDate->month)
+            ->groupByRaw('DATE(created_at)')
             ->get();
 
-        $days = [
-            'Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'
-        ];
+        $dailySales = collect(range(1, (int) $lastOfMonth->format('d')))->map(function ($day) use ($rawDailySales, $currentDate) {
+            $salesDate = $currentDate->format('Y-m-') . str_pad($day, 2, '0', STR_PAD_LEFT);
+            $sales = $rawDailySales->firstWhere('date', $salesDate);
+            return $sales ? $sales->total : 0;
+        });
 
-        $grossData = array_fill(0, 7, 0); // Inisialisasi array data penghasilan kotor dengan nol
-        $netData = array_fill(0, 7, 0); // Inisialisasi array data penghasilan bersih dengan nol
+        $rawDailyGross = $this->_transactions
+            ->where('status', 'PAID')
+            ->where('delivery_status', 'selesai')
+            ->whereHas('order.product', function ($query) use ($userStoreId) {
+                $query->where('store_id', $userStoreId);
+            })
+            ->selectRaw('DATE(created_at) as date, SUM(total) as total') // 0.9 is equivalent to 90% after deducting 10%
+            ->whereMonth('created_at', $currentDate->month)
+            ->groupByRaw('DATE(created_at)')
+            ->get();
 
-        foreach ($transactions as $transaction) {
-            $grossData[$transaction->day_of_week - 1] = $transaction->total;
-            $netData[$transaction->day_of_week - 1] = $transaction->total * 0.95; // Hitung penghasilan bersih (95% dari total)
-        }
+        $dailyGross = collect(range(1, (int) $lastOfMonth->format('d')))->map(function ($day) use ($rawDailyGross, $currentDate) {
+            $salesDate = $currentDate->format('Y-m-') . str_pad($day, 2, '0', STR_PAD_LEFT);
+            $sales = $rawDailyGross->firstWhere('date', $salesDate);
+            return $sales ? $sales->total : 0;
+        });
 
+        // Monthly chart
+        $months = collect(range(1, 12))->map(fn($month) => $currentDate->format('Y-') . str_pad($month, 2, '0', STR_PAD_LEFT))->toArray();
 
-        } else {
-            return redirect()->route('login')->with('error', 'Anda harus masuk untuk melihat informasi toko.');
-        }
+        $monthlySales = $this->_transactions
+            ->where('status', 'PAID')
+            ->where('delivery_status', 'selesai')
+            ->whereHas('order.product', function ($query) use ($userStoreId) {
+                $query->where('store_id', $userStoreId);
+            })
+            ->selectRaw('MONTH(created_at) as month, SUM(total) * 0.9 as total') // 0.9 is equivalent to 90% after deducting 10%
+            ->whereYear('created_at', $currentDate->year)
+            ->groupBy(\DB::raw('MONTH(created_at)'))
+            ->get()
+            ->keyBy('month');
 
-        return view('seller.index', compact('store', 'address', 'user', 'count','grossData','netData','days','transactions','transactionsbulan','months','datas','countnewOrder','countendOrder','countProduct','accountBalance'));
+        $monthlySalesData = collect(range(1, 12))->map(fn($month) => $monthlySales->get($month)->total ?? 0)->toArray();
+
+        $monthlyGross = $this->_transactions
+            ->where('status', 'PAID')
+            ->where('delivery_status', 'selesai')
+            ->whereHas('order.product', function ($query) use ($userStoreId) {
+                $query->where('store_id', $userStoreId);
+            })
+            ->selectRaw('MONTH(created_at) as month, SUM(total) as total') // 0.9 is equivalent to 90% after deducting 10%
+            ->whereYear('created_at', $currentDate->year)
+            ->groupBy(\DB::raw('MONTH(created_at)'))
+            ->get()
+            ->keyBy('month');
+
+        $monthlyGrossData = collect(range(1, 12))->map(fn($month) => $monthlyGross->get($month)->total ?? 0)->toArray();
+
+        return view('seller.index', compact('transactions', 'transactionTotal', 'netIncome', 'dailySales','dailyGross', 'months', 'monthlySalesData','monthlyGrossData', 'accountBalance','countnewOrder','countendOrder','countProduct','address', 'store', 'user', 'count'));
     }
 
     /**
