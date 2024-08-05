@@ -28,6 +28,11 @@ class TransactionController extends Controller
             $method = $request->method;
             $address = UserAddress::find($request->addressOption);
             $product = Product::whereIn('id', $products)->get();
+
+            if (!$method) {
+                return back()->withErrors(['error' => 'PILIH PEMBAYARAN WAJIB DIISI']);
+            }
+
             $tripay = new TripayController();
             $transaction = $tripay->requestTransaction($method, $product);
 
@@ -83,6 +88,11 @@ class TransactionController extends Controller
             $method = $request->method;
             $address = UserAddress::find($request->addressOption);
             $product_auction = ProductAuction::whereIn('id', $product_auction)->get();
+
+            if (!$method) {
+                return back()->with('error', 'PILIH PEMBAYARAN WAJIB DIISI');
+            }
+
             $tripay = new TripayController();
             $transaction = $tripay->requestTransactionLelang($method, $product_auction);
 
