@@ -71,6 +71,8 @@
             @csrf
             @method('PUT')
             <input class="d-none" value="" name="status" />
+            <li><a class="dropdown-item btn btn-sm btn-danger text-white" role="button"
+                onclick="submitForm(this, 'failed')">Failed</a></li>
             <li><a class="dropdown-item btn btn-sm btn-warning text-white" role="button"
                 onclick="submitForm(this, 'processed')">Process</a></li>
             <li><a class="dropdown-item btn btn-sm btn-success text-white" role="button"
