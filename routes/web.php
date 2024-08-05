@@ -21,16 +21,16 @@ use App\Http\Controllers\Payment\CallbackController;
 
 
 # User Routes
-include __DIR__ . '\role\user.php';
+include __DIR__ . '/role/user.php';
 
 # Seller Routes
-include __DIR__ . '\role\seller.php';
+include __DIR__ . '/role/seller.php';
 
 # Admin Routes
-include __DIR__ . '\role\admin.php';
+include __DIR__ . '/role/admin.php';
 
 # Landing Pages
-include __DIR__ . '\landing.php';
+include __DIR__ . '/landing.php';
 
 
 # Authentication Routes

@@ -171,40 +171,48 @@
         });
     });
 </script> --}}
-
-
 <script>
-    function applyFilter(value, e = null) {
-    if (e !== null) {
-        e.preventDefault();
+    async function applyFilter(value, e = null) {
+        if (e !== null) {
+            e.preventDefault();
+        }
+
+        try {
+            const response = await fetch('{{ route('user.order') }}?delivery_status=' + encodeURIComponent(value), {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+            const data = await response.json();
+
+            if (!data.orderHTML.trim()) {
+                $('#orderproduk').html('<tr><td colspan="4" class="text-center no-data-message"><img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 200px; height: 200px;"><p>Tidak ada data</p></td></tr>');
+            } else {
+                $('#orderproduk').html(data.orderHTML);
+            }
+
+            if (!data.auctionHTML.trim()) {
+                $('#auctionproduk').html('<tr><td colspan="4" class="text-center no-data-message"><img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 200px; height: 200px;"><p>Tidak ada data</p></td></tr>');
+            } else {
+                $('#auctionproduk').html(data.auctionHTML);
+            }
+        } catch (error) {
+            alert('Terjadi kesalahan saat memfilter konten.');
+        }
     }
 
-    // // Show loading indicator
-    // $('#orderproduk').html('<p>Loading...</p>');
-    // $('#auctionproduk').html('<p>Loading...</p>');
+    document.addEventListener('DOMContentLoaded', function() {
+        const selectElement = document.querySelector('select[name="delivery_status"]');
 
-    $.ajax({
-        url: '{{ route('user.order') }}',
-        type: 'GET',
-        data: { delivery_status: value },
-        success: function(data) {
-            $('#orderproduk').html(data.orderHTML);
-            $('#auctionproduk').html(data.auctionHTML);
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX Error:', status, error);
-            alert('Terjadi kesalahan saat memfilter konten. Silakan coba lagi nanti.');
-        }
+        // Fetch initial data based on the default or currently selected value
+        const initialValue = selectElement ? selectElement.value : '';
+        applyFilter(initialValue);
+
+        selectElement.addEventListener('change', function() {
+            applyFilter(this.value);
+        });
     });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const selectElement = document.querySelector('select[name="delivery_status"]');
-    selectElement.addEventListener('change', function() {
-        applyFilter(this.value);
-    });
-});
-
 </script>
 
 @endsection

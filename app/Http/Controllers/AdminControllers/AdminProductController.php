@@ -1,57 +1,51 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminControllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductAuction;
 use App\Models\ProductCategoryPivot;
 use App\Models\UserStore;
-use Auth;
 use Illuminate\Http\Request;
 
-class ProductAdminController extends Controller
-{
+class AdminProductController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
+    public function index() {
         $product_category_pivots = ProductCategoryPivot::all();
         $store = UserStore::all();
         $products = Product::all();
         $product_auctions = ProductAuction::all();
-        return view('admin.produk', compact('products','product_auctions','product_category_pivots','store'));
+        return view('admin.produk', compact('products', 'product_auctions', 'product_category_pivots', 'store'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
+    public function show(string $id) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
+    public function edit(string $id) {
         $product = Product::find($id);
         $product_auction = ProductAuction::find($id);
 
@@ -69,8 +63,7 @@ class ProductAdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
+    public function update(Request $request, string $id) {
         $request->validate([
             'status' => 'required|in:active,inactive,sold',
         ], [
@@ -102,8 +95,7 @@ class ProductAdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
+    public function destroy(string $id) {
         //
     }
 }
