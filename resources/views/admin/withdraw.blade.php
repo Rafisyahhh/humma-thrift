@@ -205,33 +205,29 @@
           className: 'text-center',
           searchable: false,
           render: (data, _, row) => {
-            const buttonHTML = {
+            const button = {
               pending: pendingButton[0].outerHTML,
               processed: processedButton[0].outerHTML,
               complete: completeButton[0].outerHTML,
               failed: failedButton[0].outerHTML
             };
-
-            const isEditable = !["complete", "failed"].includes(row.status);
-            let tableStatusDropdownHTML = '';
-
-            if (row.status === "pending") {
-              const formAction = statusDropdown.find('form').attr('action').replace(':id:', row.id);
-              tableStatusDropdownHTML = statusDropdown.clone().find('form').attr('action', formAction)[0]
-                .outerHTML;
-            } else {
-              tableStatusDropdownHTML = statusProcessDropdown[0].outerHTML;
+            let showEdit = true;
+            if (["complete", "failed"].includes(row.status)) {
+              showEdit = false;
             }
 
-            return `
-              <div class="d-flex gap-2 float-end">
-                ${buttonHTML[row.status]}
-                ${isEditable ? tableStatusDropdownHTML : "<div style='width: 50px;'></div>"}
-              </div>
-            `;
+            let tableStatusDropdown;
+            if (row.status === "pending") {
+              tableStatusDropdown = statusDropdown.clone();
+              tableStatusDropdown.find('form').attr('action', statusDropdown.find('form').attr(
+                'action').replace(':id:', row.id));
+            } else {
+              tableStatusDropdown = statusProcessDropdown.clone();
+            }
+            tableStatusDropdown = tableStatusDropdown[0].outerHTML;
+            return `<div class="d-flex gap-2 float-end">${button[row.status] + (showEdit ? tableStatusDropdown : "<div style='width: 50px;'></div>")}</div>`;
           }
         }
-
       ]
     });
     table.on("click", "button.editStatus", function() {
