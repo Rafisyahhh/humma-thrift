@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Withdrawal;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,11 @@ class AdminWithdrawController extends Controller {
      */
     public function index() {
         //
+        $users = User::where("role");
+        foreach ($users as $user) {
+            // $user->notify(new WithdrawalNotification($data));
+            dd($user->getUserRoleInstance());
+        }
         return view('admin.withdraw');
     }
 
@@ -54,13 +60,15 @@ class AdminWithdrawController extends Controller {
         ]);
 
         $withdraw = Withdrawal::find($id);
-        // dd($withdraw);
 
         if ($withdraw) {
             $withdraw->status = $request->status;
             $withdraw->save();
+            return redirect()->back()->with('success', 'Status penarikan berhasil diperbarui.');
         }
-        return redirect()->back()->with('success', 'Status penarikan berhasil diperbarui.');
+
+
+        return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui data.');
     }
 
     /**

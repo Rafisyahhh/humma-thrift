@@ -99,7 +99,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Modal body text goes here.</p>
+          <form action="" method="post">
+
+          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -116,7 +118,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Modal body text goes here.</p>
+          <form action="" method="post">
+
+          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -201,41 +205,46 @@
           className: 'text-center',
           searchable: false,
           render: (data, _, row) => {
-            const button = {
+            const buttonHTML = {
               pending: pendingButton[0].outerHTML,
               processed: processedButton[0].outerHTML,
               complete: completeButton[0].outerHTML,
               failed: failedButton[0].outerHTML
             };
-            let showEdit = true;
-            if (["complete", "failed"].includes(row.status)) {
-              showEdit = false;
+
+            const isEditable = !["complete", "failed"].includes(row.status);
+            let tableStatusDropdownHTML = '';
+
+            if (row.status === "pending") {
+              const formAction = statusDropdown.find('form').attr('action').replace(':id:', row.id);
+              tableStatusDropdownHTML = statusDropdown.clone().find('form').attr('action', formAction)[0]
+                .outerHTML;
+            } else {
+              tableStatusDropdownHTML = statusProcessDropdown[0].outerHTML;
             }
 
-            let tableStatusDropdown;
-            if (row.status === "pending") {
-              tableStatusDropdown = statusDropdown.clone();
-              tableStatusDropdown.find('form').attr('action', statusDropdown.find('form').attr(
-                'action').replace(':id:', row.id));
-            } else {
-              tableStatusDropdown = statusProcessDropdown.clone();
-            }
-            tableStatusDropdown = tableStatusDropdown[0].outerHTML;
-            return `<div class="d-flex gap-2 float-end">${button[row.status] + (showEdit ? tableStatusDropdown : "<div style='width: 50px;'></div>")}</div>`;
+            return `
+              <div class="d-flex gap-2 float-end">
+                ${buttonHTML[row.status]}
+                ${isEditable ? tableStatusDropdownHTML : "<div style='width: 50px;'></div>"}
+              </div>
+            `;
           }
         }
+
       ]
     });
     table.on("click", "button.editStatus", function() {
       $(this).dropdown('toggle');
     });
-    table.on("click", "button[modal]", function() {
+    table.on("click", "[modal]", function() {
       const {
         id
       } = table.row($(this).closest("tr")).data();
-      $(`#${this.attr("modal")}-modal`).find("form").attr("action", editUrl?.replace(":id:", id));
-
-      $(`#${this.attr("modal")}-modal`).modal('show');
+      const $this = $(`#${$(this).attr("modal")}-modal`);
+      const $form = $this.find("form");
+      $form.attr("action", $form.attr('action').replace(":id:", id));
+      $this.modal('show');
     });
   </script>
 @endpush
