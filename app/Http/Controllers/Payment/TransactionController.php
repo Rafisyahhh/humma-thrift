@@ -33,6 +33,10 @@ class TransactionController extends Controller
                 return back()->withErrors(['error' => 'PILIH PEMBAYARAN WAJIB DIISI']);
             }
 
+            if (!$address) {
+                return back()->withErrors(['error' => 'ALAMAT WAJIB DIISI']);
+            }
+
             $tripay = new TripayController();
             $transaction = $tripay->requestTransaction($method, $product);
 
@@ -93,6 +97,10 @@ class TransactionController extends Controller
                 return back()->with('error', 'PILIH PEMBAYARAN WAJIB DIISI');
             }
 
+            if (!$address) {
+                return back()->withErrors(['error' => 'ALAMAT WAJIB DIISI']);
+            }
+
             $tripay = new TripayController();
             $transaction = $tripay->requestTransactionLelang($method, $product_auction);
 
@@ -100,7 +108,6 @@ class TransactionController extends Controller
                 return back()->withErrors(['error' => $transaction->error]);
             }
 
-            # Buat Data Transaksi
             $transactions = TransactionOrder::create([
                 'user_id' => auth()->id(),
                 'user_address_id' => $address->id,
