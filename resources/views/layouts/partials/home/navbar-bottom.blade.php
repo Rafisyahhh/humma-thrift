@@ -6,10 +6,12 @@
 <style>
 .active1 {
   overflow:hidden;
-  border-bottom:5px solid rgb(243, 243, 243);
-  padding: 2.1rem;
+  border-bottom:10px solid rgb(243, 243, 243);
+  padding: 1.3rem;
   font-weight: bold;
 }
+
+
 </style>
 
 <div class="header-bottom d-lg-block d-none" id="navbar" style="z-index: 1;">

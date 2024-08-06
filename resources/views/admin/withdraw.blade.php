@@ -234,7 +234,7 @@
         }
       ]
     });
-    table.on("click", "button.editStatus", function() {
+    table.on("mouseover", "button.editStatus", function() {
       $(this).dropdown('toggle');
     });
     table.on("click", "[modal]", function() {
