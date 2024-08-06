@@ -30,16 +30,18 @@ class CustomMessageNotification extends Notification {
      * @return array<int, string>
      */
     public function via(object $notifiable): array {
-        return ['mail', 'database'];
+        return ['database'];
     }
 
     /**
      * Get the mail representation of the notification.
      */
     public function toMail(object $notifiable): MailMessage {
+        // dd($this->mailMessage['line']);
         return (new MailMessage)
             ->subject($this->mailMessage['subject'])
             ->greeting($this->mailMessage['greeting'])
+            // ->action($this->mailMessage['action'][0], $this->mailMessage['action'][1])
             ->line($this->mailMessage['line']);
     }
 
@@ -54,7 +56,7 @@ class CustomMessageNotification extends Notification {
             'message' => $this->normalMessage['message'],
             'action' => $this->normalMessage['action']
         ];
-        if ($this->normalMessage['image']) {
+        if (isset($this->normalMessage['image'])) {
             $message['image'] = $this->normalMessage['image'];
         }
         return $message;

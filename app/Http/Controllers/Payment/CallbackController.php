@@ -12,18 +12,15 @@ use App\Notifications\SellerInvoiceProductPaidNotification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 
-class CallbackController extends Controller
-{
+class CallbackController extends Controller {
     // Isi dengan private key anda
     protected ?string $privateKey;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->privateKey = config('tripay.private_key');
     }
 
-    public function handle(Request $request)
-    {
+    public function handle(Request $request) {
         try {
 
             $callbackSignature = $request->server('HTTP_X_CALLBACK_SIGNATURE');
@@ -43,7 +40,7 @@ class CallbackController extends Controller
                     'message' => 'Unrecognized callback event, no action was taken',
                 ]);
             }
-            
+
 
             $data = json_decode($json);
 

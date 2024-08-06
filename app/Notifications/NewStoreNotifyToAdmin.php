@@ -8,8 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewStoreNotifyToAdmin extends Notification
-{
+class NewStoreNotifyToAdmin extends Notification {
     use Queueable;
 
     public UserStore $userStore;
@@ -18,8 +17,7 @@ class NewStoreNotifyToAdmin extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct(UserStore $userStore)
-    {
+    public function __construct(UserStore $userStore) {
         $this->userStore = $userStore;
         $this->storeLink = route('store.profile', $userStore->username);
     }
@@ -29,16 +27,14 @@ class NewStoreNotifyToAdmin extends Notification
      *
      * @return array<int, string>
      */
-    public function via(object $notifiable): array
-    {
+    public function via(object $notifiable): array {
         return ['mail', 'database'];
     }
 
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(object $notifiable): MailMessage
-    {
+    public function toMail(object $notifiable): MailMessage {
         return (new MailMessage)
             ->subject('Toko Baru Telah Dibuat')
             ->greeting("Halo Admin!")
@@ -52,8 +48,7 @@ class NewStoreNotifyToAdmin extends Notification
      *
      * @return array<string, mixed>
      */
-    public function toArray(object $notifiable): array
-    {
+    public function toArray(object $notifiable): array {
         return [
             'message' => "Ada toko baru bernama \"{$this->userStore->name}\" yang mana telah dibuat oleh {$notifiable->name}.",
             'action' => $this->storeLink,

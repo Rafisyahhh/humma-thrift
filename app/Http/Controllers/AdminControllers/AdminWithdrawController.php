@@ -89,11 +89,9 @@ class AdminWithdrawController extends Controller {
                 $notificationOptions = [
                     "subject" => "Penarikan anda diterima",
                     "greeting" => "Halo {$withdraw->user->name}, Penarikan anda dengan jumlah $withdraw->amount telah dikirim ke Bank {$withdraw->bank->name} dengan No. Rekening $withdraw->bank_number",
+                    "action" => ['Lihat Detail', url('/seller/withdraw')],
                     "line" => "Terima penarikan!."
                 ];
-
-                Log::info('Notification Data:', $notificationData);
-                Log::info('Notification Options:', $notificationOptions);
 
                 $withdraw->user->notify(new CustomMessageNotification($notificationData, $notificationOptions));
             } elseif ($request->filled("message")) {
@@ -102,7 +100,10 @@ class AdminWithdrawController extends Controller {
                 ], [
                     'message.required' => 'Kolom Bukti wajib diisi.',
                 ]);
-                $withdraw->status = "failed";
+
+                $withdraw->update([
+                    "status" => WithdrawalStatusEnum::FAILED->value
+                ]);
                 $user = User::find($withdraw->user_id);
                 $user->notify(new CustomMessageNotification([
                     "title" => "Terjadi kesalahan dengan penarikan anda",
