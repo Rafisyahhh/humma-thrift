@@ -3,6 +3,15 @@
   $store = $user?->store;
 @endphp
 
+<style>
+.active1 {
+  overflow:hidden;
+  border-bottom:5px solid rgb(243, 243, 243);
+  padding: 2.1rem;
+  font-weight: bold;
+}
+</style>
+
 <div class="header-bottom d-lg-block d-none" id="navbar" style="z-index: 1;">
   <div class="container">
     <div class="header-nav">
@@ -51,12 +60,11 @@
 
       <div class="header-nav-menu">
         <ul class="menu-list">
-          <li><a href="{{ url('/') }}"><span class="list-text">Home</span></a></li>
-          <li><a href="{{ url('/product/regular') }}"><span class="list-text">Produk</span></a></li>
-          <li><a href="{{ url('/product/auction') }}"><span class="list-text">Lelang</span></a></li>
-          {{-- <li><a href="{{ url('/brand') }}"><span class="list-text">Brand</span></a></li> --}}
-          <li><a href="{{ url('/stores') }}"><span class="list-text">Toko</span></a></li>
-          <li><a href="{{ url('/about-us') }}"><span class="list-text">Tentang Kami</span></a></li>
+          <li><a href="{{ url('/') }}"><span class="list-text {{ request()->is('/') ? 'active1' : '' }}">Home</span></a></li>
+          <li><a href="{{ url('/product/regular') }}"><span class="list-text {{ request()->is('product/regular') ? 'active1' : '' }}">Produk</span></a></li>
+          <li><a href="{{ url('/product/auction') }}"><span class="list-text {{ request()->is('product/auction') ? 'active1' : '' }}">Lelang</span></a></li>
+          <li><a href="{{ url('/stores') }}"><span class="list-text {{ request()->is('stores') ? 'active1' : '' }}">Toko</span></a></li>
+          <li><a href="{{ url('/about-us') }}"><span class="list-text {{ request()->is('about-us') ? 'active1' : '' }}">Tentang Kami</span></a></li>
         </ul>
       </div>
 
@@ -81,3 +89,13 @@
     </div>
   </div>
 </div>
+
+{{-- <script>
+    $(document).ready(function () {
+  
+  $(".list-text").click(function (){
+    $(this).addClass("active1").siblings().removeClass("active1");
+  });
+});
+
+</script> --}}
