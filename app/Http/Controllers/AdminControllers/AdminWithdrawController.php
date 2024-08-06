@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\AdminControllers;
 
+use App\Enums\WithdrawalStatusEnum;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Withdrawal;
 use App\Notifications\CustomMessageNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class AdminWithdrawController extends Controller {
     /**
@@ -47,39 +50,61 @@ class AdminWithdrawController extends Controller {
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id) {
+    public function update(Request $request, $id) {
         $request->validate([
-            'status' => 'required|in:failed,processed,complete',
+            'status' => 'required_without_all:image,message|in:failed,processed,complete',
         ], [
             'status.required' => 'Kolom STATUS wajib diisi.',
         ]);
 
-        $withdraw = Withdrawal::find($id);
+        $withdraw = Withdrawal::with(["user", "bank"])->find($id);
 
         if ($withdraw) {
-            $withdraw->status = $request->status;
-            $withdraw->save();
-            if ($request->status == "complete") {
+            if ($request->filled("status")) {
+                $withdraw->status = $request->status;
+                $withdraw->save();
+            }
+            if ($request->hasFile("image")) {
                 $request->validate([
                     'image' => 'required',
                 ], [
                     'image.required' => 'Kolom Bukti wajib diisi.',
                 ]);
+                $data = [];
                 if ($request->hasFile('image')) {
                     $data['image'] = $request->file('image')->store('image', 'public');
                 }
-                $withdraw->user()->notify(new CustomMessageNotification([
+                $withdraw->update([
+                    "status" => WithdrawalStatusEnum::COMPLETED->value
+                ]);
+
+                // Debugging
+                $notificationData = [
                     "title" => "Penarikan anda diterima",
                     "image" => $data['image'],
-                    "message" => "Halo {$withdraw->user()->name}, Penarikan anda dengan jumlah $withdraw->amount telah dikirim ke Bank {$withdraw->bank()->name} dengan No. Rekening $withdraw->bank_number",
+                    "message" => "Halo {$withdraw->user->name}, Penarikan anda dengan jumlah $withdraw->amount telah dikirim ke Bank {$withdraw->bank->name} dengan No. Rekening $withdraw->bank_number",
                     "action" => route('seller.withdraw.index')
-                ], [
+                ];
+
+                $notificationOptions = [
                     "subject" => "Penarikan anda diterima",
-                    "greeting" => "Halo {$withdraw->user()->name}, Penarikan anda dengan jumlah $withdraw->amount telah dikirim ke Bank {$withdraw->bank()->name} dengan No. Rekening $withdraw->bank_number",
+                    "greeting" => "Halo {$withdraw->user->name}, Penarikan anda dengan jumlah $withdraw->amount telah dikirim ke Bank {$withdraw->bank->name} dengan No. Rekening $withdraw->bank_number",
                     "line" => "Terima penarikan!."
-                ]));
-            } elseif ($request->status == "failed") {
-                $withdraw->user()->notify(new CustomMessageNotification([
+                ];
+
+                Log::info('Notification Data:', $notificationData);
+                Log::info('Notification Options:', $notificationOptions);
+
+                $withdraw->user->notify(new CustomMessageNotification($notificationData, $notificationOptions));
+            } elseif ($request->filled("message")) {
+                $request->validate([
+                    'message' => 'required',
+                ], [
+                    'message.required' => 'Kolom Bukti wajib diisi.',
+                ]);
+                $withdraw->status = "failed";
+                $user = User::find($withdraw->user_id);
+                $user->notify(new CustomMessageNotification([
                     "title" => "Terjadi kesalahan dengan penarikan anda",
                     "message" => $request->input('message'),
                     "action" => route('seller.withdraw.index')
@@ -92,9 +117,9 @@ class AdminWithdrawController extends Controller {
             return redirect()->back()->with('success', 'Status penarikan berhasil diperbarui.');
         }
 
-
         return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui data.');
     }
+
 
     /**
      * Remove the specified resource from storage.

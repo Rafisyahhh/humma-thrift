@@ -54,8 +54,8 @@ class CustomMessageNotification extends Notification {
             'message' => $this->normalMessage['message'],
             'action' => $this->normalMessage['action']
         ];
-        if ($this->normalMessage['title']) {
-            $message['image'] = $this->normalMessage['title'];
+        if ($this->normalMessage['image']) {
+            $message['image'] = $this->normalMessage['image'];
         }
         return $message;
     }
