@@ -288,7 +288,7 @@
                     <div class="grid-item {{ $kategori->type }}"
                         data-route="{{ url("/product?categories=$kategori->slug") }}">
                         <div class="blok">
-                            <h5 style="color:#1C3879; font-size:30px; margin-top:40%;"> {{ $kategori->slug }}</h5>
+                            <h5 style="color:#1C3879; font-size:30px; margin-top:40%; text-transform:capitalize;"> {{ $kategori->slug }}</h5>
                         </div>
                         <img src="{{ asset("storage/{$kategori->icon}") }}"
                             style="width:125px;hieght:125px;border-radius:20px;" class="h-100 w-100">
