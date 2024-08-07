@@ -43,18 +43,27 @@
 
                                 <div class="profile-section">
                                     <div class="row g-5">
+                                        @php
+                                            $hasData = false;
+                                        @endphp
+
                                         @foreach ($transaction as $item)
                                             {{-- @foreach ($orders[$item->id] as $ordr)
                                                 @if ($ordr->product) --}}
                                             @php
+
                                                 $firstOrder = $orders[$item->id]->first();
                                                 $additionalProductsCount = $orders[$item->id]->count() - 1;
 
                                             @endphp
                                             @if ($firstOrder->product->userstore->user_id == auth()->user()->id)
                                                 @if ($firstOrder && $firstOrder->product)
+                                                    @php
+                                                        $hasData = true;
+                                                    @endphp
+
                                                     {{-- @foreach ($transaction as $item)
-                                        @if ($orders) --}}
+                                                        @if ($orders) --}}
                                                     <div class="col-lg-4 col-sm-6">
                                                         <div class="product-wrapper"
                                                             style="border: 1px solid; height: 41rem;">
@@ -138,6 +147,14 @@
                                         @endforeach
                                         {{-- @endforeach --}}
 
+
+                                        @if (!$hasData)
+                                        <div class="table-body d-flex flex-column align-items-center justify-content-center">
+                                            <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 200px; height: 200px;">
+                                            <p>Tidak ada data</p>
+                                        </div>
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -162,118 +179,143 @@
                                             <td class="table-wrapper">
 
                                                 <h5 class="table-heading">HARGA</h5>
-                            </div>
-                            </td>
-                            <td class="table-wrapper">
-                                <div class="table-wrapper-center">
-                                    <h5 class="table-heading">PENGIRIMAN</h5>
-                                </div>
-                            </td>
-                            <td class="table-wrapper">
-                                <div class="table-wrapper-center">
-                                    <h5 class="table-heading">STATUS</h5>
-                                </div>
-                            </td>
+                                                {{-- </div> --}}
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <h5 class="table-heading">PENGIRIMAN</h5>
+                                                </div>
+                                            </td>
+                                            <td class="table-wrapper">
+                                                <div class="table-wrapper-center">
+                                                    <h5 class="table-heading">STATUS</h5>
+                                                </div>
+                                            </td>
 
-                            </tr>
-                            @forelse ($transaction as $item)
-                                @foreach ($orderL[$item->id] as $ordr)
-                                    @if ($ordr->product_auction)
-                                        @if ($ordr->product_auction->userStore->user_id == auth()->user()->id)
-                                            <tr class="table-row ticket-row">
-
-                                                <td class="table-wrapper wrapper-product" style="width: 28%;">
-                                                    <div class="wrapper">
-                                                        <div class="wrapper-img">
-                                                            <img src="{{ asset('storage/' . $ordr->product_auction->thumbnail) }}"
-                                                                alt="img" style="border-radius:0.5rem;">
-                                                        </div>
-                                                        <div class="wrapper-content">
-                                                            <p class="heading" style="color: #787878; font-size: 12px;">
-                                                                {{ $item->created_at->format('d F Y') }}</p>
-                                                            <h5 class="heading">{{ $ordr->product_auction->title }}</h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper" style="width: 15%;">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="heading">{{ $item->user->name }}</h5>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper" style="width: 15%;">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="heading">{{ $item->user->email }}</h5>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="heading">
-                                                            {{ 'Rp. ' . number_format($ordr->product_auction->price, 0, ',', '.') }}
-                                                        </h5>
-                                                    </div>
-                                                </td>
-                                                @php
-                                                    $statusClasses = [
-                                                        'diterima' => 'badge  text-bg-primary text-light',
-                                                        'selesai' => 'badge  text-bg-success text-light',
-                                                        'dikemas' => 'badge  text-bg-warning text-light',
-                                                        'diantar' => 'badge  text-bg-warning text-light',
-                                                        'selesaikan pesanan' => 'badge  text-bg-danger text-light',
-                                                    ];
+                                        </tr>
+                                        @php
+                                        $hasDatalelang = false;
+                                    @endphp
+                                        @forelse ($transaction as $item)
+                                            @foreach ($orderL[$item->id] as $ordr)
+                                                @if ($ordr->product_auction)
+                                                    @if ($ordr->product_auction->userStore->user_id == auth()->user()->id)
+                                                    @php
+                                                    $hasDatalelang = true;
                                                 @endphp
-                                                @if (isset($statusClasses[$item->delivery_status]))
-                                                    <td class="table-wrapper" style="width: 12%; font-size: 15px">
-                                                        {{-- <div class="{{ $statusClasses[$item->delivery_status] }}"> --}}
-                                                        {{-- {{ $item->delivery_status }} --}}
-                                                        <form
-                                                            action="{{ route('seller.transaction.detail.update', $item->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            <select class="form-select form-select-lg mx-2"
-                                                                aria-label="Default select example"
-                                                                style="width: 160px;border-color: #1c3879" name="status"
-                                                                onchange="this.form.submit()">
-                                                                <option value="dikemas"
-                                                                    {{ $item->delivery_status == 'dikemas' ? 'selected' : '' }}>
-                                                                    Dikemas</option>
-                                                                <option value="diantar"
-                                                                    {{ $item->delivery_status == 'diantar' ? 'selected' : '' }}>
-                                                                    Diantar</option>
-                                                                <option value="diterima"
-                                                                    {{ $item->delivery_status == 'diterima' ? 'selected' : '' }}>
-                                                                    Diterima</option>
-                                                            </select>
-                                                        </form>
-                                                        {{-- </div> --}}
-                                                    </td>
+
+                                                        <tr class="table-row ticket-row">
+
+                                                            <td class="table-wrapper wrapper-product" style="width: 28%;">
+                                                                <div class="wrapper">
+                                                                    <div class="wrapper-img">
+                                                                        <img src="{{ asset('storage/' . $ordr->product_auction->thumbnail) }}"
+                                                                            alt="img" style="border-radius:0.5rem;">
+                                                                    </div>
+                                                                    <div class="wrapper-content">
+                                                                        <p class="heading"
+                                                                            style="color: #787878; font-size: 12px;">
+                                                                            {{ $item->created_at->format('d F Y') }}</p>
+                                                                        <h5 class="heading">
+                                                                            {{ $ordr->product_auction->title }}</h5>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="table-wrapper" style="width: 15%;">
+                                                                <div class="table-wrapper-center">
+                                                                    <h5 class="heading">{{ $item->user->name }}</h5>
+                                                                </div>
+                                                            </td>
+                                                            <td class="table-wrapper" style="width: 15%;">
+                                                                <div class="table-wrapper-center">
+                                                                    <h5 class="heading">{{ $item->user->email }}</h5>
+                                                                </div>
+                                                            </td>
+                                                            <td class="table-wrapper">
+                                                                <div class="table-wrapper-center">
+                                                                    <h5 class="heading">
+                                                                        {{ 'Rp. ' . number_format($ordr->product_auction->price, 0, ',', '.') }}
+                                                                    </h5>
+                                                                </div>
+                                                            </td>
+                                                            @php
+                                                                $statusClasses = [
+                                                                    'diterima' => 'badge  text-bg-primary text-light',
+                                                                    'selesai' => 'badge  text-bg-success text-light',
+                                                                    'dikemas' => 'badge  text-bg-warning text-light',
+                                                                    'diantar' => 'badge  text-bg-warning text-light',
+                                                                    'selesaikan pesanan' =>
+                                                                        'badge  text-bg-danger text-light',
+                                                                ];
+                                                            @endphp
+                                                            @if (isset($statusClasses[$item->delivery_status]))
+                                                                <td class="table-wrapper"
+                                                                    style="width: 12%; font-size: 15px">
+                                                                    {{-- <div class="{{ $statusClasses[$item->delivery_status] }}"> --}}
+                                                                    {{-- {{ $item->delivery_status }} --}}
+                                                                    <form
+                                                                        action="{{ route('seller.transaction.detail.update', $item->id) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        <select class="form-select form-select-lg mx-2"
+                                                                            aria-label="Default select example"
+                                                                            style="width: 160px;border-color: #1c3879"
+                                                                            name="status" onchange="this.form.submit()">
+                                                                            <option value="dikemas"
+                                                                                {{ $item->delivery_status == 'dikemas' ? 'selected' : '' }}>
+                                                                                Dikemas</option>
+                                                                            <option value="diantar"
+                                                                                {{ $item->delivery_status == 'diantar' ? 'selected' : '' }}>
+                                                                                Diantar</option>
+                                                                            <option value="diterima"
+                                                                                {{ $item->delivery_status == 'diterima' ? 'selected' : '' }}>
+                                                                                Diterima</option>
+                                                                        </select>
+                                                                    </form>
+                                                                    {{-- </div> --}}
+                                                                </td>
+                                                            @endif
+                                                            <td class="table-wrapper">
+                                                                <div class="table-wrapper-center">
+                                                                    @if ($ordr->transaction_order->status == 'UNPAID')
+                                                                        <h5 class="heading text-danger">Belum Bayar</h5>
+                                                                    @elseif ($ordr->transaction_order->status == 'PAID')
+                                                                        <h5 class="heading text-success">Pembayaran
+                                                                            Berhasil</h5>
+                                                                    @elseif ($ordr->transaction_order->status == 'EXPIRED')
+                                                                        <h5 class="heading text-danger">Pembayaran
+                                                                            Kadaluarsa</h5>
+                                                                    @elseif ($ordr->transaction_order->status == 'REFUND')
+                                                                        <h5 class="heading text-warning">Produk
+                                                                            Dikembalikan</h5>
+                                                                    @elseif ($ordr->transaction_order->status == 'FAILED')
+                                                                        <h5 class="heading text-danger">Pembayaran Gagal
+                                                                        </h5>
+                                                                    @endif
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endif
                                                 @endif
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        @if ($ordr->transaction_order->status == 'UNPAID')
-                                                            <h5 class="heading text-danger">Belum Bayar</h5>
-                                                        @elseif ($ordr->transaction_order->status == 'PAID')
-                                                            <h5 class="heading text-success">Pembayaran Berhasil</h5>
-                                                        @elseif ($ordr->transaction_order->status == 'EXPIRED')
-                                                            <h5 class="heading text-danger">Pembayaran Kadaluarsa</h5>
-                                                        @elseif ($ordr->transaction_order->status == 'REFUND')
-                                                            <h5 class="heading text-warning">Produk Dikembalikan</h5>
-                                                        @elseif ($ordr->transaction_order->status == 'FAILED')
-                                                            <h5 class="heading text-danger">Pembayaran Gagal</h5>
-                                                        @endif
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            @endforeach
+                                        @endforeach
+
+                                        @if (!$hasDatalelang)
+
+                                        <tr >
+                                            <td >
+                                                <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 200px; height: 200px;">
+                                                <p>Tidak ada data</p>
+                                            </td>
+                                        </tr>
                                         @endif
-                                    @endif
-                                @endforeach
-                            @endforeach
-                            </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
 @endsection

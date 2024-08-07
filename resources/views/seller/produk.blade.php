@@ -174,7 +174,7 @@
     </div>
 
     <div class="cart-section wishlist-section row gy-5">
-      @forelse ($products as $item)
+      @foreach ($products as $item)
         @if ($item->status == 'active')
           <div class="col-lg-4 col-sm-6">
             <div class="product-wrapper" data-aos="fade-up">
@@ -355,13 +355,21 @@
             </div>
           </div>
         @endif
-      @empty
+      {{-- @empty
         <div class="col-lg-12 d-flex flex-column align-items-center">
           <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 200px; height: 200px;">
           <h5 class="text-center" style="color: #000000">Upss..</h5>
           <p class="text-center" style="color: #000000">Maaf, anda belum menambahkan produk apapun</p>
-        </div>
-      @endforelse
+        </div> --}}
+      @endforeach
+
+      @if ($products->isEmpty() && $product_auctions->isEmpty())
+      <div class="col-lg-12 d-flex flex-column align-items-center">
+        <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 200px; height: 200px;">
+        <h5 class="text-center" style="color: #000000">Upss..</h5>
+        <p class="text-center" style="color: #000000">Maaf, anda belum menambahkan produk apapun</p>
+      </div>
+      @endif
 
       {{-- LELANG --}}
       @foreach ($product_auctions as $item)

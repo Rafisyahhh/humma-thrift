@@ -153,7 +153,7 @@
                             @empty
                             <div class="col-lg-12">
                                 <h3 class="text-center">Produk Masih Kosong</h3>
-                                <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
+                                 <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
                             </div>
                             @endforelse
 
