@@ -31,11 +31,6 @@ class UserSeeder extends Seeder {
                 'email' => 'sauqi2019@gmail.com'
             ],
             [
-                'username' => 'Cak Adi',
-                'name' => 'Amir Zuhdi Wibowo',
-                'email' => 'cakadi190@gmail.com'
-            ],
-            [
                 'username' => 'Cinta',
                 'name' => 'Cinta Adenia',
                 'email' => 'ccintaadenia06@gmail.com'
@@ -50,6 +45,16 @@ class UserSeeder extends Seeder {
                 'name' => 'Nasya Asriva Putri Artama',
                 'email' => 'asrivanasya0@gmail.com'
             ],
+            [
+                'username' => 'Tika',
+                'name' => 'Nugi Artika',
+                'email' => 'nugiartika@gmail.com'
+            ],
+            [
+                'username' => 'Akbar',
+                'name' => 'Akbar',
+                'email' => 'akbar@gmail.com'
+            ]
         ];
         foreach ($teamAccount as $account) {
             User::factory()->withRole('user')->create($account);
