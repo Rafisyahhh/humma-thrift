@@ -31,6 +31,50 @@
             height: 100%;
             max-height: 82rem;
         } */
+
+        .close1 {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close1:hover,
+    .close1:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button1 {
+      font-size: 15px;
+    }
+
+    .modal-show1 {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content-show1 {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 100%;
+      max-width: 50rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
     </style>
 @endsection
 
@@ -70,6 +114,11 @@
                                         <span class="badge badge-dot bg-primary position-absolute top-0 m-3 end-0"></span>
                                     @endif
                                 </div>
+                                <div>
+                                    <button class="me-4" onclick="openModal('#exampleModal')" data-toggle="tooltip" data-placement="top" title="Detail">
+                                        <i class="fa-regular fa-image"></i>
+                                    </button>
+                                </div>
                                 <div class="aksi">
                                     <span
                                         class="text-muted">{{ $notification->created_at->locale('id')->diffForHumans() }}</span>
@@ -94,6 +143,24 @@
                                     </div>
                                 </div>
                             </a>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content-show1">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                      <button type="button" class="close1" data-dismiss="modal" aria-label="Close" onclick="closeModal(this)">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="{{ asset("storage/$notification->image") }}" alt="image" class="object-fit-cover">
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="button1" data-dismiss="modal" onclick="closeModal(this)">Close</button>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
                         @empty
                             <div class="list-group-item py-3 position-relative d-flex justify-content-between align-items-center">
                                 <div class="d-flex gap-2 align-items-center">
@@ -110,7 +177,6 @@
     </div>
 @endsection
 
-@section('scripts')
     {{-- <script>
     document.addEventListener('DOMContentLoaded', function () {
         const showMoreBtn = document.querySelector('.show-more-btn');
@@ -124,4 +190,14 @@
         }
     });
 </script> --}}
-@endsection
+<script>
+    function openModal(modal) {
+        $(modal).modal('show');
+    }
+    function closeModal($this) {
+        $($this).closest(".modal").modal("hide");
+    }
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>  
