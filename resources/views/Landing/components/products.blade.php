@@ -1,4 +1,4 @@
-@include('Landing.components.product-regular', ['doNotShowEmptyProduct' => true])
+@include('Landing.components.product-regular2', ['doNotShowEmptyProduct' => true])
 @include('Landing.components.product-auction', ['doNotShowEmptyProduct' => true])
 
 @if (count($products) + count($product_auction) <= 0)

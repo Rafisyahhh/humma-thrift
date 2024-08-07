@@ -259,6 +259,7 @@
               `);
               return;
             }
+            appendProduct(data.data)
           },
           error: function() {
             loading = false;
@@ -299,8 +300,12 @@
           ":userStore.name:": item.user_store.name,
           ":storesproduct:": `{{ route('storesproduct', '') }}/${item.id}`,
           ":storecart:": `{{ route('storecart', '') }}/${item.id}`,
-          ":store.product.detail:": `{{ route('store.product.detail', ['store' => '', 'product' => '']) }}/${item.id}`,
+          ":store.product.detail:": "{{ route('store.product.detail', ['store' => ':store:', 'product' => ':product:']) }}"
+            .replace(":store:", item.user_store.username).replace(":product:", item.slug),
+          ":store.profile:": "{{ route('store.profile', ['store' => ':username:']) }}"
+            .replace(":username:", item.user_store.username),
           ":thumbnail:": `{{ asset('storage/') }}/${item.thumbnail}`,
+          ":user.checkout.process:": `{{ route('user.checkout.process') }}`,
         };
         const productHTML = replacePlaceholders(product, data);
         $("#product-container").append(productHTML);
