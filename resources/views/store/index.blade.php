@@ -582,10 +582,10 @@
                 <div class="tab-pane fade mt-5" id="ulasan-tab-pane" role="tabpanel" aria-labelledby="ulasan-tab"
                     tabindex="0">
                     <ul class="list-group list-group-flush" style="height: unset;">
-                        <section class="about-feedback product ">
+                        <section class="about-feedback product p-0">
                             <div class="container p-0">
-                                <div class="position-relative px-5">
-                                    <div class="swiper about-swiper">
+                                <div class="position-relative">
+                                    <div class="swiper about-swiper p-0">
                                         <div class="swiper-wrapper d-flex flex-row">
                                             @forelse ($reviews as $item)
                                                 <div class="swiper-slide testimonial-wrapper">

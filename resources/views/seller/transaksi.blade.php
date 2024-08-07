@@ -85,64 +85,55 @@
                                                         @endforeach --}}
 
 
-                                                                <p class="paragraph mt-4 ms-4 fw-bold"
-                                                                    style="font-size: 15px;">
-                                                                    {{ $item->user->name }}</p>
-                                                                {{-- <p class="paragraph mt-4 ms-4 p-0" style="font-size: 15px;">
+                                                            <p class="paragraph mt-4 ms-4 fw-bold" style="font-size: 15px;">
+                                                                {{ $item->user->name }}</p>
+                                                            {{-- <p class="paragraph mt-4 ms-4 p-0" style="font-size: 15px;">
                                                             Jumlah
                                                             produk : {{ $item->order->count() }}
                                                         </p> --}}
 
-                                                                @php
-                                                                    $statusClasses = [
-                                                                        'diterima' =>
-                                                                            'badge  text-bg-primary text-light',
-                                                                        'selesai' =>
-                                                                            'badge  text-bg-success text-light',
-                                                                        'dikemas' =>
-                                                                            'badge  text-bg-warning text-light',
-                                                                        'diantar' =>
-                                                                            'badge  text-bg-warning text-light',
-                                                                        'selesaikan pesanan' =>
-                                                                            'badge  text-bg-danger text-light',
-                                                                    ];
-                                                                @endphp
+                                                            @php
+                                                                $statusClasses = [
+                                                                    'diterima' => 'badge  text-bg-primary text-light',
+                                                                    'selesai' => 'badge  text-bg-success text-light',
+                                                                    'dikemas' => 'badge  text-bg-warning text-light',
+                                                                    'diantar' => 'badge  text-bg-warning text-light',
+                                                                    'selesaikan pesanan' =>
+                                                                        'badge  text-bg-danger text-light',
+                                                                ];
+                                                            @endphp
 
-                                                                <p class="paragraph ms-4 p-0 mb-4" style="font-size: 15px;">
-                                                                    @currency($item->total)
-                                                                </p>
+                                                            <p class="paragraph ms-4 p-0 mb-4" style="font-size: 15px;">
+                                                                @currency($item->total)
+                                                            </p>
 
-                                                                @if (isset($statusClasses[$item->delivery_status]))
-                                                                    <div class="ps-3">
-                                                                        <div class="{{ $statusClasses[$item->delivery_status] }}"
-                                                                            style="font-size: 15px">
-                                                                            {{ $item->delivery_status }}
-                                                                        </div>
+                                                            @if (isset($statusClasses[$item->delivery_status]))
+                                                                <div class="ps-3">
+                                                                    <div class="{{ $statusClasses[$item->delivery_status] }}"
+                                                                        style="font-size: 15px">
+                                                                        {{ $item->delivery_status }}
                                                                     </div>
-                                                                @endif
+                                                                </div>
+                                                            @endif
 
-                                                                <a
-                                                                    href="{{ route('seller.transaction.detail', $item->id) }}">
-                                                                    <span data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="Detail Transaksi"
-                                                                        style="position: absolute;  right: 10px; display: flex; justify-content: right; align-items: right; margin-bottom: 10px; border-radius: 50%; border:1px solid;">
-                                                                        <svg style="display: flex; justify-content: center; align-items:center;"
-                                                                            class="mt-1 me-1"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="32" height="32"
-                                                                            viewBox="0 0 24 24">
-                                                                            <path fill="currentColor"
-                                                                                d="m13.692 17.308l-.707-.72l4.088-4.088H5v-1h12.073l-4.088-4.088l.707-.72L19 12z" />
-                                                                        </svg>
-                                                                    </span></a>
-                                                                <p class="bottom-left mt-4 ms-2"
-                                                                    style="position: absolute; left: 10px; display: flex; justify-content: left; align-items: left;">
-                                                                    {{ $item->created_at->format('d F Y') }}
-                                                                </p>
-                                                            </div>
+                                                            <a href="{{ route('seller.transaction.detail', $item->id) }}">
+                                                                <span data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    title="Detail Transaksi"
+                                                                    style="position: absolute;  right: 10px; display: flex; justify-content: right; align-items: right; margin-bottom: 10px; border-radius: 50%; border:1px solid;">
+                                                                    <svg style="display: flex; justify-content: center; align-items:center;"
+                                                                        class="mt-1 me-1" xmlns="http://www.w3.org/2000/svg"
+                                                                        width="32" height="32" viewBox="0 0 24 24">
+                                                                        <path fill="currentColor"
+                                                                            d="m13.692 17.308l-.707-.72l4.088-4.088H5v-1h12.073l-4.088-4.088l.707-.72L19 12z" />
+                                                                    </svg>
+                                                                </span></a>
+                                                            <p class="bottom-left mt-4 ms-2"
+                                                                style="position: absolute; left: 10px; display: flex; justify-content: left; align-items: left;">
+                                                                {{ $item->created_at->format('d F Y') }}
+                                                            </p>
                                                         </div>
                                                     </div>
-                                                @endif
+                                                </div>
                                             @endif
                                         @endforeach
                                         {{-- @endforeach --}}
@@ -177,9 +168,7 @@
                                                 <h5 class="table-heading">EMAIL</h5>
                                             </td>
                                             <td class="table-wrapper">
-
                                                 <h5 class="table-heading">HARGA</h5>
-                                                {{-- </div> --}}
                                             </td>
                                             <td class="table-wrapper">
                                                 <div class="table-wrapper-center">

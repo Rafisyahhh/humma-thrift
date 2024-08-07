@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder {
             ProductAuctionSeeder::class,
             ProductGallerySeeder::class,
             ProductCategoryPivotSeeder::class,
-            WithdrawalSeeder::class,
         ]);
     }
 }

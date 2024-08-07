@@ -181,13 +181,26 @@
                 </div>
 
                 <div class="item">
-                    @if($withdrawal->status === WithdrawalStatusEnum::COMPLETED)
+                    @if ($withdrawal->status === WithdrawalStatusEnum::COMPLETED)
                         <h4>{{ $withdrawal->updated_at->locale('id')->isoFormat('D MMMM YYYY') }}</h4>
                         <p class="mb-0">Tanggal Transfer</p>
                     @else
                         <h4>-</h4>
                     @endif
                 </div>
+            </div>
+            <div class="item">
+                @if ($withdrawal->status === WithdrawalStatusEnum::COMPLETED)
+                    <h4 class="mb-0 text-center">Bukti Pembayaran</h4>
+                    <div class="d-flex justify-content-center">
+                        <img src="{{ asset('storage/' . $withdrawal->reason) }}" alt="" width="50%">
+                    </div>
+                @elseif ($withdrawal->status === WithdrawalStatusEnum::FAILED)
+                    <h4 class="mb-0">Alasan Gagal</h4>
+                    <p>{{ $withdrawal->reason }}</p>
+                @else
+                    <h4> - </h4>
+                @endif
             </div>
         </div>
     </section>

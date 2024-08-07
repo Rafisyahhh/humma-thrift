@@ -270,10 +270,16 @@
                     </div>
                 </div>
             @empty
-            <div class="table-body d-flex flex-column align-items-center justify-content-center">
-                <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 200px; height: 200px;">
-                <p>Tidak ada data</p>
-            </div>
+                <tr class="table-row ticket-row" style="height:12px;">
+                    <td colspan="6"
+                        class="text-center no-data-message d-flex justify-content-center align-items-center">
+                        <div class="m-auto">
+                            <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong"
+                                style="width: 200px; height: 200px;">
+                            <p class="mt-3 text-center">Tidak ada data</p>
+                        </div>
+                    </td>
+                </tr>
             @endforelse
 
             {{ $transactions->links() }}

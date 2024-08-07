@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained();
             $table->bigInteger('amount');
             $table->string('reimbursement_proof')->nullable();
+            $table->string('reason')->nullable();
             $table->enum('status', Withdrawal::getWithdrawalStatusEnum()->toArray())->default(WithdrawalStatusEnum::PENDING->value);
         });
     }

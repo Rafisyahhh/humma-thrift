@@ -75,7 +75,8 @@ class AdminWithdrawController extends Controller {
                     $data['image'] = $request->file('image')->store('image', 'public');
                 }
                 $withdraw->update([
-                    "status" => WithdrawalStatusEnum::COMPLETED->value
+                    "status" => WithdrawalStatusEnum::COMPLETED->value,
+                    "reason" => $data['image']
                 ]);
 
                 // Debugging
@@ -102,7 +103,8 @@ class AdminWithdrawController extends Controller {
                 ]);
 
                 $withdraw->update([
-                    "status" => WithdrawalStatusEnum::FAILED->value
+                    "status" => WithdrawalStatusEnum::FAILED->value,
+                    "reason" => $request->input('message')
                 ]);
                 $user = User::find($withdraw->user_id);
                 $user->notify(new CustomMessageNotification([
