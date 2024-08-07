@@ -6,8 +6,8 @@
 <style>
 .active1 {
   overflow:hidden;
-  border-bottom:10px solid rgb(243, 243, 243);
-  padding: 1.3rem;
+  border-bottom:5px solid rgb(243, 243, 243);
+  padding: 1.8rem;
   font-weight: bold;
 }
 
