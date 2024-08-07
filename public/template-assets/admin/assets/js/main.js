@@ -1,6 +1,5 @@
 'use strict';
 
-window.isRtl = window.Helpers.isRtl();
 window.isDarkStyle = window.Helpers.isDarkStyle();
 let menu, animate, isHorizontalLayout = false;
 
@@ -121,71 +120,6 @@ if (document.getElementById('layout-menu')) {
 
   switchImage(storedStyle);
 
-  if (typeof i18next !== 'undefined' && typeof i18NextHttpBackend !== 'undefined') {
-    i18next
-      .use(i18NextHttpBackend)
-      .init({
-        lng: window.templateCustomizer ? window.templateCustomizer.settings.lang : 'en',
-        debug: false,
-        fallbackLng: 'en',
-        backend: {
-          loadPath: assetsPath + 'json/locales/{{lng}}.json'
-        },
-        returnObjects: true
-      })
-      .then(function (t) {
-        localize();
-      });
-  }
-
-  let languageDropdown = document.getElementsByClassName('dropdown-language')[0];
-
-  if (languageDropdown) {
-    let dropdownItems = languageDropdown.querySelectorAll('.dropdown-item');
-
-    dropdownItems.forEach(item => {
-      item.addEventListener('click', function () {
-        let currentLanguage = this.getAttribute('data-language');
-        let textDirection = this.getAttribute('data-text-direction');
-
-        dropdownItems.forEach(sibling => {
-          sibling.classList.remove('active');
-        });
-        this.classList.add('active');
-
-        i18next.changeLanguage(currentLanguage, (err, t) => {
-          if (err) return console.log('something went wrong loading', err);
-          window.templateCustomizer?.setLang(currentLanguage);
-          directionChange(textDirection);
-          localize();
-        });
-      });
-    });
-
-    function directionChange(textDirection) {
-      if (textDirection === 'rtl') {
-        if (localStorage.getItem('templateCustomizer-' + templateName + '--Rtl') !== 'true')
-          window.templateCustomizer?.setRtl(true);
-      } else {
-        if (localStorage.getItem('templateCustomizer-' + templateName + '--Rtl') === 'true')
-          window.templateCustomizer?.setRtl(false);
-      }
-    }
-  }
-
-  function localize() {
-    let i18nList = document.querySelectorAll('[data-i18n]');
-    let currentLanguageEle = document.querySelector('.dropdown-item[data-language="' + i18next.language + '"]');
-
-    if (currentLanguageEle) {
-      currentLanguageEle.click();
-    }
-
-    i18nList.forEach(item => {
-      item.innerHTML = i18next.t(item.dataset.i18n);
-    });
-  }
-
   const notificationMarkAsReadAll = document.querySelector('.dropdown-notifications-all');
   const notificationMarkAsReadList = document.querySelectorAll('.dropdown-notifications-read');
 
@@ -260,178 +194,178 @@ if (document.getElementById('layout-menu')) {
   }
 })();
 
-if (typeof $ !== 'undefined') {
-  $(function () {
-    window.Helpers.initSidebarToggle();
+// if (typeof $ !== 'undefined') {
+//   $(function () {
+//     window.Helpers.initSidebarToggle();
 
-    var searchToggler = $('.search-toggler'),
-      searchInputWrapper = $('.search-input-wrapper'),
-      searchInput = $('.search-input'),
-      contentBackdrop = $('.content-backdrop');
+//     var searchToggler = $('.search-toggler'),
+//       searchInputWrapper = $('.search-input-wrapper'),
+//       searchInput = $('.search-input'),
+//       contentBackdrop = $('.content-backdrop');
 
-    if (searchToggler.length) {
-      searchToggler.on('click', function () {
-        if (searchInputWrapper.length) {
-          searchInputWrapper.toggleClass('d-none');
-          searchInput.focus();
-        }
-      });
-    }
+//     if (searchToggler.length) {
+//       searchToggler.on('click', function () {
+//         if (searchInputWrapper.length) {
+//           searchInputWrapper.toggleClass('d-none');
+//           searchInput.focus();
+//         }
+//       });
+//     }
 
-    $(document).on('keydown', function (event) {
-      if (event.ctrlKey && event.which === 191) {
-        if (searchInputWrapper.length) {
-          searchInputWrapper.toggleClass('d-none');
-          searchInput.focus();
-        }
-      }
-    });
+//     $(document).on('keydown', function (event) {
+//       if (event.ctrlKey && event.which === 191) {
+//         if (searchInputWrapper.length) {
+//           searchInputWrapper.toggleClass('d-none');
+//           searchInput.focus();
+//         }
+//       }
+//     });
 
-    setTimeout(() => {
-      var twitterTypeahead = $('.twitter-typeahead');
-      searchInput.on('focus', function () {
-        if (searchInputWrapper.hasClass('container-xxl')) {
-          searchInputWrapper.find(twitterTypeahead).addClass('container-xxl');
-          twitterTypeahead.removeClass('container-fluid');
-        } else if (searchInputWrapper.hasClass('container-fluid')) {
-          searchInputWrapper.find(twitterTypeahead).addClass('container-fluid');
-          twitterTypeahead.removeClass('container-xxl');
-        }
-      });
-    }, 10);
+//     setTimeout(() => {
+//       var twitterTypeahead = $('.twitter-typeahead');
+//       searchInput.on('focus', function () {
+//         if (searchInputWrapper.hasClass('container-xxl')) {
+//           searchInputWrapper.find(twitterTypeahead).addClass('container-xxl');
+//           twitterTypeahead.removeClass('container-fluid');
+//         } else if (searchInputWrapper.hasClass('container-fluid')) {
+//           searchInputWrapper.find(twitterTypeahead).addClass('container-fluid');
+//           twitterTypeahead.removeClass('container-xxl');
+//         }
+//       });
+//     }, 10);
 
-    if (searchInput.length) {
-      var filterConfig = function (data) {
-        return function findMatches(q, cb) {
-          let matches = [];
-          data.filter(function (i) {
-            if (i.name.toLowerCase().startsWith(q.toLowerCase()) || i.name.toLowerCase().includes(q.toLowerCase())) {
-              matches.push(i);
-              matches.sort((a, b) => b.name < a.name ? 1 : -1);
-            }
-          });
-          cb(matches);
-        };
-      };
+//     if (searchInput.length) {
+//       var filterConfig = function (data) {
+//         return function findMatches(q, cb) {
+//           let matches = [];
+//           data.filter(function (i) {
+//             if (i.name.toLowerCase().startsWith(q.toLowerCase()) || i.name.toLowerCase().includes(q.toLowerCase())) {
+//               matches.push(i);
+//               matches.sort((a, b) => b.name < a.name ? 1 : -1);
+//             }
+//           });
+//           cb(matches);
+//         };
+//       };
 
-      var searchJson = $('#layout-menu').hasClass('menu-horizontal') ? 'search-horizontal.json' : 'search-vertical.json';
-      var searchData = $.ajax({
-        url: assetsPath + 'json/' + searchJson,
-        dataType: 'json',
-        async: false
-      }).responseJSON;
+//       var searchJson = $('#layout-menu').hasClass('menu-horizontal') ? 'search-horizontal.json' : 'search-vertical.json';
+//       var searchData = $.ajax({
+//         url: assetsPath + 'json/' + searchJson,
+//         dataType: 'json',
+//         async: false
+//       }).responseJSON;
 
-      searchInput.each(function () {
-        var $this = $(this);
-        searchInput
-          .typeahead(
-            {
-              hint: false,
-              classNames: {
-                menu: 'tt-menu navbar-search-suggestion',
-                cursor: 'active',
-                suggestion: 'suggestion d-flex justify-content-between px-3 py-2 w-100'
-              }
-            },
-            {
-              name: 'pages',
-              display: 'name',
-              limit: 5,
-              source: filterConfig(searchData.pages),
-              templates: {
-                header: '<h6 class="suggestions-header text-primary mb-0 mx-3 mt-3 pb-2">Pages</h6>',
-                suggestion: function ({ url, icon, name }) {
-                  return (
-                    '<a href="' + url + '">' +
-                    '<div>' +
-                    '<i class="ti ' + icon + ' me-2"></i>' +
-                    '<span class="align-middle">' + name + '</span>' +
-                    '</div>' +
-                    '</a>'
-                  );
-                },
-                notFound:
-                  '<div class="not-found px-3 py-2">' +
-                  '<h6 class="suggestions-header text-primary mb-2">Pages</h6>' +
-                  '<p class="py-2 mb-0"><i class="ti ti-alert-circle ti-xs me-2"></i> No Results Found</p>' +
-                  '</div>'
-              }
-            },
-            {
-              name: 'files',
-              display: 'name',
-              limit: 4,
-              source: filterConfig(searchData.files),
-              templates: {
-                header: '<h6 class="suggestions-header text-primary mb-0 mx-3 mt-3 pb-2">Files</h6>',
-                suggestion: function ({ src, name, subtitle, meta }) {
-                  return (
-                    '<a href="javascript:;">' +
-                    '<div class="d-flex w-50">' +
-                    '<img class="me-3" src="' + assetsPath + src + '" alt="' + name + '" height="32">' +
-                    '<div class="w75">' +
-                    '<h6 class="mb-0">' + name + '</h6>' +
-                    '<small class="text-muted">' + subtitle + '</small>' +
-                    '</div>' +
-                    '</div>' +
-                    '<small class="text-muted">' + meta + '</small>' +
-                    '</a>'
-                  );
-                },
-                notFound:
-                  '<div class="not-found px-3 py-2">' +
-                  '<h6 class="suggestions-header text-primary mb-2">Files</h6>' +
-                  '<p class="py-2 mb-0"><i class="ti ti-alert-circle ti-xs me-2"></i> No Results Found</p>' +
-                  '</div>'
-              }
-            },
-            {
-              name: 'members',
-              display: 'name',
-              limit: 4,
-              source: filterConfig(searchData.members),
-              templates: {
-                header: '<h6 class="suggestions-header text-primary mb-0 mx-3 mt-3 pb-2">Members</h6>',
-                suggestion: function ({ name, src, subtitle }) {
-                  return (
-                    '<a href="app-user-view-account.html">' +
-                    '<div class="d-flex align-items-center">' +
-                    '<img class="rounded-circle me-3" src="' + assetsPath + src + '" alt="' + name + '" height="32">' +
-                    '<div class="user-info">' +
-                    '<h6 class="mb-0">' + name + '</h6>' +
-                    '<small class="text-muted">' + subtitle + '</small>' +
-                    '</div>' +
-                    '</div>' +
-                    '</a>'
-                  );
-                },
-                notFound:
-                  '<div class="not-found px-3 py-2">' +
-                  '<h6 class="suggestions-header text-primary mb-2">Members</h6>' +
-                  '<p class="py-2 mb-0"><i class="ti ti-alert-circle ti-xs me-2"></i> No Results Found</p>' +
-                  '</div>'
-              }
-            }
-          )
-          .bind('typeahead:render', () => contentBackdrop.addClass('show').removeClass('fade'))
-          .bind('typeahead:select', (ev, suggestion) => { if (suggestion.url) window.location = suggestion.url; })
-          .bind('typeahead:close', () => {
-            searchInput.val('');
-            $this.typeahead('val', '');
-            searchInputWrapper.addClass('d-none');
-            contentBackdrop.addClass('fade').removeClass('show');
-          });
+//       searchInput.each(function () {
+//         var $this = $(this);
+//         searchInput
+//           .typeahead(
+//             {
+//               hint: false,
+//               classNames: {
+//                 menu: 'tt-menu navbar-search-suggestion',
+//                 cursor: 'active',
+//                 suggestion: 'suggestion d-flex justify-content-between px-3 py-2 w-100'
+//               }
+//             },
+//             {
+//               name: 'pages',
+//               display: 'name',
+//               limit: 5,
+//               source: filterConfig(searchData.pages),
+//               templates: {
+//                 header: '<h6 class="suggestions-header text-primary mb-0 mx-3 mt-3 pb-2">Pages</h6>',
+//                 suggestion: function ({ url, icon, name }) {
+//                   return (
+//                     '<a href="' + url + '">' +
+//                     '<div>' +
+//                     '<i class="ti ' + icon + ' me-2"></i>' +
+//                     '<span class="align-middle">' + name + '</span>' +
+//                     '</div>' +
+//                     '</a>'
+//                   );
+//                 },
+//                 notFound:
+//                   '<div class="not-found px-3 py-2">' +
+//                   '<h6 class="suggestions-header text-primary mb-2">Pages</h6>' +
+//                   '<p class="py-2 mb-0"><i class="ti ti-alert-circle ti-xs me-2"></i> No Results Found</p>' +
+//                   '</div>'
+//               }
+//             },
+//             {
+//               name: 'files',
+//               display: 'name',
+//               limit: 4,
+//               source: filterConfig(searchData.files),
+//               templates: {
+//                 header: '<h6 class="suggestions-header text-primary mb-0 mx-3 mt-3 pb-2">Files</h6>',
+//                 suggestion: function ({ src, name, subtitle, meta }) {
+//                   return (
+//                     '<a href="javascript:;">' +
+//                     '<div class="d-flex w-50">' +
+//                     '<img class="me-3" src="' + assetsPath + src + '" alt="' + name + '" height="32">' +
+//                     '<div class="w75">' +
+//                     '<h6 class="mb-0">' + name + '</h6>' +
+//                     '<small class="text-muted">' + subtitle + '</small>' +
+//                     '</div>' +
+//                     '</div>' +
+//                     '<small class="text-muted">' + meta + '</small>' +
+//                     '</a>'
+//                   );
+//                 },
+//                 notFound:
+//                   '<div class="not-found px-3 py-2">' +
+//                   '<h6 class="suggestions-header text-primary mb-2">Files</h6>' +
+//                   '<p class="py-2 mb-0"><i class="ti ti-alert-circle ti-xs me-2"></i> No Results Found</p>' +
+//                   '</div>'
+//               }
+//             },
+//             {
+//               name: 'members',
+//               display: 'name',
+//               limit: 4,
+//               source: filterConfig(searchData.members),
+//               templates: {
+//                 header: '<h6 class="suggestions-header text-primary mb-0 mx-3 mt-3 pb-2">Members</h6>',
+//                 suggestion: function ({ name, src, subtitle }) {
+//                   return (
+//                     '<a href="app-user-view-account.html">' +
+//                     '<div class="d-flex align-items-center">' +
+//                     '<img class="rounded-circle me-3" src="' + assetsPath + src + '" alt="' + name + '" height="32">' +
+//                     '<div class="user-info">' +
+//                     '<h6 class="mb-0">' + name + '</h6>' +
+//                     '<small class="text-muted">' + subtitle + '</small>' +
+//                     '</div>' +
+//                     '</div>' +
+//                     '</a>'
+//                   );
+//                 },
+//                 notFound:
+//                   '<div class="not-found px-3 py-2">' +
+//                   '<h6 class="suggestions-header text-primary mb-2">Members</h6>' +
+//                   '<p class="py-2 mb-0"><i class="ti ti-alert-circle ti-xs me-2"></i> No Results Found</p>' +
+//                   '</div>'
+//               }
+//             }
+//           )
+//           .bind('typeahead:render', () => contentBackdrop.addClass('show').removeClass('fade'))
+//           .bind('typeahead:select', (ev, suggestion) => { if (suggestion.url) window.location = suggestion.url; })
+//           .bind('typeahead:close', () => {
+//             searchInput.val('');
+//             $this.typeahead('val', '');
+//             searchInputWrapper.addClass('d-none');
+//             contentBackdrop.addClass('fade').removeClass('show');
+//           });
 
-        var psSearch;
-        $('.navbar-search-suggestion').each(function () {
-          psSearch = new PerfectScrollbar($(this)[0], {
-            wheelPropagation: false,
-            suppressScrollX: true
-          });
-        });
+//         var psSearch;
+//         $('.navbar-search-suggestion').each(function () {
+//           psSearch = new PerfectScrollbar($(this)[0], {
+//             wheelPropagation: false,
+//             suppressScrollX: true
+//           });
+//         });
 
-        searchInput.on('keyup', () => psSearch.update());
-      });
-    }
-  });
-}
+//         searchInput.on('keyup', () => psSearch.update());
+//       });
+//     }
+//   });
+// }
