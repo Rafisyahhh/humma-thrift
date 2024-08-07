@@ -61,9 +61,7 @@
               <div class="col-lg-12">
                 <div class="product-sorting-section" style="padding-bottom: unset; margin-bottom: unset">
                   <div class="result">
-                    <p>Menampilkan
-                      {{ $product_auction->firstItem() ?? 0 }}–<span id="last-item">0</span>
-                      dari {{ $product_auction->total() ?? 0 }} hasil</p>
+                    <p>Menampilkan <span id="total"></span> hasil</p>
                   </div>
                 </div>
               </div>
@@ -143,7 +141,6 @@
   <script>
     $(document).ready(function() {
       const url = new URL(window.location.href);
-      window.scrollTo(0, 0);
       let updateTimeout;
       let page = 0;
       let loading = true;
@@ -180,6 +177,7 @@
       };
 
       const updateFilters = () => {
+        window.scrollTo(0, 0);
         clearInterval(updateTimeout);
         updateTimeout = setTimeout(() => {
           page = 1;
@@ -208,6 +206,7 @@
               loading = false;
               $('[isProduct],[isLoader]').remove();
               $('#product-container').append(data);
+              $('#total').text($('[isProduct]').length);
             },
             error: function() {
               loading = false;
@@ -292,7 +291,7 @@
             if (data.lastPage) {
               lastPage = true;
               $("#product-container").append(`
-                <div class="col-lg-12 d-flex flex-column align-items-center">
+                <div class="col-lg-12 d-flex flex-column align-items-center" isProduct>
                     <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong"
                     style="width: 200px; height: 200px;">
                     <h5 class="text-center" style="color: #000000">Upss..</h5>
@@ -302,6 +301,7 @@
               return;
             }
             $("#product-container").append(data);
+            $('#total').text($('[isProduct]').length);
           },
           error: function() {
             loading = false;
