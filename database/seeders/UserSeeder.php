@@ -47,12 +47,12 @@ class UserSeeder extends Seeder {
             ],
             [
                 'username' => 'Tika',
-                'name' => 'Nugi Artika',
-                'email' => 'nugiartika@gmail.com'
+                'name' => 'NUGI ARTIKASARI',
+                'email' => 'ar.tika0412@gmail.com'
             ],
             [
                 'username' => 'Akbar',
-                'name' => 'Akbar',
+                'name' => 'MOHAMAD AKBAR RAFISYAH AJI',
                 'email' => 'muhammadakbar1801@gmail.com'
             ]
         ];
