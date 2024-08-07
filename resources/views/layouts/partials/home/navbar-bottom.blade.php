@@ -4,13 +4,15 @@
 @endphp
 
 <style>
-.active1 {
-  overflow:hidden;
-  border-bottom:10px solid rgb(243, 243, 243);
-  padding: 1.3rem;
-  font-weight: bold;
-}
 
+.active1 {
+  overflow: hidden;
+  border-bottom: 2px solid rgb(243, 243, 243);
+  padding: 1rem;
+  line-height: 3rem;
+  font-weight: bold;
+  padding-bottom: 2.2rem;
+}
 
 </style>
 
@@ -94,7 +96,7 @@
 
 {{-- <script>
     $(document).ready(function () {
-  
+
   $(".list-text").click(function (){
     $(this).addClass("active1").siblings().removeClass("active1");
   });

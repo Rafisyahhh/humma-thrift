@@ -21,7 +21,7 @@
         }
 
         .table-header {
-            background-color: #1c3879;
+            background-color: #1c3879 ;
             color: #fff;
             font-weight: bold;
             border-radius: .5rem;
@@ -41,7 +41,7 @@
             border-radius: .5rem;
         }
 
-        .table-body .table-item {
+         .table-body .table-item {
             color: #212529;
         }
 
