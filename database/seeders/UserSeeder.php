@@ -49,6 +49,11 @@ class UserSeeder extends Seeder {
                 'username' => 'Tika',
                 'name' => 'Nugi Artika',
                 'email' => 'nugiartika@gmail.com'
+            ],
+            [
+                'username' => 'Akbar',
+                'name' => 'Akbar',
+                'email' => 'akbar@gmail.com'
             ]
         ];
         foreach ($teamAccount as $account) {
