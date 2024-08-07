@@ -76,6 +76,7 @@
       </div>
     </div>
   </section>
+  @include('Landing.components.product-regular')
 @endsection
 
 @push('script')
@@ -140,6 +141,7 @@
       const maxPrice = +('{{ $products->pluck('price')->max() }}');
       const loader = $('[isLoader]');
 
+
       const getCheckedFilters = () => {
         const checked = {};
 
@@ -184,10 +186,13 @@
           $.ajax({
             url: url.toString(),
             type: 'GET',
-            success: function(data) {
+            success: function({
+              data
+            }) {
               loading = false;
               $('[isProduct],[isLoader]').remove();
-              $('#product-container').append(data);
+              appendProduct(data)
+              // $('#product-container').append(data);
             },
             error: function() {
               loading = false;
@@ -254,7 +259,6 @@
               `);
               return;
             }
-            $("#product-container").append(data);
           },
           error: function() {
             loading = false;
@@ -277,6 +281,41 @@
         }
       });
     });
+
+    const product = $('[isProduct]')[0].outerHTML;
+    const moneyFormat = new Intl.NumberFormat('id', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    });
+
+    function appendProduct(products) {
+      products.map((item) => {
+        const data = {
+          ":id:": item.id,
+          ":title:": item.title,
+          ":price:": moneyFormat.format(item.price),
+          ":userStore.name:": item.user_store.name,
+          ":storesproduct:": `{{ route('storesproduct', '') }}/${item.id}`,
+          ":storecart:": `{{ route('storecart', '') }}/${item.id}`,
+          ":store.product.detail:": `{{ route('store.product.detail', ['store' => '', 'product' => '']) }}/${item.id}`,
+          ":thumbnail:": `{{ asset('storage/') }}/${item.thumbnail}`,
+        };
+        const productHTML = replacePlaceholders(product, data);
+        $("#product-container").append(productHTML);
+      })
+    }
+
+    function replacePlaceholders(product, data) {
+      // Create a regex dynamically from the keys of the data object
+      const keys = Object.keys(data).join('|');
+      const regex = new RegExp(keys, 'g');
+
+      return product.replace(regex, function(match) {
+        return data[match];
+      });
+    }
   </script>
   <script>
     function ajaxSubmit(e, $this, callback) {

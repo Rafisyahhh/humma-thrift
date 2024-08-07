@@ -107,7 +107,7 @@ class LandingpageController extends Controller {
 
     // Tambahkan metode regular
     public function productRegular(Request $request) {
-        $products = Product::where('status', 'active');
+        $products = Product::with(["userStore"])->where('status', 'active');
         $colors = $products->pluck('color')->map('strtolower')->unique();
         $sizes = $products->pluck('size')->map('strtolower')->unique();
 
@@ -145,7 +145,7 @@ class LandingpageController extends Controller {
             if ($products->currentPage() > $products->lastPage()) {
                 return response()->json(['lastPage' => true]);
             }
-            return view('Landing.components.product-regular', compact('products'))->render();
+            return response()->json($products);
         }
 
         $products = $products->paginate(24);
