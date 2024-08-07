@@ -64,6 +64,9 @@
       };
 
       const updateFilters = debounce(() => {
+        $('html').animate({
+          scrollTop: 0
+        }, 250);
         page = 1;
         lastPage = false;
         const checked = getCheckedFilters();
@@ -90,7 +93,6 @@
             $('[isProduct],[isLoader]').remove();
             $('#product-container').append(data);
             $('#total').text($('[isProduct]').length);
-            window.scrollTo(0, 0);
           },
           error: function() {
             loading = false;

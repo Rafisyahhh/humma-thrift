@@ -163,6 +163,9 @@
       };
 
       const updateFilters = () => {
+        $('html').animate({
+          scrollTop: 0
+        }, 250);
         clearInterval(updateTimeout);
         updateTimeout = setTimeout(() => {
           page = 1;
