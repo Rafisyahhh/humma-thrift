@@ -64,8 +64,7 @@
               <div class="col-lg-12">
                 <div class="product-sorting-section" style="padding-bottom: unset; margin-bottom: unset">
                   <div class="result">
-                    <p>Menampilkan {{ $products->firstItem() }}–{{ $products->lastItem() }} dari
-                      {{ $products->total() }} hasil</p>
+                    <p>Menampilkan <span id="total"></span> hasil </p>
                   </div>
                 </div>
               </div>
@@ -193,6 +192,7 @@
               $('[isProduct],[isLoader]').remove();
               appendProduct(data)
               // $('#product-container').append(data);
+              $('#total').text($('[isProduct]').length);
             },
             error: function() {
               loading = false;
@@ -260,6 +260,7 @@
               return;
             }
             appendProduct(data.data)
+            $('#total').text($('[isProduct]').length);
           },
           error: function() {
             loading = false;
