@@ -17,25 +17,25 @@ class AboutSeeder extends Seeder
         $listData = [
             [
                 "title" => "Humma Thrift",
-                "description" => "Humma Thrift adalah platform daring pertama di Malang yang berfokus pada penjualan barang-barang thrift. Didirikan dengan tujuan untuk menyediakan pakaian dan aksesori berkualitas dengan harga terjangkau, Humma Thrift menawarkan berbagai macam produk fashion yang telah dikurasi dengan baik, mulai dari pakaian, sepatu, hingga tas dan aksesori lainnya. Platform ini menggabungkan konsep ramah lingkungan dengan tren fashion terkini, sehingga tidak hanya membantu mengurangi limbah tekstil tetapi juga memberikan kesempatan bagi para pelanggan untuk tetap tampil stylish tanpa harus mengeluarkan banyak biaya. Melalui website Humma Thrift, pengguna dapat dengan mudah menelusuri katalog produk, melakukan pembelian, serta memanfaatkan fitur-fitur seperti filter pencarian, rekomendasi produk, dan ulasan pelanggan.",
+                "description" => "Humma Thrift adalah platform daring pertama di Malang yang fokus pada penjualan barang thrift. Kami menyediakan pakaian dan aksesori berkualitas dengan harga terjangkau, mulai dari pakaian, sepatu, hingga tas. Dengan menggabungkan konsep ramah lingkungan dan tren fashion terkini, kami membantu mengurangi limbah tekstil dan memungkinkan pelanggan tampil stylish dengan biaya rendah. Di website kami, pengguna dapat menelusuri katalog produk, melakukan pembelian, dan menggunakan fitur seperti filter pencarian, rekomendasi produk, dan ulasan pelanggan.",
                 "thumbnail" => "png/icon-square-color-tsxxxhdpi.png"
             ]
-            ];
+        ];
 
-            $publicPath = public_path("images/brands/");
-            $uploadPath = "uploads/about/";
+        $publicPath = public_path("images/brands/");
+        $uploadPath = "uploads/about/";
 
-            foreach ($listData as $data) {
-                $sourcePath = $publicPath . $data["thumbnail"];
-                $destinationPath = $uploadPath . $data["thumbnail"];
+        foreach ($listData as $data) {
+            $sourcePath = $publicPath . $data["thumbnail"];
+            $destinationPath = $uploadPath . $data["thumbnail"];
 
-                if (Storage::disk('public')->put($destinationPath, file_get_contents($sourcePath))) {
-                    AboutUs::create([
-                        "title" => $data["title"],
-                        "description" => $data["description"],
-                        "image" => $destinationPath,
-                    ]);
-                }
+            if (Storage::disk('public')->put($destinationPath, file_get_contents($sourcePath))) {
+                AboutUs::create([
+                    "title" => $data["title"],
+                    "description" => $data["description"],
+                    "image" => $destinationPath,
+                ]);
             }
+        }
     }
 }
