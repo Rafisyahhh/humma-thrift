@@ -85,15 +85,14 @@ class WithdrawalController extends Controller {
             foreach ($listAdmin as $admin) {
                 $admin->notify(new CustomAdminMessageNotification([
                     "title" => "Seorang Seller ingin menarik",
-                    "message" => "Halo $admin->name, Seorang seller bernama {$user->name} ingin menarik Saldo sebesar {$data->amount}",
+                    "message" => "Halo $admin->name, Seorang seller bernama {$user->name} ingin menarik Saldo sebesar {$data->get('amount')}",
                     "action" => route('admin.withdraw.index')
                 ], [
                     "subject" => "Seorang Seller ingin menarik",
-                    "greeting" => "Halo $admin->name, Seorang seller bernama {$user->name} ingin menarik Saldo sebesar {$data->amount}",
+                    "greeting" => "Halo $admin->name, Seorang seller bernama {$user->name} ingin menarik Saldo sebesar {$data->get('amount')}",
                     "line" => "Terima penarikan!."
                 ]));
             }
-
             return redirect()->route('seller.withdraw.index')->with('success', 'Berhasil mengajukan pencairan dana.');
         } catch (\Throwable $th) {
             Log::error($th->getMessage(), $th->getTrace());
