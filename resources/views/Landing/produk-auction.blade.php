@@ -72,6 +72,7 @@
       </div>
     </div>
   </section>
+  @include('Landing.components.product-auction')
 @endsection
 
 @section('script')
@@ -326,5 +327,35 @@
         }
       });
     });
+
+    const productAuction = $('[isProductAuction]')[0].outerHTML;
+    const moneyFormat = new Intl.NumberFormat('id', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits:0
+    });
+
+    function appendProductAuction(productAuction){
+        productAuction.map((item) => {
+            const data = {
+                ":id:": item.id,
+                ":title:": item.title,
+                ":price:": moneyFormat.format(item.bid_price_start)+ '-' +
+                moneyFormat.format(item.bid_price_end),
+                ":userStore.name:": item.user_store.name,
+                ":storesproduct:": `{{ route('store.products', '')}}/${item.id}`,
+                ":storecard:": `{{ route('storecart', '')}}/${item.id}`,
+                ":store.product.detail:": "{{ route('store.product.detail', ['store' => ':store:', 'product' => ':product:'])}}"
+                .replace(":store:", item.user_store.username).replace(":product:", item.slug),
+                ":store.profile:": "{{ route('store.profile', ['store' => ':username:']) }}"
+                .replace(":username:", item.user_store.username),
+                ":thumbnail:": `{{ asset('storage/')}}/${item.thumbnail}`,
+                ":user.checkout.proses:": `{{ route('user.checkout.process') }}`,
+            };
+            const productAuctionsHTML = replacePlaceholders(productAuction, data);
+            $("#product-container").append(productAuctionsHTML);
+        })
+    }
   </script>
 @endpush
