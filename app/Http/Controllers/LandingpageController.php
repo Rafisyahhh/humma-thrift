@@ -190,7 +190,7 @@ class LandingpageController extends Controller {
                 return response()->json(['lastPage' => true]);
             }
 
-            return view('Landing.components.product-auction', compact('product_auction'))->render();
+            return response()->json(compact('product_auction'));
         }
 
         $product_auction = $product_auction->paginate(24);
@@ -222,8 +222,8 @@ class LandingpageController extends Controller {
             $allRequest['type'] = 'auction';
             $commandSearch = true;
         }
-        $products = Product::where('status', 'active')->where('title', 'like', "%$search%");
-        $product_auctions = ProductAuction::where('status', 'active')->where('title', 'like', "%$search%");
+        $products = Product::with('userStore')->where('status', 'active')->where('title', 'like', "%$search%");
+        $product_auctions = ProductAuction::with('userStore')->where('status', 'active')->where('title', 'like', "%$search%");
 
         $colors = $products->pluck('color')->concat($product_auctions->pluck('color'))->map('strtolower')->unique();
         $sizes = $products->pluck('size')->concat($product_auctions->pluck('size'))->map('strtolower')->unique();
@@ -308,10 +308,10 @@ class LandingpageController extends Controller {
             }
 
             $products = $productResults ?? [];
-            $product_auction = $productAuctionResults ?? [];
+            $product_auctions = $productAuctionResults ?? [];
 
 
-            return view('Landing.components.products', compact('products', 'product_auction'));
+            return response()->json(compact('products', 'product_auctions'));
         }
 
         $products = $products->paginate(24) ?? [];

@@ -2,6 +2,22 @@
 
 @section('title', 'Product')
 
+@push('style')
+  <style>
+    .modal-content {
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+      width: 50rem;
+      left: 50%;
+      transform: translate(-50%, 150%);
+    }
+
+    .modal-content .modal-header {
+      border: unset;
+    }
+  </style>
+@endpush
+
 @section('content')
   <section class="product product-sidebar footer-padding">
     <div class="container">
@@ -25,6 +41,66 @@
       </div>
     </div>
   </section>
+  @include('Landing.components.product-regular')
+  @include('Landing.components.product-auction')
+
+  <div id="shareModaln" class="modal fade">
+    <div class="modal-content">
+      <button class="close" style="float: right; text-align: end;" data-bs-dismiss="modal"
+        aria-label="Close">&times;</button>
+      <div class="align-items-center gap-3 justify-content-center py-3" style="position: relative;">
+        <p class="fs-2 mb-0 text-center fw-bold">Bagikan ke:</p>
+        <div class="d-flex gap-2 align-items-center justify-content-center mt-2">
+          <span class="share-container share-buttons d-flex gap-3 ms-2" style="z-index:1;">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=:facebook:" target="_blank" class="social-buttons">
+              <i class="fa-brands fa-square-facebook" style="color: #1c3879;font-size:4rem"></i>
+            </a>
+            <a href="https://twitter.com/intent/tweet?url=:twitter_url:&text=:twitter_text:" target="_blank"
+              class="social-buttons">
+              <i class="fa-brands fa-square-x-twitter" style="color: #1c3879;font-size:4rem"></i>
+            </a>
+            <a href="https://t.me/share/url?url=:telegram_url:&text=:telegram_text:" target="_blank"
+              class="social-buttons">
+              <i class="fa-brands fa-telegram" style="color: #1c3879;font-size:4rem"></i>
+            </a>
+            <a href="https://api.whatsapp.com/send?text=:whatsapp_text: :whatsapp_url:" target="_blank"
+              class="social-buttons">
+              <i class="fa-brands fa-whatsapp" style="color: #1c3879;font-size:4rem"></i>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-2" id="exampleModalLabel"
+            style="transform: translateX(-50%); position: relative; left: 50%;">Bagikan</h1>
+          <button type="button" class="btn-close position-absolute fs-3" data-bs-dismiss="modal" aria-label="Close"
+            style="top: 15px; right: 15px;"></button>
+        </div>
+        <div class="modal-body d-flex gap-2 align-items-center justify-content-center mt-2">
+          <span class="share-container share-buttons d-flex gap-3 ms-2" style="z-index:1;">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=:facebook:" target="_blank" class="social-buttons">
+              <i class="fa-brands fa-square-facebook" style="color: #1c3879;font-size:4rem"></i>
+            </a>
+            <a href="https://twitter.com/intent/tweet?url=:twitter_url:&text=:twitter_text:" target="_blank"
+              class="social-buttons">
+              <i class="fa-brands fa-square-x-twitter" style="color: #1c3879;font-size:4rem"></i>
+            </a>
+            <a href="" target="_blank" class="social-buttons telegram-link">
+              <i class="fa-brands fa-telegram" style="color: #1c3879;font-size:4rem"></i>
+            </a>
+            <a href="" target="_blank" class="social-buttons whatsapp-link">
+              <i class="fa-brands fa-whatsapp" style="color: #1c3879;font-size:4rem"></i>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
 
 @push('script')
@@ -88,10 +164,14 @@
           url: url.toString(),
           type: 'GET',
           cache: true,
-          success: function(data) {
+          success: function({
+            products,
+            product_auctions
+          }) {
             loading = false;
             $('[isProduct],[isLoader]').remove();
-            $('#product-container').append(data);
+            (product.length > 0) || appendProduct(products.data);
+            (product_auctions.length > 0) || appendProductAuction(product_auctions.data);
             $('#total').text($('[isProduct]').length);
           },
           error: function() {
@@ -219,6 +299,68 @@
         };
       }
     });
+
+    const product = $('[isProduct]')[0].outerHTML;
+    const productAuction = $('[isProductAuction]')[0].outerHTML;
+    const moneyFormat = new Intl.NumberFormat('id', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    });
+
+    function appendProduct(products) {
+      products.map((item) => {
+        const data = {
+          ":id:": item.id,
+          ":title:": item.title,
+          ":price:": moneyFormat.format(item.price),
+          ":userStore.name:": item.user_store.name,
+          ":storesproduct:": `{{ route('storesproduct', '') }}/${item.id}`,
+          ":storecart:": `{{ route('storecart', '') }}/${item.id}`,
+          ":store.product.detail:": "{{ route('store.product.detail', ['store' => ':store:', 'product' => ':product:']) }}"
+            .replace(":store:", item.user_store.username).replace(":product:", item.slug),
+          ":store.profile:": "{{ route('store.profile', ['store' => ':username:']) }}"
+            .replace(":username:", item.user_store.username),
+          ":thumbnail:": `{{ asset('storage/') }}/${item.thumbnail}`,
+          ":user.checkout.process:": `{{ route('user.checkout.process') }}`,
+        };
+        const productHTML = replacePlaceholders(product, data);
+        $("#product-container").append(productHTML);
+      })
+    }
+
+    function appendProductAuction(productAuctions) {
+      productAuctions.map((item) => {
+        const data = {
+          ":id:": item.id,
+          ":title:": item.title,
+          ":price:": moneyFormat.format(item.bid_price_start) + '-' +
+            moneyFormat.format(item.bid_price_end),
+          ":userStore.name:": item.user_store.name,
+          ":storesproduct:": `{{ route('storesproduct', '') }}/${item.id}`,
+          ":storecart:": `{{ route('storecart', '') }}/${item.id}`,
+          ":store.product.detail:": "{{ route('store.product.detail', ['store' => ':store:', 'product' => ':product:']) }}"
+            .replace(":store:", item.user_store.username).replace(":product:", item.slug),
+          ":store.profile:": "{{ route('store.profile', ['store' => ':username:']) }}"
+            .replace(":username:", item.user_store.username),
+          ":thumbnail:": `{{ asset('storage/') }}/${item.thumbnail}`,
+          ":user.checkout.process:": `{{ route('user.checkout.process') }}`,
+        };
+        const productAuctionsHTML = replacePlaceholders(productAuction, data);
+        $("#product-container").append(productAuctionsHTML);
+      })
+    }
+
+    function replacePlaceholders(product, data) {
+      // Create a regex dynamically from the keys of the data object
+      const keys = Object.keys(data).join('|');
+      const regex = new RegExp(keys, 'g');
+
+      return product.replace(regex, function(match) {
+        return data[match];
+      });
+    }
   </script>
   <script>
     function ajaxSubmit(e, $this) {
@@ -241,5 +383,29 @@
         }
       });
     };
+
+    function openModal(modal) {
+      $(modal).modal('show');
+
+      function share({
+        facebook = null,
+        whatsapp = null,
+        telegram = null,
+        twitter = null
+      }) {
+        const links = {
+          facebook: ``,
+          whatsapp: `https://api.whatsapp.com/send?text=${ whatsapp?.text || whatsapp?.title } ${ whatsapp?.url || whatsapp?.link }`,
+          telegram: `https://t.me/share/url?url=${ telegram?.url || telegram?.link }&text=${ telegram?.text || telegram?.title }`,
+          twitter: ``
+        };
+        const anchor = $(this.modal).find("a[target=_blank]");
+        console.log(anchor);
+      }
+
+      return {
+        share
+      };
+    }
   </script>
 @endpush
