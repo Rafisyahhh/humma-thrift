@@ -61,9 +61,7 @@
               <div class="col-lg-12">
                 <div class="product-sorting-section" style="padding-bottom: unset; margin-bottom: unset">
                   <div class="result">
-                    <p>Menampilkan
-                      {{ $product_auction->firstItem() ?? 0 }}–<span id="last-item">0</span>
-                      dari {{ $product_auction->total() ?? 0 }} hasil</p>
+                    <p>Menampilkan <span id="total"></span> hasil</p>
                   </div>
                 </div>
               </div>
@@ -74,6 +72,7 @@
       </div>
     </div>
   </section>
+  @include('Landing.components.product-auction')
 @endsection
 
 @section('script')
@@ -143,7 +142,6 @@
   <script>
     $(document).ready(function() {
       const url = new URL(window.location.href);
-      window.scrollTo(0, 0);
       let updateTimeout;
       let page = 0;
       let loading = true;
@@ -180,6 +178,9 @@
       };
 
       const updateFilters = () => {
+        $('html').animate({
+          scrollTop: 0
+        }, 250);
         clearInterval(updateTimeout);
         updateTimeout = setTimeout(() => {
           page = 1;
@@ -208,6 +209,7 @@
               loading = false;
               $('[isProduct],[isLoader]').remove();
               $('#product-container').append(data);
+              $('#total').text($('[isProduct]').length);
             },
             error: function() {
               loading = false;
@@ -292,7 +294,7 @@
             if (data.lastPage) {
               lastPage = true;
               $("#product-container").append(`
-                <div class="col-lg-12 d-flex flex-column align-items-center">
+                <div class="col-lg-12 d-flex flex-column align-items-center" isProduct>
                     <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong"
                     style="width: 200px; height: 200px;">
                     <h5 class="text-center" style="color: #000000">Upss..</h5>
@@ -302,6 +304,7 @@
               return;
             }
             $("#product-container").append(data);
+            $('#total').text($('[isProduct]').length);
           },
           error: function() {
             loading = false;
@@ -324,5 +327,35 @@
         }
       });
     });
+
+    const productAuction = $('[isProductAuction]')[0].outerHTML;
+    const moneyFormat = new Intl.NumberFormat('id', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits:0
+    });
+
+    function appendProductAuction(productAuction){
+        productAuction.map((item) => {
+            const data = {
+                ":id:": item.id,
+                ":title:": item.title,
+                ":price:": moneyFormat.format(item.bid_price_start)+ '-' +
+                moneyFormat.format(item.bid_price_end),
+                ":userStore.name:": item.user_store.name,
+                ":storesproduct:": `{{ route('store.products', '')}}/${item.id}`,
+                ":storecard:": `{{ route('storecart', '')}}/${item.id}`,
+                ":store.product.detail:": "{{ route('store.product.detail', ['store' => ':store:', 'product' => ':product:'])}}"
+                .replace(":store:", item.user_store.username).replace(":product:", item.slug),
+                ":store.profile:": "{{ route('store.profile', ['store' => ':username:']) }}"
+                .replace(":username:", item.user_store.username),
+                ":thumbnail:": `{{ asset('storage/')}}/${item.thumbnail}`,
+                ":user.checkout.proses:": `{{ route('user.checkout.process') }}`,
+            };
+            const productAuctionsHTML = replacePlaceholders(productAuction, data);
+            $("#product-container").append(productAuctionsHTML);
+        })
+    }
   </script>
 @endpush

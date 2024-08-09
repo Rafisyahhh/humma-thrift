@@ -64,8 +64,7 @@
               <div class="col-lg-12">
                 <div class="product-sorting-section" style="padding-bottom: unset; margin-bottom: unset">
                   <div class="result">
-                    <p>Menampilkan {{ $products->firstItem() }}–{{ $products->lastItem() }} dari
-                      {{ $products->total() }} hasil</p>
+                    <p>Menampilkan <span id="total"></span> hasil </p>
                   </div>
                 </div>
               </div>
@@ -76,7 +75,9 @@
       </div>
     </div>
   </section>
-  @include('Landing.components.product-regular')
+  <div class="d-none">
+    @include('Landing.components.product-regular2')
+  </div>
 @endsection
 
 @push('script')
@@ -164,6 +165,9 @@
       };
 
       const updateFilters = () => {
+        $('html').animate({
+          scrollTop: 0
+        }, 250);
         clearInterval(updateTimeout);
         updateTimeout = setTimeout(() => {
           page = 1;
@@ -193,6 +197,7 @@
               $('[isProduct],[isLoader]').remove();
               appendProduct(data)
               // $('#product-container').append(data);
+              $('#total').text($('[isProduct]').length);
             },
             error: function() {
               loading = false;
@@ -250,7 +255,7 @@
             if (data.lastPage) {
               lastPage = true;
               $("#product-container").append(`
-                <div class="col-lg-12 d-flex flex-column align-items-center">
+                <div class="col-lg-12 d-flex flex-column align-items-center" isProduct>
                     <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong"
                         style="width: 200px; height: 200px;">
                         <h5 class="text-center" style="color: #000000">Upss..</h5>
@@ -260,6 +265,7 @@
               return;
             }
             appendProduct(data.data)
+            $('#total').text($('[isProduct]').length);
           },
           error: function() {
             loading = false;
