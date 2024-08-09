@@ -12,6 +12,37 @@
     .dropdown-menu:hover {
         display: block;
     }
+
+
+    .product-cart-btn {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip */
+    .product-cart-btn .tooltip-text {
+        visibility: hidden;
+        width: 100px;
+        background-color: #717070;
+        color: #fff;
+        font-size: 1.60rem;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 100%; /* Posisi tooltip di atas tombol */
+        left: 60%;
+        margin-left: -10px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .product-cart-btn:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+    }
+
 </style>
 
     @forelse ($product_favorite as $item)
@@ -74,6 +105,7 @@
                             <i class="fas fa-shopping-cart"></i>
                         </span>
                     </button>
+                    <span class="tooltip-text">Keranjang</span>
                 </form>
             </div>
         </div>
