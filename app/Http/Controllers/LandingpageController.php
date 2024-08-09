@@ -190,7 +190,7 @@ class LandingpageController extends Controller {
                 return response()->json(['lastPage' => true]);
             }
 
-            return response()->json(compact('product_auction'));
+            return view('Landing.components.product-auction', compact('product_auction'))->render();
         }
 
         $product_auction = $product_auction->paginate(24);
@@ -308,10 +308,9 @@ class LandingpageController extends Controller {
             }
 
             $products = $productResults ?? [];
-            $product_auctions = $productAuctionResults ?? [];
+            $product_auction = $productAuctionResults ?? [];
 
-
-            return response()->json(compact('products', 'product_auctions'));
+            return view('Landing.components.products', compact('products', 'product_auction'))->render();
         }
 
         $products = $products->paginate(24) ?? [];

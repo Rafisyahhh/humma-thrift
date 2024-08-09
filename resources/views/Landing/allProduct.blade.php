@@ -43,7 +43,7 @@
   </section>
 
   <div class="d-none">
-    @include('Landing.components.product-regular')
+    {{-- @include('Landing.components.product-regular')
     @include('Landing.components.product-auction')
 
     <div class="modal fade" id="auctionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -99,12 +99,73 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
 
   </div>
+
+  @if (session('success'))
+    <div class="alert alert-success">
+      {{ session('success') }}
+    </div>
+  @endif
+
+  @if (session('error'))
+    <div class="alert alert-danger">
+      {{ session('error') }}
+    </div>
+  @endif
 @endsection
 
 @push('script')
+  <script>
+    function openModal(modal, callback) {
+      $(modal).modal('show');
+      callback?.($(modal));
+    }
+
+    function openModal2(modal, callback) {
+      $(modal).show();
+      callback?.($(modal));
+    }
+
+    function closeModal2(modal) {
+      $(modal).hide();
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      var modals = document.querySelectorAll('.modal');
+      var btns = document.querySelectorAll('.openModal');
+      var spans = document.querySelectorAll('.close');
+
+      document.querySelectorAll('.openModal').forEach(function(btn, index) {
+        btn.onclick = function() {
+          var productId = btn.getAttribute('data-id');
+          var modal = document.getElementById('reviewModal-' + productId);
+          var auctionForm = document.getElementById('auctionForm-' + productId);
+
+          if (auctionForm) {
+            auctionForm.querySelector('input[name="product_id"]').value = productId;
+          }
+
+          modal.style.display = 'flex';
+        }
+      });
+
+      document.querySelectorAll('.close').forEach(function(span, index) {
+        span.onclick = function() {
+          var modal = span.closest('.modal');
+          modal.style.display = 'none';
+        }
+      });
+
+      window.onclick = function(event) {
+        document.querySelectorAll('.modal').forEach(function(modal) {
+          if (event.target == modal) {
+            modal.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
   <script>
     $(document).ready(function() {
       const url = new URL(window.location.href);
@@ -165,14 +226,10 @@
           url: url.toString(),
           type: 'GET',
           cache: true,
-          success: function({
-            products,
-            product_auctions
-          }) {
+          success: function(data) {
             loading = false;
             $('[isProduct],[isLoader]').remove();
-            (product.length > 0) || appendProduct(products.data);
-            (product_auctions.length > 0) || appendProductAuction(product_auctions.data);
+            $('#product-container').append(data);
             $('#total').text($('[isProduct]').length);
           },
           error: function() {
@@ -301,8 +358,8 @@
       }
     });
 
-    const product = $('[isProduct]')[0].outerHTML;
-    const productAuction = $('[isProductAuction]')[0].outerHTML;
+    // const product = $('[isProduct]')[0].outerHTML;
+    // const productAuction = $('[isProductAuction]')[0].outerHTML;
     const moneyFormat = new Intl.NumberFormat('id', {
       style: 'currency',
       currency: 'IDR',

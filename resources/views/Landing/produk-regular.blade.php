@@ -75,7 +75,9 @@
       </div>
     </div>
   </section>
-  @include('Landing.components.product-regular')
+  <div class="d-none">
+    @include('Landing.components.product-regular2')
+  </div>
 @endsection
 
 @push('script')
