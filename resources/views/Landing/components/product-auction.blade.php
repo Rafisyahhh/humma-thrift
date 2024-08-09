@@ -69,7 +69,7 @@
                                     -
                                     Rp{{ number_format($item->bid_price_end, null, null, '.') }}</span>
                             </div>
-                        @  
+                        @endif
                     @endif
                 </div>
             </div>
