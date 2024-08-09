@@ -56,8 +56,7 @@
                                                 $additionalProductsCount = $orders[$item->id]->count() - 1;
 
                                             @endphp
-                                            @if ($firstOrder->product->userstore->user_id == auth()->user()->id)
-                                                @if ($firstOrder && $firstOrder->product)
+                                                @if ($firstOrder && $firstOrder->product && $firstOrder->product->userstore->user_id == auth()->user()->id)
                                                     @php
                                                         $hasData = true;
                                                     @endphp
@@ -142,7 +141,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endif
                                                 @endif
                                             @endforeach
                                             {{-- @endforeach --}}

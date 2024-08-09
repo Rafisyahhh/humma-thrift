@@ -118,10 +118,11 @@ class OrderController extends Controller
     //     return view('seller.transaksi', compact('filteredTransactions', 'orders', 'orderL'));
     // }
 
-     public function indexTransaction()
+    public function indexTransaction()
     {
         $transaction = TransactionOrder::latest()->get();
-        $orders = Order::with('product')
+    
+        $orders = Order::with('product.userstore')
             ->orderBy('transaction_order_id')
             ->get()
             ->groupBy('transaction_order_id');
