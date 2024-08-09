@@ -161,11 +161,11 @@
                 value="{{ old('bank_number') }}" name="bank_number" id="bank_number"
                 class="form-control @error('bank_number') is-invalid @enderror" required />
 
-            @error('amount')
+            {{-- @error('amount')
                 <span class="text-danger" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
-            @enderror
+            @enderror --}}
         </div>
 
         <div class="form-group mb-3">
