@@ -610,10 +610,10 @@
 
                                     @if ($user)
                                         @if ($existingAuction && $auctions->status === 1)
-                                            <form action="{{ route('user.checkout') }}" method="post">
+                                            <form action="{{ route('user.checkout.process.auction') }}" method="post">
                                                 @csrf
                                                 <div class="product-cart-btn" style="bottom:0;">
-                                                    <input type="hidden" value="{{ $item->id }}" name="product_id">
+                                                    <input type="hidden" value="{{ $item->id }}" name="product_auction_id">
                                                     <button type="submit" class="product-btn">Beli
                                                         sekarang</button>
                                                 </div>
