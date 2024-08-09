@@ -67,56 +67,72 @@ class OrderController extends Controller
     }
 
 
-    public function indexTransaction()
+    // public function indexTransaction()
+    // {
+    //     $userId = auth()->user()->id;
+
+    //     // Fetch transactions
+    //     $transactions = TransactionOrder::latest()->get();
+
+    //     // Fetch orders and group them by transaction_order_id
+    //     $orders = Order::with('product.userstore')
+    //         ->orderBy('transaction_order_id')
+    //         ->get()
+    //         ->groupBy('transaction_order_id');
+
+    //     // Fetch auction orders and group them by transaction_order_id
+    //     $orderL = Order::with('product_auction.userStore')
+    //         ->orderBy('transaction_order_id')
+    //         ->get()
+    //         ->groupBy('transaction_order_id');
+
+    //     // Process transactions to include only those relevant to the authenticated user
+    //     $filteredTransactions = $transactions->filter(function ($transaction) use ($orders, $orderL, $userId) {
+    //         $validOrder = false;
+
+    //         // Check if there are valid orders
+    //         if (isset($orders[$transaction->id])) {
+    //             $firstOrder = $orders[$transaction->id]->first();
+    //             if ($firstOrder && $firstOrder->product && $firstOrder->product->userstore->user_id == $userId) {
+    //                 $transaction->firstOrder = $firstOrder;
+    //                 $transaction->additionalProductsCount = $orders[$transaction->id]->count() - 1;
+    //                 $validOrder = true;
+    //             }
+    //         }
+
+    //         // Check if there are valid auction orders
+    //         if (isset($orderL[$transaction->id])) {
+    //             $validAuctionOrders = $orderL[$transaction->id]->filter(function ($ordr) use ($userId) {
+    //                 return $ordr->product_auction && $ordr->product_auction->userStore->user_id == $userId;
+    //             });
+
+    //             if ($validAuctionOrders->isNotEmpty()) {
+    //                 $transaction->validAuctionOrders = $validAuctionOrders;
+    //                 $validOrder = true;
+    //             }
+    //         }
+
+    //         return $validOrder;
+    //     });
+
+    //     return view('seller.transaksi', compact('filteredTransactions', 'orders', 'orderL'));
+    // }
+
+     public function indexTransaction()
     {
-        $userId = auth()->user()->id;
-
-        // Fetch transactions
-        $transactions = TransactionOrder::latest()->get();
-
-        // Fetch orders and group them by transaction_order_id
-        $orders = Order::with('product.userstore')
+        $transaction = TransactionOrder::latest()->get();
+        $orders = Order::with('product')
+            ->orderBy('transaction_order_id')
+            ->get()
+            ->groupBy('transaction_order_id');
+        $orderL = Order::with('product_auction')
             ->orderBy('transaction_order_id')
             ->get()
             ->groupBy('transaction_order_id');
 
-        // Fetch auction orders and group them by transaction_order_id
-        $orderL = Order::with('product_auction.userStore')
-            ->orderBy('transaction_order_id')
-            ->get()
-            ->groupBy('transaction_order_id');
-
-        // Process transactions to include only those relevant to the authenticated user
-        $filteredTransactions = $transactions->filter(function ($transaction) use ($orders, $orderL, $userId) {
-            $validOrder = false;
-
-            // Check if there are valid orders
-            if (isset($orders[$transaction->id])) {
-                $firstOrder = $orders[$transaction->id]->first();
-                if ($firstOrder && $firstOrder->product && $firstOrder->product->userstore->user_id == $userId) {
-                    $transaction->firstOrder = $firstOrder;
-                    $transaction->additionalProductsCount = $orders[$transaction->id]->count() - 1;
-                    $validOrder = true;
-                }
-            }
-
-            // Check if there are valid auction orders
-            if (isset($orderL[$transaction->id])) {
-                $validAuctionOrders = $orderL[$transaction->id]->filter(function ($ordr) use ($userId) {
-                    return $ordr->product_auction && $ordr->product_auction->userStore->user_id == $userId;
-                });
-
-                if ($validAuctionOrders->isNotEmpty()) {
-                    $transaction->validAuctionOrders = $validAuctionOrders;
-                    $validOrder = true;
-                }
-            }
-
-            return $validOrder;
-        });
-
-        return view('seller.transaksi', compact('filteredTransactions', 'orders', 'orderL'));
+        return view('seller.transaksi', compact('transaction', 'orders', 'orderL'));
     }
+
 
     public function indexDetail($transaction)
     {

@@ -57,11 +57,20 @@
                     <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
                         class="product-details">{{ $item->title }}
                     </a>
-                    <div class="price">
-                        <span class="new-price">Rp{{ number_format($item->bid_price_start, null, null, '.') }}
-                            -
-                            Rp{{ number_format($item->bid_price_end, null, null, '.') }}</span>
-                    </div>
+                    @if ($user)
+                        @if ($existingAuction && $auctions->status === 1)
+                            <div class="price">
+                                <span class="new-price">Rp{{ number_format($item->price, null, null, '.') }}</span>
+                            </div>
+                        @elseif ($auctionproduct)
+                        @else
+                            <div class="price">
+                                <span class="new-price">Rp{{ number_format($item->bid_price_start, null, null, '.') }}
+                                    -
+                                    Rp{{ number_format($item->bid_price_end, null, null, '.') }}</span>
+                            </div>
+                        @  
+                    @endif
                 </div>
             </div>
             @if ($user)
