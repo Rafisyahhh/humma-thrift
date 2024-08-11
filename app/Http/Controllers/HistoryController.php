@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use NumberFormatter;
+
 class HistoryController extends Controller {
     /**
      * Display a listing of the resource.
@@ -23,7 +24,7 @@ class HistoryController extends Controller {
     public function index() {
         $orders = Order::whereHas('transaction_order', function ($query) {
             $query->where('user_id', auth()->id())
-                  ->where('delivery_status', 'selesai');
+                ->where('delivery_status', 'selesai');
         })->get();
 
         return view('user.history', compact('orders'));
@@ -35,6 +36,7 @@ class HistoryController extends Controller {
     public function create() {
         //
     }
+
 
     public function store(Request $request) {
 
@@ -57,18 +59,37 @@ class HistoryController extends Controller {
 
         return redirect()->back()->with('success', 'Ulasan Anda berhasil dibuat');
     }
+    public function storeLelang(Request $request, $id) {
 
+        $validate = Validator::make($request->all(), [
+            'star' => 'required|integer|between:1,5',
+            'comment' => 'required|string|max:1000',
+        ]);
+
+        if ($validate->fails()) {
+            return redirect()->back()->with('error', "Harap isikan kolom masukan dengan benar!")
+                ->withErrors($validate->errors())
+                ->withInput($request->input());
+        }
+
+        $data = collect($validate->validated());
+        $data->put('user_id', Auth::id());
+        $data->put('product_auction_id', $id);
+
+        Ulasan::create($data->toArray());
+
+        return redirect()->back()->with('success', 'Ulasan Anda berhasil dibuat');
+    }
     /**
      * Display the specified resource.
      */
-    public function showProduct($productId)
-    {
+    public function showProduct($productId) {
         $product = Product::findOrFail($productId);
         $user = Auth::user();
 
         $hasReviewed = Ulasan::where('product_id', $productId)
-                             ->where('user_id', $user->id)
-                             ->exists();
+            ->where('user_id', $user->id)
+            ->exists();
 
         return view('product.show', compact('product', 'hasReviewed'));
     }

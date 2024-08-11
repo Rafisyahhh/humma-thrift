@@ -28,6 +28,7 @@ Route::prefix('user')->middleware(['auth', 'role:user'])->name('user.')->group(f
     });
 
     Route::post('ulasan', [HistoryController::class, 'store'])->name('ulasan');
+    Route::post('ulasan/lelang/{id}', [HistoryController::class, 'storeLelang'])->name('ulasan.lelang');
     Route::post('address/{id}', [UserAddressController::class, 'store'])->name('address.store');
     Route::put('edit/address/{user}/{address}', [UserAddressController::class, 'update'])->name('address.edit');
     Route::put('main/address/{address}', [UserAddressController::class, 'main'])->name('address.main');
