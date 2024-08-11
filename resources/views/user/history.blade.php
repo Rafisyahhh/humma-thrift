@@ -174,122 +174,239 @@
         <div class="cart-section wishlist-section">
 
             @forelse ($orders as $order)
-                <div class="card mb-5">
-                    <table>
-                        <tbody>
-                            <tr class="table-row ticket-row">
-                                <td class="table-wrapper wrapper-product">
-                                    <div class="wrapper">
-                                        <div class="wrapper-img">
-                                            <img src="{{ asset("storage/{$order->product->thumbnail}") }}"
-                                                alt="img">
-                                        </div>
-                                        <div class="wrapper-content">
-                                            <h5 class="heading">{{ $order->product->title }}</h5>
-                                            <p class="paragraph">
-                                                @currency($order->product->price)
-                                            </p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="table-wrapper">
-                                    <div class="wrapper-content me-5" style="float: right; text-align: end;">
-                                        <h5 class="heading">
-                                            {{ App\Http\Controllers\HistoryController::formatTanggal($order->created_at) }}
-                                        </h5>
-                                        <p class="paragraph opacity-75 pt-1">
-                                            {{ Carbon\Carbon::parse($order->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="table-row ticket-row">
-                                <td class="table-wrapper wrapper-product">
-                                    <div class="wrapper">
-                                    </div>
-                                </td>
-
-                                @if (!$order->product()->whereHas('ulasan', function ($query) {
-                                    $query->where('user_id', Auth::user()->id);
-                                })->exists()) 
-                                    <td>
-                                        <div class="wrapper-content me-5" style="float: right; text-align: end;">
-                                            <button class="shop-btn openModal" data-id="reviewModal-{{ $order->id }}">Beri
-                                                Nilai</button>
+                @isset($order->product_auction)
+                    <div class="card mb-5">
+                        <table>
+                            <tbody>
+                                <tr class="table-row ticket-row">
+                                    <td class="table-wrapper wrapper-product">
+                                        <div class="wrapper">
+                                            <div class="wrapper-img">
+                                                <img src="{{ asset("storage/{$order->product_auction->thumbnail}") }}" alt="img">
+                                            </div>
+                                            <div class="wrapper-content">
+                                                <h5 class="heading">{{ $order->product_auction->title }}</h5>
+                                                <p class="paragraph">
+                                                    @currency($order->product_auction->price)
+                                                </p>
+                                            </div>
                                         </div>
                                     </td>
-                                @endif
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                    <td class="table-wrapper">
+                                        <div class="wrapper-content me-5" style="float: right; text-align: end;">
+                                            <h5 class="heading">
+                                                {{ App\Http\Controllers\HistoryController::formatTanggal($order->created_at) }}
+                                            </h5>
+                                            <p class="paragraph opacity-75 pt-1">
+                                                {{ Carbon\Carbon::parse($order->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
 
-                <div id="reviewModal-{{ $order->id }}" class="modal">
-                    <div class="modal-content">
-                        <button class="close" style="float: right; text-align: end;">&times;</button>
-                        <h4 style="text-align: center;">Nilai Produk dan Toko</h4>
-                        <hr>
-                        <td class="table-wrapper wrapper-product">
-                            <div class="row-rating mt-4">
-                                <div class="wrapper-img">
-                                    <img src="{{ asset("storage/{$order->product->thumbnail}") }}"
-                                        alt="img"
-                                        style="height: 15rem; width: 15rem; border: 1px solid rgba(126, 163, 219, 0.40); border-radius: 8px;">
-                                </div>
-                                <div class="wrapper-content mx-5">
-                                    <h5 class="heading">{{ $order->product->title }}</h5>
-                                    <p class="paragraph">
-                                        @currency($order->product->price)
-                                    </p>
-                                </div>
-                            </div>
-                        </td>
-                        <form action="{{ route('user.ulasan') }}" method="post" class="mt-5">
-                            @csrf
-                            <hr>
+                                <tr class="table-row ticket-row">
+                                    <td class="table-wrapper wrapper-product">
+                                        <div class="wrapper">
+                                        </div>
+                                    </td>
 
-                            <div class="mb-3">
-                                <div class="row-rating mb-0 align-items-center gap-3">
-                                    <label for="produk-rating" class="form-label mb-0" style="font-size: 19px;">Penilaian
-                                        Produk </label>
-                                    {{-- <label for="star">Pilih penilaian:</label> --}}
-                                    <select class="star-rating form-control @error('star') is-invalid @enderror"
-                                        name="star"
-                                        data-options="{&quot;clearable&quot;:false, &quot;tooltip&quot;:false}"
-                                        id="star">
-                                        <option value="">Pilih penilaian</option>
-                                        <option value="5">Luar Biasa</option>
-                                        <option value="4">Sangat Baik</option>
-                                        <option value="3">Baik</option>
-                                        <option value="2">Cukup</option>
-                                        <option value="1">Buruk</option>
-                                    </select>
-                                </div>
-
-                                @error('star')
-                                    <p class="text-danger" role="alert"><strong>{{ $message }}</strong></p>
-                                @enderror
-                            </div>
-
-                            <div>
-                                <label for="comment" class="form-label" style="font-size: 18px;">Beri Ulasan :</label>
-                                <br>
-                                <textarea id="comment" name="comment" class="form-control @error('comment') is-invalid @enderror"
-                                    placeholder="Masukkan ulasan" rows="7" style="font-size: 17px;"></textarea>
-                                @error('comment')
-                                    <p class="text-danger" role="alert"><strong>{{ $message }}</strong></p>
-                                @enderror
-                            </div>
-
-                            <input type="hidden" name="product_id"
-                                value="{{ $order->product->id }}">
-
-                            <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim Ulasan</button>
-                        </form>
+                                    @if (
+                                        !$order->product()->whereHas('ulasan', function ($query) {
+                                                $query->where('user_id', Auth::user()->id);
+                                            })->exists())
+                                        <td>
+                                            <div class="wrapper-content me-5" style="float: right; text-align: end;">
+                                                <button class="shop-btn openModal"
+                                                    data-id="reviewModal-{{ $order->id }}">Beri
+                                                    Nilai</button>
+                                            </div>
+                                        </td>
+                                    @endif
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-                {{-- @endforeach --}}
+
+                    <div id="reviewModal-{{ $order->id }}" class="modal">
+                        <div class="modal-content">
+                            <button class="close" style="float: right; text-align: end;">&times;</button>
+                            <h4 style="text-align: center;">Nilai Produk dan Toko</h4>
+                            <hr>
+                            <td class="table-wrapper wrapper-product">
+                                <div class="row-rating mt-4">
+                                    <div class="wrapper-img">
+                                        <img src="{{ asset("storage/{$order->product_auction->thumbnail}") }}" alt="img"
+                                            style="height: 15rem; width: 15rem; border: 1px solid rgba(126, 163, 219, 0.40); border-radius: 8px;">
+                                    </div>
+                                    <div class="wrapper-content mx-5">
+                                        <h5 class="heading">{{ $order->product_auction->title }}</h5>
+                                        <p class="paragraph">
+                                            @currency($order->product_auction->price)
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <form action="{{ route('user.ulasan') }}" method="post" class="mt-5">
+                                @csrf
+                                <hr>
+
+                                <div class="mb-3">
+                                    <div class="row-rating mb-0 align-items-center gap-3">
+                                        <label for="produk-rating" class="form-label mb-0" style="font-size: 19px;">Penilaian
+                                            Produk </label>
+                                        {{-- <label for="star">Pilih penilaian:</label> --}}
+                                        <select class="star-rating form-control @error('star') is-invalid @enderror"
+                                            name="star"
+                                            data-options="{&quot;clearable&quot;:false, &quot;tooltip&quot;:false}"
+                                            id="star">
+                                            <option value="">Pilih penilaian</option>
+                                            <option value="5">Luar Biasa</option>
+                                            <option value="4">Sangat Baik</option>
+                                            <option value="3">Baik</option>
+                                            <option value="2">Cukup</option>
+                                            <option value="1">Buruk</option>
+                                        </select>
+                                    </div>
+
+                                    @error('star')
+                                        <p class="text-danger" role="alert"><strong>{{ $message }}</strong></p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label for="comment" class="form-label" style="font-size: 18px;">Beri Ulasan :</label>
+                                    <br>
+                                    <textarea id="comment" name="comment" class="form-control @error('comment') is-invalid @enderror"
+                                        placeholder="Masukkan ulasan" rows="7" style="font-size: 17px;"></textarea>
+                                    @error('comment')
+                                        <p class="text-danger" role="alert"><strong>{{ $message }}</strong></p>
+                                    @enderror
+                                </div>
+
+                                <input type="hidden" name="product_id" value="{{ $order->product_auction->id }}">
+
+                                <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim Ulasan</button>
+                            </form>
+                        </div>
+                    </div>
+                    {{-- @endforeach --}}
+                @else
+                    <div class="card mb-5">
+                        <table>
+                            <tbody>
+                                <tr class="table-row ticket-row">
+                                    <td class="table-wrapper wrapper-product">
+                                        <div class="wrapper">
+                                            <div class="wrapper-img">
+                                                <img src="{{ asset("storage/{$order->product->thumbnail}") }}" alt="img">
+                                            </div>
+                                            <div class="wrapper-content">
+                                                <h5 class="heading">{{ $order->product->title }}</h5>
+                                                <p class="paragraph">
+                                                    @currency($order->product->price)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="table-wrapper">
+                                        <div class="wrapper-content me-5" style="float: right; text-align: end;">
+                                            <h5 class="heading">
+                                                {{ App\Http\Controllers\HistoryController::formatTanggal($order->created_at) }}
+                                            </h5>
+                                            <p class="paragraph opacity-75 pt-1">
+                                                {{ Carbon\Carbon::parse($order->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="table-row ticket-row">
+                                    <td class="table-wrapper wrapper-product">
+                                        <div class="wrapper">
+                                        </div>
+                                    </td>
+
+                                    @if (
+                                        !$order->product()->whereHas('ulasan', function ($query) {
+                                                $query->where('user_id', Auth::user()->id);
+                                            })->exists())
+                                        <td>
+                                            <div class="wrapper-content me-5" style="float: right; text-align: end;">
+                                                <button class="shop-btn openModal"
+                                                    data-id="reviewModal-{{ $order->id }}">Beri
+                                                    Nilai</button>
+                                            </div>
+                                        </td>
+                                    @endif
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="reviewModal-{{ $order->id }}" class="modal">
+                        <div class="modal-content">
+                            <button class="close" style="float: right; text-align: end;">&times;</button>
+                            <h4 style="text-align: center;">Nilai Produk dan Toko</h4>
+                            <hr>
+                            <td class="table-wrapper wrapper-product">
+                                <div class="row-rating mt-4">
+                                    <div class="wrapper-img">
+                                        <img src="{{ asset("storage/{$order->product->thumbnail}") }}" alt="img"
+                                            style="height: 15rem; width: 15rem; border: 1px solid rgba(126, 163, 219, 0.40); border-radius: 8px;">
+                                    </div>
+                                    <div class="wrapper-content mx-5">
+                                        <h5 class="heading">{{ $order->product->title }}</h5>
+                                        <p class="paragraph">
+                                            @currency($order->product->price)
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <form action="{{ route('user.ulasan') }}" method="post" class="mt-5">
+                                @csrf
+                                <hr>
+
+                                <div class="mb-3">
+                                    <div class="row-rating mb-0 align-items-center gap-3">
+                                        <label for="produk-rating" class="form-label mb-0" style="font-size: 19px;">Penilaian
+                                            Produk </label>
+                                        {{-- <label for="star">Pilih penilaian:</label> --}}
+                                        <select class="star-rating form-control @error('star') is-invalid @enderror"
+                                            name="star"
+                                            data-options="{&quot;clearable&quot;:false, &quot;tooltip&quot;:false}"
+                                            id="star">
+                                            <option value="">Pilih penilaian</option>
+                                            <option value="5">Luar Biasa</option>
+                                            <option value="4">Sangat Baik</option>
+                                            <option value="3">Baik</option>
+                                            <option value="2">Cukup</option>
+                                            <option value="1">Buruk</option>
+                                        </select>
+                                    </div>
+
+                                    @error('star')
+                                        <p class="text-danger" role="alert"><strong>{{ $message }}</strong></p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label for="comment" class="form-label" style="font-size: 18px;">Beri Ulasan :</label>
+                                    <br>
+                                    <textarea id="comment" name="comment" class="form-control @error('comment') is-invalid @enderror"
+                                        placeholder="Masukkan ulasan" rows="7" style="font-size: 17px;"></textarea>
+                                    @error('comment')
+                                        <p class="text-danger" role="alert"><strong>{{ $message }}</strong></p>
+                                    @enderror
+                                </div>
+
+                                <input type="hidden" name="product_id" value="{{ $order->product->id }}">
+
+                                <button type="submit" class="shop-btn" style="margin-left: 22rem;">Kirim Ulasan</button>
+                            </form>
+                        </div>
+                    </div>
+                    {{-- @endforeach --}}
+                @endisset
             @empty
                 {{-- <tr class="table-row ticket-row" style="height:12px;">
                 <td colspan="6" class="text-center no-data-message" > --}}
@@ -303,7 +420,6 @@
                 {{-- </td>
             </tr> --}}
             @endforelse
-
         </div>
     </div>
 @endsection
