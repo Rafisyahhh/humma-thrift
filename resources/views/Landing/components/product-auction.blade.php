@@ -5,11 +5,11 @@
             $existingAuction = App\Models\auctions::where('user_id', Auth::id())
                 ->where('product_auction_id', $item->id)
                 ->first();
-            $auctions = App\Models\Auctions::where('user_id', $user->id)
+            $auctions = App\Models\auctions::where('user_id', $user->id)
                 ->where('product_auction_id', $item->id)
                 ->first();
         }
-        $auctionproduct = App\Models\Auctions::where('product_auction_id', $item->id)
+        $auctionproduct = App\Models\auctions::where('product_auction_id', $item->id)
             ->where('status', 1)
             ->first();
 
