@@ -8,14 +8,14 @@
             <div class="login-section">
                 <div class="review-form">
                     <h5 class="comment-title">Masuk</h5>
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login') }}" id="login-form">
                         @csrf
                         <div class="review-inner-form ">
                             <div class="review-form-name">
                                 <label for="email" class="form-label">Surat Elektronik</label>
                                 <input type="email" id="email"
                                     class="form-control @error('email') is-invalid @enderror" placeholder="Surat elektronik"
-                                    value="{{ old('email') }}" name="email"  autocomplete="email" autofocus>
+                                    value="{{ old('email') }}" name="email" autocomplete="email" autofocus>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -25,8 +25,8 @@
                             <div class="review-form-name">
                                 <label for="password" class="form-label">Kata Sandi</label>
                                 <input type="password" name="password" id="password"
-                                    class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan kata sandimu"
-                                     autocomplete="current-password">
+                                    class="form-control @error('password') is-invalid @enderror"
+                                    placeholder="Masukkan kata sandimu" autocomplete="current-password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -47,6 +47,12 @@
                                     @endif
                                 </div>
                             </div>
+                        </div>
+                        <div class="mb-4">
+                            {!!htmlFormSnippet()!!}
+                            @if ($errors->has('g-recaptcha-response'))
+                            <p class="text-danger">{{ $errors->first('g-recaptcha-response') }}</p>
+                            @endif
                         </div>
                         <div class="login-btn text-center">
                             <button type="submit" class="shop-btn text-white">Masuk</button>

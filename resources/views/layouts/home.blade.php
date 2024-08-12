@@ -60,6 +60,8 @@
 
     <script src="{{ asset('vendor/flasher/flasher.min.js') }}"></script>
 
+    {!!htmlScriptTagJsApi()!!}
+
     <style>
       .header-right-dropdown>div {
         right: 0 !important;
