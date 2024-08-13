@@ -11,13 +11,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-class SellerTransactionController extends Controller
-{
+class SellerTransactionController extends Controller {
     private TransactionOrder $_transactions;
     private Withdrawal $_withdrawal;
 
-    public function __construct(TransactionOrder $transactions, Withdrawal $withdrawal)
-    {
+    public function __construct(TransactionOrder $transactions, Withdrawal $withdrawal) {
         $this->_transactions = $transactions;
         $this->_withdrawal = $withdrawal;
     }
@@ -25,8 +23,7 @@ class SellerTransactionController extends Controller
     /**
      * Showing the list of trx data
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $user = Auth::user();
         $userStoreId = $user->store->id;
         $trxSearch = $request->get('trx');
@@ -111,9 +108,9 @@ class SellerTransactionController extends Controller
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
-            ->selectRaw('MONTH(created_at) as month, SUM(total) * 0.9 as total') // 0.9 is equivalent to 90% after deducting 10%
+            ->selectRaw('strftime("%m", created_at) as month, SUM(total) as total')
             ->whereYear('created_at', $currentDate->year)
-            ->groupBy(\DB::raw('MONTH(created_at)'))
+            ->groupBy(\DB::raw('strftime("%m", created_at)'))
             ->get()
             ->keyBy('month');
 
@@ -125,14 +122,14 @@ class SellerTransactionController extends Controller
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
-            ->selectRaw('MONTH(created_at) as month, SUM(total) as total') // 0.9 is equivalent to 90% after deducting 10%
+            ->selectRaw('strftime("%m", created_at) as month, SUM(total) as total')
             ->whereYear('created_at', $currentDate->year)
-            ->groupBy(\DB::raw('MONTH(created_at)'))
+            ->groupBy(\DB::raw('strftime("%m", created_at)'))
             ->get()
             ->keyBy('month');
 
         $monthlyGrossData = collect(range(1, 12))->map(fn($month) => $monthlyGross->get($month)->total ?? 0)->toArray();
 
-        return view('seller.penghasilan', compact('transactions', 'transactionTotal', 'netIncome', 'dailySales','dailyGross', 'months', 'monthlySalesData','monthlyGrossData', 'accountBalance'));
+        return view('seller.penghasilan', compact('transactions', 'transactionTotal', 'netIncome', 'dailySales', 'dailyGross', 'months', 'monthlySalesData', 'monthlyGrossData', 'accountBalance'));
     }
 }
