@@ -39,6 +39,9 @@
             window.globalVarProxy[target] = response;
           },
           error: function(xhr, status, error) {
+            if (error.login) {
+              flasher.error(error.login);
+            }
             console.error(`Error fetching ${url}: ${status} ${error}`);
           }
         });
