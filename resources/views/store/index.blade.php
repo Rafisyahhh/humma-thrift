@@ -154,11 +154,6 @@
             color: #f5b301;
         }
 
-        .rating label:hover,
-        .rating label:hover~label {
-            color: #f5b301;
-        }
-
         .row-rating span {
             width: unset;
             height: unset;
@@ -314,7 +309,7 @@
                             <p class="profile-description opacity-75 mt-3 mb-0">
                                 @if ($store->cuti)
                                     <span class="badge text-bg-warning me-2">Cuti</span>
-                                @elseif($now->between($openInstance, $closeInstance) && Cache::has('user-is-online-' . $store->user_id))
+                                @elseif($now->between($openInstance, $closeInstance))
                                     <span class="badge text-bg-success me-2">Buka</span>
                                 @else
                                     <span class="badge text-bg-danger me-2">Tutup</span>

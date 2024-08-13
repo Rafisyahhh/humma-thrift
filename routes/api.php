@@ -38,3 +38,9 @@ Route::prefix('yajra')->name('yajra.')->group(function () {
     Route::get('/income', [YajraController::class, 'incomes'])->name("incomes");
     Route::get('/withdrawal', [YajraController::class, 'withdrawal'])->name("withdrawal");
 });
+
+Route::get('/whatsapp', function (Request $request) {
+    $phone_number = $request->phone ?? 6285707062531;
+    $message = $request->message ?? "Permisi%20saya%20%5Bnama%20seller%5D%20melakukan%20penarikan%20dana%20sejumlah%20%5BRp.%20jumlah%20penarikan%5D%20pada%20tanggal%20%5B%20tanggal%20penarikan%20%5D%20memohon%20untuk%20segera%20disetujui";
+    return redirect("whatsapp://send?phone=$phone_number&text=$message");
+})->name('whatsapp');
