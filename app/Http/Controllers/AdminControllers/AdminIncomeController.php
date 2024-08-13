@@ -80,9 +80,9 @@ class AdminIncomeController extends Controller {
         $monthlySales = $this->_transactions
             ->where('status', 'PAID')
             ->where('delivery_status', 'selesai')
-            ->selectRaw('MONTH(created_at) as month, SUM(total) as total')
+            ->selectRaw('strftime("%m", created_at) as month, SUM(total) as total')
             ->whereYear('created_at', $currentDate->year)
-            ->groupBy(\DB::raw('MONTH(created_at)'))
+            ->groupBy(\DB::raw('strftime("%m", created_at)'))
             ->get()
             ->keyBy('month');
 

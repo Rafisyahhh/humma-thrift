@@ -127,7 +127,6 @@ class SellerTransactionController extends Controller {
             ->groupBy(\DB::raw('strftime("%m", created_at)'))
             ->get()
             ->keyBy('month');
-
         $monthlyGrossData = collect(range(1, 12))->map(fn($month) => $monthlyGross->get($month)->total ?? 0)->toArray();
 
         return view('seller.penghasilan', compact('transactions', 'transactionTotal', 'netIncome', 'dailySales', 'dailyGross', 'months', 'monthlySalesData', 'monthlyGrossData', 'accountBalance'));
