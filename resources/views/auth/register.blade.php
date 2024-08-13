@@ -18,8 +18,8 @@
                                 <label for="name" class="form-label">Nama Lengkap</label>
                                 <input id="name" type="text"
                                     class="form-control @error('name') is-invalid @enderror" name="name"
-                                    value="{{ old('name') }}" placeholder="Mis: Akbar Rafsyah"
-                                    autocomplete="name" autofocus />
+                                    value="{{ old('name') }}" placeholder="Mis: Akbar Rafsyah" autocomplete="name"
+                                    autofocus />
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -33,8 +33,8 @@
                                 <label for="username" class="form-label">Username (Tanpa tanda "@")</label>
                                 <input id="username" type="text"
                                     class="form-control @error('username') is-invalid @enderror" name="username"
-                                    value="{{ old('username') }}" placeholder="Mis: akbarrafsyah"
-                                    autocomplete="username" autofocus />
+                                    value="{{ old('username') }}" placeholder="Mis: akbarrafsyah" autocomplete="username"
+                                    autofocus />
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -48,7 +48,7 @@
                                 <label for="email" class="form-label">Surel</label>
                                 <input id="email" type="email" placeholder="user@gmail.com"
                                     class="form-control @error('email') is-invalid @enderror" name="email"
-                                    value="{{ old('email') }}"  autocomplete="email">
+                                    value="{{ old('email') }}" autocomplete="email">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -72,8 +72,9 @@
                         <div class=" account-inner-form">
                             <div class="review-form-name">
                                 <label for="password-confirm" class="form-label">Ketik Ulang Kata Sandi</label>
-                                <input id="password-confirm" type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
-                                    name="password_confirmation"  autocomplete="new-password">
+                                <input id="password-confirm" type="password"
+                                    class="form-control @error('password_confirmation') is-invalid @enderror"
+                                    name="password_confirmation" autocomplete="new-password">
                                 @error('password_confirmation')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -81,9 +82,16 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="mb-4">
+                            {!! htmlFormSnippet() !!}
+                            @if ($errors->has('g-recaptcha-response'))
+                                <p class="text-danger">{{ $errors->first('g-recaptcha-response') }}</p>
+                            @endif
+                        </div>
                         <div class="login-btn text-center">
                             <button type="submit" class="shop-btn">Daftar</button>
-                            <span class="shop-account">Sudah punya akun?<a href="{{ route('login') }}">Masuk disini</a></span>
+                            <span class="shop-account">Sudah punya akun?<a href="{{ route('login') }}">Masuk
+                                    disini</a></span>
                         </div>
                     </form>
                 </div>

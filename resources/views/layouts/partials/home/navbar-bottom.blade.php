@@ -4,16 +4,46 @@
 @endphp
 
 <style>
-
-.active1 {
-  overflow: hidden;
-  border-bottom: 2px solid rgb(243, 243, 243);
-  padding: 1rem;
-  line-height: 3rem;
-  font-weight: bold;
-  padding-bottom: 2.2rem;
+.menu-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
+.menu-list li {
+  position: relative;
+  padding: 1rem;
+}
+
+.menu-list li::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: rgb(243, 243, 243);
+  transition: width 0.4s ease;
+}
+
+.menu-list li:hover::after {
+  width: 100%;
+}
+
+.active1 {
+  font-weight: bold;
+}
+
+.active1::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: rgb(243, 243, 243);
+}
 </style>
 
 <div class="header-bottom d-lg-block d-none" id="navbar" style="z-index: 1;">
@@ -64,13 +94,33 @@
 
       <div class="header-nav-menu">
         <ul class="menu-list">
-          <li><a href="{{ url('/') }}"><span class="list-text {{ request()->is('/') ? 'active1' : '' }}">Home</span></a></li>
-          <li><a href="{{ url('/product/regular') }}"><span class="list-text {{ request()->is('product/regular') ? 'active1' : '' }}">Produk</span></a></li>
-          <li><a href="{{ url('/product/auction') }}"><span class="list-text {{ request()->is('product/auction') ? 'active1' : '' }}">Lelang</span></a></li>
-          <li><a href="{{ url('/stores') }}"><span class="list-text {{ request()->is('stores') ? 'active1' : '' }}">Toko</span></a></li>
-          <li><a href="{{ url('/about-us') }}"><span class="list-text {{ request()->is('about-us') ? 'active1' : '' }}">Tentang Kami</span></a></li>
+            <li>
+                <a href="{{ url('/') }}">
+                    <span class="list-text {{ request()->is('/') ? 'active1' : '' }}">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('/product/regular') }}">
+                    <span class="list-text {{ request()->is('product/regular') ? 'active1' : '' }}">Produk</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('/product/auction') }}">
+                    <span class="list-text {{ request()->is('product/auction') ? 'active1' : '' }}">Lelang</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('/stores') }}">
+                    <span class="list-text {{ request()->is('stores') ? 'active1' : '' }}">Toko</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('/about-us') }}">
+                    <span class="list-text {{ request()->is('about-us') ? 'active1' : '' }}">Tentang Kami</span>
+                </a>
+            </li>
         </ul>
-      </div>
+    </div>
 
       <div class="header-vendor-btn">
         @if (auth()->check() && auth()->user()->hasRole('user'))

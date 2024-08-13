@@ -768,7 +768,7 @@
                         <div class="container">
                             <div class="section-title">
                                 <h5>Produk Serupa</h5>
-                                <a href="#" class="view">Lihat Semua</a>
+                                {{-- <a href="#" class="view">Lihat Semua</a> --}}
                             </div>
                             <div class="weekly-sale-section">
                                 <div class="row g-5">

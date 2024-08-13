@@ -54,18 +54,16 @@
                 <div class="dropdown position-absolute" style="right: 0; top: 0;">
                     <a class="wishlist-link" href="#" role="button" id="wishlistDropdown"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-ellipsis-h"
-                            style="color: #1c3879; font-size: 30px;"></i>
+                        <i class="fas fa-ellipsis-h" style="color: #1c3879; font-size: 30px;"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="wishlistDropdown">
                         <li>
                             <form action="{{ route('destroyProduct.destroy', $item->id) }}"
-                                method="POST"
-                                onsubmit="return confirmDeletion('Apakah anda yakin ingin menghapus produk ini dari daftar favorit?', (() => { event.preventDefault(); this.submit()}))">
+                                method="POST" onsubmit="return confirmDeletion('Apakah anda yakin ingin menghapus produk ini dari daftar favorit?', (() => { event.preventDefault(); this.submit()}))">
                                 @csrf
                                 @method('DELETE')
                                 <a role="button" type="submit" class="dropdown-item"
-                                    onclick="$(this).closest('form').submit()" style="color: red;">Hapus Favorit</a>
+                                    onclick="$(this).closest('form').submit()" style="color: red; font-size: 1.50rem;">Hapus Favorit</a>
                             </form>
                         </li>
                     </ul>
@@ -88,11 +86,11 @@
                     </tr>
                     <a href="{{ route('store.product.detail', ['store' => $item->product->userStore->username, 'product' => $item->product->slug]) }}"
                         class="product-details"
-                        style="font-size: 1.85rem">{{ $item->product->title }}
+                        style="font-size: 1.78rem">{{ $item->product->title }}
                     </a>
                     <div class="price">
                         <span class="new-price"
-                            style="font-size: 1.8rem">Rp{{ number_format($item->product->price, null, null, '.') }}</span>
+                            style="font-size: 1.6rem">Rp{{ number_format($item->product->price, null, null, '.') }}</span>
                     </div>
                 </div>
             </div>

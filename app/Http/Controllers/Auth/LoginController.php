@@ -87,4 +87,19 @@ class LoginController extends Controller {
             Cache::forget('user-is-online-' . Auth::id());
         }
     }
+
+    public function login(Request $request) {
+        // Validasi reCAPTCHA
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:8',
+            'g-recaptcha-response' => 'recaptcha',
+        ]);
+
+        if (Auth::attempt($this->credentials($request))) {
+            return $this->sendLoginResponse($request);
+        }
+
+        return $this->sendFailedLoginResponse($request);
+    }
 }

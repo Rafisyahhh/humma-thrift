@@ -234,7 +234,7 @@
                                                 {{ $even->subjudul }}
                                             </h5>
                                             <h1 class="wrapper-details" style="color:#1c3879;">{{ $even->judul }}</h1>
-                                            <a href="{{ url('/product/regular') }}" class="shop-btn mt-3" ">Belanja Sekarang</a>
+                                            <a href="{{ url('/product/regular') }}" class="shop-btn mt-3">Belanja Sekarang</a>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
@@ -242,7 +242,7 @@
                                                                                         </div>
                                                                                     </div>
      @endforeach
-                                        </div>
+                                    </div>
                                         <div class="swiper-pagination"></div>
                                     </div>
     </section>
@@ -255,7 +255,7 @@
             <ul class="nav nav-underline mb-3" style="display:flex; justify-content: center;">
                 <li class="nav-item">
                     <a class="filter nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
-                        type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">All</a>
+                        type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Semua</a>
                 </li>
                 <li class="nav-item">
                     <a class="filter nav-link" id="atasan-tab" data-bs-toggle="tab" data-bs-target="#lelang-tab-pane"

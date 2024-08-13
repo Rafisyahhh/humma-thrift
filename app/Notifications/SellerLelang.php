@@ -56,9 +56,9 @@ class SellerLelang extends Notification implements ShouldQueue
         $product = $this->auction->productAuction->title;
 
         return [
-            'data' => "\"{$this->auction->productAuction->userStore->user->username}\" mengikuti lelang produk \"{$this->auction->productAuction->title}\".",
+            'data' => "\"{$this->auction->user->username}\" mengikuti lelang produk \"{$this->auction->productAuction->title}\".",
             'auction_price' => number_format($this->auction->auction_price),
-            'title' => "{$this->auction->productAuction->userStore->user->username} Mengikuti Lelang",
+            'title' => "{$this->auction->user->username} Mengikuti Lelang",
             'url' => route('store.product.detail', compact('store', 'product')),
         ];
     }

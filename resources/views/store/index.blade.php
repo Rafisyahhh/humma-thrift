@@ -415,7 +415,7 @@
                                         <div class="product-info">
                                             <div class="product-description">
                                                 <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
-                                                    class="product-details">
+                                                    class="product-details" style="font-size: 1.78rem">
                                                     {{ $item->title }}
                                                 </a>
                                                 <div class="price">
@@ -500,7 +500,7 @@
                                         <div class="product-info">
                                             <div class="product-description">
                                                 <a href="{{ route('store.product.detail', ['store' => $item->userStore->username, 'product' => $item->slug]) }}"
-                                                    class="product-details">
+                                                    class="product-details" style="font-size: 1.79rem">
                                                     {{ $item->title }}
                                                 </a>
                                                 <div class="price">
