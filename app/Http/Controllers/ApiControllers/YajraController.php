@@ -24,7 +24,7 @@ use Yajra\DataTables\Facades\DataTables;
 class YajraController extends Controller {
     //
     public function users(Request $request) {
-        if ($request->ajax()) {
+        if ($request->ajax() || ($request->isJson() || $request->wantsJson())) {
             $data = User::all();
             return DataTables::of($data)->editColumn('name', function (User $user) {
                 return "<div class='d-flex gap-3 align-items-center'>
@@ -44,25 +44,25 @@ class YajraController extends Controller {
         }
     }
     public function brands(Request $request) {
-        if ($request->ajax()) {
+        if ($request->ajax() || ($request->isJson() || $request->wantsJson())) {
             $data = Brand::all();
             return DataTables::of($data)->addIndexColumn()->make(true);
         }
     }
     public function categories(Request $request) {
-        if ($request->ajax()) {
+        if ($request->ajax() || ($request->isJson() || $request->wantsJson())) {
             $data = ProductCategory::all();
             return DataTables::of($data)->addIndexColumn()->make(true);
         }
     }
     public function events(Request $request) {
-        if ($request->ajax()) {
+        if ($request->ajax() || ($request->isJson() || $request->wantsJson())) {
             $data = event::all();
             return DataTables::of($data)->addIndexColumn()->make(true);
         }
     }
     public function products(Request $request) {
-        if ($request->ajax()) {
+        if ($request->ajax() || ($request->isJson() || $request->wantsJson())) {
             $products = Product::with(['categories', 'userstore', 'brand'])->get();
             $productAuctions = ProductAuction::with(['categories', 'userstore', 'brand'])->get();
 
@@ -81,13 +81,13 @@ class YajraController extends Controller {
     }
 
     public function abouts(Request $request) {
-        if ($request->ajax()) {
+        if ($request->ajax() || ($request->isJson() || $request->wantsJson())) {
             $data = AboutUs::all();
             return DataTables::of($data)->addIndexColumn()->make(true);
         }
     }
     public function stores(Request $request) {
-        if ($request->ajax()) {
+        if ($request->ajax() || ($request->isJson() || $request->wantsJson())) {
             $data = UserStore::with(['user'])->get();
             return DataTables::of($data)->editColumn('name', function (UserStore $store) {
                 return "<div class='d-flex gap-3 align-items-center'>
@@ -105,7 +105,7 @@ class YajraController extends Controller {
         }
     }
     public function transactions(Request $request) {
-        if ($request->ajax()) {
+        if ($request->ajax() || ($request->isJson() || $request->wantsJson())) {
             $transaction = TransactionOrder::with(['user', 'userstore'])->latest()->get();
             $orders = Order::with('product')
                 ->orderBy('transaction_order_id')
@@ -158,7 +158,7 @@ class YajraController extends Controller {
         }
     }
     public function incomes(Request $request) {
-        if ($request->ajax()) {
+        if ($request->ajax() || ($request->isJson() || $request->wantsJson())) {
             $data = TransactionOrder::with(['user', 'userstore'])->latest()->get();
 
             return DataTables::of($data)
@@ -183,7 +183,7 @@ class YajraController extends Controller {
     }
 
     public function withdrawal(Request $request) {
-        if ($request->ajax()) {
+        if ($request->ajax() || ($request->isJson() || $request->wantsJson())) {
             $data = Withdrawal::with(['user', 'store', 'bank'])->latest()->get();
 
             return DataTables::of($data)

@@ -22,13 +22,11 @@ use Illuminate\Support\Facades\DB;
  *
  * @package App\Http\Controllers
  */
-class DashboardUserController extends Controller
-{
+class DashboardUserController extends Controller {
     private TransactionOrder $_transactions;
     private Withdrawal $_withdrawal;
 
-    public function __construct(TransactionOrder $transactions, Withdrawal $withdrawal)
-    {
+    public function __construct(TransactionOrder $transactions, Withdrawal $withdrawal) {
         $this->_transactions = $transactions;
         $this->_withdrawal = $withdrawal;
     }
@@ -37,8 +35,7 @@ class DashboardUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function dashboard()
-    {
+    public function dashboard() {
         $carts = cart::where('user_id', auth()->id())
             ->whereNotNull('product_id')
             ->orderBy('created_at')
@@ -106,9 +103,9 @@ class DashboardUserController extends Controller
 
         $monthlyGross = TransactionOrder::where('user_id', $userId)
             ->where('status', 'PAID')
-            ->selectRaw('MONTH(paid_at) as month, SUM(total_harga) as total')
-            ->whereYear('paid_at', $currentDate->year)
-            ->groupBy(\DB::raw('MONTH(paid_at)'))
+            ->selectRaw('strftime("%m", created_at) as month, SUM(total) as total')
+            ->whereYear('created_at', $currentDate->year)
+            ->groupBy(\DB::raw('strftime("%m", created_at)'))
             ->get()
             ->keyBy('month');
 
