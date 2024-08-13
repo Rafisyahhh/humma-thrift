@@ -183,7 +183,15 @@ class YajraController extends Controller {
 
     public function withdrawal(Request $request) {
         if ($request->ajax() || ($request->isJson() || $request->wantsJson())) {
-            $data = Withdrawal::with(['user', 'store', 'bank'])->latest()->get();
+            $dateBefore = $request->input('dateBefore');
+            $dateAfter = $request->input('dateAfter');
+            $query = Withdrawal::with(['user', 'store', 'bank']);
+
+            if ($dateBefore && $dateAfter) {
+                $query->whereBetween('created_at', [$dateBefore, $dateAfter]);
+            }
+
+            $data = $query->latest()->get();
 
             return DataTables::of($data)
                 ->addColumn('status_order', function (Withdrawal $withdrawal) {

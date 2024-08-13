@@ -83,7 +83,8 @@
         </button>
         <ul class="dropdown-menu p-0">
           <li><a class="dropdown-item btn btn-sm btn-danger text-white" role="button" modal="failed">Gagal</a></li>
-          <li><a class="dropdown-item btn btn-sm btn-success text-white" role="button" modal="complete">Menyelesaikan</a></li>
+          <li><a class="dropdown-item btn btn-sm btn-success text-white" role="button" modal="complete">Menyelesaikan</a>
+          </li>
         </ul>
       </div>
 
@@ -136,6 +137,20 @@
     </div>
   </div>
   <!-- Bootstrap Table with Header - Light -->
+
+  <div class="d-none">
+    <div datatables-topEnd>
+      <div class="d-flex">
+        <div class="input-group">
+          <input class="form-control mt-3" id="date-before" type="date" placeholder="Tanggal Awal" required />
+        </div>
+        <div class="ms-1 me-1"></div>
+        <div class="input-group">
+          <input class="form-control mt-3 me-3" id="date-after" type="date" placeholder="Tanggal Akhir" required />
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
 
 @push('scripts')
@@ -181,14 +196,20 @@
       options: {
         layout: {
           topStart: null,
-          topEnd: null,
+          topEnd: $('[datatables-topEnd]'),
           bottomStart: null,
         },
         order: [
           [5, 'asc']
-        ]
+        ],
+        ajax: {
+          url: "{{ route('yajra.withdrawal') }}",
+          data: function(d) {
+            d.dateBefore = $('#date-before').val();
+            d.dateAfter = $('#date-after').val();
+          }
+        }
       },
-      ajax: "{{ route('yajra.withdrawal') }}",
       columns: [{
           data: 'created_at',
           render: (data, type, row) => dateTimeFormat.format(new Date(data))
@@ -247,6 +268,16 @@
       const $form = $this.find("form");
       $form.attr("action", $form.attr('action').replace(":id:", id));
       $this.modal('show');
+    });
+    let searchTimeout;
+
+    $('#date-before, #date-after').on('change', function() {
+      const dateBefore = $('#date-before').val();
+      const dateAfter = $('#date-after').val();
+
+      if (dateBefore && dateAfter) {
+        table.draw();
+      }
     });
   </script>
 @endpush

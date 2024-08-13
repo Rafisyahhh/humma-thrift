@@ -52,6 +52,7 @@ class AdminController extends Controller {
 
         $user = Auth::user();
         $currentDate = now();
+        $driver = DB::getDriverName();
 
         // Gunakan eager loading untuk mengurangi jumlah query
         $transactionsQuery = $this->_transactions->with(['order.product.userstore'])
@@ -104,14 +105,20 @@ class AdminController extends Controller {
             return $currentDate->format('Y-') . str_pad($month, 2, '0', STR_PAD_LEFT);
         })->toArray();
 
-        $monthlySales = $this->_transactions
+        $monthlySalesQuery = $this->_transactions
             ->where('status', 'PAID')
             ->where('delivery_status', 'selesai')
-            ->selectRaw('strftime("%m", created_at) as month, SUM(total) as total')
-            ->whereYear('created_at', $currentDate->year)
-            ->groupBy(\DB::raw('strftime("%m", created_at)'))
-            ->get()
-            ->keyBy('month');
+            ->whereYear('created_at', $currentDate->year);
+
+        if ($driver === 'sqlite') {
+            $monthlySalesQuery->selectRaw('strftime("%m", created_at) as month, SUM(total) as total')
+                ->groupBy(DB::raw('strftime("%m", created_at)'));
+        } elseif ($driver === 'mysql') {
+            $monthlySalesQuery->selectRaw('MONTH(created_at) as month, SUM(total) as total')
+                ->groupBy(DB::raw('MONTH(created_at)'));
+        }
+
+        $monthlySales = $monthlySalesQuery->get()->keyBy('month');
 
 
         $monthlyNetIncome = collect(range(1, 12))->map(function ($month) use ($monthlySales) {
