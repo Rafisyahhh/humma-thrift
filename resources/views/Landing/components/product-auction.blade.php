@@ -70,6 +70,12 @@
                                     Rp{{ number_format($item->bid_price_end, null, null, '.') }}</span>
                             </div>
                         @endif
+                    @else
+                    <div class="price">
+                        <span class="new-price">Rp{{ number_format($item->bid_price_start, null, null, '.') }}
+                            -
+                            Rp{{ number_format($item->bid_price_end, null, null, '.') }}</span>
+                    </div>
                     @endif
                 </div>
             </div>
