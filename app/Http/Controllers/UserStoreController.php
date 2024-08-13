@@ -21,23 +21,20 @@ use DateTime;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class UserStoreController extends Controller
-{
+class UserStoreController extends Controller {
     private TransactionOrder $_transactions;
     private Withdrawal $_withdrawal;
 
-    public function __construct(TransactionOrder $transactions, Withdrawal $withdrawal)
-    {
+    public function __construct(TransactionOrder $transactions, Withdrawal $withdrawal) {
         $this->_transactions = $transactions;
         $this->_withdrawal = $withdrawal;
     }
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
-    {
-        $countnewOrder = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status','selesaikan pembayaran')->count();
-        $countendOrder = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status','selesai')->count();
+    public function index(Request $request) {
+        $countnewOrder = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status', 'selesaikan pembayaran')->count();
+        $countendOrder = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status', 'selesai')->count();
         $countProduct = Product::where('user_id', auth()->id())->count() +
             ProductAuction::where('user_id', auth()->id())->count();
         $store = UserStore::all();
@@ -129,9 +126,9 @@ class UserStoreController extends Controller
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
-            ->selectRaw('MONTH(created_at) as month, SUM(total) * 0.9 as total') // 0.9 is equivalent to 90% after deducting 10%
+            ->selectRaw('strftime("%m", created_at) as month, SUM(total) as total')
             ->whereYear('created_at', $currentDate->year)
-            ->groupBy(\DB::raw('MONTH(created_at)'))
+            ->groupBy(\DB::raw('strftime("%m", created_at)'))
             ->get()
             ->keyBy('month');
 
@@ -143,38 +140,35 @@ class UserStoreController extends Controller
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
-            ->selectRaw('MONTH(created_at) as month, SUM(total) as total') // 0.9 is equivalent to 90% after deducting 10%
+            ->selectRaw('strftime("%m", created_at) as month, SUM(total) as total')
             ->whereYear('created_at', $currentDate->year)
-            ->groupBy(\DB::raw('MONTH(created_at)'))
+            ->groupBy(\DB::raw('strftime("%m", created_at)'))
             ->get()
             ->keyBy('month');
 
         $monthlyGrossData = collect(range(1, 12))->map(fn($month) => $monthlyGross->get($month)->total ?? 0)->toArray();
 
-        return view('seller.index', compact('transactions', 'transactionTotal', 'netIncome', 'dailySales','dailyGross', 'months', 'monthlySalesData','monthlyGrossData', 'accountBalance','countnewOrder','countendOrder','countProduct','address', 'store', 'user', 'count'));
+        return view('seller.index', compact('transactions', 'transactionTotal', 'netIncome', 'dailySales', 'dailyGross', 'months', 'monthlySalesData', 'monthlyGrossData', 'accountBalance', 'countnewOrder', 'countendOrder', 'countProduct', 'address', 'store', 'user', 'count'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUserStoreRequest $request)
-    {
+    public function store(StoreUserStoreRequest $request) {
         //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(UserStore $userStore)
-    {
+    public function show(UserStore $userStore) {
         $store = UserStore::where('user_id', auth()->user()->id)->first();
         return view('seller.profil', compact('store'));
     }
@@ -182,23 +176,21 @@ class UserStoreController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UserStore $userStore)
-    {
+    public function edit(UserStore $userStore) {
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserStoreRequest $request, UserStore $id)
-    {
+    public function update(UpdateUserStoreRequest $request, UserStore $id) {
         // dd($request->all());
-        if(isset($request->gif)) {
-            $id->update(['cuti'=>!$id->cuti]);
-            if($request->cuti){
-                return redirect()->back()->with("warning","Anda memasuki masa Cuti");
-            }else{
-                return redirect()->back()->with("success","Anda tidak dalam masa Cuti");
+        if (isset($request->gif)) {
+            $id->update(['cuti' => !$id->cuti]);
+            if ($request->cuti) {
+                return redirect()->back()->with("warning", "Anda memasuki masa Cuti");
+            } else {
+                return redirect()->back()->with("success", "Anda tidak dalam masa Cuti");
 
             }
 
@@ -240,12 +232,11 @@ class UserStoreController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserStore $userStore)
-    {
+    public function destroy(UserStore $userStore) {
         //
     }
 
-    public function cuti(UserStore $userStore){
+    public function cuti(UserStore $userStore) {
 
         $userStore->update(['status' => !$userStore->status]);
 
