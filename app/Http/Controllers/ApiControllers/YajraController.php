@@ -128,8 +128,7 @@ class YajraController extends Controller {
                 return "<div class='d-flex gap-3 align-items-center'>
                     <img src='" . ($image ? asset("storage/$image") : $firstOrder->product_id) . "' height='80px' loading='lazy' class='rounded-3'/>
                     <div class='d-flex flex-column gap-1'>
-                        <p class='paragraph fw-bold'>$productTitle</p>
-                        <span class='text-muted'>" . Carbon::parse($transaction->created_at)->locale('id')->isoFormat('D MMMM YYYY') . "</span>
+                        <p class='paragraph mt-3 fw-bold'>$productTitle</p>
                     </div>
                 </div>";
             })->addColumn('type', function (TransactionOrder $transaction) use ($orders) {
