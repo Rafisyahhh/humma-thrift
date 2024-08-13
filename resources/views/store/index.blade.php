@@ -180,6 +180,17 @@
             background-size: 78% !important;
         }
 
+        .star-rating {
+            pointer-events: auto;
+            background-color: inherit;
+            color: inherit;
+            cursor: default;
+            background-color: inherit;
+            color: inherit;
+        }
+
+
+
         .badge {
             font-size: 15px;
             /* Ubah ukuran teks */
@@ -566,14 +577,6 @@
                                         produknya. Tapi dalam
                                         waktu dekat kami akan menambahkan beberapa produk untukmu, stay tune.</p>
                                 </div>
-
-                                {{-- <div class="col-lg-12">
-                                    <h3 class="text-center">Produk Lelang Masih Kosong</h3>
-                                    <p class="text-center">Maaf ya, kami masih belum menambahkan produknya. Tapi dalam
-                                        waktu dekat kami
-                                        akan
-                                        menambahkan beberapa produk untukmu, stay tune.</p>
-                                </div> --}}
                             @endforelse
                         </div>
                     </div>
@@ -588,7 +591,7 @@
                                     <div class="swiper about-swiper p-0">
                                         <div class="swiper-wrapper d-flex flex-row">
                                             @forelse ($reviews as $item)
-                                                <div class="swiper-slide testimonial-wrapper">
+                                            <div class="testimonial-wrapper border px-4">
                                                     <div class="blockquote w-100">
                                                         <span class="d-flex flex-row position-relative">
                                                             <svg width="38" height="30" viewBox="0 0 38 30"
@@ -601,22 +604,6 @@
                                                                     fill="#f6f6f6" />
                                                             </svg>
                                                         </span>
-                                                        {{-- STORE --}}
-                                                        {{-- <div class="mt-2 position-absolute" style="top:0; right: 45px;">
-                                                            <tr class="table-row ticket-row store-header"
-                                                                style="border: 1px solid #e6d5d593; background-color: #ffffff; width:100%;">
-                                                                <td class="table-wrapper wrapper-product"
-                                                                    style="display: flex; align-items: center;">
-                                                                    <div class="form-check"
-                                                                        style="display: flex; align-items: center; margin-left: 1rem;">
-                                                                        <i class="fa-solid fa-store"
-                                                                            style="margin-left: -3rem; color: #215791; font-size: 1.75rem;"></i>
-                                                                        <a href="{{ route('store.profile', ['store' => $item->product->userStore->username]) }}"
-                                                                            style="font-weight: bold; margin-left: 1rem; font-size: 1.55rem; color: gray;">{{ $item->product->userStore->name }}</a>
-                                                                    </div>
-                                                                </td><br>
-                                                            </tr>
-                                                        </div> --}}
                                                     </div>
                                                     <div style="width: 30rem; margin-bottom: 30px; ">
                                                         <img src="{{ asset("storage/{$item->product->thumbnail}") }}"
@@ -629,7 +616,7 @@
                                                     <p class="testimonial-details">{{ $item->comment }}
                                                     </p>
                                                     <div class="ratings d-flex gap-2 align-items-center">
-                                                        <select class="star-rating" name="product_rating"
+                                                        <select class="star-rating" disabled name="product_rating"
                                                             data-options="{&quot;clearable&quot;:false, &quot;tooltip&quot;:false}">
                                                             @foreach (['1', '2', '3', '4', '5'] as $rating)
                                                                 <option value="{{ $rating }}"
