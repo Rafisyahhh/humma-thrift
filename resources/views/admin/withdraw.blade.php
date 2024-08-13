@@ -56,10 +56,10 @@
 
     <div id="components" class="d-none">
 
-      <button class="btn btn-sm btn-info" pendingButton>Pending</button>
-      <button class="btn btn-sm btn-warning" processedButton>Processed</button>
-      <button class="btn btn-sm btn-success" completeButton>Complete</button>
-      <button class="btn btn-sm btn-danger" failedButton>Failed</button>
+      <button class="btn btn-sm btn-info" pendingButton>Tertunda</button>
+      <button class="btn btn-sm btn-warning" processedButton>Diproses</button>
+      <button class="btn btn-sm btn-success" completeButton>Menyelesaikan</button>
+      <button class="btn btn-sm btn-danger" failedButton>Gagal</button>
 
       <div class="dropdown dropstart" statusDropdown>
         <button type="button" class="badge bg-label-dark me-1 border-0 editStatus" style="background: none;"
@@ -72,7 +72,7 @@
             @method('PUT')
             <input class="d-none" value="" name="status" />
             <li><a class="dropdown-item btn btn-sm btn-warning text-white" role="button"
-                onclick="submitForm(this, 'processed')">Process</a></li>
+                onclick="submitForm(this, 'processed')">Proses</a></li>
           </form>
         </ul>
       </div>
@@ -82,8 +82,8 @@
           <i class="ti ti-dots-vertical"></i>
         </button>
         <ul class="dropdown-menu p-0">
-          <li><a class="dropdown-item btn btn-sm btn-danger text-white" role="button" modal="failed">Failed</a></li>
-          <li><a class="dropdown-item btn btn-sm btn-success text-white" role="button" modal="complete">Complete</a></li>
+          <li><a class="dropdown-item btn btn-sm btn-danger text-white" role="button" modal="failed">Gagal</a></li>
+          <li><a class="dropdown-item btn btn-sm btn-success text-white" role="button" modal="complete">Menyelesaikan</a></li>
         </ul>
       </div>
 

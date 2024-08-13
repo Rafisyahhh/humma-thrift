@@ -112,7 +112,7 @@
       </table>
     </div>
   </div>
-  @foreach ($product_auctions as $item)
+  {{-- @foreach ($product_auctions as $item)
     <div class="modal fade" id="detailLelangModal{{ $item->id }}" tabindex="-1"
       aria-labelledby="detailModalLabel{{ $item->id }}" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -188,7 +188,7 @@
         </div>
       </div>
     </div>
-  @endforeach
+  @endforeach --}}
   <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -460,12 +460,23 @@
         categories: typeof data.categories === "object" ? data.categories.map(cat => cat.title).join(', ') : data
           .categories,
         brand: typeof data.brand === "object" ? data.brand.title : data.brand
+
       };
 
       modal.find("#detail_image").attr("src", "{{ asset('storage/') }}/" + editedData.thumbnail);
 
       modal.find("[data-row]").each(function() {
+        const status = {
+            active: ["Aktif", "green"],
+            inactive: ["Tidak Aktif", "red"],
+            sold: ["Terjual", "blue"]
+        }
+        if ($(this).data("row") == "status") {
+            $(this).css('color', status[editedData[$(this).data("row")]][1] ?? "red");
+            $(this).text(status[editedData[$(this).data("row")]][0]);
+        } else {
         $(this).text(editedData[$(this).data("row")]);
+        }
       });
 
       modal.modal("show");
