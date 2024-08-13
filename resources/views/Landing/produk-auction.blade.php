@@ -72,7 +72,9 @@
       </div>
     </div>
   </section>
-  @include('Landing.components.product-auction')
+  <div class="d-none">
+    @include('Landing.components.product-auction')
+  </div>
 @endsection
 
 @section('script')

@@ -294,7 +294,8 @@ class LandingpageController extends Controller {
                 }
                 if (isset($request->price)) {
                     $priceRange = explode('-', $request->price);
-                    $productAuctionResults = $productAuctionResults->whereBetween('price', [$priceRange[0], $priceRange[1]]);
+                    $productAuctionResults = $productAuctionResults->where('bid_price_start', '>=', $priceRange[0]);
+                    $productAuctionResults = $productAuctionResults->where('bid_price_end', '<=', $priceRange[1]);
                 }
                 if (isset($request->sortBy)) {
                     $sortBy = $request->sortBy == 'asc' ? 'asc' : 'desc';
