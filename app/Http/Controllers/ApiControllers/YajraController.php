@@ -106,7 +106,15 @@ class YajraController extends Controller {
     }
     public function transactions(Request $request) {
         if ($request->ajax() || ($request->isJson() || $request->wantsJson())) {
-            $transaction = TransactionOrder::with(['user', 'userstore'])->latest()->get();
+            $dateBefore = $request->input('dateBefore');
+            $dateAfter = $request->input('dateAfter');
+            $query = TransactionOrder::with(['user', 'userstore']);
+
+            if ($dateBefore && $dateAfter) {
+                $query->whereBetween('created_at', [$dateBefore, $dateAfter . ' 23:59:59']);
+            }
+
+            $transaction = $query->latest()->get();
             $orders = Order::with('product')
                 ->orderBy('transaction_order_id')
                 ->get()
@@ -188,7 +196,7 @@ class YajraController extends Controller {
             $query = Withdrawal::with(['user', 'store', 'bank']);
 
             if ($dateBefore && $dateAfter) {
-                $query->whereBetween('created_at', [$dateBefore, $dateAfter]);
+                $query->whereBetween('created_at', [$dateBefore, $dateAfter . ' 23:59:59']);
             }
 
             $data = $query->latest()->get();

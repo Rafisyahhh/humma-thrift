@@ -269,8 +269,6 @@
       $form.attr("action", $form.attr('action').replace(":id:", id));
       $this.modal('show');
     });
-    let searchTimeout;
-
     $('#date-before, #date-after').on('change', function() {
       const dateBefore = $('#date-before').val();
       const dateAfter = $('#date-after').val();
