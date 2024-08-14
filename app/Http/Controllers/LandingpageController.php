@@ -145,7 +145,7 @@ class LandingpageController extends Controller {
             if ($products->currentPage() > $products->lastPage()) {
                 return response()->json(['lastPage' => true]);
             }
-            return response()->json($products);
+            return view('Landing.components.product-regular', compact('products'))->render();
         }
 
         $products = $products->paginate(24);

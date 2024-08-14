@@ -4,22 +4,26 @@
       <div class="product-img">
         <img src="{{ asset("storage/$item->thumbnail") }}" alt="product-img" class="object-fit-cover">
         <div class="product-cart-items">
-          <form action="{{ route('storesproduct', $item->id) }}" method="POST" onsubmit="ajaxSubmit(event, this)">
-            @csrf
-            <button class="favourite cart-item">
-              <span>
-                <i class="fas fa-heart"></i>
-              </span>
-            </button>
-          </form>
-          <form action="{{ route('storecart', $item->id) }}" method="POST" onsubmit="ajaxSubmit(event, this)">
-            @csrf
-            <button class="favourite cart-item">
-              <span>
-                <i class="fas fa-shopping-cart" style="font-size: 18px;"></i>
-              </span>
-            </button>
-          </form>
+          @auth
+            @role('user')
+              <form action="{{ route('storesproduct', $item->id) }}" method="POST" onsubmit="ajaxSubmit(event, this)">
+                @csrf
+                <button class="favourite cart-item">
+                  <span>
+                    <i class="fas fa-heart"></i>
+                  </span>
+                </button>
+              </form>
+              <form action="{{ route('storecart', $item->id) }}" method="POST" onsubmit="ajaxSubmit(event, this)">
+                @csrf
+                <button class="favourite cart-item">
+                  <span>
+                    <i class="fas fa-shopping-cart" style="font-size: 18px;"></i>
+                  </span>
+                </button>
+              </form>
+            @endrole
+          @endauth
           <a data-id="{{ $item->id }}" class="compaire item-cart openModal"
             onclick="openModal2('#shareModal-{{ $item->id }}')">
             <span>
