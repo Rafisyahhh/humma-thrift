@@ -126,14 +126,28 @@ class AdminIncomeController extends Controller {
             return $currentDate->format('Y-') . str_pad($month, 2, '0', STR_PAD_LEFT);
         })->toArray();
 
-        $monthlySales = $this->_transactions
+        $driver = \DB::getDriverName();
+
+        $monthlySalesQuery = $this->_transactions
             ->where('status', 'PAID')
             ->where('delivery_status', 'selesai')
-            ->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
-            ->whereYear('created_at', $currentDate->year)
-            ->groupBy(\DB::raw('MONTH(created_at)'))
-            ->get()
-            ->keyBy('month');
+            // ->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
+            // ->whereYear('created_at', $currentDate->year)
+            // ->groupBy(\DB::raw('MONTH(created_at)'))
+            // ->get()
+            // ->keyBy('month');
+
+            ->whereYear('created_at', $currentDate->year);
+
+            if ($driver === 'sqlite') {
+                $monthlySalesQuery->selectRaw('strftime("%m", created_at) as month, SUM(total_harga) as total')
+                    ->groupBy(\DB::raw('strftime("%m", created_at)'));
+            } elseif ($driver === 'mysql') {
+                $monthlySalesQuery->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
+                    ->groupBy(\DB::raw('MONTH(created_at)'));
+            }
+
+            $monthlySales = $monthlySalesQuery->get()->keyBy('month');
 
         $monthlyChartR = $orderR->groupBy(function ($order) {
             return $order->first()->created_at->format('Y-m');

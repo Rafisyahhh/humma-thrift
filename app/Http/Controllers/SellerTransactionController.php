@@ -179,18 +179,30 @@ class SellerTransactionController extends Controller
 
         $months = collect(range(1, 12))->map(fn($month) => $currentDate->format('Y-') . str_pad($month, 2, '0', STR_PAD_LEFT))->toArray();
 
-        $monthlySales = $this->_transactions
+        $driver = \DB::getDriverName();
+
+        $monthlySalesQuery = $this->_transactions
             ->where('status', 'PAID')
             ->where('delivery_status', 'selesai')
-            ->whereHas('order.product', function ($query) use ($userStoreId) {
-                $query->where('store_id', $userStoreId);
-            })
-            ->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
-            ->whereYear('created_at', $currentDate->year)
-            ->groupBy(\DB::raw('MONTH(created_at)'))
-            ->get()
-            ->keyBy('month');
+            // ->whereHas('order.product', function ($query) use ($userStoreId) {
+            //     $query->where('store_id', $userStoreId);
+            // })
+            // ->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
+            // ->whereYear('created_at', $currentDate->year)
+            // ->groupBy(\DB::raw('MONTH(created_at)'))
+            // ->get()
+            // ->keyBy('month');
+            ->whereYear('created_at', $currentDate->year);
 
+            if ($driver === 'sqlite') {
+                $monthlySalesQuery->selectRaw('strftime("%m", created_at) as month, SUM(total_harga) as total')
+                    ->groupBy(\DB::raw('strftime("%m", created_at)'));
+            } elseif ($driver === 'mysql') {
+                $monthlySalesQuery->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
+                    ->groupBy(\DB::raw('MONTH(created_at)'));
+            }
+
+            $monthlySales = $monthlySalesQuery->get()->keyBy('month');
 
         $monthlySalesData = collect(range(1, 12))->map(function ($month) use ($monthlySales, $monthlyChartR, $monthlyChartL, $currentDate) {
             $monthKey = $currentDate->format('Y-') . str_pad($month, 2, '0', STR_PAD_LEFT);
@@ -202,17 +214,28 @@ class SellerTransactionController extends Controller
 
 
         // Calculate monthly gross
-        $monthlyGross = $this->_transactions
+        $monthlyGrossQuery = $this->_transactions
             ->where('status', 'PAID')
             ->where('delivery_status', 'selesai')
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
-            ->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
-            ->whereYear('created_at', $currentDate->year)
-            ->groupBy(\DB::raw('MONTH(created_at)'))
-            ->get()
-            ->keyBy('month');
+            // ->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
+            // ->whereYear('created_at', $currentDate->year)
+            // ->groupBy(\DB::raw('MONTH(created_at)'))
+            // ->get()
+            // ->keyBy('month');
+            ->whereYear('created_at', $currentDate->year);
+
+            if ($driver === 'sqlite') {
+                $monthlyGrossQuery->selectRaw('strftime("%m", created_at) as month, SUM(total_harga) as total')
+                    ->groupBy(\DB::raw('strftime("%m", created_at)'));
+            } elseif ($driver === 'mysql') {
+                $monthlyGrossQuery->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
+                    ->groupBy(\DB::raw('MONTH(created_at)'));
+            }
+
+            $monthlyGross = $monthlyGrossQuery->get()->keyBy('month');
 
         $monthlyGrossData = collect(range(1, 12))->map(fn($month) => $monthlyGross->get($month)->total ?? 0)->toArray();
 
