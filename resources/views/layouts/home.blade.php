@@ -6,6 +6,7 @@
     <meta name="keywords"
       content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ asset('apple-touch-icon-57x57.png') }}" />
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('apple-touch-icon-114x114.png') }}" />
@@ -60,7 +61,7 @@
 
     <script src="{{ asset('vendor/flasher/flasher.min.js') }}"></script>
 
-    {!!htmlScriptTagJsApi()!!}
+    {!! htmlScriptTagJsApi() !!}
 
     <style>
       .header-right-dropdown>div {
@@ -202,28 +203,35 @@
       //       $this.prop('disabled', false);
       //     }, 250);
       //   });
-      $("form[action*='product/storesproduct'], form[action*='product/storecart']").submit(function(e) {
-        e.preventDefault();
-        const form = $(this);
-        const product = form.closest('swiper-slide, [isProduct]');
-        product.addClass('submitLoading');
-        $.ajax({
-          url: form.attr('action'),
-          type: "POST",
-          cache: true,
-          success: function(response) {
-            product.removeClass('submitLoading');
-            if (response.error) {
-              flasher.error(response.error);
-              return false;
-            } else {
-              flasher.success(response.success);
-            }
-            window.globalVarProxy[response.type] = response.data;
-          }
+      @role('user')
+        $("form[action*='product/storesproduct'], form[action*='product/storecart']").submit(function(e) {
+          e.preventDefault();
+          const form = $(this);
+          const product = form.closest('swiper-slide, [isProduct]');
+          product.addClass('submitLoading');
+          $.ajax({
+            url: form.attr('action'),
+            type: "POST",
+            cache: true,
+            statusCode: {
+              403: function() {
+                flasher.error("Anda tidak memiliki hak akses.");
+              }
+            },
+            success: function(response) {
+              if (response.error) {
+                flasher.error(response.error);
+                return false;
+              } else {
+                flasher.success(response.success);
+              }
+              window.globalVarProxy[response.type] = response.data;
+            },
+            complete: () => product.removeClass('submitLoading')
+          });
+          return false;
         });
-        return false;
-      });
+      @endrole
     </script>
 
     <script src="{{ asset('additional-assets/toastr-2.1.4/toastr.min.js') }}"></script>

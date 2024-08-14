@@ -1,3 +1,40 @@
+<style>
+.footer-link ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-link ul li {
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.footer-link ul li a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  padding-bottom: 0.4rem;
+}
+
+.footer-link ul li a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: rgb(243, 243, 243);
+  transition: width 0.3s ease;
+}
+
+.footer-link ul li a:hover::after {
+  width: 100%;
+}
+
+</style>
+
 <section class="product footer" id="footer">
   <div class="container">
     <div class="footer-section">

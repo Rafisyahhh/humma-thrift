@@ -28,73 +28,74 @@
   </div>
 </div>
 
-@push('js')
-  <script>
-    const updatePartials = (() => {
-      const ajaxRequest = (url, target) => {
-        return $.ajax({
-          url: url,
-          cache: true,
-          success: function(response) {
-            window.globalVarProxy[target] = response;
-          },
-          error: function(xhr, status, error) {
-            console.error(`Error fetching ${url}: ${status} ${error}`);
+@role('user')
+  @push('js')
+    <script>
+      const updatePartials = (() => {
+        const ajaxRequest = (url, target) => {
+          return $.ajax({
+            url: url,
+            cache: true,
+            success: function(response) {
+              window.globalVarProxy[target] = response;
+            },
+            error: function(xhr, status, error) {
+              console.error(`Error fetching ${url}: ${status} ${error}`);
+            }
+          });
+        };
+
+        const routes = {
+          cart: "{{ route('header.cart') }}",
+          notification: "{{ route('header.notification') }}",
+          wishlist: "{{ route('header.wishlist') }}"
+        };
+
+        return {
+          wishlist: () => ajaxRequest(routes.wishlist, 'wishlist'),
+          cart: () => ajaxRequest(routes.cart, 'cart'),
+          // notification: () => ajaxRequest(routes.notification, '#notification-header'),
+          all: function() {
+            Promise.all([
+              this.wishlist(),
+              this.cart(),
+              // this.notification(),
+            ]).catch(error => console.error('Error updating partials:', error));
           }
-        });
-      };
+        };
+      })();
 
-      const routes = {
-        cart: "{{ route('header.cart') }}",
-        notification: "{{ route('header.notification') }}",
-        wishlist: "{{ route('header.wishlist') }}"
-      };
+      @auth
+      updatePartials.all();
 
-      return {
-        wishlist: () => ajaxRequest(routes.wishlist, 'wishlist'),
-        cart: () => ajaxRequest(routes.cart, 'cart'),
-        // notification: () => ajaxRequest(routes.notification, '#notification-header'),
-        all: function() {
-          Promise.all([
-            this.wishlist(),
-            this.cart(),
-            // this.notification(),
-          ]).catch(error => console.error('Error updating partials:', error));
+      // setInterval(() => {
+      //   updatePartials.notification();
+      // }, 60_000);
+      @endauth
+    </script>
+    <script>
+      window.wishlist = null;
+
+      window.globalVarProxy = new Proxy(window, {
+        set(target, property, value) {
+          if (property === 'wishlist' && value > 0) {
+            $('#favorite-wrapper .wishlist-count').removeClass('d-none');
+            $('#favorite-wrapper .wishlist-count').text(value);
+          }
+          if (property === 'cart' && value.length > 0) {
+            $('.header-cart .cart-count').removeClass('d-none');
+            $('.header-cart .cart-count').text(value.length);
+            $('.header-cart .cart-submenu #cart-wrapper').html(pushCartItem(value));
+          }
+          target[property] = value;
+          return true;
         }
-      };
-    })();
+      });
 
-    @auth
-    updatePartials.all();
-
-    // setInterval(() => {
-    //   updatePartials.notification();
-    // }, 60_000);
-    @endauth
-  </script>
-  <script>
-    window.wishlist = null;
-
-    window.globalVarProxy = new Proxy(window, {
-      set(target, property, value) {
-        if (property === 'wishlist' && value > 0) {
-          $('#favorite-wrapper .wishlist-count').removeClass('d-none');
-          $('#favorite-wrapper .wishlist-count').text(value);
-        }
-        if (property === 'cart' && value.length > 0) {
-          $('.header-cart .cart-count').removeClass('d-none');
-          $('.header-cart .cart-count').text(value.length);
-          $('.header-cart .cart-submenu #cart-wrapper').html(pushCartItem(value));
-        }
-        target[property] = value;
-        return true;
-      }
-    });
-
-    function pushCartItem(value) {
-      return value.map(({
-        product
-      }) => `
+      function pushCartItem(value) {
+        return value.map(({
+          product
+        }) => `
         <div class="wrapper">
           <div class="wrapper-item">
             <div class="wrapper-img" style="margin-right: 1rem;">
@@ -110,33 +111,34 @@
           </div>
         </div>
       `);
-    }
-  </script>
-  <script>
-    $(document).ready(function() {
-      var $filter = $('#navbar');
-      var stickyTop = $filter.offset().top;
+      }
+    </script>
+    <script>
+      $(document).ready(function() {
+        var $filter = $('#navbar');
+        var stickyTop = $filter.offset().top;
 
-      $(window).on('scroll', function() {
-        var filterWidth = $filter.width();
-        requestAnimationFrame(function() {
-          var windowTop = $(window).scrollTop();
+        $(window).on('scroll', function() {
+          var filterWidth = $filter.width();
+          requestAnimationFrame(function() {
+            var windowTop = $(window).scrollTop();
 
-          if (stickyTop < windowTop) {
-            $filter.css({
-              position: 'fixed',
-              top: '0',
-              width: filterWidth,
-            });
-          } else {
-            $filter.css({
-              position: 'relative',
-              top: '',
-              width: '',
-            });
-          }
+            if (stickyTop < windowTop) {
+              $filter.css({
+                position: 'fixed',
+                top: '0',
+                width: filterWidth,
+              });
+            } else {
+              $filter.css({
+                position: 'relative',
+                top: '',
+                width: '',
+              });
+            }
+          });
         });
       });
-    });
-  </script>
-@endpush
+    </script>
+  @endpush
+@endrole
