@@ -174,7 +174,7 @@
                           <td colspan="2"><span class="inner-text">{{ $item->description }}</span></td>
                         </tr>
                         <tr>
-                          <th>Status</th>
+                          <th>Statu</th>
                           <td><span class="inner-status" style="color: red">{{ $item->status }}</span></td>
                         </tr>
                       </table>
@@ -248,7 +248,14 @@
                       </tr>
                       <tr>
                         <th>Status</th>
-                        <td><span class="inner-status" style="color: red" data-row="status"></span>
+                        <td>
+                            <span class="inner-status" data-row="@if("status" === 'active') @endif">
+                                aktif
+                            </span>
+                            {{-- <span class="inner-status" data-row="status">
+                                {{ "status" === 'active' ? 'aktif' : "status" === 'inactive' ? 'tidak aktif' : "status" === 'sold' ? 'habis' }}
+                            </span> --}}
+
                         </td>
                       </tr>
                     </table>

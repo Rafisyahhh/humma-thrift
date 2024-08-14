@@ -84,6 +84,9 @@
   {{-- @if ($errors->any())
     {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif --}}
+  <div class="alert alert-warning" role="alert">
+    Keuntungan Anda adalah selisih antara Harga Jual dan Harga Beli, dikurangi 10% sebagai biaya admin.
+  </div>
   @if ($errors->has('user'))
     <div class="alert alert-danger" role="alert">
       Maaf, informasi anda kurang lengkap. Tolong isi semua informasi yang dibutuhkan di <a href="{{ route('home') }}"
@@ -178,39 +181,9 @@
                   <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                 @enderror
               </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="warna" class="form-label">Warna</label>
-              <input type="text" id="warna" name="color"
-                class="form-control @error('color') is-invalid @enderror" placeholder="Masukkan Warna"
-                value="{{ isset($is_edit) ? $product->color : old('color') }}">
-              @error('color')
-                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-              @enderror
-
-              <div class="form-group mt-4">
-                <label class="form-label" for="image-input">Galeri Produk</label>
-                <label class="ms-1 mt-1 row gy-4 pb-4 row-cols-1 row-cols-md-2 w-100" for="image-input" role="button"
-                  style="border: 1px solid #7ea3db66; border-radius: 1rem; min-height: 105px;" id="image-area">
-                  <div class="col w-100 h-100 text-center my-auto">
-                    <span class="text-center text-nowrap">Pilih gambar (max 4)</span>
-                  </div>
-                </label>
-                <input type="file" accept=".jpeg, .png, .jpg" name="image_galery[]"
-                  class="d-none @error('image_galery') is-invalid @enderror" id="image-input" multiple hidden>
-                @error('image_galery')
-                  <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                @enderror
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Product Type and Pricing -->
-        <div class="account-inner-form">
-          <div class="contact-section">
-            <div class="row">
-              <div class="col-lg-6">
+              <div class="account-inner-form mb-0 ">
+                <div class="contact-section">
+              {{-- <div class="col-lg-6"> --}}
                 <div class="contact-info-section">
                   <div class="contact-information">
                     <div class="contact-wrapper">
@@ -237,8 +210,44 @@
                     </div>
                   </div>
                 </div>
+              {{-- </div> --}}
               </div>
-              <div class="col-lg-6 mt-4" id="input-a" style="align-items: center; display: none;">
+              </div>
+
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="warna" class="form-label">Warna</label>
+              <input type="text" id="warna" name="color"
+                class="form-control @error('color') is-invalid @enderror" placeholder="Masukkan Warna"
+                value="{{ isset($is_edit) ? $product->color : old('color') }}">
+              @error('color')
+                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+              @enderror
+
+              <div class="form-group mt-4">
+                <label class="form-label" for="image-input">Galeri Produk</label>
+                <label class="ms-1 mt-1 row gy-4 pb-4 row-cols-1 row-cols-md-2 w-100" for="image-input" role="button"
+                  style="border: 1px solid #7ea3db66; border-radius: 1rem; min-height: 105px;" id="image-area">
+                  <div class="col w-100 h-100 text-center my-auto">
+                    <span class="text-center text-nowrap">Pilih gambar (max 4)</span>
+                  </div>
+                </label>
+                <input type="file" accept=".jpeg, .png, .jpg" name="image_galery[]"
+                  class="d-none @error('image_galery') is-invalid @enderror" id="image-input" multiple hidden>
+                @error('image_galery')
+                  <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                @enderror
+              </div>
+              <div class="mt-4">
+                <label for="start_price" class="form-label">Harga Awal</label>
+                <input type="number" id="start_price" name="start_price"
+                  class="form-control @error('start_price') is-invalid @enderror" placeholder="Masukkan Harga awal"
+                  value="{{ isset($is_edit) ? $product->start_price : old('start_price') }}">
+                @error('start_price')
+                  <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                @enderror
+              </div>
+              <div class="mt-4" id="input-a" style="align-items: center; display: none;">
                 <div class="form-group">
                   <label for="inputA">Harga</label>
                   <input type="number" id="inputA" class="form-control @error('price') is-invalid @enderror"
@@ -249,7 +258,81 @@
                   @enderror
                 </div>
               </div>
-              <div class="col-lg-6" id="input-b" style="align-items: center; display: none;">
+              <div id="input-b" style="align-items: center; display: none;">
+                <div class="row mt-4">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="inputB">Harga mulai dari</label>
+                      <input type="number" id="inputB" name="bid_price_start"
+                        class="form-control @error('bid_price_start') is-invalid @enderror" placeholder="Harga bid awal"
+                        value="{{ isset($is_edit) ? $product->bid_price_start : old('bid_price_start') }}">
+                      @error('bid_price_start')
+                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="col-lg-6" id="input-c" style="display: none;">
+                    <div class="form-group">
+                      <label for="inputC">Sampai dari</label>
+                      <input type="number" id="inputC" name="bid_price_end"
+                        class="form-control @error('bid_price_end') is-invalid @enderror" placeholder="Harga bid akhir"
+                        value="{{ isset($is_edit) ? $product->bid_price_end : old('bid_price_end') }}">
+                      @error('bid_price_end')
+                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                      @enderror
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Type and Pricing -->
+        <div class="account-inner-form">
+          <div class="contact-section">
+            <div class="row">
+              {{-- <div class="col-lg-6">
+                <div class="contact-info-section">
+                  <div class="contact-information">
+                    <div class="contact-wrapper">
+                      <div class="row gy-5">
+                        <div class="col-sm-6">
+                          <label class="card phone" onclick="selectCard('phone')" style="height: 80px" for="phone">
+                            <input type="radio" id="phone" name="product_type" class="radio-input d-none"
+                              value="products" {{ isset($product->bid_price_start) ? '' : 'checked' }}>
+                            <div class="wrapper-content">
+                              <p>Harga tetap</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="col-sm-6">
+                          <label class="card email" onclick="selectCard('email')" style="height: 80px" for="email">
+                            <input type="radio" id="email" name="product_type" class="radio-input d-none"
+                              value="product_auctions" {{ isset($product->bid_price_start) ? 'checked' : '' }}>
+                            <div class="wrapper-content">
+                              <p>Lelang</p>
+                            </div>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> --}}
+
+              {{-- <div class="col-lg-6 mt-4" id="input-a" style="align-items: center; display: none;">
+                <div class="form-group">
+                  <label for="inputA">Harga</label>
+                  <input type="number" id="inputA" class="form-control @error('price') is-invalid @enderror"
+                    name="price" placeholder="Masukkan harga"
+                    value="{{ isset($is_edit) ? $product->price : old('price') }}">
+                  @error('price')
+                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                  @enderror
+                </div>
+              </div> --}}
+              {{-- <div class="col-lg-6" id="input-b" style="align-items: center; display: none;">
                 <div class="row mt-4">
                   <div class="col-lg-6">
                     <div class="form-group">
@@ -274,7 +357,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> --}}
             </div>
           </div>
         </div>

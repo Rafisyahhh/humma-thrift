@@ -142,7 +142,7 @@
                             <div class="avatar me-2">
                                 <span class="avatar-initial rounded bg-label-primary"><i class="fas fa-coins"></i></span>
                             </div>
-                            <h4 class="ms-1 mb-0">@currency($netIncome)</h4>
+                            <h4 class="ms-1 mb-0">@currency($saldo)</h4>
                             <p class="ms-3 mb-0">Transaksi Bersih</p>
                         </div>
                     </div>

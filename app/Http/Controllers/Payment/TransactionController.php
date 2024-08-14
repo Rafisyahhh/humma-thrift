@@ -37,6 +37,10 @@ class TransactionController extends Controller
                 return back()->withErrors(['error' => 'ALAMAT WAJIB DIISI']);
             }
 
+            if (auth()->user()->phone === null){
+                return back()->withErrors(['error' => 'Data diri anda belum lengkap']);
+            }
+
             $tripay = new TripayController();
             $transaction = $tripay->requestTransaction($method, $product);
 
@@ -99,6 +103,10 @@ class TransactionController extends Controller
 
             if (!$address) {
                 return back()->withErrors(['error' => 'ALAMAT WAJIB DIISI']);
+            }
+
+            if (auth()->user()->phone === null){
+                return back()->withErrors(['error' => 'Data diri anda belum lengkap']);
             }
 
             $tripay = new TripayController();

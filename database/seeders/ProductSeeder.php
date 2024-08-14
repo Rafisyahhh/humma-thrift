@@ -126,6 +126,7 @@ class ProductSeeder extends Seeder {
                     "brand_id" => $data["brand_id"],
                     "title" => $data["title"],
                     "thumbnail" => $destinationPath,
+                    "start_price" => 5000,
                     "price" => $this->random_int_with_fixed_suffix(10_000, 1_500_000),
                     "size" => "XL",
                     "color" => $data["warna"],
@@ -134,7 +135,7 @@ class ProductSeeder extends Seeder {
             }
         }
     }
-    
+
     function random_int_with_fixed_suffix($min, $max, $suffix = 0) {
         $min_adjusted = (int) ($min / 1000);
         $max_adjusted = (int) ($max / 1000);
