@@ -21,7 +21,7 @@
         }
 
         .table-header {
-            background-color: #1c3879 ;
+            background-color: #1c3879;
             color: #fff;
             font-weight: bold;
             border-radius: .5rem;
@@ -95,6 +95,55 @@
             line-height: 1.5;
         }
     </style>
+    <style>
+        #trx-section {
+            margin-top: 2rem;
+        }
+
+        #trx-section .heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        #trx-section .form-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        #trx-section .form-group .form-control {
+            font-size: 14px !important;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ced4da;
+        }
+
+        #trx-section .form-group .form-select {
+            font-size: 14px !important;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ced4da;
+        }
+
+        #trx-section .form-group .btn {
+            padding: 0.5rem 1rem;
+            font-size: 14px !important;
+            border-radius: .25rem !important;
+            border: none;
+        }
+
+        #trx-section .form-group .btn-primary {
+            background-color: #1c3879;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #trx-section .form-group .btn-primary:hover {
+            background-color: #1c3879;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -103,52 +152,33 @@
             <h5 class="mb-0">Penarikan Dana</h5>
             <a href="{{ route('seller.withdraw.create') }}" class="shop-btn float-left mb-4" style="color: white;">Ajukan</a>
         </div>
-    </section>
-
-    <div class="table-view">
-        <div class="table-header">
-            <div class="table-item">#</div>
-            <div class="table-item">Tanggal Diajukan</div>
-            <div class="table-item">Nominal</div>
-            <div class="table-item">Status</div>
-            <div class="table-item">Aksi</div>
-        </div>
-
-        @forelse ($withdrawals as $withdrawal)
-            <div class="table-body">
-                <a href="{{ route('seller.withdraw.detail', $withdrawal->transaction_id) }}">
-                    <div class="table-item flex-column d-flex">
-                        <strong>{{ $withdrawal->transaction_id }}</strong>
-                        <span class="text-muted">@currency($withdrawal->amount)</span>
-                    </div>
-                </a>
-                    <div class="table-item">{{ $withdrawal->created_at->locale('id')->isoFormat('D MMMM YYYY') }}</div>
-                    <div class="table-item">@currency($withdrawal->amount)</div>
-                    <div class="table-item">
-                        <span class="badge bg-{{ $withdrawal->status->color() }}">{{ $withdrawal->status->label() }}</span>
-                    </div>
-                <div class="table-item">
-                    @if ($withdrawal->status->value == 'complete')
-                        <a role="button" class="btn btn-primary withdrawal-btn" data-bs-toggle="modal"
-                            data-bs-target="#detailAlasan{{ $withdrawal->id }}">Lihat Bukti</a>
-                    @elseif ($withdrawal->status->value == 'failed')
-                        <a role="button" class="btn btn-primary withdrawal-btn" data-bs-toggle="modal"
-                            data-bs-target="#detailAlasan{{ $withdrawal->id }}">Lihat Alasan</a>
-                    @else
-                        <strong> - </strong>
-                    @endif
+        <div id="trx-section">
+            <form action="{{ url()->current() }}" class="form-group">
+                <div class="filter">
+                    <select id="status" name="status" class="form-select form-select-lg"
+                        aria-label="Default select example" style="width: 200px;">
+                        <option value="" {{ request('status') == '' ? 'selected' : '' }}>Semua</option>
+                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Menunggu Antrean
+                        </option>
+                        <option value="processed" {{ request('status') == 'processed' ? 'selected' : '' }}>Diproses</option>
+                        <option value="complete" {{ request('status') == 'complete' ? 'selected' : '' }}>Selesai</option>
+                        <option value="failed" {{ request('status') == 'failed' ? 'selected' : '' }}>Gagal
+                        </option>
+                    </select>
                 </div>
-            </div>
-        @empty
-            <div class="table-item d-flex flex-column justify-content-center align-items-center w-100" style="text-align: center;font-size: 14px;">
-                <img src="{{ asset('asset-thrift/datakosong.png') }}"
-                alt="kosong" style="width: 200px; height: 200px;">
-                <p>Tidak ada data</p>
-            </div>
-        @endforelse
-
-        {{ $withdrawals->links() }}
+                <input type="date" id="date-range" class="form-control" name="date"
+                    value="{{ old('date', request()->get('date')) }}" style="font-size: 1rem" />
+                <input type="text" id="trx-id" name="trx" class="form-control"
+                    value="{{ old('trx', request()->get('trx')) }}" placeholder="Misal: WTH-00001"
+                    style="font-size: 1rem" />
+                <button class="btn btn-primary" type="submit">Cari</button>
+            </form>
+        </div>
+    </section>
+    <div id="withdrawal">
+        @include('seller.filterwithdrawal', ['withdrawals' => $withdrawals])
     </div>
+
     @foreach ($withdrawals as $item)
         <div class="modal fade" id="detailAlasan{{ $item->id }}" tabindex="-1"
             aria-labelledby="detailModalLabel{{ $item->id }}" aria-hidden="true" style="height: 99%;">
@@ -178,5 +208,60 @@
         </div>
     @endforeach
 
-
 @endsection
+@push('script')
+    <script>
+        async function applyFilter(status, search = '', date = '', e = null) {
+            if (e !== null) e.preventDefault();
+
+            try {
+                const url = new URL('{{ route('seller.withdraw.index') }}');
+                url.searchParams.append('status', status);
+                url.searchParams.append('trx', search);
+                url.searchParams.append('date', date);
+
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                const data = await response.json();
+
+                $('#withdrawal').html(data.withdrawalHTML ||
+                    '<tr><td colspan="5" class="text-center no-data-message"><img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 200px; height: 200px;"><p>Tidak ada data</p></td></tr>'
+                    );
+            } catch (error) {
+                alert('Terjadi kesalahan saat memfilter konten.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusElement = document.querySelector('select[name="status"]');
+            const searchElement = document.querySelector('input[name="trx"]');
+            const dateElement = document.querySelector('input[name="date"]');
+
+            // Fetch initial data based on current parameters
+            const initialStatus = statusElement ? statusElement.value : '';
+            const initialSearch = searchElement ? searchElement.value : '';
+            const initialDate = dateElement ? dateElement.value : '';
+            applyFilter(initialStatus, initialSearch, initialDate);
+
+            // Add event listeners
+            statusElement.addEventListener('change', function() {
+                applyFilter(this.value, searchElement.value, dateElement.value);
+            });
+
+            searchElement.addEventListener('input', function() {
+                applyFilter(statusElement.value, this.value, dateElement.value);
+            });
+
+            dateElement.addEventListener('input', function() {
+                applyFilter(statusElement.value, searchElement.value, this.value);
+            });
+        });
+    </script>
+@endpush
