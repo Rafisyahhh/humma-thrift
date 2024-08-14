@@ -566,6 +566,15 @@
       $(this).dropdown('toggle');
     });
 
+    function formatDate(value) {
+      const date = new Date(value);
+      const formattedDate = date.toLocaleDateString('id-ID', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+      return formattedDate;
+    }
 
     let searchTimeout;
 
