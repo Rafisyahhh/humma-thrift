@@ -47,7 +47,7 @@ class Handler extends ExceptionHandler {
     public function render($request, Throwable $exception) {
         if ($exception instanceof \Illuminate\Auth\Access\AuthorizationException) {
             if ($request->ajax() || $request->wantsJson()) {
-                return response()->json(['message' => 'Akses ditolak.'], 403);
+                return response()->view('errors.403', [], 403);
             }
         }
 
