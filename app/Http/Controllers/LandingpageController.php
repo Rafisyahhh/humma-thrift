@@ -73,9 +73,9 @@ class LandingpageController extends Controller {
         if ($request->ajax()) {
             if (isset($request->filter)) {
                 if ($request->filter == 'newest') {
-                    $product_favorite = $product_favorite->orderBy('created_at');
-                } elseif ($request->filter == 'oldest') {
                     $product_favorite = $product_favorite->orderByDesc('created_at');
+                } elseif ($request->filter == 'oldest') {
+                    $product_favorite = $product_favorite->orderBy('created_at');
                 }
             }
             $product_favorite = $product_favorite->paginate(24);

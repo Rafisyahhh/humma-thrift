@@ -53,13 +53,21 @@
           </div>
         </div>
       </div>
-      <form action="{{ route('user.checkout.process') }}" method="post">
-        @csrf
+      @auth
+        @role('user')
+          <form action="{{ route('user.checkout.process') }}" method="post">
+            @csrf
+          @endrole
+        @endauth
         <div class="product-cart-btn" style="bottom:0;">
           <input type="hidden" value="{{ $item->id }}" name="product_id[]">
           <button type="submit" class="product-btn">Beli sekarang</button>
         </div>
-      </form>
+        @auth
+          @role('user')
+          </form>
+        @endrole
+      @endauth
       <div id="shareModal-{{ $item->id }}" class="modal" style="display: none;">
         <div class="modal-content">
           <button class="close" style="float: right; text-align: end;"
