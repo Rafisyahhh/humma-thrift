@@ -28,8 +28,8 @@
   </div>
 </div>
 
-@role('user')
-  @push('js')
+@push('js')
+  @role('user')
     <script>
       const updatePartials = (() => {
         const ajaxRequest = (url, target) => {
@@ -113,32 +113,33 @@
       `);
       }
     </script>
-    <script>
-      $(document).ready(function() {
-        var $filter = $('#navbar');
-        var stickyTop = $filter.offset().top;
+  @endrole
 
-        $(window).on('scroll', function() {
-          var filterWidth = $filter.width();
-          requestAnimationFrame(function() {
-            var windowTop = $(window).scrollTop();
+  <script>
+    $(document).ready(function() {
+      var $filter = $('#navbar');
+      var stickyTop = $filter.offset().top;
 
-            if (stickyTop < windowTop) {
-              $filter.css({
-                position: 'fixed',
-                top: '0',
-                width: filterWidth,
-              });
-            } else {
-              $filter.css({
-                position: 'relative',
-                top: '',
-                width: '',
-              });
-            }
-          });
+      $(window).on('scroll', function() {
+        var filterWidth = $filter.width();
+        requestAnimationFrame(function() {
+          var windowTop = $(window).scrollTop();
+
+          if (stickyTop < windowTop) {
+            $filter.css({
+              position: 'fixed',
+              top: '0',
+              width: filterWidth,
+            });
+          } else {
+            $filter.css({
+              position: 'relative',
+              top: '',
+              width: '',
+            });
+          }
         });
       });
-    </script>
-  @endpush
-@endrole
+    });
+  </script>
+@endpush

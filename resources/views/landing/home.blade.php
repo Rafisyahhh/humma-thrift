@@ -171,7 +171,7 @@
       /* margin: 0 5px 5px; */
       background-color: #ffffff73;
       /* margin-left:1px !important;
-                                                                                                                                            margin-right: 1px !important; */
+                                                                                                                                              margin-right: 1px !important; */
       /* Tambahkan margin jika perlu */
     }
 
@@ -392,18 +392,18 @@
                                 </span>
                               </button>
                             </form>
-                          @else
-                            <a href="{{ route('login') }}" class="favourite cart-item">
-                              <span>
-                                <i class="fas fa-heart"></i>
-                              </span>
-                            </a>
-                            <a href="{{ route('login') }}" class="favourite cart-item">
-                              <span>
-                                <i class="fas fa-shopping-cart"></i>
-                              </span>
-                            </a>
                           @endrole
+                        @else
+                          <a href="{{ route('login') }}" class="favourite cart-item">
+                            <span>
+                              <i class="fas fa-heart"></i>
+                            </span>
+                          </a>
+                          <a href="{{ route('login') }}" class="favourite cart-item">
+                            <span>
+                              <i class="fas fa-shopping-cart"></i>
+                            </span>
+                          </a>
                         @endauth
                         <a data-id="{{ $item->id }}" class="compare item-cart openShareModal">
                           <span>

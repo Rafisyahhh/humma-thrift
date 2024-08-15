@@ -16,33 +16,35 @@ class ProductController extends Controller {
      */
     public function index(Request $request) {
         $product_category_pivots = ProductCategoryPivot::all();
+        $products = Product::where("store_id", Auth::user()->store()->first()->id);
+        $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id);
 
-        if ($request->search) {
-            $products = Product::where("store_id", Auth::user()->store()->first()->id)->where('title', 'like', "%$request->search%")->get();
-            $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id)->where('title', 'like', "%$request->search%")->get();
-        } else {
-            $products = Product::where("store_id", Auth::user()->store()->first()->id)->get();
-            $product_auctions = ProductAuction::where("store_id", Auth::user()->store()->first()->id)->get();
+        if ($request->ajax() || $request->wantsJson()) {
+            if ($request->search) {
+                $products = $products->where('title', 'like', "%$request->search%");
+                $product_auctions = $product_auctions->where('title', 'like', "%$request->search%");
+            }
+            if ($request->date) {
+                $products = $products->whereBetween('created_at', [$request->date, $request->date . ' 23:59:59']);
+                $product_auctions = $product_auctions->whereBetween('created_at', [$request->date, $request->date . ' 23:59:59']);
+            }
+
+            $products = $products->get();
+            $product_auctions = $product_auctions->get();
+            if ($request->type == "products") {
+                $product_auctions = collect([]);
+            }
+            if ($request->type == "auction") {
+                $products = collect([]);
+            }
+            return view('seller.components.products', compact('products', 'product_auctions'))->render();
         }
 
+        $products = $products->get();
+        $product_auctions = $product_auctions->get();
         $auctions = Auctions::orderBy('auction_price', 'desc')->orderBy('created_at', 'asc')->get();
 
-        $countFavorite = Favorite::select('product_id', \DB::raw('count(*) as total'))
-            ->groupBy('product_id')
-            ->pluck('total', 'product_id');
-
-        $countLFavorite = Favorite::select('product_auction_id', \DB::raw('count(*) as total'))
-            ->groupBy('product_auction_id')
-            ->pluck('total', 'product_auction_id');
-
-        $countCart = Cart::select('product_id', \DB::raw('count(*) as total'))
-            ->groupBy('product_id')
-            ->pluck('total', 'product_id');
-
-        $favorites = Favorite::all();
-        $carts = cart::all();
-
-        return view('seller.produk', compact('auctions', 'product_category_pivots', 'products', 'product_auctions', 'countFavorite', 'countLFavorite', 'countCart', 'favorites', 'carts'));
+        return view('seller.produk', compact('auctions', 'product_category_pivots', 'products', 'product_auctions'));
     }
 
     /**
