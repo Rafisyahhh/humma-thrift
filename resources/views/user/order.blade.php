@@ -125,7 +125,6 @@
                         <div  id="orderproduk" class="cart-section">
                             {{-- @include('user.filter', ['transactions' => $transaction]) --}}
                             @include('user.filter', ['orders' => $orders])
-
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-lelang" role="tabpanel" aria-labelledby="nav-lelang-tab"

@@ -160,6 +160,7 @@ class TransactionController extends Controller
         $tripay = new TripayController();
         $detail = $tripay->detailTransaction($reference);
         $transaction_order = TransactionOrder::where('reference_id', $reference)->first();
+        dd($detail);
         $order = Order::where('transaction_order_id', $transaction_order->id)->get();
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())->whereNotNull('product_id')->orderBy('created_at')->get();
