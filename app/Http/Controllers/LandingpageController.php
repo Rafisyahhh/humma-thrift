@@ -51,7 +51,7 @@ class LandingpageController extends Controller {
     public function aboutUs() {
         $aboutUs = AboutUs::all();
 
-        return view('landing.about', compact('aboutUs'));
+        return view('Landing.about', compact('aboutUs'));
     }
 
 
