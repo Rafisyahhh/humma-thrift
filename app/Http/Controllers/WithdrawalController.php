@@ -82,7 +82,7 @@ class WithdrawalController extends Controller
 
         $netIncome = $this->_transaction
             ->where('status', 'PAID')
-            ->where('delivery_status', 'selesai')
+            // ->where('delivery_status', 'selesai')
             ->sum('total_harga');
 
             $orderR = Order::with('product.userstore')
