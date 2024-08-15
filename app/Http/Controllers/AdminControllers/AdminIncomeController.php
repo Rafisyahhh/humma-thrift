@@ -102,7 +102,7 @@ class AdminIncomeController extends Controller {
         $lastOfMonth = $currentDate->endOfMonth();
         $rawDailySales = $this->_transactions
             ->where('status', 'PAID')
-            ->where('delivery_status', 'selesai')
+            // ->where('delivery_status', 'selesai')
             ->selectRaw('DATE(created_at) as date, SUM(total_harga) as total')
             ->whereMonth('created_at', $currentDate->month)
             ->groupByRaw('DATE(created_at)')
@@ -130,7 +130,7 @@ class AdminIncomeController extends Controller {
 
         $monthlySalesQuery = $this->_transactions
             ->where('status', 'PAID')
-            ->where('delivery_status', 'selesai')
+            // ->where('delivery_status', 'selesai')
             // ->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
             // ->whereYear('created_at', $currentDate->year)
             // ->groupBy(\DB::raw('MONTH(created_at)'))
