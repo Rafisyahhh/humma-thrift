@@ -120,14 +120,17 @@ class ProductSeeder extends Seeder {
             $destinationPath = $uploadPath . $data["thumbnail"];
 
             if (Storage::disk('public')->put($destinationPath, file_get_contents($sourcePath))) {
+                $startPrice = $this->random_int_with_fixed_suffix(100_000, 400_000);
+                $price = $this->random_int_with_fixed_suffix($startPrice + 50_000, 500_000);
+
                 Product::create([
                     "user_id" => 16,
                     "store_id" => 1,
                     "brand_id" => $data["brand_id"],
                     "title" => $data["title"],
                     "thumbnail" => $destinationPath,
-                    "start_price" => 5000,
-                    "price" => $this->random_int_with_fixed_suffix(10_000, 1_500_000),
+                    "start_price" => $startPrice,
+                    "price" => $price,
                     "size" => "XL",
                     "color" => $data["warna"],
                     "description" => "Loading...",
