@@ -136,7 +136,7 @@ class UserStoreController extends Controller
         $lastOfMonth = Carbon::now()->endOfMonth();
         $rawDailySales = $this->_transactions
             ->where('status', 'PAID')
-            ->where('delivery_status', 'selesai')
+            // ->where('delivery_status', 'selesai')
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
@@ -153,7 +153,7 @@ class UserStoreController extends Controller
 
         $rawDailyGross = $this->_transactions
             ->where('status', 'PAID')
-            ->where('delivery_status', 'selesai')
+            // ->where('delivery_status', 'selesai')
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
@@ -196,7 +196,7 @@ class UserStoreController extends Controller
 
         $monthlySalesQuery = $this->_transactions
             ->where('status', 'PAID')
-            ->where('delivery_status', 'selesai')
+            // ->where('delivery_status', 'selesai')
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
@@ -229,7 +229,7 @@ class UserStoreController extends Controller
         // Calculate monthly gross
         $monthlyGrossQuery = $this->_transactions
             ->where('status', 'PAID')
-            ->where('delivery_status', 'selesai')
+            // ->where('delivery_status', 'selesai')
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
