@@ -124,14 +124,6 @@
           topStart: {
             buttons: ["create"]
           },
-          /*topEnd: $(`<form action="#" method="get" id="search" class="me-4">
-            <div class="input-group mb-3">
-              <input type="search" name="search" class="form-control" placeholder="Cari Brand&hellip;"
-                value="{{ old('search', request('search')) }}" />
-              <button type="submit" class="btn"
-                style="background: #7367f0; color:#fff;">Cari</button>
-            </div>
-          </form>`),*/
           bottomStart: {
             info: {
               text: 'Menampilkan _START_ dari _END_ hasil'
