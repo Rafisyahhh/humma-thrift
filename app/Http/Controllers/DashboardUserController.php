@@ -106,10 +106,10 @@ class DashboardUserController extends Controller {
             ->whereYear('created_at', $currentDate->year);
 
         if ($driver === 'sqlite') {
-            $monthlyGrossQuery->selectRaw('strftime("%m", created_at) as month, SUM(total) as total')
+            $monthlyGrossQuery->selectRaw('strftime("%m", created_at) as month, SUM(total_harga) as total')
                 ->groupBy(\DB::raw('strftime("%m", created_at)'));
         } elseif ($driver === 'mysql') {
-            $monthlyGrossQuery->selectRaw('MONTH(created_at) as month, SUM(total) as total')
+            $monthlyGrossQuery->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
                 ->groupBy(\DB::raw('MONTH(created_at)'));
         }
 
