@@ -57,7 +57,7 @@ class NotificationUserCheckout extends Notification
     {
         return [
             'title' => 'Segera Bayar Yuk!',
-            'url' => route('user.transaction.show', $this->transaction->id),
+            'url' => route('user.transaction.show', $this->transaction->reference_id),
             'data' => 'Kamu baru saja checkout beberapa barang. Yuk segera lakukan pembayaran biar segera diantar ke alamatmu.',
         ];
     }
