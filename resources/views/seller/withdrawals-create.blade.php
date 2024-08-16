@@ -132,7 +132,7 @@
       <div class="account-detail">
         <h5>{{ auth()->user()->store->name }} <span>{{ '@' . auth()->user()->store->username }}</span></h5>
         <p><i class="fas fa-wallet me-2"></i><span accountBalance="{{ $accountBalance }}"></span></p>
-        <p><i class="fas fa-wallet me-2"></i> Minimal penarikan: 1.000.000 (1jt)</p>
+        <p><i class="fas fa-wallet me-2"></i> Minimal penarikan: 1.000.000 (1.0jt)</p>
       </div>
     </div>
 
