@@ -20,7 +20,6 @@ return new class extends Migration {
             $table->string('size');
             $table->string('color');
             $table->enum('status', ['active', 'inactive', 'sold'])->default('active');
-            $table->bigInteger('start_price');
             $table->bigInteger('bid_price_start')->nullable();
             $table->bigInteger('bid_price_end')->nullable();
             $table->bigInteger('price')->nullable();

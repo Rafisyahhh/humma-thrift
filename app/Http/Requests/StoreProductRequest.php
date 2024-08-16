@@ -17,36 +17,8 @@ class StoreProductRequest extends FormRequest {
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    // public function rules(): array {
-    //     return [
-    //         'title' => 'required',
-    //         'description' => 'required|string',
-    //         'thumbnail' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-    //         'image_galery' => 'required|array|max:4',
-    //         'image_galery.*' => 'image|mimes:jpeg,png,jpg|max:2048',
-    //         'brand_id' => 'required|numeric',
-    //         'size' => 'required',
-    //         'color' => 'required',
-    //         'product_type' => 'required',
-
-    //         'start_price' => ['required', 'numeric', "max:$this->bid_price_start||$this->price", "min:500"],
-    //         'price' => 'required_if:product_type,products|nullable|numeric',
-    //         'bid_price_start' => ['required_if:product_type,product_auctions', 'nullable', 'numeric', "max:$this->bid_price_end", "min:500"],
-    //         'bid_price_end' => ['required_if:product_type,product_auctions', 'nullable', 'numeric'],
-    //         'category_id' => 'required|array',
-    //         'category_id.*' => 'integer|exists:product_categories,id',
-    //     ];
-
-    //     if ($this->product_type == 'products') {
-    //         $rules['start_price'] = ['required', 'numeric', "max:$this->price", "min:500"];
-    //     } elseif ($this->product_type == 'product_auctions') {
-    //         $rules['start_price'] = ['required', 'numeric', "max:$this->bid_price_start", "min:500"];
-    //     }
-    //     return $rules;
-
-    // }
     public function rules(): array {
-        $rules = [
+        return [
             'title' => 'required',
             'description' => 'required|string',
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg|max:2048',
@@ -59,19 +31,12 @@ class StoreProductRequest extends FormRequest {
             'price' => 'required_if:product_type,products|nullable|numeric',
             'bid_price_start' => ['required_if:product_type,product_auctions', 'nullable', 'numeric', "max:$this->bid_price_end", "min:500"],
             'bid_price_end' => ['required_if:product_type,product_auctions', 'nullable', 'numeric'],
+            // 'bid_price_end' => ['required_if:product_type,1', 'nullable', 'numeric', "min:$this->bid_price_start"],
             'category_id' => 'required|array',
             'category_id.*' => 'integer|exists:product_categories,id',
         ];
-
-        // Aturan tambahan berdasarkan jenis produk
-        if ($this->product_type == 'products') {
-            $rules['start_price'] = ['required', 'numeric', "max:$this->price", "min:500"];
-        } elseif ($this->product_type == 'product_auctions') {
-            $rules['start_price'] = ['required', 'numeric', "max:$this->bid_price_start", "min:500"];
-        }
-
-        return $rules;
     }
+
 
 
     public function messages(): array {
@@ -96,12 +61,10 @@ class StoreProductRequest extends FormRequest {
             'product_type.required' => 'Tipe product wajib diisi',
             'price.required_if' => 'Harga harus diisi jika produk bukan lelang',
             'price.numeric' => 'Harga harus berupa angka',
-            'start_price.max' => 'Harga awal tidak boleh lebih besar dari harga bid awal atau harga',
-            'start_price.required' => 'Harga Awal harus diisi',
-            'bid_price_start.max' => 'Harga  bid awal tidak boleh lebih besar dari harga bid akhir',
-            'bid_price_start.required_if' => 'Harga bid Awal harus diisi',
-            'bid_price_end.required_if' => 'Harga bid akhir harus diisi',
-            'bid_price_end.numeric' => 'Harga bid akhir harus berupa angka',
+            'bid_price_start.max' => 'Harga awal tidak boleh lebih besar dari harga akhir',
+            'bid_price_start.required_if' => 'Harga Awal harus diisi',
+            'bid_price_end.required_if' => 'Harga akhir harus diisi',
+            'bid_price_end.numeric' => 'Harga akhir harus berupa angka',
             'category_id.required' => 'Kategori produk Wajib Diisi',
             'category_id.array' => 'Kategori harus berupa array',
             'category_id.*.integer' => 'ID kategori harus berupa angka',
