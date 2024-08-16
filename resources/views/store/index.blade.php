@@ -600,14 +600,17 @@
                                                             </svg>
                                                         </span>
                                                     </div>
-                                                    <div style="width: 30rem; margin-bottom: 30px; ">
-                                                        <img src="{{ asset("storage/{$item->product->thumbnail}") }}"
-                                                            class="img-fluid rounded float-start me-5"
-                                                            style="width: 7.5rem; margin-top:50px;" />
-                                                        <div class="h-50"></div>
-                                                        <h5 class="text-start">{{ $item->product->title }}</h5>
-                                                        <p class="text-start">Warna: {{ $item->product->color }}</p>
+                                                    <div style="display: flex; align-items: center; width: 30rem; margin-bottom: 30px;">
+                                                        <img src="{{ asset('storage/' . $item->product->thumbnail) }}"
+                                                            class="img-fluid rounded"
+                                                            style="width: 7.5rem; margin-right: 15px;" />
+                                                        <div>
+                                                            <h5 class="text-start" style="font-size: 2.5rem">{{ $item->product->title }}</h5>
+                                                        </div>
                                                     </div>
+
+                                                        <p class="text-start">Warna: {{ $item->product->color }}</p>
+                                                    {{-- </div> --}}
                                                     <p class="testimonial-details">{{ $item->comment }}
                                                     </p>
                                                     <div class="ratings d-flex gap-2 align-items-center">
@@ -627,7 +630,7 @@
                                                         </div>
 
                                                         <div class="testimonial-info-details">
-                                                            <h5 class="testimonial-name">{{ $item->user->name }}</h5>
+                                                            <h5 class="testimonial-name" style="font-size: 1.7rem">{{ $item->user->name }}</h5>
                                                             <p class="testimonial-title">{{ $item->created_at }}</p>
                                                         </div>
                                                     </div>

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('payment_method');
             $table->string('total_harga');
             $table->string('biaya_admin');
+            $table->string('biaya_transaction');
             $table->timestamps();
         });
     }
