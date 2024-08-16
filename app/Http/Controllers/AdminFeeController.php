@@ -13,7 +13,8 @@ class AdminFeeController extends Controller
      */
     public function index()
     {
-        //
+        $biaya = AdminFee::all();
+        return view('admin.index', compact('biayaAdmin'));
     }
 
     /**
@@ -21,7 +22,7 @@ class AdminFeeController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -45,15 +46,26 @@ class AdminFeeController extends Controller
      */
     public function edit(AdminFee $adminFee)
     {
-        //
+        $biaya = AdminFee::all();
+        return view('admin.index', compact('biayaAdmin'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAdminFeeRequest $request, AdminFee $adminFee)
+    public function update(UpdateAdminFeeRequest $request, AdminFee $adminfee)
     {
-        //
+        try{
+        $dataToUpdate = [
+            'biaya_admin' => $request->input('biaya_admin'),
+        ];
+
+        $adminfee->update($dataToUpdate);
+
+        return redirect()->back()->with('success', 'biaya admin berhasil di ubah');
+    } catch (\Throwable $th) {
+        return redirect()->back()->withInput()->withErrors(['error' => $th->getMessage()]);
+    }
     }
 
     /**

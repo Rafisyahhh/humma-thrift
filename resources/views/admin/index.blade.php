@@ -81,7 +81,7 @@
                             <span class="avatar-initial rounded bg-label-primary"><i
                                     class="fa-regular fa-credit-card"></i></span>
                         </div>
-                        <h4 class="ms-1 mb-0">{{ $countproductauction }}</h4>
+                        <h4 class="ms-1 mb-0">@currency($biayaAdmin ?? 0)</h4>
                         <div>
                             <p class="ms-3 mb-0">Biaya Admin</p>
                             <button type="button" class="btn btn-primary btn-sm ms-3" data-bs-toggle="modal"
@@ -100,14 +100,17 @@
                         <h5 class="modal-title" id="exampleModalLabel1">Atur Biaya Admin</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{route('admin.adminfee.store')}}" method="POST">
+                    @foreach ($biaya as $adminfee)
+
+                    <form action="{{ route('admin.adminfee.update', $adminfee->id) }}" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col mb-4">
                                     <label for="nameBasic" class="form-label">Biaya Admin</label>
                                     <input type="number" name="biaya_admin" id="nameBasic" class="form-control"
-                                        placeholder="Masukkan Biaya Admin">
+                                        placeholder="Masukkan Biaya Admin" value="{{ $adminfee->biaya_admin }}">
                                 </div>
                             </div>
                         </div>
@@ -116,6 +119,7 @@
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>
+                    @endforeach
                 </div>
             </div>
         </div>

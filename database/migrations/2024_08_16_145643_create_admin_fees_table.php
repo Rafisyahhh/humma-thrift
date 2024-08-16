@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('admin_fees', function (Blueprint $table) {
             $table->id();
+            $table->string('biaya_admin');
             $table->timestamps();
         });
     }

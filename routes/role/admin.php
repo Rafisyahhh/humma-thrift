@@ -14,6 +14,7 @@ use App\Http\Controllers\AdminControllers\{
   AdminWithdrawController,
   AdminNotificationController,
 };
+use App\Http\Controllers\AdminFeeController;
 
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function () {
   Route::get('/', [AdminController::class, 'index'])->name('index');
@@ -27,6 +28,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
   Route::resource('transaction', AdminTransactionController::class);
   Route::resource('income', AdminIncomeController::class);
   Route::resource('withdraw', AdminWithdrawController::class);
+  Route::resource('adminfee', AdminFeeController::class);
 
   Route::prefix('/notification')->controller(AdminNotificationController::class)->name('notification.')->group(function () {
     Route::get('/', 'index')->name('index');

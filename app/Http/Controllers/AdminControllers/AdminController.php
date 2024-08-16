@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
 use App\Enums\WithdrawalStatusEnum;
+use App\Models\AdminFee;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductAuction;
@@ -33,7 +34,8 @@ class AdminController extends Controller {
         $countproductauction = ProductAuction::count();
         $countseller = UserStore::count();
         $countuser = User::count();
-
+        $biaya = AdminFee::all();
+        $biayaAdmin = $biaya->first()->biaya_admin;
         // $transactions = TransactionOrder::select(DB::raw("DAYOFWEEK(paid_at) as day_of_week"), DB::raw("SUM(total_harga * 0.05) as total"))
         //     ->groupBy(DB::raw('DAYOFWEEK(paid_at)'))
         //     ->get();
@@ -135,7 +137,7 @@ class AdminController extends Controller {
 
 
         // dd($accountBalance);
-        return view('admin.index', compact('countproduct', 'countproductauction', 'countseller', 'countuser', 'months', 'transactions', 'transactionTotal', 'netIncome', 'monthlyNetIncome', 'dailySales', 'dailyGrossSales', 'monthlyGrossSales', 'accountBalance'));
+        return view('admin.index', compact('countproduct', 'countproductauction', 'countseller', 'countuser', 'months', 'transactions', 'transactionTotal', 'netIncome', 'monthlyNetIncome', 'dailySales', 'dailyGrossSales', 'monthlyGrossSales', 'accountBalance','biayaAdmin','biaya'));
     }
 
 

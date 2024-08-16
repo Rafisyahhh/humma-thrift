@@ -32,29 +32,6 @@ class AdminAboutUsController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(StoreAboutRequest $request) {
-        $description = $request->description;
-
-        if (!empty($description)) {
-            $dom = new \DomDocument();
-            $dom->loadHtml($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
-            $images = $dom->getElementsByTagName('img');
-            foreach ($images as $k => $img) {
-                $data = $img->getAttribute('src');
-                list($type, $data) = explode(';', $data);
-                list(, $data) = explode(',', $data);
-                $data = base64_decode($data);
-
-                $image_name = "/uploads" . time() . $k . '.png';
-                $path = public_path() . $image_name;
-                file_put_contents($path, $data);
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $image_name);
-            }
-            $description = $dom->saveHTML();
-        }
-
-
         $gambar = $request->file('image');
         $path_gambar = Storage::disk('public')->put('about', $gambar);
 
@@ -94,29 +71,6 @@ class AdminAboutUsController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(UpdateAboutRequest $request, AboutUs $about) {
-        $description = $request->input('description');
-
-        if (!empty($description)) {
-            $dom = new \DomDocument();
-            $dom->loadHtml($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
-            $images = $dom->getElementsByTagName('img');
-            foreach ($images as $k => $img) {
-                $data = $img->getAttribute('src');
-                if (strpos($data, 'data:image') === 0) {
-                    list($type, $data) = explode(';', $data);
-                    list(, $data) = explode(',', $data);
-                    $data = base64_decode($data);
-
-                    $image_name = "/uploads/" . time() . $k . '.png';
-                    $path = public_path() . $image_name;
-                    file_put_contents($path, $data);
-                    $img->removeAttribute('src');
-                    $img->setAttribute('src', $image_name);
-                }
-            }
-            $description = $dom->saveHTML();
-        }
 
         $oldPhotoPath = $about->image;
 

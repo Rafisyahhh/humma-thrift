@@ -11,7 +11,7 @@ class UpdateAdminFeeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class UpdateAdminFeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'biaya_admin' => 'required'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'biaya_admin.required' => 'biaya admin harus diisi'
         ];
     }
 }
