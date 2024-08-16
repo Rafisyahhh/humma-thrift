@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreUserStoreRequest;
 use App\Http\Requests\UpdateUserStoreRequest;
 use App\Enums\WithdrawalStatusEnum;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductAuction;
 use App\Models\Withdrawal;
@@ -21,20 +22,23 @@ use DateTime;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class UserStoreController extends Controller {
+class UserStoreController extends Controller
+{
     private TransactionOrder $_transactions;
     private Withdrawal $_withdrawal;
 
-    public function __construct(TransactionOrder $transactions, Withdrawal $withdrawal) {
+    public function __construct(TransactionOrder $transactions, Withdrawal $withdrawal)
+    {
         $this->_transactions = $transactions;
         $this->_withdrawal = $withdrawal;
     }
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request) {
-        $countnewOrder = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status', 'selesaikan pembayaran')->count();
-        $countendOrder = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status', 'selesai')->count();
+    public function index(Request $request)
+    {
+        $countnewOrder = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status','selesaikan pembayaran')->count();
+        $countendOrder = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status','selesai')->count();
         $countProduct = Product::where('user_id', auth()->id())->count() +
             ProductAuction::where('user_id', auth()->id())->count();
         $store = UserStore::all();
@@ -74,12 +78,15 @@ class UserStoreController extends Controller {
             return $query->total * 0.9; // 0.9 is equivalent to 90% after deducting 10%
         });
 
+
+
         $withdrawalTotal = $this->_withdrawal
             ->where('status', WithdrawalStatusEnum::COMPLETED)
             ->where('user_id', $user->id)
             ->sum('amount');
 
         $accountBalance = $netIncome - $withdrawalTotal;
+
 
         // Showing the order chart
         $lastOfMonth = Carbon::now()->endOfMonth();
@@ -89,13 +96,13 @@ class UserStoreController extends Controller {
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
-            ->selectRaw('DATE(created_at) as date, SUM(total) * 0.9 as total') // 0.9 is equivalent to 90% after deducting 10%
+            ->selectRaw('DATE(created_at) as date, SUM(total_harga) *0.9 as total') // 0.9 is equivalent to 90% after deducting 10%
             ->whereMonth('created_at', $currentDate->month)
             ->groupByRaw('DATE(created_at)')
             ->get();
 
-        $dailySales = collect(range(1, (int) $lastOfMonth->format('d')))->map(function ($day) use ($rawDailySales, $currentDate) {
-            $salesDate = $currentDate->format('Y-m-') . str_pad($day, 2, '0', STR_PAD_LEFT);
+            $dailySales = collect(range(1, (int) $lastOfMonth->format('d')))->map(function ($day) use ($rawDailySales, $currentDate) {
+                $salesDate = $currentDate->format('Y-m-') . str_pad($day, 2, '0', STR_PAD_LEFT);
             $sales = $rawDailySales->firstWhere('date', $salesDate);
             return $sales ? $sales->total : 0;
         });
@@ -106,10 +113,11 @@ class UserStoreController extends Controller {
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
-            ->selectRaw('DATE(created_at) as date, SUM(total) as total') // 0.9 is equivalent to 90% after deducting 10%
+            ->selectRaw('DATE(created_at) as date, SUM(total_harga) as total') // 0.9 is equivalent to 90% after deducting 10%
             ->whereMonth('created_at', $currentDate->month)
             ->groupByRaw('DATE(created_at)')
             ->get();
+
 
         $dailyGross = collect(range(1, (int) $lastOfMonth->format('d')))->map(function ($day) use ($rawDailyGross, $currentDate) {
             $salesDate = $currentDate->format('Y-m-') . str_pad($day, 2, '0', STR_PAD_LEFT);
@@ -117,7 +125,9 @@ class UserStoreController extends Controller {
             return $sales ? $sales->total : 0;
         });
 
-        // Monthly chart
+        // Group orders by month
+
+
         $months = collect(range(1, 12))->map(fn($month) => $currentDate->format('Y-') . str_pad($month, 2, '0', STR_PAD_LEFT))->toArray();
 
         $driver = DB::getDriverName();
@@ -128,61 +138,78 @@ class UserStoreController extends Controller {
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
+            // ->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
+            // ->whereYear('created_at', $currentDate->year)
+            // ->groupBy(\DB::raw('MONTH(created_at)'))
+            // ->get()
+            // ->keyBy('month');
             ->whereYear('created_at', $currentDate->year);
 
-        if ($driver === 'sqlite') {
-            $monthlySalesQuery->selectRaw('strftime("%m", created_at) as month, SUM(total) as total')
-                ->groupBy(DB::raw('strftime("%m", created_at)'));
-        } elseif ($driver === 'mysql') {
-            $monthlySalesQuery->selectRaw('MONTH(created_at) as month, SUM(total) as total')
-                ->groupBy(DB::raw('MONTH(created_at)'));
-        }
+            if ($driver === 'sqlite') {
+                $monthlySalesQuery->selectRaw('strftime("%m", created_at) as month, SUM(total_harga) * 0.9 as total')
+                    ->groupBy(DB::raw('strftime("%m", created_at)'));
+            } elseif ($driver === 'mysql') {
+                $monthlySalesQuery->selectRaw('MONTH(created_at) as month, SUM(total_harga) * 0.9 as total')
+                    ->groupBy(DB::raw('MONTH(created_at)'));
+            }
 
-        $monthlySales = $monthlySalesQuery->get()->keyBy('month');
+            $monthlySales = $monthlySalesQuery->get()->keyBy('month');
 
-        $monthlySalesData = collect(range(1, 12))->map(fn($month) => $monthlySales->get($month)->total ?? 0)->toArray();
+            $monthlySalesData = collect(range(1, 12))->map(fn($month) => $monthlySales->get($month)->total ?? 0)->toArray();
 
+
+
+
+        // Calculate monthly gross
         $monthlyGrossQuery = $this->_transactions
             ->where('status', 'PAID')
             ->where('delivery_status', 'selesai')
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
+            // ->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
+            // ->whereYear('created_at', $currentDate->year)
+            // ->groupBy(\DB::raw('MONTH(created_at)'))
+            // ->get()
+            // ->keyBy('month');
             ->whereYear('created_at', $currentDate->year);
 
-        if ($driver === 'sqlite') {
-            $monthlyGrossQuery->selectRaw('strftime("%m", created_at) as month, SUM(total) as total')
-                ->groupBy(DB::raw('strftime("%m", created_at)'));
-        } elseif ($driver === 'mysql') {
-            $monthlyGrossQuery->selectRaw('MONTH(created_at) as month, SUM(total) as total')
-                ->groupBy(DB::raw('MONTH(created_at)'));
-        }
+            if ($driver === 'sqlite') {
+                $monthlyGrossQuery->selectRaw('strftime("%m", created_at) as month, SUM(total_harga) as total')
+                    ->groupBy(DB::raw('strftime("%m", created_at)'));
+            } elseif ($driver === 'mysql') {
+                $monthlyGrossQuery->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
+                    ->groupBy(DB::raw('MONTH(created_at)'));
+            }
 
-        $monthlyGross = $monthlyGrossQuery->get()->keyBy('month');
+            $monthlyGross = $monthlyGrossQuery->get()->keyBy('month');
 
         $monthlyGrossData = collect(range(1, 12))->map(fn($month) => $monthlyGross->get($month)->total ?? 0)->toArray();
 
-        return view('seller.index', compact('transactions', 'transactionTotal', 'netIncome', 'dailySales', 'dailyGross', 'months', 'monthlySalesData', 'monthlyGrossData', 'accountBalance', 'countnewOrder', 'countendOrder', 'countProduct', 'address', 'store', 'user', 'count'));
+        return view('seller.index', compact('transactions', 'transactionTotal', 'netIncome', 'dailySales','dailyGross', 'months', 'monthlySalesData','monthlyGrossData', 'accountBalance','countnewOrder','countendOrder','countProduct','address', 'store', 'user', 'count'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {
+    public function create()
+    {
         //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUserStoreRequest $request) {
+    public function store(StoreUserStoreRequest $request)
+    {
         //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(UserStore $userStore) {
+    public function show(UserStore $userStore)
+    {
         $store = UserStore::where('user_id', auth()->user()->id)->first();
         return view('seller.profil', compact('store'));
     }
@@ -190,21 +217,23 @@ class UserStoreController extends Controller {
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UserStore $userStore) {
+    public function edit(UserStore $userStore)
+    {
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserStoreRequest $request, UserStore $id) {
+    public function update(UpdateUserStoreRequest $request, UserStore $id)
+    {
         // dd($request->all());
-        if (isset($request->gif)) {
-            $id->update(['cuti' => !$id->cuti]);
-            if ($request->cuti) {
-                return redirect()->back()->with("warning", "Anda memasuki masa Cuti");
-            } else {
-                return redirect()->back()->with("success", "Anda tidak dalam masa Cuti");
+        if(isset($request->gif)) {
+            $id->update(['cuti'=>!$id->cuti]);
+            if($request->cuti){
+                return redirect()->back()->with("warning","Anda memasuki masa Cuti");
+            }else{
+                return redirect()->back()->with("success","Anda tidak dalam masa Cuti");
 
             }
 
@@ -246,11 +275,12 @@ class UserStoreController extends Controller {
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserStore $userStore) {
+    public function destroy(UserStore $userStore)
+    {
         //
     }
 
-    public function cuti(UserStore $userStore) {
+    public function cuti(UserStore $userStore){
 
         $userStore->update(['status' => !$userStore->status]);
 

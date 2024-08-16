@@ -29,72 +29,73 @@
 </div>
 
 @push('js')
-  <script>
-    const updatePartials = (() => {
-      const ajaxRequest = (url, target) => {
-        return $.ajax({
-          url: url,
-          cache: true,
-          success: function(response) {
-            window.globalVarProxy[target] = response;
-          },
-          error: function(xhr, status, error) {
-            console.error(`Error fetching ${url}: ${status} ${error}`);
+  @role('user')
+    <script>
+      const updatePartials = (() => {
+        const ajaxRequest = (url, target) => {
+          return $.ajax({
+            url: url,
+            cache: true,
+            success: function(response) {
+              window.globalVarProxy[target] = response;
+            },
+            error: function(xhr, status, error) {
+              console.error(`Error fetching ${url}: ${status} ${error}`);
+            }
+          });
+        };
+
+        const routes = {
+          cart: "{{ route('header.cart') }}",
+          notification: "{{ route('header.notification') }}",
+          wishlist: "{{ route('header.wishlist') }}"
+        };
+
+        return {
+          wishlist: () => ajaxRequest(routes.wishlist, 'wishlist'),
+          cart: () => ajaxRequest(routes.cart, 'cart'),
+          // notification: () => ajaxRequest(routes.notification, '#notification-header'),
+          all: function() {
+            Promise.all([
+              this.wishlist(),
+              this.cart(),
+              // this.notification(),
+            ]).catch(error => console.error('Error updating partials:', error));
           }
-        });
-      };
+        };
+      })();
 
-      const routes = {
-        cart: "{{ route('header.cart') }}",
-        notification: "{{ route('header.notification') }}",
-        wishlist: "{{ route('header.wishlist') }}"
-      };
+      @auth
+      updatePartials.all();
 
-      return {
-        wishlist: () => ajaxRequest(routes.wishlist, 'wishlist'),
-        cart: () => ajaxRequest(routes.cart, 'cart'),
-        // notification: () => ajaxRequest(routes.notification, '#notification-header'),
-        all: function() {
-          Promise.all([
-            this.wishlist(),
-            this.cart(),
-            // this.notification(),
-          ]).catch(error => console.error('Error updating partials:', error));
+      // setInterval(() => {
+      //   updatePartials.notification();
+      // }, 60_000);
+      @endauth
+    </script>
+    <script>
+      window.wishlist = null;
+
+      window.globalVarProxy = new Proxy(window, {
+        set(target, property, value) {
+          if (property === 'wishlist' && value > 0) {
+            $('#favorite-wrapper .wishlist-count').removeClass('d-none');
+            $('#favorite-wrapper .wishlist-count').text(value);
+          }
+          if (property === 'cart' && value.length > 0) {
+            $('.header-cart .cart-count').removeClass('d-none');
+            $('.header-cart .cart-count').text(value.length);
+            $('.header-cart .cart-submenu #cart-wrapper').html(pushCartItem(value));
+          }
+          target[property] = value;
+          return true;
         }
-      };
-    })();
+      });
 
-    @auth
-    updatePartials.all();
-
-    // setInterval(() => {
-    //   updatePartials.notification();
-    // }, 60_000);
-    @endauth
-  </script>
-  <script>
-    window.wishlist = null;
-
-    window.globalVarProxy = new Proxy(window, {
-      set(target, property, value) {
-        if (property === 'wishlist' && value > 0) {
-          $('#favorite-wrapper .wishlist-count').removeClass('d-none');
-          $('#favorite-wrapper .wishlist-count').text(value);
-        }
-        if (property === 'cart' && value.length > 0) {
-          $('.header-cart .cart-count').removeClass('d-none');
-          $('.header-cart .cart-count').text(value.length);
-          $('.header-cart .cart-submenu #cart-wrapper').html(pushCartItem(value));
-        }
-        target[property] = value;
-        return true;
-      }
-    });
-
-    function pushCartItem(value) {
-      return value.map(({
-        product
-      }) => `
+      function pushCartItem(value) {
+        return value.map(({
+          product
+        }) => `
         <div class="wrapper">
           <div class="wrapper-item">
             <div class="wrapper-img" style="margin-right: 1rem;">
@@ -110,8 +111,10 @@
           </div>
         </div>
       `);
-    }
-  </script>
+      }
+    </script>
+  @endrole
+
   <script>
     $(document).ready(function() {
       var $filter = $('#navbar');

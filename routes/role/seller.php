@@ -10,7 +10,7 @@ use App\Http\Controllers\{
   WithdrawalController,
 };
 
-Route::prefix('seller')->middleware(['auth', 'seller'])->name('seller.')->group(function () {
+Route::prefix('seller')->middleware(['auth', 'seller', 'role:user'])->name('seller.')->group(function () {
   Route::get('/home', [UserStoreController::class, 'index'])->name('home');
   Route::get('/transaction', [OrderController::class, 'indexTransaction'])->name('transaction');
   Route::get('/transactiondetail/{transaction}', [OrderController::class, 'indexDetail'])->name('transaction.detail');

@@ -84,6 +84,9 @@
   {{-- @if ($errors->any())
     {{ implode('', $errors->all('<div>:message</div>')) }}
   @endif --}}
+  <div class="alert alert-warning" role="alert">
+    Keuntungan Anda adalah selisih antara Harga Jual dan Harga Beli, dikurangi 10% sebagai biaya admin.
+  </div>
   @if ($errors->has('user'))
     <div class="alert alert-danger" role="alert">
       Maaf, informasi anda kurang lengkap. Tolong isi semua informasi yang dibutuhkan di <a href="{{ route('home') }}"
@@ -178,6 +181,8 @@
                   <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                 @enderror
               </div>
+            
+
             </div>
             <div class="col-md-6 mb-3">
               <label for="warna" class="form-label">Warna</label>
@@ -202,6 +207,7 @@
                   <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                 @enderror
               </div>
+
             </div>
           </div>
         </div>
@@ -238,6 +244,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="col-lg-6 mt-4" id="input-a" style="align-items: center; display: none;">
                 <div class="form-group">
                   <label for="inputA">Harga</label>

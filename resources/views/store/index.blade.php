@@ -586,8 +586,8 @@
                                     <div class="swiper about-swiper p-0">
                                         <div class="swiper-wrapper d-flex flex-row">
                                             @forelse ($reviews as $item)
-                                            <div class="testimonial-wrapper border px-4">
-                                                    <div class="blockquote w-100">
+                                            <div class="swiper-slide testimonial-wrapper">
+                                                <div class="blockquote w-100">
                                                         <span class="d-flex flex-row position-relative">
                                                             <svg width="38" height="30" viewBox="0 0 38 30"
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">

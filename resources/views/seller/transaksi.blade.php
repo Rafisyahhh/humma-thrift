@@ -2,7 +2,7 @@
 
 @section('title', 'Transaksi')
 
-@section('css')
+@section('style')
     <style>
         .table-row.ticket-row:hover {
             background: rgba(167, 146, 119, 0.40) !important;
@@ -14,6 +14,55 @@
             color: #fff;
         }
     </style>
+    <style>
+        #trx-section {
+            margin-top: 2rem;
+        }
+
+        #trx-section .heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        #trx-section .form-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        #trx-section .form-group .form-control {
+            font-size: 14px !important;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ced4da;
+        }
+
+        #trx-section .form-group .form-select {
+            font-size: 14px !important;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ced4da;
+        }
+
+        #trx-section .form-group .btn {
+            padding: 0.5rem 1rem;
+            font-size: 14px !important;
+            border-radius: .25rem !important;
+            border: none;
+        }
+
+        #trx-section .form-group .btn-primary {
+            background-color: #1c3879;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #trx-section .form-group .btn-primary:hover {
+            background-color: #1c3879;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -23,16 +72,48 @@
                 <h5 class="mb-4">Data Transaksi</h5>
 
                 <nav>
-                    <div class="nav nav-tabs" id="nav-tab" style="border:none;" role="tablist">
-                        <button class="nav-link active me-2" id="nav-produk-tab" data-bs-toggle="tab"
-                            data-bs-target="#nav-produk" type="button" role="tab" aria-controls="nav-produk"
-                            aria-selected="true">
-                            Produk
-                        </button>
-                        <button class="nav-link" id="nav-lelang-tab" data-bs-toggle="tab" data-bs-target="#nav-lelang"
-                            type="button" role="tab" aria-controls="nav-lelang" aria-selected="false">
-                            Lelang
-                        </button>
+                    <div class="row d-flex flex-wrap">
+                        <div class="col-4" style="margin-top: 20px">
+                            <div class="nav nav-tabs" id="nav-tab" style="border:none;" role="tablist">
+                                <button class="nav-link active me-2" id="nav-produk-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-produk" type="button" role="tab" aria-controls="nav-produk"
+                                    aria-selected="true">
+                                    Produk
+                                </button>
+                                <button class="nav-link" id="nav-lelang-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-lelang" type="button" role="tab" aria-controls="nav-lelang"
+                                    aria-selected="false">
+                                    Lelang
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div id="trx-section">
+                                <form id="filter-form" action="{{ url()->current() }}" class="form-group">
+                                    <div class="filter">
+                                        <select id="status" name="status" class="form-select form-select-lg"
+                                            aria-label="Default select example" style="width: 180px;">
+                                            <option value="" {{ request('status') == '' ? 'selected' : '' }}>Semua
+                                            </option>
+                                            <option value="selesaikan pesanan"
+                                                {{ request('status') == 'selesaikan pesanan' ? 'selected' : '' }}>
+                                                Selesaikan Pesanan
+                                            </option>
+                                            <option value="dikemas" {{ request('status') == 'dikemas' ? 'selected' : '' }}>
+                                                Dikemas</option>
+                                            <option value="diantar" {{ request('status') == 'diantar' ? 'selected' : '' }}>
+                                                Diantar</option>
+                                            <option value="diterima"
+                                                {{ request('status') == 'diterima' ? 'selected' : '' }}>Diterima</option>
+                                            <option value="selesai" {{ request('status') == 'selesai' ? 'selected' : '' }}>
+                                                Selesai</option>
+                                        </select>
+                                    </div>
+                                    <input type="date" id="date" class="form-control" name="date"
+                                        value="{{ old('date', request()->get('date')) }}" style="font-size: 1rem" />
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </nav>
                 <div class="tab-content tab-item" id="nav-tabContent">
@@ -40,121 +121,11 @@
                         tabindex="0" data-aos="fade-up">
                         <div class="produk">
                             <div class="cart-section wishlist-section">
-
                                 <div class="profile-section">
-                                    <div class="row g-5">
-                                        @php
-                                            $hasData = false;
-                                        @endphp
-
-                                        @foreach ($transaction as $item)
-                                            {{-- @foreach ($orders[$item->id] as $ordr)
-                                                @if ($ordr->product) --}}
-                                            @php
-
-                                                $firstOrder = $orders[$item->id]->first();
-                                                $additionalProductsCount = $orders[$item->id]->count() - 1;
-
-                                            @endphp
-                                                @if ($firstOrder && $firstOrder->product && $firstOrder->product->userstore->user_id == auth()->user()->id)
-                                                    @php
-                                                        $hasData = true;
-                                                    @endphp
-
-                                                    {{-- @foreach ($transaction as $item)
-                                                        @if ($orders) --}}
-                                                    <div class="col-lg-4 col-sm-6">
-                                                        <div class="product-wrapper"
-                                                            style="border: 1px solid; height: 41rem;">
-                                                            <div class="wrapper-content"
-                                                                style="position: relative; height:13rem;">
-                                                                <img src="{{ asset('storage/' . $firstOrder->product->thumbnail) }}"
-                                                                    alt="img" class="object-fit-cover"
-                                                                    style="border-radius: 0%; height:20rem; width:100%;">
-                                                                @if ($additionalProductsCount === 0)
-                                                                    <p class="paragraph mt-4 ms-4 fw-bold"
-                                                                        style="margin-bottom: 38px">
-                                                                        {{ $firstOrder->product->title }}</p>
-                                                                @else
-                                                                    <p class="paragraph mt-4 ms-4 fw-bold">
-                                                                        {{ $firstOrder->product->title }} dan
-                                                                        {{ $additionalProductsCount }} produk lainnya</p>
-                                                                @endif
-                                                                {{-- @endif
-                                                        @endforeach --}}
-
-
-                                                                <p class="paragraph mt-4 ms-4 fw-bold"
-                                                                    style="font-size: 15px;">
-                                                                    {{ $item->user->name }}</p>
-                                                                {{-- <p class="paragraph mt-4 ms-4 p-0" style="font-size: 15px;">
-                                                            Jumlah
-                                                            produk : {{ $item->order->count() }}
-                                                        </p> --}}
-
-                                                                @php
-                                                                    $statusClasses = [
-                                                                        'diterima' =>
-                                                                            'badge  text-bg-primary text-light',
-                                                                        'selesai' =>
-                                                                            'badge  text-bg-success text-light',
-                                                                        'dikemas' =>
-                                                                            'badge  text-bg-warning text-light',
-                                                                        'diantar' =>
-                                                                            'badge  text-bg-warning text-light',
-                                                                        'selesaikan pesanan' =>
-                                                                            'badge  text-bg-danger text-light',
-                                                                    ];
-                                                                @endphp
-
-                                                                <p class="paragraph ms-4 p-0 mb-4" style="font-size: 15px;">
-                                                                    @currency($item->total)
-                                                                </p>
-
-                                                                @if (isset($statusClasses[$item->delivery_status]))
-                                                                    <div class="ps-3">
-                                                                        <div class="{{ $statusClasses[$item->delivery_status] }}"
-                                                                            style="font-size: 15px">
-                                                                            {{ $item->delivery_status }}
-                                                                        </div>
-                                                                    </div>
-                                                                @endif
-
-                                                                <a
-                                                                    href="{{ route('seller.transaction.detail', $item->id) }}">
-                                                                    <span data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                        title="Detail Transaksi"
-                                                                        style="position: absolute;  right: 10px; display: flex; justify-content: right; align-items: right; margin-bottom: 10px; border-radius: 50%; border:1px solid;">
-                                                                        <svg style="display: flex; justify-content: center; align-items:center;"
-                                                                            class="mt-1 me-1"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="32" height="32"
-                                                                            viewBox="0 0 24 24">
-                                                                            <path fill="currentColor"
-                                                                                d="m13.692 17.308l-.707-.72l4.088-4.088H5v-1h12.073l-4.088-4.088l.707-.72L19 12z" />
-                                                                        </svg>
-                                                                    </span></a>
-                                                                <p class="bottom-left mt-4 ms-2"
-                                                                    style="position: absolute; left: 10px; display: flex; justify-content: left; align-items: left;">
-                                                                    {{ $item->created_at->format('d F Y') }}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                            {{-- @endforeach --}}
-
-
-                                            @if (!$hasData)
-                                                <div
-                                                    class="table-body d-flex flex-column align-items-center justify-content-center">
-                                                    <img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong"
-                                                        style="width: 200px; height: 200px;">
-                                                    <p>Tidak ada data</p>
-                                                </div>
-                                            @endif
-
+                                    <div id="transactionproduk">
+                                        {{-- @include('seller.filtertransaksiproduk', [
+                                            'transaction' => $transaction,
+                                        ]) --}}
                                     </div>
                                 </div>
                             </div>
@@ -164,151 +135,11 @@
                         tabindex="0">
                         <div class="wishlist">
                             <div class="cart-section wishlist-section">
-                                <table style="width: 100rem;">
-                                    <tbody>
-                                        <tr class="table-row table-top-row custom-table-header" style="color:#fff;">
-                                            <td class="table-wrapper wrapper-product" style="width: 15%;">
-                                                <h5 class="table-heading">PRODUK</h5>
-                                            </td>
-                                            <td class="table-wrapper wrapper-product" style="width: 15%;">
-                                                <h5 class="table-heading">PEMBELI</h5>
-                                            </td>
-                                            <td class="table-wrapper wrapper-product" style="width: 15%;">
-                                                <h5 class="table-heading">EMAIL</h5>
-                                            </td>
-                                            <td class="table-wrapper">
-                                                <h5 class="table-heading">HARGA</h5>
-                                            </td>
-                                            <td class="table-wrapper">
-                                                <div class="table-wrapper-center">
-                                                    <h5 class="table-heading">PENGIRIMAN</h5>
-                                                </div>
-                                            </td>
-                                            <td class="table-wrapper">
-                                                <div class="table-wrapper-center">
-                                                    <h5 class="table-heading">STATUS</h5>
-                                                </div>
-                                            </td>
-
-                                        </tr>
-                                        @php
-                                            $hasDatalelang = false;
-                                        @endphp
-                                        @forelse ($transaction as $item)
-                                            @foreach ($orderL[$item->id] as $ordr)
-                                                @if ($ordr->product_auction)
-                                                    @if ($ordr->product_auction->userStore->user_id == auth()->user()->id)
-                                                        @php
-                                                            $hasDatalelang = true;
-                                                        @endphp
-
-                                                        <tr class="table-row ticket-row">
-
-                                                            <td class="table-wrapper wrapper-product" style="width: 28%;">
-                                                                <div class="wrapper">
-                                                                    <div class="wrapper-img">
-                                                                        <img src="{{ asset('storage/' . $ordr->product_auction->thumbnail) }}"
-                                                                            alt="img" style="border-radius:0.5rem;">
-                                                                    </div>
-                                                                    <div class="wrapper-content">
-                                                                        <p class="heading"
-                                                                            style="color: #787878; font-size: 12px;">
-                                                                            {{ $item->created_at->format('d F Y') }}</p>
-                                                                        <h5 class="heading">
-                                                                            {{ $ordr->product_auction->title }}</h5>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="table-wrapper" style="width: 15%;">
-                                                                <div class="table-wrapper-center">
-                                                                    <h5 class="heading">{{ $item->user->name }}</h5>
-                                                                </div>
-                                                            </td>
-                                                            <td class="table-wrapper" style="width: 15%;">
-                                                                <div class="table-wrapper-center">
-                                                                    <h5 class="heading">{{ $item->user->email }}</h5>
-                                                                </div>
-                                                            </td>
-                                                            <td class="table-wrapper">
-                                                                <div class="table-wrapper-center">
-                                                                    <h5 class="heading">
-                                                                        {{ 'Rp. ' . number_format($ordr->product_auction->price, 0, ',', '.') }}
-                                                                    </h5>
-                                                                </div>
-                                                            </td>
-                                                            @php
-                                                                $statusClasses = [
-                                                                    'diterima' => 'badge  text-bg-primary text-light',
-                                                                    'selesai' => 'badge  text-bg-success text-light',
-                                                                    'dikemas' => 'badge  text-bg-warning text-light',
-                                                                    'diantar' => 'badge  text-bg-warning text-light',
-                                                                    'selesaikan pesanan' =>
-                                                                        'badge  text-bg-danger text-light',
-                                                                ];
-                                                            @endphp
-                                                            @if (isset($statusClasses[$item->delivery_status]))
-                                                                <td class="table-wrapper"
-                                                                    style="width: 12%; font-size: 15px">
-                                                                    {{-- <div class="{{ $statusClasses[$item->delivery_status] }}"> --}}
-                                                                    {{-- {{ $item->delivery_status }} --}}
-                                                                    <form
-                                                                        action="{{ route('seller.transaction.detail.update', $item->id) }}"
-                                                                        method="POST">
-                                                                        @csrf
-                                                                        <select class="form-select form-select-lg mx-2"
-                                                                            aria-label="Default select example"
-                                                                            style="width: 160px;border-color: #1c3879"
-                                                                            name="status" onchange="this.form.submit()">
-                                                                            <option value="dikemas"
-                                                                                {{ $item->delivery_status == 'dikemas' ? 'selected' : '' }}>
-                                                                                Dikemas</option>
-                                                                            <option value="diantar"
-                                                                                {{ $item->delivery_status == 'diantar' ? 'selected' : '' }}>
-                                                                                Diantar</option>
-                                                                            <option value="diterima"
-                                                                                {{ $item->delivery_status == 'diterima' ? 'selected' : '' }}>
-                                                                                Diterima</option>
-                                                                        </select>
-                                                                    </form>
-                                                                    {{-- </div> --}}
-                                                                </td>
-                                                            @endif
-                                                            <td class="table-wrapper">
-                                                                <div class="table-wrapper-center">
-                                                                    @if ($ordr->transaction_order->status == 'UNPAID')
-                                                                        <h5 class="heading text-danger">Belum Bayar</h5>
-                                                                    @elseif ($ordr->transaction_order->status == 'PAID')
-                                                                        <h5 class="heading text-success">Pembayaran
-                                                                            Berhasil</h5>
-                                                                    @elseif ($ordr->transaction_order->status == 'EXPIRED')
-                                                                        <h5 class="heading text-danger">Pembayaran
-                                                                            Kadaluarsa</h5>
-                                                                    @elseif ($ordr->transaction_order->status == 'REFUND')
-                                                                        <h5 class="heading text-warning">Produk
-                                                                            Dikembalikan</h5>
-                                                                    @elseif ($ordr->transaction_order->status == 'FAILED')
-                                                                        <h5 class="heading text-danger">Pembayaran Gagal
-                                                                        </h5>
-                                                                    @endif
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    @endif
-                                                @endif
-                                            @endforeach
-                                        @endforeach
-
-                                        @if (!$hasDatalelang)
-                                        <tr class="table-row ticket-row" style="height:12px;">
-                                            <td colspan="6" class="text-center no-data-message">
-                                                <img src="{{ asset('asset-thrift/datakosong.png') }}"
-                                                    alt="kosong" style="width: 200px; height: 200px;">
-                                                <p>Tidak ada data</p>
-                                            </td>
-                                        </tr>
-                                        @endif
-                                    </tbody>
-                                </table>
+                                <div id="transactionlelang">
+                                    {{-- @include('seller.filtertransaksilelang', [
+                                        'transaction' => $transactionLelang,
+                                    ]) --}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -317,3 +148,54 @@
         </div>
     </section>
 @endsection
+@push('script')
+    <script>
+        async function applyFilter(value, e = null) {
+            try {
+                const response = await fetch(`{{ route('seller.transaction') }}?status=${value.status ?? ""}&date=${value.date ?? ""}`, {
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+                const data = await response.json();
+
+
+                if (!data.transactionprodukHTML) {
+                    $('#transactionproduk').html(
+                        '<tr><td colspan="4" class="text-center no-data-message"><img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 200px; height: 200px;"><p>Tidak ada data</p></td></tr>'
+                    );
+                } else {
+                    $('#transactionproduk').html(data.transactionprodukHTML);
+                }
+
+                if (!data.transactionlelangHTML) {
+                    $('#transactionlelang').html(
+                        '<tr><td colspan="4" class="text-center no-data-message"><img src="{{ asset('asset-thrift/datakosong.png') }}" alt="kosong" style="width: 200px; height: 200px;"><p>Tidak ada data</p></td></tr>'
+                    );
+                } else {
+                    $('#transactionlelang').html(data.transactionlelangHTML);
+                }
+            } catch (error) {
+                alert('Terjadi kesalahan saat memfilter konten.', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectElement = document.querySelector('select[name="status"]');
+            const dateElement = document.querySelector('input[name="date"]');
+
+            // Fetch initial data based on the default or currently selected value
+            const initialValue = selectElement ? selectElement.value : '';
+            const initialDate = dateElement ? dateElement.value : '';
+            applyFilter(initialValue, initialDate);
+
+            selectElement.addEventListener('change', function() {
+                applyFilter({status: this.value});
+            });
+            dateElement.addEventListener('input', function() {
+                applyFilter({date: this.value}, this.value);
+            });
+        });
+    </script>
+@endpush

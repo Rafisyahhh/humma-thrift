@@ -76,57 +76,6 @@
         </div>
       </div>
 
-      {{-- @foreach ($brands as $key => $brand)
-        <div class="modal fade" tabindex="-1" id="editModal{{ $brand->id }}">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit Kategori</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form action="{{ route('admin.brand.update', $brand->id) }}" method="POST" enctype="multipart/form-data">
-                  @csrf
-                  @method('PUT')
-
-                  <div class="mb-3">
-                    <label for="title" class="form-label">Nama Brand</label>
-                    <input type="text" class="form-control @error('title_update') is-invalid @enderror" id="title"
-                      name="title_update" value="{{ old('title_update', $brand->title) }}">
-                    @error('title_update')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                    @enderror
-                  </div>
-                  <div class="mb-3">
-                    <label for="logo" class="form-label">Foto Cover</label>
-                    <input type="file" class="form-control @error('logo_update') is-invalid @enderror" id="logo"
-                      name="logo_update" />
-
-                    @if ($brand->logo)
-                      <img src="{{ asset('storage/' . $brand->logo) }}" class="w-100 mt-3 rounded-3"
-                        alt="{{ $brand->title }}" />
-                    @else
-                      No Image
-                    @endif
-                    @error('logo_update')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                    @enderror
-                  </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn"
-                  style="background: linear-gradient(72.47deg, rgba(28, 56, 121, 1) 22.16%, rgba(115, 103, 240, 0.7) 76.47%); color:#fff;">Simpan</button>
-              </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      @endforeach --}}
       <div class="modal fade" tabindex="-1" id="editModal">
         <div class="modal-dialog">
           <div class="modal-content">

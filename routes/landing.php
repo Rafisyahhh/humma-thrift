@@ -21,9 +21,11 @@ Route::prefix('product')->group(function () {
   Route::get('/', [LandingpageController::class, 'productSearch'])->name('searchProduct');
   Route::get('auction', [LandingpageController::class, 'productAuction']);
   Route::get('regular', [LandingpageController::class, 'productRegular']);
-  Route::post('storecart/{product}', [CartController::class, 'storecart'])->name('storecart');
-  Route::post('storesproduct/{product}', [FavoriteController::class, 'storesproduct'])->name('storesproduct');
-  Route::delete('deletecart/{cart}', [CartController::class, 'deletecart'])->name('deletecart');
+  Route::middleware(["role:user"])->group(function () {
+    Route::post('storecart/{product}', [CartController::class, 'storecart'])->name('storecart');
+    Route::post('storesproduct/{product}', [FavoriteController::class, 'storesproduct'])->name('storesproduct');
+    Route::delete('deletecart/{cart}', [CartController::class, 'deletecart'])->name('deletecart');
+  });
 });
 
 #wishlist product

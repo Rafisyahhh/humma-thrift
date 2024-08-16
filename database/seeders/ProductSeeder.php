@@ -120,6 +120,7 @@ class ProductSeeder extends Seeder {
             $destinationPath = $uploadPath . $data["thumbnail"];
 
             if (Storage::disk('public')->put($destinationPath, file_get_contents($sourcePath))) {
+
                 Product::create([
                     "user_id" => 16,
                     "store_id" => 1,
@@ -134,7 +135,7 @@ class ProductSeeder extends Seeder {
             }
         }
     }
-    
+
     function random_int_with_fixed_suffix($min, $max, $suffix = 0) {
         $min_adjusted = (int) ($min / 1000);
         $max_adjusted = (int) ($max / 1000);

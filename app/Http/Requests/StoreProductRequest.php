@@ -37,6 +37,8 @@ class StoreProductRequest extends FormRequest {
         ];
     }
 
+
+
     public function messages(): array {
         return [
             'title.required' => 'Nama produk Wajib Diisi',

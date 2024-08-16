@@ -2,7 +2,8 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "start": "concurrently 'php artisan serve' 'cloudflared tunnel run hummathrift'"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",

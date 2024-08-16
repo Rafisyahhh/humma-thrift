@@ -75,9 +75,6 @@
       </div>
     </div>
   </section>
-  <div class="d-none">
-    @include('Landing.components.product-regular2')
-  </div>
 @endsection
 
 @push('script')
@@ -190,12 +187,10 @@
           $.ajax({
             url: url.toString(),
             type: 'GET',
-            success: function({
-              data
-            }) {
+            success: function(data) {
               loading = false;
               $('[isProduct],[isLoader]').remove();
-              appendProduct(data)
+              $('#product-container').append(data);
               // $('#product-container').append(data);
               $('#total').text($('[isProduct]').length);
             },
@@ -264,7 +259,7 @@
               `);
               return;
             }
-            appendProduct(data.data)
+            $('#product-container').append(data);
             $('#total').text($('[isProduct]').length);
           },
           error: function() {
@@ -289,7 +284,7 @@
       });
     });
 
-    const product = $('[isProduct]')[0].outerHTML;
+    // const product = $('[isProduct]')[0].outerHTML;
     const moneyFormat = new Intl.NumberFormat('id', {
       style: 'currency',
       currency: 'IDR',
@@ -328,25 +323,27 @@
       });
     }
   </script>
-  <script>
-    function ajaxSubmit(e, $this, callback) {
-      e.preventDefault();
-      const form = $($this);
-      const product = form.closest('[isProduct]');
-      product.addClass('submitLoading');
-      $.ajax({
-        url: form.attr('action'),
-        type: "POST",
-        success: function(response) {
-          if (response.error) {
-            flasher.error(response.error);
-          } else {
-            flasher.success(response.success);
+  @role('user')
+    <script>
+      function ajaxSubmit(e, $this, callback) {
+        e.preventDefault();
+        const form = $($this);
+        const product = form.closest('[isProduct]');
+        product.addClass('submitLoading');
+        $.ajax({
+          url: form.attr('action'),
+          type: "POST",
+          success: function(response) {
+            if (response.error) {
+              flasher.error(response.error);
+            } else {
+              flasher.success(response.success);
+            }
+            product.removeClass('submitLoading');
+            callback();
           }
-          product.removeClass('submitLoading');
-          callback();
-        }
-      });
-    };
-  </script>
+        });
+      };
+    </script>
+  @endrole
 @endpush

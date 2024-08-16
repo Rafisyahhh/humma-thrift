@@ -16,11 +16,6 @@
             <h4 class="ms-1 mb-0">{{ $countuser }}</h4>
             <p class="ms-3 mb-0">Pengguna</p>
           </div>
-          {{-- <p>Pengguna</p> --}}
-          {{-- <p class="mb-0">
-                        <span class="fw-medium me-1">+18.2%</span>
-                        <small class="text-muted">than last week</small>
-                    </p> --}}
         </div>
       </div>
     </div>
@@ -35,11 +30,6 @@
             <h4 class="ms-1 mb-0">{{ $countseller }}</h4>
             <p class="ms-3 mb-0">Seller</p>
           </div>
-          {{-- <p class="mb-1">Seller</p> --}}
-          {{-- <p class="mb-0">
-                        <span class="fw-medium me-1">-8.7%</span>
-                        <small class="text-muted">than last week</small>
-                    </p> --}}
         </div>
       </div>
     </div>
@@ -52,13 +42,7 @@
             </div>
             <h4 class="ms-1 mb-0">{{ $countproduct }}</h4>
             <p class="ms-3 mb-0">Produk</p>
-
           </div>
-          {{-- <p class="mb-1">Produk</p> --}}
-          {{-- <p class="mb-0">
-                        <span class="fw-medium me-1">+4.3%</span>
-                        <small class="text-muted">than last week</small>
-                    </p> --}}
         </div>
       </div>
     </div>
@@ -72,16 +56,9 @@
             <h4 class="ms-1 mb-0">{{ $countproductauction }}</h4>
             <p class="ms-3 mb-0">Produk Lelang</p>
           </div>
-          {{-- <p class="mb-1">Produk Lelang</p> --}}
-          {{-- <p class="mb-0">
-                        <span class="fw-medium me-1">-2.5%</span>
-                        <small class="text-muted">than last week</small>
-                    </p> --}}
         </div>
       </div>
     </div>
-    {{-- </div> --}}
-    <!-- Revenue Report -->
     <div class="col-12 col-xl-8 mb-4 col-xl-12">
       <div class="card">
         <div class="card-body p-0">
@@ -131,68 +108,10 @@
 
 @section('scripts')
   <script src="template-assets/admin/assets/vendor/libs/chartjs/chartjs.js"></script>
-  {{-- <script src="{{ asset('additional-assets/chart.js-4.4.3/chart.umd.js') }}"></script> --}}
-  {{-- <script src="template-assets/admin/assets/js/main.js"></script> --}}
-  {{-- <script src="template-assets/admin/assets/js/charts-chartjs.js"></script> --}}
-  {{-- <script src="{{ asset('template-assets/admin/assets/vendor/libs/apex-charts/apexcharts.js') }}"></script> --}}
   <script src="template-assets/admin/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-
-  {{-- <script src="template-assets/admin/assets/js/app-ecommerce-dashboard.js"></script> --}}
 @endsection
 
 @section('js')
-  {{-- <script>
-    var labels = @json($months);
-    var data = @json($data);
-
-    var ctx = document.getElementById('barChart').getContext('2d');
-    var barChart = new Chart(ctx, {
-        type: 'line', // Jenis chart
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Jumlah Transaksi per Bulan',
-                data: data,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script> --}}
-  {{-- <script>
-        var labels = @json($months);
-        var data = @json($data);
-
-        var ctx = document.getElementById('adminchart').getContext('2d');
-        var adminchart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Pendapatan per bulan',
-                    data: data,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script> --}}
     <script>
         const ctxBulanan = document.getElementById('penjualan-bulanan').getContext('2d');
         const gradientBulanan = ctxBulanan.createLinearGradient(0, 0, 0, 250);

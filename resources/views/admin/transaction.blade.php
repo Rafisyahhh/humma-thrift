@@ -133,126 +133,6 @@
     </div>
   </div>
   </div>
-  {{-- @foreach ($product_auctions as $item)
-<div class="modal fade" id="detailLelangModal{{ $item->id }}" tabindex="-1"
-    aria-labelledby="detailModalLabel{{ $item->id }}" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="review-form m-0">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <section class="product product-info">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="product-info-img" data-aos="fade-right">
-                                <div class="swiper product-top">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide slider-top-img">
-                                            <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="img"
-                                                class="object-fit-cover">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="product-info-content" data-aos="fade-left">
-                                    <h5 style="margin-bottom:0;" data-row="title">Judul</h5>
-                                    <div class="price"
-                                        style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span class="new-price"><span data-row="total"></span></span>
-                                        <span style="display: flex; justify-content:center; align-items:center;">
-                                            <i class="fa-solid fa-store"
-                                                style="margin-right: 0.5rem; color: #215791; font-size: 1.2rem; margin-left:2rem;"></i>
-                                            <p style="font-weight: bold; margin-top:1rem; display: flex; justify-content:center; align-items:center;"
-                                                data-row="store"></p>
-                                        </span>
-                                    </div>
-                                    <hr>
-                                    <div class="product-details">
-                                        <table>
-                                            <tr>
-                                                <th>Pembeli</th>
-                                                <td><span class="inner-text" data-row="name"></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Tanggal</th>
-                                                <td><span class="inner-text" data-row="created_at"></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>No Reference</th>
-                                                <td><span class="inner-text" data-row="reference_id"></span></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Pembayaran</th>
-                                                <td><span class="inner-text" data-row="payment_method"></span></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Biaya Admin</th>
-                                                <td><span class="inner-text" data-row="biaya_admin"></span></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Total Harga Produk</th>
-                                                <td><span class="inner-text" data-row="total_harga"></span></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Status Pengiriman</th>
-                                                <td><span class="inner-text" style="color: red" data-row="delivery_status"></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Status Pembayaran</th>
-                                                <td><span class="inner-status" style="color: red" data-row="status"></span>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="product-details">
-                                    <table>
-                                        <tr>
-                                            <th>Kategori</th>
-                                            <td><span class="inner-text">{{ implode(', ',
-                                                    array_column($item->categories->toArray(), 'title')) }}</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Brand</th>
-                                            <td><span class="inner-text">{{ $item->brand->title }}</span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Ukuran</th>
-                                            <td><span class="inner-text">{{ $item->size }}</span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Warna</th>
-                                            <td><span class="inner-text">{{ $item->color }}</span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Deskripsi</th>
-                                            <td colspan="2"><span class="inner-text">{{ $item->description }}</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Status</th>
-                                            <td><span class="inner-status" style="color: red">{{ $item->status }}</span>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <hr>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </div>
-</div>
-@endforeach --}}
   <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -478,32 +358,6 @@
             return badge || data;
           }
         },
-        // {
-        //   data: 'id',
-        //   orderable: false,
-        //   searchable: false,
-        //   render: (data, _, row) => {
-        //     const status = `<form action="${"{{ route('admin.produk.update', ':id:') }}".replace(":id:", data)}" method="POST">
-      //     @csrf
-      //     @method('PUT')
-      //     <div class="d-flex gap-2">
-      //       <div>
-      //         <input type="radio" onchange="submitForm(this)" class="btn-check" name="status"
-      //           id="inactive" value="inactive"
-      //           ${ row.status == 'inactive' ? 'checked' : '' } />
-      //         <label class="btn btn-sm btn-danger" for="inactive">Tidak Aktif</label>
-      //       </div>
-      //       <div>
-      //         <input type="radio" onchange="submitForm(this)" class="btn-check" name="status"
-      //           id="active" value="active" ${ row.status == 'active' ? 'checked' : '' }
-      //           />
-      //         <label class="btn btn-sm btn-success" for="active">Aktif</label>
-      //       </div>
-      //     </div>
-      //   </form>`;
-        //     return status;
-        //   }
-        // },
         {
           data: 'id',
           className: 'text-center',
@@ -566,6 +420,15 @@
       $(this).dropdown('toggle');
     });
 
+    function formatDate(value) {
+      const date = new Date(value);
+      const formattedDate = date.toLocaleDateString('id-ID', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+      return formattedDate;
+    }
 
     let searchTimeout;
 

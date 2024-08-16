@@ -174,7 +174,7 @@
                           <td colspan="2"><span class="inner-text">{{ $item->description }}</span></td>
                         </tr>
                         <tr>
-                          <th>Status</th>
+                          <th>Statu</th>
                           <td><span class="inner-status" style="color: red">{{ $item->status }}</span></td>
                         </tr>
                       </table>
@@ -248,7 +248,10 @@
                       </tr>
                       <tr>
                         <th>Status</th>
-                        <td><span class="inner-status" style="color: red" data-row="status"></span>
+                        <td>
+                            <span class="inner-status" data-row="@if("status" === 'active') @endif">
+                                aktif
+                            </span>
                         </td>
                       </tr>
                     </table>
@@ -384,32 +387,6 @@
             return `<div class="d-flex gap-2 float-end">${(row.status == 'inactive' ? inactive : active) + editButton}</div>`;
           }
         },
-        // {
-        //   data: 'id',
-        //   orderable: false,
-        //   searchable: false,
-        //   render: (data, _, row) => {
-        //     const status = `<form action="${"{{ route('admin.produk.update', ':id:') }}".replace(":id:", data)}" method="POST">
-      //     @csrf
-      //     @method('PUT')
-      //     <div class="d-flex gap-2">
-      //       <div>
-      //         <input type="radio" onchange="submitForm(this)" class="btn-check" name="status"
-      //           id="inactive" value="inactive"
-      //           ${ row.status == 'inactive' ? 'checked' : '' } />
-      //         <label class="btn btn-sm btn-danger" for="inactive">Tidak Aktif</label>
-      //       </div>
-      //       <div>
-      //         <input type="radio" onchange="submitForm(this)" class="btn-check" name="status"
-      //           id="active" value="active" ${ row.status == 'active' ? 'checked' : '' }
-      //           />
-      //         <label class="btn btn-sm btn-success" for="active">Aktif</label>
-      //       </div>
-      //     </div>
-      //   </form>`;
-        //     return status;
-        //   }
-        // },
         {
           data: 'id',
           className: 'text-center',

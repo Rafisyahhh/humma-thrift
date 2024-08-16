@@ -77,7 +77,7 @@ class Withdrawal extends Model
      */
     public function store()
     {
-        return $this->belongsTo(UserStore::class);
+        return $this->belongsTo(UserStore::class,'user_store_id', 'id');
     }
 
     /**

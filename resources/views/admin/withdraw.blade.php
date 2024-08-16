@@ -16,39 +16,6 @@
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">
-          {{-- @forelse ($users as $user) --}}
-          {{-- <tr>
-            <td>
-              <div class="d-flex gap-3 align-items-center">
-                <p>12 Juni 2024</p>
-              </div>
-            </td>
-            <td>
-              <div class="d-flex gap-3 align-items-center">
-                <p>Dummy. Shop</p>
-              </div>
-            </td>
-            <td>
-              <div class="d-flex gap-3 align-items-center">
-                <p>BCA</p>
-              </div>
-            </td>
-            <td>
-              <div class="d-flex gap-3 align-items-center">
-                <p>00837645272</p>
-              </div>
-            </td>
-            <td>
-              <div class="d-flex gap-3 align-items-center">
-                <p>Rp. 12.000.000</p>
-              </div>
-            </td>
-            <td>
-              <div class="d-flex gap-3 align-items-center">
-                <span class="badge bg-danger">Pending</span>
-              </div>
-            </td>
-          </tr> --}}
         </tbody>
       </table>
     </div>
@@ -164,8 +131,6 @@
 @push('js')
   <script>
     function submitForm(radioBtn, value) {
-      // radioBtn.closest('input.d-none')[0].val(value);
-      // radioBtn.closest('form').attr(value)
       $(radioBtn.closest('form')).find('input.d-none').val(value)
       var form = radioBtn.closest('form').submit();
     }

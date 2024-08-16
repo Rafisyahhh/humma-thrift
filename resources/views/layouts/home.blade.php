@@ -61,7 +61,7 @@
 
     <script src="{{ asset('vendor/flasher/flasher.min.js') }}"></script>
 
-    {!!htmlScriptTagJsApi()!!}
+    {!! htmlScriptTagJsApi() !!}
 
     <style>
       .header-right-dropdown>div {
@@ -203,28 +203,35 @@
       //       $this.prop('disabled', false);
       //     }, 250);
       //   });
-      $("form[action*='product/storesproduct'], form[action*='product/storecart']").submit(function(e) {
-        e.preventDefault();
-        const form = $(this);
-        const product = form.closest('swiper-slide, [isProduct]');
-        product.addClass('submitLoading');
-        $.ajax({
-          url: form.attr('action'),
-          type: "POST",
-          cache: true,
-          success: function(response) {
-            product.removeClass('submitLoading');
-            if (response.error) {
-              flasher.error(response.error);
-              return false;
-            } else {
-              flasher.success(response.success);
-            }
-            window.globalVarProxy[response.type] = response.data;
-          }
+      @role('user')
+        $("form[action*='product/storesproduct'], form[action*='product/storecart']").submit(function(e) {
+          e.preventDefault();
+          const form = $(this);
+          const product = form.closest('swiper-slide, [isProduct]');
+          product.addClass('submitLoading');
+          $.ajax({
+            url: form.attr('action'),
+            type: "POST",
+            cache: true,
+            statusCode: {
+              403: function() {
+                flasher.error("Anda tidak memiliki hak akses.");
+              }
+            },
+            success: function(response) {
+              if (response.error) {
+                flasher.error(response.error);
+                return false;
+              } else {
+                flasher.success(response.success);
+              }
+              window.globalVarProxy[response.type] = response.data;
+            },
+            complete: () => product.removeClass('submitLoading')
+          });
+          return false;
         });
-        return false;
-      });
+      @endrole
     </script>
 
     <script src="{{ asset('additional-assets/toastr-2.1.4/toastr.min.js') }}"></script>

@@ -51,7 +51,7 @@ class LandingpageController extends Controller {
     public function aboutUs() {
         $aboutUs = AboutUs::all();
 
-        return view('landing.about', compact('aboutUs'));
+        return view('Landing.about', compact('aboutUs'));
     }
 
 
@@ -73,9 +73,9 @@ class LandingpageController extends Controller {
         if ($request->ajax()) {
             if (isset($request->filter)) {
                 if ($request->filter == 'newest') {
-                    $product_favorite = $product_favorite->orderBy('created_at');
-                } elseif ($request->filter == 'oldest') {
                     $product_favorite = $product_favorite->orderByDesc('created_at');
+                } elseif ($request->filter == 'oldest') {
+                    $product_favorite = $product_favorite->orderBy('created_at');
                 }
             }
             $product_favorite = $product_favorite->paginate(24);
@@ -145,7 +145,7 @@ class LandingpageController extends Controller {
             if ($products->currentPage() > $products->lastPage()) {
                 return response()->json(['lastPage' => true]);
             }
-            return response()->json($products);
+            return view('Landing.components.product-regular', compact('products'))->render();
         }
 
         $products = $products->paginate(24);

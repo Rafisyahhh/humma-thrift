@@ -15,6 +15,7 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\ProductAuction;
 use App\Models\TransactionOrder;
+use Illuminate\Database\Eloquent\Builder;
 use App\Notifications\UserTransaksi;
 use DB;
 
@@ -118,21 +119,81 @@ class OrderController extends Controller
     //     return view('seller.transaksi', compact('filteredTransactions', 'orders', 'orderL'));
     // }
 
-    public function indexTransaction()
+    public function indexTransaction(Request $request)
     {
-        $transaction = TransactionOrder::latest()->get();
-    
-        $orders = Order::with('product.userstore')
-            ->orderBy('transaction_order_id')
-            ->get()
-            ->groupBy('transaction_order_id');
-        $orderL = Order::with('product_auction')
-            ->orderBy('transaction_order_id')
-            ->get()
-            ->groupBy('transaction_order_id');
+        $user = $request->user();
+        $status = $request->input('status');
+        $dateSearch = $request->input('date');
 
-        return view('seller.transaksi', compact('transaction', 'orders', 'orderL'));
+        if ($request->ajax()) {
+            $orders = Order::with(['product.userstore', 'transaction_order'])
+            ->orderBy('transaction_order_id')
+            ->when($dateSearch, function (Builder $query) use ($dateSearch) {
+                $query->whereDate('created_at', $dateSearch);
+            })
+            ->whereHas('transaction_order', function (Builder $query) use ($status) {
+                if ($status) {
+                    $query->where('delivery_status', $status);
+                }
+            })
+            ->whereNotNull('product_id')
+            ->get()
+            ->groupBy('transaction_order_id');
+            $transaction = $orders->map(function ($ordersGroup) {
+                return $ordersGroup->first()->transaction_order;
+            });
+            $orderL = Order::with(['product_auction', 'transaction_order'])
+            ->orderBy('transaction_order_id')
+            ->when($dateSearch, function (Builder $query) use ($dateSearch) {
+                $query->whereDate('created_at', $dateSearch);
+            })
+            ->whereHas('transaction_order', function (Builder $query) use ($status) {
+                if ($status) {
+                    $query->where('delivery_status', $status);
+                }
+            })
+            ->whereNotNull('product_auction_id')
+            ->get()
+            ->groupBy('transaction_order_id');
+            $transactionLelang = $orderL->map(function ($ordersGroup)use ($status) {
+                return $ordersGroup->first()->transaction_order;
+            });
+            return response()->json([
+                'transactionprodukHTML' => view('seller.filtertransaksiproduk', [
+                    'transaction' => $transaction,
+                    'orders' => $orders
+                ])->render(),
+                'transactionlelangHTML' => view('seller.filtertransaksilelang', [
+                    'transaction' => $transactionLelang,
+                    'orderL' => $orderL
+                ])->render()
+            ]);
+        }
+
+        // Menangani permintaan non-AJAX
+        $orders = Order::with(['product.userstore', 'transaction_order'])
+        ->orderBy('transaction_order_id')
+        ->whereNotNull('product_id')
+        ->get()
+        ->groupBy('transaction_order_id');
+        $transaction = $orders->map(function ($ordersGroup) {
+            return $ordersGroup->first()->transaction_order;
+        });
+
+        $orderL = Order::with(['product_auction', 'transaction_order'])
+        ->orderBy('transaction_order_id')
+        ->whereNotNull('product_auction_id')
+        ->get()
+        ->groupBy('transaction_order_id');
+        $transactionLelang = $orderL->map(function ($ordersGroup) {
+            return $ordersGroup->first()->transaction_order;
+        });
+        return view('seller.transaksi');
     }
+
+
+
+
 
 
     public function indexDetail($transaction)
