@@ -20,21 +20,18 @@ use Illuminate\Http\Request;
 use Log;
 use Str;
 
-class WithdrawalController extends Controller
-{
+class WithdrawalController extends Controller {
     private Bank $_banks;
     private Withdrawal $_withdrawal;
     private TransactionOrder $_transaction;
 
-    public function __construct(Bank $bank, Withdrawal $withdrawal, TransactionOrder $transaction)
-    {
+    public function __construct(Bank $bank, Withdrawal $withdrawal, TransactionOrder $transaction) {
         $this->_banks = $bank;
         $this->_withdrawal = $withdrawal;
         $this->_transaction = $transaction;
     }
 
-    public function indexUser(Request $request)
-    {
+    public function indexUser(Request $request) {
         $user = $request->user();
         $trxSearch = $request->get('trx');
         $dateSearch = $request->get('date');
@@ -75,8 +72,7 @@ class WithdrawalController extends Controller
 
 
 
-    public function createUser(Request $request)
-    {
+    public function createUser(Request $request) {
         $user = $request->user();
         $banks = $this->_banks->all();
 
@@ -99,19 +95,30 @@ class WithdrawalController extends Controller
         $accountBalance = $netIncome - $withdrawalTotal;
 
         if ($pendingWithdrawals) {
-           return redirect()->back()->with('error','Kamu masih ada Transaksi yang belum kamu cairkan!');
+            return redirect()->route('withdraw.index')->with('error', 'Kamu masih ada Transaksi yang belum kamu cairkan!');
         }
 
         return view('seller.withdrawals-create', compact('accountBalance', 'banks'));
     }
 
-    public function detailUser(Withdrawal $withdrawal)
-    {
+    public function detailUser(Withdrawal $withdrawal) {
         return view('seller.withdrawals-detail', compact('withdrawal'));
     }
 
-    public function issueUser(WithdrawalUserIssueRequest $request)
-    {
+    public function issueUser(WithdrawalUserIssueRequest $request) {
+        $user = $request->user();
+        $netIncome = $this->_transaction
+            ->where('status', 'PAID')
+            ->where('delivery_status', 'selesai')
+            ->sum('total_harga') * 0.9;
+
+
+        $withdrawalTotal = $this->_withdrawal
+            ->where('status', WithdrawalStatusEnum::COMPLETED)
+            ->where('user_id', $user->id)
+            ->sum('amount');
+
+        $accountBalance = $netIncome - $withdrawalTotal;
         try {
             $data = collect($request->validated());
             $user = $request->user();
@@ -122,6 +129,7 @@ class WithdrawalController extends Controller
             $data->put('user_store_id', $user->store->id);
             $data->put('status', WithdrawalStatusEnum::PENDING);
             $data->put('transaction_id', Str::upper("WTH-{$transactionID}"));
+            $data->put('amount', floor($accountBalance / 50000) * 50000);
 
             $this->_withdrawal->create($data->toArray());
 
