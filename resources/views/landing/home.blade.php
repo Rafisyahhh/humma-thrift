@@ -171,7 +171,7 @@
       /* margin: 0 5px 5px; */
       background-color: #ffffff73;
       /* margin-left:1px !important;
-                                                                                                                                              margin-right: 1px !important; */
+                                                                                                                                                                  margin-right: 1px !important; */
       /* Tambahkan margin jika perlu */
     }
 
@@ -233,7 +233,7 @@
                       <h5 class="wrapper-details" style="color:#1c3879;">
                         {{ $even->subjudul }}
                       </h5>
-                      <h1 class="wrapper-details" style="color:#1c3879;">{{ $even->judul }}</h1>
+                      <h1 class="wrapper-details" style="color:#1c3879;" id="hero-title">{{ $even->judul }}</h1>
                       <a href="{{ url('/product/regular') }}" class="shop-btn mt-3">Belanja Sekarang</a>
                     </div>
                   </div>
@@ -365,8 +365,8 @@
               }
             </style>
           </div>
-          <swiper-container slides-per-view="4" loop="true" navigation="true" space-between="30" autoplay-delay="10000"
-            autoplay-disable-on-interaction="false">
+          <swiper-container slides-per-view="4" loop="true" navigation="true" space-between="30"
+            autoplay-delay="10000" autoplay-disable-on-interaction="false">
             @foreach ($product as $item)
               <swiper-slide id="cardButton">
                 <div class="product-wrapper" data-aos="fade-up">
@@ -505,39 +505,12 @@
                     <div class="product-cart-items">
                       <div class="product-cart-items">
                         @auth
-                          {{-- <form action="{{ route('storesproductAuction', $item->id) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        <button class="favourite cart-item">
-                                                            <span>
-                                                                <i class="fas fa-heart" style="font-size: 18px;"></i>
-                                                            </span>
-                                                        </button>
-                                                    </form> --}}
-                          {{-- <form action="{{ route('storecart', $item->id) }}" method="POST">
-                                                        @csrf
-                                                        <button class="favourite cart-item">
-                                                            <span>
-                                                                <i class="fas fa-shopping-cart" style="font-size: 18px;"></i>
-                                                            </span>
-                                                        </button>
-                                                    </form> --}}
                           <a data-id="{{ $item->id }}" class="compare item-cart openShareModal">
                             <span>
                               <i class="fas fa-share"></i>
                             </span>
                           </a>
                         @else
-                          {{-- <a href="{{ route('login') }}" class="favourite cart-item">
-                                                        <span>
-                                                            <i class="fas fa-heart"></i>
-                                                        </span>
-                                                    </a> --}}
-                          {{-- <a href="{{ route('login') }}" class="favourite cart-item">
-                                                        <span>
-                                                            <i class="fas fa-shopping-cart"></i>
-                                                        </span>
-                                                    </a> --}}
                           <a href="{{ route('login') }}" class="compaire cart-item">
                             <span>
                               <i class="fas fa-share"></i>
@@ -802,16 +775,6 @@
       }
     });
   </script>
-
-  {{-- <script>
-        $("[data-route]").click(function({
-            target: {
-                tagName
-            }
-        }) {
-            if (!["A", "I"].includes(tagName)) window.location.href = $(this).data("route");
-        });
-    </script> --}}
   <script>
     var $grid = $('.grid').isotope({
       itemSelector: '.grid-item',
@@ -820,37 +783,17 @@
         columnWidth: '.grid-sizer'
       }
     });
-    // $grid.imagesLoaded().progress(function() {
-    //     $grid.isotope('layout');
-    // });
-    // var filterFns = {
-    //     // show if number is greater than 50
-    //     numberGreaterThan50: function() {
-    //         var number = $(this).find('.number').text();
-    //         return parseInt(number, 10) > 50;
-    //     },
-    //     // show if name ends with -ium
-    //     ium: function() {
-    //         var name = $(this).find('.name').text();
-    //         return name.match(/ium$/);
-    //     }
-    // };
     $('.filter').click(function() {
-      console.log("tfvtvvv");
       var filterValue = $(this).data('filter');
-      // use filterFn if matches value
       filterValue = filterValue;
       $grid.isotope({
         filter: filterValue
       });
     });
-    // change is-checked class on buttons
   </script>
   <script>
-    // swiper element
     const swiperEl = document.querySelector('swiper-container[slides-per-view="4"]');
 
-    // swiper parameters
     const swiperParams = {
       slidesPerView: 1,
       breakpoints: {
@@ -869,10 +812,26 @@
       }
     };
 
-    // now we need to assign all parameters to Swiper element
     Object.assign(swiperEl, swiperParams);
 
-    // and now initialize it
     swiperEl.initialize();
+  </script>
+  <script>
+    function parseCustomTags(input) {
+      const pattern =
+        /<#([a-fA-F0-9]{6,8}|rgb\(\d{1,3},\s?\d{1,3},\s?\d{1,3}\)|rgba\(\d{1,3},\s?\d{1,3},\s?\d{1,3},\s?0?\.?\d+\))>(.*?)<\/#\1>/g;
+      const output = input.replace(pattern, (match, p1, p2) => {
+        const style = `color: ${p1};`;
+        return `<span style="${style}">${p2}</span>`;
+      });
+
+      return output;
+    }
+
+    const heroTitle = $("#hero-title");
+    heroTitle.each(function(index, element) {
+      console.log($(this).text());
+      $(this).html(parseCustomTags($(this).text()))
+    });
   </script>
 @endpush
