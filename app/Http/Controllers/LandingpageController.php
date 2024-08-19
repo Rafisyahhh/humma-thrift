@@ -57,7 +57,6 @@ class LandingpageController extends Controller {
 
     public function store() {
         $store = UserStore::all();
-
         return view('landing.toko', compact('store'));
     }
 
