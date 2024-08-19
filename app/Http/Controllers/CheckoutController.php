@@ -8,6 +8,7 @@ use App\Http\Controllers\Payment\TripayController;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Auctions;
+use App\Models\AdminFee;
 use App\Models\UserAddress;
 use App\Models\cart;
 use Illuminate\Http\Request;
@@ -45,6 +46,7 @@ class CheckoutController extends Controller
         }
 
         $channel_pembayaran = ChannelPembayaran::all();
+        $biaya_admin = AdminFee::first();
         $users = Auth::user();
         $addresses = UserAddress::where('user_id', $users->id)->get();
         $product = Product::whereIn('id', $products)->get();
@@ -64,7 +66,8 @@ class CheckoutController extends Controller
                 'channel_pembayaran',
                 'countFavorite',
                 'carts',
-                'countcart'
+                'countcart',
+                'biaya_admin'
             )
         );
     }
@@ -90,6 +93,7 @@ class CheckoutController extends Controller
             }
         }
 
+        $biaya_admin = AdminFee::first();
         $channel_pembayaran = ChannelPembayaran::all();
         $users = Auth::user();
         $addresses = UserAddress::where('user_id', $users->id)->get();
@@ -110,7 +114,8 @@ class CheckoutController extends Controller
                 'countFavorite',
                 'product_auction',
                 'carts',
-                'countcart'
+                'countcart',
+                'biaya_admin'
             )
         );
     }

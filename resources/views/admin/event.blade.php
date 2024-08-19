@@ -161,6 +161,17 @@
 
 @push('js')
   <script type="text/javascript">
+    function parseCustomTags(input) {
+      const pattern =
+        /<#([a-fA-F0-9]{6,8}|rgb\(\d{1,3},\s?\d{1,3},\s?\d{1,3}\)|rgba\(\d{1,3},\s?\d{1,3},\s?\d{1,3},\s?0?\.?\d+\))>(.*?)<\/#\1>/g;
+
+      const output = input.replace(pattern, (match, p1, p2) => {
+        const style = p1.startsWith("rgb") ? `color: ${p1};` : `color: #${p1};`;
+        return `<span style="${style}">${p2}</span>`;
+      });
+
+      return output;
+    }
     $(document).ready(function() {
       const {
         table
@@ -209,6 +220,7 @@
           },
           {
             data: 'judul',
+            render: (data) => parseCustomTags(data.replace(/&lt;/g, '<').replace(/&gt;/g, '>'))
           },
           {
             data: 'subjudul',

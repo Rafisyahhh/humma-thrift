@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\cart;
 use App\Models\Favorite;
 use App\Models\Order;
+use App\Models\AdminFee;
 use App\Models\ProductAuction;
 use App\Models\TransactionOrder;
 use App\Models\UserAddress;
@@ -49,18 +50,20 @@ class TransactionController extends Controller
             }
 
             # Buat Data Transaksi
+            $biaya_admin = AdminFee::first();
             $transactions = TransactionOrder::create([
                 'user_id' => auth()->id(),
                 'user_address_id' => $address->id,
                 'transaction_id' => $transaction['merchant_ref'],
                 'reference_id' => $transaction['reference'],
-                'total' => $transaction['amount'],
+                'total' => $transaction['amount'] + $biaya_admin->biaya_admin,
                 'expired_at' => now()->addDays(1),
                 'paid_at' => null,
                 'delivery_status' => 'selesaikan pesanan',
                 'status' => $transaction['status'],
                 'total_harga' => $transaction['amount_received'],
-                'biaya_admin' => $transaction['total_fee'],
+                'biaya_transaction' => $transaction['total_fee'],
+                'biaya_admin' => $biaya_admin->biaya_admin,
                 'payment_method' => $transaction['payment_name']
             ]);
 
@@ -116,16 +119,18 @@ class TransactionController extends Controller
                 return back()->withErrors(['error' => $transaction->error]);
             }
 
+            $biaya_admin = AdminFee::first();
             $transactions = TransactionOrder::create([
                 'user_id' => auth()->id(),
                 'user_address_id' => $address->id,
                 'transaction_id' => $transaction['merchant_ref'],
                 'reference_id' => $transaction['reference'],
-                'total' => $transaction['amount'],
+                'total' => $transaction['amount'] + $biaya_admin->biaya_admin,
                 'delivery_status' => 'selesaikan pesanan',
                 'status' => $transaction['status'],
                 'total_harga' => $transaction['amount_received'],
-                'biaya_admin' => $transaction['total_fee'],
+                'biaya_admin' => $biaya_admin->biaya_admin,
+                'biaya_transaction' => $transaction['total_fee'],
                 'payment_method' => $transaction['payment_name']
             ]);
 
@@ -157,6 +162,7 @@ class TransactionController extends Controller
      */
     public function show($reference)
     {
+        $biaya_admin = AdminFee::first();
         $tripay = new TripayController();
         $detail = $tripay->detailTransaction($reference);
         $transaction_order = TransactionOrder::where('reference_id', $reference)->first();
@@ -164,6 +170,6 @@ class TransactionController extends Controller
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $carts = cart::where('user_id', auth()->id())->whereNotNull('product_id')->orderBy('created_at')->get();
         $countcart = cart::where('user_id', auth()->id())->count();
-        return view('user.transactiondetail', compact('detail','order', 'countFavorite', 'countcart', 'carts', 'transaction_order'));
+        return view('user.transactiondetail', compact('detail','order', 'countFavorite', 'countcart', 'carts', 'transaction_order','biaya_admin'));
     }
 }

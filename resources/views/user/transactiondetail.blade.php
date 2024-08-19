@@ -153,18 +153,23 @@
                                     <div class="subtotal product-total">
                                         <h5 class="wrapper-heading" style="font-size: 17px;">Total Harga</h5>
                                         <h5 class="wrapper-heading" style="font-size: 17px;">
-                                            Rp.{{ number_format($detail?->amount_received, null, null, '.') }}
+                                            Rp.{{ number_format($transaction_order->total_harga, null, null, '.') }}
                                         </h5>
+                                    </div>
+                                    <div class="subtotal product-total">
+                                        <h5 class="wrapper-heading" style="font-size: 17px;">Biaya Transaksi</h5>
+                                        <h5 class="wrapper-heading" style="font-size: 17px;" id="admin-fee">
+                                            Rp.{{ number_format($transaction_order->biaya_transaction, null, null, '.') }}</h5>
                                     </div>
                                     <div class="subtotal product-total">
                                         <h5 class="wrapper-heading" style="font-size: 17px;">Biaya Admin</h5>
                                         <h5 class="wrapper-heading" style="font-size: 17px;" id="admin-fee">
-                                            Rp.{{ number_format($detail?->total_fee, null, null, '.') }}</h5>
+                                            Rp.{{ number_format($biaya_admin->biaya_admin, null, null, '.') }}</h5>
                                     </div>
                                     <div class="subtotal total">
                                         <h5 class="wrapper-heading">Total Belanja</h5>
                                         <h5 class="wrapper-heading price" id="total-belanja">
-                                            Rp.{{ number_format($detail?->amount, null, null, '.') }}</h5>
+                                            Rp.{{ number_format($transaction_order->total, null, null, '.') }}</h5>
                                     </div>
                                 </div>
                             </div>

@@ -171,7 +171,7 @@
       /* margin: 0 5px 5px; */
       background-color: #ffffff73;
       /* margin-left:1px !important;
-                                                                                                                                                                      margin-right: 1px !important; */
+                                                                                                                                                                                                  margin-right: 1px !important; */
       /* Tambahkan margin jika perlu */
     }
 
@@ -818,19 +818,26 @@
   </script>
   <script>
     function parseCustomTags(input) {
+      // Pattern untuk menangkap warna hex (6 atau 8 digit), rgb(), dan rgba()
       const pattern =
         /<#([a-fA-F0-9]{6,8}|rgb\(\d{1,3},\s?\d{1,3},\s?\d{1,3}\)|rgba\(\d{1,3},\s?\d{1,3},\s?\d{1,3},\s?0?\.?\d+\))>(.*?)<\/#\1>/g;
+
       const output = input.replace(pattern, (match, p1, p2) => {
-        const style = `color: ${p1.startsWith("rgb") ? p1 : `#${p1}`};`;
+        // Memeriksa format warna dan menyiapkan style
+        const style = p1.startsWith("rgb") ? `color: ${p1};` : `color: #${p1};`;
         return `<span style="${style}">${p2}</span>`;
       });
 
       return output;
     }
 
+
+
     const heroTitle = $("#hero-title");
-    heroTitle.each(function(index, element) {
-      console.log($(this).text());
+    heroTitle.each(async function(index, element) {
+      const originalText = $(this).text();
+      const parsedText = await parseCustomTags(parseCustomTags(originalText));
+      console.log(originalText, parsedText);
       $(this).html(parseCustomTags($(this).text()))
     });
   </script>
