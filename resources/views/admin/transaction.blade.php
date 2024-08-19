@@ -337,9 +337,9 @@
             console.log(row);
             const badge = {
               'selesaikan pesanan': `<span class="badge text-bg-danger">Selesaikan Pesanan</span>`,
-              'dikemas': `<span class="badge text-bg-warning">Di Kemas</span>`,
-              'diantar': `<span class="badge text-bg-warning">Di Antar</span>`,
-              'diterima': `<span class="badge text-bg-warning">Di Terima</span>`,
+              'dikemas': `<span class="badge text-bg-warning">Dikemas</span>`,
+              'diantar': `<span class="badge text-bg-warning">Diantar</span>`,
+              'diterima': `<span class="badge text-bg-warning">Diterima</span>`,
               'selesai': `<span class="badge text-bg-success">Selesai</span>`,
             } [data];
             return badge || data;
