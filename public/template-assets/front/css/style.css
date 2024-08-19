@@ -1712,7 +1712,7 @@ button {
     content: " ";
     width: 0%;
     height: 100%;
-    background: #f9f5eb;
+    background: #ffffff;
     position: absolute;
     transition: all 0.4s ease-in-out;
     right: 0;
