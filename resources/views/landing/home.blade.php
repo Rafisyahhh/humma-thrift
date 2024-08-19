@@ -21,8 +21,8 @@
       position: absolute;
       margin-top: -10rem;
       z-index: 1;
-      filter: drop-shadow(1px 4px 20px rgba(0,0,0,.125));
-      -ms-filter: drop-shadow(1px 4px 20px rgba(0,0,0,.125));
+      /* filter: drop-shadow(1px 4px 20px rgba(0,0,0,.125));
+      -ms-filter: drop-shadow(1px 4px 20px rgba(0,0,0,.125)); */
     }
 
     .shape-wrapper .circle-shape {
