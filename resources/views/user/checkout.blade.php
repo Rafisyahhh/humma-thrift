@@ -432,8 +432,12 @@
                             </h5>
                         </div>
                         <div class="subtotal product-total">
-                            <h5 class="wrapper-heading" style="font-size: 17px;">Biaya Admin</h5>
+                            <h5 class="wrapper-heading" style="font-size: 17px;">Biaya Transaksi</h5>
                             <h5 class="wrapper-heading" style="font-size: 17px;" id="admin-fee">Rp0</h5>
+                        </div>
+                        <div class="subtotal product-total">
+                            <h5 class="wrapper-heading" style="font-size: 17px;">Biaya Admin</h5>
+                            <h5 class="wrapper-heading" style="font-size: 17px;">@currency($biaya_admin->biaya_admin)</h5>
                         </div>
                         <div class="subtotal total">
                             <h5 class="wrapper-heading">Total Belanja</h5>
@@ -608,7 +612,7 @@
                     productPrice * (adminfeePercent / 100) :
                     adminfeeFlat;
 
-                const total = productPrice + adminFee;
+                const total = productPrice + adminFee + {{ $biaya_admin->biaya_admin }};
                 document.getElementById('total-belanja').textContent = 'Rp' + total.toLocaleString('id-ID');
             }
 
