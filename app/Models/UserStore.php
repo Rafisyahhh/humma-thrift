@@ -48,10 +48,10 @@ class UserStore extends Model {
     }
 
     public function products() {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, "store_id");
     }
     public function productAuctions() {
-        return $this->hasMany(ProductAuction::class);
+        return $this->hasMany(ProductAuction::class, "store_id");
     }
 
     public function ulasan() {

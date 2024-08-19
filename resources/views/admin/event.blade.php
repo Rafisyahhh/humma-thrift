@@ -173,6 +173,11 @@
       return output;
     }
     $(document).ready(function() {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+      });
       const {
         table
       } = $('.yajra-datatable').AjaxDataTable({

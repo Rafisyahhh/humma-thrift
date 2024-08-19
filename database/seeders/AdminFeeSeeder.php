@@ -14,7 +14,7 @@ class AdminFeeSeeder extends Seeder
     public function run(): void
     {
         AdminFee::create([
-            "biaya_admin" => 10000
+            "biaya_admin" => 1000
         ]);
     }
 }

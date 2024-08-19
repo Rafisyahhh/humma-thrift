@@ -51,13 +51,13 @@ class SellerTransactionController extends Controller
         $transactionData = $transactionsQuery->get();
         $transactions = $transactionsQuery->paginate(12);
 
-        $transactionTotal = $transactionsQuery->where('status', 'PAID')->sum('total_harga');
+        $transactionTotal = $transactionsQuery->where('status', 'PAID')->sum('total');
 
         // More efficient net income calculation
         $netIncome = $transactionData->filter(function ($query) {
             return $query->status === 'PAID' && $query->delivery_status === 'selesai';
         })->sum(function ($query) {
-            return $query->total_harga * 0.9; // 0.9 is equivalent to 90% after deducting 10%
+            return $query->total_harga;
         });
 
         $withdrawalTotal = $this->_withdrawal
@@ -76,7 +76,7 @@ class SellerTransactionController extends Controller
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
-            ->selectRaw('DATE(created_at) as date, SUM(total_harga) * 0.9 as total') // 0.9 is equivalent to 90% after deducting 10%
+            ->selectRaw('DATE(created_at) as date, SUM(total_harga) as total')
             ->whereMonth('created_at', $currentDate->month)
             ->groupByRaw('DATE(created_at)')
             ->get();
@@ -93,7 +93,7 @@ class SellerTransactionController extends Controller
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
-            ->selectRaw('DATE(created_at) as date, SUM(total_harga) as total') // 0.9 is equivalent to 90% after deducting 10%
+            ->selectRaw('DATE(created_at) as date, SUM(total) as total')
             ->whereMonth('created_at', $currentDate->month)
             ->groupByRaw('DATE(created_at)')
             ->get();
@@ -125,10 +125,10 @@ class SellerTransactionController extends Controller
             ->whereYear('created_at', $currentDate->year);
 
             if ($driver === 'sqlite') {
-                $monthlySalesQuery->selectRaw('strftime("%m", created_at) as month, SUM(total_harga) * 0.9 as total')
+                $monthlySalesQuery->selectRaw('strftime("%m", created_at) as month, SUM(total_harga) as total')
                     ->groupBy(\DB::raw('strftime("%m", created_at)'));
             } elseif ($driver === 'mysql') {
-                $monthlySalesQuery->selectRaw('MONTH(created_at) as month, SUM(total_harga) * 0.9 as total')
+                $monthlySalesQuery->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
                     ->groupBy(\DB::raw('MONTH(created_at)'));
             }
 
@@ -154,10 +154,10 @@ class SellerTransactionController extends Controller
             ->whereYear('created_at', $currentDate->year);
 
             if ($driver === 'sqlite') {
-                $monthlyGrossQuery->selectRaw('strftime("%m", created_at) as month, SUM(total_harga) as total')
+                $monthlyGrossQuery->selectRaw('strftime("%m", created_at) as month, SUM(total) as total')
                     ->groupBy(\DB::raw('strftime("%m", created_at)'));
             } elseif ($driver === 'mysql') {
-                $monthlyGrossQuery->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
+                $monthlyGrossQuery->selectRaw('MONTH(created_at) as month, SUM(total) as total')
                     ->groupBy(\DB::raw('MONTH(created_at)'));
             }
 

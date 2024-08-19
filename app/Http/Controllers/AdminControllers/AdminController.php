@@ -64,13 +64,13 @@ class AdminController extends Controller {
         $transactionData = $transactionsQuery->get();
         $transactions = $transactionsQuery->paginate(12);
 
-        $transactionTotal = $transactionsQuery->where('status', 'PAID')->sum('total_harga');
+        $transactionTotal = $transactionsQuery->where('status', 'PAID')->sum('total');
 
         // Hitung pendapatan bersih (10% dari setiap transaksi)
         $netIncome = $transactionData->filter(function ($query) {
             return $query->status === 'PAID' && $query->delivery_status === 'selesai';
         })->sum(function ($query) {
-            return $query->total_harga * 0.1; // 10% dari setiap transaksi
+            return $query->biaya_admin; // 10% dari setiap transaksi
         });
 
 
@@ -89,7 +89,7 @@ class AdminController extends Controller {
         $rawDailySales = $this->_transactions
             ->where('status', 'PAID')
             ->where('delivery_status', 'selesai')
-            ->selectRaw('DATE(created_at) as date, SUM(total_harga) as total')
+            ->selectRaw('DATE(created_at) as date, SUM(total) as total, SUM(biaya_admin) as biaya')
             ->whereMonth('created_at', $currentDate->month)
             ->groupByRaw('DATE(created_at)')
             ->get();
@@ -97,7 +97,7 @@ class AdminController extends Controller {
             $dailySales = collect(range(1, (int) $lastOfMonth->format('d')))->map(function ($day) use ($rawDailySales, $currentDate) {
                 $salesDate = $currentDate->format('Y-m-') . str_pad($day, 2, '0', STR_PAD_LEFT);
                 $sales = $rawDailySales->firstWhere('date', $salesDate);
-                return $sales ? $sales->total * 0.1 : 0; // 10% dari setiap transaksi
+                return $sales ? $sales->biaya : 0;
             });
 
         $dailyGrossSales = collect(range(1, (int) $lastOfMonth->format('d')))->map(function ($day) use ($rawDailySales, $currentDate) {
@@ -116,19 +116,20 @@ class AdminController extends Controller {
             ->where('delivery_status', 'selesai')
             ->whereYear('created_at', $currentDate->year);
 
-        if ($driver === 'sqlite') {
-            $monthlySalesQuery->selectRaw('strftime("%m", created_at) as month, SUM(total_harga) as total')
-                ->groupBy(DB::raw('strftime("%m", created_at)'));
-        } elseif ($driver === 'mysql') {
-            $monthlySalesQuery->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
-                ->groupBy(DB::raw('MONTH(created_at)'));
-        }
+            if ($driver === 'sqlite') {
+                $monthlySalesQuery->selectRaw('strftime("%m", created_at) as month, SUM(total) as total, SUM(biaya_admin) as biaya')
+                    ->groupBy(\DB::raw('strftime("%m", created_at)'));
+            } elseif ($driver === 'mysql') {
+                $monthlySalesQuery->selectRaw('MONTH(created_at) as month, SUM(total) as total, SUM(biaya_admin) as biaya')
+                    ->groupBy(\DB::raw('MONTH(created_at)'));
+            }
+
 
         $monthlySales = $monthlySalesQuery->get()->keyBy('month');
 
 
         $monthlyNetIncome = collect(range(1, 12))->map(function ($month) use ($monthlySales) {
-            return $monthlySales->get($month, ['total' => 0])['total'] * 0.1; // 10% dari setiap transaksi
+            return $monthlySales->get($month, ['biaya' => 0])['biaya']; 
         })->toArray();
 
         $monthlyGrossSales = collect(range(1, 12))->map(function ($month) use ($monthlySales) {
