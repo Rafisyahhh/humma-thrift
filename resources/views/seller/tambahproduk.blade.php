@@ -181,38 +181,7 @@
                   <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                 @enderror
               </div>
-              <div class="account-inner-form mb-0 ">
-                <div class="contact-section">
-              {{-- <div class="col-lg-6"> --}}
-                <div class="contact-info-section">
-                  <div class="contact-information">
-                    <div class="contact-wrapper">
-                      <div class="row gy-5">
-                        <div class="col-sm-6">
-                          <label class="card phone" onclick="selectCard('phone')" style="height: 80px" for="phone">
-                            <input type="radio" id="phone" name="product_type" class="radio-input d-none"
-                              value="products" {{ isset($product->bid_price_start) ? '' : 'checked' }}>
-                            <div class="wrapper-content">
-                              <p>Harga tetap</p>
-                            </div>
-                          </label>
-                        </div>
-                        <div class="col-sm-6">
-                          <label class="card email" onclick="selectCard('email')" style="height: 80px" for="email">
-                            <input type="radio" id="email" name="product_type" class="radio-input d-none"
-                              value="product_auctions" {{ isset($product->bid_price_start) ? 'checked' : '' }}>
-                            <div class="wrapper-content">
-                              <p>Lelang</p>
-                            </div>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              {{-- </div> --}}
-              </div>
-              </div>
+            
 
             </div>
             <div class="col-md-6 mb-3">
@@ -238,52 +207,7 @@
                   <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                 @enderror
               </div>
-              <div class="mt-4">
-                <label for="start_price" class="form-label">Harga Awal</label>
-                <input type="number" id="start_price" name="start_price"
-                  class="form-control @error('start_price') is-invalid @enderror" placeholder="Masukkan Harga awal"
-                  value="{{ isset($is_edit) ? $product->start_price : old('start_price') }}">
-                @error('start_price')
-                  <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                @enderror
-              </div>
-              <div class="mt-4" id="input-a" style="align-items: center; display: none;">
-                <div class="form-group">
-                  <label for="inputA">Harga</label>
-                  <input type="number" id="inputA" class="form-control @error('price') is-invalid @enderror"
-                    name="price" placeholder="Masukkan harga"
-                    value="{{ isset($is_edit) ? $product->price : old('price') }}">
-                  @error('price')
-                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                  @enderror
-                </div>
-              </div>
-              <div id="input-b" style="align-items: center; display: none;">
-                <div class="row mt-4">
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label for="inputB">Harga mulai dari</label>
-                      <input type="number" id="inputB" name="bid_price_start"
-                        class="form-control @error('bid_price_start') is-invalid @enderror" placeholder="Harga bid awal"
-                        value="{{ isset($is_edit) ? $product->bid_price_start : old('bid_price_start') }}">
-                      @error('bid_price_start')
-                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                      @enderror
-                    </div>
-                  </div>
-                  <div class="col-lg-6" id="input-c" style="display: none;">
-                    <div class="form-group">
-                      <label for="inputC">Sampai dari</label>
-                      <input type="number" id="inputC" name="bid_price_end"
-                        class="form-control @error('bid_price_end') is-invalid @enderror" placeholder="Harga bid akhir"
-                        value="{{ isset($is_edit) ? $product->bid_price_end : old('bid_price_end') }}">
-                      @error('bid_price_end')
-                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                      @enderror
-                    </div>
-                  </div>
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
@@ -292,7 +216,7 @@
         <div class="account-inner-form">
           <div class="contact-section">
             <div class="row">
-              {{-- <div class="col-lg-6">
+              <div class="col-lg-6">
                 <div class="contact-info-section">
                   <div class="contact-information">
                     <div class="contact-wrapper">
@@ -319,9 +243,9 @@
                     </div>
                   </div>
                 </div>
-              </div> --}}
+              </div>
 
-              {{-- <div class="col-lg-6 mt-4" id="input-a" style="align-items: center; display: none;">
+              <div class="col-lg-6 mt-4" id="input-a" style="align-items: center; display: none;">
                 <div class="form-group">
                   <label for="inputA">Harga</label>
                   <input type="number" id="inputA" class="form-control @error('price') is-invalid @enderror"
@@ -331,8 +255,8 @@
                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                   @enderror
                 </div>
-              </div> --}}
-              {{-- <div class="col-lg-6" id="input-b" style="align-items: center; display: none;">
+              </div>
+              <div class="col-lg-6" id="input-b" style="align-items: center; display: none;">
                 <div class="row mt-4">
                   <div class="col-lg-6">
                     <div class="form-group">
@@ -357,7 +281,7 @@
                     </div>
                   </div>
                 </div>
-              </div> --}}
+              </div>
             </div>
           </div>
         </div>

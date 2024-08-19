@@ -213,7 +213,7 @@
                     </div>
                     <div class="custom-card-content">
                         <div class="mb-0">Transaksi Bersih</div>
-                        <div class="mb-0">@currency($saldo)</div>
+                        <div class="mb-0">@currency($netIncome)</div>
                     </div>
                 </div>
             </div>

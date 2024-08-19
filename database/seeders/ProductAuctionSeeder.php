@@ -122,8 +122,7 @@ class ProductAuctionSeeder extends Seeder {
             $item = collect($item);
             $sourcePath = $publicPath . $item["thumbnail"];
             $destinationPath = $uploadPath . $item["thumbnail"];
-            $startPrice = $this->random_int_with_fixed_suffix(100_000, 400_000);
-            $priceStart = $this->random_int_with_fixed_suffix($startPrice + 50_000, 500_000);
+            $priceStart = $this->random_int_with_fixed_suffix(5_000, 1_000_000);
 
             if (File::exists($sourcePath) && Storage::disk('public')->put($destinationPath, File::get($sourcePath))) {
                 return $item->put("price", null)
@@ -131,9 +130,8 @@ class ProductAuctionSeeder extends Seeder {
                     ->put("user_id", 16)
                     ->put('size', 'XL')
                     ->put('description', $faker->sentence())
-                    ->put('start_price' , $startPrice)
                     ->put('bid_price_start', $priceStart)
-                    ->put('bid_price_end', $this->random_int_with_fixed_suffix($priceStart, $priceStart + 50_000))
+                    ->put('bid_price_end', $this->random_int_with_fixed_suffix($priceStart, $priceStart + 500_000))
                     ->put("thumbnail", $uploadPath . $item["thumbnail"]);
             }
         })->each(fn(Collection $data) => ProductAuction::create($data->toArray()));

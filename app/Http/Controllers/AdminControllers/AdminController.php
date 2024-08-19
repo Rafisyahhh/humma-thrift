@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
 use App\Enums\WithdrawalStatusEnum;
+use App\Models\AdminFee;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductAuction;
@@ -33,7 +34,8 @@ class AdminController extends Controller {
         $countproductauction = ProductAuction::count();
         $countseller = UserStore::count();
         $countuser = User::count();
-
+        $biaya = AdminFee::all();
+        $biayaAdmin = $biaya->first()->biaya_admin;
         // $transactions = TransactionOrder::select(DB::raw("DAYOFWEEK(paid_at) as day_of_week"), DB::raw("SUM(total_harga * 0.05) as total"))
         //     ->groupBy(DB::raw('DAYOFWEEK(paid_at)'))
         //     ->get();
@@ -68,77 +70,34 @@ class AdminController extends Controller {
         $netIncome = $transactionData->filter(function ($query) {
             return $query->status === 'PAID' && $query->delivery_status === 'selesai';
         })->sum(function ($query) {
-            return $query->total * 0.1; // 10% dari setiap transaksi
+            return $query->total_harga * 0.1; // 10% dari setiap transaksi
         });
 
 
-        $orderR = Order::with('product')
-        ->orderBy('transaction_order_id')
-        ->get()
-        ->groupBy('transaction_order_id');
-
-        $orderL = Order::with('product_auction')
-        ->orderBy('transaction_order_id')
-        ->get()
-        ->groupBy('transaction_order_id');
-
-        $hargaBeli = $orderR->sum(function ($orders) {
-            return $orders->sum(function ($order) {
-                return $order->product->start_price ?? 0;
-            });
-        });
-
-        $hargaBeliL = $orderL->sum(function ($orders) {
-            return $orders->sum(function ($order) {
-                return $order->product_auction->start_price ?? 0;
-            });
-        });
-
-        $saldo = ($transactionTotal - ($hargaBeli + $hargaBeliL)) * 0.1;
 
         $withdrawalTotal = $this->_withdrawal
             ->where('status', WithdrawalStatusEnum::COMPLETED)
             ->where('user_id', $user->id)
             ->sum('amount');
 
-        $accountBalance = $saldo - $withdrawalTotal;
+        $accountBalance = $netIncome - $withdrawalTotal;
 
-        $chartR = $orderR->groupBy(function ($order) {
-            return $order->first()->created_at->format('Y-m-d');
-        })->map(function ($orders) {
-            return $orders->sum(function ($order) {
-                return $order->sum(function ($orderItem) {
-                    return $orderItem->product->start_price ?? 0;
-                });
-            });
-        });
-
-        $chartL = $orderL->groupBy(function ($order) {
-            return $order->first()->created_at->format('Y-m-d');
-        })->map(function ($orders) {
-            return $orders->sum(function ($order) {
-                return $order->sum(function ($orderItem) {
-                    return $orderItem->product_auction->start_price ?? 0;
-                });
-            });
-        });
 
 
         $currentDate = Carbon::now();
         $lastOfMonth = $currentDate->endOfMonth();
         $rawDailySales = $this->_transactions
             ->where('status', 'PAID')
-            // ->where('delivery_status', 'selesai')
+            ->where('delivery_status', 'selesai')
             ->selectRaw('DATE(created_at) as date, SUM(total_harga) as total')
             ->whereMonth('created_at', $currentDate->month)
             ->groupByRaw('DATE(created_at)')
             ->get();
 
-            $dailySales = collect(range(1, (int) $lastOfMonth->format('d')))->map(function ($day) use ($rawDailySales, $currentDate, $chartR, $chartL) {
+            $dailySales = collect(range(1, (int) $lastOfMonth->format('d')))->map(function ($day) use ($rawDailySales, $currentDate) {
                 $salesDate = $currentDate->format('Y-m-') . str_pad($day, 2, '0', STR_PAD_LEFT);
                 $sales = $rawDailySales->firstWhere('date', $salesDate);
-                return $sales ? ($sales->total - ($chartR->get($salesDate, 0) + $chartL->get($salesDate, 0))) * 0.1 : 0; // Subtract (selling price - purchase price) and take 10%
-
+                return $sales ? $sales->total * 0.1 : 0; // 10% dari setiap transaksi
             });
 
         $dailyGrossSales = collect(range(1, (int) $lastOfMonth->format('d')))->map(function ($day) use ($rawDailySales, $currentDate) {
@@ -154,7 +113,7 @@ class AdminController extends Controller {
 
         $monthlySalesQuery = $this->_transactions
             ->where('status', 'PAID')
-            // ->where('delivery_status', 'selesai')
+            ->where('delivery_status', 'selesai')
             ->whereYear('created_at', $currentDate->year);
 
         if ($driver === 'sqlite') {
@@ -168,32 +127,8 @@ class AdminController extends Controller {
         $monthlySales = $monthlySalesQuery->get()->keyBy('month');
 
 
-        $monthlyChartR = $orderR->groupBy(function ($order) {
-            return $order->first()->created_at->format('Y-m');
-        })->map(function ($orders) {
-            return $orders->sum(function ($order) {
-                return $order->sum(function ($orderItem) {
-                    return $orderItem->product->start_price ?? 0;
-                });
-            });
-        });
-
-        $monthlyChartL = $orderL->groupBy(function ($order) {
-            return $order->first()->created_at->format('Y-m');
-        })->map(function ($orders) {
-            return $orders->sum(function ($order) {
-                return $order->sum(function ($orderItem) {
-                    return $orderItem->product_auction->start_price ?? 0;
-                });
-            });
-        });
-
-
-        $monthlyNetIncome = collect(range(1, 12))->map(function ($month) use ($monthlySales, $monthlyChartR, $monthlyChartL, $currentDate) {
-            $monthKey = $currentDate->format('Y-') . str_pad($month, 2, '0', STR_PAD_LEFT);
-            $totalSales = $monthlySales->get($month, ['total' => 0])['total'];
-            $totalPurchases = ($monthlyChartR->get($monthKey, 0) + $monthlyChartL->get($monthKey, 0));
-            return ($totalSales - $totalPurchases) * 0.1;
+        $monthlyNetIncome = collect(range(1, 12))->map(function ($month) use ($monthlySales) {
+            return $monthlySales->get($month, ['total' => 0])['total'] * 0.1; // 10% dari setiap transaksi
         })->toArray();
 
         $monthlyGrossSales = collect(range(1, 12))->map(function ($month) use ($monthlySales) {
@@ -202,7 +137,7 @@ class AdminController extends Controller {
 
 
         // dd($accountBalance);
-        return view('admin.index', compact('countproduct', 'countproductauction', 'countseller', 'countuser', 'months', 'transactions', 'transactionTotal', 'netIncome', 'monthlyNetIncome', 'dailySales', 'dailyGrossSales', 'monthlyGrossSales', 'accountBalance'));
+        return view('admin.index', compact('countproduct', 'countproductauction', 'countseller', 'countuser', 'months', 'transactions', 'transactionTotal', 'netIncome', 'monthlyNetIncome', 'dailySales', 'dailyGrossSales', 'monthlyGrossSales', 'accountBalance','biayaAdmin','biaya'));
     }
 
 

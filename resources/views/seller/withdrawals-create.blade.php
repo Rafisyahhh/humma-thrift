@@ -131,8 +131,8 @@
       </div>
       <div class="account-detail">
         <h5>{{ auth()->user()->store->name }} <span>{{ '@' . auth()->user()->store->username }}</span></h5>
-        <p><i class="fas fa-wallet me-2"></i> @currency($accountBalance)</p>
-        <p><i class="fas fa-wallet me-2"></i> Minimal penarikan: 1jt</p>
+        <p><i class="fas fa-wallet me-2"></i><span accountBalance="{{ $accountBalance }}"></span></p>
+        <p><i class="fas fa-wallet me-2"></i> Minimal penarikan: 1.000.000 (1.0jt)</p>
       </div>
     </div>
 
@@ -160,7 +160,8 @@
       <label for="bank_number" style="font-size: 14px">Nomor Rekening</label>
       <input type="number" style="font-size: 14px; padding: 1rem 1.5rem;" placeholder="Masukkan rekening bank anda"
         value="{{ old('bank_number') }}" name="bank_number" id="bank_number"
-        class="form-control @error('bank_number') is-invalid @enderror" required />
+        class="form-control @error('bank_number') @if ($message != 'balance_error') is-invalid @endif @enderror"
+        required />
 
       {{-- @error('amount')
                 <span class="text-danger" role="alert">
@@ -185,3 +186,29 @@
     <button class="btn btn-primary withdrawal-btn" type="submit">Ajukan</button>
   </form>
 @endsection
+
+@push('script')
+  <script>
+    function metricNumbers(value) {
+      const types = [" ", "K", "Jt", "M", "T"];
+      const selectType = (Math.log10(value) / 3) | 0;
+      if (selectType == 0) return value;
+      let scaled = value / Math.pow(10, selectType * 3);
+      return scaled.toFixed(1) + types[selectType];
+    }
+    const $accountBalanceElem = $('[accountBalance]');
+    const accountBalance = parseFloat($accountBalanceElem.attr("accountBalance"));
+    const balance = metricNumbers(accountBalance);
+
+    $accountBalanceElem.text(`@currency($accountBalance) ${balance ? `(${balance})` : ""}`);
+
+    $accountBalanceElem.closest("p").css("color", accountBalance < 1000000 ? "red" : "green");
+
+
+    @error('bank_number')
+      @if ($message == 'balance_error')
+        flasher.error("Tidak dapat menarik karena Saldo anda dibawah 1.000.000")
+      @endif
+    @enderror
+  </script>
+@endpush

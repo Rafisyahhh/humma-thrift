@@ -49,22 +49,6 @@ class DashboardUserController extends Controller {
         $countFavorite = Favorite::where('user_id', auth()->id())->count();
         $currentDate = now();
 
-        // $transactionsbulan = TransactionOrder::select(DB::raw("MONTH(paid_at) as month"), DB::raw("SUM(total) as total"))
-        // ->whereYear('paid_at', date('Y'))
-        // ->where('user_id', Auth::id())
-        // ->groupBy(DB::raw("MONTH(paid_at)"))
-        // ->orderBy(DB::raw("MONTH(paid_at)"))
-        // ->get();
-
-        // $months = [
-        //     'January', 'February', 'March', 'April', 'May', 'June',
-        //     'July', 'August', 'September', 'October', 'November', 'December'
-        // ];
-
-        // $datas = array_fill(0, 12, 0); // Initialize data array with zeroes
-        // foreach ($transactionsbulan as $transaction) {
-        //     $datas[$transaction->month - 1] = $transaction->total;
-        // }
         $countUnpaid = TransactionOrder::where('user_id', auth()->user()->id)->where('status', 'UNPAID')->count();
         $countDelivery = TransactionOrder::where('user_id', auth()->user()->id)->where('delivery_status', 'selesai')->count();
 
@@ -95,8 +79,12 @@ class DashboardUserController extends Controller {
             ->count();
 
         // Monthly sales data
+        // $months = collect(range(1, 12))->map(function ($month) use ($currentDate) {
+        //     return $currentDate->format('Y-') . str_pad($month, 2, '0', STR_PAD_LEFT);
+        // })->toArray();
+
         $months = collect(range(1, 12))->map(function ($month) use ($currentDate) {
-            return $currentDate->format('Y-') . str_pad($month, 2, '0', STR_PAD_LEFT);
+            return $currentDate->month($month)->format('F');
         })->toArray();
 
         $driver = \DB::getDriverName();
