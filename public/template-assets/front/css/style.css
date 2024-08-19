@@ -1699,11 +1699,11 @@ button {
     text-align: center;
     border-radius: 3rem;
     display: inline-block;
-    background: #f9f5eb;
+    background: #1c3879;
     font-size: 1.6rem;
     font-weight: 500;
     position: relative;
-    color: #1c3879;
+    color: #f9f5eb;
     font-family: inter, sans-serif;
     transition: all 0.3s;
     overflow: hidden;
@@ -1712,7 +1712,7 @@ button {
     content: " ";
     width: 0%;
     height: 100%;
-    background: #1c3879;
+    background: #f9f5eb;
     position: absolute;
     transition: all 0.4s ease-in-out;
     right: 0;
@@ -1731,8 +1731,9 @@ button {
     transition: all 0.4s ease-in-out;
 }
 .wrapper-section .shop-btn:hover {
-    color: #fff;
-    background-color: #1c3879;
+    color: #1c3879;
+    background-color:#f9f5eb;
+    ;
 }
 .wrapper-section .shop-btn:hover::after {
     right: auto;

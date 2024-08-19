@@ -24,8 +24,13 @@ class Ulasan extends Model {
         return $this->belongsTo(Product::class);
     }
 
-    public function user() {
+    public function product_auction()
+    {
+        return $this->belongsTo(ProductAuction::class);
+    }
 
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

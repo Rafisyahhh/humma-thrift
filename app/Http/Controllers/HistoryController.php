@@ -27,7 +27,16 @@ class HistoryController extends Controller {
                 ->where('delivery_status', 'selesai');
         })->get();
 
-        return view('user.history', compact('orders'));
+        // $reviews = Ulasan::where('product', function ($query) use ($orders) {
+        //     $query->where('user_id', auth()->id());
+        // })->get();
+
+        // $reviewsAuction = Ulasan::where('product_auction', function ($query) use ($orders) {
+        //     $query->where('user_id', auth()->id());
+        // })->get();
+        $reviews = Ulasan::where('user_id', auth()->id())->get();
+
+        return view('user.history', compact('orders', 'reviews'));
     }
 
     /**
