@@ -45,7 +45,7 @@
                                     <span class="new-price" style="font-size: 17px; font-weight:bold; color:red;">{{ count($storeOrders[$item->id]) }} terjual</span>
                                 </div>
                             </div>
-                            <div class="profile-info-detail-content me-5" style="align-items: center; justify-content: center; text-align: center; border-left:2px; border-color:black;">
+                            <div class="profile-info-detail-content me-5" style="align-items: center; justify-content: center; text-align: center; border-left: 2px solid rgb(216, 216, 216);padding-left: 12px;">
                                 <div class="profile-icon">
                                     <i class="fas fa-star" style="color: #ffbb28; font-size: 25px;"></i>
                                 </div>
