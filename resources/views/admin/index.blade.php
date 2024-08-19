@@ -76,7 +76,7 @@
         <div class="col-sm-6 col-lg-4 mb-4">
             <div class="card card-border-shadow-primary">
                 <div class="card-body">
-                    <div class="d-flex align-items-center mb-2 pb-1">
+                    <div class="d-flex align-items-center mb-2 pb-1 ms-0 me-0">
                         <div class="avatar me-2">
                             <span class="avatar-initial rounded bg-label-primary"><i
                                     class="fa-regular fa-credit-card"></i></span>
@@ -109,8 +109,14 @@
                             <div class="row">
                                 <div class="col mb-4">
                                     <label for="nameBasic" class="form-label">Biaya Admin</label>
-                                    <input type="number" name="biaya_admin" id="nameBasic" class="form-control"
+                                    <input type="number" name="biaya_admin" id="nameBasic" class="form-control @error('biaya_admin') is-invalid @enderror"
                                         placeholder="Masukkan Biaya Admin" value="{{ $adminfee->biaya_admin }}">
+
+                                    @error('biaya_admin')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
