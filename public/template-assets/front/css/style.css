@@ -1733,7 +1733,7 @@ button {
 .wrapper-section .shop-btn:hover {
     color: #1c3879;
     background-color:#f9f5eb;
-    ;
+    border: #1c3879 solid 1px;
 }
 .wrapper-section .shop-btn:hover::after {
     right: auto;
