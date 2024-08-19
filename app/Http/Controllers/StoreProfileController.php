@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\auctions;
 use App\Models\Favorite;
 use App\Models\cart;
+use App\Models\Order;
 use App\Models\UserStore;
 use App\Models\Product;
 use App\Models\ProductAuction;
@@ -87,7 +88,9 @@ class StoreProfileController extends Controller {
 
     public function showStore() {
         $store = UserStore::all();
-
+        $orders = Order::with(["product"])->whereHas('product', function ($query) {
+            $query->where('store_id', 1);
+        })->get();
         return view('user.store', compact('store'));
     }
 }
