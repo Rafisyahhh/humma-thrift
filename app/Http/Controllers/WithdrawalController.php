@@ -95,7 +95,7 @@ class WithdrawalController extends Controller {
         $accountBalance = $netIncome - $withdrawalTotal;
 
         if ($pendingWithdrawals) {
-            return redirect()->route('withdraw.index')->with('error', 'Kamu masih ada Transaksi yang belum kamu cairkan!');
+            return redirect()->route('seller.withdraw.index')->with('error', 'Kamu masih ada Transaksi yang belum kamu cairkan!');
         }
 
         return view('seller.withdrawals-create', compact('accountBalance', 'banks'));
