@@ -22,14 +22,16 @@ class UpdateAdminFeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'biaya_admin' => 'required'
+            'biaya_admin' => 'required|numeric|min:0|max:10000'
         ];
     }
 
     public function messages(): array
     {
         return [
-            'biaya_admin.required' => 'biaya admin harus diisi'
+            'biaya_admin.required' => 'biaya admin harus diisi',
+            'biaya_admin.min' => 'biaya admin tidak bisa minus',
+            'biaya_admin.max' => 'biaya admin maksimal Rp. 10.000'
         ];
     }
 }

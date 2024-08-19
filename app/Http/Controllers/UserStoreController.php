@@ -77,7 +77,7 @@ class UserStoreController extends Controller {
         $netIncome = $this->_transactions
             ->where('status', 'PAID')
             ->where('delivery_status', 'selesai')
-            ->sum('total_harga') * 0.9;
+            ->sum('total');
 
 
 
@@ -97,7 +97,7 @@ class UserStoreController extends Controller {
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
-            ->selectRaw('DATE(created_at) as date, SUM(total_harga) *0.9 as total') // 0.9 is equivalent to 90% after deducting 10%
+            ->selectRaw('DATE(created_at) as date, SUM(total_harga) as total') // 0.9 is equivalent to 90% after deducting 10%
             ->whereMonth('created_at', $currentDate->month)
             ->groupByRaw('DATE(created_at)')
             ->get();
@@ -114,7 +114,7 @@ class UserStoreController extends Controller {
             ->whereHas('order.product', function ($query) use ($userStoreId) {
                 $query->where('store_id', $userStoreId);
             })
-            ->selectRaw('DATE(created_at) as date, SUM(total_harga) as total') // 0.9 is equivalent to 90% after deducting 10%
+            ->selectRaw('DATE(created_at) as date, SUM(total) as total') // 0.9 is equivalent to 90% after deducting 10%
             ->whereMonth('created_at', $currentDate->month)
             ->groupByRaw('DATE(created_at)')
             ->get();
@@ -147,10 +147,10 @@ class UserStoreController extends Controller {
             ->whereYear('created_at', $currentDate->year);
 
         if ($driver === 'sqlite') {
-            $monthlySalesQuery->selectRaw('strftime("%m", created_at) as month, SUM(total_harga) * 0.9 as total')
+            $monthlySalesQuery->selectRaw('strftime("%m", created_at) as month, SUM(total_harga) as total')
                 ->groupBy(DB::raw('strftime("%m", created_at)'));
         } elseif ($driver === 'mysql') {
-            $monthlySalesQuery->selectRaw('MONTH(created_at) as month, SUM(total_harga) * 0.9 as total')
+            $monthlySalesQuery->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
                 ->groupBy(DB::raw('MONTH(created_at)'));
         }
 
@@ -176,10 +176,10 @@ class UserStoreController extends Controller {
             ->whereYear('created_at', $currentDate->year);
 
         if ($driver === 'sqlite') {
-            $monthlyGrossQuery->selectRaw('strftime("%m", created_at) as month, SUM(total_harga) as total')
+            $monthlyGrossQuery->selectRaw('strftime("%m", created_at) as month, SUM(total) as total')
                 ->groupBy(DB::raw('strftime("%m", created_at)'));
         } elseif ($driver === 'mysql') {
-            $monthlyGrossQuery->selectRaw('MONTH(created_at) as month, SUM(total_harga) as total')
+            $monthlyGrossQuery->selectRaw('MONTH(created_at) as month, SUM(total) as total')
                 ->groupBy(DB::raw('MONTH(created_at)'));
         }
 
