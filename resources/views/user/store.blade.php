@@ -39,10 +39,10 @@
                                     </div>
                                     <span class="new-price" style="font-size: 17px; font-weight:bold;">{{ count($item->products) + count($item->productAuctions) }} produk</span>
                                     <span class="new-price mx-2" style="font-size: 17px; font-weight:bold;">|</span>
-                                    <div class="profile-icon me-1" style="color:red; font-size: 19px;">
+                                    <div class="profile-icon me-1" style="color:green; font-size: 19px;">
                                         <i class="fa-solid fa-circle-check"></i>
                                     </div>
-                                    <span class="new-price" style="font-size: 17px; font-weight:bold; color:red;">{{ count($storeOrders[$item->id]) }} terjual</span>
+                                    <span class="new-price" style="font-size: 17px; font-weight:bold; color:green;">{{ count($storeOrders[$item->id]) }} terjual</span>
                                 </div>
                             </div>
                             <div class="profile-info-detail-content me-5" style="align-items: center; justify-content: center; text-align: center; border-left: 2px solid rgb(216, 216, 216);padding-left: 12px;">
