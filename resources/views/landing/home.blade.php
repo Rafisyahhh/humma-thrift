@@ -4,8 +4,16 @@
 
 @push('style')
   <style>
+    @font-face {
+      font-family: "PlusJakartaSans";
+      src: url("{{ asset('fonts/PlusJakartaSans/PlusJakartaSans-ExtraBold.ttf') }}");
+      font-weight: 900;
+    }
+
     .hero#hero {
       z-index: 10;
+      font-family: "PlusJakartaSans";
+      font-weight: 900;
     }
 
     .content-wrapper {
@@ -21,8 +29,8 @@
       position: absolute;
       margin-top: -10rem;
       z-index: 1;
-      /* filter: drop-shadow(1px 4px 20px rgba(0,0,0,.125));
-      -ms-filter: drop-shadow(1px 4px 20px rgba(0,0,0,.125)); */
+      filter: drop-shadow(1px 4px 20px rgba(0, 0, 0, .125));
+      -ms-filter: drop-shadow(1px 4px 20px rgba(0, 0, 0, .125));
     }
 
     .shape-wrapper .circle-shape {
@@ -173,7 +181,7 @@
       /* margin: 0 5px 5px; */
       background-color: #ffffff73;
       /* margin-left:1px !important;
-                                                                                                                                                                                                  margin-right: 1px !important; */
+                                                                                                                                                                                                            margin-right: 1px !important; */
       /* Tambahkan margin jika perlu */
     }
 
