@@ -31,7 +31,7 @@ class WithdrawalUserIssueRequest extends FormRequest {
                 $netIncome = (int) TransactionOrder::whereHas('order.product.userstore', fn(mixed $item) => $item->where('store_id', $storeId))
                     ->where('status', 'PAID')
                     ->where('delivery_status', 'selesai')
-                    ->sum('total_harga') * 0.9;
+                    ->sum('total_harga');
 
                 $withdrawalTotal = (int) Withdrawal::where('user_id', $user->id)
                     ->where('status', WithdrawalStatusEnum::COMPLETED)
