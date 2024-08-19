@@ -56,7 +56,7 @@ class TransactionController extends Controller
                 'user_address_id' => $address->id,
                 'transaction_id' => $transaction['merchant_ref'],
                 'reference_id' => $transaction['reference'],
-                'total' => $transaction['amount'],
+                'total' => $transaction['amount'] + $biaya_admin->biaya_admin,
                 'expired_at' => now()->addDays(1),
                 'paid_at' => null,
                 'delivery_status' => 'selesaikan pesanan',
@@ -119,16 +119,18 @@ class TransactionController extends Controller
                 return back()->withErrors(['error' => $transaction->error]);
             }
 
+            $biaya_admin = AdminFee::first();
             $transactions = TransactionOrder::create([
                 'user_id' => auth()->id(),
                 'user_address_id' => $address->id,
                 'transaction_id' => $transaction['merchant_ref'],
                 'reference_id' => $transaction['reference'],
-                'total' => $transaction['amount'],
+                'total' => $transaction['amount'] + $biaya_admin->biaya_admin,
                 'delivery_status' => 'selesaikan pesanan',
                 'status' => $transaction['status'],
                 'total_harga' => $transaction['amount_received'],
-                'biaya_admin' => $transaction['total_fee'],
+                'biaya_admin' => $biaya_admin->biaya_admin,
+                'biaya_transaction' => $transaction['total_fee'],
                 'payment_method' => $transaction['payment_name']
             ]);
 
