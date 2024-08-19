@@ -88,14 +88,17 @@ class StoreProfileController extends Controller {
 
     public function showStore() {
         $stores = UserStore::all();
-        $storeOrders = collect([]);
+        $storeOrders = [];
         foreach ($stores as $store) {
             $orders = Order::with(["product"])
                 ->whereHas('product', function ($query) use ($store) {
                     $query->where('store_id', $store->id);
                 })
+                ->orWhereHas('product_auction', function ($query) use ($store) {
+                    $query->where('store_id', $store->id);
+                })
                 ->get();
-            $storeOrders->put($store->id, $orders);
+            $storeOrders[$store->id] = $orders;
         }
         return view('user.store', compact('stores', "storeOrders"));
     }
