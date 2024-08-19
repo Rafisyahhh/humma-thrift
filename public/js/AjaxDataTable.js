@@ -109,7 +109,7 @@ $.fn.AjaxDataTable = function (config) {
     const data = table.row($(this).closest("tr")).data();
     const { id } = data;
     editModal.find("form [name]").not('[type="file"]').not('[name^="_"]').each(function () {
-      $(this).val(data[$(this).attr("name")]);
+      $(this).val(data[$(this).attr("name")].replace(/&lt;/g, '<').replace(/&gt;/g, '>'));
     });
     editModal.find("form").attr("action", editUrl?.replace(":id:", id));
     editOnClick?.(editModal.find("form"), data);

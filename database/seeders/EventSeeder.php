@@ -28,7 +28,7 @@ class EventSeeder extends Seeder {
 
             if (Storage::disk('public')->put($destinationPath, file_get_contents($sourcePath))) {
                 event::create([
-                    "judul" => "Humma <#7ea3db66>Thrift</#7ea3db66>",
+                    "judul" => "<#1C3879>Humma</#1C3879> <#5CA3E6>Thrift</#5CA3E6>",
                     "subjudul" => "Platfrom Thrift Website Pertama di Malang",
                     "foto" => $destinationPath,
                 ]);
