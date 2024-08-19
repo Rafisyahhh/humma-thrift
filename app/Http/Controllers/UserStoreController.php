@@ -77,7 +77,7 @@ class UserStoreController extends Controller {
         $netIncome = $this->_transactions
             ->where('status', 'PAID')
             ->where('delivery_status', 'selesai')
-            ->sum('total');
+            ->sum('total_harga');
 
 
 
