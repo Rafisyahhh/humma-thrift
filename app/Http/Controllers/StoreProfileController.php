@@ -86,8 +86,8 @@ class StoreProfileController extends Controller {
 
 
     public function showStore() {
-        $store = UserStore::with(["products"])->get();
+        $store = UserStore::all();
 
-        return view('user.store', compact('store', 'countFavorite', 'countcart', 'carts'));
+        return view('user.store', compact('store'));
     }
 }
