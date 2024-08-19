@@ -110,7 +110,7 @@ class WithdrawalController extends Controller {
         $netIncome = $this->_transaction
             ->where('status', 'PAID')
             ->where('delivery_status', 'selesai')
-            ->sum('total_harga') * 0.9;
+            ->sum('total_harga');
 
 
         $withdrawalTotal = $this->_withdrawal
