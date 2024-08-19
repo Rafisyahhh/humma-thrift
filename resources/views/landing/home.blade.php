@@ -12,8 +12,11 @@
 
     .hero#hero {
       z-index: 10;
-      font-family: "PlusJakartaSans";
-      font-weight: 900;
+
+      h5,
+      h1 {
+        font-family: 'PlusJakartaSans';
+      }
     }
 
     .content-wrapper {
@@ -181,7 +184,7 @@
       /* margin: 0 5px 5px; */
       background-color: #ffffff73;
       /* margin-left:1px !important;
-                                                                                                                                                                                                            margin-right: 1px !important; */
+                                                                                                                                                                                                                      margin-right: 1px !important; */
       /* Tambahkan margin jika perlu */
     }
 
@@ -845,9 +848,6 @@
 
     const heroTitle = $("#hero-title");
     heroTitle.each(async function(index, element) {
-      const originalText = $(this).text();
-      const parsedText = await parseCustomTags(parseCustomTags(originalText));
-      console.log(originalText, parsedText);
       $(this).html(parseCustomTags($(this).text()))
     });
   </script>
