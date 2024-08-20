@@ -179,6 +179,28 @@
         .star.filled {
             background: #f5b301;
         }
+
+
+        .wrapper {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .wrapper-img {
+        flex: 0 0 150px; /* Fixed width for the image */
+        max-width: 150px;
+        margin-right: 20px; /* Space between image and content */
+    }
+
+    .wrapper-img img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .wrapper-content {
+        flex: 1; /* Allow content to take remaining space */
+    }
     </style>
 @endsection
 
@@ -337,6 +359,7 @@
                     </div>
                     {{-- @endforeach --}}
                 @else
+
                     <div class="card mb-5">
                         <table>
                             <tbody>
@@ -351,14 +374,12 @@
                                                 <p class="paragraph" style="color: #1c3879;">
                                                     @currency($order->product->price)
                                                 </p>
-                                                {{-- RATING PRODUCT--}}
+                                                {{-- RATING PRODUCT --}}
                                                 @foreach ($reviews as $review)
                                                     @if ($review->product && $review->product_id == $order->product_id)
                                                         <div class="ratings d-flex gap-2 align-items-center mb-2">
                                                             @foreach (range(1, 5) as $rating)
-                                                                <div
-                                                                    class="star {{ $rating <= $review->star ? 'filled' : '' }}">
-                                                                </div>
+                                                                <div class="star {{ $rating <= $review->star ? 'filled' : '' }}"></div>
                                                             @endforeach
                                                         </div>
                                                         <div class="heading" style="font-size: 1.50rem; font-weight: normal;">{{ $review->comment }}</div>
@@ -385,14 +406,12 @@
                                         </div>
                                     </td>
 
-                                    @if (
-                                        !$order->product()->whereHas('ulasan', function ($query) {
-                                                $query->where('user_id', Auth::user()->id);
-                                            })->exists())
+                                    @if (!$order->product()->whereHas('ulasan', function ($query) {
+                                            $query->where('user_id', Auth::user()->id);
+                                        })->exists())
                                         <td>
                                             <div class="wrapper-content me-5" style="float: right; text-align: end;">
-                                                <button class="shop-btn openModal"
-                                                    data-id="reviewModal-{{ $order->id }}">Beri Nilai</button>
+                                                <button class="shop-btn openModal" data-id="reviewModal-{{ $order->id }}">Beri Nilai</button>
                                             </div>
                                         </td>
                                     @endif
