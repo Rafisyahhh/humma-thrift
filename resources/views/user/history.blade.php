@@ -188,10 +188,8 @@
 
     .wrapper-img {
       flex: 0 0 150px;
-      /* Fixed width for the image */
       max-width: 150px;
       margin-right: 20px;
-      /* Space between image and content */
     }
 
     .wrapper-img img {
@@ -202,7 +200,6 @@
 
     .wrapper-content {
       flex: 1;
-      /* Allow content to take remaining space */
     }
   </style>
 @endsection
@@ -246,9 +243,6 @@
                           @endif
                         @endforeach
                       </div>
-
-                      {{-- RATING --}}
-                      {{-- @foreach ($reviews as $review)
                                                 @if ($review->product_auction && $review->product_auction_id == $order->product_auction_id)
                                                     <div class="ratings d-flex gap-2 align-items-center">
                                                         <select class="star-rating" disabled name="product_rating"

@@ -21,7 +21,6 @@
             bottom: 0;
         }
 
-        /* Include the CSS styles here */
         .dropdown-menu {
             background-color: #ffffff;
         }
