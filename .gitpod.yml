@@ -21,3 +21,6 @@ tasks:
       echo '{"AccountTag":"73157285f608392c805d6876e7ecc1ef","TunnelSecret":"DSLjdHYJvbkPxMBKsTFE321t00JeA+ZuBt2JKAg/QJU=","TunnelID":"c4d8b28f-f6ca-483e-9161-29f32f7f1efa"}' > /home/gitpod/.cloudflared/c4d8b28f-f6ca-483e-9161-29f32f7f1efa.json
       composer install
       npm i concurrently -g
+
+
+

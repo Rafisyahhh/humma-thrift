@@ -21,11 +21,7 @@ class AdminBrandController extends Controller {
      * Display a listing of the resource.
      */
     public function index(Request $request) {
-        // $search = $request->input('search');
-        // $hasRequestSearch = $request->has('search');
 
-        // $brands = $this->brands->when($hasRequestSearch, fn($query) => $query->where("title", 'LIKE', "%{$search}%"))
-        //     ->paginate(5);
 
         return view('admin.brand'/* compact('brands')*/);
     }
@@ -64,12 +60,11 @@ class AdminBrandController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(Brand $brand) {
-        // $brands = $this->brands->all();
-        // return view('admin.brand', compact('brands'));
+       //
     }
 
     /**
-     * Update the specified resource in storage. 
+     * Update the specified resource in storage.
      */
     public function update(UpdateBrandRequest $request, Brand $brand) {
         $data = $request->validated();
