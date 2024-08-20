@@ -243,20 +243,6 @@
                           @endif
                         @endforeach
                       </div>
-                                                @if ($review->product_auction && $review->product_auction_id == $order->product_auction_id)
-                                                    <div class="ratings d-flex gap-2 align-items-center">
-                                                        <select class="star-rating" disabled name="product_rating"
-                                                            data-options="{&quot;clearable&quot;:false, &quot;tooltip&quot;:false}">
-                                                            @foreach (['1', '2', '3', '4', '5'] as $rating)
-                                                                <option value="{{ $rating }}"
-                                                                    @selected($rating == $review->star)>
-                                                                    {{ $rating }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                @endif
-                                            @endforeach --}}
                     </div>
                   </td>
                   <td class="table-wrapper">
