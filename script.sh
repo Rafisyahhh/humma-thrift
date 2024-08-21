@@ -30,3 +30,6 @@ sudo apt-get update -y && sudo apt-get install -y cloudflared
 
 # Install Composer dependencies
 composer install
+
+# Cloudflared Login
+cloudflare tunnel login
