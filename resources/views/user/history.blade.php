@@ -370,7 +370,6 @@
                   <td class="table-wrapper">
                     <div class="wrapper-content me-5" style="float: right; text-align: end;">
                       <h5 class="heading">
-                        {{ App\Http\Controllers\HistoryController::formatTanggal($order->created_at) }}
                       </h5>
                       <p class="paragraph opacity-75 pt-1">
                         {{ Carbon\Carbon::parse($order->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}
