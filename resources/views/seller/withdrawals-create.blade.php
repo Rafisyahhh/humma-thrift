@@ -194,8 +194,10 @@
       const selectType = (Math.log10(value) / 3) | 0;
       if (selectType == 0) return value;
       let scaled = value / Math.pow(10, selectType * 3);
+      scaled = Math.floor(scaled * 10) / 10;
       return scaled.toFixed(1) + types[selectType];
     }
+
     const $accountBalanceElem = $('[accountBalance]');
     const accountBalance = parseFloat($accountBalanceElem.attr("accountBalance"));
     const balance = metricNumbers(accountBalance);
