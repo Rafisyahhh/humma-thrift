@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-lg-6 ms-lg-4">
                             <div class="about-content" data-aos="fade-up">
-                                <h3 class="review-title" style="font-family: 'Arial', sans-serif; font-size: 40px !important;">
+                                <h3 class="review-title" style="font-family: 'Arial', sans-serif; font-size: 40px !important;" id="title">
                                     {{ $about->title }}
                                 </h3>
                                 <p class="about-info" style="font-size: 18px !important; word-wrap: break-word; max-width: 100%; text-align: justify;">
@@ -203,3 +203,26 @@
 
 
 @endsection
+
+@push('script')
+<script>
+    function parseCustomTags(input) {
+      // Pattern untuk menangkap warna hex (6 atau 8 digit), rgb(), dan rgba()
+      const pattern =
+        /<#([a-fA-F0-9]{6,8}|rgb\(\d{1,3},\s?\d{1,3},\s?\d{1,3}\)|rgba\(\d{1,3},\s?\d{1,3},\s?\d{1,3},\s?0?\.?\d+\))>(.*?)<\/#\1>/g;
+
+      const output = input.replace(pattern, (match, p1, p2) => {
+        // Memeriksa format warna dan menyiapkan style
+        const style = p1.startsWith("rgb") ? `color: ${p1};` : `color: #${p1};`;
+        return `<span style="${style}">${p2}</span>`;
+      });
+
+      return output;
+    }
+
+    const heroTitle = $("#title");
+    heroTitle.each(async function(index, element) {
+      $(this).html(parseCustomTags($(this).text()))
+    });
+  </script>
+@endpush
