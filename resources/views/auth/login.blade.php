@@ -1,6 +1,17 @@
 @extends('layouts.home')
 
 @section('title', 'Masuk')
+@push('style')
+    <style>
+        .recaptcha-container {
+            display: flex;
+            justify-content: center;
+            /* Mengatur elemen anak agar berada di tengah secara horizontal */
+            align-items: center;
+            /* (Opsional) Mengatur elemen anak agar berada di tengah secara vertikal */
+        }
+    </style>
+@endpush
 
 @section('content')
     <section class="login footer-padding">
@@ -33,13 +44,19 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="review-form-name checkbox">
-                                <div class="checkbox-item d-flex align-items-center">
+                            <div class="mb-4 recaptcha-container">
+                                {!! htmlFormSnippet() !!}
+                                @if ($errors->has('g-recaptcha-response'))
+                                    <p class="text-danger">{{ $errors->first('g-recaptcha-response') }}</p>
+                                @endif
+                            </div>
+                            <div class="review-form-name checkbox recaptcha-container">
+                                {{-- <div class="checkbox-item d-flex align-items-center">
                                     <input type="checkbox" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                     <label for="remember" class="m-0">
                                         Remember Me</label>
-                                </div>
-                                <div class="forget-pass">
+                                </div> --}}
+                                <div class="forget-pass ">
                                     @if (Route::has('password.request'))
                                         <a href="{{ route('password.request') }}">
                                             <p>Lupa Password</p>
@@ -48,12 +65,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-4">
-                            {!!htmlFormSnippet()!!}
-                            @if ($errors->has('g-recaptcha-response'))
-                            <p class="text-danger">{{ $errors->first('g-recaptcha-response') }}</p>
-                            @endif
-                        </div>
+
                         <div class="login-btn text-center">
                             <button type="submit" class="shop-btn text-white">Masuk</button>
                             <span class="shop-account">Belum punya akun?<a href="{{ route('register') }}">Daftar
