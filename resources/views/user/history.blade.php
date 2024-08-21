@@ -370,7 +370,6 @@
                   <td class="table-wrapper">
                     <div class="wrapper-content me-5" style="float: right; text-align: end;">
                       <h5 class="heading">
-                        {{ App\Http\Controllers\HistoryController::formatTanggal($order->created_at) }}
                       </h5>
                       <p class="paragraph opacity-75 pt-1">
                         {{ Carbon\Carbon::parse($order->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}
@@ -379,23 +378,23 @@
                   </td>
                 </tr>
 
-                <tr class="table-row ticket-row">
-                  <td class="table-wrapper wrapper-product">
-                    <div class="wrapper">
-                    </div>
-                  </td>
+                @if (
+                    !$order->product()->whereHas('ulasan', function ($query) {
+                            $query->where('user_id', Auth::user()->id);
+                        })->exists())
+                  <tr class="table-row ticket-row">
+                    <td class="table-wrapper wrapper-product">
+                      <div class="wrapper">
+                      </div>
+                    </td>
 
-                  @if (
-                      !$order->product()->whereHas('ulasan', function ($query) {
-                              $query->where('user_id', Auth::user()->id);
-                          })->exists())
                     <td>
                       <div class="wrapper-content me-5" style="float: right; text-align: end;">
                         <button class="shop-btn openModal" data-id="reviewModal-{{ $order->id }}">Beri Nilai</button>
                       </div>
                     </td>
-                  @endif
-                </tr>
+                  </tr>
+                @endif
               </tbody>
             </table>
           </div>
