@@ -129,7 +129,7 @@ class WithdrawalController extends Controller {
             $data->put('user_store_id', $user->store->id);
             $data->put('status', WithdrawalStatusEnum::PENDING);
             $data->put('transaction_id', Str::upper("WTH-{$transactionID}"));
-            $data->put('amount', floor($accountBalance / 50000) * 50000);
+            $data->put('amount', $accountBalance);
 
             $this->_withdrawal->create($data->toArray());
 
