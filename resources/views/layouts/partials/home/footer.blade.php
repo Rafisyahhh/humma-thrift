@@ -45,9 +45,12 @@
               <img src="{{ asset('images/brands/png/logo-whitexxxhdpi.png') }}" height="36px" alt="logo">
             </div>
             <div class="footer-link order-link">
-              <p style="font-size: 1.5rem"><strong style="font-size: 1.60rem;">HUMMATHRIFT</strong> sebuah platform yang
-                menyediakan berbagai macam produk fashion, mulai dari pakaian, sepatu, aksesori, hingga barang-barang
-                vintage yang unik dan sulit ditemukan.</p>
+                <p style="font-size: 1.5rem">
+                    <strong style="font-size: 1.60rem;">
+                      HUMMA<span style="color: #5CA3E6;"> THRIFT</span>
+                    </strong>
+                    sebuah platform yang menyediakan berbagai macam produk fashion, mulai dari pakaian, sepatu, aksesori, hingga barang-barang vintage yang unik dan sulit ditemukan.
+                  </p>
             </div>
           </div>
         </div>
