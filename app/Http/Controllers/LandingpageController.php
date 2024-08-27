@@ -44,7 +44,7 @@ class LandingpageController extends Controller {
             ->orderBy('created_at')
             ->get();
 
-        return view('landing.brand', compact('brands', 'countFavorite', 'carts', 'countcart'));
+        return view('Landing.brand', compact('brands', 'countFavorite', 'carts', 'countcart'));
     }
 
 
