@@ -26,7 +26,7 @@ class LandingpageController extends Controller {
         $product = Product::where('status', 'active')->get();
         $product_auction = ProductAuction::all();
 
-        return view('landing.home', compact(
+        return view('Landing.home', compact(
             'event',
             'brands',
             'categories',
@@ -57,7 +57,7 @@ class LandingpageController extends Controller {
 
     public function store() {
         $store = UserStore::all();
-        return view('landing.toko', compact('store'));
+        return view('Landing.toko', compact('store'));
     }
 
     public function wishlist(Request $request) {
