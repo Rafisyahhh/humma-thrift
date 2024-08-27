@@ -121,7 +121,6 @@
       var stickyTop = $filter.offset().top;
 
       $(window).on('scroll', function() {
-        var filterWidth = $filter.width();
         requestAnimationFrame(function() {
           var windowTop = $(window).scrollTop();
 
@@ -129,7 +128,7 @@
             $filter.css({
               position: 'fixed',
               top: '0',
-              width: filterWidth,
+              width: "100%",
             });
           } else {
             $filter.css({
